@@ -5,16 +5,50 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTcg", "PokemonTcg\PokemonTcg.csproj", "{ADB84309-8312-4004-86D1-4B3EB31D23DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCGCards", "TCGCards\TCGCards.csproj", "{062A25F7-1CC0-4C31-B300-24AE2F351E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingClient", "NetworkingClient\NetworkingClient.csproj", "{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingServer", "NetworkingServer\NetworkingServer.csproj", "{729AFB7F-64CF-4C94-8960-296DBAA9F20D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADB84309-8312-4004-86D1-4B3EB31D23DF}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{ADB84309-8312-4004-86D1-4B3EB31D23DF}.Debug|x86.ActiveCfg = Debug|x86
 		{ADB84309-8312-4004-86D1-4B3EB31D23DF}.Debug|x86.Build.0 = Debug|x86
+		{ADB84309-8312-4004-86D1-4B3EB31D23DF}.Release|Any CPU.ActiveCfg = Release|x86
 		{ADB84309-8312-4004-86D1-4B3EB31D23DF}.Release|x86.ActiveCfg = Release|x86
 		{ADB84309-8312-4004-86D1-4B3EB31D23DF}.Release|x86.Build.0 = Release|x86
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Debug|x86.Build.0 = Debug|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Release|x86.ActiveCfg = Release|Any CPU
+		{062A25F7-1CC0-4C31-B300-24AE2F351E44}.Release|x86.Build.0 = Release|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}.Release|x86.Build.0 = Release|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Debug|x86.Build.0 = Debug|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|x86.ActiveCfg = Release|Any CPU
+		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
