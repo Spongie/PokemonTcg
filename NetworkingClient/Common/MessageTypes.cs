@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetworkingClient.Common
+﻿namespace NetworkingClient.Common
 {
     public enum MessageTypes
     {
-        Connected
+        Test,
+        Connected,
+        RegisterName
     }
 }

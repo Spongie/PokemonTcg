@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="Common\MessageTypes.cs" />
     <Compile Include="Common\NetworkDataRecievedEventArgs.cs" />
     <Compile Include="Common\NetworkMessage.cs" />

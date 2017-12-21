@@ -7,18 +7,20 @@ namespace NetworkingClient.Common
 {
     public struct NetworkMessage
     {
-        public NetworkMessage(MessageTypes type, string data)
+        public NetworkMessage(MessageTypes type, string data, Guid senderId)
         {
             MessageType = type;
             Data = data;
+            SenderId = senderId;
         }
 
         public MessageTypes MessageType { get; set; }
         public string Data { get; set; }
+        public Guid SenderId { get; set; }
 
         public void Send(NetworkStream stream)
         {
-            var jsonBytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(this));
+            var jsonBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
 
             var prefixBytes = BitConverter.GetBytes(jsonBytes.Length);
             stream.Write(prefixBytes, 0, prefixBytes.Length);

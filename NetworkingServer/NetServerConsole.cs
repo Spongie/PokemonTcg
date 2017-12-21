@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkingClient.Common;
+using System;
 
 namespace NetworkingServer
 {
@@ -9,7 +10,16 @@ namespace NetworkingServer
             var server = new Server();
             server.Start(1000);
 
-            Console.Read();
+            while(true)
+            {
+                string input = Console.ReadLine();
+
+                if(input == "exit")
+                    break;
+
+                var message = new NetworkMessage(MessageTypes.Test, input, server.ServerId);
+                server.Send(message);
+            }
         }
     }
 }

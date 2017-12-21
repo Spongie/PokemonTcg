@@ -17,11 +17,12 @@ namespace NetworkingClient.Common
         private NetworkStream stream;
         private Thread writingThread;
         private Thread readerThread;
-
+        private Queue<NetworkMessage> messageQueue;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
+            messageQueue = new Queue<NetworkMessage>();
             SetTcpClient(tcpClient);
         }
 
@@ -37,9 +38,24 @@ namespace NetworkingClient.Common
             writingThread.Start();
         }
 
+        public void Send(NetworkMessage networkMessage)
+        {
+            messageQueue.Enqueue(networkMessage);
+        }
+
         void WritingThread()
         {
+            while (true)
+            {
+                if (!messageQueue.Any())
+                {
+                    Thread.Sleep(50);
+                    continue;
+                }
 
+                var message = messageQueue.Dequeue();
+                message.Send(stream);
+            }
         }
 
         void ReadingThread()
@@ -53,7 +69,10 @@ namespace NetworkingClient.Common
                     int receivedPrefixBytes = stream.Read(dataPrefix, 0, sizeof(int));
 
                     if(receivedPrefixBytes != 4)
+                    {
+                        Thread.Sleep(50);
                         continue;
+                    }
 
                     int dataSize = BitConverter.ToInt32(dataPrefix, 0);
                     data = new byte[dataSize];
@@ -61,7 +80,7 @@ namespace NetworkingClient.Common
                     stream.Read(data, 0, data.Length);
                     inputStream.Write(data, 0, dataSize);
 
-                    string input = Encoding.ASCII.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
+                    string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
                     var message = JsonConvert.DeserializeObject<NetworkMessage>(input);
 
                     DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
