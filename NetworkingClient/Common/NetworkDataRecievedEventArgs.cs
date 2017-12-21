@@ -4,11 +4,11 @@ namespace NetworkingClient.Common
 {
     public class NetworkDataRecievedEventArgs : EventArgs
     {
-        public NetworkDataRecievedEventArgs(string data)
+        public NetworkDataRecievedEventArgs(NetworkMessage data)
         {
-            Data = data;
+            Message = data;
         }
 
-        public string Data { get; set; }
+        public NetworkMessage Message { get; set; }
     }
 }

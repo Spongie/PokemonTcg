@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -61,7 +62,9 @@ namespace NetworkingClient.Common
                     inputStream.Write(data, 0, dataSize);
 
                     string input = Encoding.ASCII.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
-                    DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(input));
+                    var message = JsonConvert.DeserializeObject<NetworkMessage>(input);
+
+                    DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
                 }
             }
         }

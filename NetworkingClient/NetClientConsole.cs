@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkingClient.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -22,11 +23,8 @@ namespace NetworkingClient
                 if(input == "exit")
                     break;
 
-                var data = Encoding.ASCII.GetBytes(input);
-
-                var prefixBytes = BitConverter.GetBytes(data.Length);
-                client.GetStream().Write(prefixBytes, 0, prefixBytes.Length);
-                client.GetStream().Write(data, 0, data.Length);
+                var message = new NetworkMessage(MessageTypes.Connected, input);
+                message.Send(client.GetStream());
             }
         }
     }

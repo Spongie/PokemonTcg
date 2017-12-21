@@ -33,7 +33,7 @@ namespace NetworkingServer
 
         private void Player_DataReceived(object sender, NetworkDataRecievedEventArgs e)
         {
-            Console.WriteLine(e.Data);
+            Console.WriteLine(e.Message.Data);
         }
     }
 }
