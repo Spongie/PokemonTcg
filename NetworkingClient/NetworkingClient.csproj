@@ -52,6 +52,7 @@
     <Compile Include="Common\NetworkDataRecievedEventArgs.cs" />
     <Compile Include="Common\NetworkMessage.cs" />
     <Compile Include="Common\NetworkPlayer.cs" />
+    <Compile Include="GameUpdatedEventArgs.cs" />
     <Compile Include="Messages\GameFieldMessage.cs" />
     <Compile Include="Messages\RegisterMessage.cs" />
     <Compile Include="NetClientConsole.cs" />
