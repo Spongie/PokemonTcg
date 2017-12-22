@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TCGCards.Core
 {
     public class GameField
     {
-        public List<Player> Players;
-        public Player ActivePlayer;
-        public int Mode;
-
         public GameField()
         {
             Players = new List<Player>();
@@ -16,6 +14,32 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
         }
 
+        public void StartGame()
+        {
+            ActivePlayer = Players[new Random().Next(2)];
+
+            foreach(var player in Players)
+            {
+                player.Deck.Shuffle();
+            }
+
+            GameState = GameFieldState.SelectingActive;
+        }
+
+        public void SwapActivePlayer()
+        {
+            ActivePlayer = Players.First(x => !x.Id.Equals(ActivePlayer.Id));
+        }
+
+        public void OnBothPlayersSelectedStarter()
+        {
+            GameState = GameFieldState.SelectingBench;
+        }
+
         public GameFieldState GameState { get; set; }
+
+        public List<Player> Players { get; set; }
+        public Player ActivePlayer { get; set; }
+        public int Mode { get; set; }
     }
 }

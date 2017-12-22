@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TCGCards.EnergyCards;
 using TCGCards.PokemonCards.TeamRocket;
 
@@ -7,6 +8,12 @@ namespace TCGCards.Core
     public class Player
     {
         public Player()
+        {
+            Hand = new List<ICard>();
+            BenchedPokemon = new List<IPokemonCard>();
+        }
+
+        public void InitTestData()
         {
             Deck = new Deck();
             Deck.Cards.Push(new WaterEnergy());
@@ -18,8 +25,6 @@ namespace TCGCards.Core
             Deck.Cards.Push(new Magikarp());
             Deck.Cards.Push(new Magikarp());
             Deck.Shuffle();
-            Hand = new List<ICard>();
-            BenchedPokemon = new List<IPokemonCard>();
             DrawCards(5);
         }
 
@@ -36,6 +41,12 @@ namespace TCGCards.Core
                 BenchedPokemon.Remove(pokemon);
 
             ActivePokemonCard = pokemon;
+        }
+
+        public void SetDeck(Deck deck)
+        {
+            Deck = deck;
+            deck.Shuffle();
         }
 
         public void DrawCards(int amount)
@@ -58,5 +69,11 @@ namespace TCGCards.Core
         public Deck Deck { get; set; }
 
         public List<ICard> Hand { get; set; }
+        public Guid Id { get; set; }
+
+        public bool IsRegistered()
+        {
+            return Id != null && Deck != null;
+        }
     }
 }

@@ -52,12 +52,20 @@
     <Compile Include="Common\NetworkDataRecievedEventArgs.cs" />
     <Compile Include="Common\NetworkMessage.cs" />
     <Compile Include="Common\NetworkPlayer.cs" />
+    <Compile Include="Messages\GameFieldMessage.cs" />
+    <Compile Include="Messages\RegisterMessage.cs" />
     <Compile Include="NetClientConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TCGCards\TCGCards.csproj">
+      <Project>{062A25F7-1CC0-4C31-B300-24AE2F351E44}</Project>
+      <Name>TCGCards</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

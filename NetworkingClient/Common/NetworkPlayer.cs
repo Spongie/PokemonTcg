@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TCGCards.Core;
 
 namespace NetworkingClient.Common
 {
@@ -19,7 +20,7 @@ namespace NetworkingClient.Common
         private Thread readerThread;
         private Queue<NetworkMessage> messageQueue;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
-
+        
         public NetworkPlayer(TcpClient tcpClient)
         {
             messageQueue = new Queue<NetworkMessage>();
@@ -90,6 +91,6 @@ namespace NetworkingClient.Common
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        
+        public Player Player { get; set; }
     }
 }
