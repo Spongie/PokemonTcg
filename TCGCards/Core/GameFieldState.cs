@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TCGCards.Core
+﻿namespace TCGCards.Core
 {
     public enum GameFieldState
     {
-        Wating
+        Wating,
+        SelectingActive,
+        SelectingBench
     }
 }

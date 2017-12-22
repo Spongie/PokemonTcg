@@ -19,12 +19,23 @@ namespace TCGCards.Core
             Deck.Cards.Push(new Magikarp());
             Deck.Shuffle();
             Hand = new List<ICard>();
+            BenchedPokemon = new List<IPokemonCard>();
             DrawCards(5);
         }
 
         public void PlayCard(ICard card)
         {
 
+        }
+
+        public void SetActivePokemon(IPokemonCard pokemon)
+        {
+            if(Hand.Contains(pokemon))
+                Hand.Remove(pokemon);
+            else if(BenchedPokemon.Contains(pokemon))
+                BenchedPokemon.Remove(pokemon);
+
+            ActivePokemonCard = pokemon;
         }
 
         public void DrawCards(int amount)

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingClient", "Network
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingServer", "NetworkingServer\NetworkingServer.csproj", "{729AFB7F-64CF-4C94-8960-296DBAA9F20D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCGCardsTests", "TCGCardsTests\TCGCardsTests.csproj", "{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,14 @@ Global
 		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|x86.ActiveCfg = Release|Any CPU
 		{729AFB7F-64CF-4C94-8960-296DBAA9F20D}.Release|x86.Build.0 = Release|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Debug|x86.Build.0 = Debug|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|x86.ActiveCfg = Release|Any CPU
+		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

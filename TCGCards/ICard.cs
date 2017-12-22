@@ -32,5 +32,22 @@ namespace TCGCards
                 set = value;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as ICard;
+
+            if(item == null)
+            {
+                return false;
+            }
+
+            return item.Id.Equals(Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }
