@@ -11,6 +11,7 @@ namespace PokemonTcg
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private PokemonGame game;
 
         public Game1()
         {
@@ -40,7 +41,9 @@ namespace PokemonTcg
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            game = new PokemonGame(Content);
+
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -59,10 +62,12 @@ namespace PokemonTcg
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            InputManager.Update();
+
             if(GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            game.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -74,9 +79,11 @@ namespace PokemonTcg
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
+            game.Render(spriteBatch);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

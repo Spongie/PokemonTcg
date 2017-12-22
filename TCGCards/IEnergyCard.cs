@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Cards;
+﻿using TCGCards;
 
 public abstract class IEnergyCard : ICard
 {

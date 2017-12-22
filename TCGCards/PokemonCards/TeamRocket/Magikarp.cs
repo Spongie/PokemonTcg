@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Cards.PokemonCards.TeamRocket.Attacks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TCGCards.PokemonCards.TeamRocket.Attacks;
 
-namespace Assets.Scripts.Cards.PokemonCards.TeamRocket
+namespace TCGCards.PokemonCards.TeamRocket
 {
     public class Magikarp : IPokemonCard
     {

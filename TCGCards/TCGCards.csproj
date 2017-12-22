@@ -45,14 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attack.cs" />
-    <Compile Include="Card.cs" />
+    <Compile Include="ICard.cs" />
     <Compile Include="CardSet.cs" />
     <Compile Include="Core\Deck.cs" />
     <Compile Include="Core\GameField.cs" />
     <Compile Include="Core\GameFieldState.cs" />
     <Compile Include="Core\Player.cs" />
     <Compile Include="Energy.cs" />
-    <Compile Include="EnergyCard.cs" />
+    <Compile Include="IEnergyCard.cs" />
     <Compile Include="EnergyCards\DarknessEnergy.cs" />
     <Compile Include="EnergyCards\DoubleColorlessEnergy.cs" />
     <Compile Include="EnergyCards\ElectricEnergy.cs" />
@@ -62,7 +62,7 @@
     <Compile Include="EnergyCards\PsychicEnergy.cs" />
     <Compile Include="EnergyCards\WaterEnergy.cs" />
     <Compile Include="EnergyTypes.cs" />
-    <Compile Include="PokemonCard.cs" />
+    <Compile Include="IPokemonCard.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Flop.cs" />
     <Compile Include="PokemonCards\TeamRocket\Magikarp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

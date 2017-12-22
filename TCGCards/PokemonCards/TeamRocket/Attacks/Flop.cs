@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.Game;
+using TCGCards.Core;
 
-namespace Assets.Scripts.Cards.PokemonCards.TeamRocket.Attacks
+namespace TCGCards.PokemonCards.TeamRocket.Attacks
 {
     public class Flop : Attack
     {

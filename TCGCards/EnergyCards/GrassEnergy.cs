@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Cards.EnergyCards
+﻿namespace TCGCards.EnergyCards
 {
     public class GrassEnergy : IEnergyCard
     {

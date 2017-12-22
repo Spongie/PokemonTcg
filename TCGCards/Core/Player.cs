@@ -1,24 +1,22 @@
-﻿using Assets.Scripts.Cards;
-using Assets.Scripts.Cards.EnergyCards;
-using Assets.Scripts.Cards.PokemonCards.TeamRocket;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TCGCards.EnergyCards;
+using TCGCards.PokemonCards.TeamRocket;
 
-namespace Assets.Scripts.Game
+namespace TCGCards.Core
 {
     public class Player
     {
         public Player()
         {
             Deck = new Deck();
-            Deck.Cards.Add(new WaterEnergy());
-            Deck.Cards.Add(new WaterEnergy());
-            Deck.Cards.Add(new WaterEnergy());
-            Deck.Cards.Add(new WaterEnergy());
-            Deck.Cards.Add(new Magikarp());
-            Deck.Cards.Add(new Magikarp());
-            Deck.Cards.Add(new Magikarp());
-            Deck.Cards.Add(new Magikarp());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new Magikarp());
+            Deck.Cards.Push(new Magikarp());
+            Deck.Cards.Push(new Magikarp());
+            Deck.Cards.Push(new Magikarp());
             Deck.Shuffle();
             Hand = new List<ICard>();
             DrawCards(5);
@@ -33,7 +31,8 @@ namespace Assets.Scripts.Game
         {
             for(int i = 0; i < amount; i++)
             {
-                Hand.Add(Deck.DrawCard());
+                if (Deck.Cards.Count > 0)
+                    Hand.Add(Deck.DrawCard());
             }
         }
 

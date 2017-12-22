@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Game;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using TCGCards.Core;
 
-namespace Assets.Scripts.Cards
+namespace TCGCards
 {
     public abstract class Attack
     {

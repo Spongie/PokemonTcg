@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Assets.Scripts.Game
+namespace TCGCards.Core
 {
     [Serializable]
     public class Deck
     {
-        private List<ICard> _Cards;
+        private Stack<ICard> _Cards;
 
         public Deck()
         {
-            _Cards = new List<ICard>();
+            _Cards = new Stack<ICard>();
         }
 
-        public List<ICard> Cards
+        public Stack<ICard> Cards
         {
             get
             {
@@ -30,12 +30,12 @@ namespace Assets.Scripts.Game
         public void Shuffle()
         {
             var random = new Random();
-            Cards = Cards.OrderBy(x => random.Next(10000)).ToList();
+            Cards = new Stack<ICard>(Cards.OrderBy(x => random.Next(10000)));
         }
 
         public ICard DrawCard()
         {
-            return _Cards[0];
+            return _Cards.Pop();
         }
     }
 }

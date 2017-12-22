@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Assets.Scripts.Cards
+namespace TCGCards
 {
     public abstract class IPokemonCard : ICard
     {

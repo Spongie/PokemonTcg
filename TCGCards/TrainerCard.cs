@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-public class TrainerCard
-{ 
+﻿namespace TCGCards
+{
+    public class TrainerCard
+    {
+    }
 }

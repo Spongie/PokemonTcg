@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.Scripts.Game
+namespace TCGCards.Core
 {
     public class GameField
     {
@@ -18,5 +18,7 @@ namespace Assets.Scripts.Game
             Players.Add(new Player());
             ActivePlayer = Players[0];
         }
+
+        public GameFieldState GameState { get; set; }
     }
 }

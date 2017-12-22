@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Cards
+﻿namespace TCGCards
 {
     public struct Energy
     {
