@@ -1,21 +1,41 @@
 ﻿using NetworkingClient.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
+using TCGCards.Core;
 
 namespace NetworkingClient
 {
+    public class GameUpdatedEventArgs : EventArgs
+    {
+        public GameUpdatedEventArgs(GameField game)
+        {
+            Game = game;
+        }
+
+        public GameField Game { get; set; }
+    }
+
     public class Client
     {
+        public event EventHandler<GameUpdatedEventArgs> OnGameUpdated;
+
         private readonly Dictionary<MessageTypes, Action<NetworkMessage>> Actions;
 
         public Client()
         {
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
-                { MessageTypes.Connected, OnConnected }
+                { MessageTypes.Connected, OnConnected },
+                { MessageTypes.GameUpdate, OnGameServerUpdated }
             };
+        }
+
+        private void OnGameServerUpdated(NetworkMessage message)
+        {
+            OnGameUpdated?.Invoke(this, new GameUpdatedEventArgs(JsonConvert.DeserializeObject<GameField>(message.Data)));
         }
 
         public NetworkPlayer player { get; protected set; }
