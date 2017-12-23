@@ -26,6 +26,22 @@ namespace TCGCards.Core
             GameState = GameFieldState.SelectingActive;
         }
 
+        public void EndTurn()
+        {
+            ActivePlayer.EndTurn();
+            SwapActivePlayer();
+
+            StartNextTurn();
+        }
+
+        private void StartNextTurn()
+        {
+            GameState = GameFieldState.TurnStarting;
+            ActivePlayer.DrawCards(1);
+
+            GameState = GameFieldState.InTurn;
+        }
+
         public void SwapActivePlayer()
         {
             ActivePlayer = Players.First(x => !x.Id.Equals(ActivePlayer.Id));

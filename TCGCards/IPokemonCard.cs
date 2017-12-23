@@ -21,6 +21,7 @@ namespace TCGCards
         public EnergyTypes Weakness { get; set; }
         public List<Attack> Attacks { get; set; }
         public int RetreatCost { get; set; }
+        public bool PlayedThisTurn { get; set; }
 
         public bool CanReatreat()
         {

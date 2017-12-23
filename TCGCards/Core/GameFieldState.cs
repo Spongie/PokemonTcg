@@ -4,6 +4,8 @@
     {
         Wating,
         SelectingActive,
-        SelectingBench
+        SelectingBench,
+        TurnStarting,
+        InTurn
     }
 }

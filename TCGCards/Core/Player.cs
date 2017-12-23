@@ -7,6 +7,9 @@ namespace TCGCards.Core
 {
     public class Player
     {
+        private readonly int MaxBenchedPokemons = 5;
+        private bool hasPlayedEnergy;
+
         public Player()
         {
             Hand = new List<ICard>();
@@ -30,7 +33,16 @@ namespace TCGCards.Core
 
         public void SetBenchedPokemon(IPokemonCard pokemon)
         {
-            BenchedPokemon.Add(pokemon);
+            if(BenchedPokemon.Count < MaxBenchedPokemons && pokemon.Stage == 0)
+            {
+                if(Hand.Contains(pokemon))
+                {
+                    pokemon.PlayedThisTurn = true;
+                    Hand.Remove(pokemon);
+                }
+
+                BenchedPokemon.Add(pokemon);
+            }
         }
 
         public void RetreatActivePokemon(IPokemonCard replacementPokemon)
@@ -44,15 +56,28 @@ namespace TCGCards.Core
             BenchedPokemon.Add(oldActivePokemon);
         }
 
+        public void EndTurn()
+        {
+            ActivePokemonCard.PlayedThisTurn = false;
+
+            foreach(var pokemon in BenchedPokemon)
+            {
+                pokemon.PlayedThisTurn = false;
+            }
+        }
+
         public void PlayCard(ICard card)
         {
 
         }
-
+        
         public void SetActivePokemon(IPokemonCard pokemon)
         {
             if(Hand.Contains(pokemon))
+            {
+                pokemon.PlayedThisTurn = true;
                 Hand.Remove(pokemon);
+            }
             else if(BenchedPokemon.Contains(pokemon))
                 BenchedPokemon.Remove(pokemon);
 
