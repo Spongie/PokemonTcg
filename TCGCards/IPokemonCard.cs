@@ -1,120 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using TCGCards.Core;
 
 namespace TCGCards
 {
     public abstract class IPokemonCard : ICard
     {
-        private int hp;
-        private int damageCounters;
-        private int stage;
-        private IPokemonCard evolvesFrom;
-        private EnergyTypes pokemonType;
-        private EnergyTypes resistance;
-        private EnergyTypes weakness;
-        private List<Attack> attacks;
-
-        public int DamageCounters
+        protected IPokemonCard(Player owner) : base(owner)
         {
-            get
-            {
-                return damageCounters;
-            }
-
-            set
-            {
-                damageCounters = value;
-            }
+            AttachedEnergy = new List<IEnergyCard>();
         }
 
-        public int Hp
+        public int Hp { get; set; }
+        public int DamageCounters { get; set; }
+        public int Stage { get; set; }
+        public IPokemonCard EvolvesFrom { get; set; }
+        public List<IEnergyCard> AttachedEnergy { get; set; }
+        public EnergyTypes PokemonType { get; set; }
+        public EnergyTypes Resistance { get; set; }
+        public EnergyTypes Weakness { get; set; }
+        public List<Attack> Attacks { get; set; }
+        public int RetreatCost { get; set; }
+
+        public bool CanReatreat()
         {
-            get
-            {
-                return hp;
-            }
+            if(!Owner.BenchedPokemon.Any())
+                return false;
 
-            set
-            {
-                hp = value;
-            }
-        }
-
-        public int Stage
-        {
-            get
-            {
-                return stage;
-            }
-
-            set
-            {
-                stage = value;
-            }
-        }
-
-        public IPokemonCard EvolvesFrom
-        {
-            get
-            {
-                return evolvesFrom;
-            }
-
-            set
-            {
-                evolvesFrom = value;
-            }
-        }
-
-        public EnergyTypes PokemonType
-        {
-            get
-            {
-                return pokemonType;
-            }
-
-            set
-            {
-                pokemonType = value;
-            }
-        }
-
-        public EnergyTypes Resistance
-        {
-            get
-            {
-                return resistance;
-            }
-
-            set
-            {
-                resistance = value;
-            }
-        }
-
-        public EnergyTypes Weakness
-        {
-            get
-            {
-                return weakness;
-            }
-
-            set
-            {
-                weakness = value;
-            }
-        }
-
-        public List<Attack> Attacks
-        {
-            get
-            {
-                return attacks;
-            }
-
-            set
-            {
-                attacks = value;
-            }
+            return AttachedEnergy.Count >= RetreatCost;
         }
     }
 }

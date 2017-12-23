@@ -2,20 +2,11 @@
 
 public abstract class IEnergyCard : ICard
 {
-    protected EnergyTypes _EnergyType;
-
-    public EnergyTypes EnergyType
+    public IEnergyCard() : base(null)
     {
-        get
-        {
-            return _EnergyType;
-        }
-
-        set
-        {
-            _EnergyType = value;
-        }
     }
+
+    public EnergyTypes EnergyType { get; protected set; }
 
     public abstract Energy GetEnergry();
 }

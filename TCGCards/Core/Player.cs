@@ -20,12 +20,17 @@ namespace TCGCards.Core
             Deck.Cards.Push(new WaterEnergy());
             Deck.Cards.Push(new WaterEnergy());
             Deck.Cards.Push(new WaterEnergy());
-            Deck.Cards.Push(new Magikarp());
-            Deck.Cards.Push(new Magikarp());
-            Deck.Cards.Push(new Magikarp());
-            Deck.Cards.Push(new Magikarp());
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Cards.Push(new Magikarp(this));
             Deck.Shuffle();
             DrawCards(5);
+        }
+
+        public void SetBenchedPokemon(IPokemonCard pokemon)
+        {
+            BenchedPokemon.Add(pokemon);
         }
 
         public void PlayCard(ICard card)
@@ -43,9 +48,15 @@ namespace TCGCards.Core
             ActivePokemonCard = pokemon;
         }
 
+        public void AttachEnergyToPokemon(IEnergyCard energyCard, IPokemonCard targetPokemonCard)
+        {
+            targetPokemonCard.AttachedEnergy.Add(energyCard);
+        }
+
         public void SetDeck(Deck deck)
         {
             Deck = deck;
+
             deck.Shuffle();
         }
 

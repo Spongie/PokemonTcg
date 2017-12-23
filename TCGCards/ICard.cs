@@ -1,37 +1,26 @@
 ﻿using System;
+using TCGCards.Core;
 
 namespace TCGCards
 {
     public abstract class ICard
     {
-        protected readonly Guid _Id;
         protected string _Name;
-        private CardSet set;
 
-        protected ICard()
+        protected ICard(Player owner)
         {
-            _Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
+            Owner = owner;
         }
 
         public abstract string GetName();
 
-        public Guid Id
-        {
-            get { return _Id; }
-        }
+        public Guid Id { get; protected set; }
 
-        protected CardSet Set
-        {
-            get
-            {
-                return set;
-            }
+        protected CardSet Set { get; set; }
 
-            set
-            {
-                set = value;
-            }
-        }
+
+        public Player Owner { get; set; }
 
         public override bool Equals(object obj)
         {
