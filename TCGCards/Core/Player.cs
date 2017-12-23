@@ -33,6 +33,17 @@ namespace TCGCards.Core
             BenchedPokemon.Add(pokemon);
         }
 
+        public void RetreatActivePokemon(IPokemonCard replacementPokemon)
+        {
+            if(!ActivePokemonCard.CanReatreat())
+                return;
+
+            var oldActivePokemon = ActivePokemonCard;
+            ActivePokemonCard = replacementPokemon;
+            BenchedPokemon.Remove(replacementPokemon);
+            BenchedPokemon.Add(oldActivePokemon);
+        }
+
         public void PlayCard(ICard card)
         {
 
