@@ -66,6 +66,7 @@ namespace TCGCards.Core
 
         public void EndTurn()
         {
+            HasPlayedEnergy = false;
             ActivePokemonCard.PlayedThisTurn = false;
 
             foreach(var pokemon in BenchedPokemon)

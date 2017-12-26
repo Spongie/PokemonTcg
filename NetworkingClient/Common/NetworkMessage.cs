@@ -7,8 +7,6 @@ namespace NetworkingClient.Common
 {
     public struct NetworkMessage
     {
-        public static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
-
         public NetworkMessage(MessageTypes type, string data, Guid senderId)
         {
             MessageType = type;
@@ -22,7 +20,7 @@ namespace NetworkingClient.Common
 
         public void Send(NetworkStream stream)
         {
-            var jsonBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this, JsonSettings));
+            var jsonBytes = Encoding.UTF8.GetBytes(Serializer.Serialize(this));
 
             var prefixBytes = BitConverter.GetBytes(jsonBytes.Length);
             stream.Write(prefixBytes, 0, prefixBytes.Length);

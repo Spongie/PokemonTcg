@@ -26,13 +26,19 @@ namespace NetworkingServer
             Players = new List<NetworkPlayer>(2);
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
-                { MessageTypes.Register, OnRegister }
+                { MessageTypes.Register, OnRegister },
+                { MessageTypes.Attack, OnAttack }
             };
+        }
+
+        private void OnAttack(NetworkMessage message)
+        {
+            var attackMessage = Serializer.Deserialize<AttackMessage>(message.Data);
         }
 
         private void OnRegister(NetworkMessage message)
         {
-            var registrationMessage = JsonConvert.DeserializeObject<RegisterMessage>(message.Data, NetworkMessage.JsonSettings);
+            var registrationMessage = Serializer.Deserialize<RegisterMessage>(message.Data);
 
             NetworkPlayer player = GetPlayerById(message);
             player.Name = registrationMessage.Name;
@@ -130,7 +136,7 @@ namespace NetworkingServer
             {
                 var message = new GameFieldMessage(gameField);
 
-                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, JsonConvert.SerializeObject(message, NetworkMessage.JsonSettings), ServerId);
+                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, Serializer.Serialize(message), ServerId);
                 player.Send(networkMessage);
             }
         }

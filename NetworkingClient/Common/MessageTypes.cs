@@ -5,6 +5,7 @@
         Test,
         Connected,
         Register,
-        GameUpdate
+        GameUpdate,
+        Attack
     }
 }

@@ -35,6 +35,13 @@ namespace TCGCards.Core
             GameState = GameFieldState.SelectingActive;
         }
 
+        public void Attack(Attack attack)
+        {
+            var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
+            NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
+            attack.ProcessEffects(ActivePlayer, NonActivePlayer);
+        }
+
         public void EndTurn()
         {
             ActivePlayer.EndTurn();
@@ -65,6 +72,7 @@ namespace TCGCards.Core
 
         public List<Player> Players { get; set; }
         public Player ActivePlayer { get; set; }
+        public Player NonActivePlayer { get { return Players.First(p => p.Id != ActivePlayer.Id); } }
         public int Mode { get; set; }
     }
 }

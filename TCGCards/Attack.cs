@@ -6,50 +6,15 @@ namespace TCGCards
 {
     public abstract class Attack
     {
-        private string _Name;
-        private string _Description;
-        private List<Energy> _Cost;
+        public string Name { get; set; }
 
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
+        public string Description { get; set; }
 
-            set
-            {
-                _Name = value;
-            }
-        }
-
-        public string Description
-        {
-            get
-            {
-                return _Description;
-            }
-
-            set
-            {
-                _Description = value;
-            }
-        }
-
-        public List<Energy> Cost
-        {
-            get
-            {
-                return _Cost;
-            }
-
-            set
-            {
-                _Cost = value;
-            }
-        }
+        public List<Energy> Cost { get; set; }
 
         public abstract int GetDamage(Player owner, Player opponent);
+
+        public virtual void ProcessEffects(Player owner, Player opponent) { }
 
         protected int GetDamageAfterResistanceAndWeakness(int baseDamage, IPokemonCard attacker, IPokemonCard target)
         {
