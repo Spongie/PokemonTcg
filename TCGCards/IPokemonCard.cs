@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
 
@@ -11,7 +12,7 @@ namespace TCGCards
             AttachedEnergy = new List<IEnergyCard>();
         }
 
-        public int Hp { get; set; }
+        public int Hp { get; protected set; }
         public int DamageCounters { get; set; }
         public int Stage { get; set; }
         public IPokemonCard EvolvesFrom { get; set; }
@@ -29,6 +30,11 @@ namespace TCGCards
                 return false;
 
             return AttachedEnergy.Count >= RetreatCost;
+        }
+
+        internal bool IsDead()
+        {
+            return DamageCounters >= Hp;
         }
     }
 }

@@ -34,6 +34,10 @@ namespace NetworkingServer
         private void OnAttack(NetworkMessage message)
         {
             var attackMessage = Serializer.Deserialize<AttackMessage>(message.Data);
+
+            gameField.Attack(attackMessage.Attack);
+
+            SendGameToPlayers();
         }
 
         private void OnRegister(NetworkMessage message)

@@ -21,6 +21,13 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
         }
 
+        public void InitTest()
+        {
+            Players.Add(new Player { Id = Guid.NewGuid() });
+            Players.Add(new Player { Id = Guid.NewGuid() });
+            ActivePlayer = Players[0];
+        }
+
         public void StartGame()
         {
             ActivePlayer = Players[new Random().Next(2)];
@@ -40,6 +47,28 @@ namespace TCGCards.Core
             var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
             attack.ProcessEffects(ActivePlayer, NonActivePlayer);
+
+            CheckEndTurn();
+        }
+
+        private void CheckEndTurn()
+        {
+            if(NonActivePlayer.ActivePokemonCard.IsDead() && GameState != GameFieldState.UnActivePlayerSelectingPrize)
+                GameState = GameFieldState.ActivePlayerSelectingPrize;
+            else if(ActivePlayer.ActivePokemonCard.IsDead() && GameState != GameFieldState.UnActivePlayerSelectingPrize)
+                GameState = GameFieldState.UnActivePlayerSelectingPrize;
+            else
+                EndTurn();
+        }
+
+        public void SelectPrizeCard(ICard prizeCard)
+        {
+            if(GameState == GameFieldState.ActivePlayerSelectingPrize)
+                ActivePlayer.DrawPrizeCard(prizeCard);
+            else if(GameState == GameFieldState.UnActivePlayerSelectingPrize)
+                NonActivePlayer.DrawPrizeCard(prizeCard);
+
+            CheckEndTurn();
         }
 
         public void EndTurn()

@@ -7,6 +7,10 @@
         SelectingActive,
         SelectingBench,
         TurnStarting,
+        ActivePlayerSelectingFromBench,
+        UnActivePlayerSelectingFromBench,
+        ActivePlayerSelectingPrize,
+        UnActivePlayerSelectingPrize,
         InTurn
     }
 }

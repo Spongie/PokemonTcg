@@ -13,7 +13,8 @@ namespace TCGCards.Core
         {
             Hand = new List<ICard>();
             BenchedPokemon = new List<IPokemonCard>();
-            PriceCards = new List<ICard>();
+            PrizeCards = new List<ICard>();
+            Deck = new Deck();
         }
 
         public void InitTestData()
@@ -35,7 +36,7 @@ namespace TCGCards.Core
         {
             for(int _ = 0; _ < priceCards; _++)
             {
-                PriceCards.Add(Deck.DrawCard());
+                PrizeCards.Add(Deck.DrawCard());
             }
         }
 
@@ -62,6 +63,12 @@ namespace TCGCards.Core
             ActivePokemonCard = replacementPokemon;
             BenchedPokemon.Remove(replacementPokemon);
             BenchedPokemon.Add(oldActivePokemon);
+        }
+
+        public void DrawPrizeCard(ICard prizeCard)
+        {
+            Hand.Add(prizeCard);
+            PrizeCards.Remove(prizeCard);
         }
 
         public void EndTurn()
@@ -125,7 +132,7 @@ namespace TCGCards.Core
 
         public IPokemonCard ActivePokemonCard { get; set; }
 
-        public List<ICard> PriceCards { get; set; }
+        public List<ICard> PrizeCards { get; set; }
 
         public List<ICard> DiscardPile { get; set; }
 
