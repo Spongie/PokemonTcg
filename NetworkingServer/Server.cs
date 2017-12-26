@@ -26,13 +26,13 @@ namespace NetworkingServer
             Players = new List<NetworkPlayer>(2);
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
-                { MessageTypes.RegisterName, OnRegisterName }
+                { MessageTypes.Register, OnRegister }
             };
         }
 
-        private void OnRegisterName(NetworkMessage message)
+        private void OnRegister(NetworkMessage message)
         {
-            var registrationMessage = JsonConvert.DeserializeObject<RegisterMessage>(message.Data);
+            var registrationMessage = JsonConvert.DeserializeObject<RegisterMessage>(message.Data, NetworkMessage.JsonSettings);
 
             NetworkPlayer player = GetPlayerById(message);
             player.Name = registrationMessage.Name;
@@ -63,15 +63,18 @@ namespace NetworkingServer
 
         private void Run()
         {
+            gameField = new GameField();
+            gameField.Init();
             WaitForConnections();
             WaitForRegistrations();
         }
 
         private void WaitForRegistrations()
         {
+            Console.WriteLine("waiting for registration messages...");
+
             while(!gameField.Players.All(x => x.IsRegistered()))
             {
-                Console.WriteLine("waiting for registration messages...");
                 Thread.Sleep(100);
             }
 
@@ -84,12 +87,14 @@ namespace NetworkingServer
 
         private void InitGame()
         {
-            gameField = new GameField();
             Players[0].Player = gameField.Players[0];
-            Players[0].Player.Id = gameField.Players[0].Id;
+            gameField.Players[0].Id = Players[0].Id;
 
             Players[1].Player = gameField.Players[1];
-            Players[1].Player.Id = gameField.Players[1].Id;
+            gameField.Players[1].Id = Players[1].Id;
+
+            gameField.GameState = GameFieldState.WaitingForRegistration;
+            SendGameToPlayers();
         }
 
         private void WaitForConnections()
@@ -106,16 +111,15 @@ namespace NetworkingServer
 
                 player.Id = Guid.NewGuid();
                 player.Send(new NetworkMessage(MessageTypes.Connected, player.Id.ToString(), ServerId));
-
-                InitGame();
-                Console.WriteLine("Both players connected");
+                SendGameToPlayers();
             }
+
+            InitGame();
+            Console.WriteLine("Both players connected");
         }
 
         private void Player_DataReceived(object sender, NetworkDataRecievedEventArgs e)
         {
-            Console.WriteLine(((NetworkPlayer)sender).Id + ": " + e.Message.Data);
-
             if(Actions.ContainsKey(e.Message.MessageType))
                 Actions[e.Message.MessageType].Invoke(e.Message);
         }
@@ -126,7 +130,7 @@ namespace NetworkingServer
             {
                 var message = new GameFieldMessage(gameField);
 
-                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, JsonConvert.SerializeObject(message), ServerId);
+                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, JsonConvert.SerializeObject(message, NetworkMessage.JsonSettings), ServerId);
                 player.Send(networkMessage);
             }
         }

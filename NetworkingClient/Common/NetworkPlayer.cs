@@ -82,7 +82,7 @@ namespace NetworkingClient.Common
                     inputStream.Write(data, 0, dataSize);
 
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
-                    var message = JsonConvert.DeserializeObject<NetworkMessage>(input);
+                    var message = JsonConvert.DeserializeObject<NetworkMessage>(input, NetworkMessage.JsonSettings);
 
                     DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
                 }

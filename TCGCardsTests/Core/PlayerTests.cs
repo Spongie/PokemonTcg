@@ -32,6 +32,19 @@ namespace TCGCards.Core.Tests
             Assert.IsFalse(p.BenchedPokemon.Contains(card));
         }
 
+        [TestMethod()]
+        public void SetActiePokemon_SpotTaken()
+        {
+            var p = new Player();
+            var card = new Magikarp(p);
+            var card2 = new Magikarp(p);
+
+            p.SetActivePokemon(card);
+            p.SetActivePokemon(card2);
+
+            Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
+        }
+
         [TestMethod]
         public void RetreatActivePokemon_NoEnergy()
         {

@@ -20,7 +20,7 @@ namespace NetworkingClient
                 if(input == "exit")
                     break;
 
-                var message = new NetworkMessage(MessageTypes.Test, input, client.player.Id);
+                var message = new NetworkMessage(MessageTypes.Test, input, client.Player.Id);
                 client.Send(message);
             }
         }

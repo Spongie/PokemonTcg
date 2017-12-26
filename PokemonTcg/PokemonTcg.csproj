@@ -66,6 +66,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NetworkingClient\NetworkingClient.csproj">
+      <Project>{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}</Project>
+      <Name>NetworkingClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkingServer\NetworkingServer.csproj">
+      <Project>{729AFB7F-64CF-4C94-8960-296DBAA9F20D}</Project>
+      <Name>NetworkingServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCGCards\TCGCards.csproj">
       <Project>{062a25f7-1cc0-4c31-b300-24ae2f351e44}</Project>
       <Name>TCGCards</Name>

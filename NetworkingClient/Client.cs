@@ -1,4 +1,5 @@
 ﻿using NetworkingClient.Common;
+using NetworkingClient.Messages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace NetworkingClient
         public event EventHandler<GameUpdatedEventArgs> OnGameUpdated;
 
         private readonly Dictionary<MessageTypes, Action<NetworkMessage>> Actions;
+        public bool RegistrationSent { get; private set; }
 
         public Client()
         {
@@ -25,10 +27,10 @@ namespace NetworkingClient
 
         private void OnGameServerUpdated(NetworkMessage message)
         {
-            OnGameUpdated?.Invoke(this, new GameUpdatedEventArgs(JsonConvert.DeserializeObject<GameField>(message.Data)));
+            OnGameUpdated?.Invoke(this, new GameUpdatedEventArgs(JsonConvert.DeserializeObject<GameFieldMessage>(message.Data, NetworkMessage.JsonSettings).Game));
         }
 
-        public NetworkPlayer player { get; protected set; }
+        public NetworkPlayer Player { get; protected set; }
 
         Thread clientThread;
         
@@ -37,11 +39,21 @@ namespace NetworkingClient
             var client = new TcpClient();
             client.Connect(ipAddress, port);
 
-            player = new NetworkPlayer(client);
-            player.DataReceived += Player_DataReceived;
+            Player = new NetworkPlayer(client);
+            Player.DataReceived += Player_DataReceived;
 
             clientThread = new Thread(Run);
             clientThread.Start();
+        }
+
+        public void Register(string v, Deck deck)
+        {
+            if(RegistrationSent)
+                return;
+
+            RegistrationSent = true;
+            var registerMessage = new RegisterMessage(v, deck);
+            Send(new NetworkMessage(MessageTypes.Register, JsonConvert.SerializeObject(registerMessage, NetworkMessage.JsonSettings), Player.Id));
         }
 
         private void Run()
@@ -54,7 +66,7 @@ namespace NetworkingClient
 
         internal void Send(NetworkMessage message)
         {
-            player.Send(message);
+            Player.Send(message);
         }
 
         private void Player_DataReceived(object sender, NetworkDataRecievedEventArgs e)
@@ -67,7 +79,7 @@ namespace NetworkingClient
 
         private void OnConnected(NetworkMessage message)
         {
-            player.Id = new Guid(message.Data);
+            Player.Id = new Guid(message.Data);
         }
     }
 }

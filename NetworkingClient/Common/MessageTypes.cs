@@ -4,7 +4,7 @@
     {
         Test,
         Connected,
-        RegisterName,
+        Register,
         GameUpdate
     }
 }

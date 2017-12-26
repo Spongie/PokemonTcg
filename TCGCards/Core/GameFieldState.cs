@@ -2,7 +2,8 @@
 {
     public enum GameFieldState
     {
-        Wating,
+        WaitingForConnection,
+        WaitingForRegistration,
         SelectingActive,
         SelectingBench,
         TurnStarting,

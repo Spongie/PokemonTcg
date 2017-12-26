@@ -8,12 +8,12 @@ namespace TCGCards.Core
     public class Player
     {
         private readonly int MaxBenchedPokemons = 5;
-        private bool hasPlayedEnergy;
 
         public Player()
         {
             Hand = new List<ICard>();
             BenchedPokemon = new List<IPokemonCard>();
+            PriceCards = new List<ICard>();
         }
 
         public void InitTestData()
@@ -29,6 +29,14 @@ namespace TCGCards.Core
             Deck.Cards.Push(new Magikarp(this));
             Deck.Shuffle();
             DrawCards(5);
+        }
+
+        internal void SetPrizeCards(int priceCards)
+        {
+            for(int _ = 0; _ < priceCards; _++)
+            {
+                PriceCards.Add(Deck.DrawCard());
+            }
         }
 
         public void SetBenchedPokemon(IPokemonCard pokemon)
@@ -73,6 +81,9 @@ namespace TCGCards.Core
         
         public void SetActivePokemon(IPokemonCard pokemon)
         {
+            if(ActivePokemonCard != null)
+                return;
+
             if(Hand.Contains(pokemon))
             {
                 pokemon.PlayedThisTurn = true;
@@ -86,6 +97,10 @@ namespace TCGCards.Core
 
         public void AttachEnergyToPokemon(IEnergyCard energyCard, IPokemonCard targetPokemonCard)
         {
+            if(HasPlayedEnergy)
+                return;
+
+            HasPlayedEnergy = true;
             targetPokemonCard.AttachedEnergy.Add(energyCard);
         }
 
@@ -109,7 +124,7 @@ namespace TCGCards.Core
 
         public IPokemonCard ActivePokemonCard { get; set; }
 
-        public List<ICard> PrizeCards { get; set; }
+        public List<ICard> PriceCards { get; set; }
 
         public List<ICard> DiscardPile { get; set; }
 
@@ -117,6 +132,8 @@ namespace TCGCards.Core
 
         public List<ICard> Hand { get; set; }
         public Guid Id { get; set; }
+
+        public bool HasPlayedEnergy { get; protected set; }
 
         public bool IsRegistered()
         {

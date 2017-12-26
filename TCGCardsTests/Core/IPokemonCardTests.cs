@@ -12,6 +12,7 @@ namespace TCGCardsTests.Core
         public void CanRetreat_NoBench()
         {
             var game = new GameField();
+            game.Init();
             var pokmeon = new Magikarp(game.ActivePlayer);
 
             Assert.IsFalse(pokmeon.CanReatreat());
@@ -21,6 +22,7 @@ namespace TCGCardsTests.Core
         public void CanRetreat_Bench_NoEnergy()
         {
             var game = new GameField();
+            game.Init();
             var pokmeon = new Magikarp(game.ActivePlayer);
 
             game.ActivePlayer.SetActivePokemon(pokmeon);
@@ -33,6 +35,7 @@ namespace TCGCardsTests.Core
         public void CanRetreat_Bench_Energy()
         {
             var game = new GameField();
+            game.Init();
             var pokmeon = new Magikarp(game.ActivePlayer);
 
             game.ActivePlayer.SetActivePokemon(pokmeon);
@@ -47,6 +50,7 @@ namespace TCGCardsTests.Core
         public void CanRetreat_NoBench_Energy()
         {            
             var game = new GameField();
+            game.Init();
             var pokmeon = new Magikarp(game.ActivePlayer);
 
             game.ActivePlayer.SetActivePokemon(pokmeon);
