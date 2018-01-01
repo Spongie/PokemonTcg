@@ -88,9 +88,12 @@ namespace TCGCards.Core
             }
         }
 
-        public void PlayCard(ICard card)
+        public void PlayCard(IPokemonCard card)
         {
-
+            if(ActivePokemonCard == null)
+                ActivePokemonCard = card;
+            else
+                BenchedPokemon.Add(card);
         }
         
         public void SetActivePokemon(IPokemonCard pokemon)

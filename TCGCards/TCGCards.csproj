@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Attack.cs" />
     <Compile Include="Core\CoinFlipper.cs" />
+    <Compile Include="Core\IAbility.cs" />
+    <Compile Include="Core\TriggerType.cs" />
     <Compile Include="ICard.cs" />
     <Compile Include="CardSet.cs" />
     <Compile Include="Core\Deck.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="EnergyCards\WaterEnergy.cs" />
     <Compile Include="EnergyTypes.cs" />
     <Compile Include="IPokemonCard.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Abilities\FinalBeam.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Flop.cs" />
     <Compile Include="PokemonCards\TeamRocket\DarkGyarados.cs" />
     <Compile Include="PokemonCards\TeamRocket\Magikarp.cs" />

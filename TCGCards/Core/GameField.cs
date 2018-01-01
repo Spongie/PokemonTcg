@@ -48,22 +48,42 @@ namespace TCGCards.Core
         {
             var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
+
             attack.ProcessEffects(ActivePlayer, NonActivePlayer);
 
-            CheckDeadPokemon();
+            if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
+                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
 
+            CheckDeadPokemon();
             CheckEndTurn();
+        }
+
+        public void PlayPokemon(IPokemonCard pokemon)
+        {
+            ActivePlayer.PlayCard(pokemon);
+
+            if(pokemon.Ability?.TriggerType == TriggerType.EnterPlay)
+                pokemon.Ability?.Activate(ActivePlayer, NonActivePlayer);
         }
 
         private void CheckDeadPokemon()
         {
             if(NonActivePlayer.ActivePokemonCard.IsDead())
             {
+                NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
+
+                if(NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
+                    NonActivePlayer.ActivePokemonCard.Ability?.Activate(NonActivePlayer, ActivePlayer);
+                if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Kills)
+                    ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
+
+                NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
                 stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
                 stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
             }
             if(ActivePlayer.ActivePokemonCard.IsDead())
             {
+                ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
                 stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
             }

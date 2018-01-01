@@ -211,5 +211,26 @@ namespace TCGCards.Core.Tests
             Assert.AreEqual(activePokemon, activeEvolution);
             Assert.AreEqual(originalActive, activeEvolution.EvolvesFrom);
         }
+
+        [TestMethod]
+        public void KnockedOutBy_IsSet()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+
+            gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
+            gameField.ActivePlayer.Hand.Add(new WaterEnergy());
+
+            IPokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
+            IPokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
+
+            gameField.ActivePlayer.SetActivePokemon(activePokemon);
+            gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
+
+            otherPokemon.DamageCounters = otherPokemon.Hp - 1;
+            gameField.Attack(activePokemon.Attacks.First());
+
+            Assert.AreEqual(activePokemon, otherPokemon.KnockedOutBy);
+        }
     }
 }

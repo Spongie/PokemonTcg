@@ -27,6 +27,9 @@ namespace TCGCards
         public bool IsBurned { get; set; }
         public bool IsPoisoned { get; set; }
         public bool IsAsleep { get; set; }
+        public bool IsConfused { get; set; }
+        public IPokemonCard KnockedOutBy { get; set; }
+        public IAbility Ability { get; protected set; }
 
         public virtual void EndTurn()
         {
@@ -58,6 +61,7 @@ namespace TCGCards
             IsBurned = false;
             IsPoisoned = false;
             IsAsleep = false;
+            IsConfused = false;
         }
 
         public bool CanReatreat()

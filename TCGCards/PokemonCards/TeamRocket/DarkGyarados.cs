@@ -1,4 +1,5 @@
 ﻿using TCGCards.Core;
+using TCGCards.PokemonCards.TeamRocket.Abilities;
 
 namespace TCGCards.PokemonCards.TeamRocket
 {
@@ -18,6 +19,7 @@ namespace TCGCards.PokemonCards.TeamRocket
             Stage = 1;
             RetreatCost = 2;
             EvolvesFrom = new Magikarp();
+            Ability = new FinalBeam(this);
         }
 
         public override string GetName()

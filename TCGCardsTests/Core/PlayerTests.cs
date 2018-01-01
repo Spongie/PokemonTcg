@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using TCGCards.Core;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using TCGCards.EnergyCards;
 using TCGCards.PokemonCards.TeamRocket;
@@ -97,6 +98,30 @@ namespace TCGCards.Core.Tests
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
             Assert.IsFalse(card.IsBurned);
+        }
+
+        [TestMethod()]
+        public void PlayCardTest_NoActive()
+        {
+            var p = new Player();
+            var card = new Magikarp(p);
+
+            p.PlayCard(card);
+
+            Assert.AreEqual(card, p.ActivePokemonCard);
+        }
+
+        [TestMethod()]
+        public void PlayCardTest_Active()
+        {
+            var p = new Player();
+            var card = new Magikarp(p);
+            var card2 = new Magikarp(p);
+            p.PlayCard(card);
+            p.PlayCard(card2);
+
+            Assert.AreEqual(card, p.ActivePokemonCard);
+            Assert.AreEqual(card2, p.BenchedPokemon.First());
         }
     }
 }

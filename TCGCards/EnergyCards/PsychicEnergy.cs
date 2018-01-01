@@ -2,6 +2,11 @@
 {
     public class PsychicEnergy : IEnergyCard
     {
+        public PsychicEnergy()
+        {
+            EnergyType = EnergyTypes.Psychic;
+        }
+
         public override Energy GetEnergry()
         {
             return new Energy(EnergyTypes.Psychic, 1);

@@ -118,6 +118,7 @@ namespace TCGCardsTests.Core
             pokemon.IsParalyzed = true;
             pokemon.IsPoisoned = true;
             pokemon.IsAsleep = true;
+            pokemon.IsConfused = true;
 
             pokemon.ClearStatusEffects();
 
@@ -125,6 +126,7 @@ namespace TCGCardsTests.Core
             Assert.IsFalse(pokemon.IsBurned);
             Assert.IsFalse(pokemon.IsPoisoned);
             Assert.IsFalse(pokemon.IsAsleep);
+            Assert.IsFalse(pokemon.IsConfused);
         }
 
         [TestMethod]
