@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attack.cs" />
+    <Compile Include="Core\CoinFlipper.cs" />
     <Compile Include="ICard.cs" />
     <Compile Include="CardSet.cs" />
     <Compile Include="Core\Deck.cs" />
