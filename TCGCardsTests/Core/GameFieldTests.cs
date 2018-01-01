@@ -124,12 +124,15 @@ namespace TCGCards.Core.Tests
 
             activePokemon.DamageCounters = 100000;
             originalActive.PrizeCards.Add(new WaterEnergy());
-            gameField.GameState = GameFieldState.ActivePlayerSelectingPrize;
+
+            gameField.Attack(activePokemon.Attacks.First());
+
+            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
 
             gameField.SelectPrizeCard(originalActive.PrizeCards.First());
 
             Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
+            Assert.AreEqual(GameFieldState.ActivePlayerSelectingFromBench, gameField.GameState);
         }
 
         [TestMethod]

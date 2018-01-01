@@ -8,10 +8,12 @@ namespace TCGCards.Core
     {
         private const int StartingHandsize = 7;
         private const int PriceCards = 1;
+        private Queue<GameFieldState> stateQueue;
 
         public GameField()
         {
             Players = new List<Player>();
+            stateQueue = new Queue<GameFieldState>();
         }
 
         public void Init()
@@ -48,15 +50,24 @@ namespace TCGCards.Core
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
             attack.ProcessEffects(ActivePlayer, NonActivePlayer);
 
+            if (NonActivePlayer.ActivePokemonCard.IsDead())
+            {
+                stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
+                stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
+            }
+            if (ActivePlayer.ActivePokemonCard.IsDead())
+            {
+                stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
+                stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
+            }
+
             CheckEndTurn();
         }
 
         private void CheckEndTurn()
         {
-            if(NonActivePlayer.ActivePokemonCard.IsDead() && GameState != GameFieldState.UnActivePlayerSelectingPrize)
-                GameState = GameFieldState.ActivePlayerSelectingPrize;
-            else if(ActivePlayer.ActivePokemonCard.IsDead() && GameState != GameFieldState.UnActivePlayerSelectingPrize)
-                GameState = GameFieldState.UnActivePlayerSelectingPrize;
+            if(stateQueue.Any())
+                GameState = stateQueue.Dequeue();
             else
                 EndTurn();
         }
