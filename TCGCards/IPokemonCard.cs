@@ -23,18 +23,21 @@ namespace TCGCards
         public List<Attack> Attacks { get; set; }
         public int RetreatCost { get; set; }
         public bool PlayedThisTurn { get; set; }
+        public bool IsParalyzed { get; set; }
+        public bool IsBurned { get; set; }
 
         public bool CanReatreat()
         {
             if(!Owner.BenchedPokemon.Any())
                 return false;
 
-            return AttachedEnergy.Count >= RetreatCost;
+            return !IsParalyzed && AttachedEnergy.Count >= RetreatCost;
         }
 
-        internal bool IsDead()
-        {
-            return DamageCounters >= Hp;
-        }
+        public bool IsDead() => DamageCounters >= Hp;
+
+        public bool CanEvolve() => !PlayedThisTurn;
+
+        public bool CanAttack() => !IsParalyzed;
     }
 }

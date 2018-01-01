@@ -58,5 +58,34 @@ namespace TCGCardsTests.Core
 
             Assert.IsFalse(pokmeon.CanReatreat());
         }
+
+        [TestMethod]
+        public void CanRetreat_Paralyzed()
+        {
+            var game = new GameField();
+            game.InitTest();
+            var pokmeon = new Magikarp(game.ActivePlayer);
+
+            pokmeon.IsParalyzed = true;
+
+            Assert.IsFalse(pokmeon.CanReatreat());
+        }
+
+        [TestMethod]
+        public void CanAttack_Paralyzed()
+        {
+            var pokemon = new Magikarp();
+            pokemon.IsParalyzed = true;
+
+            Assert.IsFalse(pokemon.CanAttack());
+        }
+
+        [TestMethod]
+        public void CanAttack_NotParalyzed()
+        {
+            var pokemon = new Magikarp();
+
+            Assert.IsTrue(pokemon.CanAttack());
+        }
     }
 }
