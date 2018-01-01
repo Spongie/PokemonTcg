@@ -87,6 +87,15 @@ namespace TCGCards.Core
             CheckEndTurn();
         }
 
+        public void EvolvePokemon(ref IPokemonCard target, IPokemonCard evolution)
+        {
+            target.Evolve();
+
+            evolution.SetBase(target);
+            evolution.EvolvesFrom = target;
+            target = evolution;
+        }
+
         public void EndTurn()
         {
             ActivePlayer.EndTurn();

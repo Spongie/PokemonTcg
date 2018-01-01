@@ -189,5 +189,27 @@ namespace TCGCards.Core.Tests
             Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
             Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
         }
+
+        [TestMethod]
+        public void EvolvePokemon()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            
+
+            gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
+            gameField.ActivePlayer.Hand.Add(new WaterEnergy());
+
+            IPokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
+            IPokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
+
+            var originalActive = activePokemon;
+            var activeEvolution = new DarkGyarados(gameField.ActivePlayer);
+
+            gameField.EvolvePokemon(ref activePokemon, activeEvolution);
+
+            Assert.AreEqual(activePokemon, activeEvolution);
+            Assert.AreEqual(originalActive, activeEvolution.EvolvesFrom);
+        }
     }
 }

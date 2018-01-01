@@ -145,5 +145,48 @@ namespace TCGCardsTests.Core
 
             Assert.IsFalse(pokemon.CanAttack());
         }
+
+        [TestMethod]
+        public void Evolve_StatusClear()
+        {
+            var pokemon = new Magikarp();
+            pokemon.IsBurned = true;
+
+            pokemon.Evolve();
+
+            Assert.IsFalse(pokemon.IsBurned);
+        }
+
+        [TestMethod]
+        public void Evolve_SetBase()
+        {
+            var pokemon = new Magikarp();
+            pokemon.DamageCounters = 10;
+
+            var evolution = new DarkGyarados();
+            evolution.SetBase(pokemon);
+
+            Assert.AreEqual(10, evolution.DamageCounters);
+        }
+
+        [TestMethod]
+        public void CanEvolve_Valid()
+        {
+            var magikarp = new Magikarp();
+
+            var gyarados = new DarkGyarados();
+
+            Assert.IsTrue(magikarp.CanEvolveTo(gyarados));
+        }
+
+        [TestMethod]
+        public void CanEvolve_InValid()
+        {
+            var magikarp = new Magikarp();
+
+            var gyarados = new Magikarp();
+
+            Assert.IsFalse(magikarp.CanEvolveTo(gyarados));
+        }
     }
 }

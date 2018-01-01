@@ -47,6 +47,11 @@ namespace TCGCards
                 IsAsleep = CoinFlipper.FlipCoin();
         }
 
+        public void Evolve()
+        {
+            ClearStatusEffects();
+        }
+
         public void ClearStatusEffects()
         {
             IsParalyzed = false;
@@ -68,5 +73,15 @@ namespace TCGCards
         public bool CanEvolve() => !PlayedThisTurn;
 
         public bool CanAttack() => !IsParalyzed && !IsAsleep;
+
+        public void SetBase(IPokemonCard target)
+        {
+            DamageCounters = target.DamageCounters;
+        }
+        
+        public bool CanEvolveTo(IPokemonCard evolution)
+        {
+            return evolution.EvolvesFrom != null && evolution.EvolvesFrom.GetType() == GetType();
+        }
     }
 }
