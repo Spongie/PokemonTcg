@@ -109,5 +109,30 @@ namespace TCGCardsTests.Core
 
             Assert.AreEqual(20, pokemon.DamageCounters);
         }
+
+        [TestMethod]
+        public void ClearStatusEffects()
+        {
+            var pokemon = new Magikarp();
+            pokemon.IsBurned = true;
+            pokemon.IsParalyzed = true;
+            pokemon.IsPoisoned = true;
+
+            pokemon.ClearStatusEffects();
+
+            Assert.IsFalse(pokemon.IsParalyzed);
+            Assert.IsFalse(pokemon.IsBurned);
+            Assert.IsFalse(pokemon.IsPoisoned);
+        }
+
+        [TestMethod]
+        public void Poision_EndofTurn()
+        {
+            var pokemon = new Magikarp();
+            pokemon.IsPoisoned = true;
+            pokemon.EndTurn();
+
+            Assert.AreEqual(10, pokemon.DamageCounters);
+        }
     }
 }

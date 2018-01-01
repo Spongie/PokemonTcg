@@ -25,6 +25,7 @@ namespace TCGCards
         public bool PlayedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
         public bool IsBurned { get; set; }
+        public bool IsPoisoned { get; set; }
 
         public virtual void EndTurn()
         {
@@ -35,6 +36,18 @@ namespace TCGCards
                 DamageCounters += 20;
                 IsBurned = CoinFlipper.FlipCoin();
             }
+
+            if (IsPoisoned)
+            {
+                DamageCounters += 10;
+            }
+        }
+
+        public void ClearStatusEffects()
+        {
+            IsParalyzed = false;
+            IsBurned = false;
+            IsPoisoned = false;
         }
 
         public bool CanReatreat()
