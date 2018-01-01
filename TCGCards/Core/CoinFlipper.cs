@@ -5,6 +5,8 @@ namespace TCGCards.Core
     public static class CoinFlipper
     {
         private static Random random = new Random();
+        public static readonly bool HEADS = true;
+        public static readonly bool TAILS = false;
 
         public static bool FlipCoin()
         {

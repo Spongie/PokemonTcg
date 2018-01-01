@@ -26,6 +26,17 @@ namespace TCGCards
         public bool IsParalyzed { get; set; }
         public bool IsBurned { get; set; }
 
+        public virtual void EndTurn()
+        {
+            PlayedThisTurn = false;
+
+            if (IsBurned)
+            {
+                DamageCounters += 20;
+                IsBurned = CoinFlipper.FlipCoin();
+            }
+        }
+
         public bool CanReatreat()
         {
             if(!Owner.BenchedPokemon.Any())

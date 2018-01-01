@@ -50,18 +50,23 @@ namespace TCGCards.Core
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
             attack.ProcessEffects(ActivePlayer, NonActivePlayer);
 
-            if (NonActivePlayer.ActivePokemonCard.IsDead())
+            CheckDeadPokemon();
+
+            CheckEndTurn();
+        }
+
+        private void CheckDeadPokemon()
+        {
+            if(NonActivePlayer.ActivePokemonCard.IsDead())
             {
                 stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
                 stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
             }
-            if (ActivePlayer.ActivePokemonCard.IsDead())
+            if(ActivePlayer.ActivePokemonCard.IsDead())
             {
                 stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
                 stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
             }
-
-            CheckEndTurn();
         }
 
         private void CheckEndTurn()
@@ -85,13 +90,22 @@ namespace TCGCards.Core
         public void EndTurn()
         {
             ActivePlayer.EndTurn();
-            SwapActivePlayer();
+            CheckDeadPokemon();
 
-            StartNextTurn();
+            if(stateQueue.Any())
+                CheckEndTurn();
+            else
+            {
+                SwapActivePlayer();
+                StartNextTurn();
+            }
         }
 
         private void StartNextTurn()
         {
+            ActivePlayer.ResetTurn();
+            NonActivePlayer.ResetTurn();
+
             GameState = GameFieldState.TurnStarting;
             ActivePlayer.DrawCards(1);
 

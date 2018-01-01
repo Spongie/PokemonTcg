@@ -153,14 +153,41 @@ namespace TCGCards.Core.Tests
 
             activePokemon.DamageCounters = 100000;
 
-            gameField.GameState = GameFieldState.UnActivePlayerSelectingPrize;
             originalActive.PrizeCards.Add(new WaterEnergy());
             gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
 
+            gameField.Attack(activePokemon.Attacks.First());
+            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
+
             gameField.SelectPrizeCard(originalActive.PrizeCards.First());
 
-            Assert.AreNotEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
+            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
+            Assert.AreEqual(GameFieldState.ActivePlayerSelectingFromBench, gameField.GameState);
+        }
+
+        [TestMethod]
+        public void PokemonDiesBurn()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            var originalActive = gameField.ActivePlayer;
+
+            gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
+            gameField.ActivePlayer.Hand.Add(new WaterEnergy());
+
+            var activePokemon = new Magikarp(gameField.ActivePlayer);
+            var otherPokemon = new Magikarp(gameField.NonActivePlayer);
+
+            gameField.ActivePlayer.SetActivePokemon(activePokemon);
+            gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
+
+            activePokemon.DamageCounters = activePokemon.Hp - 1;
+            activePokemon.IsBurned = true;
+
+            gameField.EndTurn();
+
+            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
+            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
         }
     }
 }

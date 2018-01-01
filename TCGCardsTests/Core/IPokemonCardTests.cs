@@ -87,5 +87,27 @@ namespace TCGCardsTests.Core
 
             Assert.IsTrue(pokemon.CanAttack());
         }
+
+        [TestMethod]
+        public void EndOfTurn_PlayedThisTurn()
+        {
+            var pokemon = new Magikarp();
+            pokemon.PlayedThisTurn = true;
+
+            pokemon.EndTurn();
+
+            Assert.IsFalse(pokemon.PlayedThisTurn);
+        }
+
+        [TestMethod]
+        public void BurnEndOfTurn()
+        {
+            var pokemon = new Magikarp();
+            pokemon.IsBurned = true;
+
+            pokemon.EndTurn();
+
+            Assert.AreEqual(20, pokemon.DamageCounters);
+        }
     }
 }

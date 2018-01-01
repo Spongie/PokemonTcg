@@ -8,6 +8,7 @@ namespace TCGCards.Core
     public class Player
     {
         private readonly int MaxBenchedPokemons = 5;
+        private bool endedTurn = false;
 
         public Player()
         {
@@ -73,12 +74,16 @@ namespace TCGCards.Core
 
         public void EndTurn()
         {
+            if(endedTurn)
+                return;
+
+            endedTurn = true;
             HasPlayedEnergy = false;
-            ActivePokemonCard.PlayedThisTurn = false;
+            ActivePokemonCard.EndTurn();
 
             foreach(var pokemon in BenchedPokemon)
             {
-                pokemon.PlayedThisTurn = false;
+                pokemon.EndTurn();
             }
         }
 
@@ -110,6 +115,11 @@ namespace TCGCards.Core
 
             HasPlayedEnergy = true;
             targetPokemonCard.AttachedEnergy.Add(energyCard);
+        }
+
+        internal void ResetTurn()
+        {
+            endedTurn = false;
         }
 
         public void SetDeck(Deck deck)
