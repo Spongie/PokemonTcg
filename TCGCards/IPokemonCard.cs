@@ -26,6 +26,7 @@ namespace TCGCards
         public bool IsParalyzed { get; set; }
         public bool IsBurned { get; set; }
         public bool IsPoisoned { get; set; }
+        public bool IsAsleep { get; set; }
 
         public virtual void EndTurn()
         {
@@ -41,6 +42,9 @@ namespace TCGCards
             {
                 DamageCounters += 10;
             }
+
+            if(IsAsleep)
+                IsAsleep = CoinFlipper.FlipCoin();
         }
 
         public void ClearStatusEffects()
@@ -48,6 +52,7 @@ namespace TCGCards
             IsParalyzed = false;
             IsBurned = false;
             IsPoisoned = false;
+            IsAsleep = false;
         }
 
         public bool CanReatreat()
@@ -62,6 +67,6 @@ namespace TCGCards
 
         public bool CanEvolve() => !PlayedThisTurn;
 
-        public bool CanAttack() => !IsParalyzed;
+        public bool CanAttack() => !IsParalyzed && !IsAsleep;
     }
 }

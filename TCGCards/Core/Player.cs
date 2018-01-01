@@ -64,6 +64,7 @@ namespace TCGCards.Core
             ActivePokemonCard = replacementPokemon;
             BenchedPokemon.Remove(replacementPokemon);
             BenchedPokemon.Add(oldActivePokemon);
+            oldActivePokemon.ClearStatusEffects();
         }
 
         public void DrawPrizeCard(ICard prizeCard)

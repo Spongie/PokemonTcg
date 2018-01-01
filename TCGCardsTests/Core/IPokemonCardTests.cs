@@ -117,12 +117,14 @@ namespace TCGCardsTests.Core
             pokemon.IsBurned = true;
             pokemon.IsParalyzed = true;
             pokemon.IsPoisoned = true;
+            pokemon.IsAsleep = true;
 
             pokemon.ClearStatusEffects();
 
             Assert.IsFalse(pokemon.IsParalyzed);
             Assert.IsFalse(pokemon.IsBurned);
             Assert.IsFalse(pokemon.IsPoisoned);
+            Assert.IsFalse(pokemon.IsAsleep);
         }
 
         [TestMethod]
@@ -133,6 +135,15 @@ namespace TCGCardsTests.Core
             pokemon.EndTurn();
 
             Assert.AreEqual(10, pokemon.DamageCounters);
+        }
+
+        [TestMethod]
+        public void CanAttack_Asleep()
+        {
+            var pokemon = new Magikarp();
+            pokemon.IsAsleep = true;
+
+            Assert.IsFalse(pokemon.CanAttack());
         }
     }
 }
