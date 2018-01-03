@@ -6,6 +6,7 @@
         Connected,
         Register,
         GameUpdate,
-        Attack
+        Attack,
+        DeckSearch
     }
 }

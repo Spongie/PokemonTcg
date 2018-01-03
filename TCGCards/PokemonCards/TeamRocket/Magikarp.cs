@@ -24,6 +24,7 @@ namespace TCGCards.PokemonCards.TeamRocket
             {
                 new Flop()
             };
+            PokemonName = PokemonNames.Magikarp;
         }
 
         public override string GetName()

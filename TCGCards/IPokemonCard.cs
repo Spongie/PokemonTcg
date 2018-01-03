@@ -15,7 +15,8 @@ namespace TCGCards
         public int Hp { get; protected set; }
         public int DamageCounters { get; set; }
         public int Stage { get; set; }
-        public IPokemonCard EvolvesFrom { get; set; }
+        public string EvolvesFrom { get; set; }
+        public IPokemonCard EvolvedFrom { get; set; }
         public List<IEnergyCard> AttachedEnergy { get; set; }
         public EnergyTypes PokemonType { get; set; }
         public EnergyTypes Resistance { get; set; }
@@ -30,6 +31,7 @@ namespace TCGCards
         public bool IsConfused { get; set; }
         public IPokemonCard KnockedOutBy { get; set; }
         public IAbility Ability { get; protected set; }
+        public string PokemonName { get; protected set; }
 
         public virtual void EndTurn()
         {
@@ -85,7 +87,7 @@ namespace TCGCards
         
         public bool CanEvolveTo(IPokemonCard evolution)
         {
-            return evolution.EvolvesFrom != null && evolution.EvolvesFrom.GetType() == GetType();
+            return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
         }
     }
 }

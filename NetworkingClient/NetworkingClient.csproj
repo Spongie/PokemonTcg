@@ -55,6 +55,7 @@
     <Compile Include="Common\Serializer.cs" />
     <Compile Include="GameUpdatedEventArgs.cs" />
     <Compile Include="Messages\AttackMessage.cs" />
+    <Compile Include="Messages\DeckSearchMessage.cs" />
     <Compile Include="Messages\GameFieldMessage.cs" />
     <Compile Include="Messages\RegisterMessage.cs" />
     <Compile Include="NetClientConsole.cs" />

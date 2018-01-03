@@ -209,7 +209,7 @@ namespace TCGCards.Core.Tests
             gameField.EvolvePokemon(ref activePokemon, activeEvolution);
 
             Assert.AreEqual(activePokemon, activeEvolution);
-            Assert.AreEqual(originalActive, activeEvolution.EvolvesFrom);
+            Assert.AreEqual(originalActive.PokemonName, activeEvolution.EvolvesFrom);
         }
 
         [TestMethod]

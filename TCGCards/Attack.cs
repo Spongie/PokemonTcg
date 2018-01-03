@@ -12,9 +12,11 @@ namespace TCGCards
 
         public List<Energy> Cost { get; set; }
 
+        public bool NeedsPlayerInteraction { get; protected set; }
+
         public abstract int GetDamage(Player owner, Player opponent);
 
-        public virtual void ProcessEffects(Player owner, Player opponent) { }
+        public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }
 
         protected int GetDamageAfterResistanceAndWeakness(int baseDamage, IPokemonCard attacker, IPokemonCard target)
         {

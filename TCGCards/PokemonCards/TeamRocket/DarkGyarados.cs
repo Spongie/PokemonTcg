@@ -18,7 +18,8 @@ namespace TCGCards.PokemonCards.TeamRocket
             Resistance = EnergyTypes.Fighting;
             Stage = 1;
             RetreatCost = 2;
-            EvolvesFrom = new Magikarp();
+            EvolvesFrom = PokemonNames.Magikarp;
+            PokemonName = PokemonNames.Gyarados;
             Ability = new FinalBeam(this);
         }
 

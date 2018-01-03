@@ -27,8 +27,18 @@ namespace NetworkingServer
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
                 { MessageTypes.Register, OnRegister },
-                { MessageTypes.Attack, OnAttack }
+                { MessageTypes.Attack, OnAttack },
+                { MessageTypes.DeckSearch, OnDeckSearched }
             };
+        }
+
+        private void OnDeckSearched(NetworkMessage message)
+        {
+            var deckSearchMessage = Serializer.Deserialize<DeckSearchMessage>(message.Data);
+
+            gameField.OnDeckSearched(deckSearchMessage.PickedCards);
+
+            SendGameToPlayers();
         }
 
         private void OnAttack(NetworkMessage message)
@@ -75,8 +85,15 @@ namespace NetworkingServer
         {
             gameField = new GameField();
             gameField.Init();
+            gameField.OnDeckSearchTriggered += GameField_OnDeckSearchTriggered;
             WaitForConnections();
             WaitForRegistrations();
+        }
+
+        private void GameField_OnDeckSearchTriggered(object sender, DeckSearchEventHandler e)
+        {
+            var message = new DeckSearchMessage(e);
+            Players.FirstOrDefault(p => p.Id == e.Player.Id).Send(new NetworkMessage(MessageTypes.DeckSearch, Serializer.Serialize(message), ServerId));
         }
 
         private void WaitForRegistrations()

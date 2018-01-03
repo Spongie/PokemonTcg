@@ -8,12 +8,14 @@ namespace TCGCards.Core
     {
         private const int StartingHandsize = 7;
         private const int PriceCards = 1;
-        private Queue<GameFieldState> stateQueue;
+        private Action<GameField, List<ICard>> deckSearchAction;
+
+        public event EventHandler<DeckSearchEventHandler> OnDeckSearchTriggered;
 
         public GameField()
         {
             Players = new List<Player>();
-            stateQueue = new Queue<GameFieldState>();
+            StateQueue = new Queue<GameFieldState>();
         }
 
         public void Init()
@@ -28,6 +30,24 @@ namespace TCGCards.Core
             Players.Add(new Player { Id = Guid.NewGuid() });
             Players.Add(new Player { Id = Guid.NewGuid() });
             ActivePlayer = Players[0];
+        }
+
+        public void TriggerDeckSearch(Player player, List<IDeckFilter> filterList, int cardCount, Action<GameField, List<ICard>> continueation)
+        {
+            GameState = GameFieldState.WaitingForDeckSearch;
+            deckSearchAction = continueation;
+            OnDeckSearchTriggered?.Invoke(this, new DeckSearchEventHandler(player, filterList, cardCount));
+        }
+
+        public void OnDeckSearched(List<ICard> selectedCards)
+        {
+            deckSearchAction?.Invoke(this, selectedCards);
+
+            if(StateQueue.Any())
+                GameState = StateQueue.Dequeue();
+
+            if(GameState == GameFieldState.EndAttack)
+                PostAttack();
         }
 
         public void StartGame()
@@ -49,8 +69,14 @@ namespace TCGCards.Core
             var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
 
-            attack.ProcessEffects(ActivePlayer, NonActivePlayer);
+            attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
+            if (!attack.NeedsPlayerInteraction)
+                PostAttack();
+        }
+
+        public void PostAttack()
+        {
             if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
                 ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
 
@@ -78,21 +104,21 @@ namespace TCGCards.Core
                     ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
-                stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
-                stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
+                StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
+                StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
             }
             if(ActivePlayer.ActivePokemonCard.IsDead())
             {
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
-                stateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
-                stateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
+                StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
+                StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
             }
         }
 
         private void CheckEndTurn()
         {
-            if(stateQueue.Any())
-                GameState = stateQueue.Dequeue();
+            if(StateQueue.Any())
+                GameState = StateQueue.Dequeue();
             else
                 EndTurn();
         }
@@ -112,7 +138,7 @@ namespace TCGCards.Core
             target.Evolve();
 
             evolution.SetBase(target);
-            evolution.EvolvesFrom = target;
+            evolution.EvolvedFrom = target;
             target = evolution;
         }
 
@@ -121,7 +147,7 @@ namespace TCGCards.Core
             ActivePlayer.EndTurn();
             CheckDeadPokemon();
 
-            if(stateQueue.Any())
+            if(StateQueue.Any())
                 CheckEndTurn();
             else
             {
@@ -157,5 +183,6 @@ namespace TCGCards.Core
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get { return Players.First(p => p.Id != ActivePlayer.Id); } }
         public int Mode { get; set; }
+        public Queue<GameFieldState> StateQueue { get; set; }
     }
 }

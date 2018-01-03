@@ -11,6 +11,8 @@
         UnActivePlayerSelectingFromBench,
         ActivePlayerSelectingPrize,
         UnActivePlayerSelectingPrize,
-        InTurn
+        InTurn,
+        WaitingForDeckSearch,
+        EndAttack
     }
 }
