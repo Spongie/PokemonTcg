@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NetworkingClient;
 using NetworkingServer;
+using PokemonTcg.Assets;
 using System;
 using System.Linq;
 using TCGCards;
@@ -20,14 +21,16 @@ namespace PokemonTcg
         private SpriteFont defaultFont;
         private Server server;
         private Client client;
+        private TextureManager textureManager;
 
         public PokemonGame(ContentManager content)
         {
             defaultFont = content.Load<SpriteFont>("Fonts/Default");
+            textureManager = new TextureManager(content);
 
-            client = new Client();
-            client.OnGameUpdated += Client_OnGameUpdated;
-            client.Start("127.0.0.1", 1000);
+            //client = new Client();
+            //client.OnGameUpdated += Client_OnGameUpdated;
+            //client.Start("127.0.0.1", 1000);
         }
 
         private void Client_OnGameUpdated(object sender, GameUpdatedEventArgs e)
@@ -72,7 +75,15 @@ namespace PokemonTcg
 
         public void Render(SpriteBatch spriteBatch)
         {
-            if (playingField != null)
+            var magikarp = new Magikarp();
+
+            spriteBatch.Draw(textureManager.LoadCardTexture(magikarp), new Rectangle(0, 0, 150, 250), Color.White);
+            //RenderTestText(spriteBatch);
+        }
+
+        private void RenderTestText(SpriteBatch spriteBatch)
+        {
+            if(playingField != null)
             {
                 spriteBatch.DrawString(defaultFont, Enum.GetName(typeof(GameFieldState), playingField.GameState), new Vector2(10, 5), Color.Black);
                 spriteBatch.DrawString(defaultFont, "Connected Players: " + playingField.Players.Count, new Vector2(250, 5), Color.Black);

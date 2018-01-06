@@ -29,7 +29,6 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks
 
         public void PostDeckSearch(GameField game, List<ICard> pickedCards)
         {
-            
             game.PostAttack();
         }
     }

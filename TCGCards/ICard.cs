@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TCGCards.Core;
 
 namespace TCGCards
@@ -32,6 +33,16 @@ namespace TCGCards
             }
 
             return item.Id.Equals(Id);
+        }
+
+        public virtual string GetLogicalName()
+        {
+            var type = GetType();
+
+            var name = type.FullName.Split('.').Last();
+            var nameSpace = type.Namespace.Split('.').Last();
+
+            return $"Cards\\{nameSpace}\\{name}";
         }
 
         public override int GetHashCode()

@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\TextureManager.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="PokemonGame.cs" />
