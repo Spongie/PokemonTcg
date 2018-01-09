@@ -41,9 +41,15 @@ namespace PokemonTcg
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.ApplyChanges();
+
             game = new PokemonGame(Content);
 
             IsMouseVisible = true;
+
+            Window.AllowUserResizing = true;
         }
 
         /// <summary>
@@ -78,13 +84,33 @@ namespace PokemonTcg
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            var renderTarget = new RenderTarget2D(GraphicsDevice, 1920, 1080);
+
+            RenderPass1(renderTarget);
+            RenderPass2(renderTarget);
+
+            base.Draw(gameTime);
+        }
+
+        private void RenderPass2(RenderTarget2D source)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(source, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            spriteBatch.End();
+        }
+
+        private void RenderPass1(RenderTarget2D renderTarget)
+        {
+            GraphicsDevice.SetRenderTarget(renderTarget);
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
             game.Render(spriteBatch);
 
             spriteBatch.End();
-            base.Draw(gameTime);
+
+            GraphicsDevice.SetRenderTarget(null);
         }
     }
 }
