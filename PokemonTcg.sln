@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingServer", "Network
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCGCardsTests", "TCGCardsTests\TCGCardsTests.csproj", "{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardDownloader", "CardDownloader\CardDownloader.csproj", "{28471AE9-B79A-4433-AF8D-3E39B462C740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,14 @@ Global
 		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}.Release|x86.Build.0 = Release|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Debug|x86.Build.0 = Debug|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|x86.ActiveCfg = Release|Any CPU
+		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
