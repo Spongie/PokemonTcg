@@ -17,6 +17,15 @@ namespace PokemonTcg.Assets
         {
             textures = new Dictionary<Type, Texture2D>();
             contentManager = content;
+            instance = this;
+        }
+
+        public static TextureManager Instance
+        {
+            get
+            {
+                return instance;
+            }
         }
 
         public Texture2D LoadCardTexture(ICard card)

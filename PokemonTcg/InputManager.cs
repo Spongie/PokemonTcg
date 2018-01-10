@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using PokemonTcg.Assets;
 
 namespace PokemonTcg
 {
@@ -16,7 +18,15 @@ namespace PokemonTcg
 
             oldMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
+
+            var mousePos = currentMouseState.Position;
+            
+            var realX = (1920f / Settings.ClientWidth) * currentMouseState.X;
+            var realY = (1080f / Settings.ClientHeight) * currentMouseState.Y;
+            MousePosition = new Point((int)realX, (int)realY);
         }
+
+        public static Point MousePosition { get; private set; }
 
         public static bool IsKeyPressed(Keys key)
         {

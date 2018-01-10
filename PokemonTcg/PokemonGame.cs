@@ -7,7 +7,6 @@ using NetworkingServer;
 using PokemonTcg.Assets;
 using PokemonTcg.Rendering;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
 using TCGCards.Core;
@@ -25,6 +24,7 @@ namespace PokemonTcg
         private Client client;
         private TextureManager textureManager;
         private Point middleClickPoint;
+        private PlayerRenderer playerRenderer;
 
         public PokemonGame(ContentManager content)
         {
@@ -61,6 +61,8 @@ namespace PokemonTcg
             player.Deck.Cards.Push(new Magikarp(player));
             player.Deck.Cards.Push(new Magikarp(player));
             player.Deck.Cards.Push(new Magikarp(player));
+
+            playerRenderer = new PlayerRenderer(player);
         }
 
         private void Client_OnGameUpdated(object sender, GameUpdatedEventArgs e)
@@ -75,7 +77,9 @@ namespace PokemonTcg
                 player.DrawCards(1);
 
             if (InputManager.IsMiddleMousePressed())
-                middleClickPoint = Mouse.GetState().Position;
+                middleClickPoint = InputManager.MousePosition;
+
+            playerRenderer.Update();
 
             if(playingField == null || playingField.GameState == GameFieldState.WaitingForConnection)
                 return;
@@ -106,69 +110,15 @@ namespace PokemonTcg
 
                 if(InputManager.IsKeyPressed(Keys.P))
                     player.SetActivePokemon((IPokemonCard)player.Hand.First(x => x is IPokemonCard));
-            }
+            }            
         }
 
         public void Render(SpriteBatch spriteBatch)
         {
-            RenderBench(spriteBatch);
-            RenderPlayerHand(spriteBatch);
-            
-            //RenderTestText(spriteBatch);
-        }
+            playerRenderer.Render(spriteBatch);
 
-        private const int benchCardWidth = 125;
-        private const int benchCardHeight = 150;
-        private const int benchCardSpacing = 10;
-
-        private void RenderBench(SpriteBatch spriteBatch)
-        {
-            var cardRectangle = new Rectangle(600, 650, benchCardWidth, benchCardHeight);
-            var delayedRenders = new List<DelayedDraw>();
-
-            foreach(var card in player.BenchedPokemon)
-            {
-                if(cardRectangle.Contains(Mouse.GetState().Position))
-                    delayedRenders.Add(new DelayedDraw(textureManager.LoadCardTexture(card), new Rectangle((int)(cardRectangle.X - benchCardWidth / 2.5f), (int)(cardRectangle.Y - ((benchCardHeight * 2.5f) - benchCardHeight)), (int)(benchCardWidth * 2.5f), (int)(benchCardHeight * 2.5f))));
-                else
-                    spriteBatch.Draw(textureManager.LoadCardTexture(card), cardRectangle, Color.PaleVioletRed);
-
-                cardRectangle.X += benchCardWidth + benchCardSpacing;
-            }
-
-            foreach(var drawing in delayedRenders)
-            {
-                drawing.Render(spriteBatch);
-            }
-        }
-
-        private const int cardWidth = 150;
-        private const int cardWidthSpacing = 10;
-        private const int cardHeight = 250;
-
-        private void RenderPlayerHand(SpriteBatch spriteBatch)
-        {
-            var totalCardsize = (cardWidth + cardWidthSpacing) * player.Hand.Count;
-            var totalEmptySpace = 1920 - totalCardsize;
-
-            var cardRectangle = new Rectangle(totalEmptySpace / 2, 820, cardWidth, cardHeight);
-
-            var delayedRenders = new List<DelayedDraw>();
-
-            foreach(var card in player.Hand)
-            {
-                if(cardRectangle.Contains(Mouse.GetState().Position))
-                    delayedRenders.Add(new DelayedDraw(textureManager.LoadCardTexture(card), new Rectangle(cardRectangle.X - cardWidth / 2, cardRectangle.Y - cardHeight, cardWidth * 2, cardHeight * 2)));
-                else
-                    spriteBatch.Draw(textureManager.LoadCardTexture(card), cardRectangle, Color.White);
-
-                cardRectangle.X += cardWidth + cardWidthSpacing;
-            }
-
-            foreach(var drawing in delayedRenders)
-            {
-                drawing.Render(spriteBatch);
-            }
+            spriteBatch.DrawString(defaultFont, "X: " + InputManager.MousePosition.X, new Vector2(20, 15), Color.Black);
+            spriteBatch.DrawString(defaultFont, "Y: " + InputManager.MousePosition.Y, new Vector2(20, 30), Color.Black);
         }
 
         private void RenderTestText(SpriteBatch spriteBatch)
