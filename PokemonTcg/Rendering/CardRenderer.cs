@@ -7,8 +7,8 @@ namespace PokemonTcg.Rendering
 {
     public class CardRenderer
     {
-        public const int benchCardWidth = 125;
-        public const int benchCardHeight = 150;
+        public const int benchCardWidth = 135;
+        public const int benchCardHeight = 165;
         public const int benchCardSpacing = 10;
         public const int cardWidth = 150;
         public const int cardWidthSpacing = 10;
@@ -16,6 +16,8 @@ namespace PokemonTcg.Rendering
         public const int activeCardWidth = 150;
         public const int activeCardWidthSpacing = 10;
         public const int activeCardHeight = 250;
+
+        private readonly float hoverModifier;
 
         public CardRenderer(ICard card, CardMode cardMode, Point position)
         {
@@ -25,6 +27,8 @@ namespace PokemonTcg.Rendering
             Texture = TextureManager.Instance.LoadCardTexture(card);
             Mode = cardMode;
             AllowIsHovered = true;
+
+            hoverModifier = Mode == CardMode.Bench ? 2.5f : 2;
         }
 
         public Point BasePosition { get; set; }
@@ -105,14 +109,18 @@ namespace PokemonTcg.Rendering
 
         public void Update()
         {
-            var size = IsHovered ? new Point(Width * 2, Height * 2) : new Point(Width, Height);
+            var size = IsHovered ? new Point((int)(Width * hoverModifier), (int)(Height * hoverModifier)) : new Point(Width, Height);
             if (new Rectangle(RealPosition, size).Contains(InputManager.MousePosition))
             {
                 if(!IsHovered && AllowIsHovered)
                 {
                     HoverEnter = true;
                     IsHovered = true;
-                    RealPosition = new Point(BasePosition.X - (Width / 2), BasePosition.Y - Height);
+
+                    if (Mode == CardMode.Hand)
+                        RealPosition = new Point(BasePosition.X - (Width / 2), 1080 - Height * 2);
+                    else
+                        RealPosition = new Point(BasePosition.X - (Width / 2), BasePosition.Y - Height);
                 }
             }
             else
@@ -127,7 +135,7 @@ namespace PokemonTcg.Rendering
 
         public void Render(SpriteBatch spriteBatch)
         {
-            var size = IsHovered ? new Point(Width * 2, Height * 2) : new Point(Width, Height);
+            var size = IsHovered ? new Point((int)(Width * hoverModifier), (int)(Height * hoverModifier)) : new Point(Width, Height);
             spriteBatch.Draw(Texture, new Rectangle(RealPosition, size), Color.White);
         }
     }

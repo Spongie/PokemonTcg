@@ -10,6 +10,7 @@ namespace PokemonTcg.Rendering
     {
         private List<CardRenderer> handCards;
         private List<CardRenderer> benchedCards;
+        private CardRenderer activeRenderer;
 
         public PlayerRenderer(Player player)
         {
@@ -19,7 +20,7 @@ namespace PokemonTcg.Rendering
             var totalCardsize = (CardRenderer.cardWidth + CardRenderer.cardWidthSpacing) * player.Hand.Count;
             var totalEmptySpace = 1920 - totalCardsize;
 
-            var handBasePosition = new Point(totalEmptySpace / 2, 820);
+            var handBasePosition = new Point(totalEmptySpace / 2, 950);
 
             foreach(var card in player.Hand)
             {
@@ -27,17 +28,19 @@ namespace PokemonTcg.Rendering
                 handBasePosition = new Point(handBasePosition.X + CardRenderer.cardWidth + CardRenderer.cardWidthSpacing, handBasePosition.Y);
             }
 
-            var benchBasePosition = new Point(600, 650);
+            var benchBasePosition = new Point(600, 780);
             foreach(var card in player.BenchedPokemon)
             {
                 benchedCards.Add(new CardRenderer(card, CardMode.Bench, benchBasePosition));
                 benchBasePosition = new Point(benchBasePosition.X + CardRenderer.benchCardWidth + CardRenderer.benchCardSpacing, benchBasePosition.Y);
             }
+
+            activeRenderer = new CardRenderer(player.ActivePokemonCard, CardMode.Active, new Point((1920 / 2) - (CardRenderer.activeCardWidth / 2), 500));
         }
 
         public void Update()
         {
-            foreach(var renderer in handCards.Concat(benchedCards))
+            foreach(var renderer in handCards.Concat(benchedCards).Concat(new[] { activeRenderer }))
             {
                 renderer.Update();
                 CheckHoverEnterExit(renderer, handCards.Concat(benchedCards));
@@ -67,7 +70,7 @@ namespace PokemonTcg.Rendering
 
         internal void Render(SpriteBatch spriteBatch)
         {
-            foreach(var renderer in handCards.Concat(benchedCards).OrderBy(x => x.IsHovered))
+            foreach(var renderer in handCards.Concat(benchedCards).Concat(new[] { activeRenderer }).OrderBy(x => x.IsHovered))
             {
                 renderer.Render(spriteBatch);
             }

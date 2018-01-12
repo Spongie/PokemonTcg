@@ -38,11 +38,14 @@ namespace PokemonTcg
             player = new Player();
             player.Hand.Add(new Magikarp(player));
             player.Hand.Add(new Magikarp(player));
+            player.Hand.Add(new Magikarp(player));
             player.Hand.Add(new DarkGyarados(player));
             player.Hand.Add(new WaterEnergy());
             player.Hand.Add(new WaterEnergy());
             player.Hand.Add(new WaterEnergy());
             player.Hand.Add(new WaterEnergy());
+
+            player.SetActivePokemon((IPokemonCard)player.Hand.First());
 
             player.BenchedPokemon.Add(new Magikarp(player));
             player.BenchedPokemon.Add(new Magikarp(player));
@@ -119,6 +122,8 @@ namespace PokemonTcg
 
             spriteBatch.DrawString(defaultFont, "X: " + InputManager.MousePosition.X, new Vector2(20, 15), Color.Black);
             spriteBatch.DrawString(defaultFont, "Y: " + InputManager.MousePosition.Y, new Vector2(20, 30), Color.Black);
+
+            spriteBatch.Draw(textureManager.LoadCardTexture(new WaterEnergy()), new Rectangle(0, 1080 / 2, 1920, 1), Color.Black);
         }
 
         private void RenderTestText(SpriteBatch spriteBatch)
