@@ -5,6 +5,7 @@
         Hand,
         Bench,
         Active,
-        Prize
+        Prize,
+        HandOpponent
     }
 }

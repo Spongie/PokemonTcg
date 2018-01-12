@@ -25,6 +25,8 @@ namespace PokemonTcg
         private TextureManager textureManager;
         private Point middleClickPoint;
         private PlayerRenderer playerRenderer;
+        private PlayerRenderer opponentRenderer;
+        private Player opponent;
 
         public PokemonGame(ContentManager content)
         {
@@ -65,7 +67,39 @@ namespace PokemonTcg
             player.Deck.Cards.Push(new Magikarp(player));
             player.Deck.Cards.Push(new Magikarp(player));
 
-            playerRenderer = new PlayerRenderer(player);
+            playerRenderer = PlayerRenderer.CreateForPlayer(player);
+
+            opponent = new Player();
+            opponent.Hand.Add(new Magikarp(player));
+            opponent.Hand.Add(new Magikarp(player));
+            opponent.Hand.Add(new Magikarp(player));
+            opponent.Hand.Add(new DarkGyarados(player));
+            opponent.Hand.Add(new WaterEnergy());
+            opponent.Hand.Add(new WaterEnergy());
+            opponent.Hand.Add(new WaterEnergy());
+            opponent.Hand.Add(new WaterEnergy());
+
+            opponent.SetActivePokemon((IPokemonCard)player.Hand.First());
+
+            opponent.BenchedPokemon.Add(new Magikarp(player));
+            opponent.BenchedPokemon.Add(new Magikarp(player));
+            opponent.BenchedPokemon.Add(new Magikarp(player));
+            opponent.BenchedPokemon.Add(new Magikarp(player));
+            opponent.BenchedPokemon.Add(new Magikarp(player));
+
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+            opponent.Deck.Cards.Push(new Magikarp(player));
+
+            opponentRenderer = PlayerRenderer.CreateForOpponent(opponent);
         }
 
         private void Client_OnGameUpdated(object sender, GameUpdatedEventArgs e)
@@ -82,7 +116,9 @@ namespace PokemonTcg
             if (InputManager.IsMiddleMousePressed())
                 middleClickPoint = InputManager.MousePosition;
 
+            opponentRenderer.Update();
             playerRenderer.Update();
+            
 
             if(playingField == null || playingField.GameState == GameFieldState.WaitingForConnection)
                 return;
@@ -118,6 +154,7 @@ namespace PokemonTcg
 
         public void Render(SpriteBatch spriteBatch)
         {
+            opponentRenderer.Render(spriteBatch);
             playerRenderer.Render(spriteBatch);
 
             spriteBatch.DrawString(defaultFont, "X: " + InputManager.MousePosition.X, new Vector2(20, 15), Color.Black);

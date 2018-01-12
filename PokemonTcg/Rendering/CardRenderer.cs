@@ -17,7 +17,13 @@ namespace PokemonTcg.Rendering
         public const int activeCardWidthSpacing = 10;
         public const int activeCardHeight = 250;
 
+        private bool isOpponentCard;
         private readonly float hoverModifier;
+
+        public CardRenderer(ICard card, CardMode cardMode, Point position, bool opponent) :this(card, cardMode, position)
+        {
+            isOpponentCard = opponent;
+        }
 
         public CardRenderer(ICard card, CardMode cardMode, Point position)
         {
@@ -28,7 +34,7 @@ namespace PokemonTcg.Rendering
             Mode = cardMode;
             AllowIsHovered = true;
 
-            hoverModifier = Mode == CardMode.Bench ? 2.5f : 2;
+            hoverModifier = Mode == CardMode.Bench ? 2.25f : 2;
         }
 
         public Point BasePosition { get; set; }
@@ -114,13 +120,17 @@ namespace PokemonTcg.Rendering
             {
                 if(!IsHovered && AllowIsHovered)
                 {
-                    HoverEnter = true;
-                    IsHovered = true;
-
-                    if (Mode == CardMode.Hand)
+                    if(isOpponentCard && Mode == CardMode.Hand)
+                        return;
+                    else if (isOpponentCard && Mode == CardMode.Bench)
+                        RealPosition = new Point(BasePosition.X - (Width / 2), BasePosition.Y - Height / 2);
+                    else if(Mode == CardMode.Hand)
                         RealPosition = new Point(BasePosition.X - (Width / 2), 1080 - Height * 2);
                     else
                         RealPosition = new Point(BasePosition.X - (Width / 2), BasePosition.Y - Height);
+
+                    HoverEnter = true;
+                    IsHovered = true;
                 }
             }
             else
@@ -136,7 +146,8 @@ namespace PokemonTcg.Rendering
         public void Render(SpriteBatch spriteBatch)
         {
             var size = IsHovered ? new Point((int)(Width * hoverModifier), (int)(Height * hoverModifier)) : new Point(Width, Height);
-            spriteBatch.Draw(Texture, new Rectangle(RealPosition, size), Color.White);
+            var color = isOpponentCard ? Color.Red : Color.White;
+            spriteBatch.Draw(Texture, new Rectangle(RealPosition, size), color);
         }
     }
 }
