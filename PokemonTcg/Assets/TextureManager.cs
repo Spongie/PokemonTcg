@@ -18,6 +18,7 @@ namespace PokemonTcg.Assets
             textures = new Dictionary<Type, Texture2D>();
             contentManager = content;
             instance = this;
+            Cardback = content.Load<Texture2D>("Cards\\CardBack");
         }
 
         public static TextureManager Instance
@@ -27,6 +28,8 @@ namespace PokemonTcg.Assets
                 return instance;
             }
         }
+
+        public Texture2D Cardback { get; internal set; }
 
         public Texture2D LoadCardTexture(ICard card)
         {

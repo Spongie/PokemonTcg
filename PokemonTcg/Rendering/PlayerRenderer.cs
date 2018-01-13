@@ -10,18 +10,17 @@ namespace PokemonTcg.Rendering
     {
         private List<CardRenderer> handCards;
         private List<CardRenderer> benchedCards;
-        private CardRenderer activeRenderer;
+        private List<CardRenderer> activeCards;
 
         private PlayerRenderer()
         {
-            
+            activeCards = new List<CardRenderer>();
+            handCards = new List<CardRenderer>();
+            benchedCards = new List<CardRenderer>();
         }
 
         private void InitActivePlayer(Player player)
         {
-            handCards = new List<CardRenderer>();
-            benchedCards = new List<CardRenderer>();
-
             var totalCardsize = (CardRenderer.cardWidth + CardRenderer.cardWidthSpacing) * player.Hand.Count;
             var totalEmptySpace = 1920 - totalCardsize;
 
@@ -40,14 +39,11 @@ namespace PokemonTcg.Rendering
                 benchBasePosition = new Point(benchBasePosition.X + CardRenderer.benchCardWidth + CardRenderer.benchCardSpacing, benchBasePosition.Y);
             }
 
-            activeRenderer = new CardRenderer(player.ActivePokemonCard, CardMode.Active, new Point((1920 / 2) - (CardRenderer.activeCardWidth / 2), 525));
+            activeCards.Add(new CardRenderer(player.ActivePokemonCard, CardMode.Active, new Point((1920 / 2) - (CardRenderer.activeCardWidth), 525)));
         }
 
         private void InitOpponent(Player player)
         {
-            handCards = new List<CardRenderer>();
-            benchedCards = new List<CardRenderer>();
-
             var totalCardsize = (CardRenderer.cardWidth + CardRenderer.cardWidthSpacing) * player.Hand.Count;
             var totalEmptySpace = 1920 - totalCardsize;
 
@@ -55,7 +51,7 @@ namespace PokemonTcg.Rendering
 
             foreach(var card in player.Hand)
             {
-                handCards.Add(new CardRenderer(card, CardMode.Hand, handBasePosition, true));
+                handCards.Add(new CardbackRenderer(card, CardMode.Hand, handBasePosition, true));
                 handBasePosition = new Point(handBasePosition.X + CardRenderer.cardWidth + CardRenderer.cardWidthSpacing, handBasePosition.Y);
             }
 
@@ -66,7 +62,14 @@ namespace PokemonTcg.Rendering
                 benchBasePosition = new Point(benchBasePosition.X + CardRenderer.benchCardWidth + CardRenderer.benchCardSpacing, benchBasePosition.Y);
             }
 
-            activeRenderer = new CardRenderer(player.ActivePokemonCard, CardMode.Active, new Point((1920 / 2) - (CardRenderer.activeCardWidth / 2), 300), true);
+            activeCards.Add(new CardRenderer(player.ActivePokemonCard, CardMode.Active, new Point((1920 / 2), 300), true));
+        }
+
+        public void Add(PlayerRenderer playerRenderer)
+        {
+            handCards.AddRange(playerRenderer.handCards);
+            benchedCards.AddRange(playerRenderer.benchedCards);
+            activeCards.AddRange(playerRenderer.activeCards);
         }
 
         public static PlayerRenderer CreateForPlayer(Player player)
@@ -87,10 +90,10 @@ namespace PokemonTcg.Rendering
 
         public void Update()
         {
-            foreach(var renderer in handCards.Concat(benchedCards).Concat(new[] { activeRenderer }))
+            foreach(var renderer in handCards.Concat(benchedCards).Concat(activeCards).OrderByDescending(x => x.IsOpponentCard))
             {
                 renderer.Update();
-                CheckHoverEnterExit(renderer, handCards.Concat(benchedCards));
+                CheckHoverEnterExit(renderer, handCards.Concat(benchedCards).Concat(activeCards));
             }
         }
 
@@ -117,7 +120,7 @@ namespace PokemonTcg.Rendering
 
         internal void Render(SpriteBatch spriteBatch)
         {
-            foreach(var renderer in handCards.Concat(benchedCards).Concat(new[] { activeRenderer }).OrderBy(x => x.IsHovered))
+            foreach(var renderer in handCards.Concat(benchedCards).Concat(activeCards).OrderBy(x => x.IsHovered))
             {
                 renderer.Render(spriteBatch);
             }

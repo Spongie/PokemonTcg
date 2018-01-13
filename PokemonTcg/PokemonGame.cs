@@ -100,6 +100,7 @@ namespace PokemonTcg
             opponent.Deck.Cards.Push(new Magikarp(player));
 
             opponentRenderer = PlayerRenderer.CreateForOpponent(opponent);
+            playerRenderer.Add(opponentRenderer);
         }
 
         private void Client_OnGameUpdated(object sender, GameUpdatedEventArgs e)
@@ -116,7 +117,7 @@ namespace PokemonTcg
             if (InputManager.IsMiddleMousePressed())
                 middleClickPoint = InputManager.MousePosition;
 
-            opponentRenderer.Update();
+            //opponentRenderer.Update();
             playerRenderer.Update();
             
 
@@ -154,13 +155,14 @@ namespace PokemonTcg
 
         public void Render(SpriteBatch spriteBatch)
         {
-            opponentRenderer.Render(spriteBatch);
+            //opponentRenderer.Render(spriteBatch);
             playerRenderer.Render(spriteBatch);
 
             spriteBatch.DrawString(defaultFont, "X: " + InputManager.MousePosition.X, new Vector2(20, 15), Color.Black);
             spriteBatch.DrawString(defaultFont, "Y: " + InputManager.MousePosition.Y, new Vector2(20, 30), Color.Black);
 
             spriteBatch.Draw(textureManager.LoadCardTexture(new WaterEnergy()), new Rectangle(0, 1080 / 2, 1920, 1), Color.Black);
+            spriteBatch.Draw(textureManager.LoadCardTexture(new WaterEnergy()), new Rectangle(1920 / 2, 0, 1, 1080), Color.Black);
         }
 
         private void RenderTestText(SpriteBatch spriteBatch)

@@ -17,12 +17,13 @@ namespace PokemonTcg.Rendering
         public const int activeCardWidthSpacing = 10;
         public const int activeCardHeight = 250;
 
-        private bool isOpponentCard;
+        public bool IsOpponentCard { get; protected set; }
+
         private readonly float hoverModifier;
 
         public CardRenderer(ICard card, CardMode cardMode, Point position, bool opponent) :this(card, cardMode, position)
         {
-            isOpponentCard = opponent;
+            IsOpponentCard = opponent;
         }
 
         public CardRenderer(ICard card, CardMode cardMode, Point position)
@@ -120,9 +121,9 @@ namespace PokemonTcg.Rendering
             {
                 if(!IsHovered && AllowIsHovered)
                 {
-                    if(isOpponentCard && Mode == CardMode.Hand)
+                    if(IsOpponentCard && Mode == CardMode.Hand)
                         return;
-                    else if (isOpponentCard && Mode == CardMode.Bench)
+                    else if (IsOpponentCard && Mode == CardMode.Bench)
                         RealPosition = new Point(BasePosition.X - (Width / 2), BasePosition.Y - Height / 2);
                     else if(Mode == CardMode.Hand)
                         RealPosition = new Point(BasePosition.X - (Width / 2), 1080 - Height * 2);
@@ -146,8 +147,7 @@ namespace PokemonTcg.Rendering
         public void Render(SpriteBatch spriteBatch)
         {
             var size = IsHovered ? new Point((int)(Width * hoverModifier), (int)(Height * hoverModifier)) : new Point(Width, Height);
-            var color = isOpponentCard ? Color.Red : Color.White;
-            spriteBatch.Draw(Texture, new Rectangle(RealPosition, size), color);
+            spriteBatch.Draw(Texture, new Rectangle(RealPosition, size), Color.White);
         }
     }
 }
