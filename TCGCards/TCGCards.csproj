@@ -71,8 +71,11 @@
     <Compile Include="IPokemonCard.cs" />
     <Compile Include="PokemonCards\PokemonNames.cs" />
     <Compile Include="PokemonCards\TeamRocket\Abilities\FinalBeam.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Abra.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Flop.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Attacks\Psyshock.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\RapidEvolution.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Attacks\Vanish.cs" />
     <Compile Include="PokemonCards\TeamRocket\DarkGyarados.cs" />
     <Compile Include="PokemonCards\TeamRocket\Magikarp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

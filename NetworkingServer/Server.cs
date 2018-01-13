@@ -28,8 +28,16 @@ namespace NetworkingServer
             {
                 { MessageTypes.Register, OnRegister },
                 { MessageTypes.Attack, OnAttack },
-                { MessageTypes.DeckSearch, OnDeckSearched }
+                { MessageTypes.DeckSearch, OnDeckSearched },
+                { MessageTypes.SelectedActive, OnActiveSelected }
             };
+        }
+
+        private void OnActiveSelected(NetworkMessage obj)
+        {
+            var message = Serializer.Deserialize<ActiveSelectedMessage>(obj.Data);
+
+            gameField.OnActivePokemonSelected(message.Owner, message.ActivePokemon);
         }
 
         private void OnDeckSearched(NetworkMessage message)
@@ -86,12 +94,19 @@ namespace NetworkingServer
             gameField = new GameField();
             gameField.Init();
             gameField.OnDeckSearchTriggered += GameField_OnDeckSearchTriggered;
+            gameField.OnPlayerInteractionNeeded += GameField_OnPlayerInteractionNeeded;
             WaitForConnections();
             WaitForRegistrations();
         }
 
+        private void GameField_OnPlayerInteractionNeeded(object sender, Player player)
+        {
+            SendGameToPlayers();
+        }
+
         private void GameField_OnDeckSearchTriggered(object sender, DeckSearchEventHandler e)
         {
+            SendGameToPlayers();
             var message = new DeckSearchMessage(e);
             Players.FirstOrDefault(p => p.Id == e.Player.Id).Send(new NetworkMessage(MessageTypes.DeckSearch, Serializer.Serialize(message), ServerId));
         }

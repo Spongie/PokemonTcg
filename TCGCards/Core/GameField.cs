@@ -11,6 +11,7 @@ namespace TCGCards.Core
         private Action<GameField, List<ICard>> deckSearchAction;
 
         public event EventHandler<DeckSearchEventHandler> OnDeckSearchTriggered;
+        public event EventHandler<Player> OnPlayerInteractionNeeded;
 
         public GameField()
         {
@@ -39,15 +40,33 @@ namespace TCGCards.Core
             OnDeckSearchTriggered?.Invoke(this, new DeckSearchEventHandler(player, filterList, cardCount));
         }
 
-        public void OnDeckSearched(List<ICard> selectedCards)
+        public void OnActivePokemonSelected(Player owner, IPokemonCard activePokemon)
         {
-            deckSearchAction?.Invoke(this, selectedCards);
+            owner.SetActivePokemon(activePokemon);
 
+            GotoNextState();
+        }
+
+        private void GotoNextState()
+        {
             if(StateQueue.Any())
                 GameState = StateQueue.Dequeue();
 
             if(GameState == GameFieldState.EndAttack)
                 PostAttack();
+        }
+
+        public void AddStatesWithPlayerInteraction(GameFieldState firstState, GameFieldState postState)
+        {
+            GameState = firstState;
+            StateQueue.Enqueue(postState);
+        }
+
+        public void OnDeckSearched(List<ICard> selectedCards)
+        {
+            deckSearchAction?.Invoke(this, selectedCards);
+
+            GotoNextState();
         }
 
         public void StartGame()

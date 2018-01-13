@@ -59,6 +59,7 @@
     <Compile Include="Core\IPokemonCardTests.cs" />
     <Compile Include="Core\PlayerTests.cs" />
     <Compile Include="PokemonCards\TeamRocket\Abilities\FinalBeamTests.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Attacks\PsyshockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
         Register,
         GameUpdate,
         Attack,
-        DeckSearch
+        DeckSearch,
+        SelectedActive
     }
 }

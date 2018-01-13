@@ -79,7 +79,7 @@ namespace PokemonTcg
             opponent.Hand.Add(new WaterEnergy());
             opponent.Hand.Add(new WaterEnergy());
 
-            opponent.SetActivePokemon((IPokemonCard)player.Hand.First());
+            opponent.SetActivePokemon((IPokemonCard)opponent.Hand.First());
 
             opponent.BenchedPokemon.Add(new Magikarp(player));
             opponent.BenchedPokemon.Add(new Magikarp(player));
