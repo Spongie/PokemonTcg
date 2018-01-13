@@ -72,12 +72,16 @@
     <Compile Include="PokemonCards\PokemonNames.cs" />
     <Compile Include="PokemonCards\TeamRocket\Abilities\FinalBeam.cs" />
     <Compile Include="PokemonCards\TeamRocket\Abra.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Attacks\Bite.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Flop.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Attacks\IceBeam.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Psyshock.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Attacks\Ram.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\RapidEvolution.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Vanish.cs" />
     <Compile Include="PokemonCards\TeamRocket\DarkGyarados.cs" />
     <Compile Include="PokemonCards\TeamRocket\Magikarp.cs" />
+    <Compile Include="PokemonCards\TeamRocket\Zubat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrainerCard.cs" />
   </ItemGroup>
