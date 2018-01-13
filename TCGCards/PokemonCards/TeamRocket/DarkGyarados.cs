@@ -1,5 +1,7 @@
-﻿using TCGCards.Core;
+﻿using System.Collections.Generic;
+using TCGCards.Core;
 using TCGCards.PokemonCards.TeamRocket.Abilities;
+using TCGCards.PokemonCards.TeamRocket.Attacks;
 
 namespace TCGCards.PokemonCards.TeamRocket
 {
@@ -21,6 +23,7 @@ namespace TCGCards.PokemonCards.TeamRocket
             EvolvesFrom = PokemonNames.Magikarp;
             PokemonName = PokemonNames.Gyarados;
             Ability = new FinalBeam(this);
+            Attacks = new List<Attack> { new IceBeam() }
         }
 
         public override string GetName()
