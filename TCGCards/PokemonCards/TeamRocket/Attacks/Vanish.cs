@@ -9,6 +9,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks
         {
             Name = "Vanish";
             Description = string.Empty;
+            NeedsPlayerInteraction = true;
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 1)
@@ -24,7 +25,8 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks
         {
             owner.Deck.Cards.Push(owner.ActivePokemonCard);
             owner.Deck.Shuffle();
-            
+
+            game.AddStatesWithPlayerInteraction(GameFieldState.ActivePlayerSelectingFromBench, GameFieldState.EndAttack);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace TCGCards.PokemonCards.TeamRocket
             EvolvesFrom = PokemonNames.Magikarp;
             PokemonName = PokemonNames.Gyarados;
             Ability = new FinalBeam(this);
-            Attacks = new List<Attack> { new IceBeam() }
+            Attacks = new List<Attack> { new IceBeam() };
         }
 
         public override string GetName()
