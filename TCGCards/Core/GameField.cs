@@ -26,6 +26,11 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
         }
 
+        internal void RevealCardsTo(List<ICard> pickedCards, Player nonActivePlayer)
+        {
+            //TODO: Complete this
+        }
+
         public void InitTest()
         {
             Players.Add(new Player { Id = Guid.NewGuid() });
@@ -90,8 +95,10 @@ namespace TCGCards.Core
 
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
-            if (!attack.NeedsPlayerInteraction)
+            if(!attack.NeedsPlayerInteraction)
                 PostAttack();
+            else
+                OnPlayerInteractionNeeded?.Invoke(this, ActivePlayer);
         }
 
         public void PostAttack()

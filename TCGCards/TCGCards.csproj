@@ -81,7 +81,9 @@
     <Compile Include="PokemonCards\TeamRocket\Attacks\SpeedBall.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\Vanish.cs" />
     <Compile Include="PokemonCards\TeamRocket\DarkGyarados.cs" />
+    <Compile Include="Core\Deckfilters\DarkNameFilter.cs" />
     <Compile Include="PokemonCards\TeamRocket\Magikarp.cs" />
+    <Compile Include="PokemonCards\TeamRocket\TheBosssWay.cs" />
     <Compile Include="PokemonCards\TeamRocket\Voltorb.cs" />
     <Compile Include="PokemonCards\TeamRocket\Zubat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
