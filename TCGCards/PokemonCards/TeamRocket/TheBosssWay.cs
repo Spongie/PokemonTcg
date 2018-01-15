@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCGCards.Core;
+using TCGCards.Core.Deckfilters;
 
 namespace TCGCards.PokemonCards.TeamRocket
 {
