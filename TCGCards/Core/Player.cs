@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using TCGCards.EnergyCards;
 using TCGCards.PokemonCards.TeamRocket;
@@ -152,8 +153,15 @@ namespace TCGCards.Core
 
         public Deck Deck { get; set; }
 
+        public void SetNetworkPlayer(NetworkPlayer networkPlayer)
+        {
+            Id = networkPlayer.Id;
+            NetworkPlayer = networkPlayer;
+        }
+
         public List<ICard> Hand { get; set; }
         public Guid Id { get; set; }
+        public NetworkPlayer NetworkPlayer { get; private set; }
 
         public bool HasPlayedEnergy { get; protected set; }
 

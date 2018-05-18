@@ -58,8 +58,8 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -76,6 +76,10 @@
     <ProjectReference Include="..\NetworkingClient\NetworkingClient.csproj">
       <Project>{6BC488FC-694A-4F92-AA94-4D23E7CDF0F4}</Project>
       <Name>NetworkingClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj">
+      <Project>{04848704-3083-4e96-8b36-8b368c8ba582}</Project>
+      <Name>NetworkingCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetworkingServer\NetworkingServer.csproj">
       <Project>{729AFB7F-64CF-4C94-8960-296DBAA9F20D}</Project>

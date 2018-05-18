@@ -1,5 +1,6 @@
 ﻿using NetworkingClient.Common;
 using NetworkingClient.Messages;
+using NetworkingClientCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace NetworkingClient
             OnGameUpdated?.Invoke(this, new GameUpdatedEventArgs(Serializer.Deserialize<GameFieldMessage>(message.Data).Game));
         }
 
-        public NetworkPlayer Player { get; protected set; }
+        public ServerPlayer Player { get; protected set; }
 
         Thread clientThread;
         
@@ -39,7 +40,7 @@ namespace NetworkingClient
             var client = new TcpClient();
             client.Connect(ipAddress, port);
 
-            Player = new NetworkPlayer(client);
+            Player = new ServerPlayer(client);
             Player.DataReceived += Player_DataReceived;
 
             clientThread = new Thread(Run);

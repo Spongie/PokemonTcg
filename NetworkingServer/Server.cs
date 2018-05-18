@@ -1,6 +1,7 @@
 ﻿using NetworkingClient;
 using NetworkingClient.Common;
 using NetworkingClient.Messages;
+using NetworkingClientCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace NetworkingServer
     public class Server
     {
         private readonly Dictionary<MessageTypes, Action<NetworkMessage>> Actions;
-        private List<NetworkPlayer> Players;
+        private List<ServerPlayer> Players;
         private Thread serverThread;
         private GameField gameField;
         TcpListener listener;
@@ -23,7 +24,7 @@ namespace NetworkingServer
         public Server()
         {
             ServerId = Guid.NewGuid();
-            Players = new List<NetworkPlayer>(2);
+            Players = new List<ServerPlayer>(2);
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
                 { MessageTypes.Register, OnRegister },
@@ -62,12 +63,12 @@ namespace NetworkingServer
         {
             var registrationMessage = Serializer.Deserialize<RegisterMessage>(message.Data);
 
-            NetworkPlayer player = GetPlayerById(message);
+            ServerPlayer player = GetPlayerById(message);
             player.Name = registrationMessage.Name;
             player.Player.SetDeck(registrationMessage.Deck);
         }
 
-        private NetworkPlayer GetPlayerById(NetworkMessage message)
+        private ServerPlayer GetPlayerById(NetworkMessage message)
         {
             return Players.First(p => p.Id == message.SenderId);
         }
@@ -130,7 +131,7 @@ namespace NetworkingServer
         private void InitGame()
         {
             Players[0].Player = gameField.Players[0];
-            gameField.Players[0].Id = Players[0].Id;
+            gameField.Players[0].SetNetworkPlayer(Players[0]);
 
             Players[1].Player = gameField.Players[1];
             gameField.Players[1].Id = Players[1].Id;
@@ -146,7 +147,7 @@ namespace NetworkingServer
                 Console.WriteLine("listening...");
                 var client = listener.AcceptTcpClient();
 
-                var player = new NetworkPlayer(client);
+                var player = new ServerPlayer(client);
                 player.DataReceived += Player_DataReceived;
                 Players.Add(player);
                 Console.WriteLine("Player connected...");

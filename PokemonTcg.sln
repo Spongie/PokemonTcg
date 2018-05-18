@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTcg", "PokemonTcg\PokemonTcg.csproj", "{ADB84309-8312-4004-86D1-4B3EB31D23DF}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCGCardsTests", "TCGCardsTests\TCGCardsTests.csproj", "{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardDownloader", "CardDownloader\CardDownloader.csproj", "{28471AE9-B79A-4433-AF8D-3E39B462C740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingCore", "NetworkingCore\NetworkingCore.csproj", "{04848704-3083-4E96-8B36-8B368C8BA582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,8 +71,19 @@ Global
 		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|x86.ActiveCfg = Release|Any CPU
 		{28471AE9-B79A-4433-AF8D-3E39B462C740}.Release|x86.Build.0 = Release|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Debug|x86.Build.0 = Debug|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|x86.ActiveCfg = Release|Any CPU
+		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26ED972C-D698-468F-A5FB-3F84AD2D3A25}
 	EndGlobalSection
 EndGlobal

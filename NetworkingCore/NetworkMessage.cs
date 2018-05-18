@@ -3,7 +3,7 @@ using System;
 using System.Net.Sockets;
 using System.Text;
 
-namespace NetworkingClient.Common
+namespace NetworkingClientCore
 {
     public struct NetworkMessage
     {
