@@ -109,7 +109,7 @@ namespace NetworkingServer
         {
             SendGameToPlayers();
             var message = new DeckSearchMessage(e);
-            Players.FirstOrDefault(p => p.Id == e.Player.Id).Send(new NetworkMessage(MessageTypes.DeckSearch, Serializer.Serialize(message), ServerId));
+            Players.FirstOrDefault(p => p.Id == e.Player.Id).Send(new NetworkMessage(MessageTypes.DeckSearch, Serializer.Serialize(message), ServerId, Guid.NewGuid()));
         }
 
         private void WaitForRegistrations()
@@ -153,7 +153,7 @@ namespace NetworkingServer
                 Console.WriteLine("Player connected...");
 
                 player.Id = Guid.NewGuid();
-                player.Send(new NetworkMessage(MessageTypes.Connected, player.Id.ToString(), ServerId));
+                player.Send(new NetworkMessage(MessageTypes.Connected, player.Id.ToString(), ServerId, Guid.NewGuid()));
                 SendGameToPlayers();
             }
 
@@ -164,7 +164,9 @@ namespace NetworkingServer
         private void Player_DataReceived(object sender, NetworkDataRecievedEventArgs e)
         {
             if(Actions.ContainsKey(e.Message.MessageType))
+            {
                 Actions[e.Message.MessageType].Invoke(e.Message);
+            }
         }
 
         private void SendGameToPlayers()
@@ -173,7 +175,7 @@ namespace NetworkingServer
             {
                 var message = new GameFieldMessage(gameField);
 
-                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, Serializer.Serialize(message), ServerId);
+                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, Serializer.Serialize(message), ServerId, Guid.NewGuid());
                 player.Send(networkMessage);
             }
         }

@@ -1,4 +1,5 @@
 ﻿using NetworkingClientCore;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,6 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace NetworkingCore
 {
@@ -17,11 +17,13 @@ namespace NetworkingCore
         private Thread writingThread;
         private Thread readerThread;
         private Queue<NetworkMessage> messageQueue;
+        private List<NetworkMessage> specificResponses;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
             messageQueue = new Queue<NetworkMessage>();
+            specificResponses = new List<NetworkMessage>();
             SetTcpClient(tcpClient);
         }
 
@@ -82,7 +84,29 @@ namespace NetworkingCore
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
                     var message = Serializer.Deserialize<NetworkMessage>(input);
 
-                    DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
+                    if (message.ResponseTo == Guid.Empty)
+                    {
+                        specificResponses.Add(message);
+                    }
+                    else
+                    {
+                        DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
+                    }
+                }
+            }
+        }
+
+        public T SendAndWaitForResponse<T>(NetworkMessage message)
+        {
+            Send(message);
+
+            while (true)
+            {
+                Thread.Sleep(100);
+                NetworkMessage response = specificResponses.FirstOrDefault(m => m.ResponseTo == message.ResponseTo);
+                if (response != null)
+                {
+                    return Serializer.Deserialize<JObject>(response.Data).ToObject<T>();
                 }
             }
         }

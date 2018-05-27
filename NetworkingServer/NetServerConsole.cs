@@ -18,7 +18,7 @@ namespace NetworkingServer
                 if(input == "exit")
                     break;
 
-                var message = new NetworkMessage(MessageTypes.Test, input, server.ServerId);
+                var message = new NetworkMessage(MessageTypes.Test, input, server.ServerId, Guid.NewGuid());
                 server.Send(message);
             }
         }

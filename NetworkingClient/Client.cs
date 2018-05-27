@@ -54,7 +54,7 @@ namespace NetworkingClient
 
             RegistrationSent = true;
             var registerMessage = new RegisterMessage(v, deck);
-            Send(new NetworkMessage(MessageTypes.Register, Serializer.Serialize(registerMessage), Player.Id));
+            Send(new NetworkMessage(MessageTypes.Register, Serializer.Serialize(registerMessage), Player.Id, Guid.NewGuid()));
         }
 
         private void Run()
