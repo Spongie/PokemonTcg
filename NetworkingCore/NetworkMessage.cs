@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace NetworkingClientCore
+namespace NetworkingCore
 {
     public class NetworkMessage
     {
@@ -34,11 +34,6 @@ namespace NetworkingClientCore
             stream.Write(prefixBytes, 0, prefixBytes.Length);
 
             stream.Write(jsonBytes, 0, jsonBytes.Length);
-        }
-
-        public T deserializeData<T>()
-        {
-            
         }
     }
 }
