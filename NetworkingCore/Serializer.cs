@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NetworkingClientCore
+namespace NetworkingCore
 {
     public static class Serializer
     {

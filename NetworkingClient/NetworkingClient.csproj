@@ -50,11 +50,6 @@
     <Compile Include="Client.cs" />
     <Compile Include="Common\NetworkPlayer.cs" />
     <Compile Include="GameUpdatedEventArgs.cs" />
-    <Compile Include="Messages\ActiveSelectedMessage.cs" />
-    <Compile Include="Messages\AttackMessage.cs" />
-    <Compile Include="Messages\DeckSearchMessage.cs" />
-    <Compile Include="Messages\GameFieldMessage.cs" />
-    <Compile Include="Messages\RegisterMessage.cs" />
     <Compile Include="NetClientConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

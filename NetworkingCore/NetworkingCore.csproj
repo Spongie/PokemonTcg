@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractNetworkMessage.cs" />
     <Compile Include="MessageTypes.cs" />
     <Compile Include="NetworkDataRecievedEventArgs.cs" />
     <Compile Include="NetworkMessage.cs" />

@@ -1,13 +1,15 @@
-﻿using TCGCards.Core;
+﻿using NetworkingCore;
+using TCGCards.Core;
 
-namespace NetworkingClient
+namespace TCGCards.Core.Messages
 {
-    public struct RegisterMessage
+    public class RegisterMessage : AbstractNetworkMessage
     {
         public RegisterMessage(string name, Deck deck)
         {
             Name = name;
             Deck = deck;
+            messageType = MessageTypes.Register;
         }
 
         public string Name { get; set; }

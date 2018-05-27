@@ -1,8 +1,5 @@
-﻿using NetworkingClient;
-using NetworkingClient.Common;
-using NetworkingClient.Messages;
-using NetworkingClientCore;
-using Newtonsoft.Json;
+﻿using NetworkingClient.Common;
+using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace NetworkingServer
 {

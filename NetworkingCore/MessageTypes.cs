@@ -1,4 +1,4 @@
-﻿namespace NetworkingClientCore
+﻿namespace NetworkingCore
 {
     public enum MessageTypes
     {

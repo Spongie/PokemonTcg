@@ -50,6 +50,11 @@
     <Compile Include="Core\Deckfilters\IDeckFilter.cs" />
     <Compile Include="Core\DeckSearchEventHandler.cs" />
     <Compile Include="Core\IAbility.cs" />
+    <Compile Include="Core\Messages\ActiveSelectedMessage.cs" />
+    <Compile Include="Core\Messages\AttackMessage.cs" />
+    <Compile Include="Core\Messages\DeckSearchMessage.cs" />
+    <Compile Include="Core\Messages\GameFieldMessage.cs" />
+    <Compile Include="Core\Messages\RegisterMessage.cs" />
     <Compile Include="Core\TriggerType.cs" />
     <Compile Include="ICard.cs" />
     <Compile Include="CardSet.cs" />

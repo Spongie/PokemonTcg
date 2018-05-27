@@ -1,5 +1,4 @@
-﻿using NetworkingClient.Common;
-using NetworkingClientCore;
+﻿using NetworkingCore;
 using System;
 
 namespace NetworkingServer

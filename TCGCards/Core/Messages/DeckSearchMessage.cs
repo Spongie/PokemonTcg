@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using NetworkingCore;
+using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 
-namespace NetworkingClient.Messages
+namespace TCGCards.Core.Messages
 {
-    public class DeckSearchMessage
+    public class DeckSearchMessage : AbstractNetworkMessage
     {
         public DeckSearchMessage(DeckSearchEventHandler deckSearchEvent) : this(deckSearchEvent.Player, deckSearchEvent.Filters, deckSearchEvent.CardCount)
         {
@@ -17,6 +18,7 @@ namespace NetworkingClient.Messages
             Filters = filters;
             CardCount = cardCount;
             PickedCards = new List<ICard>();
+            messageType = MessageTypes.DeckSearch;
         }
 
         public Player Player { get; }

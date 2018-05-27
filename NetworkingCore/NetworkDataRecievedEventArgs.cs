@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetworkingClientCore
+namespace NetworkingCore
 {
     public class NetworkDataRecievedEventArgs : EventArgs
     {
