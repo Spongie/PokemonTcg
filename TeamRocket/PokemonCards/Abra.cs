@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using TCGCards;
 using TCGCards.Core;
 
-namespace TCGCards.PokemonCards.TeamRocket
+namespace TeamRocket.PokemonCards
 {
     public class Abra : IPokemonCard
     {

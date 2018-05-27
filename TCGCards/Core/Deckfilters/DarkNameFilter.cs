@@ -1,6 +1,4 @@
-﻿using TCGCards.Core;
-
-namespace TCGCards.Core.Deckfilters
+﻿namespace TCGCards.Core.Deckfilters
 {
     public class DarkNameFilter : IDeckFilter
     {

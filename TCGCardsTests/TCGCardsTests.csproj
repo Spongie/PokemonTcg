@@ -60,7 +60,6 @@
     <Compile Include="Core\PlayerTests.cs" />
     <Compile Include="PokemonCards\TeamRocket\Abilities\FinalBeamTests.cs" />
     <Compile Include="PokemonCards\TeamRocket\Attacks\PsyshockTests.cs" />
-    <Compile Include="PokemonCards\TeamRocket\Attacks\VanishTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +69,10 @@
     <ProjectReference Include="..\TCGCards\TCGCards.csproj">
       <Project>{062A25F7-1CC0-4C31-B300-24AE2F351E44}</Project>
       <Name>TCGCards</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeamRocket\TeamRocket.csproj">
+      <Project>{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}</Project>
+      <Name>TeamRocket</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

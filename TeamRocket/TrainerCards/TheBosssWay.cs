@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
 
-namespace TCGCards.PokemonCards.TeamRocket
+namespace TeamRocket.TrainerCards
 {
     public class TheBosssWay : TrainerCard
     {

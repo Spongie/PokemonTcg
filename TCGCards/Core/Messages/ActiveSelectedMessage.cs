@@ -1,9 +1,7 @@
 ﻿using NetworkingCore;
-using TCGCards;
-using TCGCards.Core;
 
 namespace TCGCards.Core.Messages
-{ 
+{
     public class ActiveSelectedMessage : AbstractNetworkMessage
     {
         public ActiveSelectedMessage(IPokemonCard active, Player owner)

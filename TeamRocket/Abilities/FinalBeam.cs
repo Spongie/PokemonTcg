@@ -1,7 +1,8 @@
 ﻿using System.Linq;
+using TCGCards;
 using TCGCards.Core;
 
-namespace TCGCards.PokemonCards.TeamRocket.Abilities
+namespace TeamRocket.Abilities
 {
     public class FinalBeam : IAbility
     {

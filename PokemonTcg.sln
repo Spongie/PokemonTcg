@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardDownloader", "CardDownl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingCore", "NetworkingCore\NetworkingCore.csproj", "{04848704-3083-4E96-8B36-8B368C8BA582}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamRocket", "TeamRocket\TeamRocket.csproj", "{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,14 @@ Global
 		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|x86.ActiveCfg = Release|Any CPU
 		{04848704-3083-4E96-8B36-8B368C8BA582}.Release|x86.Build.0 = Release|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Debug|x86.Build.0 = Debug|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Release|x86.ActiveCfg = Release|Any CPU
+		{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

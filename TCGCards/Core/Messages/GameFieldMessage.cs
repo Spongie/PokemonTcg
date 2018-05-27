@@ -1,5 +1,4 @@
 ﻿using NetworkingCore;
-using TCGCards.Core;
 
 namespace TCGCards.Core.Messages
 {

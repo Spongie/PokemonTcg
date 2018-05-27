@@ -1,8 +1,9 @@
 ﻿using NetworkingCore;
 using System;
 using System.Collections.Generic;
+using TCGCards.EnergyCards;
 
-namespace TCGCards.Core
+namespace TCGCore
 {
     public class Player
     {
@@ -15,6 +16,21 @@ namespace TCGCards.Core
             BenchedPokemon = new List<IPokemonCard>();
             PrizeCards = new List<ICard>();
             Deck = new Deck();
+        }
+
+        public void InitTestData()
+        {
+            Deck = new Deck();
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new WaterEnergy());
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Cards.Push(new Magikarp(this));
+            Deck.Shuffle();
+            DrawCards(5);
         }
 
         internal void SetPrizeCards(int priceCards)

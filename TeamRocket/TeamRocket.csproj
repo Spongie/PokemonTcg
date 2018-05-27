@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{062A25F7-1CC0-4C31-B300-24AE2F351E44}</ProjectGuid>
+    <ProjectGuid>{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TCGCards</RootNamespace>
-    <AssemblyName>TCGCards</AssemblyName>
+    <RootNamespace>TeamRocket</RootNamespace>
+    <AssemblyName>TeamRocket</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,48 +40,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attack.cs" />
-    <Compile Include="Core\CoinFlipper.cs" />
-    <Compile Include="Core\Deckfilters\EnergyFilter.cs" />
-    <Compile Include="Core\Deckfilters\IDeckFilter.cs" />
-    <Compile Include="Core\DeckSearchEventHandler.cs" />
-    <Compile Include="Core\IAbility.cs" />
-    <Compile Include="Core\Messages\ActiveSelectedMessage.cs" />
-    <Compile Include="Core\Messages\AttackMessage.cs" />
-    <Compile Include="Core\Messages\DeckSearchMessage.cs" />
-    <Compile Include="Core\Messages\GameFieldMessage.cs" />
-    <Compile Include="Core\Messages\RegisterMessage.cs" />
-    <Compile Include="Core\Player.cs" />
-    <Compile Include="Core\TriggerType.cs" />
-    <Compile Include="ICard.cs" />
-    <Compile Include="CardSet.cs" />
-    <Compile Include="Core\Deck.cs" />
-    <Compile Include="Core\GameField.cs" />
-    <Compile Include="Core\GameFieldState.cs" />
-    <Compile Include="Energy.cs" />
-    <Compile Include="IEnergyCard.cs" />
-    <Compile Include="EnergyCards\DarknessEnergy.cs" />
-    <Compile Include="EnergyCards\DoubleColorlessEnergy.cs" />
-    <Compile Include="EnergyCards\ElectricEnergy.cs" />
-    <Compile Include="EnergyCards\FightingEnergy.cs" />
-    <Compile Include="EnergyCards\FireEnergy.cs" />
-    <Compile Include="EnergyCards\GrassEnergy.cs" />
-    <Compile Include="EnergyCards\PsychicEnergy.cs" />
-    <Compile Include="EnergyCards\WaterEnergy.cs" />
-    <Compile Include="EnergyTypes.cs" />
-    <Compile Include="IPokemonCard.cs" />
-    <Compile Include="Core\Deckfilters\DarkNameFilter.cs" />
-    <Compile Include="Core\PokemonNames.cs" />
+    <Compile Include="Abilities\FinalBeam.cs" />
+    <Compile Include="Attacks\Bite.cs" />
+    <Compile Include="Attacks\Flop.cs" />
+    <Compile Include="Attacks\IceBeam.cs" />
+    <Compile Include="Attacks\Psyshock.cs" />
+    <Compile Include="Attacks\Ram.cs" />
+    <Compile Include="Attacks\RapidEvolution.cs" />
+    <Compile Include="Attacks\SpeedBall.cs" />
+    <Compile Include="Attacks\Vanish.cs" />
+    <Compile Include="PokemonCards\Abra.cs" />
+    <Compile Include="PokemonCards\DarkGyarados.cs" />
+    <Compile Include="PokemonCards\Magikarp.cs" />
+    <Compile Include="TrainerCards\TheBosssWay.cs" />
+    <Compile Include="PokemonCards\Voltorb.cs" />
+    <Compile Include="PokemonCards\Zubat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrainerCard.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Folder Include="EnergyCards\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj">
       <Project>{04848704-3083-4E96-8B36-8B368C8BA582}</Project>
       <Name>NetworkingCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TCGCards\TCGCards.csproj">
+      <Project>{062A25F7-1CC0-4C31-B300-24AE2F351E44}</Project>
+      <Name>TCGCards</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

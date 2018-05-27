@@ -1,11 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TCGCards.PokemonCards.TeamRocket.Attacks;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCGCards.Core;
+using TeamRocket.PokemonCards;
+using TeamRocket.Attacks;
 
 namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
 {

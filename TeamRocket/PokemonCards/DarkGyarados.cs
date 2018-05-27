@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using TCGCards;
 using TCGCards.Core;
-using TCGCards.PokemonCards.TeamRocket.Abilities;
-using TCGCards.PokemonCards.TeamRocket.Attacks;
+using TeamRocket.Abilities;
+using TeamRocket.Attacks;
 
-namespace TCGCards.PokemonCards.TeamRocket
+namespace TeamRocket.PokemonCards
 {
     public class DarkGyarados : IPokemonCard
     {

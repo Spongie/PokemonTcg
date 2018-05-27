@@ -26,7 +26,7 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
         }
 
-        internal void RevealCardsTo(List<ICard> pickedCards, Player nonActivePlayer)
+        public void RevealCardsTo(List<ICard> pickedCards, Player nonActivePlayer)
         {
             //TODO: Complete this
         }

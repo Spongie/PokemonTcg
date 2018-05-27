@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using TCGCards;
 using TCGCards.Core;
 
-namespace TCGCards.PokemonCards.TeamRocket.Attacks
+namespace TeamRocket.Attacks
 {
     public class SpeedBall : Attack
     {

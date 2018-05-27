@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 
-namespace TCGCards.PokemonCards.TeamRocket.Attacks
+namespace TeamRocket.Attacks
 {
     public class Vanish : Attack
     {

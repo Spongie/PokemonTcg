@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TCGCards.Core;
 using TCGCards.EnergyCards;
-using TCGCards.PokemonCards.TeamRocket;
+using TeamRocket.PokemonCards;
 
 namespace TCGCardsTests.Core
 {

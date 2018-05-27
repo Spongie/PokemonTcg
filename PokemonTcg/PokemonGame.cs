@@ -11,7 +11,7 @@ using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.EnergyCards;
-using TCGCards.PokemonCards.TeamRocket;
+using TeamRocket.PokemonCards;
 
 namespace PokemonTcg
 {
