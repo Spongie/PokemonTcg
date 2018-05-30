@@ -41,8 +41,9 @@ namespace TCGCards
 
             var name = type.FullName.Split('.').Last();
             var nameSpace = type.Namespace.Split('.').Last();
+            var assembly = type.Assembly.GetName().Name;
 
-            return $"Cards\\{nameSpace}\\{name}";
+            return $"Cards\\{assembly}\\{nameSpace}\\{name}";
         }
 
         public override int GetHashCode()
