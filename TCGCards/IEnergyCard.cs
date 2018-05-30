@@ -9,4 +9,6 @@ public abstract class IEnergyCard : ICard
     public EnergyTypes EnergyType { get; protected set; }
 
     public abstract Energy GetEnergry();
+
+    public bool IsBasic { get; set; } = true;
 }
