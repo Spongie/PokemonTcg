@@ -8,10 +8,6 @@ namespace TCGCards.Core
     {
         private const int StartingHandsize = 7;
         private const int PriceCards = 1;
-        private Action<GameField, List<ICard>> deckSearchAction;
-
-        public event EventHandler<DeckSearchEventHandler> OnDeckSearchTriggered;
-        public event EventHandler<Player> OnPlayerInteractionNeeded;
 
         public GameField()
         {
@@ -38,13 +34,6 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
         }
 
-        public void TriggerDeckSearch(Player player, List<IDeckFilter> filterList, int cardCount, Action<GameField, List<ICard>> continueation)
-        {
-            GameState = GameFieldState.WaitingForDeckSearch;
-            deckSearchAction = continueation;
-            OnDeckSearchTriggered?.Invoke(this, new DeckSearchEventHandler(player, filterList, cardCount));
-        }
-
         public void OnActivePokemonSelected(Player owner, IPokemonCard activePokemon)
         {
             owner.SetActivePokemon(activePokemon);
@@ -59,19 +48,6 @@ namespace TCGCards.Core
 
             if(GameState == GameFieldState.EndAttack)
                 PostAttack();
-        }
-
-        public void AddStatesWithPlayerInteraction(GameFieldState firstState, GameFieldState postState)
-        {
-            GameState = firstState;
-            StateQueue.Enqueue(postState);
-        }
-
-        public void OnDeckSearched(List<ICard> selectedCards)
-        {
-            deckSearchAction?.Invoke(this, selectedCards);
-
-            GotoNextState();
         }
 
         public void StartGame()
@@ -95,10 +71,7 @@ namespace TCGCards.Core
 
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
-            if(!attack.NeedsPlayerInteraction)
-                PostAttack();
-            else
-                OnPlayerInteractionNeeded?.Invoke(this, ActivePlayer);
+            PostAttack();
         }
 
         public void PostAttack()
@@ -157,15 +130,6 @@ namespace TCGCards.Core
                 NonActivePlayer.DrawPrizeCard(prizeCard);
 
             CheckEndTurn();
-        }
-
-        public void EvolvePokemon(ref IPokemonCard target, IPokemonCard evolution)
-        {
-            target.Evolve();
-
-            evolution.SetBase(target);
-            evolution.EvolvedFrom = target;
-            target = evolution;
         }
 
         public void EndTurn()

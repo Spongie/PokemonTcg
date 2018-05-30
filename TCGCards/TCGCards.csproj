@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractDeckSearcherTrainerCard.cs" />
     <Compile Include="Attack.cs" />
     <Compile Include="Core\CoinFlipper.cs" />
     <Compile Include="Core\Deckfilters\EnergyFilter.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Core\IAbility.cs" />
     <Compile Include="Core\Messages\ActiveSelectedMessage.cs" />
     <Compile Include="Core\Messages\AttackMessage.cs" />
+    <Compile Include="Core\Messages\DeckSearchedMessage.cs" />
     <Compile Include="Core\Messages\DeckSearchMessage.cs" />
     <Compile Include="Core\Messages\GameFieldMessage.cs" />
     <Compile Include="Core\Messages\RegisterMessage.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Core\GameField.cs" />
     <Compile Include="Core\GameFieldState.cs" />
     <Compile Include="Energy.cs" />
+    <Compile Include="AbstractDeckSearcherAttack.cs" />
     <Compile Include="IEnergyCard.cs" />
     <Compile Include="EnergyCards\DarknessEnergy.cs" />
     <Compile Include="EnergyCards\DoubleColorlessEnergy.cs" />

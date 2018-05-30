@@ -27,25 +27,15 @@ namespace NetworkingServer
             {
                 { MessageTypes.Register, OnRegister },
                 { MessageTypes.Attack, OnAttack },
-                { MessageTypes.DeckSearch, OnDeckSearched },
                 { MessageTypes.SelectedActive, OnActiveSelected }
             };
         }
 
-        private void OnActiveSelected(NetworkMessage obj)
+        private void OnActiveSelected(NetworkMessage networkMessage)
         {
-            var message = Serializer.Deserialize<ActiveSelectedMessage>(obj.Data);
+            var message = Serializer.Deserialize<ActiveSelectedMessage>(networkMessage.Data);
 
             gameField.OnActivePokemonSelected(message.Owner, message.ActivePokemon);
-        }
-
-        private void OnDeckSearched(NetworkMessage message)
-        {
-            var deckSearchMessage = Serializer.Deserialize<DeckSearchMessage>(message.Data);
-
-            gameField.OnDeckSearched(deckSearchMessage.PickedCards);
-
-            SendGameToPlayers();
         }
 
         private void OnAttack(NetworkMessage message)
@@ -92,22 +82,8 @@ namespace NetworkingServer
         {
             gameField = new GameField();
             gameField.Init();
-            gameField.OnDeckSearchTriggered += GameField_OnDeckSearchTriggered;
-            gameField.OnPlayerInteractionNeeded += GameField_OnPlayerInteractionNeeded;
             WaitForConnections();
             WaitForRegistrations();
-        }
-
-        private void GameField_OnPlayerInteractionNeeded(object sender, Player player)
-        {
-            SendGameToPlayers();
-        }
-
-        private void GameField_OnDeckSearchTriggered(object sender, DeckSearchEventHandler e)
-        {
-            SendGameToPlayers();
-            var message = new DeckSearchMessage(e);
-            Players.FirstOrDefault(p => p.Id == e.Player.Id).Send(new NetworkMessage(MessageTypes.DeckSearch, Serializer.Serialize(message), ServerId, Guid.NewGuid()));
         }
 
         private void WaitForRegistrations()

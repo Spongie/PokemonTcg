@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class RapidEvolution : Attack
+    public class RapidEvolution : AbstractDeckSearcherAttack
     {
         public RapidEvolution()
         {
@@ -21,22 +22,26 @@ namespace TeamRocket.Attacks
             return 0;
         }
 
-        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        protected override List<IDeckFilter> GetDeckFilters()
         {
-            NeedsPlayerInteraction = true;
-            game.StateQueue.Enqueue(GameFieldState.EndAttack);
-            game.TriggerDeckSearch(owner, new List<IDeckFilter>(), 1, PostDeckSearch);
+            return new List<IDeckFilter> { new RapidEvolutionDeckFilter() };
         }
 
-        public void PostDeckSearch(GameField game, List<ICard> pickedCards)
+        protected override int GetNumberOfCards()
         {
-            game.ActivePlayer.Hand.AddRange(pickedCards);
-            game.ActivePlayer.Deck.Shuffle();
-            game.PostAttack();
+            return 1;
+        }
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            List<ICard> selectedCards = TriggerDeckSearch(owner);
+
+            IPokemonCard evolution = owner.ActivePokemonCard.Evolve((IPokemonCard)selectedCards.First());
+            owner.ActivePokemonCard = evolution;
         }
     }
 
-    public class RapidEvolutionDeckFilter : IDeckFilter
+    internal class RapidEvolutionDeckFilter : IDeckFilter
     {
         public bool IsCardValid(ICard card)
         {

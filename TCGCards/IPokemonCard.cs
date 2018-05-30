@@ -51,9 +51,13 @@ namespace TCGCards
                 IsAsleep = CoinFlipper.FlipCoin();
         }
 
-        public void Evolve()
+        public IPokemonCard Evolve(IPokemonCard evolution)
         {
             ClearStatusEffects();
+            evolution.SetBase(this);
+            evolution.EvolvedFrom = this;
+
+            return evolution;
         }
 
         public void ClearStatusEffects()

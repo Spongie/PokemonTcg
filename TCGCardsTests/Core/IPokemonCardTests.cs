@@ -154,7 +154,7 @@ namespace TCGCardsTests.Core
             var pokemon = new Magikarp();
             pokemon.IsBurned = true;
 
-            pokemon.Evolve();
+            pokemon.Evolve(pokemon);
 
             Assert.IsFalse(pokemon.IsBurned);
         }

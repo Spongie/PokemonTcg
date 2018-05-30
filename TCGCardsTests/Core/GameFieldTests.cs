@@ -201,7 +201,8 @@ namespace TCGCards.Core.Tests
             var originalActive = activePokemon;
             var activeEvolution = new DarkGyarados(gameField.ActivePlayer);
 
-            gameField.EvolvePokemon(ref activePokemon, activeEvolution);
+            IPokemonCard evolution = activePokemon.Evolve(activeEvolution);
+            activePokemon = evolution;
 
             Assert.AreEqual(activePokemon, activeEvolution);
             Assert.AreEqual(originalActive.PokemonName, activeEvolution.EvolvesFrom);

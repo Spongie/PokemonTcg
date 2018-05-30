@@ -1,6 +1,7 @@
 ﻿using NetworkingCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TCGCards.Core
 {
@@ -23,6 +24,13 @@ namespace TCGCards.Core
             {
                 PrizeCards.Add(Deck.DrawCard());
             }
+        }
+
+        public void DrawCardsFromDeck(IEnumerable<ICard> selectedCards)
+        {
+            Deck.Cards = new Stack<ICard>(Deck.Cards.Except(selectedCards));
+            Hand.AddRange(selectedCards);
+            Deck.Shuffle();
         }
 
         public void SetBenchedPokemon(IPokemonCard pokemon)
