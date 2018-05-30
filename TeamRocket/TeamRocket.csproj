@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abilities\AfternoonNap.cs" />
     <Compile Include="Abilities\FinalBeam.cs" />
     <Compile Include="Attacks\Bite.cs" />
     <Compile Include="Attacks\Flop.cs" />
+    <Compile Include="Attacks\Headbutt.cs" />
     <Compile Include="Attacks\IceBeam.cs" />
     <Compile Include="Attacks\Psyshock.cs" />
     <Compile Include="Attacks\Ram.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="PokemonCards\Abra.cs" />
     <Compile Include="PokemonCards\DarkGyarados.cs" />
     <Compile Include="PokemonCards\Magikarp.cs" />
+    <Compile Include="PokemonCards\Slowpoke.cs" />
     <Compile Include="PokemonCards\Squirtle.cs" />
     <Compile Include="TrainerCards\TheBosssWay.cs" />
     <Compile Include="PokemonCards\Voltorb.cs" />

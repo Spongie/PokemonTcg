@@ -4,15 +4,14 @@ using TCGCards.Core;
 
 namespace TeamRocket.Abilities
 {
-    public class FinalBeam : IAbility
+    public class FinalBeam : Ability
     {
-        public FinalBeam(IPokemonCard owner)
+        public FinalBeam(IPokemonCard owner) : base(owner)
         {
-            Owner = owner;
             TriggerType = TriggerType.Dies;
         }
 
-        public void Activate(Player player, Player opponent)
+        public override void Activate(Player player, Player opponent)
         {
             if(Owner.IsAsleep || Owner.IsParalyzed || Owner.IsConfused)
                 return;
@@ -25,13 +24,9 @@ namespace TeamRocket.Abilities
                 Owner.KnockedOutBy.KnockedOutBy = Owner;
         }
 
-        public void SetTarget(IPokemonCard target)
+        public override void SetTarget(IPokemonCard target)
         {
             
         }
-
-        public TriggerType TriggerType { get; set; }
-
-        public IPokemonCard Owner { get; }
     }
 }

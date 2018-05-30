@@ -29,7 +29,7 @@ namespace TCGCards
         public bool IsAsleep { get; set; }
         public bool IsConfused { get; set; }
         public IPokemonCard KnockedOutBy { get; set; }
-        public IAbility Ability { get; protected set; }
+        public Ability Ability { get; protected set; }
         public string PokemonName { get; protected set; }
 
         public virtual void EndTurn()
