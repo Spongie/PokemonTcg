@@ -57,6 +57,7 @@
     <Compile Include="Core\Messages\DeckSearchedMessage.cs" />
     <Compile Include="Core\Messages\DeckSearchMessage.cs" />
     <Compile Include="Core\Messages\GameFieldMessage.cs" />
+    <Compile Include="Core\Messages\PickFromListMessage.cs" />
     <Compile Include="Core\Messages\RegisterMessage.cs" />
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\TriggerType.cs" />

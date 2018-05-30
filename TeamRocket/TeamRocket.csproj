@@ -57,6 +57,7 @@
     <Compile Include="PokemonCards\Magikarp.cs" />
     <Compile Include="PokemonCards\Slowpoke.cs" />
     <Compile Include="PokemonCards\Squirtle.cs" />
+    <Compile Include="TrainerCards\RocketsSneakAttack.cs" />
     <Compile Include="TrainerCards\Sleep.cs" />
     <Compile Include="TrainerCards\TheBosssWay.cs" />
     <Compile Include="PokemonCards\Voltorb.cs" />
