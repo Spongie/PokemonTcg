@@ -47,11 +47,13 @@
     <Compile Include="Attacks\Psyshock.cs" />
     <Compile Include="Attacks\Ram.cs" />
     <Compile Include="Attacks\RapidEvolution.cs" />
+    <Compile Include="Attacks\ShellAttack.cs" />
     <Compile Include="Attacks\SpeedBall.cs" />
     <Compile Include="Attacks\Vanish.cs" />
     <Compile Include="PokemonCards\Abra.cs" />
     <Compile Include="PokemonCards\DarkGyarados.cs" />
     <Compile Include="PokemonCards\Magikarp.cs" />
+    <Compile Include="PokemonCards\Squirtle.cs" />
     <Compile Include="TrainerCards\TheBosssWay.cs" />
     <Compile Include="PokemonCards\Voltorb.cs" />
     <Compile Include="PokemonCards\Zubat.cs" />
