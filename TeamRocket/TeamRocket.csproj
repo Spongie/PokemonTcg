@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="Abilities\AfternoonNap.cs" />
     <Compile Include="Abilities\FinalBeam.cs" />
+    <Compile Include="Abilities\Trickery.cs" />
     <Compile Include="Attacks\Bite.cs" />
     <Compile Include="Attacks\Flop.cs" />
     <Compile Include="Attacks\Headbutt.cs" />
     <Compile Include="Attacks\IceBeam.cs" />
     <Compile Include="Attacks\Psyshock.cs" />
+    <Compile Include="Attacks\QuickAttack.cs" />
     <Compile Include="Attacks\Ram.cs" />
     <Compile Include="Attacks\RapidEvolution.cs" />
     <Compile Include="Attacks\ShellAttack.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="PokemonCards\Abra.cs" />
     <Compile Include="PokemonCards\DarkGyarados.cs" />
     <Compile Include="PokemonCards\Magikarp.cs" />
+    <Compile Include="PokemonCards\Rattata.cs" />
     <Compile Include="PokemonCards\Slowpoke.cs" />
     <Compile Include="PokemonCards\Squirtle.cs" />
     <Compile Include="TrainerCards\RocketsSneakAttack.cs" />

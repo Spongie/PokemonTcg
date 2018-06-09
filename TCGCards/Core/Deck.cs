@@ -7,25 +7,12 @@ namespace TCGCards.Core
     [Serializable]
     public class Deck
     {
-        private Stack<ICard> _Cards;
-
         public Deck()
         {
-            _Cards = new Stack<ICard>();
+            Cards = new Stack<ICard>();
         }
 
-        public Stack<ICard> Cards
-        {
-            get
-            {
-                return _Cards;
-            }
-
-            set
-            {
-                _Cards = value;
-            }
-        }
+        public Stack<ICard> Cards { get; set; }
 
         public void Shuffle()
         {
@@ -35,7 +22,7 @@ namespace TCGCards.Core
 
         public ICard DrawCard()
         {
-            return _Cards.Pop();
+            return Cards.Pop();
         }
     }
 }

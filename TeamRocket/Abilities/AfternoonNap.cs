@@ -21,7 +21,7 @@ namespace TeamRocket.Abilities
             Owner.Owner.DrawCardsFromDeck(new[] { selectedCard });
         }
 
-        public override void SetTarget(IPokemonCard target)
+        public override void SetTarget(ICard target)
         {
         }
 

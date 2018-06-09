@@ -24,7 +24,7 @@ namespace TeamRocket.Abilities
                 Owner.KnockedOutBy.KnockedOutBy = Owner;
         }
 
-        public override void SetTarget(IPokemonCard target)
+        public override void SetTarget(ICard target)
         {
             
         }

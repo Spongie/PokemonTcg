@@ -9,7 +9,7 @@
 
         public abstract void Activate(Player owner, Player opponent);
 
-        public abstract void SetTarget(IPokemonCard target);
+        public abstract void SetTarget(ICard target);
 
         public TriggerType TriggerType { get; protected set; }
 
