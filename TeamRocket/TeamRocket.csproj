@@ -44,6 +44,7 @@
     <Compile Include="Abilities\FinalBeam.cs" />
     <Compile Include="Abilities\Trickery.cs" />
     <Compile Include="Attacks\Bite.cs" />
+    <Compile Include="Attacks\Dizziness.cs" />
     <Compile Include="Attacks\Flop.cs" />
     <Compile Include="Attacks\Headbutt.cs" />
     <Compile Include="Attacks\IceBeam.cs" />
@@ -54,9 +55,11 @@
     <Compile Include="Attacks\ShellAttack.cs" />
     <Compile Include="Attacks\SpeedBall.cs" />
     <Compile Include="Attacks\Vanish.cs" />
+    <Compile Include="Attacks\WaterGun.cs" />
     <Compile Include="PokemonCards\Abra.cs" />
     <Compile Include="PokemonCards\DarkGyarados.cs" />
     <Compile Include="PokemonCards\Magikarp.cs" />
+    <Compile Include="PokemonCards\Psyduck.cs" />
     <Compile Include="PokemonCards\Rattata.cs" />
     <Compile Include="PokemonCards\Slowpoke.cs" />
     <Compile Include="PokemonCards\Squirtle.cs" />
