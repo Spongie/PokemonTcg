@@ -60,6 +60,7 @@
     <Compile Include="Core\Messages\GameFieldMessage.cs" />
     <Compile Include="Core\Messages\PickFromListMessage.cs" />
     <Compile Include="Core\Messages\RegisterMessage.cs" />
+    <Compile Include="Core\Messages\SelectColorMessage.cs" />
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\TriggerType.cs" />
     <Compile Include="ICard.cs" />

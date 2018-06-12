@@ -11,7 +11,6 @@ namespace TeamRocket.Attacks
         {
             Name = "Vanish";
             Description = string.Empty;
-            NeedsPlayerInteraction = true;
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 1)
