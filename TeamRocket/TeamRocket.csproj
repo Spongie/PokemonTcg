@@ -46,6 +46,7 @@
     <Compile Include="Attacks\Bite.cs" />
     <Compile Include="Attacks\Conversion1.cs" />
     <Compile Include="Attacks\Dizziness.cs" />
+    <Compile Include="Attacks\Ember.cs" />
     <Compile Include="Attacks\Flop.cs" />
     <Compile Include="Attacks\Headbutt.cs" />
     <Compile Include="Attacks\IceBeam.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="PokemonCards\Abra.cs" />
     <Compile Include="PokemonCards\DarkGyarados.cs" />
     <Compile Include="PokemonCards\Magikarp.cs" />
+    <Compile Include="PokemonCards\Ponyta.cs" />
     <Compile Include="PokemonCards\Porygon.cs" />
     <Compile Include="PokemonCards\Psyduck.cs" />
     <Compile Include="PokemonCards\Rattata.cs" />
