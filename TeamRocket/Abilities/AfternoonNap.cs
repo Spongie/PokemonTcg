@@ -6,7 +6,7 @@ using TCGCards.EnergyCards;
 
 namespace TeamRocket.Abilities
 {
-    public class AfternoonNap : AbstractDeckSearcherAbility
+    public class AfternoonNap : Ability, IDeckSearcher
     {
         public AfternoonNap(IPokemonCard owner) : base(owner)
         {
@@ -15,7 +15,7 @@ namespace TeamRocket.Abilities
 
         public override void Activate(Player owner, Player opponent)
         {
-            var selectedCard = (PsychicEnergy)TriggerDeckSearch(owner).First();
+            var selectedCard = (PsychicEnergy)this.TriggerDeckSearch(owner).First();
 
             Owner.AttachedEnergy.Add(selectedCard);
             Owner.Owner.DrawCardsFromDeck(new[] { selectedCard });
@@ -25,12 +25,12 @@ namespace TeamRocket.Abilities
         {
         }
 
-        protected override List<IDeckFilter> GetDeckFilters()
+        public List<IDeckFilter> GetDeckFilters()
         {
             return new List<IDeckFilter> { new AfternoonNapDeckFilter() };
         }
 
-        protected override int GetNumberOfCards()
+        public int GetNumberOfCards()
         {
             return 1;
         }

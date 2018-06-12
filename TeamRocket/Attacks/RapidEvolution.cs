@@ -5,7 +5,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class RapidEvolution : AbstractDeckSearcherAttack
+    internal class RapidEvolution : Attack, IDeckSearcher
     {
         public RapidEvolution()
         {
@@ -22,19 +22,19 @@ namespace TeamRocket.Attacks
             return 0;
         }
 
-        protected override List<IDeckFilter> GetDeckFilters()
+        public List<IDeckFilter> GetDeckFilters()
         {
             return new List<IDeckFilter> { new RapidEvolutionDeckFilter() };
         }
 
-        protected override int GetNumberOfCards()
+        public int GetNumberOfCards()
         {
             return 1;
         }
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            List<ICard> selectedCards = TriggerDeckSearch(owner);
+            List<ICard> selectedCards = this.TriggerDeckSearch(owner);
 
             IPokemonCard evolution = owner.ActivePokemonCard.Evolve((IPokemonCard)selectedCards.First());
             owner.ActivePokemonCard = evolution;

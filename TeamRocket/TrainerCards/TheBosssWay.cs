@@ -5,7 +5,7 @@ using TCGCards.Core.Deckfilters;
 
 namespace TeamRocket.TrainerCards
 {
-    public class TheBosssWay : AbstractDeckSearcherTrainerCard
+    public class TheBosssWay : TrainerCard, IDeckSearcher
     {
         public override string GetName()
         {
@@ -14,17 +14,17 @@ namespace TeamRocket.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            List<ICard> selectedCards = TriggerDeckSearch(caster);
+            List<ICard> selectedCards = this.TriggerDeckSearch(caster);
             game.ActivePlayer.DrawCardsFromDeck(selectedCards);
             game.RevealCardsTo(selectedCards, game.NonActivePlayer);
         }
 
-        protected override List<IDeckFilter> GetDeckFilters()
+        public List<IDeckFilter> GetDeckFilters()
         {
             return new List<IDeckFilter> { new DarkNameFilter() };
         }
 
-        protected override int GetNumberOfCards()
+        public int GetNumberOfCards()
         {
             return 1;
         }
