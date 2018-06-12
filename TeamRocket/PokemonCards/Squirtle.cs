@@ -20,10 +20,5 @@ namespace TeamRocket.PokemonCards
                 new ShellAttack()
             };
         }
-
-        public override string GetName()
-        {
-            return PokemonNames.Squirtle;
-        }
     }
 }

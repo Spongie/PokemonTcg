@@ -49,6 +49,7 @@
     <Compile Include="Attacks\Flop.cs" />
     <Compile Include="Attacks\Headbutt.cs" />
     <Compile Include="Attacks\IceBeam.cs" />
+    <Compile Include="Attacks\PsyBeam.cs" />
     <Compile Include="Attacks\Psyshock.cs" />
     <Compile Include="Attacks\QuickAttack.cs" />
     <Compile Include="Attacks\Ram.cs" />

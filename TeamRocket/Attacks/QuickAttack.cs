@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class QuickAttack : Attack
+    internal class QuickAttack : Attack
     {
         public QuickAttack()
         {

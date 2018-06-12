@@ -6,7 +6,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class WaterGun : Attack
+    internal class WaterGun : Attack
     {
         public WaterGun()
         {

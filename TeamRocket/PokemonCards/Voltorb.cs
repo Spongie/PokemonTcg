@@ -21,10 +21,5 @@ namespace TeamRocket.PokemonCards
                 new SpeedBall()
             };
         }
-
-        public override string GetName()
-        {
-            return PokemonNames.Voltorb;
-        }
     }
 }

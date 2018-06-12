@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class Bite : Attack
+    internal class Bite : Attack
     {
         public Bite()
         {

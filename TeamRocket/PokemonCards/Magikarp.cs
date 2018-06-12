@@ -26,10 +26,5 @@ namespace TeamRocket.PokemonCards
             };
             PokemonName = PokemonNames.Magikarp;
         }
-
-        public override string GetName()
-        {
-            return "Magikarp";
-        }
     }
 }

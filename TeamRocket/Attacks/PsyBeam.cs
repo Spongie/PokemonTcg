@@ -4,27 +4,29 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class IceBeam : Attack
+    internal class PsyBeam : Attack
     {
-        public IceBeam()
+        public PsyBeam()
         {
-            Name = "IceBeam";
-            Description = string.Empty;
+            Name = "Psybeam";
+            Description = "Flip a coin. If heads, the defending pokemon is now confused";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Water, 3)
+                new Energy(EnergyTypes.Psychic, 3)
             };
         }
 
         public override int GetDamage(Player owner, Player opponent)
         {
-            return 30;
+            return 20;
         }
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            if(CoinFlipper.FlipCoin() == CoinFlipper.HEADS)
-                opponent.ActivePokemonCard.IsParalyzed = true;
+            if (CoinFlipper.FlipCoin())
+            {
+                opponent.ActivePokemonCard.IsConfused = true;
+            }
         }
     }
 }

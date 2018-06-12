@@ -20,10 +20,5 @@ namespace TeamRocket.PokemonCards
                 new WaterGun()
             };
         }
-
-        public override string GetName()
-        {
-            return PokemonName;
-        }
     }
 }

@@ -22,10 +22,5 @@ namespace TeamRocket.PokemonCards
             };
             Ability = new AfternoonNap(this);
         }
-
-        public override string GetName()
-        {
-            return PokemonNames.Slowpoke;
-        }
     }
 }

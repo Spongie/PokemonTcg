@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using TCGCards.Core;
 using TeamRocket.PokemonCards;
-using TeamRocket.Attacks;
 
 namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
 {
@@ -15,13 +14,12 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
         {
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
-            var attack = new Psyshock();
-
             var game = new GameField();
             game.Players.Add(new Player() { Id = Guid.NewGuid() });
             game.Players.Add(new Player() { Id = Guid.NewGuid() });
 
             game.ActivePlayer = game.Players.First();
+            var attack = new Abra(game.ActivePlayer).Attacks[1];
 
             game.ActivePlayer.ActivePokemonCard = new Abra(game.ActivePlayer);
             game.NonActivePlayer.ActivePokemonCard = new Abra(game.NonActivePlayer);
@@ -37,8 +35,6 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
         {
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
-            var attack = new Psyshock();
-
             var game = new GameField();
             game.Players.Add(new Player() { Id = Guid.NewGuid() });
             game.Players.Add(new Player() { Id = Guid.NewGuid() });
@@ -47,18 +43,11 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
 
             game.ActivePlayer.ActivePokemonCard = new Abra(game.ActivePlayer);
             game.NonActivePlayer.ActivePokemonCard = new Abra(game.NonActivePlayer);
+            var attack = game.ActivePlayer.ActivePokemonCard.Attacks[1];
 
             game.Attack(attack);
 
             Assert.IsFalse(game.ActivePlayer.ActivePokemonCard.IsParalyzed);
-        }
-
-        [TestMethod()]
-        public void GetDamage()
-        {
-            var attack = new Psyshock();
-
-            Assert.AreEqual(10, attack.GetDamage(null, null));
         }
     }
 }

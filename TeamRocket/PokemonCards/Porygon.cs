@@ -21,10 +21,5 @@ namespace TeamRocket.PokemonCards
                 new PsyBeam()
             };
         }
-
-        public override string GetName()
-        {
-            return PokemonName;
-        }
     }
 }

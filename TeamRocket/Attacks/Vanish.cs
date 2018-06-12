@@ -5,7 +5,7 @@ using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
-    public class Vanish : Attack
+    internal class Vanish : Attack
     {
         public Vanish()
         {

@@ -22,10 +22,5 @@ namespace TeamRocket.PokemonCards
                 new Bite()
             };
         }
-
-        public override string GetName()
-        {
-            return "Zubat";
-        }
     }
 }

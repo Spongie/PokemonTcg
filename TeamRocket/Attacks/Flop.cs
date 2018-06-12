@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class Flop : Attack
+    internal class Flop : Attack
     {
         public Flop()
         {

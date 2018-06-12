@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
@@ -16,15 +17,11 @@ namespace TeamRocket.PokemonCards
             RetreatCost = 1;
             Attacks = new List<Attack>
             {
-                
+                new Vanish(),
+                new Psyshock()
             };
 
             PokemonName = PokemonNames.Abra;
-        }
-
-        public override string GetName()
-        {
-            return "Abra";
         }
     }
 }

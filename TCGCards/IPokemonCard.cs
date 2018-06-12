@@ -51,6 +51,11 @@ namespace TCGCards
                 IsAsleep = CoinFlipper.FlipCoin();
         }
 
+        public override string GetName()
+        {
+            return PokemonName;
+        }
+
         public IPokemonCard Evolve(IPokemonCard evolution)
         {
             ClearStatusEffects();

@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class SpeedBall : Attack
+    internal class SpeedBall : Attack
     {
         public SpeedBall()
         {

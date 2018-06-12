@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class Ram : Attack
+    internal class Ram : Attack
     {
         public Ram()
         {

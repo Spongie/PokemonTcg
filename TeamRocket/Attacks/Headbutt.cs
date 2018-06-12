@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class Headbutt : Attack
+    internal class Headbutt : Attack
     {
         public Headbutt()
         {

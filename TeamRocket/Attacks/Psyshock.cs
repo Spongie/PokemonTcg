@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class Psyshock : Attack
+    internal class Psyshock : Attack
     {
         public Psyshock()
         {

@@ -5,7 +5,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    public class RapidEvolution : AbstractDeckSearcherAttack
+    internal class RapidEvolution : AbstractDeckSearcherAttack
     {
         public RapidEvolution()
         {

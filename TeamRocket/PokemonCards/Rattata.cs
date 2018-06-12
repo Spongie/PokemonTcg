@@ -21,12 +21,6 @@ namespace TeamRocket.PokemonCards
             {
                 new QuickAttack()
             };
-
-        }
-
-        public override string GetName()
-        {
-            return PokemonName;
         }
     }
 }
