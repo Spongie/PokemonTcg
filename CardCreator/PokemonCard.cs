@@ -75,7 +75,7 @@ namespace CardCreator
                 case "Fighting":
                     return "EnergyTypes.Fighting";
                 case "Lightning":
-                    return "EnergyTypes.Lightning";
+                    return "EnergyTypes.Electric";
                 case "":
                 case "none":
                     return "EnergyTypes.None";
