@@ -14,6 +14,7 @@ namespace TeamRocket.PokemonCards
             PokemonType = EnergyTypes.Fire;
             Weakness = EnergyTypes.Water;
             RetreatCost = 1;
+            Stage = 0;
             Attacks = new List<Attack>
             {
                 new Ember()

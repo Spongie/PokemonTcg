@@ -153,5 +153,34 @@
         public const string Dragonite = "Dragonite";
         public const string Mewtwo = "Mewtwo";
         public const string Mew = "Mew";
+        public const string DarkAlakazam = "Dark Alakazam";
+        public const string DarkArbok = "Dark Arbok";
+        public const string DarkBlastoise = "Dark Blastoise";
+        public const string DarkCharizard = "Dark Charizard";
+        public const string DarkDragonite = "Dark Dragonite";
+        public const string DarkDugtrio = "Dark Dugtrio";
+        public const string DarkGolbat = "Dark Golbat";
+        public const string DarkGyarados = "Dark Gyarados";
+        public const string DarkHypno = "Dark Hypno";
+        public const string DarkMachamp = "Dark Machamp";
+        public const string DarkMagneton = "Dark Magneton";
+        public const string DarkSlowbro = "Dark Slowbro";
+        public const string DarkVileplume = "Dark Vileplume";
+        public const string DarkWeezing = "Dark Weezing";
+        public const string DarkCharmeleo = "Dark Charmeleon";
+        public const string DarkDragonair = "Dark Dragonair";
+        public const string DarkElectrode = "Dark Electrode";
+        public const string DarkFlareon = "Dark Flareon";
+        public const string DarkGloom = "Dark Gloom";
+        public const string DarkGolduck = "Dark Golduck";
+        public const string DarkJolteon = "Dark Jolteon";
+        public const string DarkKadabra = "Dark Kadabra";
+        public const string DarkMachoke = "Dark Machoke";
+        public const string DarkMuk = "Dark Muk";
+        public const string DarkPersian = "Dark Persian";
+        public const string DarkPrimeape = "Dark Primeape";
+        public const string DarkRapidash = "Dark Rapidash";
+        public const string DarkVaporeon = "Dark Vaporeon";
+        public const string DarkWartortle = "Dark Wartortle";
     }
 }

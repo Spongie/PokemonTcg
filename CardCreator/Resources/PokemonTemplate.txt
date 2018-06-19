@@ -1,0 +1,26 @@
+using System.Collections.Generic;
+using TCGCards;
+using TCGCards.Core;
+using TeamRocket.Attacks;
+
+namespace {SETNAME}.PokemonCards
+{
+    public class {CLASSNAME} : IPokemonCard
+    {
+        public {CLASSNAME}(Player owner) : base(owner)
+        {
+            PokemonName = "{NAME}";
+			{EVOLVESFROM}
+            Hp = {HP};
+            PokemonType = {TYPE};
+            RetreatCost = {RETREAT};
+            Weakness = {WEAKNESS};
+			Resistence = {RESISTENCE};
+            Attacks = new List<Attack>
+            {
+				{ATTACKS}
+            };
+			{POKEMONPOWER}
+        }
+    }
+}

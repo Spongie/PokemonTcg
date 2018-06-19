@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
             Hp = 50;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;
+            Stage = 0;
             Weakness = EnergyTypes.Electric;
             Attacks = new List<Attack>
             {
