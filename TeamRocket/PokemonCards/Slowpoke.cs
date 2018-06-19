@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
-using TeamRocket.Abilities;
 using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
@@ -18,9 +17,9 @@ namespace TeamRocket.PokemonCards
             PokemonName = PokemonNames.Slowpoke;
             Attacks = new List<Attack>
             {
+                new AfternoonNap(),
                 new Headbutt()
             };
-            Ability = new AfternoonNap(this);
         }
     }
 }

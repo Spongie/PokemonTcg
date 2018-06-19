@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abilities\AfternoonNap.cs" />
+    <Compile Include="Attacks\AfternoonNap.cs" />
     <Compile Include="Abilities\FinalBeam.cs" />
     <Compile Include="Abilities\Trickery.cs" />
     <Compile Include="Attacks\Bite.cs" />
