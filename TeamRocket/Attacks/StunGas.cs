@@ -1,0 +1,25 @@
+using System.Collections.Generic;
+using TCGCards;
+using TCGCards.Core;
+
+namespace TeamRocket.Attacks
+{
+    internal class StunGas : Attack
+    {
+        public StunGas()
+        {
+            Name = "Stun Gas";
+            Description = "Flip a coin. If heads, the Defending Pokémon is now Poisoned. If tails, the Defending Pokémon is now Paralyzed.";
+            Cost = new List<Energy>
+            {
+                new Energy(EnergyTypes.Grass, 3)
+            };
+        }
+
+        public override int GetDamage(Player owner, Player opponent)
+        {
+            return 20;
+        }
+		//TODO:
+    }
+}

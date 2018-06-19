@@ -57,7 +57,7 @@ namespace CardCreator
             code = code.Replace(templateDamage, Damage);
             code = code.Replace(templateName, Name);
             code = code.Replace(templateDescription, Description);
-            code = code.Replace(templateNeedsMode, NeedsMore ? "//TODO:" : string.Empty);
+            code = code.Replace(templateNeedsMode, NeedsMore ? "//TODO: Special effects" : string.Empty);
             code = code.Replace(templateSetName, setName);
             code = code.Replace(templateCost, generateCostString());
 
