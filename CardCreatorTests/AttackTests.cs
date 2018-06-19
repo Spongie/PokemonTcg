@@ -59,7 +59,7 @@ namespace CardCreator.Tests
         {
             Attack attack = CreateAttackFromHtml2();
 
-            Assert.AreEqual("", attack.Damage);
+            Assert.AreEqual("0", attack.Damage);
         }
 
         [TestMethod()]

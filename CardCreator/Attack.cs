@@ -38,7 +38,7 @@ namespace CardCreator
             if (!int.TryParse(damage.Trim(), out int _))
             {
                 description = text.Substring(nameEnding + 1);
-                damage = string.Empty;
+                damage = "0";
             }
 
             return new Attack
@@ -112,7 +112,7 @@ namespace CardCreator
 
         private static string generateSafeClassName(string name)
         {
-            return name.Replace("é", "e").Replace("’", "").Replace("!", string.Empty).Replace(" ", string.Empty);
+            return name.Replace("é", "e").Replace("’", "").Replace("-", string.Empty).Replace("!", string.Empty).Replace(" ", string.Empty);
         }
     }
 }
