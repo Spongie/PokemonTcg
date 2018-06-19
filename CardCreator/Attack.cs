@@ -31,7 +31,7 @@ namespace CardCreator
             string name = text.Substring(costEnding + 1, nameEnding - costEnding - 1);
 
             int damageEnding = text.IndexOf('.') - 1;
-            string damage = text.Substring(nameEnding + 1, damageEnding - nameEnding).Replace("damage", string.Empty);
+            string damage = text.Substring(nameEnding + 1, damageEnding - nameEnding).Replace("damage", string.Empty).Replace("+", string.Empty);
 
             string description = text.Substring(damageEnding + 2).Trim();
 

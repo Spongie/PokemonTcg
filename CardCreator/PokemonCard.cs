@@ -86,7 +86,7 @@ namespace CardCreator
 
         private static string generateSafeClassName(string name)
         {
-            return name.Replace("é", "e").Replace("’", "").Replace("!", string.Empty).Replace(" ", string.Empty);
+            return name.Replace("-", string.Empty).Replace("é", "e").Replace("’", "").Replace("!", string.Empty).Replace(" ", string.Empty);
         }
     }
 }

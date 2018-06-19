@@ -116,7 +116,7 @@ namespace CardCreator
 
         private static string generateFileName(string name)
         {
-            return name.Replace("é", "e").Replace("’", "").Replace("!", string.Empty).Replace(" ", string.Empty);
+            return name.Replace("-", string.Empty).Replace("é", "e").Replace("’", "").Replace("!", string.Empty).Replace(" ", string.Empty);
         }
 
         private static bool IsAttackNode(HtmlNode node)
