@@ -30,45 +30,34 @@ namespace CardCreator.Tests
         public void ParseTest_Retreat()
         {
             var weaknessResistence = CreateWeaknessResistenceFromHtml();
-            Assert.AreEqual(0, weaknessResistence.RetreatCost);
+            Assert.AreEqual(1, weaknessResistence.RetreatCost);
         }
 
         private static WeaknessResistenceInfo CreateWeaknessResistenceFromHtml()
         {
-            var document = new HtmlDocument();
-            var htmlNode = new HtmlNode(HtmlNodeType.Element, document, 0) { Name = "ppp" };
-
-            var weakness = new HtmlNode(HtmlNodeType.Element, document, 0)
+            return new WeaknessResistenceInfo(new PokemonTcgSdk.Models.PokemonCard
             {
-                InnerHtml = "Weakness: Psychic ×2",
-                Name = "text"
-            };
-            htmlNode.AppendChild(weakness);
-            htmlNode.AppendChild(new HtmlNode(HtmlNodeType.Element, document, 1)
-            {
-                InnerHtml = "<br>",
-                Name = "br1"
+                RetreatCost = new List<string>
+                {
+                    "Colorless"
+                },
+                Weaknesses = new List<PokemonTcgSdk.Models.Weakness>
+                {
+                    new PokemonTcgSdk.Models.Weakness
+                    {
+                        Type = "Psychic",
+                        Value = "x2"
+                    }
+                },
+                Resistances = new List<PokemonTcgSdk.Models.Weakness>
+                {
+                    new PokemonTcgSdk.Models.Weakness
+                    {
+                        Type = "Fighting",
+                        Value = "-30"
+                    }
+                }
             });
-            var resistence = new HtmlNode(HtmlNodeType.Element, document, 2)
-            {
-                InnerHtml = "Resistance: Fighting -30",
-                Name = "text2"
-            };
-            htmlNode.AppendChild(resistence);
-            htmlNode.AppendChild(new HtmlNode(HtmlNodeType.Element, document, 3)
-            {
-                InnerHtml = "<br>",
-                Name = "br2"
-            });
-
-            var retreat = new HtmlNode(HtmlNodeType.Element, document, 4)
-            {
-                InnerHtml = "Retreat Cost: 0",
-                Name = "text3"
-            };
-            htmlNode.AppendChild(retreat);
-
-            return WeaknessResistenceInfo.Parse(htmlNode);
         }
     }
 }

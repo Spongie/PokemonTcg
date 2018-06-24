@@ -17,6 +17,8 @@ namespace TCGCards
 
         public List<Energy> Cost { get; set; }
 
+        public bool ApplyWeaknessAndResistance { get; set; } = true;
+
         public abstract int GetDamage(Player owner, Player opponent);
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }

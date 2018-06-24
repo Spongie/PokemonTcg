@@ -16,6 +16,7 @@ namespace {SETNAME}.PokemonCards
             RetreatCost = {RETREAT};
             Weakness = {WEAKNESS};
 			Resistance = {RESISTENCE};
+			Stage = {STAGE};
             Attacks = new List<Attack>
             {
 				{ATTACKS}

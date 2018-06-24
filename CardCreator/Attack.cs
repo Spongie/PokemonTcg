@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,45 +14,31 @@ namespace CardCreator
         private const string templateDamage = "{DAMAGE}";
         private const string templateNeedsMode = "{NEEDSMORE}";
 
+        public Attack(PokemonTcgSdk.Models.Attack attack)
+        {
+            Name = attack.Name;
+            Description = attack.Text;
+            Damage = string.IsNullOrWhiteSpace(attack.Damage) ? "0" : attack.Damage;
+
+            foreach (var cost in attack.Cost)
+            {
+                Cost += cost.Substring(0, 1);
+            }
+
+            ClassName = generateSafeClassName(Name);
+        }
+
         public string Cost { get; set; }
         public string Name { get; set; }
         public string Damage { get; set; }
         public bool NeedsMore { get { return !string.IsNullOrEmpty(Description); } }
         public string Description { get; set; }
-
-        public static Attack Parse(HtmlNode node)
-        {
-            string text = node.ChildNodes[0].InnerHtml;
-            int costEnding = text.IndexOf(' ');
-            string costString = text.Substring(0, costEnding).Replace("[", string.Empty).Replace("]", string.Empty);
-
-            int nameEnding = text.IndexOf(':');
-            string name = text.Substring(costEnding + 1, nameEnding - costEnding - 1);
-
-            int damageEnding = text.IndexOf('.') - 1;
-            string damage = text.Substring(nameEnding + 1, damageEnding - nameEnding).Replace("damage", string.Empty).Replace("+", string.Empty);
-
-            string description = text.Substring(damageEnding + 2).Trim();
-
-            if (!int.TryParse(damage.Trim(), out int _))
-            {
-                description = text.Substring(nameEnding + 1);
-                damage = "0";
-            }
-
-            return new Attack
-            {
-                Name = name.Trim(),
-                Cost = costString.Trim(),
-                Damage = damage.Trim(),
-                Description = description.Trim()
-            };
-        }
+        public string ClassName { get; set; }
 
         public string generateCode(string setName)
         {
             var template = Properties.Resources.AttackTemplate;
-            string code = template.Replace(templateClassName, generateSafeClassName(Name));
+            string code = template.Replace(templateClassName, ClassName);
             code = code.Replace(templateDamage, Damage);
             code = code.Replace(templateName, Name);
             code = code.Replace(templateDescription, Description);

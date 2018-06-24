@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HtmlAgilityPack;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CardCreator.Tests
 {
@@ -9,7 +11,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Cost()
         {
-            Attack attack = CreateAttackFromHtml();
+            Attack attack = new Attack(createTestPokemon().Attacks.First());
 
             Assert.AreEqual("PPC", attack.Cost);
         }
@@ -17,7 +19,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Name()
         {
-            Attack attack = CreateAttackFromHtml();
+            Attack attack = new Attack(createTestPokemon().Attacks.First());
 
             Assert.AreEqual("Teleport Blast", attack.Name);
         }
@@ -25,7 +27,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Damage()
         {
-            Attack attack = CreateAttackFromHtml();
+            Attack attack = new Attack(createTestPokemon().Attacks.First());
 
             Assert.AreEqual("30", attack.Damage);
         }
@@ -33,7 +35,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Description()
         {
-            Attack attack = CreateAttackFromHtml();
+            Attack attack = new Attack(createTestPokemon().Attacks.First());
 
             Assert.AreEqual("You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)", attack.Description);
         }
@@ -41,7 +43,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Cost2()
         {
-            Attack attack = CreateAttackFromHtml2();
+            Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
             Assert.AreEqual("P", attack.Cost);
         }
@@ -49,7 +51,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Name2()
         {
-            Attack attack = CreateAttackFromHtml2();
+            Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
             Assert.AreEqual("Dizziness", attack.Name);
         }
@@ -57,7 +59,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Damage2()
         {
-            Attack attack = CreateAttackFromHtml2();
+            Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
             Assert.AreEqual("0", attack.Damage);
         }
@@ -65,84 +67,59 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void ParseTest_Description2()
         {
-            Attack attack = CreateAttackFromHtml2();
+            Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
             Assert.AreEqual("Draw a card.", attack.Description);
         }
 
         [TestMethod()]
-        public void ParseTest_Description_Plus()
-        {
-            Attack attack = CreateAttackFromHtml_Plus();
-
-            Assert.AreEqual("Flip a coin. If heads, this attack does 20 damage plus 20 more damage. If tails, this attack does 20 damage.", attack.Description);
-        }
-
-        [TestMethod()]
-        public void ParseTest_Damage_Plus()
-        {
-            Attack attack = CreateAttackFromHtml_Plus();
-
-            Assert.AreEqual("20", attack.Damage);
-        }
-
-        [TestMethod()]
         public void ParseTest_NeedsMode_Plus()
         {
-            Attack attack = CreateAttackFromHtml_Plus();
+            Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
             Assert.IsTrue(attack.NeedsMore);
         }
 
-        private static Attack CreateAttackFromHtml()
+        private PokemonTcgSdk.Models.PokemonCard createTestPokemon()
         {
-            var document = new HtmlDocument();
-            string input = "[P][P][C] Teleport Blast: 30 damage. You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)";
-            var htmlNode = new HtmlNode(HtmlNodeType.Element, document, 0) { Name = "ppp" };
-            
-            var textNode = new HtmlNode(HtmlNodeType.Element, document, 0)
+            return new PokemonTcgSdk.Models.PokemonCard
             {
-                InnerHtml = input,
-                Name = "text"
+                Attacks = new List<PokemonTcgSdk.Models.Attack>
+                {
+                    new PokemonTcgSdk.Models.Attack()
+                    {
+                        Name = "Teleport Blast",
+                        Damage = "30",
+                        Text = "You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)",
+                        Cost = new List<string>
+                        {
+                            "Psychic",
+                            "Psychic",
+                            "Colorless"
+                        }
+                    }
+                }
             };
-            htmlNode.AppendChild(textNode);
-
-            var attack = Attack.Parse(htmlNode);
-            return attack;
         }
 
-        private static Attack CreateAttackFromHtml2()
+        private PokemonTcgSdk.Models.PokemonCard createTestPokemon2()
         {
-            var document = new HtmlDocument();
-            string input = "[P] Dizziness: Draw a card.";
-            var htmlNode = new HtmlNode(HtmlNodeType.Element, document, 0) { Name = "ppp" };
-
-            var textNode = new HtmlNode(HtmlNodeType.Element, document, 0)
+            return new PokemonTcgSdk.Models.PokemonCard
             {
-                InnerHtml = input,
-                Name = "text"
+                Attacks = new List<PokemonTcgSdk.Models.Attack>
+                {
+                    new PokemonTcgSdk.Models.Attack()
+                    {
+                        Name = "Dizziness",
+                        Damage = "",
+                        Text = "Draw a card.",
+                        Cost = new List<string>
+                        {
+                            "Psychic"
+                        }
+                    }
+                }
             };
-            htmlNode.AppendChild(textNode);
-
-            var attack = Attack.Parse(htmlNode);
-            return attack;
-        }
-
-        private static Attack CreateAttackFromHtml_Plus()
-        {
-            var document = new HtmlDocument();
-            string input = "[F][C] Anger: 20+ damage. Flip a coin. If heads, this attack does 20 damage plus 20 more damage. If tails, this attack does 20 damage.";
-            var htmlNode = new HtmlNode(HtmlNodeType.Element, document, 0) { Name = "ppp" };
-
-            var textNode = new HtmlNode(HtmlNodeType.Element, document, 0)
-            {
-                InnerHtml = input,
-                Name = "text"
-            };
-            htmlNode.AppendChild(textNode);
-
-            var attack = Attack.Parse(htmlNode);
-            return attack;
         }
     }
 }
