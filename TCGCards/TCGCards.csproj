@@ -52,7 +52,7 @@
     <Compile Include="Core\Deckfilters\IDeckFilter.cs" />
     <Compile Include="Core\DeckSearchEventHandler.cs" />
     <Compile Include="Core\Ability.cs" />
-    <Compile Include="Core\DeckShufflerExtensions.cs" />
+    <Compile Include="Core\DeckSearcherExtensions.cs" />
     <Compile Include="Core\IDeckShuffler.cs" />
     <Compile Include="Core\Messages\ActiveSelectedMessage.cs" />
     <Compile Include="Core\Messages\AttackMessage.cs" />
@@ -60,7 +60,7 @@
     <Compile Include="Core\Messages\DeckSearchMessage.cs" />
     <Compile Include="Core\Messages\GameFieldMessage.cs" />
     <Compile Include="Core\Messages\PickFromListMessage.cs" />
-    <Compile Include="Core\Messages\PokemonCardList.cs" />
+    <Compile Include="Core\Messages\PokemonCardListMessage.cs" />
     <Compile Include="Core\Messages\RegisterMessage.cs" />
     <Compile Include="Core\Messages\SelectColorMessage.cs" />
     <Compile Include="Core\Messages\SelectFromOpponentBench.cs" />

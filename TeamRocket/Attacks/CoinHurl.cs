@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
@@ -24,7 +25,14 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage());
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
+
+            var selectedPokemon = response.Pokemons.FirstOrDefault();
+
+            if (selectedPokemon != null)
+            {
+                selectedPokemon.DamageCounters += 20;
+            }
         }
     }
 }
