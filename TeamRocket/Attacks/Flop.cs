@@ -16,9 +16,9 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override int GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent)
         {
-            return GetDamageAfterResistanceAndWeakness(10, owner.ActivePokemonCard, opponent.ActivePokemonCard);
+            return 10;
         }
     }
 }

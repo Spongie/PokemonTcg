@@ -15,7 +15,7 @@ namespace TeamRocket.Attacks
             Name = "Shell attack";
         }
 
-        public override int GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent)
         {
             return 20;
         }

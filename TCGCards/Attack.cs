@@ -19,24 +19,8 @@ namespace TCGCards
 
         public bool ApplyWeaknessAndResistance { get; set; } = true;
 
-        public abstract int GetDamage(Player owner, Player opponent);
+        public abstract Damage GetDamage(Player owner, Player opponent);
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }
-
-        protected int GetDamageAfterResistanceAndWeakness(int baseDamage, IPokemonCard attacker, IPokemonCard target)
-        {
-            int realDamage = baseDamage;
-
-            if (target.Resistance == attacker.PokemonType)
-            {
-                realDamage -= 30;
-            }
-            if (target.Weakness == attacker.PokemonType)
-            {
-                realDamage *= 2;
-            }
-
-            return Math.Max(realDamage, 0);
-        }
     }
 }

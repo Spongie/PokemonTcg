@@ -67,11 +67,28 @@ namespace TCGCards.Core
         public void Attack(Attack attack)
         {
             var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
-            NonActivePlayer.ActivePokemonCard.DamageCounters += damage;
+            NonActivePlayer.ActivePokemonCard.DamageCounters += damage.DamageWithoutResistAndWeakness;
+            NonActivePlayer.ActivePokemonCard.DamageCounters += GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
             PostAttack();
+        }
+
+        private int GetDamageAfterWeaknessAndResistance(int damage, IPokemonCard attacker, IPokemonCard defender)
+        {
+            int realDamage = damage;
+
+            if (defender.Resistance == attacker.PokemonType)
+            {
+                realDamage -= 30;
+            }
+            if (defender.Weakness == attacker.PokemonType)
+            {
+                realDamage *= 2;
+            }
+
+            return Math.Max(realDamage, 0);
         }
 
         public void PostAttack()

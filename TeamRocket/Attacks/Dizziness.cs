@@ -21,7 +21,7 @@ namespace TeamRocket.Attacks
             owner.DrawCards(1);
         }
 
-        public override int GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent)
         {
             return 0;
         }

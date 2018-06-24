@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Attack.cs" />
     <Compile Include="Core\CoinFlipper.cs" />
+    <Compile Include="Core\Damage.cs" />
     <Compile Include="Core\Deckfilters\AnyCardFilter.cs" />
     <Compile Include="Core\Deckfilters\EnergyFilter.cs" />
     <Compile Include="Core\Deckfilters\IDeckFilter.cs" />

@@ -17,7 +17,7 @@ namespace TeamRocket.Attacks
             Description = "Search your deck for a card that evolves from Magikarp and put it on this Pokémon. (This counts as evolving this Pokémon.) Shuffle your deck afterward.";
         }
 
-        public override int GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent)
         {
             return 0;
         }

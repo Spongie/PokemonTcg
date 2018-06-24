@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override int GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent)
         {
             int waterEnergyAmount = owner.ActivePokemonCard.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water) - 1;
 
