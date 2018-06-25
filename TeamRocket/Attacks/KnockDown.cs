@@ -18,8 +18,7 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 20;
+            return CoinFlipper.FlipCoin() ? 20 : 40;
         }
-		//TODO:
     }
 }

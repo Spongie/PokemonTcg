@@ -9,7 +9,7 @@ namespace TeamRocket.Attacks
         public Flitter()
         {
             Name = "Flitter";
-            Description = "Choose 1 of your opponent&#8217;s Pokémon. This attack does 20 damage to that Pokémon. Don&#8217;t apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
+            Description = "Choose 1 of your opponent's Pokémon. This attack does 20 damage to that Pokémon. Don't apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 2)

@@ -9,7 +9,7 @@ namespace TeamRocket.Attacks
         public RocketTackle()
         {
             Name = "Rocket Tackle";
-            Description = "Dark Blastoise does 10 damage to itself. Flip a coin. If heads, prevent all damage done to Dark Blastoise during your opponent&#8217;s next turn. (Any other effects of attacks still happen.)";
+            Description = "Dark Blastoise does 10 damage to itself. Flip a coin. If heads, prevent all damage done to Dark Blastoise during your opponent's next turn. (Any other effects of attacks still happen.)";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Water, 1),

@@ -55,6 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AttackTests.cs" />
     <Compile Include="Core\GameFieldTests.cs" />
     <Compile Include="Core\IPokemonCardTests.cs" />
     <Compile Include="Core\PlayerTests.cs" />

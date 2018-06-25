@@ -9,7 +9,7 @@ namespace TeamRocket.Attacks
         public MirrorShell()
         {
             Name = "Mirror Shell";
-            Description = "If an attack does damage to Dark Wartortle during your opponent&#8217;s next turn (even if Dark Wartortle is Knocked Out), Dark Wartortle attacks the Defending Pokémon for an equal amount of damage.";
+            Description = "If an attack does damage to Dark Wartortle during your opponent's next turn (even if Dark Wartortle is Knocked Out), Dark Wartortle attacks the Defending Pokémon for an equal amount of damage.";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Water, 1),

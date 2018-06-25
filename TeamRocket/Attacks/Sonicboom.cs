@@ -9,7 +9,7 @@ namespace TeamRocket.Attacks
         public Sonicboom()
         {
             Name = "Sonicboom";
-            Description = "Don&#8217;t apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
+            Description = "Don't apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 2)

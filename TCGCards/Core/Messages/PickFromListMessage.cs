@@ -5,8 +5,6 @@ namespace TCGCards.Core.Messages
 {
     public class PickFromListMessage : AbstractNetworkMessage
     {
-        private List<ICard> prizeCards;
-
         public PickFromListMessage(List<ICard> possibleChoices, List<IDeckFilter> filter, int cardCount)
         {
             PossibleChoices = possibleChoices;

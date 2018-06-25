@@ -9,7 +9,7 @@ namespace TeamRocket.Attacks
         public Mischief()
         {
             Name = "Mischief";
-            Description = "Shuffle your opponent&#8217;s deck.";
+            Description = "Shuffle your opponent's deck.";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)
