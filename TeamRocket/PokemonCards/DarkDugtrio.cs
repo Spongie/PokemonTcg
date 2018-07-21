@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkDugtrio(Player owner) : base(owner)
         {
             PokemonName = "Dark Dugtrio";
-			EvolvesFrom = "Diglett"; //TODO: Add stage
+			EvolvesFrom = "Diglett";
+            Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 2;

@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkGolduck(Player owner) : base(owner)
         {
-            PokemonName = "Dark Golduck";
-			EvolvesFrom = "Psyduck"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkGolduck;
+			EvolvesFrom = PokemonNames.Psyduck;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 2;

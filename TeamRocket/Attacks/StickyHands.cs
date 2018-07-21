@@ -18,8 +18,13 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
+            if (CoinFlipper.FlipCoin())
+            {
+                opponent.ActivePokemonCard.IsParalyzed = true;
+                return 30;
+            }
+
             return 10;
         }
-		//TODO:
     }
 }

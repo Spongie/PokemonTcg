@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkJolteon(Player owner) : base(owner)
         {
-            PokemonName = "Dark Jolteon";
-			EvolvesFrom = "Eevee"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkJolteon;
+			EvolvesFrom = PokemonNames.Eevee;
+            Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

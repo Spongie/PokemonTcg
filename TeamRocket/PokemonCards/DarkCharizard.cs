@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkCharizard(Player owner) : base(owner)
         {
             PokemonName = "Dark Charizard";
-			EvolvesFrom = "Dark Charmeleon"; //TODO: Add stage
+			EvolvesFrom = "Dark Charmeleon";
+            Stage = 2;
             Hp = 80;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 3;

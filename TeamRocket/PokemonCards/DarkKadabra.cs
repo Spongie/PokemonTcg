@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkKadabra(Player owner) : base(owner)
         {
-            PokemonName = "Dark Kadabra";
-			EvolvesFrom = "Abra"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkKadabra;
+			EvolvesFrom = PokemonNames.Abra;
+            Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 2;

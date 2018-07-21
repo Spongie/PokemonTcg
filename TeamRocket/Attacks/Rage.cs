@@ -18,8 +18,7 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 10;
+            return 10 + (10 * owner.ActivePokemonCard.DamageCounters / 10);
         }
-		//TODO:
     }
 }

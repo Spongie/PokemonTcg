@@ -21,6 +21,17 @@ namespace TeamRocket.Attacks
         {
             return 30;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (CoinFlipper.FlipCoin())
+            {
+                opponent.ActivePokemonCard.IsParalyzed = true;
+            }
+            else
+            {
+                owner.ActivePokemonCard.DamageCounters += 10;
+            }
+        }
     }
 }

@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkMagneton(Player owner) : base(owner)
         {
-            PokemonName = "Dark Magneton";
-			EvolvesFrom = "Magnemite"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkMagneton;
+            EvolvesFrom = PokemonNames.Magnemite;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 2;

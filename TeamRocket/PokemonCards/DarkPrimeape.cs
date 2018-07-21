@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkPrimeape(Player owner) : base(owner)
         {
-            PokemonName = "Dark Primeape";
-			EvolvesFrom = "Mankey"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkPrimeape;
+			EvolvesFrom = PokemonNames.Mankey;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 1;

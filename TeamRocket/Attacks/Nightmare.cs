@@ -21,6 +21,10 @@ namespace TeamRocket.Attacks
         {
             return 10;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            opponent.ActivePokemonCard.IsAsleep = true;
+        }
     }
 }

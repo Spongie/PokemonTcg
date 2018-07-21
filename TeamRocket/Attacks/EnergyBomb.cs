@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
@@ -20,6 +22,19 @@ namespace TeamRocket.Attacks
         {
             return 30;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            var energyCards = owner.ActivePokemonCard.AttachedEnergy;
+            var message = new AttachEnergyCardsToBenchMessage(energyCards).ToNetworkMessage(owner.Id);
+            owner.ActivePokemonCard.AttachedEnergy.Clear();
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<AttachedEnergyDoneMessage>(message);
+
+            foreach (var energyId in response.EnergyPokemonMap.Keys)
+            {
+                var attachesToId = response.EnergyPokemonMap[energyId];
+                owner.BenchedPokemon.First(pokemon => pokemon.Id.Equals(attachesToId)).AttachedEnergy.Add(energyCards.First(energy => energy.Id.Equals(energyId)));
+            }
+        }
     }
 }

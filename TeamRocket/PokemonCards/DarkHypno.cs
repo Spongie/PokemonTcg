@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkHypno(Player owner) : base(owner)
         {
-            PokemonName = "Dark Hypno";
-			EvolvesFrom = "Drowzee"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkHypno;
+			EvolvesFrom = PokemonNames.Drowzee;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 2;

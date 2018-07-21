@@ -20,6 +20,13 @@ namespace TeamRocket.Attacks
         {
             return 10;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (CoinFlipper.FlipCoin())
+            {
+                opponent.ActivePokemonCard.IsParalyzed = true;
+            }
+        }
     }
 }

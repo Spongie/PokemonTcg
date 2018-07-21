@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkPersian(Player owner) : base(owner)
         {
-            PokemonName = "Dark Persian";
-			EvolvesFrom = "Meowth"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkPersian;
+			EvolvesFrom = PokemonNames.Meowth;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 0;

@@ -182,5 +182,7 @@
         public const string DarkRapidash = "Dark Rapidash";
         public const string DarkVaporeon = "Dark Vaporeon";
         public const string DarkWartortle = "Dark Wartortle";
+        public const string DarkRaichu = "Dark Raichu";
+        public const string DarkRaticate = "Dark Raticate";
     }
 }

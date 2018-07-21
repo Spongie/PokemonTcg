@@ -47,6 +47,15 @@ namespace TCGCards.Core
             }
         }
 
+        public void ForceRetreatActivePokemon(IPokemonCard replacementPokemon)
+        {
+            var oldActivePokemon = ActivePokemonCard;
+            ActivePokemonCard = replacementPokemon;
+            BenchedPokemon.Remove(replacementPokemon);
+            BenchedPokemon.Add(oldActivePokemon);
+            oldActivePokemon.ClearStatusEffects();
+        }
+
         public void RetreatActivePokemon(IPokemonCard replacementPokemon)
         {
             if(!ActivePokemonCard.CanReatreat())

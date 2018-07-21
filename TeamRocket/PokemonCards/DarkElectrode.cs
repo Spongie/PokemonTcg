@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkElectrode(Player owner) : base(owner)
         {
             PokemonName = "Dark Electrode";
-			EvolvesFrom = "Voltorb"; //TODO: Add stage
+			EvolvesFrom = "Voltorb";
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

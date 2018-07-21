@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkRapidash(Player owner) : base(owner)
         {
-            PokemonName = "Dark Rapidash";
-			EvolvesFrom = "Ponyta"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkRapidash;
+			EvolvesFrom = PokemonNames.Ponyta;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 0;

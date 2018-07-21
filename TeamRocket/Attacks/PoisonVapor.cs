@@ -20,6 +20,15 @@ namespace TeamRocket.Attacks
         {
             return 10;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            opponent.ActivePokemonCard.IsPoisoned = true;
+
+            foreach (var pokemon in opponent.BenchedPokemon)
+            {
+                pokemon.DamageCounters += 10;
+            }
+        }
     }
 }

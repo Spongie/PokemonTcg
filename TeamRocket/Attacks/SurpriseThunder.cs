@@ -20,6 +20,20 @@ namespace TeamRocket.Attacks
         {
             return 30;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!CoinFlipper.FlipCoin())
+            {
+                return;
+            }
+
+            int damage = CoinFlipper.FlipCoin() ? 20 : 10;
+
+            foreach (var pokemon in opponent.BenchedPokemon)
+            {
+                pokemon.DamageCounters += damage;
+            }
+        }
     }
 }

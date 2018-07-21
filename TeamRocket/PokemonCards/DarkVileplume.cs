@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkVileplume(Player owner) : base(owner)
         {
-            PokemonName = "Dark Vileplume";
-			EvolvesFrom = "Dark Gloom"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkVileplume;
+			EvolvesFrom = PokemonNames.DarkGloom;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;

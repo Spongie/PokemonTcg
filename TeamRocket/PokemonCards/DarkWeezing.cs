@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkWeezing(Player owner) : base(owner)
         {
-            PokemonName = "Dark Weezing";
-			EvolvesFrom = "Koffing"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkWeezing;
+			EvolvesFrom = PokemonNames.Koffing;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

@@ -55,6 +55,7 @@
     <Compile Include="Core\DeckSearcherExtensions.cs" />
     <Compile Include="Core\IDeckShuffler.cs" />
     <Compile Include="Core\Messages\ActiveSelectedMessage.cs" />
+    <Compile Include="Core\Messages\AttachEnergyCardsToBench.cs" />
     <Compile Include="Core\Messages\AttackMessage.cs" />
     <Compile Include="Core\Messages\DeckSearchedMessage.cs" />
     <Compile Include="Core\Messages\DeckSearchMessage.cs" />

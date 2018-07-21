@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkSlowbro(Player owner) : base(owner)
         {
-            PokemonName = "Dark Slowbro";
-			EvolvesFrom = "Slowpoke"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkSlowbro;
+			EvolvesFrom = PokemonNames.Slowpoke;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 2;

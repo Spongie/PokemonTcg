@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkArbok(Player owner) : base(owner)
         {
             PokemonName = "Dark Arbok";
-			EvolvesFrom = "Ekans"; //TODO: Add stage
+			EvolvesFrom = "Ekans";
+            Stage = 0;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;

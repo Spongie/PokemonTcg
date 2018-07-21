@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkRaichu(Player owner) : base(owner)
         {
-            PokemonName = "Dark Raichu";
-			EvolvesFrom = "Pikachu"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkRaichu;
+			EvolvesFrom = PokemonNames.Pikachu;
+            Stage = 1;
             Hp = 70;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

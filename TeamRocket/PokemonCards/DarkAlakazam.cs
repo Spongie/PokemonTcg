@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkAlakazam(Player owner) : base(owner)
         {
             PokemonName = "Dark Alakazam";
-			EvolvesFrom = "Dark Kadabra"; //TODO: Add stage
+			EvolvesFrom = "Dark Kadabra";
+            Stage = 2;
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 3;
@@ -20,8 +21,7 @@ namespace TeamRocket.PokemonCards
             {
 				new TeleportBlast(),
 				new MindShock()
-            };
-			
+            };		
         }
     }
 }

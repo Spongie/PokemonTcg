@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkDragonite(Player owner) : base(owner)
         {
             PokemonName = "Dark Dragonite";
-			EvolvesFrom = "Dark Dragonair"; //TODO: Add stage
+			EvolvesFrom = "Dark Dragonair";
+            Stage = 2;
             Hp = 70;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 2;

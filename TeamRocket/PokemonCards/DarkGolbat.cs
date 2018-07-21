@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkGolbat(Player owner) : base(owner)
         {
-            PokemonName = "Dark Golbat";
-			EvolvesFrom = "Zubat"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkGolbat;
+			EvolvesFrom = PokemonNames.Zubat;
+            Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 0;

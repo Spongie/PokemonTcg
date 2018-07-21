@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkWartortle(Player owner) : base(owner)
         {
-            PokemonName = "Dark Wartortle";
-			EvolvesFrom = "Squirtle"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkWartortle;
+            EvolvesFrom = PokemonNames.Squirtle;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

@@ -21,6 +21,13 @@ namespace TeamRocket.Attacks
         {
             return 20;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (CoinFlipper.FlipCoin())
+            {
+                opponent.ActivePokemonCard.IsPoisoned = true;
+            }
+        }
     }
 }

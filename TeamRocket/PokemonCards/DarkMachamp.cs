@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkMachamp(Player owner) : base(owner)
         {
-            PokemonName = "Dark Machamp";
-			EvolvesFrom = "Dark Machoke"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkMachamp;
+			EvolvesFrom = PokemonNames.DarkMachoke;
+            Stage = 2;
             Hp = 70;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 3;

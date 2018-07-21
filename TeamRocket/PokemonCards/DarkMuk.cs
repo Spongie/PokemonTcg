@@ -9,8 +9,9 @@ namespace TeamRocket.PokemonCards
     {
         public DarkMuk(Player owner) : base(owner)
         {
-            PokemonName = "Dark Muk";
-			EvolvesFrom = "Grimer"; //TODO: Add stage
+            PokemonName = PokemonNames.DarkMuk;
+			EvolvesFrom = PokemonNames.Grimer;
+            Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;
