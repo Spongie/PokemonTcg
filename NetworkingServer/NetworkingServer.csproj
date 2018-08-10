@@ -60,10 +60,6 @@
       <Project>{04848704-3083-4E96-8B36-8B368C8BA582}</Project>
       <Name>NetworkingCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TCGCards\TCGCards.csproj">
-      <Project>{062A25F7-1CC0-4C31-B300-24AE2F351E44}</Project>
-      <Name>TCGCards</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

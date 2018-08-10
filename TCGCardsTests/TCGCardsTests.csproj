@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TCGCardsTests</RootNamespace>
     <AssemblyName>TCGCardsTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -19,6 +19,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,17 +65,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TCGCards\TCGCards.csproj">
-      <Project>{062A25F7-1CC0-4C31-B300-24AE2F351E44}</Project>
-      <Name>TCGCards</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeamRocket\TeamRocket.csproj">
-      <Project>{B4AC2A45-16A3-467C-8C2B-03F6EAB37AAC}</Project>
-      <Name>TeamRocket</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\TCGCardsNew\TCGCardsNew.csproj">
+      <Project>{8a826d6b-b9f7-42e4-9b01-f4909884e8ff}</Project>
+      <Name>TCGCardsNew</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TRocket\TRocket.csproj">
+      <Project>{3f25f024-015e-40a7-b5ed-4efbd88e9dcd}</Project>
+      <Name>TRocket</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
