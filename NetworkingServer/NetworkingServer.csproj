@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EnergyCards\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TCGCardsNew\TCGCardsNew.csproj" />
+    <ProjectReference Include="..\NetworkingClient\NetworkingClient.csproj" />
+    <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
   </ItemGroup>
 
 </Project>

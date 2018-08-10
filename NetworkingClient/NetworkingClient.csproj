@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NClient\NClient.csproj" />
-    <ProjectReference Include="..\NCore\NCore.csproj" />
+    <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
+    <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
   </ItemGroup>
 
 </Project>

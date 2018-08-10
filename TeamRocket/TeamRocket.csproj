@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NCore\NCore.csproj" />
+    <Folder Include="EnergyCards\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
   </ItemGroup>
 
 </Project>

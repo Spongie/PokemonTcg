@@ -68,13 +68,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TCGCardsNew\TCGCardsNew.csproj">
+    <ProjectReference Include="..\TCGCards\TCGCards.csproj">
       <Project>{8a826d6b-b9f7-42e4-9b01-f4909884e8ff}</Project>
-      <Name>TCGCardsNew</Name>
+      <Name>TCGCards</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TRocket\TRocket.csproj">
+    <ProjectReference Include="..\TeamRocket\TeamRocket.csproj">
       <Project>{3f25f024-015e-40a7-b5ed-4efbd88e9dcd}</Project>
-      <Name>TRocket</Name>
+      <Name>TeamRocket</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
