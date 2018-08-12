@@ -83,7 +83,7 @@ namespace NetworkingCore
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
                     var message = Serializer.Deserialize<NetworkMessage>(input);
 
-                    if (message.ResponseTo == Guid.Empty)
+                    if (message.ResponseTo != Guid.Empty)
                     {
                         specificResponses.Add(message);
                     }

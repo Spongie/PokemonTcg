@@ -4,7 +4,8 @@
     {
         Test,
         Connected,
-        Register,
+        Generic,
+        RegisterForGame,
         GameUpdate,
         Attack,
         DeckSearch,

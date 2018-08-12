@@ -11,7 +11,7 @@ using TCGCards.Core.Messages;
 
 namespace NetworkingServer
 {
-    public class Server
+    public class GameServerInstance
     {
         private readonly Dictionary<MessageTypes, Action<NetworkMessage>> Actions;
         private List<ServerPlayer> Players;
@@ -19,13 +19,13 @@ namespace NetworkingServer
         private GameField gameField;
         TcpListener listener;
 
-        public Server()
+        public GameServerInstance()
         {
             ServerId = Guid.NewGuid();
             Players = new List<ServerPlayer>(2);
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
-                { MessageTypes.Register, OnRegister },
+                { MessageTypes.RegisterForGame, OnRegister },
                 { MessageTypes.Attack, OnAttack },
                 { MessageTypes.SelectedActive, OnActiveSelected }
             };

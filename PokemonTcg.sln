@@ -9,17 +9,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardCreator", "CardCreator\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardCreatorTests", "CardCreatorTests\CardCreatorTests.csproj", "{9F23DFCE-166C-4393-B81D-064C972DCE94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingCore", "NetworkingCore\NetworkingCore.csproj", "{3F993665-D003-4468-86FA-C59F6A7F1A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkingCore", "NetworkingCore\NetworkingCore.csproj", "{3F993665-D003-4468-86FA-C59F6A7F1A6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingServer", "NetworkingServer\NetworkingServer.csproj", "{7B363E89-5725-4DA7-B4AD-6BE74EC02102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkingServer", "NetworkingServer\NetworkingServer.csproj", "{7B363E89-5725-4DA7-B4AD-6BE74EC02102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkingClient", "NetworkingClient\NetworkingClient.csproj", "{945526A5-1890-4715-9265-3B8F9E7D355C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkingClient", "NetworkingClient\NetworkingClient.csproj", "{945526A5-1890-4715-9265-3B8F9E7D355C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCGCards", "TCGCards\TCGCards.csproj", "{8A826D6B-B9F7-42E4-9B01-F4909884E8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCGCards", "TCGCards\TCGCards.csproj", "{8A826D6B-B9F7-42E4-9B01-F4909884E8FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamRocket", "TeamRocket\TeamRocket.csproj", "{3F25F024-015E-40A7-B5ED-4EFBD88E9DCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamRocket", "TeamRocket\TeamRocket.csproj", "{3F25F024-015E-40A7-B5ED-4EFBD88E9DCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageDownloader", "ImageDownloader\ImageDownloader.csproj", "{3891AE0C-1A45-471F-9414-F02F6A7C5966}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageDownloader", "ImageDownloader\ImageDownloader.csproj", "{3891AE0C-1A45-471F-9414-F02F6A7C5966}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{E1E168EF-5ABC-4CD6-9FAB-46F144325740}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "TestClient\TestClient.csproj", "{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTests", "ServerTests\ServerTests.csproj", "{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +107,30 @@ Global
 		{3891AE0C-1A45-471F-9414-F02F6A7C5966}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3891AE0C-1A45-471F-9414-F02F6A7C5966}.Release|x86.ActiveCfg = Release|Any CPU
 		{3891AE0C-1A45-471F-9414-F02F6A7C5966}.Release|x86.Build.0 = Release|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Debug|x86.Build.0 = Debug|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Release|x86.ActiveCfg = Release|Any CPU
+		{E1E168EF-5ABC-4CD6-9FAB-46F144325740}.Release|x86.Build.0 = Release|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|x86.Build.0 = Release|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|x86.Build.0 = Debug|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

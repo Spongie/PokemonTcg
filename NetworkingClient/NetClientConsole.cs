@@ -6,7 +6,7 @@ namespace NetworkingClient
 {
     class NetClientConsole
     {
-        static Client client;
+        static GameClient client;
 
         static void Main()
         {
@@ -27,7 +27,7 @@ namespace NetworkingClient
 
         static void Run()
         {
-            client = new Client();
+            client = new GameClient();
             client.Start("127.0.0.1", 1000);
         }
     }

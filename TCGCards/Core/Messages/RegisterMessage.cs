@@ -8,7 +8,7 @@ namespace TCGCards.Core.Messages
         {
             Name = name;
             Deck = deck;
-            messageType = MessageTypes.Register;
+            messageType = MessageTypes.RegisterForGame;
         }
 
         public string Name { get; set; }

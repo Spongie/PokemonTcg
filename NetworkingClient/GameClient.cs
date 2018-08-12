@@ -9,14 +9,14 @@ using TCGCards.Core.Messages;
 
 namespace NetworkingClient
 {
-    public class Client
+    public class GameClient
     {
         public event EventHandler<GameUpdatedEventArgs> OnGameUpdated;
 
         private readonly Dictionary<MessageTypes, Action<NetworkMessage>> Actions;
         public bool RegistrationSent { get; private set; }
 
-        public Client()
+        public GameClient()
         {
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
@@ -53,7 +53,7 @@ namespace NetworkingClient
 
             RegistrationSent = true;
             var registerMessage = new RegisterMessage(v, deck);
-            Send(new NetworkMessage(MessageTypes.Register, Serializer.Serialize(registerMessage), Player.Id, Guid.NewGuid()));
+            Send(new NetworkMessage(MessageTypes.RegisterForGame, Serializer.Serialize(registerMessage), Player.Id, Guid.NewGuid()));
         }
 
         private void Run()

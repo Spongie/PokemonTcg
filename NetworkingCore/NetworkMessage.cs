@@ -6,6 +6,11 @@ namespace NetworkingCore
 {
     public class NetworkMessage
     {
+        public NetworkMessage()
+        {
+
+        }
+
         public NetworkMessage(MessageTypes type, string data, Guid senderId, Guid messageId) :this(type, data, senderId, messageId, Guid.Empty)
         {
 
