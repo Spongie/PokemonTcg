@@ -41,14 +41,6 @@ namespace Server.Services
                 Database.Instance.Update(user);
             }
 
-            Database.Instance.Insert(new LoginStatistics
-            {
-                UserName = userName,
-                Password = hashedPassword,
-                Time = DateTime.Now,
-                Successful = result
-            });
-
             return result;
         }
     }

@@ -9,12 +9,17 @@ namespace Server.DataLayer
     {     
         public static string GenerateCreateTableCommand<T>() where T : DBEntity
         {
-            var tableName = typeof(T).FullName.Replace('.', '_');
+            return GenerateCreateTableCommand(typeof(T));
+        }
+
+        public static string GenerateCreateTableCommand(Type type)
+        {
+            var tableName = type.FullName.Replace('.', '_');
             var columnCommands = new List<string>();
 
-            foreach (var property in typeof(T).GetProperties())
+            foreach (var property in type.GetProperties())
             {
-                string columnText = GenerateCreateColumnCommand(property);
+                string columnText = GenerateCreateTableColumnCommand(property);
 
                 if (columnText.StartsWith("Id"))
                 {
@@ -31,7 +36,26 @@ namespace Server.DataLayer
             return $"CREATE TABLE {tableName} ({createColumnCommand});";
         }
 
-        private static string GenerateCreateColumnCommand(PropertyInfo property)
+        public static string GenerateAddColumnSql(string tableName, PropertyInfo property)
+        {
+            SqlDbType dbType = Util.GetSqlTypeFromType(property.PropertyType);
+            string typeText = Util.GetSqlTypeString(dbType);
+
+            if (typeText.Contains("{0}"))
+            {
+                var lengthAttribute = property.GetCustomAttribute<DbLengthAttribute>();
+                typeText = typeText.Replace("{0}", lengthAttribute == null ? "1000" : lengthAttribute.Length.ToString());
+            }
+
+            return $"ALTER TABLE {tableName} ADD {property.Name} {typeText.Trim()}";
+        }
+
+        public static string GenerateDropColumnSql(string tableName, string column)
+        {
+            return $"ALTER TABLE {tableName} DROP COLUMN {column}";
+        }
+
+        private static string GenerateCreateTableColumnCommand(PropertyInfo property)
         {
             SqlDbType dbType = Util.GetSqlTypeFromType(property.PropertyType);
             string typeText = Util.GetSqlTypeString(dbType);

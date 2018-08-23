@@ -92,6 +92,46 @@ namespace Server.DataLayer
             return result;
         }
 
+        public HashSet<string> SelectTables()
+        {
+            var tables = new HashSet<string>();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        tables.Add(reader.GetString(0));
+                    }
+                }
+            }
+
+            return tables;
+        }
+
+        public HashSet<string> SelectColumnsForTable(string table)
+        {
+            var columns = new HashSet<string>();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = $"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table}'";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        columns.Add(reader.GetString(0));
+                    }
+                }
+            }
+
+            return columns;
+        }
+
         public void Insert<T>(T objectToInsert) where T : DBEntity
         {
             using (var command = connection.CreateCommand())
@@ -125,33 +165,79 @@ namespace Server.DataLayer
         {
             Logger.Instance.Log("Checking for database updates");
 
-            HashSet<DateTime> executedMigrations = new HashSet<DateTime>();
+            HashSet<string> tables = SelectTables();
 
-            try
+            foreach (var entityType in Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(DBEntity).IsAssignableFrom(type) && type.IsClass))
             {
-                executedMigrations = Select<Migration>().Select(x => x.ExecutionTimeId).ToHashSet();
-            }
-            catch (SqlException sqlException)
-            {
-                if (sqlException.Message != "Invalid object name 'SERVER_ENTITIES_MIGRATION'.")
+                var entity = (DBEntity)Activator.CreateInstance(entityType);
+
+                if (!tables.Contains(entity.GetTableName()))
                 {
-                    throw;
+                    using (var command = connection.CreateCommand())
+                    {
+                        Logger.Instance.Log("Creating table for: " + entityType.FullName);
+                        command.CommandText = TableCreator.GenerateCreateTableCommand(entityType);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    CreateAndDropColumn(entityType, entity);
                 }
             }
 
             foreach (var migrationType in Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(IMigration).IsAssignableFrom(type) && type.IsClass))
             {
                 var migration = (IMigration)Activator.CreateInstance(migrationType);
-
-                if (executedMigrations.Contains(migration.GetExecutionCreationTime()))
-                {
-                    continue;
-                }
-
                 RunMigration(migration);
             }
 
             Logger.Instance.Log("Database updated");
+        }
+
+        private void CreateAndDropColumn(Type entityType, DBEntity entity)
+        {
+            HashSet<string> existingColumns = SelectColumnsForTable(entity.GetTableName());
+            PropertyInfo[] properties = entityType.GetProperties();
+
+            AddNewColumns(entityType, entity, existingColumns, properties);
+            DropOldColumns(entityType, entity, existingColumns, properties);
+        }
+
+        private void DropOldColumns(Type entityType, DBEntity entity, HashSet<string> existingColumns, PropertyInfo[] properties)
+        {
+            foreach (var column in existingColumns)
+            {
+                if (!properties.Any(p => p.Name == column))
+                {
+                    Logger.Instance.Log($"Deleting old column {column} for: " + entityType.FullName);
+
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = TableCreator.GenerateDropColumnSql(entity.GetTableName(), column);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        private void AddNewColumns(Type entityType, DBEntity entity, HashSet<string> existingColumns, PropertyInfo[] properties)
+        {
+            foreach (var property in properties)
+            {
+                if (existingColumns.Contains(property.Name))
+                {
+                    continue;
+                }
+
+                Logger.Instance.Log($"Creating column {property} for: " + entityType.FullName);
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = TableCreator.GenerateAddColumnSql(entity.GetTableName(), property);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         private void RunMigration(IMigration migration)

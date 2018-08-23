@@ -6,9 +6,9 @@ namespace Server.DataLayer.Queries
     public class InsertQuery<T> where T : DBEntity
     {
         private readonly Type targetType;
-        private readonly object targetObject;
+        private readonly T targetObject;
 
-        public InsertQuery(object targetObject)
+        public InsertQuery(T targetObject)
         {
             targetType = typeof(T);
             this.targetObject = targetObject;
@@ -16,7 +16,6 @@ namespace Server.DataLayer.Queries
 
         public string GenerateSql()
         {
-            string tableName = targetType.FullName.Replace('.', '_');
             var columns = new List<string>();
             var values = new List<string>();
 
@@ -32,7 +31,7 @@ namespace Server.DataLayer.Queries
                 values.Add(value);
             }
 
-            return $"INSERT INTO {tableName} ({string.Join(',', columns)}) VALUES ({string.Join(',', values)})";
+            return $"INSERT INTO {targetObject.GetTableName()} ({string.Join(',', columns)}) VALUES ({string.Join(',', values)})";
         }
     }
 }

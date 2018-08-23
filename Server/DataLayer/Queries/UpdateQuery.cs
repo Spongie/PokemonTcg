@@ -14,7 +14,6 @@ namespace Server.DataLayer.Queries
 
         public string GenerateSql()
         {
-            string tableName = typeof(T).FullName.Replace('.', '_');
             var updates = new List<UpdateField>();
             var filters = "";
 
@@ -30,7 +29,7 @@ namespace Server.DataLayer.Queries
                 updates.Add(new UpdateField(property.Name, value));
             }
 
-            return $"UPDATE {tableName} SET {string.Join(',', updates.Select(x => x.GenerateQuery()))} {filters}";
+            return $"UPDATE {entity.GetTableName()} SET {string.Join(',', updates.Select(x => x.GenerateQuery()))} {filters}";
         }
     }
 }
