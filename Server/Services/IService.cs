@@ -1,6 +1,6 @@
 ﻿namespace Server.Services
 {
-    interface IService
+    public interface IService
     {
     }
 }

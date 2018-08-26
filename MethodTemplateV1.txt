@@ -1,0 +1,11 @@
+public {RETURNTYPE} {METHODNAME}({PARAMS})
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "{METHODNAME}",
+			TargetClass = "{SERVICENAME}",
+			Parameters = new object[] { {PARAMVALUES} }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<{RETURNTYPE}>(message);
+	}
