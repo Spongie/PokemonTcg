@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,14 +16,14 @@ namespace NetworkingCore
         private NetworkStream stream;
         private Thread writingThread;
         private Thread readerThread;
-        private Queue<NetworkMessage> messageQueue;
-        private List<NetworkMessage> specificResponses;
+        private ConcurrentQueue<NetworkMessage> messageQueue;
+        private ConcurrentBag<NetworkMessage> specificResponses;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
-            messageQueue = new Queue<NetworkMessage>();
-            specificResponses = new List<NetworkMessage>();
+            messageQueue = new ConcurrentQueue<NetworkMessage>();
+            specificResponses = new ConcurrentBag<NetworkMessage>();
             SetTcpClient(tcpClient);
         }
 
@@ -53,8 +54,10 @@ namespace NetworkingCore
                     continue;
                 }
 
-                var message = messageQueue.Dequeue();
-                message.Send(stream);
+                if (messageQueue.TryDequeue(out NetworkMessage message))
+                {
+                    message.Send(stream);
+                }
             }
         }
 
@@ -102,7 +105,7 @@ namespace NetworkingCore
             while (true)
             {
                 Thread.Sleep(100);
-                NetworkMessage response = specificResponses.FirstOrDefault(m => m.ResponseTo == message.ResponseTo);
+                NetworkMessage response = specificResponses.FirstOrDefault(m => m.ResponseTo == message.MessageId);
                 if (response != null)
                 {
                     return Serializer.Deserialize<JObject>(response.Data).ToObject<T>();

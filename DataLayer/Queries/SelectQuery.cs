@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Server.DataLayer.Queries
+namespace DataLayer.Queries
 {
     public class SelectQuery<T> where T : DBEntity
     {
@@ -53,7 +53,7 @@ namespace Server.DataLayer.Queries
         public string GenerateSql()
         {
             string tableName = targetType.FullName.Replace('.', '_');
-            string selects = overrideSelects.Any() ? string.Join(',', overrideSelects) : "*";
+            string selects = overrideSelects.Any() ? string.Join(",", overrideSelects) : "*";
             string filterQuery = "";
 
             if (filters.Any())

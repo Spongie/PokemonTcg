@@ -13,7 +13,7 @@ public class UserService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public System.Boolean Register(System.String userName,System.String password)
+	public NetworkingCore.BooleanResult Register(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{
@@ -22,9 +22,9 @@ public class UserService
 			Parameters = new object[] { userName,password }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
-		return networkPlayer.SendAndWaitForResponse<System.Boolean>(message);
+		return networkPlayer.SendAndWaitForResponse<NetworkingCore.BooleanResult>(message);
 	}
-public System.Boolean Login(System.String userName,System.String password)
+public NetworkingCore.BooleanResult Login(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{
@@ -33,6 +33,6 @@ public System.Boolean Login(System.String userName,System.String password)
 			Parameters = new object[] { userName,password }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
-		return networkPlayer.SendAndWaitForResponse<System.Boolean>(message);
+		return networkPlayer.SendAndWaitForResponse<NetworkingCore.BooleanResult>(message);
 	}
 }

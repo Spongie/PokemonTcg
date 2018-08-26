@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProxyGenerator", "ProxyGene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProxy", "ServerProxy\ServerProxy.csproj", "{5E994A8D-087B-4005-8742-5D7D5DA83A37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{C9CF8745-0F23-4C75-91B8-D5B96433A723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{44CD12B7-4826-4793-A4FE-8153391D7189}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +155,22 @@ Global
 		{5E994A8D-087B-4005-8742-5D7D5DA83A37}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E994A8D-087B-4005-8742-5D7D5DA83A37}.Release|x86.ActiveCfg = Release|Any CPU
 		{5E994A8D-087B-4005-8742-5D7D5DA83A37}.Release|x86.Build.0 = Release|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|x86.Build.0 = Debug|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|x86.ActiveCfg = Release|Any CPU
+		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|x86.Build.0 = Release|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|x86.Build.0 = Debug|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|x86.ActiveCfg = Release|Any CPU
+		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

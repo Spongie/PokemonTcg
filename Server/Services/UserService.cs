@@ -1,7 +1,7 @@
-﻿using NetworkingCore;
-using Server.DataLayer;
-using Server.DataLayer.Queries;
-using Server.Entities;
+﻿using DataLayer;
+using DataLayer.Queries;
+using Entities;
+using NetworkingCore;
 using System;
 using System.Linq;
 
@@ -9,7 +9,7 @@ namespace Server.Services
 {
     internal class UserService : IService
     {
-        public bool Register(string userName, string password)
+        public BooleanResult Register(string userName, string password)
         {
             if (Database.Instance.Select(new SelectQuery<User>().AndEquals(nameof(User.UserName), userName)).Any())
             {
@@ -27,7 +27,7 @@ namespace Server.Services
             return true;
         }
 
-        public bool Login(string userName, string password)
+        public BooleanResult Login(string userName, string password)
         {
             var user = Database.Instance.Select(new SelectQuery<User>().AndEquals(nameof(User.UserName), userName).Limit(1)).FirstOrDefault();
             

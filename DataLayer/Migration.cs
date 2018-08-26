@@ -1,7 +1,7 @@
-﻿using Server.DataLayer;
+﻿using DataLayer;
 using System;
 
-namespace Server.Entities
+namespace DataLayer
 {
     public class Migration : DBEntity
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Server.DataLayer.Queries
+namespace DataLayer.Queries
 {
     public class UpdateQuery<T> where T : DBEntity
     {
@@ -29,7 +29,7 @@ namespace Server.DataLayer.Queries
                 updates.Add(new UpdateField(property.Name, value));
             }
 
-            return $"UPDATE {entity.GetTableName()} SET {string.Join(',', updates.Select(x => x.GenerateQuery()))} {filters}";
+            return $"UPDATE {entity.GetTableName()} SET {string.Join(",", updates.Select(x => x.GenerateQuery()))} {filters}";
         }
     }
 }

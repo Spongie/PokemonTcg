@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Server.DataLayer
+namespace DataLayer
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class DbLengthAttribute : Attribute

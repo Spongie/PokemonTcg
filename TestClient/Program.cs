@@ -9,13 +9,13 @@ namespace TestClient
     class Program
     {
         static NetworkPlayer networkPlayer;
-
+        static UserService userService;
         static void Main(string[] args)
         {
             var thread = new Thread(RunPlayer);
             thread.Start();
 
-            string input;           
+            string input;
 
             do
             {
@@ -26,14 +26,14 @@ namespace TestClient
                     string userName = Console.ReadLine().Trim();
                     string password = Console.ReadLine().Trim();
 
-                    networkPlayer.Send(new LoginMessage(userName, password).ToNetworkMessage(networkPlayer.Id));
+                    Console.WriteLine(userService.Login(userName, password));
                 }
                 if (input == "register")
                 {
                     string userName = Console.ReadLine().Trim();
                     string password = Console.ReadLine().Trim();
 
-                    networkPlayer.Send(new RegisterMessage(userName, password).ToNetworkMessage(networkPlayer.Id));
+                    Console.WriteLine(userService.Register(userName, password));
                 }
 
             } while (input.ToLower() != "exit");
@@ -46,6 +46,7 @@ namespace TestClient
             Console.WriteLine("Connected to server");
 
             networkPlayer = new NetworkPlayer(tcp);
+            userService = new UserService(networkPlayer);
             networkPlayer.DataReceived += NetworkPlayer_DataReceived;
         }
 

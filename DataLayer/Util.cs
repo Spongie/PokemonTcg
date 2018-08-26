@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace Server.DataLayer
+namespace DataLayer
 {
     public static class Util
     {

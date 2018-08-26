@@ -1,4 +1,4 @@
-﻿namespace Server.DataLayer.Queries
+﻿namespace DataLayer.Queries
 {
     internal class AndFilter : Filter
     {

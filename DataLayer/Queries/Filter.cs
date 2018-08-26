@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Server.DataLayer.Queries
+namespace DataLayer.Queries
 {
     internal abstract class Filter
     {

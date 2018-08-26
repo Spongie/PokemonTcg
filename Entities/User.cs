@@ -1,7 +1,7 @@
-﻿using Server.DataLayer;
+﻿using DataLayer;
 using System;
 
-namespace Server.Entities
+namespace Entities
 {
     public class User : DBEntity
     {
@@ -11,7 +11,7 @@ namespace Server.Entities
         public string Password { get; set; }
 
         [DbLength(500)]
-        public string Email { get; set; }
+        public string Email { get; set; } = "";
 
         public DateTime RegisteredDate { get; set; }
 

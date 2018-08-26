@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Server.DataLayer;
-using Server.DataLayer.Queries;
+﻿using DataLayer;
+using DataLayer.Queries;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ServerTests.Database.Queries
 {

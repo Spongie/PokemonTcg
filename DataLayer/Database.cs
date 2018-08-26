@@ -1,5 +1,5 @@
-﻿using Server.DataLayer.Queries;
-using Server.Entities;
+﻿using DataLayer.Queries;
+using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Server.DataLayer
+namespace DataLayer
 {
     public class Database : IDisposable
     {
@@ -167,31 +167,34 @@ namespace Server.DataLayer
 
             HashSet<string> tables = SelectTables();
 
-            foreach (var entityType in Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(DBEntity).IsAssignableFrom(type) && type.IsClass))
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                var entity = (DBEntity)Activator.CreateInstance(entityType);
-
-                if (!tables.Contains(entity.GetTableName()))
+                foreach (var entityType in assembly.GetTypes().Where(type => typeof(DBEntity).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract))
                 {
-                    using (var command = connection.CreateCommand())
+                    var entity = (DBEntity)Activator.CreateInstance(entityType);
+
+                    if (!tables.Contains(entity.GetTableName()))
                     {
-                        Logger.Instance.Log("Creating table for: " + entityType.FullName);
-                        command.CommandText = TableCreator.GenerateCreateTableCommand(entityType);
-                        command.ExecuteNonQuery();
+                        using (var command = connection.CreateCommand())
+                        {
+                            Logger.Instance.Log("Creating table for: " + entityType.FullName);
+                            command.CommandText = TableCreator.GenerateCreateTableCommand(entityType);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        CreateAndDropColumn(entityType, entity);
                     }
                 }
-                else
+
+                foreach (var migrationType in assembly.GetTypes().Where(type => typeof(IMigration).IsAssignableFrom(type) && type.IsClass))
                 {
-                    CreateAndDropColumn(entityType, entity);
+                    var migration = (IMigration)Activator.CreateInstance(migrationType);
+                    RunMigration(migration);
                 }
             }
-
-            foreach (var migrationType in Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(IMigration).IsAssignableFrom(type) && type.IsClass))
-            {
-                var migration = (IMigration)Activator.CreateInstance(migrationType);
-                RunMigration(migration);
-            }
-
+            
             Logger.Instance.Log("Database updated");
         }
 

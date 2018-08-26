@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Server.DataLayer.Queries
+namespace DataLayer.Queries
 {
     public class InsertQuery<T> where T : DBEntity
     {
@@ -31,7 +31,7 @@ namespace Server.DataLayer.Queries
                 values.Add(value);
             }
 
-            return $"INSERT INTO {targetObject.GetTableName()} ({string.Join(',', columns)}) VALUES ({string.Join(',', values)})";
+            return $"INSERT INTO {targetObject.GetTableName()} ({string.Join(",", columns)}) VALUES ({string.Join(",", values)})";
         }
     }
 }

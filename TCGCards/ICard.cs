@@ -20,7 +20,6 @@ namespace TCGCards
 
         protected CardSet Set { get; set; }
 
-
         public Player Owner { get; set; }
 
         public override bool Equals(object obj)

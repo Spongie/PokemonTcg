@@ -1,6 +1,6 @@
-﻿namespace Server.DataLayer
+﻿namespace DataLayer
 {
-    public class DBEntity
+    public abstract class DBEntity
     {
         public long Id { get; set; }
 
