@@ -92,6 +92,33 @@ namespace DataLayer
             return result;
         }
 
+        public void Delete<T>(T entity) where T : DBEntity
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = new DeleteQuery<T>(entity).GenerateSql();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteList<T>(IEnumerable<T> entitys) where T : DBEntity
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = new DeleteMultipleQuery<T>(entitys).GenerateSql();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void ExecuteNonQuery(string query)
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+            }
+        }
+
         public HashSet<string> SelectTables()
         {
             var tables = new HashSet<string>();
@@ -141,6 +168,24 @@ namespace DataLayer
             }
         }
 
+        public void InsertList<T>(IEnumerable<T> objects) where T : DBEntity
+        {
+            using (var command = connection.CreateCommand())
+            {
+                using (var transaction = connection.BeginTransaction())
+                {
+                    command.Transaction = transaction;
+                    foreach (var item in objects)
+                    {
+                        command.CommandText = new InsertQuery<T>(item).GenerateSql();
+                        command.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
+            }
+        }
+
         public void Update<T>(T objectToUpdate) where T : DBEntity
         {
             using (var command = connection.CreateCommand())
@@ -167,32 +212,29 @@ namespace DataLayer
 
             HashSet<string> tables = SelectTables();
 
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var entityType in TypeLoader.GetLoadedTypesAssignableFrom<DBEntity>())
             {
-                foreach (var entityType in assembly.GetTypes().Where(type => typeof(DBEntity).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract))
-                {
-                    var entity = (DBEntity)Activator.CreateInstance(entityType);
+                var entity = (DBEntity)Activator.CreateInstance(entityType);
 
-                    if (!tables.Contains(entity.GetTableName()))
+                if (!tables.Contains(entity.GetTableName()))
+                {
+                    using (var command = connection.CreateCommand())
                     {
-                        using (var command = connection.CreateCommand())
-                        {
-                            Logger.Instance.Log("Creating table for: " + entityType.FullName);
-                            command.CommandText = TableCreator.GenerateCreateTableCommand(entityType);
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                    else
-                    {
-                        CreateAndDropColumn(entityType, entity);
+                        Logger.Instance.Log("Creating table for: " + entityType.FullName);
+                        command.CommandText = TableCreator.GenerateCreateTableCommand(entityType);
+                        command.ExecuteNonQuery();
                     }
                 }
-
-                foreach (var migrationType in assembly.GetTypes().Where(type => typeof(IMigration).IsAssignableFrom(type) && type.IsClass))
+                else
                 {
-                    var migration = (IMigration)Activator.CreateInstance(migrationType);
-                    RunMigration(migration);
+                    CreateAndDropColumn(entityType, entity);
                 }
+            }
+
+            foreach (var migrationType in TypeLoader.GetLoadedTypesAssignableFrom<IMigration>())
+            {
+                var migration = (IMigration)Activator.CreateInstance(migrationType);
+                RunMigration(migration);
             }
             
             Logger.Instance.Log("Database updated");

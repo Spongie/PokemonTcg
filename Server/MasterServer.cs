@@ -37,6 +37,8 @@ namespace Server
 
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
 
+            //Load all card assemblies /Cards/*.dll
+
             serverId = Guid.NewGuid();
             listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             listener.Start();

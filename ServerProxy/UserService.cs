@@ -21,10 +21,8 @@ public class UserService
 			TargetClass = "UserService",
 			Parameters = new object[] { userName,password }
 		}.ToNetworkMessage(networkPlayer.Id);
-		
-		return networkPlayer.SendAndWaitForResponse<NetworkingCore.BooleanResult>(message);
-	}
-public NetworkingCore.BooleanResult Login(System.String userName,System.String password)
+	
+		return networkPlayer.SendAndWaitForResponse<NetworkingCore.BooleanResult>(message);}public NetworkingCore.BooleanResult Login(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{

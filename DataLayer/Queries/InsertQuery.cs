@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace DataLayer.Queries
 {
@@ -21,7 +22,7 @@ namespace DataLayer.Queries
 
             foreach (var property in targetType.GetProperties())
             {
-                if (property.Name.ToLower() == "id")
+                if (property.Name.ToLower() == "id" || property.GetCustomAttribute<DbIgnore>() != null)
                 {
                     continue;
                 }

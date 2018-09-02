@@ -50,6 +50,22 @@ namespace DataLayer.Queries
             return this;
         }
 
+        public SelectQuery<T> AndIn(string column, IEnumerable<string> values)
+        {
+            return AndIn(targetType.GetProperty(column, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance), values);
+        }
+
+        public SelectQuery<T> AndIn(PropertyInfo column, IEnumerable<string> values)
+        {
+            filters.Add(new InFilter
+            {
+                Column = column,
+                Values = values.ToList()
+            });
+
+            return this;
+        }
+
         public string GenerateSql()
         {
             string tableName = targetType.FullName.Replace('.', '_');
