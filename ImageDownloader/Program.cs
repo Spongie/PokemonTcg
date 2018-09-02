@@ -1,4 +1,6 @@
 ﻿using HtmlAgilityPack;
+using PokemonTcgSdk;
+using PokemonTcgSdk.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,33 +15,83 @@ namespace CardDownloader
     {
         static void Main(string[] args)
         {
-            var sets = FindSets();
+            var sets = Sets.All();
 
             Console.WriteLine($"Found {sets.Count} sets");
+            int totalIndex = 0;
+            object lockObject = new object();
 
-            for(int i = 0; i < sets.Count; i++)
+            Parallel.ForEach(sets, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, (set) =>
             {
-                var set = sets[i];
+                int myId = Interlocked.Increment(ref totalIndex);
+                int progress = 0;
 
-                Console.WriteLine($"Downloading set {i + 1} of {sets.Count} - {set.Name}");
+                string baseFolder = set.Name.Replace(" ", "");
 
-                var web = new HtmlWeb();
-                var document = web.Load(set.Link);
+                if (!Directory.Exists(baseFolder))
+                {
+                    Directory.CreateDirectory(baseFolder);
+                }
 
-                var contentNodes = document.DocumentNode.Descendants("Article").ToList();
+                var cards = Card.Get<Pokemon>(new Dictionary<string, string>
+                {
+                    { CardQueryTypes.SetCode, set.Code},
+                    { CardQueryTypes.PageSize, "500" }
+                }).Cards;
+                
+                float max = cards.Count;
 
-                DownloadAllPokemons(contentNodes, set);
-            }
+                foreach (var card in cards)
+                {
+                    string fileName = Path.Combine(baseFolder, GetPokemonFileName(card));
+
+                    if (File.Exists(fileName))
+                    {
+                        continue;
+                    }
+
+                    using (var client = new WebClient())
+                    {
+                        try
+                        {
+                            client.DownloadFile(card.ImageUrlHiRes, fileName);
+                        }
+                        catch (WebException e)
+                        {
+                            if (e.Message.Contains("404"))
+                            {
+                                try
+                                {
+                                    client.DownloadFile(card.ImageUrl, fileName);
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("Failed to download image for: " + card.Name);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Failed to download image for: " + card.Name);
+                            }
+                        }
+                    }
+
+                    progress++;
+                    lock (lockObject)
+                    {
+                        Console.SetCursorPosition(0, myId);
+                        Console.Write($"Downloading {set.Name.PadRight(25)} - {(progress / max).ToString("p2").PadLeft(7, '0')}");
+                    }
+                }
+            });
 
             Console.Read();
         }
 
-        static List<PokemonSet> FindSets()
+        class PokemonSet
         {
-            var web = new HtmlWeb();
-            var document = web.Load("https://pkmncards.com/sets/");
-
-            return document.DocumentNode.Descendants("Article").First().Descendants("a").Skip(1).Select(x => new PokemonSet(x)).ToList();
+            public string Name { get; set; }
+            public string Link { get; set; }
         }
 
         static void DownloadAllPokemons(List<HtmlNode> htmlNodes, PokemonSet set)
@@ -56,7 +108,7 @@ namespace CardDownloader
 
             Parallel.ForEach(pokemons, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, (pokemon) =>
             {
-                string fileName = baseFolder + "\\" + GetPokemonFileName(pokemon);
+                string fileName = baseFolder + "\\";// + GetPokemonFileName(pokemon);
 
                 if(new FileInfo(fileName).Exists)
                 {
@@ -103,9 +155,9 @@ namespace CardDownloader
             Console.Write($"\rDownloading: {status.ToString("p2").PadLeft(7, '0')}");
         }
 
-        private static string GetPokemonFileName(HtmlNode pokemon)
+        private static string GetPokemonFileName(PokemonCard card)
         {
-            return pokemon.InnerHtml.Replace(" ", "")
+            return card.Name.Replace(" ", "")
                 .Replace("'", "")
                 .Replace("´", "")
                 .Replace("`", "")
