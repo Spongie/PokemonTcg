@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 
@@ -18,8 +19,19 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
+            if (CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
+            {
+                return 0;
+            }
+
+            owner.ActivePokemonCard.DiscardEnergyCardOfType(EnergyTypes.Fire);
+
             return 70;
         }
-		//TODO:
+
+        public override bool CanBeUsed(GameField game, Player owner, Player opponent)
+        {
+            return base.CanBeUsed(game, owner, opponent) && owner.ActivePokemonCard.AttachedEnergy.Any(e => e.EnergyType == EnergyTypes.Fire);
+        }
     }
 }

@@ -1,6 +1,9 @@
+using NetworkingCore.Messages;
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
@@ -18,8 +21,20 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
+            if (opponent.BenchedPokemon.Any())
+            {
+                var activateMessage = new YesNoMessage { Message = Description }.ToNetworkMessage(owner.Id);
+                var activateResponse = owner.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(activateMessage);
+
+                if (activateResponse.AnsweredYes)
+                {
+                    var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
+                    var selected = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(message).Pokemons.First();
+                    selected.DamageCounters += 10;
+                }
+            }
+
             return 30;
         }
-		//TODO:
     }
 }

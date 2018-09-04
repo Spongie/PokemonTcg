@@ -24,5 +24,21 @@ namespace TCGCards.Core
         {
             return Cards.Pop();
         }
+
+        public void ShuffleInCard(ICard card)
+        {
+            Cards.Push(card);
+            Shuffle();
+        }
+
+        public void ShuffleInCards(IEnumerable<ICard> cards)
+        {
+            foreach (var card in cards)
+            {
+                Cards.Push(card);
+            }
+
+            Shuffle();
+        }
     }
 }

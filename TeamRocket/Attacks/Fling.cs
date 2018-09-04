@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 
@@ -17,10 +18,29 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
+            opponent.Deck.ShuffleInCard(opponent.ActivePokemonCard);
+            opponent.Deck.ShuffleInCards(opponent.ActivePokemonCard.AttachedEnergy.OfType<ICard>());
+
+            if (opponent.BenchedPokemon.Count == 1)
+            {
+                opponent.SetActivePokemon(opponent.BenchedPokemon.First());
+            }
+            else
+            {
+                game.StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
+            }
+        }
+
+        public override Damage GetDamage(Player owner, Player opponent)
+        {       
             return 0;
         }
-		//TODO:
+
+        public override bool CanBeUsed(GameField game, Player owner, Player opponent)
+        {
+            return base.CanBeUsed(game, owner, opponent) && opponent.BenchedPokemon.Any();
+        }
     }
 }

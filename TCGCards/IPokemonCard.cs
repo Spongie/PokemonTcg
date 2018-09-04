@@ -51,6 +51,19 @@ namespace TCGCards
                 IsAsleep = CoinFlipper.FlipCoin();
         }
 
+        public void DiscardEnergyCard(IEnergyCard energyCard)
+        {
+            if (energyCard != null)
+            {
+                AttachedEnergy.Remove(energyCard);
+            }
+        }
+
+        public void DiscardEnergyCardOfType(EnergyTypes energyType)
+        {
+            DiscardEnergyCard(AttachedEnergy.FirstOrDefault(e => e.EnergyType == energyType));
+        }
+
         public override string GetName()
         {
             return PokemonName;

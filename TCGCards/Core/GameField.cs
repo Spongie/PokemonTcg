@@ -66,6 +66,9 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
+            if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
+                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
+
             var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage.DamageWithoutResistAndWeakness;
             NonActivePlayer.ActivePokemonCard.DamageCounters += GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
@@ -93,9 +96,6 @@ namespace TCGCards.Core
 
         public void PostAttack()
         {
-            if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
-                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
-
             CheckDeadPokemon();
             CheckEndTurn();
         }
