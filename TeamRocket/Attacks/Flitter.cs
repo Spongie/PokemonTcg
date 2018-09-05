@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
@@ -20,6 +22,17 @@ namespace TeamRocket.Attacks
         {
             return 0;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!opponent.BenchedPokemon.Any())
+            {
+                opponent.ActivePokemonCard.DamageCounters += 20;
+                return;
+            }
+
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
+            response.Pokemons.First().DamageCounters += 20;
+        }
     }
 }

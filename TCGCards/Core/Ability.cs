@@ -7,7 +7,7 @@
             Owner = owner;
         }
 
-        public abstract void Activate(Player owner, Player opponent);
+        public abstract void Activate(Player owner, Player opponent, int damageTaken);
 
         public abstract void SetTarget(Card target);
 

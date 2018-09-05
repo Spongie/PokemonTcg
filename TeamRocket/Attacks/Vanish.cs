@@ -31,7 +31,7 @@ namespace TeamRocket.Attacks
 
             var message = new GameFieldMessage(game).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<ActiveSelectedMessage>(message);
-            owner.SetActivePokemon(response.SelectedPokemon);
+            owner.ForceRetreatActivePokemon(response.SelectedPokemon);
         }
     }
 }

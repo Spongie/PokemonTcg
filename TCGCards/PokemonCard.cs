@@ -9,6 +9,7 @@ namespace TCGCards
         public PokemonCard(Player owner) : base(owner)
         {
             AttachedEnergy = new List<EnergyCard>();
+            TemporaryAbilities = new List<TemporaryAbility>();
         }
 
         public int Hp { get; protected set; }
@@ -30,10 +31,16 @@ namespace TCGCards
         public bool IsConfused { get; set; }
         public PokemonCard KnockedOutBy { get; set; }
         public Ability Ability { get; protected set; }
+        public List<TemporaryAbility> TemporaryAbilities { get; set; }
         public string PokemonName { get; protected set; }
+
+        public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
         public virtual void EndTurn()
         {
+            TemporaryAbilities.ForEach(x => x.TurnsLeft--);
+            TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnsLeft > 0).ToList();
+
             PlayedThisTurn = false;
 
             if (IsBurned)

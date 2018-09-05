@@ -9,7 +9,7 @@ namespace TCGCards.Core.Tests
     public class PlayerTests
     {
         [TestMethod()]
-        public void SetActiePokemon_CardInHand()
+        public void SetActivePokemon_CardInHand()
         {
             var p = new Player();
             var card = new Magikarp(p);
@@ -21,7 +21,7 @@ namespace TCGCards.Core.Tests
         }
 
         [TestMethod()]
-        public void SetActiePokemon_CardOnBench()
+        public void SetActivePokemon_CardOnBench()
         {
             var p = new Player();
             var card = new Magikarp(p);
@@ -33,7 +33,7 @@ namespace TCGCards.Core.Tests
         }
 
         [TestMethod()]
-        public void SetActiePokemon_SpotTaken()
+        public void SetActivePokemon_SpotTaken()
         {
             var p = new Player();
             var card = new Magikarp(p);
@@ -42,7 +42,8 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetActivePokemon(card2);
 
-            Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
+            Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
+            Assert.IsTrue(p.BenchedPokemon.Any());
         }
 
         [TestMethod]

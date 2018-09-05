@@ -3,6 +3,7 @@
     public enum EnergyTypes
     {
         None,
+        All,
         Colorless,
         Water,
         Fire,

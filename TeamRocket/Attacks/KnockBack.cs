@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
@@ -21,6 +23,14 @@ namespace TeamRocket.Attacks
         {
             return 30;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!opponent.BenchedPokemon.Any())
+                return;
+
+            var response = opponent.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromYourBench(1).ToNetworkMessage(opponent.Id));
+            opponent.ForceRetreatActivePokemon(response.Pokemons.First());
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace TeamRocket.Abilities
             TriggerType = TriggerType.Activation;
         }
 
-        public override void Activate(Player owner, Player opponent)
+        public override void Activate(Player owner, Player opponent, int damageTaken)
         {
             var message = new PickFromListMessage(owner.PrizeCards, new AnyCardFilter(), 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(message);

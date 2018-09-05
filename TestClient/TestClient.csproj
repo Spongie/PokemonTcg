@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
     <ProjectReference Include="..\ServerProxy\ServerProxy.csproj" />
   </ItemGroup>

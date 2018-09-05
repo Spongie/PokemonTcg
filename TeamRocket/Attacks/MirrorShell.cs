@@ -21,6 +21,28 @@ namespace TeamRocket.Attacks
         {
             return 0;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            owner.ActivePokemonCard.TemporaryAbilities.Add(new MirrorShellAbility(owner.ActivePokemonCard));
+        }
+
+        private class MirrorShellAbility : TemporaryAbility
+        {
+            public MirrorShellAbility(PokemonCard owner) :base(owner)
+            {
+                TriggerType = TriggerType.TakesDamage;
+            }
+
+            public override void Activate(Player owner, Player opponent, int damageTaken)
+            {
+                opponent.ActivePokemonCard.DamageCounters += damageTaken;
+            }
+
+            public override void SetTarget(Card target)
+            {
+
+            }
+        }
     }
 }

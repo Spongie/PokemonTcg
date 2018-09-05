@@ -20,6 +20,10 @@ namespace TeamRocket.Attacks
         {
             return 40;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            owner.ActivePokemonCard.IsConfused = true;
+        }
     }
 }

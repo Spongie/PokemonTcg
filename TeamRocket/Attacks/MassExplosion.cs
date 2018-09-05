@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 
@@ -19,8 +20,21 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 0;
+            var pokemonNames = new[] { PokemonNames.Koffing, PokemonNames.Weezing, PokemonNames.DarkWeezing };
+            var validPokemons = owner.BenchedPokemon.Where(pokemon => pokemonNames.Contains(pokemon.PokemonName)).ToList();
+            validPokemons.Add(owner.ActivePokemonCard);
+            
+            if (pokemonNames.Contains(opponent.ActivePokemonCard.PokemonName))
+                validPokemons.Add(opponent.ActivePokemonCard);
+
+            validPokemons.AddRange(opponent.BenchedPokemon.Where(pokemon => pokemonNames.Contains(pokemon.PokemonName)));
+
+            foreach (var pokemon in validPokemons)
+            {
+                pokemon.DamageCounters += 20;
+            }
+
+            return 20 * validPokemons.Count;
         }
-		//TODO:
     }
 }

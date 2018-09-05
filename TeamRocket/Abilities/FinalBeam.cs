@@ -11,7 +11,7 @@ namespace TeamRocket.Abilities
             TriggerType = TriggerType.Dies;
         }
 
-        public override void Activate(Player player, Player opponent)
+        public override void Activate(Player player, Player opponent, int damageTake)
         {
             if(Owner.IsAsleep || Owner.IsParalyzed || Owner.IsConfused)
                 return;

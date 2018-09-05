@@ -9,7 +9,7 @@ namespace TeamRocket.Attacks
         public PetalWhirlwind()
         {
             Name = "Petal Whirlwind";
-            Description = "30× damage. Flip a coins. This attack does 30 damage times the number of heads. If you get 2 or more heads, Dark Vileplume is now Confused (after doing damage).";
+            Description = "30× damage. Flip 3 coins. This attack does 30 damage times the number of heads. If you get 2 or more heads, Dark Vileplume is now Confused (after doing damage).";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 3)
@@ -18,8 +18,12 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 0;
+            var heads = CoinFlipper.FlipCoins(3);
+
+            if (heads >= 2)
+                owner.ActivePokemonCard.IsConfused = true;
+
+            return heads * 30;
         }
-		//TODO:
     }
 }

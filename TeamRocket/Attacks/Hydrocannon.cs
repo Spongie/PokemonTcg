@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
@@ -18,8 +19,12 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
+            int extraDamage = 0;
+            int extraWaterEnergy = owner.ActivePokemonCard.GetEnergyOfType(EnergyTypes.Water) - 2;
+
+            extraDamage = Math.Max(40, extraWaterEnergy * 20);
+
             return 30;
         }
-		//TODO:
     }
 }

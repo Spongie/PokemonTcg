@@ -99,7 +99,7 @@ namespace TCGCards.Core
         
         public void SetActivePokemon(PokemonCard pokemon)
         {
-            if(ActivePokemonCard != null)
+            if (ActivePokemonCard != null)
                 return;
 
             if(Hand.Contains(pokemon))
@@ -162,7 +162,6 @@ namespace TCGCards.Core
         public List<Card> Hand { get; set; }
         public Guid Id { get; set; }
         public NetworkPlayer NetworkPlayer { get; private set; }
-
         public bool HasPlayedEnergy { get; protected set; }
 
         public bool IsRegistered()

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Deckfilters;
+using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
@@ -20,6 +23,18 @@ namespace TeamRocket.Attacks
         {
             return 30;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!opponent.ActivePokemonCard.AttachedEnergy.Any(x => x.IsBasic) || !opponent.BenchedPokemon.Any())
+                return;
+
+            var selectedEnergyMessage = owner.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy.OfType<Card>(), new BasicEnergyFilter(), 1).ToNetworkMessage(owner.Id));
+            var selectedPokemonMessage = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
+            var selectedEnergy = selectedEnergyMessage.SelectedCards.OfType<EnergyCard>().First();
+
+            selectedPokemonMessage.Pokemons.First().AttachedEnergy.Add(selectedEnergy);
+            opponent.ActivePokemonCard.AttachedEnergy.Remove(selectedEnergy);
+        }
     }
 }

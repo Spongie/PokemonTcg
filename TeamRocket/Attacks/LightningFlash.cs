@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TeamRocket.Attacks
 {
@@ -20,6 +21,13 @@ namespace TeamRocket.Attacks
         {
             return 20;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            game.AttackStoppers.Add(new AttackStopper(() =>
+            {
+                return CoinFlipper.FlipCoin();
+            }));
+        }
     }
 }

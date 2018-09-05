@@ -25,7 +25,7 @@ namespace TeamRocket.Attacks
 
             if (opponent.BenchedPokemon.Count == 1)
             {
-                opponent.SetActivePokemon(opponent.BenchedPokemon.First());
+                opponent.ForceRetreatActivePokemon(opponent.BenchedPokemon.First());
             }
             else
             {

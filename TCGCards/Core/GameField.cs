@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Core
 {
@@ -16,6 +17,8 @@ namespace TCGCards.Core
             Players = new List<Player>();
             StateQueue = new Queue<GameFieldState>();
             playersSetStartBench = new HashSet<Guid>();
+            AttackStoppers = new List<AttackStopper>();
+            DamageStoppers = new List<DamageStopper>();
         }
 
         public void Init()
@@ -109,13 +112,24 @@ namespace TCGCards.Core
             StateQueue.Enqueue(GameFieldState.EndAttack);
 
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
-                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);         
+                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
 
-            var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
-            NonActivePlayer.ActivePokemonCard.DamageCounters += damage.DamageWithoutResistAndWeakness;
-            NonActivePlayer.ActivePokemonCard.DamageCounters += GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
+            if (!AttackStoppers.Any(x => x.IsAttackIgnored()))
+            {
+                if (!DamageStoppers.Any(x => x.IsDamageIgnored()))
+                {
+                    var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
+                    var normalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
-            attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
+                    NonActivePlayer.ActivePokemonCard.DamageCounters += damage.DamageWithoutResistAndWeakness;
+                    NonActivePlayer.ActivePokemonCard.DamageCounters += normalDamage;
+
+                    if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage)
+                        NonActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, normalDamage + damage.DamageWithoutResistAndWeakness);
+                }
+
+                attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
+            }
 
             PostAttack();
         }
@@ -138,6 +152,12 @@ namespace TCGCards.Core
 
         public void PostAttack()
         {
+            AttackStoppers.ForEach(attackStopper => attackStopper.TurnsLeft--);
+            DamageStoppers.ForEach(damageStopper => damageStopper.TurnsLeft--);
+
+            AttackStoppers = AttackStoppers.Where(attackStopper => attackStopper.TurnsLeft > 0).ToList();
+            DamageStoppers = DamageStoppers.Where(damageStopper => damageStopper.TurnsLeft > 0).ToList();
+
             CheckDeadPokemon();
             CheckEndTurn();
         }
@@ -147,7 +167,7 @@ namespace TCGCards.Core
             ActivePlayer.PlayCard(pokemon);
 
             if(pokemon.Ability?.TriggerType == TriggerType.EnterPlay)
-                pokemon.Ability?.Activate(ActivePlayer, NonActivePlayer);
+                pokemon.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
         }
 
         private void CheckDeadPokemon()
@@ -157,9 +177,9 @@ namespace TCGCards.Core
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
                 if(NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
-                    NonActivePlayer.ActivePokemonCard.Ability?.Activate(NonActivePlayer, ActivePlayer);
+                    NonActivePlayer.ActivePokemonCard.Ability?.Activate(NonActivePlayer, ActivePlayer, 0);
                 if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Kills)
-                    ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
+                    ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
                 StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
@@ -232,5 +252,8 @@ namespace TCGCards.Core
         public Player NonActivePlayer { get { return Players.First(p => p.Id != ActivePlayer.Id); } }
         public int Mode { get; set; }
         public Queue<GameFieldState> StateQueue { get; set; }
+
+        public List<AttackStopper> AttackStoppers { get; set; }
+        public List<DamageStopper> DamageStoppers { get; set; }
     }
 }

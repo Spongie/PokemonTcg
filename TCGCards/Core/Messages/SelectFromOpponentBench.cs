@@ -11,4 +11,14 @@ namespace TCGCards.Core.Messages
 
         public int Count { get; set; }
     }
+
+    public class SelectFromYourBench : AbstractNetworkMessage
+    {
+        public SelectFromYourBench(int count)
+        {
+            Count = count;
+        }
+
+        public int Count { get; set; }
+    }
 }
