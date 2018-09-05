@@ -228,5 +228,61 @@ namespace TCGCards.Core.Tests
 
             Assert.AreEqual(activePokemon, otherPokemon.KnockedOutBy);
         }
+
+        [TestMethod]
+        public void GameState_Start()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            gameField.StartGame();
+
+            Assert.AreEqual(GameFieldState.BothSelectingActive, gameField.GameState);
+        }
+
+        [TestMethod]
+        public void GameState_Start_BothActivate_Selected()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            gameField.StartGame();
+
+            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new IPokemonCard(gameField.ActivePlayer));
+            
+            Assert.AreEqual(GameFieldState.BothSelectingActive, gameField.GameState);
+            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new IPokemonCard(gameField.NonActivePlayer));
+
+            Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
+        }
+
+        [TestMethod]
+        public void GameState_Start_BothBench_Selected()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            gameField.StartGame();
+
+            FillPlayerDecksWithJunk(gameField);
+
+            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new IPokemonCard(gameField.ActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new IPokemonCard(gameField.NonActivePlayer));
+
+            gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new IPokemonCard(gameField.ActivePlayer));
+
+            Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
+            gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new IPokemonCard(gameField.NonActivePlayer));
+
+            Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
+        }
+
+        private void FillPlayerDecksWithJunk(GameField gameField)
+        {
+            foreach (var player in gameField.Players)
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    player.Deck.Cards.Push(new IPokemonCard(player));
+                }
+            }
+        }
     }
 }

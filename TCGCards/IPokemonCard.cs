@@ -4,9 +4,9 @@ using TCGCards.Core;
 
 namespace TCGCards
 {
-    public abstract class IPokemonCard : ICard
+    public class IPokemonCard : ICard
     {
-        protected IPokemonCard(Player owner) : base(owner)
+        public IPokemonCard(Player owner) : base(owner)
         {
             AttachedEnergy = new List<IEnergyCard>();
         }

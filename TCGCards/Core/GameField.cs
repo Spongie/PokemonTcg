@@ -8,18 +8,21 @@ namespace TCGCards.Core
     {
         private const int StartingHandsize = 7;
         private const int PriceCards = 1;
+        private object lockObject = new object();
+        private HashSet<Guid> playersSetStartBench;
 
         public GameField()
         {
             Players = new List<Player>();
             StateQueue = new Queue<GameFieldState>();
+            playersSetStartBench = new HashSet<Guid>();
         }
 
         public void Init()
         {
             Players.Add(new Player());
             Players.Add(new Player());
-            ActivePlayer = Players[0];
+            ActivePlayer = Players[new Random().Next(Players.Count)];
         }
 
         public void RevealCardsTo(List<ICard> pickedCards, Player nonActivePlayer)
@@ -38,7 +41,40 @@ namespace TCGCards.Core
         {
             owner.SetActivePokemon(activePokemon);
 
-            GotoNextState();
+            lock (lockObject)
+            {
+                if (GameState == GameFieldState.BothSelectingActive)
+                {
+                    if (Players.All(p => p.ActivePokemonCard != null))
+                        GotoNextState();
+                }
+                else
+                {
+                    GotoNextState();
+                }
+            }
+        }
+
+        public void OnBenchPokemonSelected(Player owner, IPokemonCard selectedPokemon)
+        {
+            owner.SetBenchedPokemon(selectedPokemon);
+
+            if (GameState == GameFieldState.BothSelectingBench)
+            {
+                lock (lockObject)
+                {
+                    playersSetStartBench.Add(owner.Id);
+                    if (playersSetStartBench.Count == 2)
+                    {
+                        Players.ForEach(x => x.SetPrizeCards(PriceCards));
+                        GotoNextState();
+                    }
+                }
+            }
+            else
+            {
+                GotoNextState();
+            }
         }
 
         private void GotoNextState()
@@ -58,16 +94,22 @@ namespace TCGCards.Core
             {
                 player.Deck.Shuffle();
                 player.DrawCards(StartingHandsize);
-                player.SetPrizeCards(PriceCards);
             }
 
-            GameState = GameFieldState.SelectingActive;
+            GameState = GameFieldState.BothSelectingActive;
+            StateQueue.Enqueue(GameFieldState.BothSelectingBench);
+            StateQueue.Enqueue(GameFieldState.InTurn);
         }
 
         public void Attack(Attack attack)
         {
+            if (StateQueue.Any())
+                StateQueue.Dequeue();
+
+            StateQueue.Enqueue(GameFieldState.EndAttack);
+
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
-                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);
+                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer);         
 
             var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
             NonActivePlayer.ActivePokemonCard.DamageCounters += damage.DamageWithoutResistAndWeakness;
@@ -137,6 +179,9 @@ namespace TCGCards.Core
                 GameState = StateQueue.Dequeue();
             else
                 EndTurn();
+
+            if (GameState == GameFieldState.EndAttack)
+                EndTurn();
         }
 
         public void SelectPrizeCard(ICard prizeCard)
@@ -167,6 +212,7 @@ namespace TCGCards.Core
         {
             ActivePlayer.ResetTurn();
             NonActivePlayer.ResetTurn();
+            StateQueue.Clear();
 
             GameState = GameFieldState.TurnStarting;
             ActivePlayer.DrawCards(1);
@@ -177,11 +223,6 @@ namespace TCGCards.Core
         public void SwapActivePlayer()
         {
             ActivePlayer = Players.First(x => !x.Id.Equals(ActivePlayer.Id));
-        }
-
-        public void OnBothPlayersSelectedStarter()
-        {
-            GameState = GameFieldState.SelectingBench;
         }
 
         public GameFieldState GameState { get; set; }

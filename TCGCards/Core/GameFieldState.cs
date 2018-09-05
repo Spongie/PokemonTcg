@@ -4,8 +4,8 @@
     {
         WaitingForConnection,
         WaitingForRegistration,
-        SelectingActive,
-        SelectingBench,
+        BothSelectingActive,
+        BothSelectingBench,
         TurnStarting,
         ActivePlayerSelectingFromBench,
         UnActivePlayerSelectingFromBench,

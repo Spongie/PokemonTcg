@@ -27,7 +27,8 @@ namespace NetworkingServer
             {
                 { MessageTypes.RegisterForGame, OnRegister },
                 { MessageTypes.Attack, OnAttack },
-                { MessageTypes.SelectedActive, OnActiveSelected }
+                { MessageTypes.SelectedActive, OnActiveSelected },
+                { MessageTypes.SelectedBench, OnBenchedSelected }
             };
         }
 
@@ -35,7 +36,14 @@ namespace NetworkingServer
         {
             var message = Serializer.Deserialize<ActiveSelectedMessage>(networkMessage.Data);
 
-            gameField.OnActivePokemonSelected(message.Owner, message.ActivePokemon);
+            gameField.OnActivePokemonSelected(message.Owner, message.SelectedPokemon);
+        }
+
+        private void OnBenchedSelected(NetworkMessage networkMessage)
+        {
+            var message = Serializer.Deserialize<BenchSelectedMessage>(networkMessage.Data);
+
+            gameField.OnBenchPokemonSelected(message.Owner, message.SelectedPokemon);
         }
 
         private void OnAttack(NetworkMessage message)

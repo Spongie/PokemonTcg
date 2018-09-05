@@ -1,4 +1,4 @@
-﻿using TCGCards;
+﻿using Entities;
 
 namespace TeamRocket
 {

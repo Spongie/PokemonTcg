@@ -9,6 +9,7 @@
         GameUpdate,
         Attack,
         DeckSearch,
-        SelectedActive
+        SelectedActive,
+        SelectedBench
     }
 }

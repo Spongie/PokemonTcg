@@ -6,12 +6,12 @@ namespace TCGCards.Core.Messages
     {
         public ActiveSelectedMessage(IPokemonCard active, Player owner)
         {
-            ActivePokemon = active;
+            SelectedPokemon = active;
             Owner = owner;
             messageType = MessageTypes.SelectedActive;
         }
 
-        public IPokemonCard ActivePokemon { get; set; }
+        public IPokemonCard SelectedPokemon { get; set; }
         public Player Owner { get; set; }
     }
 }
