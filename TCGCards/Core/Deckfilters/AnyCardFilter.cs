@@ -2,7 +2,7 @@
 {
     public class AnyCardFilter : IDeckFilter
     {
-        public bool IsCardValid(ICard card)
+        public bool IsCardValid(Card card)
         {
             return true;
         }

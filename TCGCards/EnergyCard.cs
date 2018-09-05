@@ -1,8 +1,8 @@
 ﻿using TCGCards;
 
-public abstract class IEnergyCard : ICard
+public abstract class EnergyCard : Card
 {
-    public IEnergyCard() : base(null)
+    public EnergyCard() : base(null)
     {
     }
 

@@ -21,7 +21,7 @@ namespace TeamRocket.Attacks
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
             opponent.Deck.ShuffleInCard(opponent.ActivePokemonCard);
-            opponent.Deck.ShuffleInCards(opponent.ActivePokemonCard.AttachedEnergy.OfType<ICard>());
+            opponent.Deck.ShuffleInCards(opponent.ActivePokemonCard.AttachedEnergy.OfType<Card>());
 
             if (opponent.BenchedPokemon.Count == 1)
             {

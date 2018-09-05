@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Ponyta : IPokemonCard
+    public class Ponyta : PokemonCard
     {
         public Ponyta(Player owner) : base(owner)
         {

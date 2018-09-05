@@ -30,7 +30,7 @@ namespace TeamRocket.TrainerCards
 
         private class DeckFilter : IDeckFilter
         {
-            public bool IsCardValid(ICard card)
+            public bool IsCardValid(Card card)
             {
                 return card is TrainerCard;
             }

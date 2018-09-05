@@ -1,6 +1,6 @@
 ﻿namespace TCGCards.EnergyCards
 {
-    public class DoubleColorlessEnergy : IEnergyCard
+    public class DoubleColorlessEnergy : EnergyCard
     {
         public DoubleColorlessEnergy()
         {

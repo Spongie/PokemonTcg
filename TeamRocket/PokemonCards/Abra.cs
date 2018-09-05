@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Abra : IPokemonCard
+    public class Abra : PokemonCard
     {
         public Abra(Player owner) : base(owner)
         {

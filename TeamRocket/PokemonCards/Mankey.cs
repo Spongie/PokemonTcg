@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Mankey : IPokemonCard
+    public class Mankey : PokemonCard
     {
         public Mankey(Player owner) : base(owner)
         {

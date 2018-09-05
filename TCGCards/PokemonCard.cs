@@ -4,19 +4,19 @@ using TCGCards.Core;
 
 namespace TCGCards
 {
-    public class IPokemonCard : ICard
+    public class PokemonCard : Card
     {
-        public IPokemonCard(Player owner) : base(owner)
+        public PokemonCard(Player owner) : base(owner)
         {
-            AttachedEnergy = new List<IEnergyCard>();
+            AttachedEnergy = new List<EnergyCard>();
         }
 
         public int Hp { get; protected set; }
         public int DamageCounters { get; set; }
         public int Stage { get; set; }
         public string EvolvesFrom { get; set; }
-        public IPokemonCard EvolvedFrom { get; set; }
-        public List<IEnergyCard> AttachedEnergy { get; set; }
+        public PokemonCard EvolvedFrom { get; set; }
+        public List<EnergyCard> AttachedEnergy { get; set; }
         public EnergyTypes PokemonType { get; set; }
         public EnergyTypes Resistance { get; set; }
         public EnergyTypes Weakness { get; set; }
@@ -28,7 +28,7 @@ namespace TCGCards
         public bool IsPoisoned { get; set; }
         public bool IsAsleep { get; set; }
         public bool IsConfused { get; set; }
-        public IPokemonCard KnockedOutBy { get; set; }
+        public PokemonCard KnockedOutBy { get; set; }
         public Ability Ability { get; protected set; }
         public string PokemonName { get; protected set; }
 
@@ -51,7 +51,7 @@ namespace TCGCards
                 IsAsleep = CoinFlipper.FlipCoin();
         }
 
-        public void DiscardEnergyCard(IEnergyCard energyCard)
+        public void DiscardEnergyCard(EnergyCard energyCard)
         {
             if (energyCard != null)
             {
@@ -69,7 +69,7 @@ namespace TCGCards
             return PokemonName;
         }
 
-        public IPokemonCard Evolve(IPokemonCard evolution)
+        public PokemonCard Evolve(PokemonCard evolution)
         {
             ClearStatusEffects();
             evolution.SetBase(this);
@@ -101,12 +101,12 @@ namespace TCGCards
 
         public bool CanAttack() => !IsParalyzed && !IsAsleep;
 
-        public void SetBase(IPokemonCard target)
+        public void SetBase(PokemonCard target)
         {
             DamageCounters = target.DamageCounters;
         }
         
-        public bool CanEvolveTo(IPokemonCard evolution)
+        public bool CanEvolveTo(PokemonCard evolution)
         {
             return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
         }

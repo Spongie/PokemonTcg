@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Grimer : IPokemonCard
+    public class Grimer : PokemonCard
     {
         public Grimer(Player owner) : base(owner)
         {

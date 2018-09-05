@@ -12,9 +12,9 @@ namespace TCGCards.Core
 
         public Player()
         {
-            Hand = new List<ICard>();
-            BenchedPokemon = new List<IPokemonCard>();
-            PrizeCards = new List<ICard>();
+            Hand = new List<Card>();
+            BenchedPokemon = new List<PokemonCard>();
+            PrizeCards = new List<Card>();
             Deck = new Deck();
         }
 
@@ -26,14 +26,14 @@ namespace TCGCards.Core
             }
         }
 
-        public void DrawCardsFromDeck(IEnumerable<ICard> selectedCards)
+        public void DrawCardsFromDeck(IEnumerable<Card> selectedCards)
         {
-            Deck.Cards = new Stack<ICard>(Deck.Cards.Except(selectedCards));
+            Deck.Cards = new Stack<Card>(Deck.Cards.Except(selectedCards));
             Hand.AddRange(selectedCards);
             Deck.Shuffle();
         }
 
-        public void SetBenchedPokemon(IPokemonCard pokemon)
+        public void SetBenchedPokemon(PokemonCard pokemon)
         {
             if(BenchedPokemon.Count < MaxBenchedPokemons && pokemon.Stage == 0)
             {
@@ -47,7 +47,7 @@ namespace TCGCards.Core
             }
         }
 
-        public void ForceRetreatActivePokemon(IPokemonCard replacementPokemon)
+        public void ForceRetreatActivePokemon(PokemonCard replacementPokemon)
         {
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
@@ -56,7 +56,7 @@ namespace TCGCards.Core
             oldActivePokemon.ClearStatusEffects();
         }
 
-        public void RetreatActivePokemon(IPokemonCard replacementPokemon)
+        public void RetreatActivePokemon(PokemonCard replacementPokemon)
         {
             if(!ActivePokemonCard.CanReatreat())
                 return;
@@ -68,7 +68,7 @@ namespace TCGCards.Core
             oldActivePokemon.ClearStatusEffects();
         }
 
-        public void DrawPrizeCard(ICard prizeCard)
+        public void DrawPrizeCard(Card prizeCard)
         {
             Hand.Add(prizeCard);
             PrizeCards.Remove(prizeCard);
@@ -89,7 +89,7 @@ namespace TCGCards.Core
             }
         }
 
-        public void PlayCard(IPokemonCard card)
+        public void PlayCard(PokemonCard card)
         {
             if(ActivePokemonCard == null)
                 ActivePokemonCard = card;
@@ -97,7 +97,7 @@ namespace TCGCards.Core
                 BenchedPokemon.Add(card);
         }
         
-        public void SetActivePokemon(IPokemonCard pokemon)
+        public void SetActivePokemon(PokemonCard pokemon)
         {
             if(ActivePokemonCard != null)
                 return;
@@ -113,7 +113,7 @@ namespace TCGCards.Core
             ActivePokemonCard = pokemon;
         }
 
-        public void AttachEnergyToPokemon(IEnergyCard energyCard, IPokemonCard targetPokemonCard)
+        public void AttachEnergyToPokemon(EnergyCard energyCard, PokemonCard targetPokemonCard)
         {
             if(HasPlayedEnergy)
                 return;
@@ -143,13 +143,13 @@ namespace TCGCards.Core
             }
         }
 
-        public List<IPokemonCard> BenchedPokemon { get; set; }
+        public List<PokemonCard> BenchedPokemon { get; set; }
 
-        public IPokemonCard ActivePokemonCard { get; set; }
+        public PokemonCard ActivePokemonCard { get; set; }
 
-        public List<ICard> PrizeCards { get; set; }
+        public List<Card> PrizeCards { get; set; }
 
-        public List<ICard> DiscardPile { get; set; }
+        public List<Card> DiscardPile { get; set; }
 
         public Deck Deck { get; set; }
 
@@ -159,7 +159,7 @@ namespace TCGCards.Core
             NetworkPlayer = networkPlayer;
         }
 
-        public List<ICard> Hand { get; set; }
+        public List<Card> Hand { get; set; }
         public Guid Id { get; set; }
         public NetworkPlayer NetworkPlayer { get; private set; }
 

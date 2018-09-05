@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Magikarp : IPokemonCard
+    public class Magikarp : PokemonCard
     {
         public Magikarp() :this(null)
         {

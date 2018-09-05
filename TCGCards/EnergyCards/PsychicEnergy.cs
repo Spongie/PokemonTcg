@@ -1,6 +1,6 @@
 ﻿namespace TCGCards.EnergyCards
 {
-    public class PsychicEnergy : IEnergyCard
+    public class PsychicEnergy : EnergyCard
     {
         public PsychicEnergy()
         {

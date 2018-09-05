@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Voltorb : IPokemonCard
+    public class Voltorb : PokemonCard
     {
         public Voltorb(Player owner) : base(owner)
         {

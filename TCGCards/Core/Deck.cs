@@ -9,29 +9,29 @@ namespace TCGCards.Core
     {
         public Deck()
         {
-            Cards = new Stack<ICard>();
+            Cards = new Stack<Card>();
         }
 
-        public Stack<ICard> Cards { get; set; }
+        public Stack<Card> Cards { get; set; }
 
         public void Shuffle()
         {
             var random = new Random();
-            Cards = new Stack<ICard>(Cards.OrderBy(x => random.Next(10000)));
+            Cards = new Stack<Card>(Cards.OrderBy(x => random.Next(10000)));
         }
 
-        public ICard DrawCard()
+        public Card DrawCard()
         {
             return Cards.Pop();
         }
 
-        public void ShuffleInCard(ICard card)
+        public void ShuffleInCard(Card card)
         {
             Cards.Push(card);
             Shuffle();
         }
 
-        public void ShuffleInCards(IEnumerable<ICard> cards)
+        public void ShuffleInCards(IEnumerable<Card> cards)
         {
             foreach (var card in cards)
             {

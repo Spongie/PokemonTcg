@@ -6,7 +6,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Rattata : IPokemonCard
+    public class Rattata : PokemonCard
     {
         protected Rattata(Player owner) : base(owner)
         {

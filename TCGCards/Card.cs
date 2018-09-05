@@ -4,11 +4,11 @@ using TCGCards.Core;
 
 namespace TCGCards
 {
-    public abstract class ICard
+    public abstract class Card
     {
         protected string _Name;
 
-        protected ICard(Player owner)
+        protected Card(Player owner)
         {
             Id = Guid.NewGuid();
             Owner = owner;
@@ -24,7 +24,7 @@ namespace TCGCards
 
         public override bool Equals(object obj)
         {
-            var item = obj as ICard;
+            var item = obj as Card;
 
             if(item == null)
             {

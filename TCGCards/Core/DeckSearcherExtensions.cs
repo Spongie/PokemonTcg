@@ -6,7 +6,7 @@ namespace TCGCards.Core
 {
     public static class DeckSearcherExtensions
     {
-        public static List<ICard> TriggerDeckSearch(this IDeckSearcher deckSearcher, Player owner)
+        public static List<Card> TriggerDeckSearch(this IDeckSearcher deckSearcher, Player owner)
         {
             var message = new DeckSearchMessage(owner, deckSearcher.GetDeckFilters(), deckSearcher.GetNumberOfCards());
             var response = owner.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(message.ToNetworkMessage(owner.Id));

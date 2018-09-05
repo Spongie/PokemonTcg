@@ -2,6 +2,6 @@
 {
     public interface IDeckFilter
     {
-        bool IsCardValid(ICard card);
+        bool IsCardValid(Card card);
     }
 }

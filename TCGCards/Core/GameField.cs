@@ -25,7 +25,7 @@ namespace TCGCards.Core
             ActivePlayer = Players[new Random().Next(Players.Count)];
         }
 
-        public void RevealCardsTo(List<ICard> pickedCards, Player nonActivePlayer)
+        public void RevealCardsTo(List<Card> pickedCards, Player nonActivePlayer)
         {
             //TODO: Complete this
         }
@@ -37,7 +37,7 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
         }
 
-        public void OnActivePokemonSelected(Player owner, IPokemonCard activePokemon)
+        public void OnActivePokemonSelected(Player owner, PokemonCard activePokemon)
         {
             owner.SetActivePokemon(activePokemon);
 
@@ -55,7 +55,7 @@ namespace TCGCards.Core
             }
         }
 
-        public void OnBenchPokemonSelected(Player owner, IPokemonCard selectedPokemon)
+        public void OnBenchPokemonSelected(Player owner, PokemonCard selectedPokemon)
         {
             owner.SetBenchedPokemon(selectedPokemon);
 
@@ -120,7 +120,7 @@ namespace TCGCards.Core
             PostAttack();
         }
 
-        private int GetDamageAfterWeaknessAndResistance(int damage, IPokemonCard attacker, IPokemonCard defender)
+        private int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender)
         {
             int realDamage = damage;
 
@@ -142,7 +142,7 @@ namespace TCGCards.Core
             CheckEndTurn();
         }
 
-        public void PlayPokemon(IPokemonCard pokemon)
+        public void PlayPokemon(PokemonCard pokemon)
         {
             ActivePlayer.PlayCard(pokemon);
 
@@ -184,7 +184,7 @@ namespace TCGCards.Core
                 EndTurn();
         }
 
-        public void SelectPrizeCard(ICard prizeCard)
+        public void SelectPrizeCard(Card prizeCard)
         {
             if(GameState == GameFieldState.ActivePlayerSelectingPrize)
                 ActivePlayer.DrawPrizeCard(prizeCard);

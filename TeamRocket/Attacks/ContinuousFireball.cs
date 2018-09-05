@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            IPokemonCard caster = owner.ActivePokemonCard;
+            PokemonCard caster = owner.ActivePokemonCard;
             int headsCount = CoinFlipper.FlipCoins(caster.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Fire));
 
             for (int i = 0; i < headsCount; i++)

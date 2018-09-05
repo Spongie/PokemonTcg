@@ -15,7 +15,7 @@ namespace TCGCards.Tests
         }
     }
 
-    class TestPokemon : IPokemonCard
+    class TestPokemon : PokemonCard
     {
         public TestPokemon(Player owner) : base(owner)
         {
@@ -63,7 +63,7 @@ namespace TCGCards.Tests
                     }
                 }
             };
-            pokemon.AttachedEnergy = new List<IEnergyCard>
+            pokemon.AttachedEnergy = new List<EnergyCard>
             {
                 new FireEnergy(),
                 new FireEnergy()
@@ -89,7 +89,7 @@ namespace TCGCards.Tests
                     }
                 }
             };
-            pokemon.AttachedEnergy = new List<IEnergyCard>
+            pokemon.AttachedEnergy = new List<EnergyCard>
             {
                 new FireEnergy(),
                 new DoubleColorlessEnergy()
@@ -115,7 +115,7 @@ namespace TCGCards.Tests
                     }
                 }
             };
-            pokemon.AttachedEnergy = new List<IEnergyCard>
+            pokemon.AttachedEnergy = new List<EnergyCard>
             {
                 new FireEnergy(),
                 new WaterEnergy()

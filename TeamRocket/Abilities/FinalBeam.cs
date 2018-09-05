@@ -6,7 +6,7 @@ namespace TeamRocket.Abilities
 {
     public class FinalBeam : Ability
     {
-        public FinalBeam(IPokemonCard owner) : base(owner)
+        public FinalBeam(PokemonCard owner) : base(owner)
         {
             TriggerType = TriggerType.Dies;
         }
@@ -24,7 +24,7 @@ namespace TeamRocket.Abilities
                 Owner.KnockedOutBy.KnockedOutBy = Owner;
         }
 
-        public override void SetTarget(ICard target)
+        public override void SetTarget(Card target)
         {
             
         }

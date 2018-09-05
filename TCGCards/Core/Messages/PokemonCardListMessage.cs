@@ -5,11 +5,11 @@ namespace TCGCards.Core.Messages
 {
     public class PokemonCardListMessage : AbstractNetworkMessage
     {
-        public PokemonCardListMessage(List<IPokemonCard> pokemons)
+        public PokemonCardListMessage(List<PokemonCard> pokemons)
         {
-            Pokemons = new List<IPokemonCard>(pokemons);
+            Pokemons = new List<PokemonCard>(pokemons);
         }
 
-        public List<IPokemonCard> Pokemons { get; set; }
+        public List<PokemonCard> Pokemons { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TeamRocket.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            List<ICard> selectedCards = this.TriggerDeckSearch(caster);
+            List<Card> selectedCards = this.TriggerDeckSearch(caster);
             game.ActivePlayer.DrawCardsFromDeck(selectedCards);
             game.RevealCardsTo(selectedCards, game.NonActivePlayer);
         }

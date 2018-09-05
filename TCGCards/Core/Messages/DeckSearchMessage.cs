@@ -15,13 +15,13 @@ namespace TCGCards.Core.Messages
             Player = player;
             Filters = filters;
             CardCount = cardCount;
-            PickedCards = new List<ICard>();
+            PickedCards = new List<Card>();
             messageType = MessageTypes.DeckSearch;
         }
 
         public Player Player { get; }
         public List<IDeckFilter> Filters { get; }
         public int CardCount { get; }
-        public List<ICard> PickedCards { get; set; }
+        public List<Card> PickedCards { get; set; }
     }
 }

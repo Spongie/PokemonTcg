@@ -43,7 +43,7 @@ namespace TeamRocket.Attacks
 
         private class AfternoonNapDeckFilter : IDeckFilter
         {
-            public bool IsCardValid(ICard card)
+            public bool IsCardValid(Card card)
             {
                 return card is PsychicEnergy;
             }

@@ -8,7 +8,7 @@ namespace TeamRocket.Abilities
 {
     public class Trickery : Ability
     {
-        public Trickery(IPokemonCard owner) : base(owner)
+        public Trickery(PokemonCard owner) : base(owner)
         {
             TriggerType = TriggerType.Activation;
         }
@@ -27,11 +27,11 @@ namespace TeamRocket.Abilities
             owner.Deck.Cards.Push(selectedCard);
         }
 
-        public override void SetTarget(ICard target)
+        public override void SetTarget(Card target)
         {
             Target = target;
         }
 
-        public ICard Target { get; private set; }
+        public Card Target { get; private set; }
     }
 }

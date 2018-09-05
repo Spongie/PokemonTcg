@@ -6,12 +6,12 @@ namespace TCGCards.Core.Messages
 {
     public class AttachEnergyCardsToBenchMessage : AbstractNetworkMessage
     {
-        public AttachEnergyCardsToBenchMessage(List<IEnergyCard> energyCards)
+        public AttachEnergyCardsToBenchMessage(List<EnergyCard> energyCards)
         {
             EnergyCards = energyCards;
         }
 
-        public List<IEnergyCard> EnergyCards { get; set; }
+        public List<EnergyCard> EnergyCards { get; set; }
     }
 
     public class AttachedEnergyDoneMessage : AbstractNetworkMessage

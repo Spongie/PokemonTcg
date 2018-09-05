@@ -2,9 +2,9 @@
 {
     public class EnergyFilter : IDeckFilter
     {
-        public bool IsCardValid(ICard card)
+        public bool IsCardValid(Card card)
         {
-            return card is IEnergyCard;
+            return card is EnergyCard;
         }
     }
 }

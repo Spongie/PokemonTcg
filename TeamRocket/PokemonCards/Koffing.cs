@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Koffing : IPokemonCard
+    public class Koffing : PokemonCard
     {
         public Koffing(Player owner) : base(owner)
         {

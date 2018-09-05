@@ -34,18 +34,18 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            List<ICard> selectedCards = this.TriggerDeckSearch(owner);
+            List<Card> selectedCards = this.TriggerDeckSearch(owner);
 
-            IPokemonCard evolution = owner.ActivePokemonCard.Evolve((IPokemonCard)selectedCards.First());
+            PokemonCard evolution = owner.ActivePokemonCard.Evolve((PokemonCard)selectedCards.First());
             owner.ActivePokemonCard = evolution;
         }
     }
 
     internal class RapidEvolutionDeckFilter : IDeckFilter
     {
-        public bool IsCardValid(ICard card)
+        public bool IsCardValid(Card card)
         {
-            return card is IPokemonCard && ((IPokemonCard)card).EvolvesFrom == PokemonNames.Magikarp;
+            return card is PokemonCard && ((PokemonCard)card).EvolvesFrom == PokemonNames.Magikarp;
         }
     }
 }

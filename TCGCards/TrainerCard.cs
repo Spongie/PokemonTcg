@@ -2,7 +2,7 @@
 
 namespace TCGCards
 {
-    public abstract class TrainerCard : ICard
+    public abstract class TrainerCard : Card
     {
         public TrainerCard() : base(null)
         {

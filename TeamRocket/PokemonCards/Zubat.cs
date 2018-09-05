@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Zubat : IPokemonCard
+    public class Zubat : PokemonCard
     {
         public Zubat(Player owner) : base(owner)
         {

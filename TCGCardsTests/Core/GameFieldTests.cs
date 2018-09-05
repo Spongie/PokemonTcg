@@ -195,13 +195,13 @@ namespace TCGCards.Core.Tests
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
             gameField.ActivePlayer.Hand.Add(new WaterEnergy());
 
-            IPokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
-            IPokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
+            PokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
+            PokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
 
             var originalActive = activePokemon;
             var activeEvolution = new DarkGyarados(gameField.ActivePlayer);
 
-            IPokemonCard evolution = activePokemon.Evolve(activeEvolution);
+            PokemonCard evolution = activePokemon.Evolve(activeEvolution);
             activePokemon = evolution;
 
             Assert.AreEqual(activePokemon, activeEvolution);
@@ -217,8 +217,8 @@ namespace TCGCards.Core.Tests
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
             gameField.ActivePlayer.Hand.Add(new WaterEnergy());
 
-            IPokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
-            IPokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
+            PokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
+            PokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
 
             gameField.ActivePlayer.SetActivePokemon(activePokemon);
             gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
@@ -246,10 +246,10 @@ namespace TCGCards.Core.Tests
             gameField.InitTest();
             gameField.StartGame();
 
-            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new IPokemonCard(gameField.ActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
             
             Assert.AreEqual(GameFieldState.BothSelectingActive, gameField.GameState);
-            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new IPokemonCard(gameField.NonActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
 
             Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
         }
@@ -263,13 +263,13 @@ namespace TCGCards.Core.Tests
 
             FillPlayerDecksWithJunk(gameField);
 
-            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new IPokemonCard(gameField.ActivePlayer));
-            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new IPokemonCard(gameField.NonActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
 
-            gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new IPokemonCard(gameField.ActivePlayer));
+            gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
 
             Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
-            gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new IPokemonCard(gameField.NonActivePlayer));
+            gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
 
             Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
         }
@@ -280,7 +280,7 @@ namespace TCGCards.Core.Tests
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    player.Deck.Cards.Push(new IPokemonCard(player));
+                    player.Deck.Cards.Push(new PokemonCard(player));
                 }
             }
         }

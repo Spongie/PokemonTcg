@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Charmander : IPokemonCard
+    public class Charmander : PokemonCard
     {
         public Charmander(Player owner) : base(owner)
         {

@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Squirtle : IPokemonCard
+    public class Squirtle : PokemonCard
     {
         protected Squirtle(Player owner) : base(owner)
         {

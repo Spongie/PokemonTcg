@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class DarkVileplume : IPokemonCard
+    public class DarkVileplume : PokemonCard
     {
         public DarkVileplume(Player owner) : base(owner)
         {

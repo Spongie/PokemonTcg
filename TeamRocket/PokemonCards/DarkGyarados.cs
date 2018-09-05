@@ -6,7 +6,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class DarkGyarados : IPokemonCard
+    public class DarkGyarados : PokemonCard
     {
         public DarkGyarados() : this(null)
         {

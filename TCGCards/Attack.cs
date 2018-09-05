@@ -25,13 +25,13 @@ namespace TCGCards
 
         public virtual bool CanBeUsed(GameField game, Player owner, Player opponent)
         {
-            var availableEnergy = new List<IEnergyCard>(owner.ActivePokemonCard.AttachedEnergy).OrderBy(card => card.IsBasic).ToList();
+            var availableEnergy = new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy).OrderBy(card => card.IsBasic).ToList();
 
             foreach (var energy in Cost.OrderByDescending(cost => cost.EnergyType != EnergyTypes.Colorless))
             {
                 for (int i = 0; i < energy.Amount; i+=0)
                 {
-                    IEnergyCard energyCard = energy.EnergyType == EnergyTypes.Colorless ?
+                    EnergyCard energyCard = energy.EnergyType == EnergyTypes.Colorless ?
                         availableEnergy.FirstOrDefault()
                         : availableEnergy.FirstOrDefault(card => card.EnergyType == energy.EnergyType);
 

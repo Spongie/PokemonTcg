@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Magnemite : IPokemonCard
+    public class Magnemite : PokemonCard
     {
         public Magnemite(Player owner) : base(owner)
         {

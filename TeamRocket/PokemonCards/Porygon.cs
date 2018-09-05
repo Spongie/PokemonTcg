@@ -5,7 +5,7 @@ using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
 {
-    public class Porygon : IPokemonCard
+    public class Porygon : PokemonCard
     {
         public Porygon(Player owner) : base(owner)
         {
