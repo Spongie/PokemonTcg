@@ -119,13 +119,12 @@ namespace TCGCards.Core
                 if (!DamageStoppers.Any(x => x.IsDamageIgnored()))
                 {
                     var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
-                    var normalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
+                    damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
-                    NonActivePlayer.ActivePokemonCard.DamageCounters += damage.DamageWithoutResistAndWeakness;
-                    NonActivePlayer.ActivePokemonCard.DamageCounters += normalDamage;
+                    NonActivePlayer.ActivePokemonCard.DealDamage(damage);
 
                     if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage)
-                        NonActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, normalDamage + damage.DamageWithoutResistAndWeakness);
+                        NonActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
                 }
 
                 attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);

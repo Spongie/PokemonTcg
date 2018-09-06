@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards
 {
@@ -10,6 +11,7 @@ namespace TCGCards
         {
             AttachedEnergy = new List<EnergyCard>();
             TemporaryAbilities = new List<TemporaryAbility>();
+            DamageStoppers = new List<DamageStopper>();
         }
 
         public int Hp { get; protected set; }
@@ -33,6 +35,7 @@ namespace TCGCards
         public Ability Ability { get; protected set; }
         public List<TemporaryAbility> TemporaryAbilities { get; set; }
         public string PokemonName { get; protected set; }
+        public List<DamageStopper> DamageStoppers { get; set; }
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
@@ -56,6 +59,18 @@ namespace TCGCards
 
             if(IsAsleep)
                 IsAsleep = CoinFlipper.FlipCoin();
+
+            DamageStoppers.ForEach(x => x.TurnsLeft--);
+            DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
+        }
+
+        public void DealDamage(Damage damage)
+        {
+            if (DamageStoppers.Any(x => x.IsDamageIgnored()))
+                return;
+
+            DamageCounters += damage.DamageWithoutResistAndWeakness;
+            DamageCounters += damage.NormalDamage;
         }
 
         public void DiscardEnergyCard(EnergyCard energyCard)

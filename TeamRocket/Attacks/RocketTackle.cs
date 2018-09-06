@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TeamRocket.Attacks
 {
@@ -20,9 +21,19 @@ namespace TeamRocket.Attacks
         public override Damage GetDamage(Player owner, Player opponent)
         {
             owner.ActivePokemonCard.DamageCounters += 10;
-
+            
             return 40;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!CoinFlipper.FlipCoin())
+                return;
+
+            owner.ActivePokemonCard.DamageStoppers.Add(new DamageStopper(() =>
+            {
+                return true;
+            }));
+        }
     }
 }
