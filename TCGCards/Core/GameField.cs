@@ -216,6 +216,7 @@ namespace TCGCards.Core
         public void EndTurn()
         {
             ActivePlayer.EndTurn();
+            NonActivePlayer.EndTurn();
             CheckDeadPokemon();
 
             if(StateQueue.Any())
