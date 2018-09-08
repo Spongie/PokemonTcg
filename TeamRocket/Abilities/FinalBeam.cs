@@ -13,15 +13,15 @@ namespace TeamRocket.Abilities
 
         public override void Activate(Player player, Player opponent, int damageTake)
         {
-            if(Owner.IsAsleep || Owner.IsParalyzed || Owner.IsConfused)
+            if(PokemonOwner.IsAsleep || PokemonOwner.IsParalyzed || PokemonOwner.IsConfused)
                 return;
 
-            var damage = Owner.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water);
+            var damage = PokemonOwner.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water);
 
-            Owner.KnockedOutBy.DamageCounters += damage * 20;
+            PokemonOwner.KnockedOutBy.DamageCounters += damage * 20;
 
-            if(Owner.KnockedOutBy.IsDead())
-                Owner.KnockedOutBy.KnockedOutBy = Owner;
+            if(PokemonOwner.KnockedOutBy.IsDead())
+                PokemonOwner.KnockedOutBy.KnockedOutBy = PokemonOwner;
         }
 
         public override void SetTarget(Card target)

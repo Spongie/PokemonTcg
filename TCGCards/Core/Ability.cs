@@ -2,9 +2,9 @@
 {
     public abstract class Ability
     {
-        protected Ability(PokemonCard owner)
+        protected Ability(PokemonCard pokemonOwner)
         {
-            Owner = owner;
+            PokemonOwner = pokemonOwner;
         }
 
         public abstract void Activate(Player owner, Player opponent, int damageTaken);
@@ -13,6 +13,6 @@
 
         public TriggerType TriggerType { get; protected set; }
 
-        public PokemonCard Owner { get; protected set; }       
+        public PokemonCard PokemonOwner { get; protected set; }       
     }
 }
