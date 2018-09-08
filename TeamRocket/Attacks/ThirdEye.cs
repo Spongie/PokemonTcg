@@ -27,9 +27,9 @@ namespace TeamRocket.Attacks
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
             var message = new PickFromListMessage(owner.ActivePokemonCard.AttachedEnergy, new EnergyFilter(), 1).ToNetworkMessage(owner.Id);
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(message);
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            owner.ActivePokemonCard.DiscardEnergyCard(response.SelectedCards.OfType<EnergyCard>().First());
+            owner.ActivePokemonCard.DiscardEnergyCard(response.Cards.OfType<EnergyCard>().First());
             owner.DrawCards(3);
         }
     }

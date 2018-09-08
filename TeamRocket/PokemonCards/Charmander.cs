@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TeamRocket.Abilities;
 using TeamRocket.Attacks;
 
 namespace TeamRocket.PokemonCards
@@ -20,7 +21,7 @@ namespace TeamRocket.PokemonCards
             {
 				new FireTail()
             };
-			//TODO: Pokemon power
+            Ability = new GatherFire(this);
         }
     }
 }

@@ -9,13 +9,13 @@ namespace TCGCards.Core
         public static List<Card> TriggerDeckSearch(this IDeckSearcher deckSearcher, Player owner)
         {
             var message = new DeckSearchMessage(owner, deckSearcher.GetDeckFilters(), deckSearcher.GetNumberOfCards());
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(message.ToNetworkMessage(owner.Id));
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(owner.Id));
 
-            if (response.SelectedCards.Count != deckSearcher.GetNumberOfCards())
+            if (response.Cards.Count != deckSearcher.GetNumberOfCards())
                 throw new Exception("Cheating!?");
 
             owner.Deck.Shuffle();
-            return response.SelectedCards;
+            return response.Cards;
         }
     }
 }

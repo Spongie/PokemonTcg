@@ -2,11 +2,7 @@
 using DataLayer.Queries;
 using Entities;
 using NetworkingCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using TCGCards.Core;
 
 namespace Server.Services
 {

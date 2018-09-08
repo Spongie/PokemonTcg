@@ -16,13 +16,13 @@ namespace TeamRocket.TrainerCards
         public override void Process(GameField game, Player caster, Player opponent)
         {
             var message = new PickFromListMessage(opponent.Hand, new List<IDeckFilter> { new DeckFilter() }, 1);
-            var response = caster.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(message.ToNetworkMessage(caster.Id));
+            var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(caster.Id));
 
-            var pickedCard = response.SelectedCards.FirstOrDefault();
+            var pickedCard = response.Cards.FirstOrDefault();
 
             if (pickedCard != null)
             {
-                opponent.Hand = opponent.Hand.Except(response.SelectedCards).ToList();
+                opponent.Hand = opponent.Hand.Except(response.Cards).ToList();
                 opponent.Deck.Cards.Push(pickedCard);
                 opponent.Deck.Shuffle();
             }

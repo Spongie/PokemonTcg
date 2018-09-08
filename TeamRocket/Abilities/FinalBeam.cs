@@ -11,7 +11,7 @@ namespace TeamRocket.Abilities
             TriggerType = TriggerType.Dies;
         }
 
-        public override void Activate(Player player, Player opponent, int damageTake)
+        protected override void Activate(Player player, Player opponent, int damageTake)
         {
             if(PokemonOwner.IsAsleep || PokemonOwner.IsParalyzed || PokemonOwner.IsConfused)
                 return;
@@ -22,11 +22,6 @@ namespace TeamRocket.Abilities
 
             if(PokemonOwner.KnockedOutBy.IsDead())
                 PokemonOwner.KnockedOutBy.KnockedOutBy = PokemonOwner;
-        }
-
-        public override void SetTarget(Card target)
-        {
-            
         }
     }
 }

@@ -29,9 +29,9 @@ namespace TeamRocket.Attacks
             if (!opponent.ActivePokemonCard.AttachedEnergy.Any(x => x.IsBasic) || !opponent.BenchedPokemon.Any())
                 return;
 
-            var selectedEnergyMessage = owner.NetworkPlayer.SendAndWaitForResponse<DeckSearchedMessage>(new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy.OfType<Card>(), new BasicEnergyFilter(), 1).ToNetworkMessage(owner.Id));
+            var selectedEnergyMessage = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy.OfType<Card>(), new BasicEnergyFilter(), 1).ToNetworkMessage(owner.Id));
             var selectedPokemonMessage = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
-            var selectedEnergy = selectedEnergyMessage.SelectedCards.OfType<EnergyCard>().First();
+            var selectedEnergy = selectedEnergyMessage.Cards.OfType<EnergyCard>().First();
 
             selectedPokemonMessage.Pokemons.First().AttachedEnergy.Add(selectedEnergy);
             opponent.ActivePokemonCard.AttachedEnergy.Remove(selectedEnergy);

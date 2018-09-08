@@ -14,7 +14,7 @@ namespace TeamRocket.Abilities
             TriggerType = TriggerType.Activation;
         }
 
-        public override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken)
         {
             var availablePokemons = new List<PokemonCard>(owner.BenchedPokemon);
             availablePokemons.Add(owner.ActivePokemonCard);
@@ -38,11 +38,6 @@ namespace TeamRocket.Abilities
                     break;
                 }
             }
-        }
-
-        public override void SetTarget(Card target)
-        {
-            
         }
     }
 }

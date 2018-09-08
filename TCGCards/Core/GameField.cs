@@ -7,8 +7,9 @@ namespace TCGCards.Core
 {
     public class GameField
     {
-        private const int StartingHandsize = 7;
-        private const int PriceCards = 1;
+        public const int StartingHandsize = 7;
+        public const int PriceCards = 1;
+        public const int ConfusedDamage = 30;
         private object lockObject = new object();
         private HashSet<Guid> playersSetStartBench;
 
@@ -56,6 +57,14 @@ namespace TCGCards.Core
                     GotoNextState();
                 }
             }
+        }
+
+        public void OnPokemonRetreated(PokemonCard replacementCard)
+        {
+            if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.OpponentRetreats)
+                NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
+
+            ActivePlayer.RetreatActivePokemon(replacementCard);
         }
 
         public void OnBenchPokemonSelected(Player owner, PokemonCard selectedPokemon)
@@ -111,8 +120,23 @@ namespace TCGCards.Core
 
             StateQueue.Enqueue(GameFieldState.EndAttack);
 
+            if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
+            {
+                ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage));
+
+                if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage)
+                {
+                    ActivePlayer.ActivePokemonCard.Ability.SetTarget(ActivePlayer.ActivePokemonCard);
+                    ActivePlayer.ActivePokemonCard.Ability.Trigger(ActivePlayer, NonActivePlayer, 30);
+                    ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
+                }
+
+                PostAttack();
+                return;
+            }
+
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
-                ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
+                ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
 
             if (!AttackStoppers.Any(x => x.IsAttackIgnored()) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored()))
             {
@@ -123,8 +147,10 @@ namespace TCGCards.Core
 
                     NonActivePlayer.ActivePokemonCard.DealDamage(damage);
 
-                    if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage)
-                        NonActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
+                    if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
+                        NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
+                    if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage && !damage.IsZero())
+                        ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
                 }
 
                 attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
@@ -166,7 +192,7 @@ namespace TCGCards.Core
             ActivePlayer.PlayCard(pokemon);
 
             if(pokemon.Ability?.TriggerType == TriggerType.EnterPlay)
-                pokemon.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
+                pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
         }
 
         private void CheckDeadPokemon()
@@ -176,9 +202,9 @@ namespace TCGCards.Core
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
                 if(NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
-                    NonActivePlayer.ActivePokemonCard.Ability?.Activate(NonActivePlayer, ActivePlayer, 0);
+                    NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
                 if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Kills)
-                    ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
+                    ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
                 StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);

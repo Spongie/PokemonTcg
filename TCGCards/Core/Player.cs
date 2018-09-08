@@ -26,6 +26,21 @@ namespace TCGCards.Core
             }
         }
 
+        public void DiscardCards(IEnumerable<Card> cards)
+        {
+            DiscardPile.AddRange(cards);
+            foreach (var card in cards)
+            {
+                Hand.Remove(card);
+            }
+        }
+
+        public void DiscardCard(Card card)
+        {
+            DiscardPile.Add(card);
+            Hand.Remove(card);
+        }
+
         public void DrawCardsFromDeck(IEnumerable<Card> selectedCards)
         {
             Deck.Cards = new Stack<Card>(Deck.Cards.Except(selectedCards));

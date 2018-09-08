@@ -5,11 +5,6 @@ namespace TCGCards.Core.Messages
 {
     public class DeckSearchMessage : AbstractNetworkMessage
     {
-        public DeckSearchMessage(DeckSearchEventHandler deckSearchEvent) : this(deckSearchEvent.Player, deckSearchEvent.Filters, deckSearchEvent.CardCount)
-        {
-
-        }
-
         public DeckSearchMessage(Player player, List<IDeckFilter> filters, int cardCount)
         {
             Player = player;

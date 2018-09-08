@@ -17,7 +17,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.KnockedOutBy = otherPokemon;
 
-            activePokemon.Ability.Activate(null, null, 0);
+            activePokemon.Ability.Trigger(null, null, 0);
 
             Assert.AreEqual(0, otherPokemon.DamageCounters);
         }
@@ -32,7 +32,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.KnockedOutBy = otherPokemon;
 
-            activePokemon.Ability.Activate(null, null, 0);
+            activePokemon.Ability.Trigger(null, null, 0);
 
             Assert.AreEqual(0, otherPokemon.DamageCounters);
         }
@@ -47,7 +47,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.KnockedOutBy = otherPokemon;
 
-            activePokemon.Ability.Activate(null, null, 0);
+            activePokemon.Ability.Trigger(null, null, 0);
 
             Assert.AreEqual(0, otherPokemon.DamageCounters);
         }
@@ -61,7 +61,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.KnockedOutBy = otherPokemon;
 
-            activePokemon.Ability.Activate(null, null, 0);
+            activePokemon.Ability.Trigger(null, null, 0);
 
             Assert.AreEqual(20, otherPokemon.DamageCounters);
         }
@@ -76,7 +76,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.KnockedOutBy = otherPokemon;
 
-            activePokemon.Ability.Activate(null, null, 0);
+            activePokemon.Ability.Trigger(null, null, 0);
 
             Assert.AreEqual(40, otherPokemon.DamageCounters);
         }

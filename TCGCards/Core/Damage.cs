@@ -27,5 +27,10 @@ namespace TCGCards.Core
         {
             return new Damage(value);
         }
+
+        internal bool IsZero()
+        {
+            return NormalDamage == 0 && DamageWithoutResistAndWeakness == 0;
+        }
     }
 }

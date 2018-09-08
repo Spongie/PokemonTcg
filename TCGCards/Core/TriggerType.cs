@@ -5,8 +5,10 @@
         Activation,
         EnterPlay,
         Attacks,
+        DealsDamage,
         TakesDamage,
         Dies,
-        Kills
+        Kills,
+        OpponentRetreats
     }
 }
