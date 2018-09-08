@@ -24,9 +24,9 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            game.AttackStoppers.Add(new AttackStopper(() =>
+            opponent.ActivePokemonCard.AttackStoppers.Add(new AttackStopper(() =>
             {
-                return CoinFlipper.FlipCoin();
+                return CoinFlipper.FlipCoin() == CoinFlipper.TAILS;
             }));
         }
     }

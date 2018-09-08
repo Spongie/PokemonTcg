@@ -114,7 +114,7 @@ namespace TCGCards.Core
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
                 ActivePlayer.ActivePokemonCard.Ability?.Activate(ActivePlayer, NonActivePlayer, 0);
 
-            if (!AttackStoppers.Any(x => x.IsAttackIgnored()))
+            if (!AttackStoppers.Any(x => x.IsAttackIgnored()) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored()))
             {
                 if (!DamageStoppers.Any(x => x.IsDamageIgnored()))
                 {

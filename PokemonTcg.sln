@@ -29,11 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTests", "ServerTests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProxyGenerator", "ProxyGenerator\ProxyGenerator.csproj", "{D3D273B9-1D2D-4BA4-84EF-6664FE216D3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerProxy", "ServerProxy\ServerProxy.csproj", "{5E994A8D-087B-4005-8742-5D7D5DA83A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProxy", "ServerProxy\ServerProxy.csproj", "{5E994A8D-087B-4005-8742-5D7D5DA83A37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{C9CF8745-0F23-4C75-91B8-D5B96433A723}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{C9CF8745-0F23-4C75-91B8-D5B96433A723}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{44CD12B7-4826-4793-A4FE-8153391D7189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{44CD12B7-4826-4793-A4FE-8153391D7189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamRocketTests", "TeamRocketTests\TeamRocketTests.csproj", "{FC067346-7D77-4193-913C-D47A541ED7F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +173,14 @@ Global
 		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|x86.ActiveCfg = Release|Any CPU
 		{44CD12B7-4826-4793-A4FE-8153391D7189}.Release|x86.Build.0 = Release|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC067346-7D77-4193-913C-D47A541ED7F4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,8 +42,8 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetActivePokemon(card2);
 
-            Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
-            Assert.IsTrue(p.BenchedPokemon.Any());
+            Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
+            Assert.IsFalse(p.BenchedPokemon.Any());
         }
 
         [TestMethod]

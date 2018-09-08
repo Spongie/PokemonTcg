@@ -12,6 +12,7 @@ namespace TCGCards
             AttachedEnergy = new List<EnergyCard>();
             TemporaryAbilities = new List<TemporaryAbility>();
             DamageStoppers = new List<DamageStopper>();
+            AttackStoppers = new List<AttackStopper>();
         }
 
         public int Hp { get; protected set; }
@@ -36,6 +37,7 @@ namespace TCGCards
         public List<TemporaryAbility> TemporaryAbilities { get; set; }
         public string PokemonName { get; protected set; }
         public List<DamageStopper> DamageStoppers { get; set; }
+        public List<AttackStopper> AttackStoppers { get; set; }
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
@@ -62,6 +64,9 @@ namespace TCGCards
 
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
+
+            AttackStoppers.ForEach(x => x.TurnsLeft--);
+            AttackStoppers = AttackStoppers.Where(x => x.TurnsLeft > 0).ToList();
         }
 
         public void DealDamage(Damage damage)

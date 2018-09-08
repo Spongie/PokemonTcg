@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TeamRocket.Attacks
 {
-    internal class Sandattack : Attack
+    public class Sandattack : Attack
     {
         public Sandattack()
         {
@@ -20,6 +21,13 @@ namespace TeamRocket.Attacks
         {
             return 10;
         }
-		//TODO:
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            opponent.ActivePokemonCard.AttackStoppers.Add(new AttackStopper(() =>
+            {
+                return CoinFlipper.FlipCoin() == CoinFlipper.TAILS;
+            }));
+        }
     }
 }
