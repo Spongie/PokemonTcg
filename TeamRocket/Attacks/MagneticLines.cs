@@ -33,7 +33,7 @@ namespace TeamRocket.Attacks
             var selectedPokemonMessage = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
             var selectedEnergy = selectedEnergyMessage.Cards.OfType<EnergyCard>().First();
 
-            selectedPokemonMessage.Pokemons.First().AttachedEnergy.Add(selectedEnergy);
+            opponent.AttachEnergyToPokemon(selectedEnergy, selectedPokemonMessage.Pokemons.First());
             opponent.ActivePokemonCard.AttachedEnergy.Remove(selectedEnergy);
         }
     }

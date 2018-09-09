@@ -16,5 +16,7 @@
         {
             return "Grass Energy";
         }
+
+        public override void OnAttached(PokemonCard attachedTo, bool fromHand) { }
     }
 }

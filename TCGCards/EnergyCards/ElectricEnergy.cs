@@ -16,5 +16,7 @@
         {
             return "Electric Energy";
         }
+
+        public override void OnAttached(PokemonCard attachedTo, bool fromHand) { }
     }
 }

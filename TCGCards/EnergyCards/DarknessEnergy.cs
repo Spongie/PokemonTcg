@@ -16,5 +16,7 @@
         {
             return "Darkness Energy";
         }
+
+        public override void OnAttached(PokemonCard attachedTo, bool fromHand) { }
     }
 }

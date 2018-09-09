@@ -33,7 +33,7 @@ namespace TeamRocket.Attacks
             foreach (var energyId in response.EnergyPokemonMap.Keys)
             {
                 var attachesToId = response.EnergyPokemonMap[energyId];
-                owner.BenchedPokemon.First(pokemon => pokemon.Id.Equals(attachesToId)).AttachedEnergy.Add(energyCards.First(energy => energy.Id.Equals(energyId)));
+                owner.AttachEnergyToPokemon(energyCards.First(energy => energy.Id.Equals(energyId)), owner.BenchedPokemon.First(pokemon => pokemon.Id.Equals(attachesToId)));
             }
         }
     }

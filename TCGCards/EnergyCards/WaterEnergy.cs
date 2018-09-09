@@ -16,5 +16,7 @@
         {
             return "Water Energy";
         }
+
+        public override void OnAttached(PokemonCard attachedTo, bool fromHand) { }
     }
 }

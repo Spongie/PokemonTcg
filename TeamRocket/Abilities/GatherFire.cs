@@ -28,7 +28,7 @@ namespace TeamRocket.Abilities
             }.ToNetworkMessage(owner.Id);
 
             var selectedEnergy = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.OfType<EnergyCard>().First();
-            PokemonOwner.AttachedEnergy.Add(selectedEnergy);
+            owner.AttachEnergyToPokemon(selectedEnergy, PokemonOwner);
 
             foreach (var pokemon in availablePokemons)
             {

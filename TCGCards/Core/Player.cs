@@ -142,6 +142,9 @@ namespace TCGCards.Core
 
             HasPlayedEnergy = true;
             targetPokemonCard.AttachedEnergy.Add(energyCard);
+
+            energyCard.OnAttached(targetPokemonCard, Hand.Contains(energyCard));
+            Hand.Remove(energyCard);
         }
 
         internal void ResetTurn()
