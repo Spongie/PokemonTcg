@@ -17,9 +17,10 @@ namespace TCGCards.Core
             BenchedPokemon = new List<PokemonCard>();
             PrizeCards = new List<Card>();
             Deck = new Deck();
+            DiscardPile = new List<Card>();
         }
 
-        internal void SetPrizeCards(int priceCards)
+        public void SetPrizeCards(int priceCards)
         {
             for(int _ = 0; _ < priceCards; _++)
             {

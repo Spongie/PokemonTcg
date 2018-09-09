@@ -2,6 +2,7 @@
 using System.Linq;
 using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
+using TeamRocket.TrainerCards;
 
 namespace TCGCards.Core.Tests
 {
@@ -272,6 +273,24 @@ namespace TCGCards.Core.Tests
             gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
 
             Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
+        }
+
+        [TestMethod]
+        public void TrainerCard_Player_DiscardPile()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+
+            gameField.ActivePlayer.Hand.Add(new HereComesTeamRocket());
+            gameField.ActivePlayer.Hand.Add(new HereComesTeamRocket());
+            gameField.ActivePlayer.Hand.Add(new HereComesTeamRocket());
+            gameField.ActivePlayer.Hand.Add(new HereComesTeamRocket());
+            gameField.ActivePlayer.Hand.Add(new HereComesTeamRocket());
+
+            TrainerCard trainerCard = gameField.ActivePlayer.Hand.OfType<TrainerCard>().First();
+            gameField.PlayerTrainerCard(trainerCard);
+
+            Assert.AreEqual(trainerCard.Id, gameField.ActivePlayer.DiscardPile.Last().Id);
         }
 
         private void FillPlayerDecksWithJunk(GameField gameField)

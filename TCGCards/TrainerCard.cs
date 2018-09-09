@@ -14,5 +14,7 @@ namespace TCGCards
         }
 
         public abstract void Process(GameField game, Player caster, Player opponent);
+
+        public virtual bool CanCast(GameField game, Player caster, Player opponent) => true;
     }
 }

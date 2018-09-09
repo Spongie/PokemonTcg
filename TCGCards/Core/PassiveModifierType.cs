@@ -3,6 +3,7 @@
     public enum PassiveModifierType
     {
         RetreatCost,
-        StopTrainerCast
+        StopTrainerCast,
+        NoPokemonPowers
     }
 }
