@@ -9,6 +9,7 @@
         TakesDamage,
         Dies,
         Kills,
-        OpponentRetreats
+        OpponentRetreats,
+        Passive
     }
 }

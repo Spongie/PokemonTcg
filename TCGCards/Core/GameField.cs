@@ -20,6 +20,7 @@ namespace TCGCards.Core
             playersSetStartBench = new HashSet<Guid>();
             AttackStoppers = new List<AttackStopper>();
             DamageStoppers = new List<DamageStopper>();
+            PassiveAbilities = new List<PassiveAbility>();
         }
 
         public void Init()
@@ -59,12 +60,15 @@ namespace TCGCards.Core
             }
         }
 
-        public void OnPokemonRetreated(PokemonCard replacementCard)
+        public void OnPokemonRetreated(PokemonCard replacementCard, IEnumerable<EnergyCard> payedEnergy)
         {
             if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.OpponentRetreats)
                 NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
 
-            ActivePlayer.RetreatActivePokemon(replacementCard);
+            int retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + PassiveAbilities.OfType<CostModifierAbility>().Where(ability => ability.ModifierType == PassiveModifierType.RetreatCost).Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
+
+            if (retreatCost <= payedEnergy.Sum(energy => energy.GetEnergry().Amount))
+                ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
         }
 
         public void OnBenchPokemonSelected(Player owner, PokemonCard selectedPokemon)
@@ -195,6 +199,14 @@ namespace TCGCards.Core
                 pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
         }
 
+        public void PlayerTrainerCard(TrainerCard trainerCard)
+        {
+            if (PassiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
+                return;
+
+            trainerCard.Process(this, ActivePlayer, NonActivePlayer);
+        }
+
         private void CheckDeadPokemon()
         {
             if(NonActivePlayer.ActivePokemonCard.IsDead())
@@ -281,5 +293,6 @@ namespace TCGCards.Core
 
         public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
+        public List<PassiveAbility> PassiveAbilities { get; set; }
     }
 }

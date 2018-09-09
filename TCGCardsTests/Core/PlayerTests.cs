@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
@@ -56,7 +57,7 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First());
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>());
 
             Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
         }
@@ -73,9 +74,27 @@ namespace TCGCards.Core.Tests
 
             p.AttachEnergyToPokemon(new WaterEnergy(), p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First());
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>());
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
+        }
+
+        [TestMethod]
+        public void RetreatActivePokemon_Energy_Removed()
+        {
+            var p = new Player();
+            var card = new Magikarp(p);
+            var card2 = new Magikarp(p);
+
+            p.SetActivePokemon(card);
+            p.SetBenchedPokemon(card2);
+
+            p.AttachEnergyToPokemon(new WaterEnergy(), p.ActivePokemonCard);
+
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy));
+
+            Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
+            Assert.IsFalse(card.AttachedEnergy.Any());
         }
 
         [TestMethod]
@@ -94,7 +113,7 @@ namespace TCGCards.Core.Tests
 
             p.AttachEnergyToPokemon(new WaterEnergy(), p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First());
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy));
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
             Assert.IsFalse(card.IsBurned);

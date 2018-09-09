@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TCGCards.Core.Messages;
 
 namespace TCGCards.Core
 {
@@ -71,10 +72,15 @@ namespace TCGCards.Core
             oldActivePokemon.ClearStatusEffects();
         }
 
-        public void RetreatActivePokemon(PokemonCard replacementPokemon)
+        public void RetreatActivePokemon(PokemonCard replacementPokemon, IEnumerable<EnergyCard> payedEnergy)
         {
             if(!ActivePokemonCard.CanReatreat())
                 return;
+
+            foreach (var energyCard in payedEnergy)
+            {
+                ActivePokemonCard.AttachedEnergy.Remove(energyCard);
+            }
 
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
