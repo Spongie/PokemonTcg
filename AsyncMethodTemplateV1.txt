@@ -1,0 +1,12 @@
+public System.Guid {METHODNAME}({PARAMS})
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "{METHODNAME}",
+			TargetClass = "{SERVICENAME}",
+			Parameters = new object[] { {PARAMVALUES} }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	}

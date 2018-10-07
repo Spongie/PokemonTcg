@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{44CD12B7-4826-4793-A4FE-8153391D7189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamRocketTests", "TeamRocketTests\TeamRocketTests.csproj", "{FC067346-7D77-4193-913C-D47A541ED7F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamRocketTests", "TeamRocketTests\TeamRocketTests.csproj", "{FC067346-7D77-4193-913C-D47A541ED7F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

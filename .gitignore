@@ -259,3 +259,38 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# =============== #
+# Unity generated #
+# =============== #
+[Tt]emp/
+[Oo]bj/
+[Bb]uild
+[Ll]ibrary/
+sysinfo.txt
+
+PokemonTCGClient/Assembly-CSharp-Editor-firstpass-vs.csproj
+PokemonTCGClient/Assembly-CSharp-Editor-firstpass.csproj
+PokemonTCGClient/Assembly-CSharp-Editor-firstpass.pidb
+PokemonTCGClient/Assembly-CSharp-Editor-vs.csproj
+PokemonTCGClient/Assembly-CSharp-Editor.csproj
+PokemonTCGClient/Assembly-CSharp-Editor.pidb
+PokemonTCGClient/Assembly-CSharp-firstpass-vs.csproj
+PokemonTCGClient/Assembly-CSharp-firstpass.csproj
+PokemonTCGClient/Assembly-CSharp-firstpass.pidb
+PokemonTCGClient/Assembly-CSharp-vs.csproj
+PokemonTCGClient/Assembly-CSharp.csproj
+PokemonTCGClient/Assembly-CSharp.pidb
+PokemonTCGClient/Assembly-UnityScript-Editor-firstpass-vs.unityproj
+PokemonTCGClient/Assembly-UnityScript-Editor-firstpass.pidb
+PokemonTCGClient/Assembly-UnityScript-Editor-firstpass.unityproj
+PokemonTCGClient/Assembly-UnityScript-Editor-vs.unityproj
+PokemonTCGClient/Assembly-UnityScript-Editor.pidb
+PokemonTCGClient/Assembly-UnityScript-Editor.unityproj
+PokemonTCGClient/Assembly-UnityScript-firstpass-vs.unityproj
+PokemonTCGClient/Assembly-UnityScript-firstpass.pidb
+PokemonTCGClient/Assembly-UnityScript-firstpass.unityproj
+PokemonTCGClient/Assembly-UnityScript-vs.unityproj
+PokemonTCGClient/Assembly-UnityScript.pidb
+PokemonTCGClient/Assembly-UnityScript.unityProj
+PokemonTCGClient/PokemonTCGClient.sln

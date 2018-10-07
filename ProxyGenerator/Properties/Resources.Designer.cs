@@ -61,17 +61,61 @@ namespace ProxyGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to public {RETURNTYPE} {METHODNAME}({PARAMS})
-        ///{
-        ///	var message = new GenericMessageData
+        ///   Looks up a localized string similar to public void {METHODNAME}({PARAMS})
         ///	{
-        ///		TargetMethod = &quot;{METHODNAME}&quot;,
-        ///		TargetClass = &quot;{SERVICENAME}&quot;,
-        ///		Parameters = new object[] { {PARAMVALUES} }
-        ///	}.ToNetworkMessage(networkPlayer.Id);
+        ///		var message = new GenericMessageData
+        ///		{
+        ///			TargetMethod = &quot;{METHODNAME}&quot;,
+        ///			TargetClass = &quot;{SERVICENAME}&quot;,
+        ///			Parameters = new object[] { {PARAMVALUES} }
+        ///		}.ToNetworkMessage(networkPlayer.Id);
+        ///		
+        ///		return networkPlayer.Send(message);
+        ///	}.
+        /// </summary>
+        internal static string AsyncMethodTemplateV1 {
+            get {
+                return ResourceManager.GetString("AsyncMethodTemplateV1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to using NetworkingCore;
+        ///using NetworkingCore.Messages;
+        ///
+        ////// &lt;summary&gt;
+        ////// Auto-generated code - DO NOT EDIT
+        ////// &lt;/summary&gt;
+        ///public class Async{SERVICENAME}
+        ///{
+        ///	private readonly NetworkPlayer networkPlayer;
         ///	
-        ///	return networkPlayer.SendAndWaitForResponse&lt;{RETURNTYPE}&gt;(message);
+        ///	public Async{SERVICENAME}(NetworkPlayer networkPlayer)
+        ///	{
+        ///		this.networkPlayer = networkPlayer;
+        ///	}
+        ///	
+        ///	{METHODS}
         ///}.
+        /// </summary>
+        internal static string AsyncServiceTemplateV1 {
+            get {
+                return ResourceManager.GetString("AsyncServiceTemplateV1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to public {RETURNTYPE} {METHODNAME}({PARAMS})
+        ///	{
+        ///		var message = new GenericMessageData
+        ///		{
+        ///			TargetMethod = &quot;{METHODNAME}&quot;,
+        ///			TargetClass = &quot;{SERVICENAME}&quot;,
+        ///			Parameters = new object[] { {PARAMVALUES} }
+        ///		}.ToNetworkMessage(networkPlayer.Id);
+        ///		
+        ///		return networkPlayer.SendAndWaitForResponse&lt;{RETURNTYPE}&gt;(message);
+        ///	}.
         /// </summary>
         internal static string MethodTemplateV1 {
             get {
@@ -83,6 +127,9 @@ namespace ProxyGenerator.Properties {
         ///   Looks up a localized string similar to using NetworkingCore;
         ///using NetworkingCore.Messages;
         ///
+        ////// &lt;summary&gt;
+        ////// Auto-generated code - DO NOT EDIT
+        ////// &lt;/summary&gt;
         ///public class {SERVICENAME}
         ///{
         ///	private readonly NetworkPlayer networkPlayer;

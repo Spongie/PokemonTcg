@@ -4,16 +4,16 @@ using NetworkingCore.Messages;
 /// <summary>
 /// Auto-generated code - DO NOT EDIT
 /// </summary>
-public class UserService
+public class AsyncUserService
 {
 	private readonly NetworkPlayer networkPlayer;
 	
-	public UserService(NetworkPlayer networkPlayer)
+	public AsyncUserService(NetworkPlayer networkPlayer)
 	{
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public NetworkingCore.BooleanResult Register(System.String userName,System.String password)
+	public System.Guid Register(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{
@@ -22,9 +22,10 @@ public class UserService
 			Parameters = new object[] { userName,password }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
-		return networkPlayer.SendAndWaitForResponse<NetworkingCore.BooleanResult>(message);
+		networkPlayer.Send(message);	
+		return message.MessageId;
 	}
-public NetworkingCore.BooleanResult Login(System.String userName,System.String password)
+public System.Guid Login(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{
@@ -33,6 +34,7 @@ public NetworkingCore.BooleanResult Login(System.String userName,System.String p
 			Parameters = new object[] { userName,password }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
-		return networkPlayer.SendAndWaitForResponse<NetworkingCore.BooleanResult>(message);
+		networkPlayer.Send(message);	
+		return message.MessageId;
 	}
 }

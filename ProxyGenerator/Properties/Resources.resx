@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AsyncMethodTemplateV1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\AsyncMethodTemplateV1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AsyncServiceTemplateV1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\AsyncServiceTemplateV1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="MethodTemplateV1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\MethodTemplateV1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>

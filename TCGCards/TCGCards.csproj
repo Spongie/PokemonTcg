@@ -9,4 +9,8 @@
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\PokemonTCGClient\Assets\Dependencies\&quot;" />
+  </Target>
+
 </Project>

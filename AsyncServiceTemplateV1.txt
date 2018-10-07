@@ -1,0 +1,17 @@
+using NetworkingCore;
+using NetworkingCore.Messages;
+
+/// <summary>
+/// Auto-generated code - DO NOT EDIT
+/// </summary>
+public class Async{SERVICENAME}
+{
+	private readonly NetworkPlayer networkPlayer;
+	
+	public Async{SERVICENAME}(NetworkPlayer networkPlayer)
+	{
+		this.networkPlayer = networkPlayer;
+	}
+	
+	{METHODS}
+}
