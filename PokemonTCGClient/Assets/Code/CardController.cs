@@ -1,9 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using TCGCards;
-using TestCards;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,11 +23,17 @@ namespace Assets.Code
             rectTransform = GetComponent<RectTransform>();
         }
 
+        public virtual void SetCard(Card card)
+        {
+            this.card = card;
+            ReloadImage();
+        }
+
         protected virtual bool ActivatePointerEnterOrExit() => !opponentCard;
 
         protected virtual bool RenderBackSide() => opponentCard && inHand;
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             if (!ActivatePointerEnterOrExit())
                 return;
@@ -41,7 +44,7 @@ namespace Assets.Code
             rectTransform.SetPositionAndRotation(new Vector3(rectTransform.position.x, 0, rectTransform.position.z), rectTransform.rotation);
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
             if (!ActivatePointerEnterOrExit())
                 return;
@@ -64,7 +67,6 @@ namespace Assets.Code
             }
             else
             {
-                card = new TestEkans(null);
                 string finalPath = "file://" + Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
                 var localFile = new WWW(finalPath);
 

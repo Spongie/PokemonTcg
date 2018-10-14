@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.EnergyCards;
@@ -15,6 +14,8 @@ namespace Assets.Code
         public HandController opponentHandController;
         public PrizeZoneController playerPrizeZone;
         public PrizeZoneController opponentPrizeZone;
+        public ActivePokemonCardController playerActivePokemon;
+        public ActivePokemonCardController opponentActivePokemon;
 
         void Start()
         {
@@ -28,6 +29,10 @@ namespace Assets.Code
             gameField.ActivePlayer.Hand.Add(new GrassEnergy());
             gameField.ActivePlayer.Hand.Add(new GrassEnergy());
 
+            gameField.ActivePlayer.ActivePokemonCard = new TestEkans(gameField.ActivePlayer);
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
 
             gameField.ActivePlayer.Deck.Cards.Push(new TestEkans(gameField.ActivePlayer));
             gameField.ActivePlayer.Deck.Cards.Push(new GrassEnergy());
@@ -50,6 +55,10 @@ namespace Assets.Code
             gameField.NonActivePlayer.Hand.Add(new GrassEnergy());
             gameField.NonActivePlayer.Hand.Add(new GrassEnergy());
 
+            gameField.NonActivePlayer.ActivePokemonCard = new TestEkans(gameField.NonActivePlayer);
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
 
             gameField.NonActivePlayer.Deck.Cards.Push(new TestEkans(gameField.ActivePlayer));
             gameField.NonActivePlayer.Deck.Cards.Push(new GrassEnergy());
@@ -68,6 +77,8 @@ namespace Assets.Code
             opponentHandController.SetHand(gameField.NonActivePlayer.Hand);
             playerPrizeZone.SetPrizeCards(gameField.ActivePlayer.PrizeCards);
             opponentPrizeZone.SetPrizeCards(gameField.NonActivePlayer.PrizeCards);
+            playerActivePokemon.SetCard(gameField.ActivePlayer.ActivePokemonCard);
+            opponentActivePokemon.SetCard(gameField.NonActivePlayer.ActivePokemonCard);
         }
 
         void Update()
