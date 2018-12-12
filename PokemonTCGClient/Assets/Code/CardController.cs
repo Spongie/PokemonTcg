@@ -1,26 +1,34 @@
 ﻿using System.Collections;
 using System.IO;
 using TCGCards;
+using TestCards;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Assets.Code
 {
-    public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class CardController : MonoBehaviour
     {
-        public float DefaultScale;
-        public float HoverScale;
+        public float DefaultScaleX;
+        public float DefaultScaleY;
+        public float HoverScaleX;
+        public float HoverScaleY;
         public Card card;
-        public Sprite CardBack;
+        public Texture CardBack;
         public bool opponentCard;
         public bool inHand;
-        private float defaultY;
-        RectTransform rectTransform;
+
+        public Transform leftPoint;
+        public Transform rightPoint;
+        public Transform bottomPoint;
+
+        public float defaultY;
+        
+        public bool stopMovingUp = false;
 
         void Start()
         {
-            rectTransform = GetComponent<RectTransform>();
+            defaultY = transform.position.y;
+            SetCard(new TestEkans(null));
         }
 
         public virtual void SetCard(Card card)
@@ -33,25 +41,50 @@ namespace Assets.Code
 
         protected virtual bool RenderBackSide() => opponentCard && inHand;
 
-        public virtual void OnPointerEnter(PointerEventData eventData)
+        private void OnMouseEnter()
         {
-            if (!ActivatePointerEnterOrExit())
-                return;
-
-            defaultY = transform.position.y;
-            transform.localScale = new Vector3(HoverScale, HoverScale, 1);
-            GetComponent<Canvas>().sortingOrder = 10;
-            rectTransform.SetPositionAndRotation(new Vector3(rectTransform.position.x, 0, rectTransform.position.z), rectTransform.rotation);
+            if (ActivatePointerEnterOrExit())
+            {
+                transform.localScale = new Vector3(HoverScaleX, HoverScaleY, 1);
+                StartCoroutine(MoveIntoScreen());
+            }
         }
 
-        public virtual void OnPointerExit(PointerEventData eventData)
+        private void OnMouseExit()
         {
-            if (!ActivatePointerEnterOrExit())
-                return;
+            if (ActivatePointerEnterOrExit())
+            {
+                transform.localScale = new Vector3(DefaultScaleX, DefaultScaleY, 1);
+                StartCoroutine(MoveOutOfScreen());
+            }
+        }
 
-            transform.localScale = new Vector3(DefaultScale, DefaultScale, 1);
-            GetComponent<Canvas>().sortingOrder = 1;
-            rectTransform.SetPositionAndRotation(new Vector3(rectTransform.position.x, defaultY, rectTransform.position.z), rectTransform.rotation);
+        IEnumerator MoveIntoScreen()
+        {
+            stopMovingUp = false;
+
+            Vector3 current = Camera.main.WorldToViewportPoint(bottomPoint.position);
+
+            while (current.y < 0)
+            {
+                if (stopMovingUp)
+                    break;
+
+                transform.Translate(new Vector3(0, 0.1f, 0));
+                current = Camera.main.WorldToViewportPoint(bottomPoint.position);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        IEnumerator MoveOutOfScreen()
+        {
+            stopMovingUp = true;
+
+            while (transform.position.y > defaultY)
+            {
+                transform.Translate(new Vector3(0, -0.1f, 0));
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         public void ReloadImage()
@@ -63,7 +96,7 @@ namespace Assets.Code
         {
             if (RenderBackSide())
             {
-                GetComponent<Image>().sprite = CardBack;
+                GetComponent<MeshRenderer>().material.mainTexture = CardBack;
             }
             else
             {
@@ -74,7 +107,7 @@ namespace Assets.Code
 
                 var texture = localFile.texture;
 
-                GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+                GetComponent<MeshRenderer>().material.mainTexture = texture;
             }
         }
     }

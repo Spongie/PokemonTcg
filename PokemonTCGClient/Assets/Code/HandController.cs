@@ -6,15 +6,8 @@ namespace Assets.Code
 {
     public class HandController : MonoBehaviour
     {
-
-        public float cardOffset = 1.01f;
         public GameObject HandCardPrefab;
         public bool opponentHand;
-
-        void Update()
-        {
-
-        }
 
         public void SetHand(IEnumerable<Card> cards)
         {
@@ -32,6 +25,8 @@ namespace Assets.Code
                 cardController.inHand = true;
                 cardController.ReloadImage();
             }
+
+            GetComponent<HandStacker>().ReDrawHand();
         }
     }
 }

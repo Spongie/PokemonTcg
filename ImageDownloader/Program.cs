@@ -33,12 +33,23 @@ namespace CardDownloader
                     Directory.CreateDirectory(baseFolder);
                 }
 
-                var cards = Card.Get<Pokemon>(new Dictionary<string, string>
+                var response = Card.Get<Pokemon>(new Dictionary<string, string>
                 {
                     { CardQueryTypes.SetCode, set.Code},
                     { CardQueryTypes.PageSize, "500" }
-                }).Cards;
-                
+                });
+
+                List<PokemonCard> cards;
+
+                try
+                {
+                    cards = response.Cards;
+                } catch (Exception e)
+                {
+                    
+                    return;
+                }
+
                 float max = cards.Count;
 
                 foreach (var card in cards)
@@ -47,10 +58,12 @@ namespace CardDownloader
 
                     if (File.Exists(fileName))
                     {
+                        progress++;
+                        UpdateProgress(set, lockObject, myId, progress, max);
                         continue;
                     }
 
-                    using (var client = new WebClient())
+                    using (var client = new ImageWebRequest())
                     {
                         try
                         {
@@ -77,15 +90,32 @@ namespace CardDownloader
                     }
 
                     progress++;
-                    lock (lockObject)
-                    {
-                        Console.SetCursorPosition(0, myId);
-                        Console.Write($"Downloading {set.Name.PadRight(25)} - {(progress / max).ToString("p2").PadLeft(7, '0')}");
-                    }
+                    UpdateProgress(set, lockObject, myId, progress, max);
                 }
             });
 
             Console.Read();
+        }
+
+        private static int UpdateProgress(SetData set, object lockObject, int myId, int progress, float max)
+        {
+            lock (lockObject)
+            {
+                Console.SetCursorPosition(0, myId);
+                Console.Write($"Downloading {set.Name.PadRight(25)} - {progress}/{max}     ");
+            }
+
+            return progress;
+        }
+
+        class ImageWebRequest : WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri address)
+            {
+                WebRequest request = base.GetWebRequest(address);
+                request.Timeout = 10000;
+                return request;
+            }
         }
 
         class PokemonSet

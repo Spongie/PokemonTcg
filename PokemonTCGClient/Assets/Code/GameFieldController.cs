@@ -14,8 +14,6 @@ namespace Assets.Code
         public HandController opponentHandController;
         public PrizeZoneController playerPrizeZone;
         public PrizeZoneController opponentPrizeZone;
-        public ActivePokemonCardController playerActivePokemon;
-        public ActivePokemonCardController opponentActivePokemon;
 
         void Start()
         {
@@ -77,8 +75,6 @@ namespace Assets.Code
             opponentHandController.SetHand(gameField.NonActivePlayer.Hand);
             playerPrizeZone.SetPrizeCards(gameField.ActivePlayer.PrizeCards);
             opponentPrizeZone.SetPrizeCards(gameField.NonActivePlayer.PrizeCards);
-            playerActivePokemon.SetCard(gameField.ActivePlayer.ActivePokemonCard);
-            opponentActivePokemon.SetCard(gameField.NonActivePlayer.ActivePokemonCard);
         }
 
         void Update()

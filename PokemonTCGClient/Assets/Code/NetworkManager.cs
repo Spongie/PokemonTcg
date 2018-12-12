@@ -7,7 +7,6 @@ namespace Assets.Code
 {
     public class NetworkManager : MonoBehaviour
     {
-
         private NetworkingCore.NetworkPlayer networkPlayer;
         private List<NetworkMessage> messages;
         private object lockObject = new object();
