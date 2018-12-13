@@ -11,6 +11,7 @@ namespace Assets.Code
         private List<NetworkMessage> messages;
         private object lockObject = new object();
         public AsyncUserService userService;
+        //public Dictionary<MessageTypes, IMessageConsumer>; remember this
 
         void Awake()
         {
