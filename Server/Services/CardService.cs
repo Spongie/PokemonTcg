@@ -36,5 +36,10 @@ namespace Server.Services
 
             return formats;
         }
+
+        public void InitTypes()
+        {
+            //TODO
+        }
     }
 }

@@ -16,13 +16,12 @@ namespace NetworkingCore
         private Thread writingThread;
         private Thread readerThread;
         private ConcurrentQueue<NetworkMessage> messageQueue;
-        private ConcurrentBag<NetworkMessage> specificResponses;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
             messageQueue = new ConcurrentQueue<NetworkMessage>();
-            specificResponses = new ConcurrentBag<NetworkMessage>();
+            SpecificResponses = new ConcurrentBag<NetworkMessage>();
             SetTcpClient(tcpClient);
         }
 
@@ -85,9 +84,13 @@ namespace NetworkingCore
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
                     var message = Serializer.Deserialize<NetworkMessage>(input);
 
-                    if (message.ResponseTo != Guid.Empty)
+                    if (message.MessageType == MessageTypes.Connected)
                     {
-                        specificResponses.Add(message);
+                        Id = Guid.Parse(message.Data);
+                    }
+                    else if (message.ResponseTo != Guid.Empty)
+                    {
+                        SpecificResponses.Add(message);
                     }
                     else
                     {
@@ -104,7 +107,7 @@ namespace NetworkingCore
             while (true)
             {
                 Thread.Sleep(100);
-                NetworkMessage response = specificResponses.FirstOrDefault(m => m.ResponseTo == message.MessageId);
+                NetworkMessage response = SpecificResponses.FirstOrDefault(m => m.ResponseTo == message.MessageId);
                 if (response != null)
                 {
                     return Serializer.Deserialize<JObject>(response.Data).ToObject<T>();
@@ -114,5 +117,6 @@ namespace NetworkingCore
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public ConcurrentBag<NetworkMessage> SpecificResponses { get; private set; }
     }
 }

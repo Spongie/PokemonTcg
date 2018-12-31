@@ -3,6 +3,7 @@ using System.IO;
 using TCGCards;
 using TestCards;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Code
 {
@@ -16,17 +17,24 @@ namespace Assets.Code
         public Texture CardBack;
         public bool opponentCard;
         public bool inHand;
+        public bool isBenched;
 
         public Transform leftPoint;
         public Transform rightPoint;
         public Transform bottomPoint;
+        public HandController handController;
 
         public float defaultY;
-        
         public bool stopMovingUp = false;
+
+        public RawImage previewImage;
+
+        private MeshRenderer meshRenderer;
+        private bool stopFadeOut;
 
         void Start()
         {
+            meshRenderer = GetComponent<MeshRenderer>();
             defaultY = transform.position.y;
             SetCard(new TestEkans(null));
         }
@@ -41,21 +49,38 @@ namespace Assets.Code
 
         protected virtual bool RenderBackSide() => opponentCard && inHand;
 
-        private void OnMouseEnter()
+        protected virtual void OnMouseEnter()
         {
             if (ActivatePointerEnterOrExit())
             {
-                transform.localScale = new Vector3(HoverScaleX, HoverScaleY, 1);
-                StartCoroutine(MoveIntoScreen());
+                if (isBenched)
+                {
+                    handController.FadeOut();
+                    //previewImage.color = new Color(1, 1, 1, 1);
+                    //previewImage.texture = meshRenderer.material.mainTexture;
+                }
+                else
+                {
+                    transform.localScale = new Vector3(HoverScaleX, HoverScaleY, 1);
+                    StartCoroutine(MoveIntoScreen());
+                }
             }
         }
 
-        private void OnMouseExit()
+        protected virtual void OnMouseExit()
         {
             if (ActivatePointerEnterOrExit())
             {
-                transform.localScale = new Vector3(DefaultScaleX, DefaultScaleY, 1);
-                StartCoroutine(MoveOutOfScreen());
+                if (isBenched)
+                {
+                    handController.FadeIn();
+                    //previewImage.color = new Color(1, 1, 1, 0);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(DefaultScaleX, DefaultScaleY, 1);
+                    StartCoroutine(MoveOutOfScreen());
+                }
             }
         }
 
@@ -69,10 +94,12 @@ namespace Assets.Code
             {
                 if (stopMovingUp)
                     break;
-
-                transform.Translate(new Vector3(0, 0.1f, 0));
-                current = Camera.main.WorldToViewportPoint(bottomPoint.position);
-                yield return new WaitForEndOfFrame();
+                else
+                {
+                    transform.Translate(new Vector3(0, 0.1f, 0));
+                    current = Camera.main.WorldToViewportPoint(bottomPoint.position);
+                    yield return new WaitForEndOfFrame();
+                }
             }
         }
 
@@ -96,7 +123,7 @@ namespace Assets.Code
         {
             if (RenderBackSide())
             {
-                GetComponent<MeshRenderer>().material.mainTexture = CardBack;
+                meshRenderer.material.mainTexture = CardBack;
             }
             else
             {
@@ -107,8 +134,33 @@ namespace Assets.Code
 
                 var texture = localFile.texture;
 
-                GetComponent<MeshRenderer>().material.mainTexture = texture;
+                meshRenderer.material.mainTexture = texture;
             }
+        }
+
+        public IEnumerator FadeOut()
+        {
+            while (meshRenderer.material.color.a > 0.1f)
+            {
+                if (stopFadeOut)
+                    break;
+
+                meshRenderer.material.color = new Color(1f, 1f, 1f, meshRenderer.material.color.a - 0.05f);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        public IEnumerator FadeIn()
+        {
+            stopFadeOut = true;
+
+            while (meshRenderer.material.color.a < 1f)
+            {
+                meshRenderer.material.color = new Color(1f, 1f, 1f, meshRenderer.material.color.a + 0.05f);
+                yield return new WaitForEndOfFrame();
+            }
+
+            stopFadeOut = false;
         }
     }
 }

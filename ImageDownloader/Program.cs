@@ -46,7 +46,6 @@ namespace CardDownloader
                     cards = response.Cards;
                 } catch (Exception e)
                 {
-                    
                     return;
                 }
 

@@ -9,6 +9,7 @@ namespace Assets.Code
     {
         private NetworkingCore.NetworkPlayer networkPlayer;
         private List<NetworkMessage> messages;
+        private Queue<NetworkMessage> messagesToPrint;
         private object lockObject = new object();
         public AsyncUserService userService;
         //public Dictionary<MessageTypes, IMessageConsumer>; remember this
@@ -21,6 +22,8 @@ namespace Assets.Code
         void Start()
         {
             messages = new List<NetworkMessage>();
+            messagesToPrint = new Queue<NetworkMessage>();
+
             var tcp = new TcpClient();
             tcp.Connect("127.0.0.1", 1565);
             networkPlayer = new NetworkingCore.NetworkPlayer(tcp);
@@ -35,6 +38,7 @@ namespace Assets.Code
             lock (lockObject)
             {
                 messages.Add(e.Message);
+                messagesToPrint.Enqueue(e.Message);
             }
         }
 
@@ -42,11 +46,19 @@ namespace Assets.Code
         {
             lock (lockObject)
             {
-                foreach (var message in messages)
+                while (messagesToPrint.Count > 0)
                 {
-                    Debug.Log(message);
+                    Debug.Log(messagesToPrint.Dequeue().Data);
                 }
             }
+
+            //if (networkPlayer.SpecificResponses.Count > 0)
+            //{
+            //    foreach (var item in networkPlayer.SpecificResponses)
+            //    {
+            //        Debug.Log(item.Data);
+            //    }
+            //}
         }
 
         public static NetworkManager Instance { get; private set; }

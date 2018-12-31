@@ -24,5 +24,10 @@ namespace Server.Services
             Database.Instance.InsertList(deck.Cards);
             return deck.Id;
         }
+
+        public void InitTypes()
+        {
+            //TODO
+        }
     }
 }

@@ -43,5 +43,10 @@ namespace Server.Services
 
             return result;
         }
+
+        public void InitTypes()
+        {
+            var user = new User();
+        }
     }
 }

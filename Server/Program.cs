@@ -8,7 +8,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Thread t = new Thread(RunServer);
+            var t = new Thread(RunServer);
             t.Start();
 
             Console.Read();

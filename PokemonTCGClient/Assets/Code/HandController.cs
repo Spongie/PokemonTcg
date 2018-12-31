@@ -28,5 +28,21 @@ namespace Assets.Code
 
             GetComponent<HandStacker>().ReDrawHand();
         }
+
+        public void FadeOut()
+        {
+            //foreach (var card in GetComponentsInChildren<CardController>())
+            //{
+            //    StartCoroutine(card.FadeOut());
+            //}
+        }
+
+        public void FadeIn()
+        {
+            //foreach (var card in GetComponentsInChildren<CardController>())
+            //{
+            //    StartCoroutine(card.FadeIn());
+            //}
+        }
     }
 }

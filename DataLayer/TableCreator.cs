@@ -19,12 +19,12 @@ namespace DataLayer
 
             foreach (var property in type.GetProperties())
             {
-                string columnText = GenerateCreateTableColumnCommand(property);
-
                 if (property.GetCustomAttribute<DbIgnore>() != null)
                 {
                     continue;
                 }
+
+                string columnText = GenerateCreateTableColumnCommand(property);
 
                 if (columnText.StartsWith("Id"))
                 {

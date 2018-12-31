@@ -8,12 +8,14 @@ namespace NetworkingCore
     {
         public static IEnumerable<Type> GetLoadedTypesAssignableFrom<T>()
         {
+            var types = new List<Type>();
+
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                return assembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+                types.AddRange(assembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract));
             }
 
-            return new Type[] { };
+            return types;
         }
     }
 }

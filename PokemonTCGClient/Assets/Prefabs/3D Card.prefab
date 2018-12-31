@@ -203,9 +203,12 @@ MonoBehaviour:
   HoverScaleY: 2.08
   CardBack: {fileID: 2800000, guid: d6df4ee32f1d3d94ea5eaed735b3b73c, type: 3}
   opponentCard: 0
-  inHand: 0
+  inHand: 1
+  isBenched: 0
   leftPoint: {fileID: 4759033053322840}
   rightPoint: {fileID: 4795990968608888}
   bottomPoint: {fileID: 4639743869928572}
+  handController: {fileID: 0}
   defaultY: 0
   stopMovingUp: 0
+  previewImage: {fileID: 0}

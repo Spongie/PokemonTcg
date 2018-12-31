@@ -12,7 +12,7 @@ namespace DataLayer
     public class Database : IDisposable
     {
         private static Database instance;
-        private const string connectionString = @"Data Source=ENTERCYBER-PC\SQLEXPRESS;Initial Catalog=Pokemon_Tcg_Test;Integrated Security=True";
+        private const string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Pokemon_Tcg_Test;Integrated Security=True";
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
         private SqlConnection connection;
 
@@ -270,6 +270,11 @@ namespace DataLayer
         {
             foreach (var property in properties)
             {
+                if (property.GetCustomAttribute<DbIgnore>() != null)
+                {
+                    continue;
+                }
+
                 if (existingColumns.Contains(property.Name))
                 {
                     continue;

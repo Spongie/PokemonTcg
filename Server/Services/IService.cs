@@ -2,5 +2,6 @@
 {
     public interface IService
     {
+        void InitTypes();
     }
 }

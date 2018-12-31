@@ -10,6 +10,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
+using Entities;
+using System.IO;
 
 namespace Server
 {
@@ -30,13 +32,17 @@ namespace Server
                 { typeof(UserService).Name, new UserService() }
             };
 
+            foreach (var service in services.Values)
+            {
+                service.InitTypes();
+            }
+
+            LoadCardDlls();
+
             Logger.Instance.Log("Connecting to database");
             Database.Instance.Connect();
             Database.Instance.CheckAndUpdate();
 
-            AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
-
-            //Load all card assemblies /Cards/*.dll
 
             serverId = Guid.NewGuid();
             listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
@@ -48,9 +54,13 @@ namespace Server
             serverThread.Start();
         }
 
-        private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
+        private static void LoadCardDlls()
         {
-            Database.Instance.CheckAndUpdate();
+            Logger.Instance.Log("Loading card dlls...");
+
+            Assembly.Load("TeamRocket");
+
+            Logger.Instance.Log("Card dlls loaded!");
         }
 
         private void Run()
