@@ -1,5 +1,7 @@
 ﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
 
@@ -59,6 +61,14 @@ namespace Assets.Code
             //        Debug.Log(item.Data);
             //    }
             //}
+        }
+
+        public NetworkMessage TryGetResponse(Guid messageId)
+        {
+            lock (lockObject)
+            {
+                return networkPlayer.SpecificResponses.FirstOrDefault(message => message.ResponseTo.Equals(messageId));
+            }
         }
 
         public static NetworkManager Instance { get; private set; }

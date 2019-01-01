@@ -738,8 +738,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97e08ddc0e974c4fbe79c6213d21c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usernameInput: {fileID: 2020267568}
-  passwordInput: {fileID: 72915374}
+  usernameInput: {fileID: 1655562816}
+  passwordInput: {fileID: 1757526631}
 --- !u!114 &908730278
 MonoBehaviour:
   m_ObjectHideFlags: 0
