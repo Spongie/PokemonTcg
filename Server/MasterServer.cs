@@ -60,7 +60,11 @@ namespace Server
         {
             Logger.Instance.Log("Loading card dlls...");
 
-            Assembly.Load("TeamRocket");
+            foreach (var file in Directory.GetFiles("Cards/", "*.dll"))
+            {
+                var assemblyName = AssemblyName.GetAssemblyName(file);
+                Assembly.Load(assemblyName);
+            }
 
             Logger.Instance.Log("Card dlls loaded!");
         }

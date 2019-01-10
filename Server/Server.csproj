@@ -15,4 +15,8 @@
     <ProjectReference Include="..\TeamRocket\TeamRocket.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if not exist &quot;$(TargetDir)\Cards&quot; mkdir &quot;$(TargetDir)\Cards&quot;&#xD;&#xA;xcopy /y /d &quot;$(SolutionDir)\Cards\*.dll&quot; &quot;$(TargetDir)\Cards\&quot;" />
+  </Target>
+
 </Project>
