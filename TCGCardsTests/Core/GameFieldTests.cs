@@ -247,10 +247,10 @@ namespace TCGCards.Core.Tests
             gameField.InitTest();
             gameField.StartGame();
 
-            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.ActivePlayer.Id, new PokemonCard(gameField.ActivePlayer));
             
             Assert.AreEqual(GameFieldState.BothSelectingActive, gameField.GameState);
-            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.NonActivePlayer.Id, new PokemonCard(gameField.NonActivePlayer));
 
             Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
         }
@@ -264,8 +264,8 @@ namespace TCGCards.Core.Tests
 
             FillPlayerDecksWithJunk(gameField);
 
-            gameField.OnActivePokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
-            gameField.OnActivePokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.ActivePlayer.Id, new PokemonCard(gameField.ActivePlayer));
+            gameField.OnActivePokemonSelected(gameField.NonActivePlayer.Id, new PokemonCard(gameField.NonActivePlayer));
 
             gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
 

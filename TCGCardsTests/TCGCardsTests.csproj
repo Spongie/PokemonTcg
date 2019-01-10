@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj">
+      <Project>{3f993665-d003-4468-86fa-c59f6a7f1a6b}</Project>
+      <Name>NetworkingCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCGCards\TCGCards.csproj">
       <Project>{8a826d6b-b9f7-42e4-9b01-f4909884e8ff}</Project>
       <Name>TCGCards</Name>

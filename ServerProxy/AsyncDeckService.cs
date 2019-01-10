@@ -13,7 +13,7 @@ public class AsyncDeckService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public System.Guid SaveDeck(Entities.DeckInfo deck)
+	public NetworkingCore.NetworkId SaveDeck(Entities.DeckInfo deck)
 	{
 		var message = new GenericMessageData
 		{
@@ -24,5 +24,5 @@ public class AsyncDeckService
 		
 		networkPlayer.Send(message);	
 		return message.MessageId;
-	}
+	} 
 }

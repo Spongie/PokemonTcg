@@ -11,7 +11,7 @@ public class Login : MonoBehaviour
 {
     public InputField usernameInput;
     public InputField passwordInput;
-    private Guid messageId;
+    private NetworkId messageId = NetworkId.Empty;
 
     private void Start()
     {
@@ -20,15 +20,15 @@ public class Login : MonoBehaviour
 
     private void Update()
     {
-        if (messageId != Guid.Empty)
+        if (!messageId.Equals(NetworkId.Empty))
         {
             var x = NetworkManager.Instance;
             var response = x.TryGetResponse(messageId);
 
             if (response != null)
             {
-                messageId = Guid.Empty;
-                if (Serializer.Deserialize<BooleanResult>(response.Data).Result)
+                messageId = NetworkId.Empty;
+                if ((BooleanResult)response.Data)
                 {
                     SceneManager.LoadScene("3dTest");
                 }

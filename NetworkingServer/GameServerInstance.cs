@@ -21,7 +21,7 @@ namespace NetworkingServer
 
         public GameServerInstance()
         {
-            ServerId = Guid.NewGuid();
+            ServerId = NetworkId.Generate();
             Players = new List<ServerPlayer>(2);
             Actions = new Dictionary<MessageTypes, Action<NetworkMessage>>
             {
@@ -34,21 +34,21 @@ namespace NetworkingServer
 
         private void OnActiveSelected(NetworkMessage networkMessage)
         {
-            var message = Serializer.Deserialize<ActiveSelectedMessage>(networkMessage.Data);
+            var message = (ActiveSelectedMessage)networkMessage.Data;
 
-            gameField.OnActivePokemonSelected(message.Owner, message.SelectedPokemon);
+            gameField.OnActivePokemonSelected(message.Owner.Id, message.SelectedPokemon);
         }
 
         private void OnBenchedSelected(NetworkMessage networkMessage)
         {
-            var message = Serializer.Deserialize<BenchSelectedMessage>(networkMessage.Data);
+            var message = (BenchSelectedMessage)networkMessage.Data;
 
             gameField.OnBenchPokemonSelected(message.Owner, message.SelectedPokemon);
         }
 
         private void OnAttack(NetworkMessage message)
         {
-            var attackMessage = Serializer.Deserialize<AttackMessage>(message.Data);
+            var attackMessage = (AttackMessage)message.Data;
 
             gameField.Attack(attackMessage.Attack);
 
@@ -57,7 +57,7 @@ namespace NetworkingServer
 
         private void OnRegister(NetworkMessage message)
         {
-            var registrationMessage = Serializer.Deserialize<RegisterMessage>(message.Data);
+            var registrationMessage = (RegisterMessage)message.Data;
 
             ServerPlayer player = GetPlayerById(message);
             player.Name = registrationMessage.Name;
@@ -89,7 +89,6 @@ namespace NetworkingServer
         private void Run()
         {
             gameField = new GameField();
-            gameField.Init();
             WaitForConnections();
             WaitForRegistrations();
         }
@@ -134,8 +133,8 @@ namespace NetworkingServer
                 Players.Add(player);
                 Console.WriteLine("Player connected...");
 
-                player.Id = Guid.NewGuid();
-                player.Send(new NetworkMessage(MessageTypes.Connected, player.Id.ToString(), ServerId, Guid.NewGuid()));
+                player.Id = NetworkId.Generate();
+                player.Send(new NetworkMessage(MessageTypes.Connected, player.Id, ServerId, NetworkId.Generate()));
                 SendGameToPlayers();
             }
 
@@ -157,11 +156,11 @@ namespace NetworkingServer
             {
                 var message = new GameFieldMessage(gameField);
 
-                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, Serializer.Serialize(message), ServerId, Guid.NewGuid());
+                var networkMessage = new NetworkMessage(MessageTypes.GameUpdate, message, ServerId, NetworkId.Generate());
                 player.Send(networkMessage);
             }
         }
 
-        public Guid ServerId { get; protected set; }
+        public NetworkId ServerId { get; protected set; }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
+using TCGCards;
+using TCGCards.Core;
 
 namespace TestClient
 {
@@ -10,10 +13,17 @@ namespace TestClient
     {
         static NetworkPlayer networkPlayer;
         static UserService userService;
+        static GameService gameService;
+
         static void Main(string[] args)
         {
             var thread = new Thread(RunPlayer);
             thread.Start();
+
+            var x = NetworkId.Generate();
+
+            var s = Serializer.Serialize(x);
+            var b = Serializer.Serialize(new object[] {x});
 
             string input;
 
@@ -26,7 +36,9 @@ namespace TestClient
                     string userName = Console.ReadLine().Trim();
                     string password = Console.ReadLine().Trim();
 
-                    Console.WriteLine(userService.Login(userName, password));
+                    var value = userService.Login(userName, password);
+
+                    Console.WriteLine(value);
                 }
                 if (input == "register")
                 {
@@ -35,8 +47,20 @@ namespace TestClient
 
                     Console.WriteLine(userService.Register(userName, password));
                 }
+                if (input == "game")
+                {
+                    PlayGame();
+                }
 
             } while (input.ToLower() != "exit");
+        }
+
+        private static void PlayGame()
+        {
+            var gameField = gameService.JoinTheActiveGame(networkPlayer.Id);
+
+            ClientPlayer me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
+            PokemonCard starter = me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).FirstOrDefault();
         }
 
         private static void RunPlayer(object obj)
@@ -47,6 +71,7 @@ namespace TestClient
 
             networkPlayer = new NetworkPlayer(tcp);
             userService = new UserService(networkPlayer);
+            gameService = new GameService(networkPlayer);
             networkPlayer.DataReceived += NetworkPlayer_DataReceived;
         }
 
@@ -54,7 +79,7 @@ namespace TestClient
         {
             if (e.Message.MessageType == MessageTypes.Connected)
             {
-                networkPlayer.Id = new Guid(e.Message.Data);
+                networkPlayer.Id = (NetworkId)e.Message.Data;
                 Console.WriteLine("Received connectionId: " + networkPlayer.Id);
             }
             else

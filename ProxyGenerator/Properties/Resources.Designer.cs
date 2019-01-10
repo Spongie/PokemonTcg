@@ -61,7 +61,7 @@ namespace ProxyGenerator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to public void {METHODNAME}({PARAMS})
+        ///   Looks up a localized string similar to public NetworkingCore.NetworkId {METHODNAME}({PARAMS})
         ///	{
         ///		var message = new GenericMessageData
         ///		{
@@ -70,12 +70,33 @@ namespace ProxyGenerator.Properties {
         ///			Parameters = new object[] { {PARAMVALUES} }
         ///		}.ToNetworkMessage(networkPlayer.Id);
         ///		
-        ///		return networkPlayer.Send(message);
-        ///	}.
+        ///		networkPlayer.Send(message);	
+        ///		return message.MessageId;
+        ///	} .
         /// </summary>
         internal static string AsyncMethodTemplateV1 {
             get {
                 return ResourceManager.GetString("AsyncMethodTemplateV1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to public NetworkingCore.NetworkId {METHODNAME}({PARAMS})
+        ///	{
+        ///		var message = new GenericMessageData
+        ///		{
+        ///			TargetMethod = &quot;{METHODNAME}&quot;,
+        ///			TargetClass = &quot;{SERVICENAME}&quot;,
+        ///			Parameters = new object[] { {PARAMVALUES} }
+        ///		}.ToNetworkMessage(networkPlayer.Id);
+        ///		
+        ///		networkPlayer.Send(message);	
+        ///		return message.MessageId;
+        ///	} .
+        /// </summary>
+        internal static string AsyncMethodTemplateV2 {
+            get {
+                return ResourceManager.GetString("AsyncMethodTemplateV2", resourceCulture);
             }
         }
         

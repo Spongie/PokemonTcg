@@ -13,7 +13,7 @@ public class AsyncCardService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public System.Guid GetCardSets()
+	public NetworkingCore.NetworkId GetCardSets()
 	{
 		var message = new GenericMessageData
 		{
@@ -24,8 +24,8 @@ public class AsyncCardService
 		
 		networkPlayer.Send(message);	
 		return message.MessageId;
-	}
-public System.Guid GetFormats()
+	} 
+public NetworkingCore.NetworkId GetFormats()
 	{
 		var message = new GenericMessageData
 		{
@@ -36,5 +36,5 @@ public System.Guid GetFormats()
 		
 		networkPlayer.Send(message);	
 		return message.MessageId;
-	}
+	} 
 }

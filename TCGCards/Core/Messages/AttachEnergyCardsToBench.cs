@@ -16,11 +16,11 @@ namespace TCGCards.Core.Messages
 
     public class AttachedEnergyDoneMessage : AbstractNetworkMessage
     {
-        public AttachedEnergyDoneMessage(Dictionary<Guid, Guid> energyPokemonMap)
+        public AttachedEnergyDoneMessage(Dictionary<NetworkId, NetworkId> energyPokemonMap)
         {
             EnergyPokemonMap = energyPokemonMap;
         }
 
-        public Dictionary<Guid, Guid> EnergyPokemonMap { get; set; }
+        public Dictionary<NetworkId, NetworkId> EnergyPokemonMap { get; set; }
     }
 }

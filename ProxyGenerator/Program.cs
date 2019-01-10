@@ -15,7 +15,7 @@ namespace ProxyGenerator
         private const string METHOD_NAME = "{METHODNAME}";
         private const string PARAMS = "{PARAMS}";
         private const string PARAM_VALUES = "{PARAMVALUES}";
-        private static string[] methodsToSkip = { "ToString", "Equals", "GetHashCode", "GetType" };
+        private static string[] methodsToSkip = { "ToString", "Equals", "GetHashCode", "GetType", "InitTypes" };
 
         static void Main(string[] args)
         {
@@ -39,9 +39,6 @@ namespace ProxyGenerator
                 CreateProxy(targetDirectory, asyncTemplate, service, true);
                 Console.WriteLine($"Proxy for {service} created");
             }
-
-            Console.WriteLine("Completed, press any key to exit");
-            Console.ReadKey();
         }
 
         private static void CreateProxy(string targetDirectory, string template, Type service, bool async = false)
@@ -62,7 +59,7 @@ namespace ProxyGenerator
                     Type = p.ParameterType
                 });
 
-                string baseTemplate = async ? Properties.Resources.AsyncMethodTemplateV1 : Properties.Resources.MethodTemplateV1;
+                string baseTemplate = async ? Properties.Resources.AsyncMethodTemplateV2 : Properties.Resources.MethodTemplateV1;
 
                 string methodTemplate = baseTemplate
                     .Replace(METHOD_NAME, method.Name)

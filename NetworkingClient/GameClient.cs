@@ -27,7 +27,7 @@ namespace NetworkingClient
 
         private void OnGameServerUpdated(NetworkMessage message)
         {
-            OnGameUpdated?.Invoke(this, new GameUpdatedEventArgs(Serializer.Deserialize<GameFieldMessage>(message.Data).Game));
+            //OnGameUpdated?.Invoke(this, new GameUpdatedEventArgs(Serializer.Deserialize<GameFieldMessage>(message.Data).Game));
         }
 
         public ServerPlayer Player { get; protected set; }
@@ -53,7 +53,7 @@ namespace NetworkingClient
 
             RegistrationSent = true;
             var registerMessage = new RegisterMessage(v, deck);
-            Send(new NetworkMessage(MessageTypes.RegisterForGame, Serializer.Serialize(registerMessage), Player.Id, Guid.NewGuid()));
+            Send(new NetworkMessage(MessageTypes.RegisterForGame, registerMessage, Player.Id, NetworkId.Generate()));
         }
 
         private void Run()
@@ -79,7 +79,7 @@ namespace NetworkingClient
 
         private void OnConnected(NetworkMessage message)
         {
-            Player.Id = new Guid(message.Data);
+            Player.Id = (NetworkId)message.Data;
         }
     }
 }

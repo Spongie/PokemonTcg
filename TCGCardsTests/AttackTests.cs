@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -127,8 +128,8 @@ namespace TCGCards.Tests
         private GameField createTestGame()
         {
             var game = new GameField();
-            game.Players.Add(new Player() { Id = Guid.NewGuid() });
-            game.Players.Add(new Player() { Id = Guid.NewGuid() });
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
             game.ActivePlayer = game.Players.First();
 

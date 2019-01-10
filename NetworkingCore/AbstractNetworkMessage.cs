@@ -6,9 +6,9 @@ namespace NetworkingCore
     {
         protected MessageTypes messageType;
 
-        public NetworkMessage ToNetworkMessage(Guid senderId)
+        public NetworkMessage ToNetworkMessage(NetworkId senderId)
         {
-            return new NetworkMessage(messageType, Serializer.Serialize(this), senderId, Guid.NewGuid());
+            return new NetworkMessage(messageType, this, senderId, NetworkId.Generate());
         }
     }
 }

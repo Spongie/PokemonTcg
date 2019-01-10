@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NetworkingCore;
 using System;
 using System.Linq;
 using TCGCards.Core;
@@ -15,8 +16,8 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             var game = new GameField();
-            game.Players.Add(new Player() { Id = Guid.NewGuid() });
-            game.Players.Add(new Player() { Id = Guid.NewGuid() });
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
             game.ActivePlayer = game.Players.First();
             var attack = new Abra(game.ActivePlayer).Attacks[1];
@@ -36,8 +37,8 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
             var game = new GameField();
-            game.Players.Add(new Player() { Id = Guid.NewGuid() });
-            game.Players.Add(new Player() { Id = Guid.NewGuid() });
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
             game.ActivePlayer = game.Players.First();
 

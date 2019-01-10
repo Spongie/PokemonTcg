@@ -20,6 +20,11 @@ namespace TCGCards.Core
             DiscardPile = new List<Card>();
         }
 
+        public Player(NetworkPlayer networkPlayer) :this()
+        {
+            SetNetworkPlayer(networkPlayer);
+        }
+
         public void SetPrizeCards(int priceCards)
         {
             for(int _ = 0; _ < priceCards; _++)
@@ -168,26 +173,21 @@ namespace TCGCards.Core
             }
         }
 
-        public List<PokemonCard> BenchedPokemon { get; set; }
-
-        public PokemonCard ActivePokemonCard { get; set; }
-
-        public List<Card> PrizeCards { get; set; }
-
-        public List<Card> DiscardPile { get; set; }
-
-        public Deck Deck { get; set; }
-
         public void SetNetworkPlayer(NetworkPlayer networkPlayer)
         {
             Id = networkPlayer.Id;
             NetworkPlayer = networkPlayer;
         }
 
+        public List<PokemonCard> BenchedPokemon { get; set; }
+        public PokemonCard ActivePokemonCard { get; set; }
+        public List<Card> PrizeCards { get; set; }
+        public List<Card> DiscardPile { get; set; }
+        public Deck Deck { get; set; }
         public List<Card> Hand { get; set; }
-        public Guid Id { get; set; }
-        public NetworkPlayer NetworkPlayer { get; private set; }
         public bool HasPlayedEnergy { get; protected set; }
+        public NetworkId Id { get; set; }
+        public NetworkPlayer NetworkPlayer { get; private set; }
 
         public bool IsRegistered()
         {

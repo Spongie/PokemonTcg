@@ -698,7 +698,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &202063055 stripped
 Transform:
@@ -998,7 +998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &299087176 stripped
 Transform:
@@ -1416,7 +1416,7 @@ Transform:
   m_Children:
   - {fileID: 1558671348}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!1 &595113646
 GameObject:
@@ -1594,7 +1594,7 @@ Transform:
   - {fileID: 759668172}
   - {fileID: 331722389}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &712818467
 MonoBehaviour:
@@ -2065,7 +2065,7 @@ RectTransform:
   - {fileID: 30085172}
   - {fileID: 138625529}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2472,7 +2472,7 @@ Transform:
   m_Children:
   - {fileID: 1536293078}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!1 &1232315431
 GameObject:
@@ -2534,6 +2534,56 @@ Transform:
   m_Father: {fileID: 2078321277}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1240642608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1240642609}
+  - component: {fileID: 1240642610}
+  m_Layer: 0
+  m_Name: _GAMECONTROLLER_
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1240642609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240642608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.835617, y: 6.3426795, z: -2.9231377}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1240642610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240642608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6c201ae20e9fc4592385c2ef2b6f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentGameState: 0
+  playerHand: {fileID: 712818468}
+  opponentHand: {fileID: 1472484895}
+  playerBench: {fileID: 1698821628}
+  opponentBench: {fileID: 1295518144}
+  playerActivePokemon: {fileID: 1228191577}
+  opponentActivePokemon: {fileID: 592921443}
 --- !u!1 &1295518144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,7 +2631,7 @@ Transform:
   - {fileID: 1970863195}
   - {fileID: 275220158}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!4 &1309814122 stripped
 Transform:
@@ -3839,7 +3889,7 @@ Transform:
   - {fileID: 1359439038}
   - {fileID: 1403099658}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!114 &1698821630
 MonoBehaviour:
@@ -4632,7 +4682,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2078321276
 GameObject:

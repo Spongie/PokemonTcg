@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NetworkingCore;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Core
@@ -12,24 +13,18 @@ namespace TCGCards.Core
         public const int ConfusedDamage = 30;
         public const int BenchMaxSize = 5;
         private object lockObject = new object();
-        private HashSet<Guid> playersSetStartBench;
+        private HashSet<NetworkId> playersSetStartBench;
 
         public GameField()
         {
             Players = new List<Player>();
             StateQueue = new Queue<GameFieldState>();
-            playersSetStartBench = new HashSet<Guid>();
+            playersSetStartBench = new HashSet<NetworkId>();
             AttackStoppers = new List<AttackStopper>();
             DamageStoppers = new List<DamageStopper>();
             PassiveAbilities = new List<PassiveAbility>();
             TemporaryPassiveAbilities = new List<TemporaryPassiveAbility>();
-        }
-
-        public void Init()
-        {
-            Players.Add(new Player());
-            Players.Add(new Player());
-            ActivePlayer = Players[new Random().Next(Players.Count)];
+            GameState = GameFieldState.WaitingForConnection;
         }
 
         public void RevealCardsTo(List<Card> pickedCards, Player nonActivePlayer)
@@ -39,13 +34,16 @@ namespace TCGCards.Core
 
         public void InitTest()
         {
-            Players.Add(new Player { Id = Guid.NewGuid() });
-            Players.Add(new Player { Id = Guid.NewGuid() });
+            Players.Add(new Player { Id = NetworkId.Generate() });
+            Players.Add(new Player { Id = NetworkId.Generate() });
             ActivePlayer = Players[0];
+            NonActivePlayer = Players[1];
         }
 
-        public void OnActivePokemonSelected(Player owner, PokemonCard activePokemon)
+        public void OnActivePokemonSelected(NetworkId ownerId, PokemonCard activePokemon)
         {
+            var owner = Players.First(p => p.Id.Equals(ownerId));
+
             owner.SetActivePokemon(activePokemon);
 
             lock (lockObject)
@@ -107,11 +105,16 @@ namespace TCGCards.Core
         public void StartGame()
         {
             ActivePlayer = Players[new Random().Next(2)];
+            NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
 
-            foreach(var player in Players)
+            foreach (var player in Players)
             {
-                player.Deck.Shuffle();
-                player.DrawCards(StartingHandsize);
+                do
+                {
+                    player.Deck.Shuffle();
+                    player.DrawCards(StartingHandsize);
+                } while (!player.Hand.OfType<PokemonCard>().Any(p => p.Stage == 0));
+                //TODO: Actual mulligan rules
             }
 
             GameState = GameFieldState.BothSelectingActive;
@@ -288,6 +291,7 @@ namespace TCGCards.Core
         public void SwapActivePlayer()
         {
             ActivePlayer = Players.First(x => !x.Id.Equals(ActivePlayer.Id));
+            NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
         }
 
         public List<PassiveAbility> GetAllPassiveAbilities()
@@ -305,7 +309,7 @@ namespace TCGCards.Core
 
         public List<Player> Players { get; set; }
         public Player ActivePlayer { get; set; }
-        public Player NonActivePlayer { get { return Players.First(p => p.Id != ActivePlayer.Id); } }
+        public Player NonActivePlayer { get; set; }
         public int Mode { get; set; }
         public Queue<GameFieldState> StateQueue { get; set; }
 

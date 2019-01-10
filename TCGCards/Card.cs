@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using NetworkingCore;
 using TCGCards.Core;
 
 namespace TCGCards
@@ -10,13 +11,13 @@ namespace TCGCards
 
         protected Card(Player owner)
         {
-            Id = Guid.NewGuid();
+            Id = NetworkId.Generate();
             Owner = owner;
         }
 
         public abstract string GetName();
 
-        public Guid Id { get; protected set; }
+        public NetworkId Id { get; protected set; }
 
         protected CardSet Set { get; set; }
 

@@ -17,19 +17,21 @@ namespace Server
 {
     public class MasterServer
     {
+        private static MasterServer _instance;
         private Thread serverThread;
         private TcpListener listener;
-        private ConcurrentDictionary<Guid, NetworkPlayer> clients;
-        private Guid serverId;
         private Dictionary<string, IService> services;
+        private static object lockObject = new object();
 
         public void Start(int port)
         {
-            clients = new ConcurrentDictionary<Guid, NetworkPlayer>();
+            _instance = this;
+            Clients = new ConcurrentDictionary<NetworkId, NetworkPlayer>();
 
             services = new Dictionary<string, IService>
             {
-                { typeof(UserService).Name, new UserService() }
+                { typeof(UserService).Name, new UserService() },
+                { typeof(GameService).Name, new GameService() }
             };
 
             foreach (var service in services.Values)
@@ -44,7 +46,7 @@ namespace Server
             Database.Instance.CheckAndUpdate();
 
 
-            serverId = Guid.NewGuid();
+            Id = NetworkId.Generate();
             listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             listener.Start();
 
@@ -69,13 +71,15 @@ namespace Server
             {
                 var client = listener.AcceptTcpClient();
                 var player = new NetworkPlayer(client);
-                player.Id = Guid.NewGuid();
+
+                NetworkPlayer.logRequests = true;
+                player.Id = NetworkId.Generate();
 
                 Console.WriteLine("Player connected with id: " + player.Id);
 
-                player.Send(new NetworkMessage(MessageTypes.Connected, player.Id.ToString(), serverId, Guid.NewGuid()));
+                player.Send(new NetworkMessage(MessageTypes.Connected, player.Id, Id, NetworkId.Generate()));
                 player.DataReceived += Player_DataReceived;
-                clients.TryAdd(player.Id, player);
+                Clients.TryAdd(player.Id, player);
             }
         }
 
@@ -83,14 +87,14 @@ namespace Server
         {
             if (messageReceivedEvent.Message.MessageType == MessageTypes.Generic)
             {
-                var messageData = Serializer.Deserialize<GenericMessageData>(messageReceivedEvent.Message.Data);
+                var messageData = (GenericMessageData)messageReceivedEvent.Message.Data;
                 IService service = services[messageData.TargetClass];
                 var target = Assembly.GetExecutingAssembly().GetTypes().First(type => type.Name == messageData.TargetClass);
                 var result = target.GetMethod(messageData.TargetMethod).Invoke(service, messageData.Parameters);
 
-                if (clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
+                if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
                 {
-                    networkPlayer.Send(new NetworkMessage(MessageTypes.Test, Serializer.Serialize(result), Guid.NewGuid(), Guid.NewGuid(), messageReceivedEvent.Message.MessageId));
+                    networkPlayer.Send(new NetworkMessage(MessageTypes.Test, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId));
                 }
             }
             else
@@ -98,5 +102,16 @@ namespace Server
                 throw new InvalidOperationException("Bad message");
             }
         }
+
+        public static MasterServer Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
+        public ConcurrentDictionary<NetworkId, NetworkPlayer> Clients { get; private set; }
+        public NetworkId Id { get; set; }
     }
 }

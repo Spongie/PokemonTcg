@@ -14,15 +14,25 @@ namespace Assets.Code
         private Queue<NetworkMessage> messagesToPrint;
         private object lockObject = new object();
         public AsyncUserService userService;
-        //public Dictionary<MessageTypes, IMessageConsumer>; remember this
+        public AsyncGameService gameService;
+        public Dictionary<MessageTypes, IMessageConsumer> messageConsumers;
+        private Dictionary<NetworkId, Action<object>> responseMapper;
+
+        internal void RegisterCallback(NetworkId responseId, Action<object> callback)
+        {
+            responseMapper.Add(responseId, callback);
+        }
 
         void Awake()
         {
             Instance = this;
+            DontDestroyOnLoad(this);
         }
 
         void Start()
         {
+            responseMapper = new Dictionary<NetworkId, Action<object>>();
+            messageConsumers = new Dictionary<MessageTypes, IMessageConsumer>();
             messages = new List<NetworkMessage>();
             messagesToPrint = new Queue<NetworkMessage>();
 
@@ -30,7 +40,9 @@ namespace Assets.Code
             tcp.Connect("127.0.0.1", 1565);
             networkPlayer = new NetworkingCore.NetworkPlayer(tcp);
 
+            Me = networkPlayer;;
             userService = new AsyncUserService(networkPlayer);
+            gameService = new AsyncGameService(networkPlayer);
 
             networkPlayer.DataReceived += NetworkPlayer_DataReceived;
         }
@@ -54,16 +66,20 @@ namespace Assets.Code
                 }
             }
 
-            //if (networkPlayer.SpecificResponses.Count > 0)
-            //{
-            //    foreach (var item in networkPlayer.SpecificResponses)
-            //    {
-            //        Debug.Log(item.Data);
-            //    }
-            //}
+            if (networkPlayer.SpecificResponses.Count > 0)
+            {
+                foreach (var item in networkPlayer.SpecificResponses)
+                {
+                    if (responseMapper.ContainsKey(item.ResponseTo))
+                    {
+                        responseMapper[item.ResponseTo].Invoke(item);
+                        responseMapper.Remove(item.ResponseTo);
+                    }
+                }
+            }
         }
 
-        public NetworkMessage TryGetResponse(Guid messageId)
+        public NetworkMessage TryGetResponse(NetworkId messageId)
         {
             lock (lockObject)
             {
@@ -72,5 +88,6 @@ namespace Assets.Code
         }
 
         public static NetworkManager Instance { get; private set; }
+        public NetworkingCore.NetworkPlayer Me { get; internal set; }
     }
 }

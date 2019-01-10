@@ -13,7 +13,7 @@ public class AsyncUserService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public System.Guid Register(System.String userName,System.String password)
+	public NetworkingCore.NetworkId Register(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{
@@ -24,8 +24,8 @@ public class AsyncUserService
 		
 		networkPlayer.Send(message);	
 		return message.MessageId;
-	}
-public System.Guid Login(System.String userName,System.String password)
+	} 
+public NetworkingCore.NetworkId Login(System.String userName,System.String password)
 	{
 		var message = new GenericMessageData
 		{
@@ -36,5 +36,5 @@ public System.Guid Login(System.String userName,System.String password)
 		
 		networkPlayer.Send(message);	
 		return message.MessageId;
-	}
+	} 
 }

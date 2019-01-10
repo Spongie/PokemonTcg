@@ -11,6 +11,7 @@ namespace NetworkingCore
 {
     public class NetworkPlayer
     {
+        public static bool logRequests = false;
         private TcpClient client;
         private NetworkStream stream;
         private Thread writingThread;
@@ -86,9 +87,9 @@ namespace NetworkingCore
 
                     if (message.MessageType == MessageTypes.Connected)
                     {
-                        Id = Guid.Parse(message.Data);
+                        Id = (NetworkId)message.Data;
                     }
-                    else if (message.ResponseTo != Guid.Empty)
+                    else if (message.ResponseTo.Value != Guid.Empty)
                     {
                         SpecificResponses.Add(message);
                     }
@@ -107,15 +108,15 @@ namespace NetworkingCore
             while (true)
             {
                 Thread.Sleep(100);
-                NetworkMessage response = SpecificResponses.FirstOrDefault(m => m.ResponseTo == message.MessageId);
+                NetworkMessage response = SpecificResponses.FirstOrDefault(m => m.ResponseTo.Equals(message.MessageId));
                 if (response != null)
                 {
-                    return Serializer.Deserialize<JObject>(response.Data).ToObject<T>();
+                    return (T)response.Data;
                 }
             }
         }
 
-        public Guid Id { get; set; }
+        public NetworkId Id { get; set; }
         public string Name { get; set; }
         public ConcurrentBag<NetworkMessage> SpecificResponses { get; private set; }
     }

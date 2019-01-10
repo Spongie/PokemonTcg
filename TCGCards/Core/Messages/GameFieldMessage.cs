@@ -6,10 +6,10 @@ namespace TCGCards.Core.Messages
     {
         public GameFieldMessage(GameField game)
         {
-            Game = game;
+            Game = new ClientGameField(game);
             messageType = MessageTypes.GameUpdate;
         }
 
-        public GameField Game { get; set; }
+        public ClientGameField Game { get; set; }
     }
 }
