@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
@@ -11,7 +12,6 @@ namespace NetworkingCore
 {
     public class NetworkPlayer
     {
-        public static bool logRequests = false;
         private TcpClient client;
         private NetworkStream stream;
         private Thread writingThread;
@@ -79,11 +79,22 @@ namespace NetworkingCore
                     int dataSize = BitConverter.ToInt32(dataPrefix, 0);
                     data = new byte[dataSize];
 
-                    stream.Read(data, 0, data.Length);
+                    int bytesRemaining = dataSize;
+                    int offset = 0;
+
+                    while (bytesRemaining > 0)
+                    {
+                        var readBytes = stream.Read(data, offset, bytesRemaining);
+                        bytesRemaining -= readBytes;
+                        offset += readBytes;
+                    }
+
                     inputStream.Write(data, 0, dataSize);
 
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
+
                     var message = Serializer.Deserialize<NetworkMessage>(input);
+                    message.Received = DateTime.Now;
 
                     if (message.MessageType == MessageTypes.Connected)
                     {

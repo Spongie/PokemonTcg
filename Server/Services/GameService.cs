@@ -21,7 +21,7 @@ namespace Server.Services
             //TODO
         }
 
-        public ClientGameField HostGame(NetworkId hostPlayer)
+        public GameField HostGame(NetworkId hostPlayer)
         {
             theOnlyActiveGame = new GameField();
 
@@ -66,10 +66,10 @@ namespace Server.Services
 
             theOnlyActiveGame.Players.Add(p);
 
-            return new ClientGameField(theOnlyActiveGame);
+            return theOnlyActiveGame;
         }
 
-        public ClientGameField JoinTheActiveGame(NetworkId playerToJoin)
+        public GameField JoinTheActiveGame(NetworkId playerToJoin)
         {
             var p = new Player(MasterServer.Instance.Clients[playerToJoin]);
             p.SetDeck(new Deck
@@ -114,9 +114,9 @@ namespace Server.Services
 
             theOnlyActiveGame.StartGame();
 
-            SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(p.Id)));
+            //SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(p.Id)));
 
-            return new ClientGameField(theOnlyActiveGame);
+            return theOnlyActiveGame;
         }
 
         public GameField SetActivePokemon(NetworkId playerId, PokemonCard pokemonCard)

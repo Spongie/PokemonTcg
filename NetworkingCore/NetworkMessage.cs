@@ -32,15 +32,11 @@ namespace NetworkingCore
         public NetworkId SenderId { get; set; }
         public NetworkId MessageId { get; set; }
         public NetworkId ResponseTo { get; set; }
+        public DateTime Received { get; set; }
 
         public void Send(NetworkStream stream)
         {
             string message = Serializer.Serialize(this);
-
-            if (NetworkPlayer.logRequests)
-            {
-                File.WriteAllText("D:\\Dump\\request.json", message);
-            }
 
             var jsonBytes = Encoding.UTF8.GetBytes(message);
 

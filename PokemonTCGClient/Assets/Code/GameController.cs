@@ -7,7 +7,7 @@ namespace Assets.Code
 {
     public class GameController : MonoBehaviour
     {
-        public ClientGameField gameField;
+        public GameField gameField;
         public GameFieldState CurrentGameState;
         public HandController playerHand;
         public HandController opponentHand;
@@ -25,8 +25,7 @@ namespace Assets.Code
 
         private void OnGameHosted(object param1)
         {
-            var response = (GameFieldMessage)param1;
-            gameField = response.Game;
+            gameField = (GameField)param1;
         }
 
         private void Update()

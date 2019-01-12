@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
     <ProjectReference Include="..\ServerProxy\ServerProxy.csproj" />
+    <ProjectReference Include="..\TeamRocket\TeamRocket.csproj" />
   </ItemGroup>
 
 </Project>

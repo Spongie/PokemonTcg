@@ -13,7 +13,7 @@ public class GameService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public TCGCards.ClientGameField HostGame(NetworkingCore.NetworkId hostPlayer)
+	public TCGCards.Core.GameField HostGame(NetworkingCore.NetworkId hostPlayer)
 	{
 		var message = new GenericMessageData
 		{
@@ -22,9 +22,9 @@ public class GameService
 			Parameters = new object[] { hostPlayer }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
-		return networkPlayer.SendAndWaitForResponse<TCGCards.ClientGameField>(message);
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.ClientGameField JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin)
+public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin)
 	{
 		var message = new GenericMessageData
 		{
@@ -33,7 +33,7 @@ public TCGCards.ClientGameField JoinTheActiveGame(NetworkingCore.NetworkId playe
 			Parameters = new object[] { playerToJoin }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
-		return networkPlayer.SendAndWaitForResponse<TCGCards.ClientGameField>(message);
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
 public TCGCards.Core.GameField SetActivePokemon(NetworkingCore.NetworkId playerId,TCGCards.PokemonCard pokemonCard)
 	{

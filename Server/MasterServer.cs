@@ -75,8 +75,7 @@ namespace Server
             {
                 var client = listener.AcceptTcpClient();
                 var player = new NetworkPlayer(client);
-
-                NetworkPlayer.logRequests = true;
+                
                 player.Id = NetworkId.Generate();
 
                 Console.WriteLine("Player connected with id: " + player.Id);

@@ -7,7 +7,7 @@ namespace NetworkingCore
         private static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings()
         {
             TypeNameHandling = TypeNameHandling.Auto,
-            Formatting = Formatting.Indented,
+            Formatting = Formatting.None,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects
         };
 

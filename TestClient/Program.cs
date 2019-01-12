@@ -51,6 +51,20 @@ namespace TestClient
                 {
                     PlayGame();
                 }
+                if (input == "host")
+                {
+                    Console.Clear();
+
+                    for (int i = 1; i <= 1000; i++)
+                    {
+                        var xxxx  = new GameService(networkPlayer).HostGame(networkPlayer.Id);
+                        Console.SetCursorPosition(0, 0);
+                        Console.WriteLine($"{i} / 1000");
+                        Thread.Sleep(25);
+                    }
+
+                    Console.WriteLine("pass");
+                }
 
             } while (input.ToLower() != "exit");
         }
@@ -59,7 +73,7 @@ namespace TestClient
         {
             var gameField = gameService.JoinTheActiveGame(networkPlayer.Id);
 
-            ClientPlayer me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
+            Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
             PokemonCard starter = me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).FirstOrDefault();
         }
 

@@ -1,4 +1,5 @@
 ﻿using NetworkingCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -187,6 +188,7 @@ namespace TCGCards.Core
         public List<Card> Hand { get; set; }
         public bool HasPlayedEnergy { get; protected set; }
         public NetworkId Id { get; set; }
+        [JsonIgnore]
         public NetworkPlayer NetworkPlayer { get; private set; }
 
         public bool IsRegistered()
