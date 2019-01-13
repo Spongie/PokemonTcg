@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.IO;
 using TCGCards;
 using UnityEngine;
@@ -52,13 +51,7 @@ namespace Assets.Code
         {
             if (ActivatePointerEnterOrExit())
             {
-                if (isBenched)
-                {
-                    handController.FadeOut();
-                    //previewImage.color = new Color(1, 1, 1, 1);
-                    //previewImage.texture = meshRenderer.material.mainTexture;
-                }
-                else
+                if (!isBenched)
                 {
                     transform.localScale = new Vector3(HoverScaleX, HoverScaleY, 1);
                     StartCoroutine(MoveIntoScreen());
@@ -70,12 +63,7 @@ namespace Assets.Code
         {
             if (ActivatePointerEnterOrExit())
             {
-                if (isBenched)
-                {
-                    handController.FadeIn();
-                    //previewImage.color = new Color(1, 1, 1, 0);
-                }
-                else
+                if (!isBenched)
                 {
                     transform.localScale = new Vector3(DefaultScaleX, DefaultScaleY, 1);
                     StartCoroutine(MoveOutOfScreen());
