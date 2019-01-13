@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
-using TCGCards.EnergyCards;
-using TestCards;
 using UnityEngine;
 
 namespace Assets.Code

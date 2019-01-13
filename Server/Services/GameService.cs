@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NetworkingCore;
-using NetworkingCore.Messages;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TCGCards.Core
+﻿namespace TCGCards.Core
 {
     public class Damage
     {

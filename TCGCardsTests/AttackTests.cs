@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;

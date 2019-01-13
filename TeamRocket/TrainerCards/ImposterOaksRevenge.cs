@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TCGCards;
+﻿using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 

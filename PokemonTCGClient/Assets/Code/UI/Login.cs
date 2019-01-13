@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Code;
+﻿using Assets.Code;
 using NetworkingCore;
 using UnityEngine;
 using UnityEngine.SceneManagement;

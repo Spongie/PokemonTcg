@@ -10,7 +10,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
-using Entities;
 using System.IO;
 
 namespace Server

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NetworkingCore
+﻿namespace NetworkingCore
 {
     public abstract class AbstractNetworkMessage
     {

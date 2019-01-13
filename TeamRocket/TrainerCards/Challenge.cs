@@ -1,12 +1,9 @@
 ﻿using NetworkingCore.Messages;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
-using TCGCards.Core.Messages;
 
 namespace TeamRocket.TrainerCards
 {

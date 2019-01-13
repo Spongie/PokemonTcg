@@ -1,6 +1,4 @@
-﻿using System;
-using NetworkingCore;
-using TCGCards;
+﻿using NetworkingCore;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using UnityEngine;
