@@ -82,7 +82,28 @@ namespace Server
 
                 player.Send(new NetworkMessage(MessageTypes.Connected, player.Id, Id, NetworkId.Generate()));
                 player.DataReceived += Player_DataReceived;
+                player.OnDisconnected += Player_OnDisconnected;
                 Clients.TryAdd(player.Id, player);
+            }
+        }
+
+        private void Player_OnDisconnected(object sender, NetworkId playerId)
+        {
+            if(Clients.TryGetValue(playerId, out NetworkPlayer player))
+            {
+                try
+                {
+                    player.Disconnect(false);
+                }
+                catch (Exception)
+                {
+                    
+                }
+                finally
+                {
+                    Clients.TryRemove(playerId, out player);
+                    Logger.Instance.Log($"Player with id {playerId} disconnected");
+                }
             }
         }
 

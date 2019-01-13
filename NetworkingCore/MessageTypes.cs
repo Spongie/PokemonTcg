@@ -10,6 +10,7 @@
         Attack,
         DeckSearch,
         SelectedActive,
-        SelectedBench
+        SelectedBench,
+        Disconnect
     }
 }

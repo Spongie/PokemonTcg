@@ -72,7 +72,7 @@ namespace Assets.Code
                 {
                     if (responseMapper.ContainsKey(item.ResponseTo))
                     {
-                        responseMapper[item.ResponseTo].Invoke(item);
+                        responseMapper[item.ResponseTo].Invoke(item.Data);
                         responseMapper.Remove(item.ResponseTo);
                     }
                 }
@@ -85,6 +85,11 @@ namespace Assets.Code
             {
                 return networkPlayer.SpecificResponses.FirstOrDefault(message => message.ResponseTo.Equals(messageId));
             }
+        }
+
+        private void OnDestroy()
+        {
+            Me.Disconnect(true);
         }
 
         public static NetworkManager Instance { get; private set; }

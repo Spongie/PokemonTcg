@@ -114,19 +114,38 @@ namespace Server.Services
 
             theOnlyActiveGame.StartGame();
 
-            //SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(p.Id)));
+            SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(p.Id)));
 
             return theOnlyActiveGame;
         }
 
-        public GameField SetActivePokemon(NetworkId playerId, PokemonCard pokemonCard)
+        public GameField AddToBench(NetworkId playerId, List<PokemonCard> pokemons)
         {
-            theOnlyActiveGame.OnActivePokemonSelected(playerId, pokemonCard);
+            foreach (var pokemon in pokemons)
+            {
+                theOnlyActiveGame.Players.First(p => p.Id.Equals(playerId)).SetBenchedPokemon(pokemon);
+            }
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(playerId)));
 
             return theOnlyActiveGame;
         }
 
-        //TODO BENCH
+        public GameField SetActivePokemon(NetworkId playerId, PokemonCard pokemon)
+        {
+            theOnlyActiveGame.OnActivePokemonSelected(playerId, pokemon);
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(playerId)));
+
+            return theOnlyActiveGame;
+        }
+
+        public GameField Attack(Attack attack)
+        {
+            theOnlyActiveGame.Attack(attack);
+
+            return theOnlyActiveGame;
+        }
 
         private void SendUpdateToPlayers(IEnumerable<Player> players)
         {

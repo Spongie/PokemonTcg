@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TCGCards.Core;
 using System.Linq;
+using NetworkingCore;
 
 namespace TCGCards
 {
@@ -9,6 +10,7 @@ namespace TCGCards
         public Attack()
         {
             Description = string.Empty;
+            Id = NetworkId.Generate();
         }
 
         public string Name { get; set; }
@@ -18,6 +20,8 @@ namespace TCGCards
         public List<Energy> Cost { get; set; }
 
         public bool ApplyWeaknessAndResistance { get; set; } = true;
+
+        public NetworkId Id { get; set; }
 
         public abstract Damage GetDamage(Player owner, Player opponent);
 
@@ -47,6 +51,29 @@ namespace TCGCards
             }
 
             return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Attack;
+
+            if (other == null)
+            {
+                return false;
+            }
+
+            return other.Id.Equals(Id);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 927195835;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Energy>>.Default.GetHashCode(Cost);
+            hashCode = hashCode * -1521134295 + ApplyWeaknessAndResistance.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<NetworkId>.Default.GetHashCode(Id);
+            return hashCode;
         }
     }
 }

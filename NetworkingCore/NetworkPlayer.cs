@@ -18,6 +18,9 @@ namespace NetworkingCore
         private Thread readerThread;
         private ConcurrentQueue<NetworkMessage> messageQueue;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
+        public event EventHandler<NetworkId> OnDisconnected;
+        private bool writing = true;
+        private bool reading = true;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
@@ -45,7 +48,7 @@ namespace NetworkingCore
 
         void WritingThread()
         {
-            while(true)
+            while(writing)
             {
                 if(!messageQueue.Any())
                 {
@@ -62,7 +65,7 @@ namespace NetworkingCore
 
         void ReadingThread()
         {
-            while(true)
+            while(reading)
             {
                 byte[] data;
                 using(var inputStream = new MemoryStream())
@@ -100,6 +103,10 @@ namespace NetworkingCore
                     {
                         Id = (NetworkId)message.Data;
                     }
+                    if (message.MessageType == MessageTypes.Disconnect)
+                    {
+                        OnDisconnected?.Invoke(this, message.SenderId);
+                    }
                     else if (message.ResponseTo.Value != Guid.Empty)
                     {
                         SpecificResponses.Add(message);
@@ -109,6 +116,30 @@ namespace NetworkingCore
                         DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
                     }
                 }
+            }
+        }
+
+        public void Disconnect(bool sendDisconnectMessage)
+        {
+            if (sendDisconnectMessage)
+            {
+                SendAndWaitForDisconnect();
+            }
+
+            reading = false;
+            writing = false;
+            Thread.Sleep(16);
+            stream.Close();
+            client.Close();
+        }
+
+        private void SendAndWaitForDisconnect()
+        {
+            messageQueue.Enqueue(new NetworkMessage(MessageTypes.Disconnect, null, Id, NetworkId.Generate()));
+            
+            while (messageQueue.Any())
+            {
+                Thread.Sleep(50);
             }
         }
 
