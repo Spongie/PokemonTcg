@@ -19,6 +19,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
             game.ActivePlayer = game.Players.First();
+            game.NonActivePlayer = game.Players.Last();
             var attack = new Abra(game.ActivePlayer).Attacks[1];
 
             game.ActivePlayer.ActivePokemonCard = new Abra(game.ActivePlayer);
@@ -40,6 +41,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
             game.ActivePlayer = game.Players.First();
+            game.NonActivePlayer = game.Players.Last();
 
             game.ActivePlayer.ActivePokemonCard = new Abra(game.ActivePlayer);
             game.NonActivePlayer.ActivePokemonCard = new Abra(game.NonActivePlayer);

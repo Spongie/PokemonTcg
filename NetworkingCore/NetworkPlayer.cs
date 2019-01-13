@@ -23,7 +23,7 @@ namespace NetworkingCore
         public NetworkPlayer(TcpClient tcpClient)
         {
             messageQueue = new ConcurrentQueue<NetworkMessage>();
-            SpecificResponses = new ConcurrentBag<NetworkMessage>();
+            SpecificResponses = new ConcurrentDictionary<NetworkId, NetworkMessage>();
             SetTcpClient(tcpClient);
         }
 
@@ -107,7 +107,7 @@ namespace NetworkingCore
                     }
                     else if (!message.ResponseTo.Value.Equals(NetworkId.Empty))
                     {
-                        SpecificResponses.Add(message);
+                        SpecificResponses.TryAdd(message.ResponseTo, message);
                     }
                     else
                     {
@@ -148,8 +148,8 @@ namespace NetworkingCore
             while (true)
             {
                 Thread.Sleep(100);
-                NetworkMessage response = SpecificResponses.FirstOrDefault(m => m.ResponseTo.Equals(message.MessageId));
-                if (response != null)
+                
+                if (SpecificResponses.TryGetValue(message.MessageId, out NetworkMessage response))
                 {
                     return (T)response.Data;
                 }
@@ -158,6 +158,6 @@ namespace NetworkingCore
 
         public NetworkId Id { get; set; }
         public string Name { get; set; }
-        public ConcurrentBag<NetworkMessage> SpecificResponses { get; private set; }
+        public ConcurrentDictionary<NetworkId, NetworkMessage> SpecificResponses { get; private set; }
     }
 }

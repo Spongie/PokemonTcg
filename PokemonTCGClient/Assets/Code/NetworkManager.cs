@@ -1,7 +1,6 @@
 ﻿using NetworkingCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
 
@@ -58,7 +57,6 @@ namespace Assets.Code
         {
             lock (lockObject)
             {
-                messages.Add(e.Message);
                 messagesToPrint.Enqueue(e.Message);
             }
         }
@@ -71,29 +69,42 @@ namespace Assets.Code
                 {
                     NetworkMessage message = messagesToPrint.Dequeue();
                     Debug.Log(message.Data);
-                    CheckMessageHandlers(message);
+
+                    if (responseMapper.ContainsKey(message.ResponseTo))
+                    {
+                        responseMapper[message.ResponseTo].Invoke(message.Data);
+                        responseMapper.Remove(message.ResponseTo);
+                    }
+                    if (messageConsumers.ContainsKey(message.MessageType))
+                    {
+                        messageConsumers[message.MessageType].Invoke(message.Data);
+                    }
                 }
             }
-
+            
             if (networkPlayer.SpecificResponses.Count > 0)
             {
-                foreach (var item in networkPlayer.SpecificResponses)
-                {
-                    CheckMessageHandlers(item);
-                }
-            }
-        }
+                var handledMessages = new List<NetworkId>();
 
-        private void CheckMessageHandlers(NetworkMessage item)
-        {
-            if (responseMapper.ContainsKey(item.ResponseTo))
-            {
-                responseMapper[item.ResponseTo].Invoke(item.Data);
-                responseMapper.Remove(item.ResponseTo);
-            }
-            if (messageConsumers.ContainsKey(item.MessageType))
-            {
-                messageConsumers[item.MessageType].Invoke(item.Data);
+                foreach (var item in networkPlayer.SpecificResponses.Values)
+                {
+                    if (responseMapper.ContainsKey(item.ResponseTo))
+                    {
+                        responseMapper[item.ResponseTo].Invoke(item.Data);
+                        responseMapper.Remove(item.ResponseTo);
+                        handledMessages.Add(item.ResponseTo);
+                    }
+                    if (messageConsumers.ContainsKey(item.MessageType))
+                    {
+                        messageConsumers[item.MessageType].Invoke(item.Data);
+                        handledMessages.Add(item.ResponseTo);
+                    }
+                }
+
+                foreach (var id in handledMessages)
+                {
+                    networkPlayer.SpecificResponses.TryRemove(id, out NetworkMessage _);
+                }
             }
         }
 
@@ -101,7 +112,12 @@ namespace Assets.Code
         {
             lock (lockObject)
             {
-                return networkPlayer.SpecificResponses.FirstOrDefault(message => message.ResponseTo.Equals(messageId));
+                if (networkPlayer.SpecificResponses.TryGetValue(messageId, out NetworkMessage response))
+                {
+                    return response;
+                }
+
+                return null;
             }
         }
 

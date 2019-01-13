@@ -38,6 +38,12 @@ namespace TCGCards.Core
             Players.Add(new Player { Id = NetworkId.Generate() });
             ActivePlayer = Players[0];
             NonActivePlayer = Players[1];
+
+            for (int i = 0; i < 20; i++)
+            {
+                ActivePlayer.Deck.Cards.Push(new TestPokemonCard(ActivePlayer));
+                NonActivePlayer.Deck.Cards.Push(new TestPokemonCard(NonActivePlayer));
+            }
         }
 
         public void OnActivePokemonSelected(NetworkId ownerId, PokemonCard activePokemon)
@@ -111,6 +117,13 @@ namespace TCGCards.Core
             {
                 do
                 {
+                    foreach (var card in player.Hand)
+                    {
+                        player.Deck.Cards.Push(card);
+                    }
+
+                    player.Hand.Clear();
+
                     player.Deck.Shuffle();
                     player.DrawCards(StartingHandsize);
                 } while (!player.Hand.OfType<PokemonCard>().Any(p => p.Stage == 0));

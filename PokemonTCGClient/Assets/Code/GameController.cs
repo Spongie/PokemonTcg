@@ -27,9 +27,12 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
         }
 
-        private void OnGameUpdated(object game)
+        private void OnGameUpdated(object message)
         {
-            gameField = ((GameFieldMessage)game).Game;
+            var gameMessage = (GameFieldMessage)message;
+            Debug.Log("Game updated, handling message");
+
+            gameField = gameMessage.Game;
 
             if (gameField.GameState == GameFieldState.WaitingForConnection)
             {

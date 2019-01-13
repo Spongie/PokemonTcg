@@ -131,6 +131,7 @@ namespace TCGCards.Tests
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
             game.ActivePlayer = game.Players.First();
+            game.NonActivePlayer = game.Players.Last();
 
             game.ActivePlayer.ActivePokemonCard = new TestPokemon(game.ActivePlayer);
             game.NonActivePlayer.ActivePokemonCard = new TestPokemon(game.NonActivePlayer);
