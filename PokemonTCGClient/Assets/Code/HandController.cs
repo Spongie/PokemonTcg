@@ -20,10 +20,9 @@ namespace Assets.Code
             {
                 GameObject cardInHand = Instantiate(HandCardPrefab, transform);
                 var cardController = cardInHand.GetComponent<CardController>();
-                cardController.card = card;
                 cardController.opponentCard = opponentHand;
                 cardController.inHand = true;
-                cardController.ReloadImage();
+                cardController.SetCard(card);
             }
 
             GetComponent<HandStacker>().ReDrawHand();

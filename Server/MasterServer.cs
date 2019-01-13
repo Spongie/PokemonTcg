@@ -30,7 +30,8 @@ namespace Server
             services = new Dictionary<string, IService>
             {
                 { typeof(UserService).Name, new UserService() },
-                { typeof(GameService).Name, new GameService() }
+                { typeof(GameService).Name, new GameService() },
+                { typeof(ImageService).Name, new ImageService() }
             };
 
             foreach (var service in services.Values)

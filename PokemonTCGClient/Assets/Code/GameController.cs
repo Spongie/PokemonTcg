@@ -1,4 +1,5 @@
-﻿using NetworkingCore;
+﻿using System.Linq;
+using NetworkingCore;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using UnityEngine;
@@ -15,18 +16,28 @@ namespace Assets.Code
         public GameObject opponentBench;
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
+        public NetworkId myId;
 
         private void Start()
         {
+            myId = NetworkManager.Instance.Me.Id;
             var messageId = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
 
             NetworkManager.Instance.RegisterCallback(messageId, OnGameHosted);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
         }
 
-        private void OnGameUpdated(object gameField)
+        private void OnGameUpdated(object game)
         {
-            this.gameField = ((GameFieldMessage)gameField).Game;
+            gameField = ((GameFieldMessage)game).Game;
+
+            if (gameField.GameState == GameFieldState.WaitingForConnection)
+            {
+                return;
+            }
+
+            playerHand.SetHand(gameField.Players.First(p => p.Id.Equals(myId)).Hand);
+            opponentHand.SetHand(gameField.Players.First(p => !p.Id.Equals(myId)).Hand);
         }
 
         private void OnGameHosted(object param1)

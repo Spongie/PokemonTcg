@@ -15,6 +15,7 @@ namespace Assets.Code
         private object lockObject = new object();
         public AsyncUserService userService;
         public AsyncGameService gameService;
+        public AsyncImageService imageService;
         public Dictionary<MessageTypes, Action<object>> messageConsumers;
         private Dictionary<NetworkId, Action<object>> responseMapper;
 
@@ -48,6 +49,7 @@ namespace Assets.Code
             Me = networkPlayer;;
             userService = new AsyncUserService(networkPlayer);
             gameService = new AsyncGameService(networkPlayer);
+            imageService = new AsyncImageService(networkPlayer);
 
             networkPlayer.DataReceived += NetworkPlayer_DataReceived;
         }

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 using TCGCards;
-using TestCards;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 namespace Assets.Code
@@ -29,14 +30,12 @@ namespace Assets.Code
 
         public RawImage previewImage;
 
-        private MeshRenderer meshRenderer;
+        public MeshRenderer meshRenderer;
         private bool stopFadeOut;
 
         void Start()
         {
-            meshRenderer = GetComponent<MeshRenderer>();
             defaultY = transform.position.y;
-            SetCard(new TestEkans(null));
         }
 
         public virtual void SetCard(Card card)
@@ -127,14 +126,23 @@ namespace Assets.Code
             }
             else
             {
-                string finalPath = "file://" + Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
-                var localFile = new WWW(finalPath);
+                
+                string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
+                string finalPath = "file:///" + fullCardPath;
 
-                yield return localFile;
+                Debug.Log("Loading image: " + fullCardPath);
 
-                var texture = localFile.texture;
+                using (var request = UnityWebRequestTexture.GetTexture(finalPath))
+                {
+                    yield return request.SendWebRequest();
 
-                meshRenderer.material.mainTexture = texture;
+                    if (request.isNetworkError || request.isHttpError)
+                    {
+                        Debug.Log("Error fetching texture");
+                    }
+
+                    meshRenderer.material.mainTexture = DownloadHandlerTexture.GetContent(request);
+                }
             }
         }
 
