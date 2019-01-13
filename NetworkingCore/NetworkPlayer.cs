@@ -107,7 +107,7 @@ namespace NetworkingCore
                     {
                         OnDisconnected?.Invoke(this, message.SenderId);
                     }
-                    else if (message.ResponseTo.Value != Guid.Empty)
+                    else if (!message.ResponseTo.Value.Equals(NetworkId.Empty))
                     {
                         SpecificResponses.Add(message);
                     }

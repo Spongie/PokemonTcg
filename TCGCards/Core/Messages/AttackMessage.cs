@@ -7,7 +7,7 @@ namespace TCGCards.Core.Messages
         public AttackMessage(Attack attack)
         {
             Attack = attack;
-            messageType = MessageTypes.Attack;
+            MessageType = MessageTypes.Attack;
         }
 
         public Attack Attack { get; set; }

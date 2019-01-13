@@ -8,7 +8,7 @@ namespace TCGCards.Core.Messages
         {
             SelectedPokemon = active;
             Owner = owner;
-            messageType = MessageTypes.SelectedActive;
+            MessageType = MessageTypes.SelectedActive;
         }
 
         public PokemonCard SelectedPokemon { get; set; }

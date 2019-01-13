@@ -7,7 +7,7 @@ namespace TCGCards.Core.Messages
         public GameFieldMessage(GameField game)
         {
             Game = game;
-            messageType = MessageTypes.GameUpdate;
+            MessageType = MessageTypes.GameUpdate;
         }
 
         public GameField Game { get; set; }

@@ -1,4 +1,6 @@
-﻿using TCGCards;
+﻿using System;
+using NetworkingCore;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using UnityEngine;
@@ -20,7 +22,13 @@ namespace Assets.Code
         {
             var messageId = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
 
-            NetworkManager.Instance.RegisterCallback(messageId, OnGameHosted); 
+            NetworkManager.Instance.RegisterCallback(messageId, OnGameHosted);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
+        }
+
+        private void OnGameUpdated(object gameField)
+        {
+            this.gameField = ((GameFieldMessage)gameField).Game;
         }
 
         private void OnGameHosted(object param1)

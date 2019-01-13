@@ -37,7 +37,7 @@ public NetworkingCore.NetworkId JoinTheActiveGame(NetworkingCore.NetworkId playe
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId AddToBench(NetworkingCore.NetworkId playerId,System.Collections.Generic.List`1[[TCGCards.PokemonCard, TCGCards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] pokemons)
+public NetworkingCore.NetworkId AddToBench(NetworkingCore.NetworkId playerId,System.Collections.Generic.List<TCGCards.PokemonCard> pokemons)
 	{
 		var message = new GenericMessageData
 		{

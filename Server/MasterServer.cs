@@ -118,7 +118,7 @@ namespace Server
 
                 if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
                 {
-                    networkPlayer.Send(new NetworkMessage(MessageTypes.Test, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId));
+                    networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId));
                 }
             }
             else

@@ -11,7 +11,7 @@ namespace TCGCards.Core.Messages
             Filters = filters;
             CardCount = cardCount;
             PickedCards = new List<Card>();
-            messageType = MessageTypes.DeckSearch;
+            MessageType = MessageTypes.DeckSearch;
         }
 
         public Player Player { get; }

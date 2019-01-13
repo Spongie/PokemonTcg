@@ -4,7 +4,7 @@
     {
         public GenericMessageData()
         {
-            messageType = MessageTypes.Generic;
+            MessageType = MessageTypes.Generic;
         }
 
         public string TargetClass { get; set; }

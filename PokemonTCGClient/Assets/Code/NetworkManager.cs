@@ -15,12 +15,17 @@ namespace Assets.Code
         private object lockObject = new object();
         public AsyncUserService userService;
         public AsyncGameService gameService;
-        public Dictionary<MessageTypes, IMessageConsumer> messageConsumers;
+        public Dictionary<MessageTypes, Action<object>> messageConsumers;
         private Dictionary<NetworkId, Action<object>> responseMapper;
 
         internal void RegisterCallback(NetworkId responseId, Action<object> callback)
         {
             responseMapper.Add(responseId, callback);
+        }
+
+        internal void RegisterCallback(MessageTypes messageTypes, Action<object> callback)
+        {
+            messageConsumers.Add(messageTypes, callback);
         }
 
         void Awake()
@@ -32,7 +37,7 @@ namespace Assets.Code
         void Start()
         {
             responseMapper = new Dictionary<NetworkId, Action<object>>();
-            messageConsumers = new Dictionary<MessageTypes, IMessageConsumer>();
+            messageConsumers = new Dictionary<MessageTypes, Action<object>>();
             messages = new List<NetworkMessage>();
             messagesToPrint = new Queue<NetworkMessage>();
 
@@ -62,7 +67,9 @@ namespace Assets.Code
             {
                 while (messagesToPrint.Count > 0)
                 {
-                    Debug.Log(messagesToPrint.Dequeue().Data);
+                    NetworkMessage message = messagesToPrint.Dequeue();
+                    Debug.Log(message.Data);
+                    CheckMessageHandlers(message);
                 }
             }
 
@@ -70,12 +77,21 @@ namespace Assets.Code
             {
                 foreach (var item in networkPlayer.SpecificResponses)
                 {
-                    if (responseMapper.ContainsKey(item.ResponseTo))
-                    {
-                        responseMapper[item.ResponseTo].Invoke(item.Data);
-                        responseMapper.Remove(item.ResponseTo);
-                    }
+                    CheckMessageHandlers(item);
                 }
+            }
+        }
+
+        private void CheckMessageHandlers(NetworkMessage item)
+        {
+            if (responseMapper.ContainsKey(item.ResponseTo))
+            {
+                responseMapper[item.ResponseTo].Invoke(item.Data);
+                responseMapper.Remove(item.ResponseTo);
+            }
+            if (messageConsumers.ContainsKey(item.MessageType))
+            {
+                messageConsumers[item.MessageType].Invoke(item.Data);
             }
         }
 

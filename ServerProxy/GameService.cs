@@ -35,7 +35,7 @@ public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId player
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField AddToBench(NetworkingCore.NetworkId playerId,System.Collections.Generic.List`1[[TCGCards.PokemonCard, TCGCards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] pokemons)
+public TCGCards.Core.GameField AddToBench(NetworkingCore.NetworkId playerId,System.Collections.Generic.List<TCGCards.PokemonCard> pokemons)
 	{
 		var message = new GenericMessageData
 		{

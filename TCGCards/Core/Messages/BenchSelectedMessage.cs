@@ -6,7 +6,7 @@ namespace TCGCards.Core.Messages
     {
         public BenchSelectedMessage(PokemonCard active, Player owner) : base(active, owner)
         {
-            messageType = MessageTypes.SelectedBench;
+            MessageType = MessageTypes.SelectedBench;
         }
     }
 }

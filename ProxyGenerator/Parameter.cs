@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ProxyGenerator
 {
@@ -9,6 +10,12 @@ namespace ProxyGenerator
 
         public override string ToString()
         {
+            if (Type.IsGenericType)
+            {
+                string generics = $"<{string.Join(',', Type.GenericTypeArguments.Select(t => t.FullName))}>";
+                return $"System.Collections.Generic.List{generics} {Name}";
+            }
+
             return $"{Type.FullName} {Name}";
         }
     }
