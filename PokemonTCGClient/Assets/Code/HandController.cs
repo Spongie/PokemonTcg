@@ -27,5 +27,28 @@ namespace Assets.Code
 
             GetComponent<HandStacker>().ReDrawHand();
         }
+
+        public void FadeInCards(List<Card> cards)
+        {
+            foreach (var oldCard in transform.GetComponentsInChildren<CardController>())
+            {
+                if (cards.Contains(oldCard.card))
+                {
+                    oldCard.FadeIn();
+                }
+                else
+                {
+                    oldCard.FadeOut();
+                }
+            }
+        }
+
+        public void FadeInAll()
+        {
+            foreach (var oldCard in transform.GetComponentsInChildren<CardController>())
+            {
+                oldCard.FadeIn();
+            }
+        }
     }
 }

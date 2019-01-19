@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NetworkingCore;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Assets.Code
 {
     public class GameController : MonoBehaviour
     {
+        public static GameController Instance;
         public GameField gameField;
         public GameFieldState CurrentGameState;
         public HandController playerHand;
@@ -18,6 +20,11 @@ namespace Assets.Code
         public GameObject opponentActivePokemon;
         public NetworkId myId;
 
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Start()
         {
             myId = NetworkManager.Instance.Me.Id;
@@ -27,10 +34,22 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
         }
 
+        public void Card_OnCardClicked(CardController cardController)
+        {
+            Debug.Log("CLicked: " + cardController.card.GetLogicalName());
+
+            if (gameField.GameState == GameFieldState.BothSelectingActive)
+            {
+                NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
+            }
+        }
+
         private void OnGameUpdated(object message)
         {
             var gameMessage = (GameFieldMessage)message;
             Debug.Log("Game updated, handling message");
+
+            GameFieldState oldState = gameField.GameState;
 
             gameField = gameMessage.Game;
 
@@ -39,8 +58,22 @@ namespace Assets.Code
                 return;
             }
 
-            playerHand.SetHand(gameField.Players.First(p => p.Id.Equals(myId)).Hand);
-            opponentHand.SetHand(gameField.Players.First(p => !p.Id.Equals(myId)).Hand);
+            Player me = gameField.Players.First(p => p.Id.Equals(myId));
+            Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
+
+            playerHand.SetHand(me.Hand);
+            opponentHand.SetHand(opponent.Hand);
+
+            if (oldState != GameFieldState.BothSelectingActive && gameField.GameState == GameFieldState.BothSelectingActive)
+            {
+                playerHand.FadeInCards(me.Hand.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList());
+            }
+            if (oldState != GameFieldState.BothSelectingBench && gameField.GameState == GameFieldState.BothSelectingBench)
+            {
+                playerActivePokemon.GetComponentInChildren<CardController>().FadeIn();
+                playerHand.FadeInAll();
+                playerHand.FadeInCards(me.Hand.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList());
+            }
         }
 
         private void OnGameHosted(object param1)

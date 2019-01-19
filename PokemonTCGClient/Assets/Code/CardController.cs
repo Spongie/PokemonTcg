@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 using TCGCards;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Assets.Code
         public Transform rightPoint;
         public Transform bottomPoint;
         public HandController handController;
+
+        public event EventHandler<Card> OnCardClicked;
 
         public float defaultY;
         public bool stopMovingUp = false;
@@ -69,6 +72,11 @@ namespace Assets.Code
                     StartCoroutine(MoveOutOfScreen());
                 }
             }
+        }
+
+        private void OnMouseUp()
+        {
+            GameController.Instance.Card_OnCardClicked(this);
         }
 
         IEnumerator MoveIntoScreen()
@@ -134,29 +142,14 @@ namespace Assets.Code
             }
         }
 
-        public IEnumerator FadeOut()
+        public void FadeOut()
         {
-            while (meshRenderer.material.color.a > 0.1f)
-            {
-                if (stopFadeOut)
-                    break;
-
-                meshRenderer.material.color = new Color(1f, 1f, 1f, meshRenderer.material.color.a - 0.05f);
-                yield return new WaitForEndOfFrame();
-            }
+            meshRenderer.material.color = new Color(1f, 1f, 1f, 0.5f);
         }
 
-        public IEnumerator FadeIn()
+        public void FadeIn()
         {
-            stopFadeOut = true;
-
-            while (meshRenderer.material.color.a < 1f)
-            {
-                meshRenderer.material.color = new Color(1f, 1f, 1f, meshRenderer.material.color.a + 0.05f);
-                yield return new WaitForEndOfFrame();
-            }
-
-            stopFadeOut = false;
+            meshRenderer.material.color = new Color(1f, 1f, 1f, 1f);
         }
     }
 }
