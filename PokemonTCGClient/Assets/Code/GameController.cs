@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NetworkingCore;
 using TCGCards;
 using TCGCards.Core;
@@ -19,10 +20,12 @@ namespace Assets.Code
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
         public NetworkId myId;
+        private List<Card> selectedBenchCards;
 
         private void Awake()
         {
             Instance = this;
+            selectedBenchCards = new List<Card>();
         }
 
         private void Start()
@@ -40,18 +43,33 @@ namespace Assets.Code
 
             if (gameField.GameState == GameFieldState.BothSelectingActive)
             {
-                NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
+                var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
+                NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
+            }
+            else if (gameField.GameState == GameFieldState.BothSelectingBench)
+            {
+                selectedBenchCards.Add(cardController.card);
+            }
+        }
+
+        public void DoneButtonClicked()
+        {
+            if (gameField.GameState == GameFieldState.BothSelectingBench)
+            {
+                var id = NetworkManager.Instance.gameService.AddToBench(myId, selectedBenchCards.OfType<PokemonCard>().ToList());
+                NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
+                selectedBenchCards.Clear();
             }
         }
 
         private void OnGameUpdated(object message)
         {
-            var gameMessage = (GameFieldMessage)message;
+            var gameMessage = message is GameFieldMessage ? ((GameFieldMessage)message).Game : (GameField)message;
             Debug.Log("Game updated, handling message");
 
             GameFieldState oldState = gameField.GameState;
 
-            gameField = gameMessage.Game;
+            gameField = gameMessage;
 
             if (gameField.GameState == GameFieldState.WaitingForConnection)
             {
@@ -74,6 +92,19 @@ namespace Assets.Code
                 playerHand.FadeInAll();
                 playerHand.FadeInCards(me.Hand.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList());
             }
+        }
+
+        private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
+        {
+            var controller = parent.GetComponent<CardController>();
+
+            if (controller != null)
+            {
+                controller.SetCard(pokemonCard);
+                return;
+            }
+
+            //TODO
         }
 
         private void OnGameHosted(object param1)

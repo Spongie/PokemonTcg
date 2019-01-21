@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TCGCards;
 using UnityEngine;
 
@@ -11,9 +12,9 @@ namespace Assets.Code
 
         public void SetHand(IEnumerable<Card> cards)
         {
-            foreach (var oldCard in transform.GetComponentsInChildren<CardController>())
+            for (int i = 0; i < transform.childCount; i++)
             {
-                Destroy(oldCard);
+                Destroy(transform.GetChild(i).gameObject);
             }
 
             foreach (var card in cards)

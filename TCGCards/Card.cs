@@ -16,7 +16,7 @@ namespace TCGCards
 
         public abstract string GetName();
 
-        public NetworkId Id { get; protected set; }
+        public NetworkId Id { get; set; }
 
         protected CardSet Set { get; set; }
 

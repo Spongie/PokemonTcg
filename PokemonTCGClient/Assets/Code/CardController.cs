@@ -126,15 +126,13 @@ namespace Assets.Code
                 string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
                 string finalPath = "file:///" + fullCardPath;
 
-                Debug.Log("Loading image: " + fullCardPath);
-
                 using (var request = UnityWebRequestTexture.GetTexture(finalPath))
                 {
                     yield return request.SendWebRequest();
 
                     if (request.isNetworkError || request.isHttpError)
                     {
-                        Debug.Log("Error fetching texture");
+                        Debug.LogError("Error fetching texture");
                     }
 
                     meshRenderer.material.mainTexture = DownloadHandlerTexture.GetContent(request);

@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using TCGCards;
 using TCGCards.Core;
+using TeamRocket.PokemonCards;
 
 namespace TestClient
 {
@@ -19,11 +20,6 @@ namespace TestClient
         {
             var thread = new Thread(RunPlayer);
             thread.Start();
-
-            var x = NetworkId.Generate();
-
-            var s = Serializer.Serialize(x);
-            var b = Serializer.Serialize(new object[] {x});
 
             string input;
 
