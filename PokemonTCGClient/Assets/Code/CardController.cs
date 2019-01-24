@@ -33,6 +33,8 @@ namespace Assets.Code
         public RawImage previewImage;
 
         public MeshRenderer meshRenderer;
+        public bool isActivePokemon;
+
         private bool stopFadeOut;
 
         void Start()

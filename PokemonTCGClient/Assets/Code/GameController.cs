@@ -104,7 +104,8 @@ namespace Assets.Code
                 return;
             }
 
-            //TODO
+            controller.isActivePokemon = true;
+            controller.SetCard(pokemonCard);
         }
 
         private void OnGameHosted(object param1)
