@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Punch";
             Description = "";
+
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 2)

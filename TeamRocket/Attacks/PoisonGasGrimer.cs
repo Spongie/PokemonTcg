@@ -1,26 +1,25 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class Nightmare : Attack
+    internal class PoisonGasGrimer : Attack
     {
-        public Nightmare()
+        public PoisonGasGrimer()
         {
-            Name = "Nightmare";
-            Description = "The Defending Pokémon is now Asleep.";
-            DamageText = "10";
+            Name = "Poison Gas";
+            Description = "Flip a coin. If heads, the Defending Pokémon is now Poisoned.";
+            DamageText = "";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Psychic, 1),
-				new Energy(EnergyTypes.Colorless, 1)
+                new Energy(EnergyTypes.Grass, 1)
             };
         }
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 10;
+            return 0;
         }
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)

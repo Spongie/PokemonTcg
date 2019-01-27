@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Sonicboom";
             Description = "Don't apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 2)

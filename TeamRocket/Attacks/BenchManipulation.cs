@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Bench Manipulation";
             Description = "20× damage. You opponent flips a number of coins equal to the number of Pokémon on his or her Bench. This attack does 20 damage times the number of tails. Don't apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
+            DamageText = "20x";
             ApplyWeaknessAndResistance = false;
             Cost = new List<Energy>
             {

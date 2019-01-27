@@ -11,6 +11,9 @@
         Electric,
         Psychic,
         Fighting,
-        Darkness
+        Darkness,
+        Steel,
+        Fairy,
+        Dragon
     }
 }

@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Quick Attack";
             Description = "Flip a coin. If heads this attack does 10 damage plus 10 more damage; if tails, this attack does 10 damage.";
+            DamageText = "10+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

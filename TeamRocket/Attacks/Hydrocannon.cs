@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Hydrocannon";
             Description = "Does 30 damage plus 20 more damage for each [W] Energy attached to Dark Blastoise but not used to pay for this attack. You can't add more than 40 damage in this way.";
+            DamageText = "30+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Water, 2)

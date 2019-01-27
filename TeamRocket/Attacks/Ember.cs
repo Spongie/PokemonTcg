@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Ember";
             Description = "Discard 1 Fire Energy card attached to Ponyta in order to use this attack";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fire, 1),

@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Super Psy";
             Description = "";
+            DamageText = "50";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 2),

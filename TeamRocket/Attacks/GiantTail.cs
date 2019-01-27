@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Giant Tail";
             Description = "Flip a coin. If tails, this attack does nothing.";
+            DamageText = "70";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 4)

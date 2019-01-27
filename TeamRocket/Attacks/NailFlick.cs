@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Nail Flick";
             Description = "";
+            DamageText = "10";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

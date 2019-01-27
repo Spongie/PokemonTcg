@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Mega Punch";
             Description = "";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fighting, 2)

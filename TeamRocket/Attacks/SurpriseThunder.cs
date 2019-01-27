@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Surprise Thunder";
             Description = "Flip a coin. If heads, flip another coin. If the second coin is heads, this attack does 20 damage to each of your opponent's Benched Pokémon. If the second coin is tails, this attack does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Electric, 3)

@@ -12,6 +12,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Fascinate";
             Description = "Flip a coin. If heads, choose 1 of your opponent's Benched Pokémon and switch it with the Defending Pokémon. This attack can't be used if your opponent has no Benched Pokémon.";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

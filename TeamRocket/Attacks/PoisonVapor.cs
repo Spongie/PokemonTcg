@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Poison Vapor";
             Description = "The Defending Pokémon is now Poisoned. This attack does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)";
+            DamageText = "10";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 3)

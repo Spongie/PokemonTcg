@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Flaying with Fire";
             Description = "Use this attack only if there are any [R] Energy cards attached to Dark Flareon. Flip a coin. If heads, discard 1 of those Energy cards and this attack does 30 damage plus 20 more damage. If tails, this attack does 30 damage.";
+            DamageText = "30+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fire, 2)

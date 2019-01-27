@@ -12,6 +12,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Teleport Blast";
             Description = "You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 2),

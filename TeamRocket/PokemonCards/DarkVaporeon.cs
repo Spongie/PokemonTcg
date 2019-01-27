@@ -19,7 +19,7 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.None;
             Attacks = new List<Attack>
             {
-				new Bite(),
+				new Bite30(),
 				new Whirlpool()
             };
 			

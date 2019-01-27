@@ -18,7 +18,7 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.None;
             Attacks = new List<Attack>
             {
-				new PoisonGas(),
+				new PoisonGasGrimer(),
 				new StickyHands()
             };
 			

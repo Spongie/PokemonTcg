@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Sticky Hands";
             Description = "Flip a coin. If heads, this attack does 10 damage plus 20 more damage and the Defending Pokémon is now Paralyzed. If tails, this attack does 10 damage.";
+            DamageText = "10+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 2)

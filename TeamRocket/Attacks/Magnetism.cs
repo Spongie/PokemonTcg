@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Magnetism";
             Description = "Does 10 damage plus 10 more damage for each Magnemite, Magneton, and Dark Magneton on your Bench.";
+            DamageText = "10+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Electric, 1),

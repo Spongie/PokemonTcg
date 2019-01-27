@@ -12,6 +12,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Energy Bomb";
             Description = "Take all Energy cards attached to Dark Electrode and attach them to your Benched Pokémon (in any way you choose). If you have no Benched Pokémon, discard all Energy cards attached to Dark Electrode.";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Electric, 2)

@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Sleep Powder";
             Description = "The Defending Pokémon is now Asleep.";
+            DamageText = "0";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 1)

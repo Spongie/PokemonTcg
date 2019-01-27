@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Lightning Flash";
             Description = "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Electric, 1)

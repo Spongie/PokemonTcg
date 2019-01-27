@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Psybeam";
             Description = "Flip a coin. If heads, the defending pokemon is now confused";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 3)

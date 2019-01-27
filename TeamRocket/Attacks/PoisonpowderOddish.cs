@@ -1,20 +1,19 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class Nightmare : Attack
+    internal class PoisonpowderOddish : Attack
     {
-        public Nightmare()
+        public PoisonpowderOddish()
         {
-            Name = "Nightmare";
-            Description = "The Defending Pokémon is now Asleep.";
+            Name = "Poisonpowder";
+            Description = "The Defending Pokémon is now Poisoned.";
             DamageText = "10";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Psychic, 1),
-				new Energy(EnergyTypes.Colorless, 1)
+                new Energy(EnergyTypes.Grass, 1)
             };
         }
 
@@ -25,7 +24,7 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            opponent.ActivePokemonCard.IsAsleep = true;
+            opponent.ActivePokemonCard.IsPoisoned = true;
         }
     }
 }

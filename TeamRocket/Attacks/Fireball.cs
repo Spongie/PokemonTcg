@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Fireball";
             Description = "Use this attack only if there are any [R] Energy cards attached to Dark Charmeleon. Flip a coin. If heads, discard 1 of those Energy cards. If tails, this attack does nothing (not even damage).";
+            DamageText = "70";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fire, 3)

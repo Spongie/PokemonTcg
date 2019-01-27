@@ -4,12 +4,13 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class Poisonpowder : Attack
+    internal class PoisonpowderDarkGloom : Attack
     {
-        public Poisonpowder()
+        public PoisonpowderDarkGloom()
         {
             Name = "Poisonpowder";
             Description = "The Defending Pokémon is now Poisoned.";
+            DamageText = "10";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 1)
@@ -18,7 +19,7 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 0;
+            return 10;
         }
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)

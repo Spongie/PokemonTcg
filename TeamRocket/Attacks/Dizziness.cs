@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Dizziness";
             Description = "Draw a card";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 1)

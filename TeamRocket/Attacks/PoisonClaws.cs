@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Poison Claws";
             Description = "Flip a coin. If heads, the Defending Pokémon is now Poisoned.";
+            DamageText = "10";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 2)

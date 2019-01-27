@@ -20,7 +20,7 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.None;
             Attacks = new List<Attack>
             {
-				new Poisonpowder()
+				new PoisonpowderDarkGloom()
             };
             Ability = new PollenStench(this);
         }

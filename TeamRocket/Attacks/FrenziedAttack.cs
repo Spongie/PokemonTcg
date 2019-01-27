@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Frenzied Attack";
             Description = "Dark Primeape is now Confused (after doing damage).";
+            DamageText = "40";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fighting, 2)

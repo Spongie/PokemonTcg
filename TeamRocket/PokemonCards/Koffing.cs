@@ -18,8 +18,8 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.None;
             Attacks = new List<Attack>
             {
-				new Tackle(),
-				new PoisonGas()
+				new Tackle10(),
+				new PoisonGasKoffing()
             };
 			
         }

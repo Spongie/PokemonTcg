@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Conversion 1";
             Description = "If the defending pokemon has a weakness, you may change it to a type of your choice other than colerless";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

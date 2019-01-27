@@ -12,6 +12,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Water Gun";
             Description = "Draw a card";
+            DamageText = "20+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Water, 1),

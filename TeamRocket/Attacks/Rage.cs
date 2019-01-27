@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Rage";
             Description = "Does 10 damage plus 10 more damage for each damage counter on Dark Flareon.";
+            DamageText = "10+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

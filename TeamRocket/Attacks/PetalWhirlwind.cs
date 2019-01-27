@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Petal Whirlwind";
             Description = "30× damage. Flip 3 coins. This attack does 30 damage times the number of heads. If you get 2 or more heads, Dark Vileplume is now Confused (after doing damage).";
+            DamageText = "30x";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 3)

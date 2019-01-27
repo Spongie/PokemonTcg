@@ -18,7 +18,7 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.None;
             Attacks = new List<Attack>
             {
-				new Tackle(),
+				new Tackle20(),
 				new Magnetism()
             };
 			

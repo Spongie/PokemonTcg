@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Hyper Fang";
             Description = "Flip a coin. If tails, this attack does nothing.";
+            DamageText = "50";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 3)

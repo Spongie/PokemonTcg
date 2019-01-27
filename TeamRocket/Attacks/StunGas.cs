@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Stun Gas";
             Description = "Flip a coin. If heads, the Defending Pokémon is now Poisoned. If tails, the Defending Pokémon is now Paralyzed.";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 3)

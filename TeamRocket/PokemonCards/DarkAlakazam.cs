@@ -20,7 +20,7 @@ namespace TeamRocket.PokemonCards
             Attacks = new List<Attack>
             {
 				new TeleportBlast(),
-				new MindShock()
+				new MindShock40()
             };		
         }
     }

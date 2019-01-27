@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Fickle Attack";
             Description = "Flip a coin. If tails, this attack does nothing.";
+            DamageText = "40";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 2)

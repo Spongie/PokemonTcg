@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Anger";
             Description = "Flip a coin. If heads, this attack does 20 damage plus 20 more damage. If tails, this attack does 20 damage.";
+            DamageText = "20+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fighting, 1),

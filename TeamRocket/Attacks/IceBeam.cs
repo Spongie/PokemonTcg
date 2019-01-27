@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "IceBeam";
             Description = string.Empty;
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Water, 3)

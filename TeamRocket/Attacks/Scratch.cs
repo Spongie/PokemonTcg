@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Scratch";
             Description = "";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fighting, 1),

@@ -19,7 +19,7 @@ namespace TeamRocket.PokemonCards
             Attacks = new List<Attack>
             {
 				new SleepPowder(),
-				new Poisonpowder()
+				new PoisonpowderOddish()
             };
 			
         }

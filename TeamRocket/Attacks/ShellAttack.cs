@@ -13,6 +13,7 @@ namespace TeamRocket.Attacks
                 new Energy(EnergyTypes.Colorless, 2)
             };
             Name = "Shell attack";
+            DamageText = "20";
         }
 
         public override Damage GetDamage(Player owner, Player opponent)

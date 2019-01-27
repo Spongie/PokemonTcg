@@ -20,7 +20,7 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.None;
             Attacks = new List<Attack>
             {
-				new MindShock()
+				new MindShock30()
             };
             Ability = new MatterExchange(this);
         }

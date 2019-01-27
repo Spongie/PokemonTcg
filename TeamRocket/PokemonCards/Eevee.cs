@@ -18,7 +18,7 @@ namespace TeamRocket.PokemonCards
 			Resistance = EnergyTypes.Psychic;
             Attacks = new List<Attack>
             {
-				new Tackle(),
+				new Tackle10(),
 				new Sandattack()
             };
 			

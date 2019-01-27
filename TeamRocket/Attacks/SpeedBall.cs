@@ -13,6 +13,7 @@ namespace TeamRocket.Attacks
             {
                 new Energy(EnergyTypes.Electric, 1)
             };
+            DamageText = "20";
         }
 
         public override Damage GetDamage(Player owner, Player opponent)

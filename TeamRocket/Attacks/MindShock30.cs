@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class MindShock40 : Attack
+    internal class MindShock30 : Attack
     {
-        public MindShock40()
+        public MindShock30()
         {
             Name = "Mind Shock";
             Description = "Don't apply Weakness and Resistance for this attack. (Any other effects that would happen after applying Weakness and Resistance still happen.)";
-            DamageText = "40";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 2)
@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return new Damage(0, 40);
+            return new Damage(0, 30);
         }
     }
 }

@@ -4,17 +4,20 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class Headbutt : Attack
+    internal class Bite10 : Attack
     {
-        public Headbutt()
+        public Bite10()
         {
-            Name = "Headbutt";
+            Name = "Bite";
+            Description = string.Empty;
             DamageText = "10";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Psychic, 1)
+                new Energy(EnergyTypes.Colorless, 1),
+                new Energy(EnergyTypes.Grass, 1)
             };
         }
+
 
         public override Damage GetDamage(Player owner, Player opponent)
         {

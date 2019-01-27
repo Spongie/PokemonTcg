@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Thunder Attack";
             Description = "Flip a coin. If heads, the Defending Pokémon is now Paralyzed. If tails, Dark Jolteon does 10 damage to itself.";
+            DamageText = "30";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Electric, 2),

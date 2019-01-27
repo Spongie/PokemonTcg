@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Sludge Punch";
             Description = "The Defending Pokémon is now Poisoned.";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 2)

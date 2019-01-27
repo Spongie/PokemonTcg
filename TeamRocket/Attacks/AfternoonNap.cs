@@ -12,6 +12,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Afternoon Nap";
             Description = "Search your deck for a Psychic Energy card and attach it to Slowpoke. Shuffle your deck afterward.";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

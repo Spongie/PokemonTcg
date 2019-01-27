@@ -13,6 +13,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Whirlpool";
             Description = "If the Defending Pokémon has any Energy cards attached to it, choose 1 of them and discard it.";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Water, 2),

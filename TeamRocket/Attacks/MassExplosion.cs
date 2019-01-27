@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Mass Explosion";
             Description = "20× damage. Does 20 damage times the number of Koffings, Weezings, and Dark Weezings in play. (Apply Weakness and Resistance.) Then, this attack does 20 damage to each Koffing, Weezing, and Dark Weezing (even your own). Don't apply Weakness and Resistance.";
+            DamageText = "20x";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 1),

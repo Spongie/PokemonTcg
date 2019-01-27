@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Fling";
             Description = "Your opponent shuffles his or her Active Pokémon and all cards attached to it into his or her deck. This attack can't be used if your opponent has no Benched Pokémon.";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fighting, 3),

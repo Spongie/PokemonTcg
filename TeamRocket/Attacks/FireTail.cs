@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Fire Tail";
             Description = "";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fire, 1)

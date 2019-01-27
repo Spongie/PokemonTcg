@@ -13,6 +13,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Third Eye";
             Description = "Discard 1 Energy card attached to Dark Golduck in order to draw up to 3 cards.";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Psychic, 1)

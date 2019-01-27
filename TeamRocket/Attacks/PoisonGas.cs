@@ -4,12 +4,13 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class PoisonGas : Attack
+    internal class PoisonGasKoffing : Attack
     {
-        public PoisonGas()
+        public PoisonGasKoffing()
         {
             Name = "Poison Gas";
             Description = "Flip a coin. If heads, the Defending Pokémon is now Poisoned.";
+            DamageText = "20";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 1),

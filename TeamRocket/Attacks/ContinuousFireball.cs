@@ -11,6 +11,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Continuous Fireball";
             Description = "50× damage. Flip a number of coins equal to the number for [R] Energy cards attached to Dark Charizard. This attack does 50 damage times the number of heads. Discard a number of [R] Energy cards attached to Dark Charizard equal to the number of heads.";
+            DamageText = "50x";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fire, 2)

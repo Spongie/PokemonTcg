@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Knock Down";
             Description = "You opponent flips a coin. If tails, this attack does 20 damage plus 20 more damage. If heads, this attack does 20 damage.";
+            DamageText = "20+";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Fighting, 2)

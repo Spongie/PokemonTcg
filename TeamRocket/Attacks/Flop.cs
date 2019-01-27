@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Flop";
             Description = string.Empty;
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1)

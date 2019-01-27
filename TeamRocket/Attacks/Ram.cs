@@ -10,6 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Ram";
             Description = string.Empty;
+            DamageText = "10";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Colorless, 1),
