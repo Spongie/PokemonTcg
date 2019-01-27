@@ -10,6 +10,7 @@ namespace {SETNAME}.Attacks
         {
             Name = "{NAME}";
             Description = "{DESCRIPTION}";
+			DamageText = "{DAMAGE}";
             Cost = new List<Energy>
             {
                 {COST}

@@ -19,6 +19,7 @@ namespace Assets.Code
         public GameObject opponentBench;
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
+        public GameObject cardPrefab;
         public NetworkId myId;
         private List<Card> selectedBenchCards;
 
@@ -82,6 +83,8 @@ namespace Assets.Code
             playerHand.SetHand(me.Hand);
             opponentHand.SetHand(opponent.Hand);
 
+            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard);
+
             if (oldState != GameFieldState.BothSelectingActive && gameField.GameState == GameFieldState.BothSelectingActive)
             {
                 playerHand.FadeInCards(me.Hand.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList());
@@ -96,13 +99,20 @@ namespace Assets.Code
 
         private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
         {
-            var controller = parent.GetComponent<CardController>();
+            if (pokemonCard == null)
+            {
+                return;
+            }
+
+            var controller = parent.GetComponentInChildren<CardController>();
 
             if (controller != null)
             {
                 controller.SetCard(pokemonCard);
                 return;
             }
+
+            controller = Instantiate(cardPrefab, parent.transform).GetComponent<CardController>();
 
             controller.isActivePokemon = true;
             controller.SetCard(pokemonCard);

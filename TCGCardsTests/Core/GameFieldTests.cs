@@ -267,10 +267,10 @@ namespace TCGCards.Core.Tests
             gameField.OnActivePokemonSelected(gameField.ActivePlayer.Id, new PokemonCard(gameField.ActivePlayer));
             gameField.OnActivePokemonSelected(gameField.NonActivePlayer.Id, new PokemonCard(gameField.NonActivePlayer));
 
-            gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new PokemonCard(gameField.ActivePlayer));
+            gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new[] { new PokemonCard(gameField.ActivePlayer) }.ToList());
 
             Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
-            gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new PokemonCard(gameField.NonActivePlayer));
+            gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new[] { new PokemonCard(gameField.NonActivePlayer) }.ToList());
 
             Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
         }

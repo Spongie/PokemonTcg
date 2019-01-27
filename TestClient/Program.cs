@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 using TeamRocket.PokemonCards;
 
 namespace TestClient
@@ -65,12 +66,22 @@ namespace TestClient
             } while (input.ToLower() != "exit");
         }
 
+        static GameField gameField;
+
         private static void PlayGame()
         {
-            var gameField = gameService.JoinTheActiveGame(networkPlayer.Id);
+            gameField = gameService.JoinTheActiveGame(networkPlayer.Id);
 
             Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
             PokemonCard starter = me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).FirstOrDefault();
+
+            Console.Read();
+
+            gameField = gameService.SetActivePokemon(networkPlayer.Id, starter);
+
+            Console.Read();
+
+            gameField = gameService.AddToBench(networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).ToList());
         }
 
         private static void RunPlayer(object obj)
@@ -95,6 +106,10 @@ namespace TestClient
             else
             {
                 Console.WriteLine("Received data: " + e.Message.Data);
+                if (e.Message.MessageType == MessageTypes.GameUpdate)
+                {
+                    gameField = ((GameFieldMessage)e.Message.Data).Game;
+                }
             }
         }
 

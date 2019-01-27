@@ -120,7 +120,7 @@ namespace Server.Services
         {
             foreach (var pokemon in pokemons)
             {
-                theOnlyActiveGame.Players.First(p => p.Id.Equals(playerId)).SetBenchedPokemon(pokemon);
+                theOnlyActiveGame.OnBenchPokemonSelected(theOnlyActiveGame.Players.First(p => p.Id.Equals(playerId)), pokemons);
             }
 
             SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(playerId)));

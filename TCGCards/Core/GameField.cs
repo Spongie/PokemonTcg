@@ -77,9 +77,12 @@ namespace TCGCards.Core
                 ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
         }
 
-        public void OnBenchPokemonSelected(Player owner, PokemonCard selectedPokemon)
+        public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
         {
-            owner.SetBenchedPokemon(selectedPokemon);
+            foreach (var pokemon in selectedPokemons)
+            {
+                owner.SetBenchedPokemon(pokemon);
+            }
 
             if (GameState == GameFieldState.BothSelectingBench)
             {
