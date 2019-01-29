@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Code._2D
 {
-    public class CardDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class CardDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public bool dragging;
 
@@ -29,6 +29,18 @@ namespace Assets.Code._2D
             dragging = false;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
             LayoutRebuilder.MarkLayoutForRebuild(transform.parent.GetComponent<RectTransform>());
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Vector3 pos = GetComponent<RectTransform>().localPosition;
+            GetComponent<RectTransform>().localPosition = new Vector3(pos.x, 700, pos.z);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            Vector3 pos = GetComponent<RectTransform>().localPosition;
+            GetComponent<RectTransform>().localPosition = new Vector3(pos.x, 50, pos.z);
         }
     }
 }
