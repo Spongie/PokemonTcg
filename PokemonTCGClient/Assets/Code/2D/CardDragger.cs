@@ -11,11 +11,10 @@ namespace Assets.Code._2D
 {
     public class CardDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public bool dragging;
+        int oldOrder = 0;
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            dragging = true;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
@@ -26,21 +25,25 @@ namespace Assets.Code._2D
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            dragging = false;
+            Debug.Log("Drag end, marking " + transform.parent.name + " for rebuild");
             GetComponent<CanvasGroup>().blocksRaycasts = true;
-            LayoutRebuilder.MarkLayoutForRebuild(transform.parent.GetComponent<RectTransform>());
+            
+            LayoutRebuilder.MarkLayoutForRebuild(GameObject.FindGameObjectWithTag("PlayerHand").GetComponent<RectTransform>());
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             Vector3 pos = GetComponent<RectTransform>().localPosition;
-            GetComponent<RectTransform>().localPosition = new Vector3(pos.x, 700, pos.z);
+            GetComponent<RectTransform>().localPosition = new Vector3(pos.x, 875, pos.z);
+            oldOrder = transform.parent.gameObject.GetComponent<Canvas>().sortingOrder;
+            transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 100;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             Vector3 pos = GetComponent<RectTransform>().localPosition;
             GetComponent<RectTransform>().localPosition = new Vector3(pos.x, 50, pos.z);
+            transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = oldOrder;
         }
     }
 }

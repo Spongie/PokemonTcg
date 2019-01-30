@@ -37,7 +37,7 @@ public class CardRenderer : MonoBehaviour
 
     private void Start()
     {
-        SetCard(new Ekans(null));
+        //SetCard(new Ekans(null));
     }
 
     public void SetCard(PokemonCard card)

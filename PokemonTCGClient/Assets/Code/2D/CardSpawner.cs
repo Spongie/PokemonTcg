@@ -10,6 +10,11 @@ public class CardSpawner : MonoBehaviour
     void Start()
     {
         var card = new Ekans(null);
-        Instantiate(cardPrefab, transform).GetComponent<CardRenderer>().SetCard(card);
+        for (int i = 0; i < 15; i++)
+        {
+            var spawnedCard = Instantiate(cardPrefab, transform);
+            spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card);
+            spawnedCard.GetComponent<Canvas>().sortingOrder = i;
+        }
     }
 }
