@@ -8,6 +8,7 @@ TagManager:
   - OpponentActivePokemon
   - PlayerBench
   - OpponentBench
+  - PlayerHand
   layers:
   - Default
   - TransparentFX
