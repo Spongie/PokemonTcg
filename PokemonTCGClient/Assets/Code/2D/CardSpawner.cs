@@ -10,7 +10,7 @@ public class CardSpawner : MonoBehaviour
     void Start()
     {
         var card = new Ekans(null);
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 8; i++)
         {
             var spawnedCard = Instantiate(cardPrefab, transform);
             spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card);
