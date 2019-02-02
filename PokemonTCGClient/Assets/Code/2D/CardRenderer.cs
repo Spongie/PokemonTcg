@@ -47,6 +47,8 @@ public class CardRenderer : MonoBehaviour
 
         typeIcon.sprite = icons[card.PokemonType];
 
+        GetComponentInChildren<TemplateSelector>().SetTemplate(card.PokemonType);
+
         if (card.Weakness != EnergyTypes.None)
         {
             weaknessIcon.sprite = icons[card.Weakness];
