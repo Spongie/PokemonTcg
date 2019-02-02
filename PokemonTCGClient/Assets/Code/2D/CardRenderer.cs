@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TCGCards;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
 using UnityEngine.Networking;
-using TeamRocket.PokemonCards;
+using UnityEngine.EventSystems;
 
-public class CardRenderer : MonoBehaviour
+public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
     private Dictionary<EnergyTypes, Sprite> icons;
     public Texture2D icon_atlas;
@@ -22,7 +21,10 @@ public class CardRenderer : MonoBehaviour
     public GameObject retreatCost;
     public GameObject attacks;
     public GameObject attackPrefab;
+    public GameObject abilityPrefab;
     public GameObject costPrefab;
+    public Card card;
+    public bool isActivePokemon;
 
     private void Awake()
     {
@@ -40,7 +42,17 @@ public class CardRenderer : MonoBehaviour
         //SetCard(new Ekans(null));
     }
 
-    public void SetCard(PokemonCard card)
+    public void SetCard(Card card)
+    {
+        this.card = card;
+
+        if (card is PokemonCard)
+        {
+            SetPokemonCard((PokemonCard)card);
+        }
+    }
+
+    public void SetPokemonCard(PokemonCard card)
     {
         cardName.text = card.PokemonName;
         hp.text = card.Hp.ToString();
@@ -71,6 +83,11 @@ public class CardRenderer : MonoBehaviour
             Instantiate(costPrefab, retreatCost.transform).GetComponent<Image>().sprite = icons[EnergyTypes.Colorless];
         }
 
+        if (card.Ability != null)
+        {
+            Instantiate(abilityPrefab, attacks.transform).GetComponent<AbilityRenderer>().SetAbility(card.Ability);
+        }
+
         foreach (var attack in card.Attacks)
         {
             Instantiate(attackPrefab, attacks.transform).GetComponent<AttackRenderer>().SetAttack(attack);
@@ -96,5 +113,10 @@ public class CardRenderer : MonoBehaviour
             var texture = DownloadHandlerTexture.GetContent(request);
             art.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Clicked card");
     }
 }

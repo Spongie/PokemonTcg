@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/3D_Cards.unity
     guid: ffbc578b5581ad24380161d0be91e370
+  - enabled: 1
+    path: Assets/Scenes/CustomCard.unity
+    guid: 4c6ecc87cd94f9b40b7f8f278d84e2ea
   m_configObjects: {}

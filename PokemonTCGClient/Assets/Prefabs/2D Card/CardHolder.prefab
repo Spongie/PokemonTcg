@@ -22,7 +22,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1742710631299241626}
   - component: {fileID: 303969761}
-  - component: {fileID: 303969762}
   - component: {fileID: 303969763}
   m_Layer: 5
   m_Name: CardHolder
@@ -72,18 +71,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!225 &303969762
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948346836760326715}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!114 &303969763
 MonoBehaviour:
   m_ObjectHideFlags: 0

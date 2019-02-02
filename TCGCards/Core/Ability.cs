@@ -15,6 +15,9 @@
 
         public PokemonCard PokemonOwner { get; protected set; }
 
+        public string Name { get; set; }
+        public string Description { get; set; }
+
         public void Trigger(Player owner, Player opponent, int damageTaken)
         {
             if (CanActivate())

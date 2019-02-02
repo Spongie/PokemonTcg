@@ -27,7 +27,7 @@ public class Login : MonoBehaviour
                 messageId = NetworkId.Empty;
                 if ((BooleanResult)response.Data)
                 {
-                    SceneManager.LoadScene("3dTest");
+                    SceneManager.LoadScene("CustomCard");
                 }
             }
         }

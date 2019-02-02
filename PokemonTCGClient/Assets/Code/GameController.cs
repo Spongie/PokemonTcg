@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.Code._2D;
 using NetworkingCore;
 using TCGCards;
 using TCGCards.Core;
@@ -14,14 +15,18 @@ namespace Assets.Code
         public GameField gameField;
         public GameFieldState CurrentGameState;
         public HandController playerHand;
-        public HandController opponentHand;
         public GameObject playerBench;
         public GameObject opponentBench;
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
         public GameObject cardPrefab;
         public NetworkId myId;
+        public GameObject doneButton;
         private List<Card> selectedBenchCards;
+        private static GameFieldState[] statesWithDoneAction = new []
+        {
+            GameFieldState.BothSelectingBench
+        };
 
         private void Awake()
         {
@@ -38,7 +43,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
         }
 
-        public void Card_OnCardClicked(CardController cardController)
+        public void Card_OnCardClicked(CardRenderer cardController)
         {
             Debug.Log("CLicked: " + cardController.card.GetLogicalName());
 
@@ -49,6 +54,7 @@ namespace Assets.Code
             }
             else if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
+                cardController.GetComponentInChildren<SelectIndicator>().SetSelected(true);
                 selectedBenchCards.Add(cardController.card);
             }
         }
@@ -69,8 +75,10 @@ namespace Assets.Code
             Debug.Log("Game updated, handling message");
 
             GameFieldState oldState = gameField.GameState;
-
+            
             gameField = gameMessage;
+
+            doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
 
             if (gameField.GameState == GameFieldState.WaitingForConnection)
             {
@@ -81,20 +89,9 @@ namespace Assets.Code
             Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
 
             playerHand.SetHand(me.Hand);
-            opponentHand.SetHand(opponent.Hand);
 
             SetActivePokemon(playerActivePokemon, me.ActivePokemonCard);
-
-            if (oldState != GameFieldState.BothSelectingActive && gameField.GameState == GameFieldState.BothSelectingActive)
-            {
-                playerHand.FadeInCards(me.Hand.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList());
-            }
-            if (oldState != GameFieldState.BothSelectingBench && gameField.GameState == GameFieldState.BothSelectingBench)
-            {
-                playerActivePokemon.GetComponentInChildren<CardController>().FadeIn();
-                playerHand.FadeInAll();
-                playerHand.FadeInCards(me.Hand.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList());
-            }
+            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard);
         }
 
         private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
@@ -104,7 +101,7 @@ namespace Assets.Code
                 return;
             }
 
-            var controller = parent.GetComponentInChildren<CardController>();
+            var controller = parent.GetComponentInChildren<CardRenderer>();
 
             if (controller != null)
             {
@@ -112,7 +109,7 @@ namespace Assets.Code
                 return;
             }
 
-            controller = Instantiate(cardPrefab, parent.transform).GetComponent<CardController>();
+            controller = Instantiate(cardPrefab, parent.transform).GetComponent<CardRenderer>();
 
             controller.isActivePokemon = true;
             controller.SetCard(pokemonCard);
