@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using TCGCards;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class AttackRenderer : MonoBehaviour, IPointerClickHandler
+public class AttackRenderer : MonoBehaviour
 {
     private Dictionary<EnergyTypes, Sprite> icons;
     public Texture2D icon_atlas;
@@ -17,6 +13,7 @@ public class AttackRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject description;
     public Text attackName;
     public Text damage;
+    private Attack attack;
 
     private void Awake()
     {
@@ -31,6 +28,7 @@ public class AttackRenderer : MonoBehaviour, IPointerClickHandler
 
     public void SetAttack(Attack attack)
     {
+        this.attack = attack;
         description.SetActive(!string.IsNullOrEmpty(attack.Description));
         attackName.text = attack.Name;
         damage.text = attack.DamageText;
@@ -44,18 +42,8 @@ public class AttackRenderer : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void OnMouseDown()
-    {
-        Debug.Log("Mouse down on: " + attackName.text);
-    }
-
     public void AttackClicked()
     {
         Debug.Log("Clicked on: " + attackName.text);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Clicked handler on: " + attackName.text);
     }
 }

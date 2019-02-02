@@ -22,6 +22,7 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
         rect.anchoredPosition = Vector3.zero;
         rect.localScale = new Vector3(1, 1, 1);
 
+        draggedObject.GetComponent<CardDragger>().OnEndDrag(eventData);
         draggedObject.GetComponent<CardZoomer>().enabled = false;
         draggedObject.GetComponent<CardDragger>().enabled = false;
     }
