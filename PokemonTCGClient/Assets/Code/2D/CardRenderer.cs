@@ -15,11 +15,14 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     private Dictionary<EnergyTypes, Sprite> icons;
     public Texture2D icon_atlas;
     public Text cardName;
-    public Text hp;
+    public Text hpNumber;
+    public Text hpFixed;
     public Image art;
     public Image typeIcon;
+    public Image colorImage;
     public Image weaknessIcon;
     public Image resistanceIcon;
+    public Image template;
     public GameObject retreatCost;
     public GameObject attacks;
     public GameObject attackPrefab;
@@ -53,12 +56,35 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         {
             SetPokemonCard((PokemonCard)card);
         }
+        else if (card is EnergyCard)
+        {
+            SetEnergyCard((EnergyCard)card);
+        }
+        else if (card is TrainerCard)
+        {
+
+        }
+    }
+
+    public void SetEnergyCard(EnergyCard card)
+    {
+        colorImage.enabled = false;
+        cardName.enabled = false;
+        hpNumber.enabled = false;
+        hpFixed.enabled = false;
+        template.enabled = false;
+        typeIcon.enabled = false;
+        weaknessIcon.enabled = false;
+        resistanceIcon.enabled = false;
+        retreatCost.SetActive(false);
+        attacks.SetActive(false);
+        StartCoroutine(LoadSprite(card));
     }
 
     public void SetPokemonCard(PokemonCard card)
     {
         cardName.text = card.PokemonName;
-        hp.text = card.Hp.ToString();
+        hpNumber.text = card.Hp.ToString();
 
         typeIcon.sprite = icons[card.PokemonType];
 

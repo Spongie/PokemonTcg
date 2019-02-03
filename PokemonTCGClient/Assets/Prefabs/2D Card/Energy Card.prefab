@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 7609714709601664399}
   - component: {fileID: 3925190815532877406}
   - component: {fileID: 3200075445218392139}
-  - component: {fileID: 8325075633682507335}
   m_Layer: 5
-  m_Name: Card
+  m_Name: Energy Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,14 +65,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon_atlas: {fileID: 2800000, guid: dbc8a8f2e84b9a44bb1e53746bc00be2, type: 3}
   cardName: {fileID: 951139736956974935}
-  hpNumber: {fileID: 951139738041531474}
-  hpFixed: {fileID: 951139737185513566}
+  hp: {fileID: 951139738041531474}
   art: {fileID: 951139737145022211}
   typeIcon: {fileID: 951139737087030466}
-  colorImage: {fileID: 5803329538990501050}
   weaknessIcon: {fileID: 951139736681447837}
   resistanceIcon: {fileID: 951139737659214263}
-  template: {fileID: 951139737471089746}
   retreatCost: {fileID: 951139736630966286}
   attacks: {fileID: 951139738048131336}
   attackPrefab: {fileID: 8593323203468067464, guid: 9e4de7b95b4541047ab549807ac45e6d,
@@ -121,18 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1893531561124774431}
---- !u!114 &8325075633682507335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951139736514868102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be40381db4b140e4c98061e84489de11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &951139736630966286
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.19999695, y: -206.99997}
+  m_AnchoredPosition: {x: 0.20000076, y: -207}
   m_SizeDelta: {x: 580, y: 157.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &951139738048131332
