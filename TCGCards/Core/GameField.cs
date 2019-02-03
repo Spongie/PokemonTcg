@@ -56,6 +56,10 @@ namespace TCGCards.Core
             {
                 if (GameState == GameFieldState.BothSelectingActive)
                 {
+                    if (!owner.Hand.OfType<PokemonCard>().Any(card => card.Stage == 0))
+                    {
+                        playersSetStartBench.Add(owner.Id);
+                    }
                     if (Players.All(p => p.ActivePokemonCard != null))
                         GotoNextState();
                 }
