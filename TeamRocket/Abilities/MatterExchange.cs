@@ -1,4 +1,5 @@
-﻿using TCGCards;
+﻿using System.Linq;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 
@@ -9,6 +10,13 @@ namespace TeamRocket.Abilities
         public MatterExchange(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.Activation;
+            Name = "Matter Exchange";
+            Description = "Discard a card, then draw a card";
+        }
+
+        public override bool CanActivate()
+        {
+            return PokemonOwner.Owner.Hand.Any() && base.CanActivate();
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)

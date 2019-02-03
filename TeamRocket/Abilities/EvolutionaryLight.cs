@@ -10,6 +10,8 @@ namespace TeamRocket.Abilities
         public EvolutionaryLight(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.Activation;
+            Name = "Evolutionary Light";
+            Description = "Search your deck for an evolution card and put it into your hand";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)

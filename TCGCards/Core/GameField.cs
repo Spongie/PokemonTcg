@@ -71,7 +71,13 @@ namespace TCGCards.Core
             if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.OpponentRetreats)
                 NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
 
-            int retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + GetAllPassiveAbilities().OfType<CostModifierAbility>().Where(ability => ability.ModifierType == PassiveModifierType.RetreatCost).Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
+            var costModifierAbilities = GetAllPassiveAbilities()
+                .OfType<CostModifierAbility>()
+                .Where(ability => ability.IsActive() 
+                    && ability.ModifierType == PassiveModifierType.RetreatCost 
+                    && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id));
+
+            int retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
 
             if (retreatCost <= payedEnergy.Sum(energy => energy.GetEnergry().Amount))
                 ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
@@ -175,7 +181,11 @@ namespace TCGCards.Core
                     if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
                         NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
                     if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage && !damage.IsZero())
+                    {
+                        ActivePlayer.ActivePokemonCard.Ability.SetTarget(NonActivePlayer.ActivePokemonCard);
                         ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
+                        ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
+                    }
                 }
 
                 attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);

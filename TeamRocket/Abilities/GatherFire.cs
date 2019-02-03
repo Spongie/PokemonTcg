@@ -12,6 +12,8 @@ namespace TeamRocket.Abilities
         public GatherFire(PokemonCard owner) : base(owner)
         {
             TriggerType = TriggerType.Activation;
+            Name = "Gather Fire";
+            Description = "Move one Fire energy from another pokemon and attach it to Charmander";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)

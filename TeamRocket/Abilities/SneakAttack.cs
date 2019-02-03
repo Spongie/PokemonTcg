@@ -9,6 +9,8 @@ namespace TeamRocket.Abilities
         public SneakAttack(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.EnterPlay;
+            Name = "Sneak Attack";
+            Description = "When you player Dark Golbat from your hand choose 1 of your opponents Pokemon an deal 10 damage to it";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)

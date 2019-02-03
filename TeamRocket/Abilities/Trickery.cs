@@ -11,6 +11,8 @@ namespace TeamRocket.Abilities
         public Trickery(PokemonCard owner) : base(owner)
         {
             TriggerType = TriggerType.Activation;
+            Name = "Trickery";
+            Description = "Switch on of your prizes with the top card of your deck";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)

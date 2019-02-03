@@ -8,6 +8,8 @@ namespace TeamRocket.Abilities
         public Frenzy(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.DealsDamage;
+            Name = "Frenzy";
+            Description = "If Dark Primeape is confused and deals damage it deals an adiitional 30 damage";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NetworkingCore;
 
 namespace TCGCards.Core
 {
@@ -10,5 +11,9 @@ namespace TCGCards.Core
         }
 
         public List<Energy> ExtraCost { get; set; }
+
+        public virtual bool IsActive() => true;
+
+        public virtual HashSet<NetworkId> GetUnAffectedCards() => new HashSet<NetworkId>();
     }
 }
