@@ -15,7 +15,7 @@ namespace TeamRocket.Abilities
 
         protected override void Activate(Player player, Player opponent, int damageTake)
         {
-            if(PokemonOwner.IsAsleep || PokemonOwner.IsParalyzed || PokemonOwner.IsConfused || CoinFlipper.FlipCoin() == CoinFlipper.HEADS)
+            if(PokemonOwner.IsAsleep || PokemonOwner.IsParalyzed || PokemonOwner.IsConfused || CoinFlipper.FlipCoin() != CoinFlipper.HEADS)
                 return;
 
             var damage = PokemonOwner.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water);

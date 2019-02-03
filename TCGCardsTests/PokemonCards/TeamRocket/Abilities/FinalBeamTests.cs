@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TCGCards.Core;
 using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 
@@ -57,6 +58,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
         {
             var activePokemon = new DarkGyarados();
             var otherPokemon = new Magikarp();
+            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.KnockedOutBy = otherPokemon;
@@ -71,6 +73,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
         {
             var activePokemon = new DarkGyarados();
             var otherPokemon = new Magikarp();
+            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
             activePokemon.AttachedEnergy.Add(new WaterEnergy());
@@ -79,6 +82,22 @@ namespace TCGCards.PokemonCards.TeamRocket.Abilities.Tests
             activePokemon.Ability.Trigger(null, null, 0);
 
             Assert.AreEqual(40, otherPokemon.DamageCounters);
+        }
+
+        [TestMethod()]
+        public void Activate_Tails_Nothing()
+        {
+            var activePokemon = new DarkGyarados();
+            var otherPokemon = new Magikarp();
+            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
+
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.KnockedOutBy = otherPokemon;
+
+            activePokemon.Ability.Trigger(null, null, 0);
+
+            Assert.AreEqual(0, otherPokemon.DamageCounters);
         }
     }
 }
