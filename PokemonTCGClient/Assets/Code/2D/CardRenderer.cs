@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
+using Assets.Code;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -117,6 +118,6 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Clicked card");
+        GameController.Instance.OnCardClicked(this);
     }
 }

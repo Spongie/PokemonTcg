@@ -43,10 +43,8 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
         }
 
-        public void Card_OnCardClicked(CardRenderer cardController)
+        public void OnCardClicked(CardRenderer cardController)
         {
-            Debug.Log("CLicked: " + cardController.card.GetLogicalName());
-
             if (gameField.GameState == GameFieldState.BothSelectingActive)
             {
                 var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
