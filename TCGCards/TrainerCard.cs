@@ -16,5 +16,10 @@ namespace TCGCards
         public abstract void Process(GameField game, Player caster, Player opponent);
 
         public virtual bool CanCast(GameField game, Player caster, Player opponent) => true;
+
+        public override string GetName() => Name;
+
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

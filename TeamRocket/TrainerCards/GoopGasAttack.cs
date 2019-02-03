@@ -5,9 +5,10 @@ namespace TeamRocket.TrainerCards
 {
     public class GoopGasAttack : TrainerCard
     {
-        public override string GetName()
+        public GoopGasAttack()
         {
-            return "All Pokemon Powers stop working until the end of your opponents next turn";
+            Name = "Goop Gas Attack";
+            Description = "All Pokemon Powers stop working until the end of your opponents next turn";
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

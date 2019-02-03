@@ -6,9 +6,10 @@ namespace TeamRocket.TrainerCards
 {
     public class NightlyGarbageRun : TrainerCard
     {
-        public override string GetName()
+        public NightlyGarbageRun()
         {
-            return "Choose up to 3 basic Pokémon cards, Evolution cards, and/or basic Energy cards from your discard pile. Show them to your opponent and shuffle them into your deck";
+            Name = "Nightly Garbage Run";
+            Description = "Choose up to 3 basic Pokémon cards, Evolution cards, and/or basic Energy cards from your discard pile. Show them to your opponent and shuffle them into your deck";
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

@@ -8,9 +8,10 @@ namespace TeamRocket.TrainerCards
 {
     public class RocketsSneakAttack : TrainerCard
     {
-        public override string GetName()
+        public RocketsSneakAttack()
         {
-            return "Rocket's Sneak Attack";
+            Name = "Rocket's Sneak Attack";
+            Description = "Look at your opponent's hand. If he or she has any Trainer Cards, choose 1 of them. Your opponent shuffles that card into his or her deck.";
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

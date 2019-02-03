@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using Assets.Code;
 using Assets.Code._2D;
+using TMPro;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -17,6 +18,9 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public Text cardName;
     public Text hpNumber;
     public Text hpFixed;
+    public Text trainerCardName;
+    public TextMeshProUGUI trainerCardDescription;
+    public Sprite TrainerCardTemplate;
     public Image art;
     public Image typeIcon;
     public Image colorImage;
@@ -62,8 +66,30 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
         else if (card is TrainerCard)
         {
-
+            SetTrainerCard((TrainerCard)card);
         }
+    }
+
+    public void SetTrainerCard(TrainerCard card)
+    {
+        colorImage.enabled = false;
+        cardName.enabled = false;
+        colorImage.enabled = false;
+        hpNumber.enabled = false;
+        hpFixed.enabled = false;
+        typeIcon.enabled = false;
+        weaknessIcon.enabled = false;
+        resistanceIcon.enabled = false;
+        retreatCost.SetActive(false);
+        attacks.SetActive(false);
+        trainerCardDescription.gameObject.SetActive(true);
+        trainerCardName.gameObject.SetActive(true);
+
+        trainerCardName.text = card.Name;
+        trainerCardDescription.text = card.Description;
+        template.sprite = TrainerCardTemplate;
+
+        StartCoroutine(LoadSprite(card));
     }
 
     public void SetEnergyCard(EnergyCard card)

@@ -7,9 +7,10 @@ namespace TeamRocket.TrainerCards
 {
     public class TheBosssWay : TrainerCard, IDeckSearcher
     {
-        public override string GetName()
+        public TheBosssWay()
         {
-            return "The Boss's way";
+            Name = "The Boss's way";
+            Description = "Search your deck for en Evolution card with Dark in its name. Show it to your opponent and put it into your hand. Shuffle your deck afterward";
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

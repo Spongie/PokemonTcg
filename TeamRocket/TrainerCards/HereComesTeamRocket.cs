@@ -5,9 +5,10 @@ namespace TeamRocket.TrainerCards
 {
     public class HereComesTeamRocket : TrainerCard
     {
-        public override string GetName()
+        public HereComesTeamRocket()
         {
-            return "Each player plays with his or her prize cards face up for the rest of the game";
+            Name = "Here Comes Team Rocket";
+            Description = "Each player plays with his or her prize cards face up for the rest of the game";
         }
 
         public override void Process(GameField game, Player caster, Player opponent)
