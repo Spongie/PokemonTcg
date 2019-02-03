@@ -70,6 +70,7 @@ namespace TestClient
 
         private static void PlayGame()
         {
+            Console.WriteLine("Joining the game");
             gameField = gameService.JoinTheActiveGame(networkPlayer.Id);
 
             Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
@@ -77,11 +78,17 @@ namespace TestClient
 
             Console.Read();
 
+            Console.WriteLine("Setting active pokemon");
             gameField = gameService.SetActivePokemon(networkPlayer.Id, starter);
 
             Console.Read();
 
+            Console.WriteLine("Setting benched pokemon");
             gameField = gameService.AddToBench(networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).ToList());
+
+            Console.Read();
+
+            networkPlayer.Disconnect(true);
         }
 
         private static void RunPlayer(object obj)

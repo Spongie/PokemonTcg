@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8818601054791555102}
   - component: {fileID: 7609714709601664399}
   - component: {fileID: 3925190815532877406}
+  - component: {fileID: 3200075445218392139}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -77,6 +78,7 @@ MonoBehaviour:
     type: 3}
   costPrefab: {fileID: 3613349629519810508, guid: fa56b98965f94384e829d2af8b3ed5b2,
     type: 3}
+  selectIndicator: {fileID: 3200075445218392139}
   isActivePokemon: 0
 --- !u!225 &7609714709601664399
 CanvasGroup:
@@ -102,6 +104,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15ab126388731a44ba939358dfa7ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3200075445218392139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951139736514868102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b467ce8260204847aa918e0b69427cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 1893531561124774431}
 --- !u!1 &951139736630966286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7734204811842165481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1052,7 +1067,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6763585103085761795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 

@@ -52,7 +52,7 @@ namespace Assets.Code
             }
             else if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
-                cardController.GetComponentInChildren<SelectIndicator>().SetSelected(true);
+                cardController.SetSelected(true);
                 selectedBenchCards.Add(cardController.card);
             }
         }
@@ -90,6 +90,23 @@ namespace Assets.Code
 
             SetActivePokemon(playerActivePokemon, me.ActivePokemonCard);
             SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard);
+
+            SetBenchedPokemon(playerBench, me.BenchedPokemon);
+            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
+        }
+
+        private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)
+        {
+            parent.DestroyAllChildren();
+
+            foreach (var pokemon in pokemons)
+            {
+                var spawnedCard = Instantiate(cardPrefab, parent.transform);
+
+                var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
+                controller.SetCard(pokemon);
+                controller.SetIsBenched();
+            }
         }
 
         private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
@@ -99,18 +116,13 @@ namespace Assets.Code
                 return;
             }
 
-            var controller = parent.GetComponentInChildren<CardRenderer>();
+            parent.DestroyAllChildren();
 
-            if (controller != null)
-            {
-                controller.SetCard(pokemonCard);
-                return;
-            }
+            var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
-            controller = Instantiate(cardPrefab, parent.transform).GetComponent<CardRenderer>();
-
-            controller.isActivePokemon = true;
+            var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
             controller.SetCard(pokemonCard);
+            controller.SetIsActivePokemon();
         }
 
         private void OnGameHosted(object param1)

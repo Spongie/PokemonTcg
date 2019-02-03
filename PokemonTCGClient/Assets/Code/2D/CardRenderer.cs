@@ -8,6 +8,7 @@ using System.IO;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using Assets.Code;
+using Assets.Code._2D;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -24,6 +25,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject attackPrefab;
     public GameObject abilityPrefab;
     public GameObject costPrefab;
+    public SelectIndicator selectIndicator;
     public Card card;
     public bool isActivePokemon;
 
@@ -97,6 +99,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         StartCoroutine(LoadSprite(card));
     }
 
+    internal void SetSelected(bool selected)
+    {
+        selectIndicator.SetSelected(selected);
+    }
+
     IEnumerator LoadSprite(Card card)
     {
         string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
@@ -119,5 +126,19 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         GameController.Instance.OnCardClicked(this);
+    }
+
+    internal void SetIsActivePokemon()
+    {
+        isActivePokemon = true;
+        GetComponent<CardZoomer>().enabled = false;
+        GetComponent<CardDragger>().enabled = false;
+    }
+
+    internal void SetIsBenched()
+    {
+        isActivePokemon = false;
+        GetComponent<CardZoomer>().enabled = false;
+        GetComponent<CardDragger>().enabled = false;
     }
 }

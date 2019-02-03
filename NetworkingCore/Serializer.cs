@@ -9,7 +9,8 @@ namespace NetworkingCore
             TypeNameHandling = TypeNameHandling.Auto,
             Formatting = Formatting.None,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-            ObjectCreationHandling = ObjectCreationHandling.Replace
+            ObjectCreationHandling = ObjectCreationHandling.Replace,
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
         };
 
         public static T Deserialize<T>(string json)
