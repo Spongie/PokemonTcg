@@ -5,6 +5,7 @@ using NetworkingCore;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Code
@@ -22,7 +23,11 @@ namespace Assets.Code
         public GameObject cardPrefab;
         public NetworkId myId;
         public GameObject doneButton;
+        public TextMeshProUGUI playerDeckCountText;
+        public TextMeshProUGUI opponentDeckCountText;
+
         private List<Card> selectedBenchCards;
+
         private static GameFieldState[] statesWithDoneAction = new []
         {
             GameFieldState.BothSelectingBench
@@ -85,6 +90,15 @@ namespace Assets.Code
 
             Player me = gameField.Players.First(p => p.Id.Equals(myId));
             Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
+
+            if (me.Deck != null)
+            {
+                playerDeckCountText.text = me.Deck.Cards.Count.ToString();
+            }
+            if (opponent.Deck != null)
+            {
+                opponentDeckCountText.text = opponent.Deck.Cards.Count.ToString();
+            }
 
             playerHand.SetHand(me.Hand);
 
