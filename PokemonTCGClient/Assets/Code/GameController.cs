@@ -62,6 +62,26 @@ namespace Assets.Code
             }
         }
 
+        public void ActivateAbility(Ability ability)
+        {
+            if (!gameField.ActivePlayer.Id.Equals(myId) || !ability.CanActivate() || ability.PokemonOwner.Owner.Hand.Contains(ability.PokemonOwner))
+            {
+                return;
+            }
+
+            NetworkManager.Instance.gameService.ActivateAbility(ability);
+        }
+
+        public void Attack(Attack attack)
+        {
+            if (!gameField.ActivePlayer.Id.Equals(myId) || !gameField.ActivePlayer.ActivePokemonCard.Attacks.Contains(attack) || !attack.CanBeUsed(gameField, gameField.ActivePlayer, gameField.NonActivePlayer))
+            {
+                return;
+            }
+
+            NetworkManager.Instance.gameService.Attack(attack);
+        }
+
         public void DoneButtonClicked()
         {
             if (gameField.GameState == GameFieldState.BothSelectingBench)

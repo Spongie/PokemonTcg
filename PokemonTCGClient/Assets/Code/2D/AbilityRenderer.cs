@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Code;
 using TCGCards;
 using TCGCards.Core;
 using TMPro;
@@ -21,7 +22,7 @@ public class AbilityRenderer : MonoBehaviour
         abilityName.text = ability.Name;
         abilityDescription.text = ability.Description;
 
-        if (ability.TriggerType != TriggerType.Activation && ability.CanActivate())
+        if (ability.TriggerType != TriggerType.Activation || !ability.CanActivate())
         {
             GetComponent<Button>().interactable = false;
         }
@@ -29,6 +30,6 @@ public class AbilityRenderer : MonoBehaviour
 
     public void AttackClicked()
     {
-        Debug.Log("Clicked on: " + abilityName.text);
+        GameController.Instance.ActivateAbility(ability);
     }
 }

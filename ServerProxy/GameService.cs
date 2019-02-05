@@ -57,6 +57,17 @@ public TCGCards.Core.GameField SetActivePokemon(NetworkingCore.NetworkId playerI
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
+public TCGCards.Core.GameField ActivateAbility(TCGCards.Core.Ability ability)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "ActivateAbility",
+			TargetClass = "GameService",
+			Parameters = new object[] { ability }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
 public TCGCards.Core.GameField Attack(TCGCards.Attack attack)
 	{
 		var message = new GenericMessageData

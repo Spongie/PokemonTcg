@@ -137,6 +137,12 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
+        public GameField ActivateAbility(Ability ability)
+        {
+            theOnlyActiveGame.ActivateAbility(ability);
+            return theOnlyActiveGame;
+        }
+
         public GameField Attack(Attack attack)
         {
             theOnlyActiveGame.Attack(attack);

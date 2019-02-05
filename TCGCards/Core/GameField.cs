@@ -148,6 +148,11 @@ namespace TCGCards.Core
             StateQueue.Enqueue(GameFieldState.InTurn);
         }
 
+        public void ActivateAbility(Ability ability)
+        {
+            ability.Trigger(ActivePlayer, NonActivePlayer, 0);
+        }
+
         public void Attack(Attack attack)
         {
             if (StateQueue.Any())

@@ -61,6 +61,18 @@ public NetworkingCore.NetworkId SetActivePokemon(NetworkingCore.NetworkId player
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId ActivateAbility(TCGCards.Core.Ability ability)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "ActivateAbility",
+			TargetClass = "GameService",
+			Parameters = new object[] { ability }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 public NetworkingCore.NetworkId Attack(TCGCards.Attack attack)
 	{
 		var message = new GenericMessageData

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Code;
 using TCGCards;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +45,6 @@ public class AttackRenderer : MonoBehaviour
 
     public void AttackClicked()
     {
-        Debug.Log("Clicked on: " + attackName.text);
+        GameController.Instance.Attack(attack);
     }
 }
