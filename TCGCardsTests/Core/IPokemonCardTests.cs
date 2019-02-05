@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
@@ -157,6 +158,18 @@ namespace TCGCardsTests.Core
             pokemon.Evolve(pokemon);
 
             Assert.IsFalse(pokemon.IsBurned);
+        }
+
+        [TestMethod]
+        public void Evolve_EnergyTransferred()
+        {
+            PokemonCard pokemon = new Magikarp();
+            pokemon.IsBurned = true;
+            pokemon.AttachedEnergy.Add(new WaterEnergy());
+
+            pokemon = pokemon.Evolve(new DarkGyarados());
+
+            Assert.IsTrue(pokemon.AttachedEnergy.Count == 1);
         }
 
         [TestMethod]

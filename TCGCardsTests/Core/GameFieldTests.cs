@@ -293,6 +293,47 @@ namespace TCGCards.Core.Tests
             Assert.AreEqual(trainerCard.Id, gameField.ActivePlayer.DiscardPile.Last().Id);
         }
 
+        public void EvolvePokemon_ActivePokemon()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            FillPlayerDecksWithJunk(gameField);
+
+            gameField.GameState = GameFieldState.InTurn;
+            gameField.ActivePlayer.ActivePokemonCard = new Ekans(gameField.ActivePlayer);
+
+            var arbok = new DarkArbok(gameField.ActivePlayer);
+            gameField.EvolvePokemon(gameField.ActivePlayer.ActivePokemonCard, arbok);
+
+            Assert.AreEqual(gameField.ActivePlayer.ActivePokemonCard.Id, arbok.Id);
+            Assert.IsTrue(gameField.ActivePlayer.ActivePokemonCard is DarkArbok);
+        }
+
+        public void EvolvePokemon_BenchedPokemon()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            FillPlayerDecksWithJunk(gameField);
+
+            gameField.GameState = GameFieldState.InTurn;
+            gameField.ActivePlayer.ActivePokemonCard = new Ekans(gameField.ActivePlayer);
+
+            PokemonCard first = new Ekans(gameField.ActivePlayer);
+            PokemonCard second = new Ekans(gameField.ActivePlayer);
+
+            gameField.ActivePlayer.BenchedPokemon.Add(first);
+            gameField.ActivePlayer.BenchedPokemon.Add(second);
+
+            var arbok = new DarkArbok(gameField.ActivePlayer);
+            gameField.EvolvePokemon(first, arbok);
+
+            Assert.AreEqual(first.Id, arbok.Id);
+            Assert.IsTrue(first is DarkArbok);
+
+            Assert.AreNotEqual(second.Id, arbok.Id);
+            Assert.IsTrue(second is Ekans);
+        }
+
         private void FillPlayerDecksWithJunk(GameField gameField)
         {
             foreach (var player in gameField.Players)

@@ -101,6 +101,7 @@ namespace TCGCards
             ClearStatusEffects();
             evolution.SetBase(this);
             evolution.EvolvedFrom = this;
+            evolution.AttachedEnergy = AttachedEnergy;
 
             return evolution;
         }

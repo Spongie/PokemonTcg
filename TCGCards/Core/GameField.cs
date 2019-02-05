@@ -32,6 +32,27 @@ namespace TCGCards.Core
             //TODO: Complete this
         }
 
+        public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution)
+        {
+            if (!basePokemon.CanEvolve() || !basePokemon.CanEvolveTo(evolution))
+            {
+                return;
+            }
+
+            if (ActivePlayer.ActivePokemonCard.Id.Equals(basePokemon.Id))
+            {
+                ActivePlayer.ActivePokemonCard = basePokemon.Evolve(evolution);
+            }
+
+            for (int i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
+            {
+                if (ActivePlayer.BenchedPokemon[i].Id.Equals(basePokemon.Id))
+                {
+                    ActivePlayer.BenchedPokemon[i] = basePokemon.Evolve(evolution);
+                }
+            }
+        }
+
         public void InitTest()
         {
             Players.Add(new Player { Id = NetworkId.Generate() });

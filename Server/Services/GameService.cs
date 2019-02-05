@@ -140,6 +140,8 @@ namespace Server.Services
         public GameField ActivateAbility(Ability ability)
         {
             theOnlyActiveGame.ActivateAbility(ability);
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
             return theOnlyActiveGame;
         }
 
@@ -147,6 +149,29 @@ namespace Server.Services
         {
             theOnlyActiveGame.Attack(attack);
 
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
+            return theOnlyActiveGame;
+        }
+
+        public GameField PlayCard(Card card)
+        {
+            if (card is TrainerCard)
+            {
+                theOnlyActiveGame.PlayerTrainerCard((TrainerCard)card);
+            } else if (card is PokemonCard)
+            {
+                theOnlyActiveGame.PlayPokemon((PokemonCard)card);
+            }
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
+            return theOnlyActiveGame;
+        }
+
+        public GameField EvolvePokemon(PokemonCard card, PokemonCard target)
+        {
+            theOnlyActiveGame.EvolvePokemon(card, target);
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
             return theOnlyActiveGame;
         }
 

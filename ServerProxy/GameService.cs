@@ -79,4 +79,26 @@ public TCGCards.Core.GameField Attack(TCGCards.Attack attack)
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
+public TCGCards.Core.GameField PlayCard(TCGCards.Card card)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "PlayCard",
+			TargetClass = "GameService",
+			Parameters = new object[] { card }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
+public TCGCards.Core.GameField EvolvePokemon(TCGCards.PokemonCard card,TCGCards.PokemonCard target)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "EvolvePokemon",
+			TargetClass = "GameService",
+			Parameters = new object[] { card,target }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
 }

@@ -85,4 +85,28 @@ public NetworkingCore.NetworkId Attack(TCGCards.Attack attack)
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId PlayCard(TCGCards.Card card)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "PlayCard",
+			TargetClass = "GameService",
+			Parameters = new object[] { card }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId EvolvePokemon(TCGCards.PokemonCard card,TCGCards.PokemonCard target)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "EvolvePokemon",
+			TargetClass = "GameService",
+			Parameters = new object[] { card,target }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 }
