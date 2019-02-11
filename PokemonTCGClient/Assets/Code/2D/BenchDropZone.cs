@@ -9,13 +9,18 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        var cardRenderer = eventData.pointerDrag.GetComponent<CardRenderer>();
+        if (!GameController.Instance.IsMyTurn)
+        {
+            return;
+        }
+
+        var cardRenderer = eventData.pointerDrag.GetComponentInChildren<CardRenderer>();
 
         if (cardRenderer.card is PokemonCard)
         {
             var card = (PokemonCard)cardRenderer.card;
 
-            if (card.Stage == 0 && dropTarget.transform.childCount == 5)
+            if (card.Stage == 0 && dropTarget.transform.childCount == 1)
             {
                 return;
             }
@@ -25,8 +30,26 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
             }
             else if (card.Stage > 0)
             {
-                //Add 5 different drop zones? one for eaach bench slot? mayb easier to find what to evolve?
+                var existingCard = dropTarget.GetComponentInChildren<CardRenderer>();
+
+                if (existingCard == null)
+                {
+                    return;
+                }
+
+                NetworkManager.Instance.gameService.EvolvePokemon((PokemonCard)cardRenderer.card, (PokemonCard)existingCard.card);
             }
+        }
+        else if (cardRenderer.card is EnergyCard)
+        {
+            var existingCard = dropTarget.GetComponentInChildren<CardRenderer>();
+
+            if (existingCard == null)
+            {
+                return;
+            }
+
+            NetworkManager.Instance.gameService.AttachEnergy((PokemonCard)existingCard.card, (EnergyCard)cardRenderer.card);
         }
 
         var draggedObject = eventData.pointerDrag;
@@ -35,19 +58,18 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
 
         var parentRect = parent.GetComponent<RectTransform>();
         parentRect.localRotation = Quaternion.identity;
-        parentRect.localPosition = new Vector3(parentRect.anchoredPosition.x, parentRect.anchoredPosition.y, 0);
+        parentRect.anchoredPosition = Vector3.zero;
+        parentRect.localPosition = new Vector3(parent.localPosition.x, parent.localPosition.y, 0);
         parentRect.localScale = new Vector3(1, 1, 1);
 
 
         var rect = draggedObject.GetComponent<RectTransform>();
         rect.localRotation = Quaternion.identity;
-        rect.anchoredPosition = Vector3.zero;
+        rect.localPosition = Vector3.zero;
         rect.localScale = new Vector3(1, 1, 1);
 
         draggedObject.GetComponent<CardDragger>().OnEndDrag(eventData);
         draggedObject.GetComponent<CardZoomer>().enabled = false;
         draggedObject.GetComponent<CardDragger>().enabled = false;
-
-        
     }
 }

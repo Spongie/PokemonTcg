@@ -26,6 +26,7 @@ namespace Assets.Code
         public GameObject doneButton;
         public TextMeshProUGUI playerDeckCountText;
         public TextMeshProUGUI opponentDeckCountText;
+        public bool IsMyTurn;
 
         private List<Card> selectedBenchCards;
 
@@ -128,6 +129,8 @@ namespace Assets.Code
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
+
+            IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
         }
 
         private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)

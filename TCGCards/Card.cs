@@ -18,7 +18,7 @@ namespace TCGCards
 
         public NetworkId Id { get; set; }
 
-        protected CardSet Set { get; set; }
+        public CardSet Set { get; set; }
 
         public Player Owner { get; set; }
 

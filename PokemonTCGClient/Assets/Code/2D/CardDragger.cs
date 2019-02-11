@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Code;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -12,6 +13,11 @@ public class CardDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!GameController.Instance.IsMyTurn)
+        {
+            return;
+        }
+
         GetComponent<RectTransform>().position = Input.mousePosition;
     }
 

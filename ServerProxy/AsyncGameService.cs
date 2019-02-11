@@ -61,6 +61,18 @@ public NetworkingCore.NetworkId SetActivePokemon(NetworkingCore.NetworkId player
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId AttachEnergy(TCGCards.PokemonCard target,EnergyCard energyCard)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "AttachEnergy",
+			TargetClass = "GameService",
+			Parameters = new object[] { target,energyCard }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 public NetworkingCore.NetworkId ActivateAbility(TCGCards.Core.Ability ability)
 	{
 		var message = new GenericMessageData

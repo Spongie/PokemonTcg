@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Code;
+using TCGCards;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ActiveDropZone : MonoBehaviour, IDropHandler
@@ -7,14 +9,39 @@ public class ActiveDropZone : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        var draggedObject = eventData.pointerDrag;
-        draggedObject.transform.SetParent(dropTarget.transform);
-        var rect = draggedObject.GetComponent<RectTransform>();
-        rect.localRotation = Quaternion.identity;
-        rect.localPosition = new Vector3(0, 0, 1);
-        rect.localScale = new Vector3(1, 1, 1);
+        if (!GameController.Instance.IsMyTurn)
+        {
+            return;
+        }
 
-        draggedObject.GetComponent<CardZoomer>().enabled = false;
-        draggedObject.GetComponent<CardDragger>().enabled = false;
+        var cardRenderer = eventData.pointerDrag.GetComponentInChildren<CardRenderer>();
+
+        if (cardRenderer.card is PokemonCard)
+        {
+            var card = (PokemonCard)cardRenderer.card;
+
+            if (card.Stage > 0)
+            {
+                var existingCard = dropTarget.GetComponentInChildren<CardRenderer>();
+
+                if (existingCard == null)
+                {
+                    return;
+                }
+
+                NetworkManager.Instance.gameService.EvolvePokemon((PokemonCard)cardRenderer.card, (PokemonCard)existingCard.card);
+            }
+        }
+        if (cardRenderer.card is EnergyCard)
+        {
+            var existingCard = dropTarget.GetComponentInChildren<CardRenderer>();
+
+            if (existingCard == null)
+            {
+                return;
+            }
+
+            NetworkManager.Instance.gameService.AttachEnergy((PokemonCard)existingCard.card, (EnergyCard)cardRenderer.card);
+        }
     }
 }

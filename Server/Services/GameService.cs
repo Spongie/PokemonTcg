@@ -137,6 +137,15 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
+        public GameField AttachEnergy(PokemonCard target, EnergyCard energyCard)
+        {
+            theOnlyActiveGame.ActivePlayer.AttachEnergyToPokemon(energyCard, target);
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
+
+            return theOnlyActiveGame;
+        }
+
         public GameField ActivateAbility(Ability ability)
         {
             theOnlyActiveGame.ActivateAbility(ability);
