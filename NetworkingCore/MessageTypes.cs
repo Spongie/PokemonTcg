@@ -11,6 +11,7 @@
         DeckSearch,
         SelectedActive,
         SelectedBench,
-        Disconnect
+        Disconnect,
+        SelectOpponentPokemon
     }
 }

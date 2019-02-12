@@ -6,6 +6,7 @@ namespace TCGCards.Core.Messages
     {
         public SelectOpponentPokemon(int count)
         {
+            MessageType = MessageTypes.SelectOpponentPokemon;
             Count = count;
         }
 

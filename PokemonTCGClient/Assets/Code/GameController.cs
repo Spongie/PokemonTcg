@@ -11,11 +11,18 @@ using UnityEngine;
 
 namespace Assets.Code
 {
+    public enum SpecialGameState
+    {
+        None,
+        SelectingOpponentsPokemon
+    }
+
     public class GameController : MonoBehaviour
     {
         public static GameController Instance;
         public GameField gameField;
         public GameFieldState CurrentGameState;
+        public SpecialGameState SpecialState;
         public HandController playerHand;
         public GameObject playerBench;
         public GameObject opponentBench;
@@ -29,7 +36,7 @@ namespace Assets.Code
         public TextMeshProUGUI opponentDeckCountText;
         public bool IsMyTurn;
 
-        private List<Card> selectedBenchCards;
+        private List<Card> selectedCards;
 
         private static GameFieldState[] statesWithDoneAction = new []
         {
@@ -39,7 +46,7 @@ namespace Assets.Code
         private void Awake()
         {
             Instance = this;
-            selectedBenchCards = new List<Card>();
+            selectedCards = new List<Card>();
         }
 
         private void Start()
@@ -49,6 +56,15 @@ namespace Assets.Code
 
             NetworkManager.Instance.RegisterCallback(messageId, OnGameHosted);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
+        }
+
+        private void OnStartSelectingOpponentPokemon(object obj)
+        {
+            selectedCards.Clear();
+            var count = ((SelectOpponentPokemon)obj).Count;
+            SpecialState = SpecialGameState.SelectingOpponentsPokemon;
+            doneButton.SetActive(true);
         }
 
         public void OnCardClicked(CardRenderer cardController)
@@ -61,7 +77,17 @@ namespace Assets.Code
             else if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
                 cardController.SetSelected(true);
-                selectedBenchCards.Add(cardController.card);
+                selectedCards.Add(cardController.card);
+            }
+            else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
+            {
+                if (cardController.card.Owner.Id.Equals(myId))
+                {
+                    return;
+                }
+
+                cardController.SetSelected(true);
+                selectedCards.Add(cardController.card);
             }
         }
 
@@ -94,9 +120,15 @@ namespace Assets.Code
         {
             if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
-                var id = NetworkManager.Instance.gameService.AddToBench(myId, selectedBenchCards.OfType<PokemonCard>().ToList());
+                var id = NetworkManager.Instance.gameService.AddToBench(myId, selectedCards.OfType<PokemonCard>().ToList());
                 NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
-                selectedBenchCards.Clear();
+                selectedCards.Clear();
+            }
+            else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
+            {
+                var message = new CardListMessage(selectedCards);
+                NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
+                SpecialState = SpecialGameState.None;
             }
         }
 
