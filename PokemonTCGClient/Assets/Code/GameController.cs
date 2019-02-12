@@ -8,6 +8,7 @@ using TCGCards.Core;
 using TCGCards.Core.Messages;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Code
 {
@@ -36,7 +37,11 @@ namespace Assets.Code
         public TextMeshProUGUI opponentDeckCountText;
         public bool IsMyTurn;
 
+        public GameObject infoPanel;
+        public Text infoText;
+
         private List<Card> selectedCards;
+        private Dictionary<GameFieldState, string> gameStateInfo;
 
         private static GameFieldState[] statesWithDoneAction = new []
         {
@@ -47,6 +52,12 @@ namespace Assets.Code
         {
             Instance = this;
             selectedCards = new List<Card>();
+
+            gameStateInfo = new Dictionary<GameFieldState, string>
+            {
+                { GameFieldState.BothSelectingActive, "Select your active Pokémon" },
+                { GameFieldState.BothSelectingBench, "Select your benched Pokémon" },
+            };
         }
 
         private void Start()
@@ -65,6 +76,9 @@ namespace Assets.Code
             var count = ((SelectOpponentPokemon)obj).Count;
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             doneButton.SetActive(true);
+
+            infoPanel.SetActive(true);
+            infoText.text = $"Select up to {count} of your oppoents pokemon";
         }
 
         public void OnCardClicked(CardRenderer cardController)
@@ -129,6 +143,7 @@ namespace Assets.Code
                 var message = new CardListMessage(selectedCards);
                 NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
                 SpecialState = SpecialGameState.None;
+                infoPanel.SetActive(false);
             }
         }
 
@@ -169,6 +184,16 @@ namespace Assets.Code
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
+
+            if (gameStateInfo.ContainsKey(gameField.GameState))
+            {
+                infoPanel.SetActive(true);
+                infoText.text = gameStateInfo[gameField.GameState];
+            }
+            else
+            {
+                infoPanel.SetActive(false);
+            }
         }
 
         private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)
