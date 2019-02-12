@@ -12,6 +12,14 @@
         SelectedActive,
         SelectedBench,
         Disconnect,
-        SelectOpponentPokemon
+        SelectOpponentPokemon,
+        SelectFromOpponentBench,
+        SelectFromYourBench,
+        SelectFromDiscard,
+        SelectEnergyFromPokemon,
+        SelectColor,
+        PickFromList,
+        DiscardCards,
+        AttachEnergyToBench
     }
 }

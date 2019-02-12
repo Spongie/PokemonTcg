@@ -6,6 +6,7 @@ namespace TCGCards.Core.Messages
     {
         public DiscardCardsMessage(int count)
         {
+            MessageType = MessageTypes.DiscardCards;
             Count = count;
         }
 

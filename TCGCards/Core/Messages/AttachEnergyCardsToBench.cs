@@ -7,6 +7,7 @@ namespace TCGCards.Core.Messages
     {
         public AttachEnergyCardsToBenchMessage(List<EnergyCard> energyCards)
         {
+            MessageType = MessageTypes.AttachEnergyToBench;
             EnergyCards = energyCards;
         }
 

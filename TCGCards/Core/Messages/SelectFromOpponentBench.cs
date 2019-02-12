@@ -7,16 +7,7 @@ namespace TCGCards.Core.Messages
         public SelectFromOpponentBench(int count)
         {
             Count = count;
-        }
-
-        public int Count { get; set; }
-    }
-
-    public class SelectFromYourBench : AbstractNetworkMessage
-    {
-        public SelectFromYourBench(int count)
-        {
-            Count = count;
+            MessageType = MessageTypes.SelectFromOpponentBench;
         }
 
         public int Count { get; set; }

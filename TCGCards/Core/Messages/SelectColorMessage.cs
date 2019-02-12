@@ -7,6 +7,7 @@ namespace TCGCards.Core.Messages
         public SelectColorMessage(string message)
         {
             Message = message;
+            MessageType = MessageTypes.SelectColor;
         }
 
         public SelectColorMessage(EnergyTypes color)

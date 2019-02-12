@@ -8,6 +8,7 @@ namespace TCGCards.Core.Messages
     {
         public PickFromListMessage(IEnumerable<Card> possibleChoices, List<IDeckFilter> filter, int cardCount)
         {
+            MessageType = MessageTypes.PickFromList;
             PossibleChoices = possibleChoices.ToList();
             Filter = filter;
             CardCount = cardCount;

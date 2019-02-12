@@ -8,6 +8,7 @@ namespace TCGCards.Core.Messages
         {
             Count = count;
             Filter = filter;
+            MessageType = MessageTypes.SelectFromDiscard;
         }
 
         public int Count { get; set; }
