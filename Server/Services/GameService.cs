@@ -128,6 +128,15 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
+        public GameField EndTurn()
+        {
+            theOnlyActiveGame.EndTurn();
+
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
+
+            return theOnlyActiveGame;
+        }
+
         public GameField SetActivePokemon(NetworkId playerId, PokemonCard pokemon)
         {
             theOnlyActiveGame.OnActivePokemonSelected(playerId, pokemon);

@@ -49,6 +49,18 @@ public NetworkingCore.NetworkId AddToBench(NetworkingCore.NetworkId playerId,Sys
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId EndTurn()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "EndTurn",
+			TargetClass = "GameService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 public NetworkingCore.NetworkId SetActivePokemon(NetworkingCore.NetworkId playerId,TCGCards.PokemonCard pokemon)
 	{
 		var message = new GenericMessageData

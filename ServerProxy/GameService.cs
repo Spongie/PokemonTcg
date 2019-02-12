@@ -46,6 +46,17 @@ public TCGCards.Core.GameField AddToBench(NetworkingCore.NetworkId playerId,Syst
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
+public TCGCards.Core.GameField EndTurn()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "EndTurn",
+			TargetClass = "GameService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
 public TCGCards.Core.GameField SetActivePokemon(NetworkingCore.NetworkId playerId,TCGCards.PokemonCard pokemon)
 	{
 		var message = new GenericMessageData

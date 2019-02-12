@@ -24,6 +24,7 @@ namespace Assets.Code
         public GameObject cardPrefab;
         public NetworkId myId;
         public GameObject doneButton;
+        public GameObject endTurnButton;
         public TextMeshProUGUI playerDeckCountText;
         public TextMeshProUGUI opponentDeckCountText;
         public bool IsMyTurn;
@@ -84,6 +85,11 @@ namespace Assets.Code
             NetworkManager.Instance.gameService.Attack(attack);
         }
 
+        public void EndTurnButtonClicked()
+        {
+            NetworkManager.Instance.gameService.EndTurn();
+        }
+
         public void DoneButtonClicked()
         {
             if (gameField.GameState == GameFieldState.BothSelectingBench)
@@ -102,8 +108,10 @@ namespace Assets.Code
             GameFieldState oldState = gameField.GameState;
             
             gameField = gameMessage;
+            IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
 
             doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
+            endTurnButton.SetActive(IsMyTurn);
 
             if (gameField.GameState == GameFieldState.WaitingForConnection)
             {
@@ -129,8 +137,6 @@ namespace Assets.Code
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
-
-            IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
         }
 
         private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)
