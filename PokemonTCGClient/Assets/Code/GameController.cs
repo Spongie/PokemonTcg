@@ -15,7 +15,8 @@ namespace Assets.Code
     public enum SpecialGameState
     {
         None,
-        SelectingOpponentsPokemon
+        SelectingOpponentsPokemon,
+        SelectingOpponentsBenchedPokemon
     }
 
     public class GameController : MonoBehaviour
@@ -78,6 +79,7 @@ namespace Assets.Code
 
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
+                { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon },
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon }
             };
         }
@@ -90,12 +92,24 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(messageId, OnGameHosted);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
         }
 
-        private void OnStartSelectingOpponentPokemon(object obj)
+        private void OnStartSelectingOpponentBench(object message)
         {
             selectedCards.Clear();
-            var count = ((SelectOpponentPokemon)obj).Count;
+            var count = ((SelectFromOpponentBench)message).Count;
+            SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
+            doneButton.SetActive(true);
+
+            infoPanel.SetActive(true);
+            infoText.text = $"Select up to {count} of your oppoents benched pokemon";
+        }
+
+        private void OnStartSelectingOpponentPokemon(object message)
+        {
+            selectedCards.Clear();
+            var count = ((SelectOpponentPokemon)message).Count;
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             doneButton.SetActive(true);
 
@@ -115,9 +129,20 @@ namespace Assets.Code
             }
         }
 
-        private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
+        private void SelectedOpponentPokemon(CardRenderer cardController)
         {
             if (cardController.card.Owner.Id.Equals(myId))
+            {
+                return;
+            }
+
+            cardController.SetSelected(true);
+            selectedCards.Add(cardController.card);
+        }
+
+        private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
+        {
+            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)))
             {
                 return;
             }
@@ -174,6 +199,13 @@ namespace Assets.Code
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
             {
                 var message = new CardListMessage(selectedCards);
+                NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
+                SpecialState = SpecialGameState.None;
+                infoPanel.SetActive(false);
+            }
+            else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon)
+            {
+                var message = new PokemonCardListMessage(selectedCards.OfType<PokemonCard>().ToList());
                 NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
                 SpecialState = SpecialGameState.None;
                 infoPanel.SetActive(false);
