@@ -42,6 +42,8 @@ namespace Assets.Code
 
         private List<Card> selectedCards;
         private Dictionary<GameFieldState, string> gameStateInfo;
+        private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
+        private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
 
         private static GameFieldState[] statesWithDoneAction = new []
         {
@@ -53,10 +55,30 @@ namespace Assets.Code
             Instance = this;
             selectedCards = new List<Card>();
 
+            InitGamestateInfo();
+            RegisterClickHandlers();
+        }
+
+        private void InitGamestateInfo()
+        {
             gameStateInfo = new Dictionary<GameFieldState, string>
             {
                 { GameFieldState.BothSelectingActive, "Select your active Pokémon" },
                 { GameFieldState.BothSelectingBench, "Select your benched Pokémon" },
+            };
+        }
+
+        private void RegisterClickHandlers()
+        {
+            onClickHandlers = new Dictionary<GameFieldState, Action<CardRenderer>>
+            {
+                { GameFieldState.BothSelectingActive, SetActiveStateClicked },
+                { GameFieldState.BothSelectingBench, BothSelectingBenchClicked }
+            };
+
+            onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
+            {
+                { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon }
             };
         }
 
@@ -83,26 +105,37 @@ namespace Assets.Code
 
         public void OnCardClicked(CardRenderer cardController)
         {
-            if (gameField.GameState == GameFieldState.BothSelectingActive)
+            if (onSpecialClickHandlers.ContainsKey(SpecialState))
             {
-                var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
-                NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
+                onSpecialClickHandlers[SpecialState].Invoke(cardController);
             }
-            else if (gameField.GameState == GameFieldState.BothSelectingBench)
+            else if (onClickHandlers.ContainsKey(gameField.GameState))
             {
-                cardController.SetSelected(true);
-                selectedCards.Add(cardController.card);
+                onClickHandlers[gameField.GameState].Invoke(cardController);
             }
-            else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
-            {
-                if (cardController.card.Owner.Id.Equals(myId))
-                {
-                    return;
-                }
+        }
 
-                cardController.SetSelected(true);
-                selectedCards.Add(cardController.card);
+        private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
+        {
+            if (cardController.card.Owner.Id.Equals(myId))
+            {
+                return;
             }
+
+            cardController.SetSelected(true);
+            selectedCards.Add(cardController.card);
+        }
+
+        private void BothSelectingBenchClicked(CardRenderer cardController)
+        {
+            cardController.SetSelected(true);
+            selectedCards.Add(cardController.card);
+        }
+
+        private void SetActiveStateClicked(CardRenderer cardController)
+        {
+            var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
+            NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
         }
 
         public void ActivateAbility(Ability ability)
