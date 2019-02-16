@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Assets.Code._2D;
 using NetworkingCore;
@@ -8,6 +10,7 @@ using TCGCards.Core;
 using TCGCards.Core.Messages;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 namespace Assets.Code
@@ -36,6 +39,12 @@ namespace Assets.Code
         public GameObject endTurnButton;
         public TextMeshProUGUI playerDeckCountText;
         public TextMeshProUGUI opponentDeckCountText;
+
+        public TextMeshProUGUI playerDiscardCountText;
+        public Image playedDiscardArt;
+        public TextMeshProUGUI opponentDiscardCountText;
+        public Image opponentDiscardArt;
+
         public bool IsMyTurn;
 
         public GameObject infoPanel;
@@ -81,7 +90,7 @@ namespace Assets.Code
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon },
-                { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon }
+                { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon }
             };
         }
 
@@ -258,7 +267,7 @@ namespace Assets.Code
             
             gameField = gameMessage;
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
-
+            
             doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
             endTurnButton.SetActive(IsMyTurn);
 
@@ -269,6 +278,33 @@ namespace Assets.Code
 
             Player me = gameField.Players.First(p => p.Id.Equals(myId));
             Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
+
+            if (me.DiscardPile != null)
+            {
+                playerDiscardCountText.text = me.DiscardPile.Count.ToString();
+                if (me.DiscardPile.Any())
+                {
+                    playedDiscardArt.enabled = true;
+                    StartCoroutine(LoadSprite(me.DiscardPile.Last(), playedDiscardArt));
+                }
+                else
+                {
+                    playedDiscardArt.enabled = false;
+                }
+            }
+            if (opponent.DiscardPile != null)
+            {
+                opponentDiscardCountText.text = opponent.DiscardPile.Count.ToString();
+                if (opponent.DiscardPile.Any())
+                {
+                    opponentDiscardArt.enabled = true;
+                    StartCoroutine(LoadSprite(opponent.DiscardPile.Last(), opponentDiscardArt));
+                }
+                else
+                {
+                    opponentDiscardArt.enabled = false;
+                }
+            }
 
             if (me.Deck != null)
             {
@@ -370,6 +406,25 @@ namespace Assets.Code
                     break;
                 default:
                     break;
+            }
+        }
+
+        IEnumerator LoadSprite(Card card, Image target)
+        {
+            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
+            string finalPath = "file:///" + fullCardPath;
+
+            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
+            {
+                yield return request.SendWebRequest();
+
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.LogError("Error fetching texture");
+                }
+
+                var texture = DownloadHandlerTexture.GetContent(request);
+                target.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             }
         }
     }
