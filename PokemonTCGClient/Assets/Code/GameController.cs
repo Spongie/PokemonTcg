@@ -41,6 +41,7 @@ namespace Assets.Code
         public GameObject infoPanel;
         public Text infoText;
 
+        private int minSelectedCardCount;
         private List<Card> selectedCards;
         private Dictionary<GameFieldState, string> gameStateInfo;
         private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
@@ -93,28 +94,54 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourBench, OnStartSelectingYourBench);
+        }
+
+        private void OnStartSelectingYourBench(object message)
+        {
+            selectedCards.Clear();
+            
+            var maxCount = ((SelectFromYourBench)message).MaxCount;
+            var minCount = ((SelectFromYourBench)message).MinCount;
+            minSelectedCardCount = minCount;
+            SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
+            doneButton.SetActive(true);
+
+            infoPanel.SetActive(true);
+
+            var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
+            infoText.text = $"Select {countString} of your benched pokemon";
         }
 
         private void OnStartSelectingOpponentBench(object message)
         {
             selectedCards.Clear();
-            var count = ((SelectFromOpponentBench)message).Count;
+            var maxCount = ((SelectFromOpponentBench)message).MaxCount;
+            var minCount = ((SelectFromOpponentBench)message).MinCount;
+            minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
             doneButton.SetActive(true);
 
             infoPanel.SetActive(true);
-            infoText.text = $"Select up to {count} of your oppoents benched pokemon";
+
+            var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
+            infoText.text = $"Select {countString} of your oppoents benched pokemon";
         }
 
         private void OnStartSelectingOpponentPokemon(object message)
         {
             selectedCards.Clear();
-            var count = ((SelectOpponentPokemon)message).Count;
+
+            var maxCount = ((SelectOpponentPokemon)message).MaxCount;
+            var minCount = ((SelectOpponentPokemon)message).MinCount;
+            minSelectedCardCount = minCount;
+
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             doneButton.SetActive(true);
 
             infoPanel.SetActive(true);
-            infoText.text = $"Select up to {count} of your oppoents pokemon";
+            var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
+            infoText.text = $"Select {countString} of your oppoents pokemon";
         }
 
         public void OnCardClicked(CardRenderer cardController)
@@ -198,6 +225,11 @@ namespace Assets.Code
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
             {
+                if (minSelectedCardCount < selectedCards.Count)
+                {
+                    return;
+                }
+
                 var message = new CardListMessage(selectedCards);
                 NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
                 SpecialState = SpecialGameState.None;
@@ -205,6 +237,11 @@ namespace Assets.Code
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon)
             {
+                if (minSelectedCardCount < selectedCards.Count)
+                {
+                    return;
+                }
+
                 var message = new PokemonCardListMessage(selectedCards.OfType<PokemonCard>().ToList());
                 NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
                 SpecialState = SpecialGameState.None;

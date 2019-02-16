@@ -4,12 +4,19 @@ namespace TCGCards.Core.Messages
 {
     public class SelectFromOpponentBench : AbstractNetworkMessage
     {
-        public SelectFromOpponentBench(int count)
+        public SelectFromOpponentBench(int count) : this(count, count)
         {
-            Count = count;
+
+        }
+
+        public SelectFromOpponentBench(int minCount, int maxCount)
+        {
+            MinCount = minCount;
+            MaxCount = maxCount;
             MessageType = MessageTypes.SelectFromOpponentBench;
         }
 
-        public int Count { get; set; }
+        public int MaxCount { get; set; }
+        public int MinCount { get; set; }
     }
 }
