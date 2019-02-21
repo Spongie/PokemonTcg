@@ -19,7 +19,7 @@ namespace TCGCards.Core
             DiscardPile = new List<Card>();
         }
 
-        public Player(NetworkPlayer networkPlayer) :this()
+        public Player(INetworkPlayer networkPlayer) :this()
         {
             SetNetworkPlayer(networkPlayer);
         }
@@ -172,7 +172,7 @@ namespace TCGCards.Core
             }
         }
 
-        public void SetNetworkPlayer(NetworkPlayer networkPlayer)
+        public void SetNetworkPlayer(INetworkPlayer networkPlayer)
         {
             Id = networkPlayer.Id;
             NetworkPlayer = networkPlayer;
@@ -186,8 +186,9 @@ namespace TCGCards.Core
         public List<Card> Hand { get; set; }
         public bool HasPlayedEnergy { get; protected set; }
         public NetworkId Id { get; set; }
+
         [JsonIgnore]
-        public NetworkPlayer NetworkPlayer { get; private set; }
+        public INetworkPlayer NetworkPlayer { get; private set; }
 
         public bool IsRegistered()
         {

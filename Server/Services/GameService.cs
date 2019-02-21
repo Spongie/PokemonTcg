@@ -178,7 +178,8 @@ namespace Server.Services
             if (card is TrainerCard)
             {
                 theOnlyActiveGame.PlayerTrainerCard((TrainerCard)card);
-            } else if (card is PokemonCard)
+            }
+            else if (card is PokemonCard)
             {
                 theOnlyActiveGame.PlayPokemon((PokemonCard)card);
             }

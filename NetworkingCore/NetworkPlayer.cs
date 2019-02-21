@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace NetworkingCore
 {
-    public class NetworkPlayer
+    public class NetworkPlayer : INetworkPlayer
     {
         private TcpClient client;
         private NetworkStream stream;
