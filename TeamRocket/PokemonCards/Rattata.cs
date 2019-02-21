@@ -8,7 +8,7 @@ namespace TeamRocket.PokemonCards
 {
     public class Rattata : PokemonCard
     {
-        protected Rattata(Player owner) : base(owner)
+        public Rattata(Player owner) : base(owner)
         {
             PokemonName = PokemonNames.Rattata;
             Hp = 40;
