@@ -112,7 +112,7 @@ namespace TCGCards.Core
 
             foreach (var ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
             {
-                NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
+                ability.Trigger(NonActivePlayer, ActivePlayer, 0);
             }
             
             ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
