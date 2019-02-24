@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class FrenziedAttack : Attack
+    public class FrenziedAttack : Attack
     {
         public FrenziedAttack()
         {

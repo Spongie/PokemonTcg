@@ -9,7 +9,7 @@ namespace TeamRocket.Abilities
         {
             TriggerType = TriggerType.DealsDamage;
             Name = "Frenzy";
-            Description = "If Dark Primeape is confused and deals damage it deals an adiitional 30 damage";
+            Description = "If Dark Primeape is confused and deals damage it deals an additional 30 damage";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)
