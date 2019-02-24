@@ -15,6 +15,7 @@ namespace TeamRocketTests.Abilities
     [TestClass]
     public class ReelInTests
     {
+        [TestMethod]
         public void CardsAddedToHand()
         {
             var player = new Player();
