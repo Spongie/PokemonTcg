@@ -178,6 +178,20 @@ namespace TCGCards.Core
             NetworkPlayer = networkPlayer;
         }
 
+        public IEnumerable<PokemonCard> GetAllPokemonCards()
+        {
+            var list = new List<PokemonCard>();
+
+            if (ActivePokemonCard != null)
+            {
+                list.Add(ActivePokemonCard);
+            }
+            
+            list.AddRange(BenchedPokemon);
+
+            return list;
+        }
+
         public List<PokemonCard> BenchedPokemon { get; set; }
         public PokemonCard ActivePokemonCard { get; set; }
         public List<Card> PrizeCards { get; set; }

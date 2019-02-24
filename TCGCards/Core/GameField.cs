@@ -22,7 +22,6 @@ namespace TCGCards.Core
             playersSetStartBench = new HashSet<NetworkId>();
             AttackStoppers = new List<AttackStopper>();
             DamageStoppers = new List<DamageStopper>();
-            PassiveAbilities = new List<PassiveAbility>();
             TemporaryPassiveAbilities = new List<TemporaryPassiveAbility>();
             GameState = GameFieldState.WaitingForConnection;
         }
@@ -91,21 +90,32 @@ namespace TCGCards.Core
             }
         }
 
-        public void OnPokemonRetreated(PokemonCard replacementCard, IEnumerable<EnergyCard> payedEnergy)
+        public bool CanRetreat(PokemonCard card)
         {
-            if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.OpponentRetreats)
-                NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
-
             var costModifierAbilities = GetAllPassiveAbilities()
                 .OfType<CostModifierAbility>()
-                .Where(ability => ability.IsActive() 
-                    && ability.ModifierType == PassiveModifierType.RetreatCost 
+                .Where(ability => ability.IsActive()
+                    && ability.ModifierType == PassiveModifierType.RetreatCost
                     && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id));
 
             int retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
 
-            if (retreatCost <= payedEnergy.Sum(energy => energy.GetEnergry().Amount))
-                ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
+            return card.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= retreatCost;
+        }
+
+        public void OnPokemonRetreated(PokemonCard replacementCard, IEnumerable<EnergyCard> payedEnergy)
+        {
+            if (!CanRetreat(ActivePlayer.ActivePokemonCard))
+            {
+                return;
+            }
+
+            foreach (var ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
+            {
+                NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
+            }
+            
+            ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
         }
 
         public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
@@ -262,12 +272,11 @@ namespace TCGCards.Core
 
         public void PlayerTrainerCard(TrainerCard trainerCard)
         {
-            if (PassiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
+            if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
                 return;
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
-            ActivePlayer.Hand.Remove(trainerCard);
-            ActivePlayer.DiscardPile.Add(trainerCard);
+            ActivePlayer.DiscardCard(trainerCard);
         }
 
         private void CheckDeadPokemon()
@@ -352,12 +361,13 @@ namespace TCGCards.Core
 
         public List<PassiveAbility> GetAllPassiveAbilities()
         {
-            if (PassiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
-                return new List<PassiveAbility>();
-
-            var passiveAbilities = new List<PassiveAbility>(PassiveAbilities);
+            var passiveAbilities = new List<PassiveAbility>(ActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
+            passiveAbilities.AddRange(NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
             passiveAbilities.AddRange(TemporaryPassiveAbilities);
 
+            if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
+                return new List<PassiveAbility>();
+            
             return passiveAbilities;
         }
 
@@ -371,7 +381,6 @@ namespace TCGCards.Core
 
         public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
-        public List<PassiveAbility> PassiveAbilities { get; set; }
         public List<TemporaryPassiveAbility> TemporaryPassiveAbilities { get; set; }
         public bool PrizeCardsFaceUp { get; set; }
     }
