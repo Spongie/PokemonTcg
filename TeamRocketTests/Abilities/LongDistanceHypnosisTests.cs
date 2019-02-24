@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TCGCards.Core;
+using TeamRocket.Abilities;
 using TeamRocket.PokemonCards;
 
 namespace TeamRocketTests.Abilities
 {
     [TestClass]
-    public class PollenStench
+    public class LongDistanceHypnosisTests
     {
         [TestMethod]
         public void Activate_Heads()
@@ -20,10 +18,11 @@ namespace TeamRocketTests.Abilities
 
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
-            player.ActivePokemonCard.Ability.Trigger(player, opponent, 0);
+            var ability = new LongDistanceHypnosis(player.ActivePokemonCard);
+            ability.Trigger(player, opponent, 0);
 
-            Assert.IsTrue(opponent.ActivePokemonCard.IsConfused);
-            Assert.IsFalse(player.ActivePokemonCard.IsConfused);
+            Assert.IsTrue(opponent.ActivePokemonCard.IsAsleep);
+            Assert.IsFalse(player.ActivePokemonCard.IsAsleep);
         }
 
         [TestMethod]
@@ -36,10 +35,11 @@ namespace TeamRocketTests.Abilities
 
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
-            player.ActivePokemonCard.Ability.Trigger(player, opponent, 0);
+            var ability = new LongDistanceHypnosis(player.ActivePokemonCard);
+            ability.Trigger(player, opponent, 0);
 
-            Assert.IsFalse(opponent.ActivePokemonCard.IsConfused);
-            Assert.IsTrue(player.ActivePokemonCard.IsConfused);
+            Assert.IsFalse(opponent.ActivePokemonCard.IsAsleep);
+            Assert.IsTrue(player.ActivePokemonCard.IsAsleep);
         }
     }
 }
