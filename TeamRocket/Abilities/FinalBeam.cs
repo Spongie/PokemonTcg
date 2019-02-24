@@ -8,14 +8,14 @@ namespace TeamRocket.Abilities
     {
         public FinalBeam(PokemonCard owner) : base(owner)
         {
-            TriggerType = TriggerType.Dies;
+            TriggerType = TriggerType.KilledByAttack;
             Name = "Final Beam";
-            Description = "When Dark Gyarados is knocked out by an attack flip a coin. If heads Dark Gyarados deals 20 damage for each attached water energy to that pokemon";
+            Description = "When Dark Gyarados is knocked out by an attack flip a coin. If heads Dark Gyarados deals 20 damage for each attached water energy, to that pokemon";
         }
 
         protected override void Activate(Player player, Player opponent, int damageTake)
         {
-            if(PokemonOwner.IsAsleep || PokemonOwner.IsParalyzed || PokemonOwner.IsConfused || CoinFlipper.FlipCoin() != CoinFlipper.HEADS)
+            if(CoinFlipper.FlipCoin() != CoinFlipper.HEADS)
                 return;
 
             var damage = PokemonOwner.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water);

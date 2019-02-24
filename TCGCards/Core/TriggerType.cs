@@ -8,6 +8,7 @@
         DealsDamage,
         TakesDamage,
         Dies,
+        KilledByAttack,
         Kills,
         OpponentRetreats,
         Passive

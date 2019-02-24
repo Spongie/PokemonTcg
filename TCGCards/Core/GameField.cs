@@ -252,6 +252,12 @@ namespace TCGCards.Core
 
         public void PostAttack()
         {
+            if (AbilityTriggeredByDeath())
+            {
+                NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
+                NonActivePlayer.ActivePokemonCard.Ability.Trigger(NonActivePlayer, ActivePlayer, 0);
+            }
+
             AttackStoppers.ForEach(attackStopper => attackStopper.TurnsLeft--);
             DamageStoppers.ForEach(damageStopper => damageStopper.TurnsLeft--);
 
@@ -260,6 +266,13 @@ namespace TCGCards.Core
 
             CheckDeadPokemon();
             CheckEndTurn();
+        }
+
+        private bool AbilityTriggeredByDeath()
+        {
+            return NonActivePlayer.ActivePokemonCard.IsDead()
+                            && NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.KilledByAttack
+                            && NonActivePlayer.ActivePokemonCard.Ability.CanActivate();
         }
 
         public void PlayPokemon(PokemonCard pokemon)
@@ -291,12 +304,15 @@ namespace TCGCards.Core
                     ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
+
+                //TODO Change this to sendReceive
                 StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
                 StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
             }
             if(ActivePlayer.ActivePokemonCard.IsDead())
             {
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
+                //TODO Change this to sendReceive
                 StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
                 StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
             }
