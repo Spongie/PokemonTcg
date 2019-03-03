@@ -42,13 +42,14 @@ namespace TeamRocketTests.Abilities
 
             var opponent = game.NonActivePlayer;
             opponent.ActivePokemonCard = new DarkPrimeape(opponent);
+            opponent.ActivePokemonCard.DamageCounters = -1000;
 
             owner.ActivePokemonCard.IsConfused = true;
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             game.Attack(owner.ActivePokemonCard.Attacks.First());
 
-            Assert.AreEqual(70, opponent.ActivePokemonCard.DamageCounters);
+            Assert.AreEqual(-1000 + 70, opponent.ActivePokemonCard.DamageCounters);
         }
 
         [TestMethod]
@@ -64,13 +65,14 @@ namespace TeamRocketTests.Abilities
 
             var opponent = game.NonActivePlayer;
             opponent.ActivePokemonCard = new DarkPrimeape(opponent);
+            owner.ActivePokemonCard.DamageCounters = -1000;
 
             owner.ActivePokemonCard.IsConfused = true;
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
             game.Attack(owner.ActivePokemonCard.Attacks.First());
 
-            Assert.AreEqual(60, owner.ActivePokemonCard.DamageCounters);
+            Assert.AreEqual(-1000 + 60, owner.ActivePokemonCard.DamageCounters);
         }
     }
 }

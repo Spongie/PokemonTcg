@@ -71,7 +71,7 @@ namespace NetworkingCore
                     byte[] dataPrefix = new byte[sizeof(int)];
                     int receivedPrefixBytes = stream.Read(dataPrefix, 0, sizeof(int));
 
-                    if(receivedPrefixBytes != 4)
+                    if (receivedPrefixBytes != 4)
                     {
                         Thread.Sleep(50);
                         continue;
@@ -94,26 +94,31 @@ namespace NetworkingCore
 
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
 
-                    var message = Serializer.Deserialize<NetworkMessage>(input);
-                    message.Received = DateTime.Now;
-
-                    if (message.MessageType == MessageTypes.Connected)
-                    {
-                        Id = (NetworkId)message.Data;
-                    }
-                    if (message.MessageType == MessageTypes.Disconnect)
-                    {
-                        OnDisconnected?.Invoke(this, message.SenderId);
-                    }
-                    else if (!message.ResponseTo.Value.Equals(NetworkId.Empty))
-                    {
-                        SpecificResponses.TryAdd(message.ResponseTo, message);
-                    }
-                    else
-                    {
-                        DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
-                    }
+                    HandleMessage(input);
                 }
+            }
+        }
+
+        private void HandleMessage(string input)
+        {
+            var message = Serializer.Deserialize<NetworkMessage>(input);
+            message.Received = DateTime.Now;
+
+            if (message.MessageType == MessageTypes.Connected)
+            {
+                Id = (NetworkId)message.Data;
+            }
+            if (message.MessageType == MessageTypes.Disconnect)
+            {
+                OnDisconnected?.Invoke(this, message.SenderId);
+            }
+            else if (!message.ResponseTo.Value.Equals(NetworkId.Empty))
+            {
+                SpecificResponses.TryAdd(message.ResponseTo, message);
+            }
+            else
+            {
+                DataReceived?.Invoke(this, new NetworkDataRecievedEventArgs(message));
             }
         }
 

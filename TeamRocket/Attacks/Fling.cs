@@ -30,7 +30,7 @@ namespace TeamRocket.Attacks
             }
             else
             {
-                game.StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
+                opponent.SelectActiveFromBench();
             }
         }
 

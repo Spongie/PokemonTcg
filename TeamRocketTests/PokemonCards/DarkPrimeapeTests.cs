@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NetworkingCore;
+using NSubstitute;
 using TCGCards.Core;
 using TeamRocket.PokemonCards;
 
@@ -14,9 +16,11 @@ namespace TeamRocketTests.PokemonCards
             gameField.ActivePlayer.ActivePokemonCard.IsConfused = true;
             CoinFlipper.ForcedNextFlips.Enqueue(false);
 
+            gameField.ActivePlayer.ActivePokemonCard.DamageCounters = -100000; //So it does not die :)
+
             gameField.Attack(gameField.ActivePlayer.ActivePokemonCard.Attacks[0]);
 
-            Assert.AreEqual(GameField.ConfusedDamage + 30, gameField.ActivePlayer.ActivePokemonCard.DamageCounters);
+            Assert.AreEqual(-100000 + GameField.ConfusedDamage + 30, gameField.NonActivePlayer.ActivePokemonCard.DamageCounters);
         }
 
         private GameField createGameField()

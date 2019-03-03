@@ -20,6 +20,7 @@
         SelectColor,
         PickFromList,
         DiscardCards,
-        AttachEnergyToBench
+        AttachEnergyToBench,
+        SelectPriceCards
     }
 }

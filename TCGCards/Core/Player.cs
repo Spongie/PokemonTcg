@@ -1,7 +1,9 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using TCGCards.Core.Messages;
 
 namespace TCGCards.Core
 {
@@ -207,6 +209,28 @@ namespace TCGCards.Core
         public bool IsRegistered()
         {
             return Id != null && Deck != null;
+        }
+
+        public void SelectPriceCard(int amount)
+        {
+            var message = new SelectPriceCardsMessage(1).ToNetworkMessage(NetworkId.Generate());
+
+            var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
+
+            foreach (var card in response.Cards)
+            {
+                PrizeCards.Remove(card);
+                Hand.Add(card);
+            }
+        }
+
+        public void SelectActiveFromBench()
+        {
+            var message = new SelectFromYourBench(1).ToNetworkMessage(Id);
+
+            var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
+
+            SetActivePokemon((PokemonCard)response.Cards.First());
         }
     }
 }

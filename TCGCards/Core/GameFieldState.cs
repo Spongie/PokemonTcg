@@ -6,13 +6,6 @@
         WaitingForRegistration,
         BothSelectingActive,
         BothSelectingBench,
-        TurnStarting,
-        ActivePlayerSelectingFromBench,
-        UnActivePlayerSelectingFromBench,
-        ActivePlayerSelectingPrize,
-        UnActivePlayerSelectingPrize,
-        InTurn,
-        WaitingForDeckSearch,
-        EndAttack
+        InTurn
     }
 }

@@ -1,5 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NetworkingCore;
+using NSubstitute;
+using System.Collections.Generic;
 using System.Linq;
+using TCGCards.Core.Messages;
 using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 using TeamRocket.TrainerCards;
@@ -45,13 +49,39 @@ namespace TCGCards.Core.Tests
             var otherPokemon = new Magikarp(gameField.NonActivePlayer);
             otherPokemon.DamageCounters += otherPokemon.Hp - 1;
 
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
+
+            gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+
             gameField.ActivePlayer.SetActivePokemon(activePokemon);
             gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
 
+            var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
+            nonActiveNetworkPlayer.Id = gameField.NonActivePlayer.Id;
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                new Magikarp(gameField.NonActivePlayer)
+            }));
+            gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
+
+            var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
+            activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                gameField.ActivePlayer.PrizeCards.First()
+            }));
+            gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
+
             gameField.Attack(activePokemon.Attacks.First());
 
-            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.ActivePlayerSelectingPrize, gameField.GameState);
+            Assert.AreEqual(originalActive.Id, gameField.NonActivePlayer.Id);
+            Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
+            Assert.AreEqual(2, gameField.NonActivePlayer.PrizeCards.Count);
+            Assert.AreEqual(3, gameField.ActivePlayer.PrizeCards.Count);
         }
 
         [TestMethod]
@@ -72,93 +102,36 @@ namespace TCGCards.Core.Tests
             gameField.ActivePlayer.SetActivePokemon(activePokemon);
             gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
 
-            gameField.Attack(activePokemon.Attacks.First());
-
-            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
-        }
-
-        [TestMethod]
-        public void SelectPrizeCard_ActivePlayer_HisNotDead()
-        {
-            var gameField = new GameField();
-            gameField.InitTest();
-            var originalActive = gameField.ActivePlayer;
-
-            gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
-            gameField.ActivePlayer.Hand.Add(new WaterEnergy());
-
-            var activePokemon = new Magikarp(gameField.ActivePlayer);
-            var otherPokemon = new Magikarp(gameField.NonActivePlayer);
-
-            gameField.ActivePlayer.SetActivePokemon(activePokemon);
-            gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
-
-            gameField.GameState = GameFieldState.ActivePlayerSelectingPrize;
-            originalActive.PrizeCards.Add(new WaterEnergy());
-            gameField.SelectPrizeCard(originalActive.PrizeCards.First());
-
-            Assert.AreNotEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
-        }
-
-        [TestMethod]
-        public void SelectPrizeCard_ActivePlayer_HisDead()
-        {
-            var gameField = new GameField();
-            gameField.InitTest();
-            var originalActive = gameField.ActivePlayer;
-
-            gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
-            gameField.ActivePlayer.Hand.Add(new WaterEnergy());
-
-            var activePokemon = new Magikarp(gameField.ActivePlayer);
-            var otherPokemon = new Magikarp(gameField.NonActivePlayer);
-
-            gameField.ActivePlayer.SetActivePokemon(activePokemon);
-            gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
-
-            activePokemon.DamageCounters = 100000;
-            originalActive.PrizeCards.Add(new WaterEnergy());
-
-            gameField.Attack(activePokemon.Attacks.First());
-
-            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
-
-            gameField.SelectPrizeCard(originalActive.PrizeCards.First());
-
-            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.ActivePlayerSelectingFromBench, gameField.GameState);
-        }
-
-        [TestMethod]
-        public void SelectPrizeCard_NonActivePlayer_ActiveDead()
-        {
-            var gameField = new GameField();
-            gameField.InitTest();
-            var originalActive = gameField.ActivePlayer;
-
-            gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
-            gameField.ActivePlayer.Hand.Add(new WaterEnergy());
-
-            var activePokemon = new Magikarp(gameField.ActivePlayer);
-            var otherPokemon = new Magikarp(gameField.NonActivePlayer);
-
-            gameField.ActivePlayer.SetActivePokemon(activePokemon);
-            gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
-
-            activePokemon.DamageCounters = 100000;
-
-            originalActive.PrizeCards.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
             gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
 
+            gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+
+            var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
+            activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                new Magikarp(gameField.ActivePlayer)
+            }));
+            gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
+
+            var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
+            nonActiveNetworkPlayer.Id = gameField.NonActivePlayer.Id;
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                gameField.NonActivePlayer.PrizeCards.First()
+            }));
+            gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
+
             gameField.Attack(activePokemon.Attacks.First());
-            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
 
-            gameField.SelectPrizeCard(originalActive.PrizeCards.First());
-
-            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
-            Assert.AreEqual(GameFieldState.ActivePlayerSelectingFromBench, gameField.GameState);
+            Assert.AreEqual(originalActive.Id, gameField.NonActivePlayer.Id);
+            Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
+            Assert.AreEqual(3, gameField.NonActivePlayer.PrizeCards.Count);
+            Assert.AreEqual(2, gameField.ActivePlayer.PrizeCards.Count);
         }
 
         [TestMethod]
@@ -169,7 +142,21 @@ namespace TCGCards.Core.Tests
             var originalActive = gameField.ActivePlayer;
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
+            gameField.NonActivePlayer.PrizeCards.Add(new WaterEnergy());
             gameField.ActivePlayer.Hand.Add(new WaterEnergy());
+            gameField.ActivePlayer.BenchedPokemon.Add(new Magikarp(gameField.ActivePlayer));
+
+            var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
+            activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage(new List<Card> { gameField.ActivePlayer.BenchedPokemon.First() }));
+            gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
+
+            var networkPlayer = Substitute.For<INetworkPlayer>();
+            networkPlayer.Id = gameField.NonActivePlayer.Id;
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage(new List<Card> { gameField.NonActivePlayer.PrizeCards.First() }));
+            gameField.NonActivePlayer.SetNetworkPlayer(networkPlayer);
 
             var activePokemon = new Magikarp(gameField.ActivePlayer);
             var otherPokemon = new Magikarp(gameField.NonActivePlayer);
@@ -182,8 +169,7 @@ namespace TCGCards.Core.Tests
 
             gameField.EndTurn();
 
-            Assert.AreEqual(GameFieldState.UnActivePlayerSelectingPrize, gameField.GameState);
-            Assert.AreEqual(originalActive.Id, gameField.ActivePlayer.Id);
+            Assert.AreEqual(2, gameField.ActivePlayer.PrizeCards.Count);
         }
 
         [TestMethod]
@@ -217,6 +203,22 @@ namespace TCGCards.Core.Tests
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
             gameField.ActivePlayer.Hand.Add(new WaterEnergy());
+
+            var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
+            activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+
+            }));
+            gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
+
+            var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
+            nonActiveNetworkPlayer.Id = gameField.NonActivePlayer.Id;
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                new Magikarp(gameField.NonActivePlayer)
+            }));
+            gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
 
             PokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
             PokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
@@ -268,8 +270,6 @@ namespace TCGCards.Core.Tests
             gameField.OnActivePokemonSelected(gameField.NonActivePlayer.Id, new PokemonCard(gameField.NonActivePlayer));
 
             gameField.OnBenchPokemonSelected(gameField.ActivePlayer, new[] { new PokemonCard(gameField.ActivePlayer) }.ToList());
-
-            Assert.AreEqual(GameFieldState.BothSelectingBench, gameField.GameState);
             gameField.OnBenchPokemonSelected(gameField.NonActivePlayer, new[] { new PokemonCard(gameField.NonActivePlayer) }.ToList());
 
             Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);

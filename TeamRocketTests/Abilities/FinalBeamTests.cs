@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NetworkingCore;
+using NSubstitute;
+using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 
@@ -84,8 +88,7 @@ namespace TeamRocketTests.Abilities
         [TestMethod]
         public void Activated_3_Energy()
         {
-            var game = new GameField();
-            game.InitTest();
+            GameField game = createGameField();
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkMachamp(owner);
@@ -109,8 +112,7 @@ namespace TeamRocketTests.Abilities
         [TestMethod]
         public void Activated_2_Energy()
         {
-            var game = new GameField();
-            game.InitTest();
+            GameField game = createGameField();
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkMachamp(owner);
@@ -128,6 +130,31 @@ namespace TeamRocketTests.Abilities
             game.Attack(owner.ActivePokemonCard.Attacks.First());
 
             Assert.AreEqual(40, owner.ActivePokemonCard.DamageCounters);
+        }
+
+        private static GameField createGameField()
+        {
+            var game = new GameField();
+            game.InitTest();
+
+            game.ActivePlayer.PrizeCards.Add(new WaterEnergy());
+            var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
+            activeNetworkPlayer.Id = game.ActivePlayer.Id;
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                game.ActivePlayer.PrizeCards.First()
+            }));
+
+            game.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
+
+            var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
+            nonActiveNetworkPlayer.Id = game.NonActivePlayer.Id;
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            {
+                new Magikarp(game.NonActivePlayer)
+            }));
+            game.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
+            return game;
         }
     }
 }

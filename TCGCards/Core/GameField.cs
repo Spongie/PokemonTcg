@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NetworkingCore;
+using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Core
@@ -18,7 +19,6 @@ namespace TCGCards.Core
         public GameField()
         {
             Players = new List<Player>();
-            StateQueue = new Queue<GameFieldState>();
             playersSetStartBench = new HashSet<NetworkId>();
             AttackStoppers = new List<AttackStopper>();
             DamageStoppers = new List<DamageStopper>();
@@ -81,11 +81,9 @@ namespace TCGCards.Core
                         playersSetStartBench.Add(owner.Id);
                     }
                     if (Players.All(p => p.ActivePokemonCard != null))
-                        GotoNextState();
-                }
-                else
-                {
-                    GotoNextState();
+                    {
+                        GameState = GameFieldState.BothSelectingBench;
+                    }
                 }
             }
         }
@@ -133,23 +131,10 @@ namespace TCGCards.Core
                     if (playersSetStartBench.Count == 2)
                     {
                         Players.ForEach(x => x.SetPrizeCards(PriceCards));
-                        GotoNextState();
+                        GameState = GameFieldState.InTurn;
                     }
                 }
             }
-            else
-            {
-                GotoNextState();
-            }
-        }
-
-        private void GotoNextState()
-        {
-            if(StateQueue.Any())
-                GameState = StateQueue.Dequeue();
-
-            if(GameState == GameFieldState.EndAttack)
-                PostAttack();
         }
 
         public void StartGame()
@@ -175,8 +160,6 @@ namespace TCGCards.Core
             }
 
             GameState = GameFieldState.BothSelectingActive;
-            StateQueue.Enqueue(GameFieldState.BothSelectingBench);
-            StateQueue.Enqueue(GameFieldState.InTurn);
         }
 
         public void ActivateAbility(Ability ability)
@@ -186,11 +169,6 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
-            if (StateQueue.Any())
-                StateQueue.Dequeue();
-
-            StateQueue.Enqueue(GameFieldState.EndAttack);
-
             if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
             {
                 ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage));
@@ -265,7 +243,7 @@ namespace TCGCards.Core
             DamageStoppers = DamageStoppers.Where(damageStopper => damageStopper.TurnsLeft > 0).ToList();
 
             CheckDeadPokemon();
-            CheckEndTurn();
+            EndTurn();
         }
 
         private bool AbilityTriggeredByDeath()
@@ -305,38 +283,23 @@ namespace TCGCards.Core
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
-                //TODO Change this to sendReceive
-                StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingPrize);
-                StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingFromBench);
+                if (ActivePlayer.PrizeCards.Count == 1)
+                {
+                    //TODO Handle game win
+                }
+                else
+                {
+                    ActivePlayer.SelectPriceCard(1);
+                }
+                
+                NonActivePlayer.SelectActiveFromBench();
             }
             if(ActivePlayer.ActivePokemonCard.IsDead())
             {
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
-                //TODO Change this to sendReceive
-                StateQueue.Enqueue(GameFieldState.UnActivePlayerSelectingPrize);
-                StateQueue.Enqueue(GameFieldState.ActivePlayerSelectingFromBench);
+                NonActivePlayer.SelectPriceCard(1);
+                ActivePlayer.SelectActiveFromBench();
             }
-        }
-
-        private void CheckEndTurn()
-        {
-            if(StateQueue.Any())
-                GameState = StateQueue.Dequeue();
-            else
-                EndTurn();
-
-            if (GameState == GameFieldState.EndAttack)
-                EndTurn();
-        }
-
-        public void SelectPrizeCard(Card prizeCard)
-        {
-            if(GameState == GameFieldState.ActivePlayerSelectingPrize)
-                ActivePlayer.DrawPrizeCard(prizeCard);
-            else if(GameState == GameFieldState.UnActivePlayerSelectingPrize)
-                NonActivePlayer.DrawPrizeCard(prizeCard);
-
-            CheckEndTurn();
         }
 
         public void EndTurn()
@@ -347,23 +310,14 @@ namespace TCGCards.Core
             ActivePlayer.EndTurn();
             NonActivePlayer.EndTurn();
             CheckDeadPokemon();
-
-            if(StateQueue.Any())
-                CheckEndTurn();
-            else
-            {
-                SwapActivePlayer();
-                StartNextTurn();
-            }
+            SwapActivePlayer();
+            StartNextTurn();
         }
 
         private void StartNextTurn()
         {
             ActivePlayer.ResetTurn();
             NonActivePlayer.ResetTurn();
-            StateQueue.Clear();
-
-            GameState = GameFieldState.TurnStarting;
             ActivePlayer.DrawCards(1);
 
             GameState = GameFieldState.InTurn;
@@ -393,7 +347,6 @@ namespace TCGCards.Core
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get; set; }
         public int Mode { get; set; }
-        public Queue<GameFieldState> StateQueue { get; set; }
 
         public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
