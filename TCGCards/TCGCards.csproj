@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +11,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\PokemonTCGClient\Assets\Dependencies\&quot;" />
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug osx&quot; cp -a &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;" />
   </Target>
 
 </Project>

@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <StartupObject>CardDownloader.Program</StartupObject>
+    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

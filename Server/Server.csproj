@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +15,12 @@
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
     <ProjectReference Include="..\TeamRocket\TeamRocket.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist &quot;$(TargetDir)\Cards&quot; mkdir &quot;$(TargetDir)\Cards&quot;&#xD;&#xA;xcopy /y /d &quot;$(SolutionDir)\Cards\*.dll&quot; &quot;$(TargetDir)\Cards\&quot;" />
+    <Exec Command="if not exist &quot;$(TargetDir)Cards&quot; mkdir &quot;$(TargetDir)Cards&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(ProjectDir)..\Cards\*.dll&quot; &quot;$(TargetDir)Cards\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug OSX&quot; cp -a &quot;$(ProjectDir)..\Cards\*.dll&quot; &quot;$(TargetDir)Cards\&quot;" />
   </Target>
 
 </Project>

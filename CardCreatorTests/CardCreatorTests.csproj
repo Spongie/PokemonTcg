@@ -10,6 +10,8 @@
     <OutputType>Exe</OutputType>
 
     <StartupObject />
+
+    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

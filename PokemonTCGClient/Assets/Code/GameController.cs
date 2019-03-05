@@ -388,22 +388,6 @@ namespace Assets.Code
                     break;
                 case GameFieldState.BothSelectingBench:
                     break;
-                case GameFieldState.TurnStarting:
-                    break;
-                case GameFieldState.ActivePlayerSelectingFromBench:
-                    break;
-                case GameFieldState.UnActivePlayerSelectingFromBench:
-                    break;
-                case GameFieldState.ActivePlayerSelectingPrize:
-                    break;
-                case GameFieldState.UnActivePlayerSelectingPrize:
-                    break;
-                case GameFieldState.InTurn:
-                    break;
-                case GameFieldState.WaitingForDeckSearch:
-                    break;
-                case GameFieldState.EndAttack:
-                    break;
                 default:
                     break;
             }

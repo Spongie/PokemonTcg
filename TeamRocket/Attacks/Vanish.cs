@@ -28,9 +28,7 @@ namespace TeamRocket.Attacks
             owner.Deck.Cards.Push(owner.ActivePokemonCard);
             owner.Deck.Shuffle();
 
-            game.GameState = GameFieldState.ActivePlayerSelectingFromBench;
-
-            var message = new GameFieldMessage(game).ToNetworkMessage(owner.Id);
+            var message = new SelectFromYourBench(1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<ActiveSelectedMessage>(message);
             owner.ForceRetreatActivePokemon(response.SelectedPokemon);
         }

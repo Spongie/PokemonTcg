@@ -2,10 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Windows|AnyCPU'">
+    <OutputPath />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug OSX|AnyCPU'">
+    <OutputPath />
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +23,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;xcopy /y /d &quot;$(TargetPath)&quot; &quot;$(SolutionDir)Cards\$(TargetFileName)&quot;&#xD;&#xA;" />
+    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug OSX&quot; cp -a &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\Cards\$(TargetFileName)&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug OSX&quot; cp &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\Cards\$(TargetFileName)&quot;" />
   </Target>
 
 </Project>
