@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace CardCreator
 {
@@ -55,26 +57,33 @@ namespace CardCreator
         public string buildFromTemplate(string setName)
         {
             ClassName = generateSafeClassName(Name);
-            string template = Properties.Resources.PokemonTemplate;
-            string code = template.Replace(templateHP, Hp.ToString());
-            code = code.Replace(templateType, convertFullTypeToType(Type));
-            code = code.Replace(templateName, Name);
-            code = code.Replace(templateClassName, ClassName);
-            code = code.Replace(templatePokemonPower, HasPokemonPower ? "//TODO: Pokemon power" : string.Empty);
-            code = code.Replace(templateWeakness, convertFullTypeToType(WeaknessResistenceInfo.Weakness));
-            code = code.Replace(templateResistence, convertFullTypeToType(WeaknessResistenceInfo.Resistence));
-            code = code.Replace(templateRetreat, WeaknessResistenceInfo.RetreatCost.ToString());
-            code = code.Replace(templateAttacks, String.Join("," + Environment.NewLine + "\t\t\t\t", Attacks.Select(x => x.generateAttackStringForPokemon())));
-            code = code.Replace(templateStage, Stage.ToString());
 
-            if (!string.IsNullOrEmpty(EvolvesFrom))
+            var assembly = typeof(Program).GetTypeInfo().Assembly;
+            using (Stream resource = assembly.GetManifestResourceStream("Resources.PokemonTemplate.txt"))
+            using (var reader = new StreamReader(resource))
             {
-                code = code.Replace(templateEvolvesFrom, $"EvolvesFrom = \"{EvolvesFrom}\";");
+                string template = reader.ReadToEnd();
+
+                string code = template.Replace(templateHP, Hp.ToString());
+                code = code.Replace(templateType, convertFullTypeToType(Type));
+                code = code.Replace(templateName, Name);
+                code = code.Replace(templateClassName, ClassName);
+                code = code.Replace(templatePokemonPower, HasPokemonPower ? "//TODO: Pokemon power" : string.Empty);
+                code = code.Replace(templateWeakness, convertFullTypeToType(WeaknessResistenceInfo.Weakness));
+                code = code.Replace(templateResistence, convertFullTypeToType(WeaknessResistenceInfo.Resistence));
+                code = code.Replace(templateRetreat, WeaknessResistenceInfo.RetreatCost.ToString());
+                code = code.Replace(templateAttacks, String.Join("," + Environment.NewLine + "\t\t\t\t", Attacks.Select(x => x.generateAttackStringForPokemon())));
+                code = code.Replace(templateStage, Stage.ToString());
+
+                if (!string.IsNullOrEmpty(EvolvesFrom))
+                {
+                    code = code.Replace(templateEvolvesFrom, $"EvolvesFrom = \"{EvolvesFrom}\";");
+                }
+
+                code = code.Replace(templateSetName, setName);
+
+                return code;
             }
-
-            code = code.Replace(templateSetName, setName);
-
-            return code;
         }
 
         private static int subTypeToStage(string subType)

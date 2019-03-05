@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace CardCreator
 {
@@ -37,16 +39,22 @@ namespace CardCreator
 
         public string generateCode(string setName)
         {
-            var template = Properties.Resources.AttackTemplate;
-            string code = template.Replace(templateClassName, ClassName);
-            code = code.Replace(templateDamage, Damage);
-            code = code.Replace(templateName, Name);
-            code = code.Replace(templateDescription, Description);
-            code = code.Replace(templateNeedsMode, NeedsMore ? "//TODO: Special effects" : string.Empty);
-            code = code.Replace(templateSetName, setName);
-            code = code.Replace(templateCost, generateCostString());
+            var assembly = typeof(Program).GetTypeInfo().Assembly;
+            using (Stream resource = assembly.GetManifestResourceStream("Resources.AttackTemplate.txt"))
+            using (var reader = new StreamReader(resource))
+            {
+                string template = reader.ReadToEnd();
 
-            return code;
+                string code = template.Replace(templateClassName, ClassName);
+                code = code.Replace(templateDamage, Damage);
+                code = code.Replace(templateName, Name);
+                code = code.Replace(templateDescription, Description);
+                code = code.Replace(templateNeedsMode, NeedsMore ? "//TODO: Special effects" : string.Empty);
+                code = code.Replace(templateSetName, setName);
+                code = code.Replace(templateCost, generateCostString());
+
+                return code;
+            }
         }
 
         private string generateCostString()
