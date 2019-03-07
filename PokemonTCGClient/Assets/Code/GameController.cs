@@ -19,7 +19,8 @@ namespace Assets.Code
     {
         None,
         SelectingOpponentsPokemon,
-        SelectingOpponentsBenchedPokemon
+        SelectingOpponentsBenchedPokemon,
+        SelectingYourBenchedPokemon
     }
 
     public class GameController : MonoBehaviour
@@ -113,7 +114,7 @@ namespace Assets.Code
             var maxCount = ((SelectFromYourBench)message).MaxCount;
             var minCount = ((SelectFromYourBench)message).MinCount;
             minSelectedCardCount = minCount;
-            SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
+            SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
             doneButton.SetActive(true);
 
             infoPanel.SetActive(true);
@@ -244,7 +245,7 @@ namespace Assets.Code
                 SpecialState = SpecialGameState.None;
                 infoPanel.SetActive(false);
             }
-            else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon)
+            else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon || SpecialState == SpecialGameState.SelectingYourBenchedPokemon)
             {
                 if (minSelectedCardCount < selectedCards.Count)
                 {
