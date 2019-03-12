@@ -252,7 +252,7 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new PokemonCardListMessage(selectedCards.OfType<PokemonCard>().ToList());
+                var message = new CardListMessage(selectedCards);
                 NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
                 SpecialState = SpecialGameState.None;
                 infoPanel.SetActive(false);
