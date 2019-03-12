@@ -7,7 +7,6 @@ using System.Threading;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
-using TeamRocket.PokemonCards;
 
 namespace TestClient
 {

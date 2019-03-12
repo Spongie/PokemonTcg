@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NetworkingCore;
-using NSubstitute;
 using TCGCards.Core;
 using TeamRocket.PokemonCards;
 

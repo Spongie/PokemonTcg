@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NetworkingCore;
-using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Core
