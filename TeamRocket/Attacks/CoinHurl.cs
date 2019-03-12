@@ -26,9 +26,9 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
 
-            var selectedPokemon = response.Pokemons.FirstOrDefault();
+            var selectedPokemon = response.Cards.OfType<PokemonCard>().FirstOrDefault();
 
             if (selectedPokemon != null)
             {

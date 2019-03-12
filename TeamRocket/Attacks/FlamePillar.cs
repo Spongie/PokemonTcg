@@ -30,7 +30,7 @@ namespace TeamRocket.Attacks
                 if (activateResponse.AnsweredYes)
                 {
                     var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
-                    var selected = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(message).Pokemons.First();
+                    var selected = (PokemonCard)owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     selected.DamageCounters += 10;
                 }
             }

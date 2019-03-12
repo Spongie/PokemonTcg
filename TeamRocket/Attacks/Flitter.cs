@@ -32,8 +32,8 @@ namespace TeamRocket.Attacks
                 return;
             }
 
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
-            response.Pokemons.First().DamageCounters += 20;
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
+            response.Cards.OfType<PokemonCard>().First().DamageCounters += 20;
         }
     }
 }

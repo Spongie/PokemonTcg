@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
@@ -29,8 +30,8 @@ namespace TeamRocket.Attacks
             owner.Deck.Shuffle();
 
             var message = new SelectFromYourBench(1).ToNetworkMessage(owner.Id);
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<ActiveSelectedMessage>(message);
-            owner.ForceRetreatActivePokemon(response.SelectedPokemon);
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
+            owner.ForceRetreatActivePokemon((PokemonCard)response.Cards.First());
         }
     }
 }

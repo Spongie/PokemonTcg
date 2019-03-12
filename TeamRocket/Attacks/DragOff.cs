@@ -22,10 +22,10 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
 
             PokemonCard currentActive = opponent.ActivePokemonCard;
-            PokemonCard newActive = response.Pokemons.First();
+            PokemonCard newActive = (PokemonCard)response.Cards.First();
 
             opponent.ActivePokemonCard = newActive;
             opponent.BenchedPokemon.Remove(newActive);

@@ -21,9 +21,9 @@ namespace TeamRocketTests.Abilities
             opponent.SetActivePokemon(new DarkGloom(opponent));
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<PokemonCardListMessage>(null).ReturnsForAnyArgs(
-                new PokemonCardListMessage(       
-                    new List<PokemonCard>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(
+                new CardListMessage(       
+                    new List<Card>
                     {
                         opponent.ActivePokemonCard
                     }));
