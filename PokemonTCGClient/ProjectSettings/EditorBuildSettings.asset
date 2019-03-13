@@ -5,19 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/3dTest.unity
-    guid: 5382e113b1b657f4ea4a7979aaac85cd
   - enabled: 1
     path: Assets/Scenes/Login Scene.unity
-    guid: eb794c621343bce4cb99d3b2578e6e2d
-  - enabled: 1
-    path: Assets/Scenes/3D_Cards.unity
-    guid: ffbc578b5581ad24380161d0be91e370
+    guid: d6ce885004ab15b4fb381364abd16572
   - enabled: 1
     path: Assets/Scenes/CustomCard.unity
-    guid: 4c6ecc87cd94f9b40b7f8f278d84e2ea
+    guid: 25d45bb3ffd82ef4db275d72af401a29
   m_configObjects: {}

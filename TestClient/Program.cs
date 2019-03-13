@@ -1,5 +1,4 @@
 ﻿using NetworkingCore;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Net.Sockets;
@@ -117,28 +116,6 @@ namespace TestClient
                     gameField = ((GameFieldMessage)e.Message.Data).Game;
                 }
             }
-        }
-
-        class Base
-        {
-            public int Id { get; set; }
-
-            public string Serialize()
-            {
-                return JsonConvert.SerializeObject(this);
-            }
-        }
-
-        class Master : Base
-        {
-            public Master()
-            {
-                Id = 32;
-                MyProperty = "AKLSJhdkashdasd";
-            }
-
-            public string MyProperty { get; set; }
-
         }
     }
 }

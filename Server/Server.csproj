@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist &quot;$(TargetDir)Cards&quot; mkdir &quot;$(TargetDir)Cards&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(ProjectDir)..\Cards\*.dll&quot; &quot;$(TargetDir)Cards\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug OSX&quot; cp -a &quot;$(ProjectDir)..\Cards\*.dll&quot; &quot;$(TargetDir)Cards\&quot;" />
+    <Exec Command="if not exist &quot;$(TargetDir)Cards&quot; mkdir &quot;$(TargetDir)Cards&quot;&#xD;&#xA;copy &quot;$(ProjectDir)..\Cards\*.dll&quot; &quot;$(TargetDir)Cards\&quot;" />
   </Target>
 
 </Project>

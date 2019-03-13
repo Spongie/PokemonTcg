@@ -20,6 +20,7 @@ namespace CardDownloader
             Console.WriteLine($"Found {sets.Count} sets");
             int totalIndex = 0;
             object lockObject = new object();
+            int cursorStart = Console.CursorTop;
 
             Parallel.ForEach(sets, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, (set) =>
             {
@@ -58,7 +59,7 @@ namespace CardDownloader
                     if (File.Exists(fileName))
                     {
                         progress++;
-                        UpdateProgress(set, lockObject, myId, progress, max);
+                        UpdateProgress(set, lockObject, cursorStart + myId, progress, max);
                         continue;
                     }
 
@@ -89,7 +90,7 @@ namespace CardDownloader
                     }
 
                     progress++;
-                    UpdateProgress(set, lockObject, myId, progress, max);
+                    UpdateProgress(set, lockObject, cursorStart + myId, progress, max);
                 }
             });
 

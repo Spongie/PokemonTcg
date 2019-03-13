@@ -294,4 +294,10 @@ PokemonTCGClient/Assembly-UnityScript-vs.unityproj
 PokemonTCGClient/Assembly-UnityScript.pidb
 PokemonTCGClient/Assembly-UnityScript.unityProj
 PokemonTCGClient/PokemonTCGClient.sln
+PokemonTCGClient/PokemonTCGClient.csproj
 PokemonTCGClient/Assets/Dependencies/
+PokemonTCGClient/Unity.Analytics.DataPrivacy.csproj
+PokemonTCGClient/Unity.CollabProxy.Editor.csproj
+PokemonTCGClient/Unity.PackageManagerUI.Editor.csproj
+PokemonTCGClient/Unity.TextMeshPro.csproj
+PokemonTCGClient/Unity.TextMeshPro.Editor.csproj

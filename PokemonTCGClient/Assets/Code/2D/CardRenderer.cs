@@ -74,7 +74,6 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         colorImage.enabled = false;
         cardName.enabled = false;
-        colorImage.enabled = false;
         hpNumber.enabled = false;
         hpFixed.enabled = false;
         typeIcon.enabled = false;
@@ -160,7 +159,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
         string finalPath = "file:///" + fullCardPath;
-
+        
         using (var request = UnityWebRequestTexture.GetTexture(finalPath))
         {
             yield return request.SendWebRequest();

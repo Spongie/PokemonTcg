@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug OSX&quot; cp -a &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug Windows&quot; copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\Cards\$(TargetFileName)&quot;&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Debug OSX&quot; cp &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\Cards\$(TargetFileName)&quot;" />
+    <Exec Command="copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\Cards\$(TargetFileName)&quot;" />
   </Target>
 
 </Project>

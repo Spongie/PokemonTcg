@@ -63,16 +63,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 951139736514868102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc600a4d49a813147977d74f787ad6ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 96a1499636a56174c8f2b83b0e58d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon_atlas: {fileID: 2800000, guid: dbc8a8f2e84b9a44bb1e53746bc00be2, type: 3}
+  icon_atlas: {fileID: 2800000, guid: ae3480f97632f6d46acad02756105041, type: 3}
   cardName: {fileID: 951139736956974935}
   hpNumber: {fileID: 951139738041531474}
   hpFixed: {fileID: 951139737185513566}
   trainerCardName: {fileID: 2100089057380816809}
   trainerCardDescription: {fileID: 5481006146444436080}
-  TrainerCardTemplate: {fileID: 21300000, guid: 61f97eac76c36004791ebe091690a114,
+  TrainerCardTemplate: {fileID: 21300000, guid: 3da8a186a9d811e499334cce016426fb,
     type: 3}
   art: {fileID: 951139737145022211}
   typeIcon: {fileID: 951139737087030466}
@@ -82,13 +82,13 @@ MonoBehaviour:
   template: {fileID: 951139737471089746}
   retreatCost: {fileID: 951139736630966286}
   attacks: {fileID: 951139738048131336}
-  attackPrefab: {fileID: 8593323203468067464, guid: 9e4de7b95b4541047ab549807ac45e6d,
+  attackPrefab: {fileID: 8593323203468067464, guid: 640dd243ac7cbb049bdbd7db734a05aa,
     type: 3}
-  abilityPrefab: {fileID: 8593323203468067464, guid: 42e0f0280cb3db744aaa1a3b22201c1d,
+  abilityPrefab: {fileID: 8593323203468067464, guid: f7c564f93ea95124fae6158011bb2de2,
     type: 3}
-  costPrefab: {fileID: 3613349629519810508, guid: fa56b98965f94384e829d2af8b3ed5b2,
+  costPrefab: {fileID: 3613349629519810508, guid: c4b87b2bde856744e9df2a6bb0c1b7b3,
     type: 3}
-  selectIndicator: {fileID: 3200075445218392139}
+  selectIndicator: {fileID: 8325075633682507335}
   isActivePokemon: 0
 --- !u!225 &7609714709601664399
 CanvasGroup:
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 951139736514868102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15ab126388731a44ba939358dfa7ffc, type: 3}
+  m_Script: {fileID: 11500000, guid: bfe7a6ab86577b240add17096fa0dcc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3200075445218392139
@@ -123,10 +123,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 951139736514868102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b467ce8260204847aa918e0b69427cc, type: 3}
+  m_Script: {fileID: 11500000, guid: d0b91313fc3d3614eafc66b62290e931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1893531561124774431}
 --- !u!114 &8325075633682507335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,9 +135,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 951139736514868102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be40381db4b140e4c98061e84489de11, type: 3}
+  m_Script: {fileID: 11500000, guid: e183c0a86c3896a4fb88610a5de470af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 1893531561124774431}
 --- !u!1 &951139736630966286
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1b41632786afcdd459070741b517d362, type: 3}
+    m_Font: {fileID: 12800000, guid: b0ffe85db94217e4097b1682a52d82bc, type: 3}
     m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
@@ -604,7 +604,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1b41632786afcdd459070741b517d362, type: 3}
+    m_Font: {fileID: 12800000, guid: b0ffe85db94217e4097b1682a52d82bc, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -682,7 +682,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 25354b0eb53a8e14db7e62b71a19e44d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d96539a943362454287a74cbd0693e2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -831,7 +831,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1b41632786afcdd459070741b517d362, type: 3}
+    m_Font: {fileID: 12800000, guid: b0ffe85db94217e4097b1682a52d82bc, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -1026,17 +1026,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2438446701733878532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bc368a0d21c38b47a8223f9014eaffb, type: 3}
+  m_Script: {fileID: 11500000, guid: df7430c798181b645b2ce582ccbbd34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   templateMap:
-  - {fileID: 21300000, guid: ca312b52d99b330489db6009f78bb5f4, type: 3}
-  - {fileID: 21300000, guid: 589735ef90b6fdc488861d6f21550873, type: 3}
-  - {fileID: 21300000, guid: abd09953856da2848b5f538e77541f45, type: 3}
-  - {fileID: 21300000, guid: 9d942c3937af9fd41bac921fab995907, type: 3}
-  - {fileID: 21300000, guid: d9862028f42424549b28868c3a380a99, type: 3}
-  - {fileID: 21300000, guid: 4ec8745eceabd934e86884762243aa8f, type: 3}
-  - {fileID: 21300000, guid: a1b9274fcdc396c47bf57304e74544fb, type: 3}
+  - {fileID: 21300000, guid: d8d4851919412be43822723a5d113ef1, type: 3}
+  - {fileID: 21300000, guid: 4261a460898e6e2499600a017d32f208, type: 3}
+  - {fileID: 21300000, guid: a4b65d1da08527e4983b8e8b29be1c47, type: 3}
+  - {fileID: 21300000, guid: 6dae856f91cb2904c89cfb0e805659c4, type: 3}
+  - {fileID: 21300000, guid: 103bd1c461b87e54e94be3b37705a9a7, type: 3}
+  - {fileID: 21300000, guid: 9a9e9bb643c6a4441b7faf8e007ada6c, type: 3}
+  - {fileID: 21300000, guid: a2091a5f82e806043808452ce763699d, type: 3}
 --- !u!1 &5098723361937827121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,9 +1104,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b0a7a3f70949fd64ebbd893b41546dec, type: 2}
-  m_sharedMaterial: {fileID: 21421701624428842, guid: b0a7a3f70949fd64ebbd893b41546dec,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 80331e96515e13a46ae01ad5a245fff2, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1180,13 +1179,13 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
   m_inputSource: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_subTextObjects:
   - {fileID: 0}
   - {fileID: 0}
@@ -1264,7 +1263,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 1b41632786afcdd459070741b517d362, type: 3}
+    m_Font: {fileID: 12800000, guid: b0ffe85db94217e4097b1682a52d82bc, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0

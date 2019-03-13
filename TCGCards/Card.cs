@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using NetworkingCore;
 using TCGCards.Core;
 
@@ -42,7 +43,7 @@ namespace TCGCards
             var nameSpace = type.Namespace.Split('.').Last();
             var assembly = type.Assembly.GetName().Name;
 
-            return $"Cards\\{assembly}\\{nameSpace}\\{name}";
+            return Path.Combine("Cards", assembly, nameSpace, name);
         }
 
         public override int GetHashCode()
