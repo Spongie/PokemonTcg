@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Code._2D;
+using Assets.Code.UI.Game;
 using NetworkingCore;
 using TCGCards;
 using TCGCards.Core;
@@ -34,6 +35,7 @@ namespace Assets.Code
         public GameObject opponentBench;
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
+        public GameObject selectColorPanel;
         public GameObject cardPrefab;
         public NetworkId myId;
         public GameObject doneButton;
@@ -105,9 +107,16 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourBench, OnStartSelectingYourBench);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectColor, OnStartSelectColor);
         }
 
-        private void OnStartSelectingYourBench(object message)
+        private void OnStartSelectColor(object message, NetworkId messageId)
+        {
+            selectColorPanel.SetActive(true);
+            selectColorPanel.GetComponent<SelectColorPanel>().Init(((SelectColorMessage)message).Message);
+        }
+
+        private void OnStartSelectingYourBench(object message, NetworkId messageId)
         {
             selectedCards.Clear();
             
@@ -123,7 +132,7 @@ namespace Assets.Code
             infoText.text = $"Select {countString} of your benched pokemon";
         }
 
-        private void OnStartSelectingOpponentBench(object message)
+        private void OnStartSelectingOpponentBench(object message, NetworkId messageId)
         {
             selectedCards.Clear();
             var maxCount = ((SelectFromOpponentBench)message).MaxCount;
@@ -138,7 +147,7 @@ namespace Assets.Code
             infoText.text = $"Select {countString} of your oppoents benched pokemon";
         }
 
-        private void OnStartSelectingOpponentPokemon(object message)
+        private void OnStartSelectingOpponentPokemon(object message, NetworkId messageId)
         {
             selectedCards.Clear();
 
@@ -240,8 +249,9 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new CardListMessage(selectedCards);
-                NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
+                var message = new CardListMessage(selectedCards).ToNetworkMessage(myId);
+                message.ResponseTo = NetworkManager.Instance.RespondingTo;
+                NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;
                 infoPanel.SetActive(false);
             }
@@ -252,14 +262,22 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new CardListMessage(selectedCards);
-                NetworkManager.Instance.Me.Send(message.ToNetworkMessage(myId));
+                var message = new CardListMessage(selectedCards).ToNetworkMessage(myId);
+                message.ResponseTo = NetworkManager.Instance.RespondingTo;
+                NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;
                 infoPanel.SetActive(false);
             }
+
+            NetworkManager.Instance.RespondingTo = null;
         }
 
         private void OnGameUpdated(object message)
+        {
+            OnGameUpdated(message, null);
+        }
+
+        private void OnGameUpdated(object message, NetworkId messageId)
         {
             var gameMessage = message is GameFieldMessage ? ((GameFieldMessage)message).Game : (GameField)message;
             Debug.Log("Game updated, handling message");

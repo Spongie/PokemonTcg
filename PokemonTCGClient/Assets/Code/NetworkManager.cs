@@ -15,7 +15,7 @@ namespace Assets.Code
         public AsyncUserService userService;
         public AsyncGameService gameService;
         public AsyncImageService imageService;
-        public Dictionary<MessageTypes, Action<object>> messageConsumers;
+        public Dictionary<MessageTypes, Action<object, NetworkId>> messageConsumers;
         private Dictionary<NetworkId, Action<object>> responseMapper;
 
         internal void RegisterCallback(NetworkId responseId, Action<object> callback)
@@ -23,7 +23,7 @@ namespace Assets.Code
             responseMapper.Add(responseId, callback);
         }
 
-        internal void RegisterCallback(MessageTypes messageTypes, Action<object> callback)
+        internal void RegisterCallback(MessageTypes messageTypes, Action<object, NetworkId> callback)
         {
             messageConsumers.Add(messageTypes, callback);
         }
@@ -37,7 +37,7 @@ namespace Assets.Code
         void Start()
         {
             responseMapper = new Dictionary<NetworkId, Action<object>>();
-            messageConsumers = new Dictionary<MessageTypes, Action<object>>();
+            messageConsumers = new Dictionary<MessageTypes, Action<object, NetworkId>>();
             messages = new List<NetworkMessage>();
             messagesToPrint = new Queue<NetworkMessage>();
 
@@ -67,6 +67,11 @@ namespace Assets.Code
             {
                 while (messagesToPrint.Count > 0)
                 {
+                    if (RespondingTo != null)
+                    {
+                        break;
+                    }
+
                     NetworkMessage message = messagesToPrint.Dequeue();
                     Debug.Log(message.Data);
 
@@ -74,10 +79,12 @@ namespace Assets.Code
                     {
                         responseMapper[message.ResponseTo].Invoke(message.Data);
                         responseMapper.Remove(message.ResponseTo);
+                        RespondingTo = message.MessageId;
                     }
                     if (messageConsumers.ContainsKey(message.MessageType))
                     {
-                        messageConsumers[message.MessageType].Invoke(message.Data);
+                        messageConsumers[message.MessageType].Invoke(message.Data, message.MessageId);
+                        RespondingTo = message.MessageId;
                     }
                 }
             }
@@ -88,16 +95,23 @@ namespace Assets.Code
 
                 foreach (var item in networkPlayer.SpecificResponses.Values)
                 {
+                    if (RespondingTo != null)
+                    {
+                        break;
+                    }
+
                     if (responseMapper.ContainsKey(item.ResponseTo))
                     {
                         responseMapper[item.ResponseTo].Invoke(item.Data);
                         responseMapper.Remove(item.ResponseTo);
                         handledMessages.Add(item.ResponseTo);
+                        RespondingTo = item.MessageId;
                     }
                     if (messageConsumers.ContainsKey(item.MessageType))
                     {
-                        messageConsumers[item.MessageType].Invoke(item.Data);
+                        messageConsumers[item.MessageType].Invoke(item.Data, item.MessageId);
                         handledMessages.Add(item.ResponseTo);
+                        RespondingTo = item.MessageId;
                     }
                 }
 
@@ -126,6 +140,7 @@ namespace Assets.Code
             Me.Disconnect(true);
         }
 
+        public NetworkId RespondingTo { get; set; }
         public static NetworkManager Instance { get; private set; }
         public NetworkingCore.NetworkPlayer Me { get; internal set; }
     }

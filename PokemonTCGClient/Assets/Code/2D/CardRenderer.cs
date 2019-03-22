@@ -13,8 +13,6 @@ using TMPro;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
-    private Dictionary<EnergyTypes, Sprite> icons;
-    public Texture2D icon_atlas;
     public Text cardName;
     public Text hpNumber;
     public Text hpFixed;
@@ -35,21 +33,12 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public SelectIndicator selectIndicator;
     public Card card;
     public bool isActivePokemon;
-
-    private void Awake()
-    {
-        icons = new Dictionary<EnergyTypes, Sprite>();
-
-        foreach (var sprite in Resources.LoadAll<Sprite>(icon_atlas.name))
-        {
-            var type = (EnergyTypes)Enum.Parse(typeof(EnergyTypes), sprite.name);
-            icons.Add(type, sprite);
-        }
-    }
+    private EnergyResourceManager energyResources;
 
     private void Start()
     {
-        //SetCard(new Ekans(null));
+        //SetCard(new Ekans(null)); //TODO remove
+        energyResources = FindObjectOfType<EnergyResourceManager>();
     }
 
     public void SetCard(Card card)
@@ -111,13 +100,13 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         cardName.text = card.PokemonName;
         hpNumber.text = card.Hp.ToString();
 
-        typeIcon.sprite = icons[card.PokemonType];
+        typeIcon.sprite = energyResources.Icons[card.PokemonType];
 
         GetComponentInChildren<TemplateSelector>().SetTemplate(card.PokemonType);
 
         if (card.Weakness != EnergyTypes.None)
         {
-            weaknessIcon.sprite = icons[card.Weakness];
+            weaknessIcon.sprite = energyResources.Icons[card.Weakness];
         }
         else
         {
@@ -125,7 +114,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
         if (card.Resistance != EnergyTypes.None)
         {
-            resistanceIcon.sprite = icons[card.Resistance];
+            resistanceIcon.sprite = energyResources.Icons[card.Resistance];
         }
         else
         {
@@ -134,7 +123,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
         for (int i = 0; i < card.RetreatCost; i++)
         {
-            Instantiate(costPrefab, retreatCost.transform).GetComponent<Image>().sprite = icons[EnergyTypes.Colorless];
+            Instantiate(costPrefab, retreatCost.transform).GetComponent<Image>().sprite = energyResources.Icons[EnergyTypes.Colorless];
         }
 
         if (card.Ability != null)

@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Code;
+﻿using Assets.Code;
+using Assets.Code._2D;
 using TCGCards;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AttackRenderer : MonoBehaviour
 {
-    private Dictionary<EnergyTypes, Sprite> icons;
-    public Texture2D icon_atlas;
     public GameObject costPrefab;
     public GameObject costParent;
     public GameObject description;
     public Text attackName;
     public Text damage;
     private Attack attack;
+    private EnergyResourceManager energyResources;
 
-    private void Awake()
+    private void Start()
     {
-        icons = new Dictionary<EnergyTypes, Sprite>();
-
-        foreach (var sprite in Resources.LoadAll<Sprite>(icon_atlas.name))
-        {
-            var type = (EnergyTypes)Enum.Parse(typeof(EnergyTypes), sprite.name);
-            icons.Add(type, sprite);
-        }
+        energyResources = FindObjectOfType<EnergyResourceManager>();
     }
 
     public void SetAttack(Attack attack)
@@ -38,7 +30,7 @@ public class AttackRenderer : MonoBehaviour
         {
             for (int i = 0; i < cost.Amount; i++)
             {
-                Instantiate(costPrefab, costParent.transform).GetComponent<Image>().sprite = icons[cost.EnergyType];
+                Instantiate(costPrefab, costParent.transform).GetComponent<Image>().sprite = energyResources.Icons[cost.EnergyType];
             }
         }
     }
