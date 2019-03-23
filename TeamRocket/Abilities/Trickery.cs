@@ -17,7 +17,7 @@ namespace TeamRocket.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)
         {
-            var message = new PickFromListMessage(owner.PrizeCards, new AnyCardFilter(), 1).ToNetworkMessage(owner.Id);
+            var message = new PickFromListMessage(owner.PrizeCards, 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             var topCard = owner.Deck.DrawCard();

@@ -16,7 +16,7 @@ namespace TeamRocket.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            var message = new PickFromListMessage(opponent.Hand, new List<IDeckFilter> { new DeckFilter() }, 1);
+            var message = new PickFromListMessage(opponent.Hand, 1);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(caster.Id));
 
             var pickedCard = response.Cards.FirstOrDefault();

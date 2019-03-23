@@ -36,6 +36,7 @@ namespace Assets.Code
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
         public GameObject selectColorPanel;
+        public GameObject selectFromListPanel;
         public GameObject cardPrefab;
         public NetworkId myId;
         public GameObject doneButton;
@@ -108,6 +109,13 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourBench, OnStartSelectingYourBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectColor, OnStartSelectColor);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.PickFromList, OnStartPickFromList);
+        }
+
+        private void OnStartPickFromList(object message, NetworkId messageId)
+        {
+            selectFromListPanel.SetActive(true);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
         }
 
         private void OnStartSelectColor(object message, NetworkId messageId)
