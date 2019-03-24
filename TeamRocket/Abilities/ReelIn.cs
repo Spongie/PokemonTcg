@@ -1,6 +1,6 @@
-﻿using TCGCards;
+﻿using System.Linq;
+using TCGCards;
 using TCGCards.Core;
-using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 
 namespace TeamRocket.Abilities
@@ -16,7 +16,14 @@ namespace TeamRocket.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)
         {
-            var message = new SelectFromDiscard(3, new BasicPokemonFilter()).ToNetworkMessage(owner.Id);
+            var possibleChoices = owner.DiscardPile.OfType<PokemonCard>().Where(card => card.Stage == 0);
+
+            if (!possibleChoices.Any())
+            {
+                return;
+            }
+
+            var message = new PickFromListMessage(possibleChoices, 0, 3).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             owner.Hand.AddRange(response.Cards);

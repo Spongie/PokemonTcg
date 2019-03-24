@@ -6,14 +6,21 @@ namespace TCGCards.Core.Messages
 {
     public class PickFromListMessage : AbstractNetworkMessage
     {
-        public PickFromListMessage(IEnumerable<Card> possibleChoices, int cardCount)
+        public PickFromListMessage(IEnumerable<Card> possibleChoices, int count) : this(possibleChoices, count, count)
+        {
+
+        }
+
+        public PickFromListMessage(IEnumerable<Card> possibleChoices, int minCount, int maxCount)
         {
             MessageType = MessageTypes.PickFromList;
             PossibleChoices = possibleChoices.ToList();
-            CardCount = cardCount;
+            MaxCount = maxCount;
+            MinCount = minCount;
         }
 
         public List<Card> PossibleChoices { get; }
-        public int CardCount { get; }
+        public int MaxCount { get; }
+        public int MinCount { get; }
     }
 }

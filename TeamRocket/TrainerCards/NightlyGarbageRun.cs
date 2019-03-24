@@ -1,4 +1,5 @@
-﻿using TCGCards;
+﻿using System.Linq;
+using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 
@@ -14,7 +15,9 @@ namespace TeamRocket.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromDiscard(3, new Filter()).ToNetworkMessage(caster.Id));
+            var availablePicks = caster.DiscardPile.Where(card => card is PokemonCard || (card is EnergyCard && ((EnergyCard)card).IsBasic));
+
+            var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(availablePicks, 3).ToNetworkMessage(caster.Id));
 
             caster.Deck.ShuffleInCards(response.Cards);
 

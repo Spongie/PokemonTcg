@@ -11,7 +11,6 @@
         PickFromList,
         SelectColor,
         SelectEnergyFromPokemon,
-        SelectFromDiscard,
         SelectFromOpponentBench,
         GameUpdate,
         SelectFromYourBench,
