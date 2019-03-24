@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace TCGCards.Core.Messages
 {
-    public class SelectEnergyFromYourPokemonMessage : AbstractNetworkMessage
+    public class SelectEnergyFromPokemonMessage : AbstractNetworkMessage
     {
-        public SelectEnergyFromYourPokemonMessage()
+        public SelectEnergyFromPokemonMessage()
         {
             MessageType = MessageTypes.SelectEnergyFromPokemon;
         }

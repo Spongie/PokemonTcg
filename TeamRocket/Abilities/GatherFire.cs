@@ -22,7 +22,7 @@ namespace TeamRocket.Abilities
             availablePokemons.Add(owner.ActivePokemonCard);
             availablePokemons.Remove(PokemonOwner);
 
-            var message = new SelectEnergyFromYourPokemonMessage
+            var message = new SelectEnergyFromPokemonMessage
             {
                 Amount = 1,
                 Filter = new EnergyTypeFilter(EnergyTypes.Fire),

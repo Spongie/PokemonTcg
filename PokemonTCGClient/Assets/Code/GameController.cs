@@ -110,6 +110,31 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourBench, OnStartSelectingYourBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectColor, OnStartSelectColor);
             NetworkManager.Instance.RegisterCallback(MessageTypes.PickFromList, OnStartPickFromList);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectEnergyFromPokemon, OnStartSelectAttachedEnergy);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.AttachEnergyToBench, OnStartAttachingEnergyBench);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickFromList);
+        }
+
+        private void OnStartDiscardCards(object message, NetworkId messageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDeckSearch(object message, NetworkId messageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnStartAttachingEnergyBench(object message, NetworkId messageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnStartSelectAttachedEnergy(object message, NetworkId messageId)
+        {
+            throw new NotImplementedException();
         }
 
         private void OnStartPickFromList(object message, NetworkId messageId)
