@@ -12,10 +12,12 @@ namespace Assets.Code.UI.Game
         public GameObject previewCard;
         private List<Card> selectedCards;
         private int limit;
+        private int minCount;
 
         public void Init(PickFromListMessage pickFromListMessage)
         {
-            limit = pickFromListMessage.CardCount;
+            limit = pickFromListMessage.MaxCount;
+            minCount = pickFromListMessage.MinCount;
 
             foreach (var card in pickFromListMessage.PossibleChoices)
             {
@@ -37,7 +39,7 @@ namespace Assets.Code.UI.Game
 
             if (selectedCards.Count == limit)
             {
-                selectedCards.RemoveAt(0);    
+                selectedCards.RemoveAt(0);
             }
 
             selectedCards.Add(card);
@@ -45,7 +47,7 @@ namespace Assets.Code.UI.Game
 
         public void DoneClick()
         {
-            if (!selectedCards.Any())
+            if (selectedCards.Count < minCount)
             {
                 return;
             }
