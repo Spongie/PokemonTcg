@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\Cards\$(TargetFileName)&quot;" />
+    <Exec Command="cp $(TargetDir)*.dll $(ProjectDir)../PokemonTCGClient/Assets/Dependencies/ &amp;&amp; cp $(TargetPath) $(ProjectDir)..\Cards\$(TargetFileName)" />
   </Target>
 
 </Project>

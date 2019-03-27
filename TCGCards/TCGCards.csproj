@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;" />
+    <Exec Command="cp $(TargetDir)*.dll $(ProjectDir)../PokemonTCGClient/Assets/Dependencies\" />
   </Target>
 
 </Project>

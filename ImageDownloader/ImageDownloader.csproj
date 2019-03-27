@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.8.5" />
-    <PackageReference Include="PokemonTcgSdk" Version="1.0.0" />
+    <ProjectReference Include="..\PokemonTcgSdk\PokemonTcgSdk.csproj" />
   </ItemGroup>
 
 </Project>

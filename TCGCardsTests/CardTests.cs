@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TCGCards;
 using TCGCards.Core;
 
@@ -12,7 +13,7 @@ namespace TCGCardsTests
         {
             var card = new TestCard(null);
 
-            Assert.AreEqual("Cards\\TCGCardsTests\\TCGCardsTests\\TestCard", card.GetLogicalName());
+            Assert.AreEqual(Path.Combine("Cards", "TCGCardsTests", "TCGCardsTests", "TestCard"), card.GetLogicalName());
         }
     }
 

@@ -5,14 +5,14 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PokemonTcgSdk\PokemonTcgSdk.csproj" />
+  </ItemGroup>
   
   <ItemGroup>
     <EmbeddedResource Include="Resources/AttackTemplate.txt" />
     <EmbeddedResource Include="Resources/PokemonTemplate.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="PokemonTcgSdk" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

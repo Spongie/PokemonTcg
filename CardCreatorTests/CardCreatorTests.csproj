@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CardCreator\CardCreator.csproj" />
+    <ProjectReference Include="..\PokemonTcgSdk\PokemonTcgSdk.csproj" />
   </ItemGroup>
 
 </Project>

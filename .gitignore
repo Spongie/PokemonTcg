@@ -301,3 +301,4 @@ PokemonTCGClient/Unity.CollabProxy.Editor.csproj
 PokemonTCGClient/Unity.PackageManagerUI.Editor.csproj
 PokemonTCGClient/Unity.TextMeshPro.csproj
 PokemonTCGClient/Unity.TextMeshPro.Editor.csproj
+dotnet.tar.gz

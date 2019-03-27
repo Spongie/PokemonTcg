@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist &quot;$(TargetDir)Cards&quot; mkdir &quot;$(TargetDir)Cards&quot;&#xD;&#xA;copy &quot;$(ProjectDir)..\Cards\*.dll&quot; &quot;$(TargetDir)Cards\&quot;" />
+    <Exec Command="mkdir -p $(TargetDir)Cards &amp;&amp; cp $(ProjectDir)../Cards/*.dll $(TargetDir)Cards/" />
   </Target>
 
 </Project>

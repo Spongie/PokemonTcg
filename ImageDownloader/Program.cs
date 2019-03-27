@@ -1,13 +1,12 @@
-﻿using HtmlAgilityPack;
-using PokemonTcgSdk;
-using PokemonTcgSdk.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using PokemonTcgSdk;
+using PokemonTcgSdk.Models;
 
 namespace CardDownloader
 {
@@ -45,7 +44,8 @@ namespace CardDownloader
                 try
                 {
                     cards = response.Cards;
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     return;
                 }
@@ -116,68 +116,6 @@ namespace CardDownloader
                 request.Timeout = 10000;
                 return request;
             }
-        }
-
-        class PokemonSet
-        {
-            public string Name { get; set; }
-            public string Link { get; set; }
-        }
-
-        static void DownloadAllPokemons(List<HtmlNode> htmlNodes, PokemonSet set)
-        {
-            string baseFolder = set.Name.Replace(" ", "");
-
-            if(!Directory.Exists(baseFolder))
-                Directory.CreateDirectory(baseFolder);
-
-            var pokemons = htmlNodes.Select(x => x.Descendants("a").FirstOrDefault()).ToList();
-
-            int current = 0;
-            float max = pokemons.Count;
-
-            Parallel.ForEach(pokemons, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, (pokemon) =>
-            {
-                string fileName = baseFolder + "\\";// + GetPokemonFileName(pokemon);
-
-                if(new FileInfo(fileName).Exists)
-                {
-                    Interlocked.Increment(ref current);
-                    var currentStatus = current / max;
-
-                    WriteStatusLine(currentStatus);
-                    return;
-                }
-
-                lock(string.Intern(fileName))
-                {
-                    if(!new FileInfo(fileName).Exists)
-                    {
-                        var web = new HtmlWeb();
-                        var document = web.Load(pokemon.Attributes["href"].Value);
-                        var imageNode = document.DocumentNode.Descendants("Article").Select(x => x.Descendants("img").FirstOrDefault()).FirstOrDefault();
-
-                        using(var client = new WebClient())
-                        {
-                            try
-                            {
-                                client.DownloadFile(imageNode.Attributes["src"].Value, fileName);
-                            }
-                            catch
-                            {
-                                client.DownloadFile(imageNode.ParentNode.Attributes["href"].Value, fileName);
-                            }
-                        }
-                    }
-                }
-
-                Interlocked.Increment(ref current);
-                var status = current / max;
-
-                WriteStatusLine(status);
-            });
-
-            Console.WriteLine();
         }
 
         private static void WriteStatusLine(float status)
