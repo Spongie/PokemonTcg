@@ -19,9 +19,7 @@ namespace Server.Services
             Database.Instance.Insert(new User
             {
                 UserName = userName,
-                Password = Crypto.hashSHA512(password),
-                RegisteredDate = DateTime.Now,
-                LastLogin = DateTime.Now
+                Password = Crypto.hashSHA512(password)
             });
 
             return true;
@@ -30,16 +28,10 @@ namespace Server.Services
         public BooleanResult Login(string userName, string password)
         {
             var user = Database.Instance.Select(new SelectQuery<User>().AndEquals(nameof(User.UserName), userName).Limit(1)).FirstOrDefault();
-            
+
             var hashedPassword = Crypto.hashSHA512(password);
-            
+
             var result = user != null && user.Password == hashedPassword;
-            
-            if (user != null && result)
-            {
-                user.LastLogin = DateTime.Now;
-                Database.Instance.Update(user);
-            }
 
             return result;
         }

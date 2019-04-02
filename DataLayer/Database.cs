@@ -12,7 +12,7 @@ namespace DataLayer
     public class Database : IDisposable
     {
         private static Database instance;
-        private const string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Pokemon_Tcg_Test;Integrated Security=True";
+        private const string connectionString = @"Data Source=127.0.0.1,1433;Database=master;User ID=sa;Password=IbaX&197)/S(23XAax4)3)shd";
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
         private SqlConnection connection;
 
@@ -27,7 +27,7 @@ namespace DataLayer
         {
             var command = connection.CreateCommand();
             command.CommandText = commandText;
-            
+
             if (transaction != null)
             {
                 command.Transaction = transaction;
@@ -67,7 +67,7 @@ namespace DataLayer
                         for (int rowIndex = 0; rowIndex < reader.FieldCount; rowIndex++)
                         {
                             PropertyInfo property = typeof(T).GetProperty(reader.GetName(rowIndex), BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-                            
+
                             if (property.PropertyType != typeof(DateTime))
                             {
                                 property.SetValue(resultObject, reader.GetValue(rowIndex));
@@ -79,7 +79,8 @@ namespace DataLayer
                             }
                             else
                             {
-                                var value = DateTime.ParseExact(reader.GetValue(rowIndex).ToString(), DateFormat, CultureInfo.InvariantCulture);
+                                var fromDb = reader.GetValue(rowIndex).ToString();
+                                var value = DateTime.ParseExact(fromDb, DateFormat, CultureInfo.InvariantCulture);
                                 property.SetValue(resultObject, value);
                             }
                         }
@@ -236,7 +237,7 @@ namespace DataLayer
                 var migration = (IMigration)Activator.CreateInstance(migrationType);
                 RunMigration(migration);
             }
-            
+
             Logger.Instance.Log("Database updated");
         }
 

@@ -45,7 +45,6 @@ namespace Server
             Database.Instance.Connect();
             Database.Instance.CheckAndUpdate();
 
-
             Id = NetworkId.Generate();
             listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             listener.Start();
@@ -75,7 +74,7 @@ namespace Server
             {
                 var client = listener.AcceptTcpClient();
                 var player = new NetworkPlayer(client);
-                
+
                 player.Id = NetworkId.Generate();
 
                 Console.WriteLine("Player connected with id: " + player.Id);
@@ -89,7 +88,7 @@ namespace Server
 
         private void Player_OnDisconnected(object sender, NetworkId playerId)
         {
-            if(Clients.TryGetValue(playerId, out NetworkPlayer player))
+            if (Clients.TryGetValue(playerId, out NetworkPlayer player))
             {
                 try
                 {
@@ -97,7 +96,7 @@ namespace Server
                 }
                 catch (Exception)
                 {
-                    
+
                 }
                 finally
                 {

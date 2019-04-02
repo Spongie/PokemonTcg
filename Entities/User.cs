@@ -12,9 +12,5 @@ namespace Entities
 
         [DbLength(500)]
         public string Email { get; set; } = "";
-
-        public DateTime RegisteredDate { get; set; }
-
-        public DateTime LastLogin { get; set; }
     }
 }
