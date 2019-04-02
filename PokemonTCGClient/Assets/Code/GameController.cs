@@ -21,7 +21,8 @@ namespace Assets.Code
         None,
         SelectingOpponentsPokemon,
         SelectingOpponentsBenchedPokemon,
-        SelectingYourBenchedPokemon
+        SelectingYourBenchedPokemon,
+        DiscardingCards
     }
 
     public class GameController : MonoBehaviour
@@ -60,7 +61,7 @@ namespace Assets.Code
         private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
         private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
 
-        private static GameFieldState[] statesWithDoneAction = new []
+        private static GameFieldState[] statesWithDoneAction = new[]
         {
             GameFieldState.BothSelectingBench
         };
@@ -119,7 +120,14 @@ namespace Assets.Code
 
         private void OnStartDiscardCards(object message, NetworkId messageId)
         {
-            throw new NotImplementedException();
+            selectedCards.Clear();
+            SpecialState = SpecialGameState.DiscardingCards;
+            minSelectedCardCount = (DiscardCardsMessage(message)).Count;
+
+            doneButton.SetActive(true);
+            infoPanel.SetActive(true);
+
+            infoText.text = $"Discard {countString} cards";
         }
 
         private void OnDeckSearch(object message, NetworkId messageId)
@@ -152,7 +160,7 @@ namespace Assets.Code
         private void OnStartSelectingYourBench(object message, NetworkId messageId)
         {
             selectedCards.Clear();
-            
+
             var maxCount = ((SelectFromYourBench)message).MaxCount;
             var minCount = ((SelectFromYourBench)message).MinCount;
             minSelectedCardCount = minCount;
@@ -288,7 +296,9 @@ namespace Assets.Code
                 SpecialState = SpecialGameState.None;
                 infoPanel.SetActive(false);
             }
-            else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon || SpecialState == SpecialGameState.SelectingYourBenchedPokemon)
+            else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon
+            || SpecialState == SpecialGameState.SelectingYourBenchedPokemon
+            || SpecialState == SpecialGameState.DiscardingCards)
             {
                 if (minSelectedCardCount < selectedCards.Count)
                 {
@@ -316,10 +326,10 @@ namespace Assets.Code
             Debug.Log("Game updated, handling message");
 
             GameFieldState oldState = gameField.GameState;
-            
+
             gameField = gameMessage;
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
-            
+
             doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
             endTurnButton.SetActive(IsMyTurn);
 
