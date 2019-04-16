@@ -16,15 +16,6 @@ using UnityEngine.UI;
 
 namespace Assets.Code
 {
-    public enum SpecialGameState
-    {
-        None,
-        SelectingOpponentsPokemon,
-        SelectingOpponentsBenchedPokemon,
-        SelectingYourBenchedPokemon,
-        DiscardingCards
-    }
-
     public class GameController : MonoBehaviour
     {
         public static GameController Instance;
