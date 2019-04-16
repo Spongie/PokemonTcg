@@ -21,7 +21,7 @@ namespace CardDownloader
             object lockObject = new object();
             int cursorStart = Console.CursorTop;
 
-            Parallel.ForEach(sets, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, (set) =>
+            foreach (var set in sets)
             {
                 int myId = Interlocked.Increment(ref totalIndex);
                 int progress = 0;
@@ -47,61 +47,68 @@ namespace CardDownloader
                 }
                 catch (Exception)
                 {
-                    return;
+                    continue;
                 }
 
                 float max = cards.Count;
 
-                foreach (var card in cards)
+                Parallel.ForEach(cards, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 }, (card) =>
                 {
                     string fileName = Path.Combine(baseFolder, GetPokemonFileName(card));
 
                     if (File.Exists(fileName))
                     {
                         progress++;
-                        UpdateProgress(set, lockObject, cursorStart + myId, progress, max);
-                        continue;
+                        UpdateProgress(set, lockObject, progress, max);
+                        return;
                     }
 
-                    using (var client = new ImageWebRequest())
+                    DownloadCard(card, fileName);
+
+                    progress++;
+                    UpdateProgress(set, lockObject, progress, max);
+                });
+
+                Console.WriteLine("");
+            }
+
+            Console.WriteLine("Done!");
+        }
+
+        private static void DownloadCard(PokemonCard card, string fileName)
+        {
+            using (var client = new ImageWebRequest())
+            {
+                try
+                {
+                    client.DownloadFile(card.ImageUrlHiRes, fileName);
+                }
+                catch (WebException e)
+                {
+                    if (e.Message.Contains("404"))
                     {
                         try
                         {
-                            client.DownloadFile(card.ImageUrlHiRes, fileName);
+                            client.DownloadFile(card.ImageUrl, fileName);
                         }
-                        catch (WebException e)
+                        catch (Exception)
                         {
-                            if (e.Message.Contains("404"))
-                            {
-                                try
-                                {
-                                    client.DownloadFile(card.ImageUrl, fileName);
-                                }
-                                catch (Exception)
-                                {
-                                    Console.WriteLine("Failed to download image for: " + card.Name);
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Failed to download image for: " + card.Name);
-                            }
+                            Console.Write("Failed to download image for: " + card.Name);
                         }
                     }
-
-                    progress++;
-                    UpdateProgress(set, lockObject, cursorStart + myId, progress, max);
+                    else
+                    {
+                        Console.Write("Failed to download image for: " + card.Name);
+                    }
                 }
-            });
-
-            Console.Read();
+            }
         }
 
-        private static int UpdateProgress(SetData set, object lockObject, int myId, int progress, float max)
+        private static int UpdateProgress(SetData set, object lockObject, int progress, float max)
         {
             lock (lockObject)
             {
-                Console.SetCursorPosition(0, myId);
+                Console.SetCursorPosition(0, Console.CursorTop);
                 Console.Write($"Downloading {set.Name.PadRight(25)} - {progress}/{max}     ");
             }
 
@@ -134,7 +141,7 @@ namespace CardDownloader
                 .Replace("é", "e")
                 .Replace("’", "")
                 .Replace("?", "")
-                .Replace("&#8217;", "") + ".jpg";
+                .Replace("&#8217;", "") + ".png";
         }
     }
 }
