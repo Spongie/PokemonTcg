@@ -14,6 +14,28 @@ namespace Assets.Code.UI.Game
         private int limit;
         private int minCount;
 
+        public void Init(DeckSearchMessage deckSearchMessage)
+        {
+            limit = deckSearchMessage.CardCount;
+            minCount = deckSearchMessage.CardCount;
+
+            foreach (var card in deckSearchMessage.Deck.Cards)
+            {
+                if (deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
+                {
+                    CreateSelectableCard(card);
+                }
+            }
+
+            foreach (var card in deckSearchMessage.Deck.Cards)
+            {
+                if (!deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
+                {
+                    CreateCardPreview(card);
+                }
+            }
+        }
+
         public void Init(PickFromListMessage pickFromListMessage)
         {
             limit = pickFromListMessage.MaxCount;
@@ -21,13 +43,25 @@ namespace Assets.Code.UI.Game
 
             foreach (var card in pickFromListMessage.PossibleChoices)
             {
-                GameObject preview = Instantiate(previewCard, transform);
-                CardImageLoader.Instance.LoadSprite(card, preview.GetComponent<Image>());
-                preview.GetComponent<Button>().onClick.AddListener(() =>
-                {
-                    OnCardClicked(card);
-                });
+                CreateSelectableCard(card);
             }
+        }
+
+        private GameObject CreateCardPreview(Card card)
+        {
+            GameObject preview = Instantiate(previewCard, transform);
+            CardImageLoader.Instance.LoadSprite(card, preview.GetComponent<Image>());
+
+            return preview;
+        }
+
+        private void CreateSelectableCard(Card card)
+        {
+            var preview = CreateCardPreview(card);
+            preview.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                OnCardClicked(card);
+            });
         }
 
         public void OnCardClicked(Card card)

@@ -5,16 +5,16 @@ namespace TCGCards.Core.Messages
 {
     public class DeckSearchMessage : AbstractNetworkMessage
     {
-        public DeckSearchMessage(Player player, List<IDeckFilter> filters, int cardCount)
+        public DeckSearchMessage(Deck deck, List<IDeckFilter> filters, int cardCount)
         {
-            Player = player;
+            Deck = deck;
             Filters = filters;
             CardCount = cardCount;
             PickedCards = new List<Card>();
             MessageType = MessageTypes.DeckSearch;
         }
 
-        public Player Player { get; }
+        public Deck Deck { get; }
         public List<IDeckFilter> Filters { get; }
         public int CardCount { get; }
         public List<Card> PickedCards { get; set; }

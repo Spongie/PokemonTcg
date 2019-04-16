@@ -122,17 +122,18 @@ namespace Assets.Code
         {
             selectedCards.Clear();
             SpecialState = SpecialGameState.DiscardingCards;
-            minSelectedCardCount = (DiscardCardsMessage(message)).Count;
+            minSelectedCardCount = ((DiscardCardsMessage)message).Count;
 
             doneButton.SetActive(true);
             infoPanel.SetActive(true);
 
-            infoText.text = $"Discard {countString} cards";
+            infoText.text = $"Discard {minSelectedCardCount} cards";
         }
 
         private void OnDeckSearch(object message, NetworkId messageId)
         {
-            throw new NotImplementedException();
+            selectFromListPanel.SetActive(true);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((DeckSearchMessage)message);
         }
 
         private void OnStartAttachingEnergyBench(object message, NetworkId messageId)
