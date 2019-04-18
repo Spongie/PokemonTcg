@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.IO;
+using Entities;
 
 namespace Server
 {
@@ -117,7 +118,10 @@ namespace Server
 
                 if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
                 {
-                    networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId));
+                    networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId)
+                    {
+                        RequiresResponse = false
+                    });
                 }
             }
             else

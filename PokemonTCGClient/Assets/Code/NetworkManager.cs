@@ -17,6 +17,7 @@ namespace Assets.Code
         public AsyncImageService imageService;
         public Dictionary<MessageTypes, Action<object, NetworkId>> messageConsumers;
         private Dictionary<NetworkId, Action<object>> responseMapper;
+        public string rs;
 
         internal void RegisterCallback(NetworkId responseId, Action<object> callback)
         {
@@ -45,7 +46,7 @@ namespace Assets.Code
             tcp.Connect("127.0.0.1", 1565);
             networkPlayer = new NetworkingCore.NetworkPlayer(tcp);
 
-            Me = networkPlayer;;
+            Me = networkPlayer; ;
             userService = new AsyncUserService(networkPlayer);
             gameService = new AsyncGameService(networkPlayer);
             imageService = new AsyncImageService(networkPlayer);
@@ -88,7 +89,7 @@ namespace Assets.Code
                     }
                 }
             }
-            
+
             if (networkPlayer.SpecificResponses.Count > 0)
             {
                 var handledMessages = new List<NetworkId>();
@@ -105,13 +106,13 @@ namespace Assets.Code
                         responseMapper[item.ResponseTo].Invoke(item.Data);
                         responseMapper.Remove(item.ResponseTo);
                         handledMessages.Add(item.ResponseTo);
-                        RespondingTo = item.MessageId;
+                        RespondingTo = item.RequiresResponse ? item.MessageId : null;
                     }
                     if (messageConsumers.ContainsKey(item.MessageType))
                     {
                         messageConsumers[item.MessageType].Invoke(item.Data, item.MessageId);
                         handledMessages.Add(item.ResponseTo);
-                        RespondingTo = item.MessageId;
+                        RespondingTo = item.RequiresResponse ? item.MessageId : null;
                     }
                 }
 

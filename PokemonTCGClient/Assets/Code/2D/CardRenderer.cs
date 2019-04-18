@@ -39,6 +39,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         //SetCard(new Ekans(null)); //TODO remove
         energyResources = FindObjectOfType<EnergyResourceManager>();
+        //This gives null when changin scenes, FindByTag("_GLOBAL_") instead?
     }
 
     public void SetCard(Card card)
@@ -148,7 +149,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
         string finalPath = "file:///" + fullCardPath;
-        
+
         using (var request = UnityWebRequestTexture.GetTexture(finalPath))
         {
             yield return request.SendWebRequest();

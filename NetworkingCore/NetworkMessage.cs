@@ -11,7 +11,7 @@ namespace NetworkingCore
 
         }
 
-        public NetworkMessage(MessageTypes type, object data, NetworkId senderId, NetworkId messageId) :this(type, data, senderId, messageId, NetworkId.Empty)
+        public NetworkMessage(MessageTypes type, object data, NetworkId senderId, NetworkId messageId) : this(type, data, senderId, messageId, NetworkId.Empty)
         {
 
         }
@@ -32,6 +32,8 @@ namespace NetworkingCore
         public NetworkId ResponseTo { get; set; }
         public DateTime Received { get; set; }
 
+        public bool RequiresResponse { get; set; } = true;
+
         public void Send(NetworkStream stream)
         {
             string message = Serializer.Serialize(this);
@@ -40,7 +42,7 @@ namespace NetworkingCore
 
             var prefixBytes = BitConverter.GetBytes(jsonBytes.Length);
             stream.Write(prefixBytes, 0, prefixBytes.Length);
-            
+
             stream.Write(jsonBytes, 0, jsonBytes.Length);
         }
     }
