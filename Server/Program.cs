@@ -1,5 +1,4 @@
-﻿using DataLayer;
-using System;
+﻿using System;
 using System.Threading;
 
 namespace Server
@@ -12,8 +11,6 @@ namespace Server
             t.Start();
 
             Console.Read();
-
-            Database.Instance.Dispose();
         }
 
         private static void RunServer(object obj)

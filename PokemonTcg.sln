@@ -1,23 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCGCardsTests", "TCGCardsTests/TCGCardsTests.csproj", "{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCGCardsTests", "TCGCardsTests\TCGCardsTests.csproj", "{6B56C4CE-CF93-40C8-BEDE-6C035EE531B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardCreator", "CardCreator/CardCreator.csproj", "{07741055-EA59-4432-BDE8-42A4B63F9177}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardCreator", "CardCreator\CardCreator.csproj", "{07741055-EA59-4432-BDE8-42A4B63F9177}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardCreatorTests", "CardCreatorTests/CardCreatorTests.csproj", "{9F23DFCE-166C-4393-B81D-064C972DCE94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardCreatorTests", "CardCreatorTests\CardCreatorTests.csproj", "{9F23DFCE-166C-4393-B81D-064C972DCE94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkingCore", "NetworkingCore/NetworkingCore.csproj", "{3F993665-D003-4468-86FA-C59F6A7F1A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkingCore", "NetworkingCore\NetworkingCore.csproj", "{3F993665-D003-4468-86FA-C59F6A7F1A6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCGCards", "TCGCards/TCGCards.csproj", "{8A826D6B-B9F7-42E4-9B01-F4909884E8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCGCards", "TCGCards\TCGCards.csproj", "{8A826D6B-B9F7-42E4-9B01-F4909884E8FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamRocket", "TeamRocket/TeamRocket.csproj", "{3F25F024-015E-40A7-B5ED-4EFBD88E9DCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamRocket", "TeamRocket\TeamRocket.csproj", "{3F25F024-015E-40A7-B5ED-4EFBD88E9DCD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageDownloader", "ImageDownloader/ImageDownloader.csproj", "{3891AE0C-1A45-471F-9414-F02F6A7C5966}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageDownloader", "ImageDownloader\ImageDownloader.csproj", "{3891AE0C-1A45-471F-9414-F02F6A7C5966}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server/Server.csproj", "{E1E168EF-5ABC-4CD6-9FAB-46F144325740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{E1E168EF-5ABC-4CD6-9FAB-46F144325740}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3891AE0C-1A45-471F-9414-F02F6A7C5966} = {3891AE0C-1A45-471F-9414-F02F6A7C5966}
 		{FC067346-7D77-4193-913C-D47A541ED7F4} = {FC067346-7D77-4193-913C-D47A541ED7F4}
@@ -27,19 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server/Server.csp
 		{9F23DFCE-166C-4393-B81D-064C972DCE94} = {9F23DFCE-166C-4393-B81D-064C972DCE94}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "TestClient/TestClient.csproj", "{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "TestClient\TestClient.csproj", "{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTests", "ServerTests/ServerTests.csproj", "{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProxyGenerator", "ProxyGenerator\ProxyGenerator.csproj", "{D3D273B9-1D2D-4BA4-84EF-6664FE216D3E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProxyGenerator", "ProxyGenerator/ProxyGenerator.csproj", "{D3D273B9-1D2D-4BA4-84EF-6664FE216D3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProxy", "ServerProxy\ServerProxy.csproj", "{5E994A8D-087B-4005-8742-5D7D5DA83A37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerProxy", "ServerProxy/ServerProxy.csproj", "{5E994A8D-087B-4005-8742-5D7D5DA83A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{44CD12B7-4826-4793-A4FE-8153391D7189}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer/DataLayer.csproj", "{C9CF8745-0F23-4C75-91B8-D5B96433A723}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities/Entities.csproj", "{44CD12B7-4826-4793-A4FE-8153391D7189}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamRocketTests", "TeamRocketTests/TeamRocketTests.csproj", "{FC067346-7D77-4193-913C-D47A541ED7F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamRocketTests", "TeamRocketTests\TeamRocketTests.csproj", "{FC067346-7D77-4193-913C-D47A541ED7F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,14 +117,6 @@ Global
 		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|x86.ActiveCfg = Release|Any CPU
 		{DE525FDA-BF3D-49A1-9DA6-2171D12DDFC1}.Release|x86.Build.0 = Release|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Debug|x86.Build.0 = Debug|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|x86.ActiveCfg = Release|Any CPU
-		{AAD9FC51-CB1D-48B3-A6BD-0A19F1F1F692}.Release|x86.Build.0 = Release|Any CPU
 		{D3D273B9-1D2D-4BA4-84EF-6664FE216D3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3D273B9-1D2D-4BA4-84EF-6664FE216D3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3D273B9-1D2D-4BA4-84EF-6664FE216D3E}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -145,14 +133,6 @@ Global
 		{5E994A8D-087B-4005-8742-5D7D5DA83A37}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E994A8D-087B-4005-8742-5D7D5DA83A37}.Release|x86.ActiveCfg = Release|Any CPU
 		{5E994A8D-087B-4005-8742-5D7D5DA83A37}.Release|x86.Build.0 = Release|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Debug|x86.Build.0 = Debug|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|x86.ActiveCfg = Release|Any CPU
-		{C9CF8745-0F23-4C75-91B8-D5B96433A723}.Release|x86.Build.0 = Release|Any CPU
 		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44CD12B7-4826-4793-A4FE-8153391D7189}.Debug|x86.ActiveCfg = Debug|Any CPU

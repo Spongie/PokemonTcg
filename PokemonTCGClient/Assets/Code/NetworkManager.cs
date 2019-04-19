@@ -9,10 +9,8 @@ namespace Assets.Code
     public class NetworkManager : MonoBehaviour
     {
         private NetworkingCore.NetworkPlayer networkPlayer;
-        private List<NetworkMessage> messages;
         private Queue<NetworkMessage> messagesToPrint;
         private object lockObject = new object();
-        public AsyncUserService userService;
         public AsyncGameService gameService;
         public AsyncImageService imageService;
         public Dictionary<MessageTypes, Action<object, NetworkId>> messageConsumers;
@@ -38,15 +36,13 @@ namespace Assets.Code
         {
             responseMapper = new Dictionary<NetworkId, Action<object>>();
             messageConsumers = new Dictionary<MessageTypes, Action<object, NetworkId>>();
-            messages = new List<NetworkMessage>();
             messagesToPrint = new Queue<NetworkMessage>();
 
             var tcp = new TcpClient();
             tcp.Connect("127.0.0.1", 1565);
             networkPlayer = new NetworkingCore.NetworkPlayer(tcp);
 
-            Me = networkPlayer;;
-            userService = new AsyncUserService(networkPlayer);
+            Me = networkPlayer;
             gameService = new AsyncGameService(networkPlayer);
             imageService = new AsyncImageService(networkPlayer);
 
@@ -79,12 +75,12 @@ namespace Assets.Code
                     {
                         responseMapper[message.ResponseTo].Invoke(message.Data);
                         responseMapper.Remove(message.ResponseTo);
-                        RespondingTo = message.MessageId;
+                        RespondingTo = message.RequiresResponse ? message.MessageId : null;
                     }
                     if (messageConsumers.ContainsKey(message.MessageType))
                     {
                         messageConsumers[message.MessageType].Invoke(message.Data, message.MessageId);
-                        RespondingTo = message.MessageId;
+                        RespondingTo = message.RequiresResponse ? message.MessageId : null;
                     }
                 }
             }
@@ -105,13 +101,13 @@ namespace Assets.Code
                         responseMapper[item.ResponseTo].Invoke(item.Data);
                         responseMapper.Remove(item.ResponseTo);
                         handledMessages.Add(item.ResponseTo);
-                        RespondingTo = item.MessageId;
+                        RespondingTo = item.RequiresResponse ? item.MessageId : null;
                     }
                     if (messageConsumers.ContainsKey(item.MessageType))
                     {
                         messageConsumers[item.MessageType].Invoke(item.Data, item.MessageId);
                         handledMessages.Add(item.ResponseTo);
-                        RespondingTo = item.MessageId;
+                        RespondingTo = item.RequiresResponse ? item.MessageId : null;
                     }
                 }
 

@@ -11,5 +11,13 @@ namespace TCGCards.Core.Messages
         }
 
         public GameField Game { get; set; }
+
+        public override NetworkMessage ToNetworkMessage(NetworkId senderId)
+        {
+            var message = base.ToNetworkMessage(senderId);
+            message.RequiresResponse = false;
+
+            return message;
+        }
     }
 }

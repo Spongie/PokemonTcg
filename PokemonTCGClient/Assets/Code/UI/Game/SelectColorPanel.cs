@@ -18,7 +18,7 @@ namespace Assets.Code.UI.Game
 
         private void Start()
         {
-            energyResources = FindObjectOfType<EnergyResourceManager>();
+            energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
 
             foreach (var key in energyResources.Icons.Keys)
             {

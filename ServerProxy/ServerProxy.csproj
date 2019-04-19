@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cp -a $(TargetDir)*.dll $(SolutionDir)/PokemonTCGClient/Assets/Dependencies/" />
+    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\PokemonTCGClient\Assets\Dependencies\&quot;" />
   </Target>
 
 </Project>

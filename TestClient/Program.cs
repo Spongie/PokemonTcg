@@ -12,7 +12,6 @@ namespace TestClient
     class Program
     {
         static NetworkPlayer networkPlayer;
-        static UserService userService;
         static GameService gameService;
 
         static void Main(string[] args)
@@ -26,22 +25,6 @@ namespace TestClient
             {
                 input = Console.ReadLine().Trim();
 
-                if (input == "login")
-                {
-                    string userName = Console.ReadLine().Trim();
-                    string password = Console.ReadLine().Trim();
-
-                    var value = userService.Login(userName, password);
-
-                    Console.WriteLine(value);
-                }
-                if (input == "register")
-                {
-                    string userName = Console.ReadLine().Trim();
-                    string password = Console.ReadLine().Trim();
-
-                    Console.WriteLine(userService.Register(userName, password));
-                }
                 if (input == "game")
                 {
                     PlayGame();
@@ -96,7 +79,6 @@ namespace TestClient
             Console.WriteLine("Connected to server");
 
             networkPlayer = new NetworkPlayer(tcp);
-            userService = new UserService(networkPlayer);
             gameService = new GameService(networkPlayer);
             networkPlayer.DataReceived += NetworkPlayer_DataReceived;
         }

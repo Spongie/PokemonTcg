@@ -35,14 +35,15 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public bool isActivePokemon;
     private EnergyResourceManager energyResources;
 
-    private void Start()
+    private void Init()
     {
         //SetCard(new Ekans(null)); //TODO remove
-        energyResources = FindObjectOfType<EnergyResourceManager>();
+        energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
     }
 
     public void SetCard(Card card)
     {
+        Init();
         this.card = card;
 
         if (card is PokemonCard)
@@ -146,7 +147,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     IEnumerator LoadSprite(Card card)
     {
-        string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
+        string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
         string finalPath = "file:///" + fullCardPath;
         
         using (var request = UnityWebRequestTexture.GetTexture(finalPath))

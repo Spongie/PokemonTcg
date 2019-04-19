@@ -198,6 +198,8 @@ namespace Assets.Code
 
         public void OnCardClicked(CardRenderer cardController)
         {
+            Debug.Log("Clicked: " + cardController.name);
+
             if (onSpecialClickHandlers.ContainsKey(SpecialState))
             {
                 onSpecialClickHandlers[SpecialState].Invoke(cardController);
@@ -449,7 +451,7 @@ namespace Assets.Code
 
         IEnumerator LoadSprite(Card card, Image target)
         {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
+            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
             string finalPath = "file:///" + fullCardPath;
 
             using (var request = UnityWebRequestTexture.GetTexture(finalPath))

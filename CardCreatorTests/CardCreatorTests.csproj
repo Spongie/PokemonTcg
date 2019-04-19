@@ -11,7 +11,7 @@
 
     <StartupObject />
 
-    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

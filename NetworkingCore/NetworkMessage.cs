@@ -31,6 +31,7 @@ namespace NetworkingCore
         public NetworkId MessageId { get; set; }
         public NetworkId ResponseTo { get; set; }
         public DateTime Received { get; set; }
+        public bool RequiresResponse { get; set; } = true;
 
         public void Send(NetworkStream stream)
         {

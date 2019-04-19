@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <Configurations>Debug;Release;Debug Windows;Debug OSX</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Server\Server.csproj" />
-	<ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
-	<ProjectReference Include="..\TCGCards\TCGCards.csproj" />
+	  <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
+	  <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
   </ItemGroup>
 
 </Project>

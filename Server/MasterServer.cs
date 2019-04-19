@@ -1,5 +1,4 @@
-﻿using DataLayer;
-using NetworkingCore;
+﻿using NetworkingCore;
 using NetworkingCore.Messages;
 using Server.Services;
 using System;
@@ -10,40 +9,31 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
-using System.IO;
 
 namespace Server
 {
     public class MasterServer
     {
-        private static MasterServer _instance;
         private Thread serverThread;
         private TcpListener listener;
         private Dictionary<string, IService> services;
-        private static object lockObject = new object();
 
         public void Start(int port)
         {
-            _instance = this;
+            Instance = this;
             Clients = new ConcurrentDictionary<NetworkId, NetworkPlayer>();
 
             services = new Dictionary<string, IService>
             {
-                { typeof(UserService).Name, new UserService() },
                 { typeof(GameService).Name, new GameService() },
-                { typeof(ImageService).Name, new ImageService() }
+                { typeof(ImageService).Name, new ImageService() },
+                { typeof(CardService).Name, new CardService() }
             };
 
             foreach (var service in services.Values)
             {
                 service.InitTypes();
             }
-
-            LoadCardDlls();
-
-            Logger.Instance.Log("Connecting to database");
-            Database.Instance.Connect();
-            Database.Instance.CheckAndUpdate();
 
             Id = NetworkId.Generate();
             listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
@@ -53,19 +43,6 @@ namespace Server
 
             serverThread = new Thread(Run);
             serverThread.Start();
-        }
-
-        private static void LoadCardDlls()
-        {
-            Logger.Instance.Log("Loading card dlls...");
-
-            foreach (var file in Directory.GetFiles("Cards/", "*.dll"))
-            {
-                var assemblyName = AssemblyName.GetAssemblyName(file);
-                Assembly.Load(assemblyName);
-            }
-
-            Logger.Instance.Log("Card dlls loaded!");
         }
 
         private void Run()
@@ -117,7 +94,10 @@ namespace Server
 
                 if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
                 {
-                    networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId));
+                    networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId)
+                    {
+                        RequiresResponse = false
+                    });
                 }
             }
             else
@@ -126,13 +106,7 @@ namespace Server
             }
         }
 
-        public static MasterServer Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public static MasterServer Instance { get; private set; }
 
         public ConcurrentDictionary<NetworkId, NetworkPlayer> Clients { get; private set; }
         public NetworkId Id { get; set; }

@@ -1,40 +1,36 @@
-﻿using Entities;
+﻿using NetworkingCore;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using TCGCards;
 
 namespace Server.Services
 {
     public class CardService : IService
     {
-        private List<CardSet> cardSets;
-        private List<Format> formats;
-
-        public List<CardSet> GetCardSets()
-        {
-            if (this.cardSets != null)
-            {
-                return this.cardSets;
-            }
-
-            //TODO Make this something good (Reflection)
-
-            return this.cardSets;
-        }
-
-        public List<Format> GetFormats()
-        {
-            if (formats != null)
-            {
-                return formats;
-            }
-
-            //TODO Make this something good (Reflection)
-
-            return formats;
-        }
+        private List<Card> cards;
 
         public void InitTypes()
         {
-            //TODO
+            Logger.Instance.Log("Loading cards cache");
+
+            cards = new List<Card>();
+
+            foreach (var typeInfo in Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load).SelectMany(x => x.DefinedTypes)
+                .Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+            {
+                var constructor = typeInfo.DeclaredConstructors.First();
+                var parameters = new List<object>();
+
+                for (int i = 0; i < constructor.GetParameters().Length; i++)
+                {
+                    parameters.Add(null);
+                }
+
+                cards.Add((Card)constructor.Invoke(parameters.ToArray()));
+            }
+
+            Logger.Instance.Log($"Loaded {cards.Count} to cache");
         }
     }
 }

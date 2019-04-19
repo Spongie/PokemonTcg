@@ -6,7 +6,7 @@ namespace Entities
     {
         string GetName();
         long GetFormatId();
-        List<long> GetSetIds();
-        List<string> GetBannedCardsClassNames();
+        List<string> GetSetIds();
+        List<CardInfo> GetBannedCards();
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - PlayerBench
   - OpponentBench
   - PlayerHand
+  - _global_
   layers:
   - Default
   - TransparentFX

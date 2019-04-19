@@ -18,7 +18,8 @@ namespace DataLayer
 
         private Database()
         {
-
+            //TODO Change to sqlite then simplify build chain
+            //Skip database? just accept anyone!?
         }
 
         internal SqlCommand CreateCommand(string commandText) => CreateCommand(commandText, null);

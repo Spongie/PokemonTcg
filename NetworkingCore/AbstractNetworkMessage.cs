@@ -2,7 +2,7 @@
 {
     public abstract class AbstractNetworkMessage
     {
-        public NetworkMessage ToNetworkMessage(NetworkId senderId)
+        public virtual NetworkMessage ToNetworkMessage(NetworkId senderId)
         {
             return new NetworkMessage(MessageType, this, senderId, NetworkId.Generate());
         }

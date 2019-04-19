@@ -14,13 +14,14 @@ public class AttackRenderer : MonoBehaviour
     private Attack attack;
     private EnergyResourceManager energyResources;
 
-    private void Start()
+    private void Init()
     {
-        energyResources = FindObjectOfType<EnergyResourceManager>();
+        energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
     }
 
     public void SetAttack(Attack attack)
     {
+        Init();
         this.attack = attack;
         description.SetActive(!string.IsNullOrEmpty(attack.Description));
         attackName.text = attack.Name;
