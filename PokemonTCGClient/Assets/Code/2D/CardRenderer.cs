@@ -42,6 +42,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    internal void FadeOut()
+    {
+        art.color = new Color(art.color.r, art.color.g, art.color.b, 0.5f);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         GameController.Instance.OnCardClicked(this);

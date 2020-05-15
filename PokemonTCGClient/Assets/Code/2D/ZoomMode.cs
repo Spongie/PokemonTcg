@@ -2,5 +2,6 @@
 {
     FromBottom,
     FromTop,
-    Center
+    Center,
+    None
 }

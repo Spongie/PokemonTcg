@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using NetworkingCore;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
 using TCGCards.Core.Messages;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Code.UI.Game
 {
@@ -11,11 +11,13 @@ namespace Assets.Code.UI.Game
     {
         public GameObject previewCard;
         private List<Card> selectedCards;
+        private HashSet<NetworkId> availableCards;
         private int limit;
         private int minCount;
 
         public void Init(DeckSearchMessage deckSearchMessage)
         {
+            availableCards = new HashSet<NetworkId>();
             limit = deckSearchMessage.CardCount;
             minCount = deckSearchMessage.CardCount;
 
@@ -23,7 +25,9 @@ namespace Assets.Code.UI.Game
             {
                 if (deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
-                    CreateSelectableCard(card);
+                    var spawnedCard = Instantiate(previewCard, transform);
+                    spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
+                    availableCards.Add(card.Id);
                 }
             }
 
@@ -31,57 +35,50 @@ namespace Assets.Code.UI.Game
             {
                 if (!deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
-                    CreateCardPreview(card);
+                    var spawnedCard = Instantiate(previewCard, transform);
+                    var cardRenderer = spawnedCard.GetComponent<CardRenderer>();
+                    cardRenderer.FadeOut();
+                    cardRenderer.SetCard(card, ZoomMode.None);
                 }
             }
         }
 
         public void Init(PickFromListMessage pickFromListMessage)
         {
+            availableCards = new HashSet<NetworkId>();
             limit = pickFromListMessage.MaxCount;
             minCount = pickFromListMessage.MinCount;
 
             foreach (var card in pickFromListMessage.PossibleChoices)
             {
-                CreateSelectableCard(card);
+                var spawnedCard = Instantiate(previewCard, transform);
+                spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
+                availableCards.Add(card.Id);
             }
         }
 
-        private GameObject CreateCardPreview(Card card)
+        internal void OnCardClicked(CardRenderer cardRenderer)
         {
-            GameObject preview = Instantiate(previewCard, transform);
-            CardImageLoader.Instance.LoadSprite(card, preview.GetComponent<Image>());
-
-            return preview;
-        }
-
-        private void CreateSelectableCard(Card card)
-        {
-            var preview = CreateCardPreview(card);
-            preview.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                OnCardClicked(card);
-            });
-        }
-
-        public void OnCardClicked(Card card)
-        {
-            if (selectedCards.Contains(card))
-            {
+            if (!availableCards.Contains(cardRenderer.card.Id))
+                {
                 return;
             }
 
-            if (selectedCards.Count == limit)
+            if (selectedCards.Any(card => card.Id == cardRenderer.card.Id))
             {
-                selectedCards.RemoveAt(0);
+                selectedCards.Remove(cardRenderer.card);
+                cardRenderer.SetSelected(false);
             }
-
-            selectedCards.Add(card);
+            else
+            {
+                selectedCards.Add(cardRenderer.card);
+                cardRenderer.SetSelected(true);
+            }
         }
 
         public void DoneClick()
         {
-            if (selectedCards.Count < minCount)
+            if (selectedCards.Count < minCount || selectedCards.Count > limit)
             {
                 return;
             }
