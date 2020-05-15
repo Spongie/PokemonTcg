@@ -92,6 +92,7 @@ namespace Assets.Code
 
         private void Start()
         {
+            return;
             myId = NetworkManager.Instance.Me.Id;
             var messageId = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
 

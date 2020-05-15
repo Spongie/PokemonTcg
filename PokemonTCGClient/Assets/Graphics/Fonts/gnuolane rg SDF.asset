@@ -2746,7 +2746,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: gnuolane rg SDF Material
-  m_Shader: {fileID: 4800000, guid: a7a9901cc1aef93479fa95af6c4ced91, type: 3}
+  m_Shader: {fileID: 4800000, guid: fcb86e1121d385643afd3bed12c66e9c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

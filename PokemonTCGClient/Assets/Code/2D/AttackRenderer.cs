@@ -1,6 +1,7 @@
 ﻿using Assets.Code;
 using Assets.Code._2D;
 using TCGCards;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,8 @@ public class AttackRenderer : MonoBehaviour
     public GameObject costPrefab;
     public GameObject costParent;
     public GameObject description;
-    public Text attackName;
-    public Text damage;
+    public TextMeshProUGUI attackName;
+    public TextMeshProUGUI damage;
     private Attack attack;
     private EnergyResourceManager energyResources;
 

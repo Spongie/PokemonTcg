@@ -13,6 +13,8 @@ public class TemplateSelector : MonoBehaviour
     {
         string typeName = Enum.GetName(typeof(EnergyTypes), type);
 
-        GetComponent<Image>().sprite = templateMap.FirstOrDefault(sprite => sprite.name == typeName);
+        var x = templateMap.FirstOrDefault(sprite => sprite.name == typeName);
+
+        GetComponent<Image>().sprite = x;
     }
 }

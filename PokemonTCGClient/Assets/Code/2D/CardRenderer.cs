@@ -13,10 +13,10 @@ using TMPro;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
-    public Text cardName;
-    public Text hpNumber;
-    public Text hpFixed;
-    public Text trainerCardName;
+    public TextMeshProUGUI cardName;
+    public TextMeshProUGUI hpNumber;
+    public TextMeshProUGUI hpFixed;
+    public TextMeshProUGUI trainerCardName;
     public TextMeshProUGUI trainerCardDescription;
     public Sprite TrainerCardTemplate;
     public Image art;
@@ -35,15 +35,15 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public bool isActivePokemon;
     private EnergyResourceManager energyResources;
 
-    private void Init()
+    private void Start()
     {
-        //SetCard(new Ekans(null)); //TODO remove
         energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
+        SetCard(new TeamRocket.PokemonCards.Ekans(null)); //TODO remove
     }
 
     public void SetCard(Card card)
     {
-        Init();
+        //Init();
         this.card = card;
 
         if (card is PokemonCard)
