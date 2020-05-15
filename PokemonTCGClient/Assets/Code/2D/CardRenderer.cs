@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using Assets.Code;
 using System;
+using Assets.Code.UI.Game;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -49,7 +50,14 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameController.Instance.OnCardClicked(this);
+        if (GameController.Instance.selectFromListPanel.activeSelf)
+        {
+            GameController.Instance.selectFromListPanel.GetComponent<SelectFromListPanel>().OnCardClicked(this);
+        }
+        else
+        {
+            GameController.Instance.OnCardClicked(this);
+        }
     }
 
     internal void SetIsActivePokemon()
