@@ -50,6 +50,8 @@ namespace Assets.Code
         private Dictionary<GameFieldState, string> gameStateInfo;
         private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
         private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
+        private Queue<EnergyCard> energyCardsToAttach;
+        private Dictionary<NetworkId, NetworkId> energyPokemonMap;
 
         private static GameFieldState[] statesWithDoneAction = new[]
         {
@@ -60,6 +62,8 @@ namespace Assets.Code
         {
             Instance = this;
             selectedCards = new List<Card>();
+            energyCardsToAttach = new Queue<EnergyCard>();
+            energyPokemonMap = new Dictionary<NetworkId, NetworkId>();
 
             InitGamestateInfo();
             RegisterClickHandlers();
@@ -85,8 +89,28 @@ namespace Assets.Code
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon },
-                { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon }
+                { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
+                { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy }
             };
+        }
+
+        private void SelectedBenchedPokemonForEnergy(CardRenderer selectedCard)
+        {
+            if (!playerBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(selectedCard.card.Id)))
+            {
+                return;
+            }
+
+            var energyCard = energyCardsToAttach.Dequeue();
+
+            energyPokemonMap.Add(energyCard.Id, selectedCard.card.Id);
+
+            if (energyCardsToAttach.Count == 0)
+            {
+                var response = new AttachedEnergyDoneMessage(energyPokemonMap);
+                NetworkManager.Instance.SendToServer(response, true);
+                energyPokemonMap.Clear();
+            }
         }
 
         private void Start()
@@ -132,7 +156,18 @@ namespace Assets.Code
 
         private void OnStartSelectAttachedEnergy(object message, NetworkId messageId)
         {
-            throw new NotImplementedException();
+            energyCardsToAttach.Clear();
+            doneButton.SetActive(true);
+            SpecialState = SpecialGameState.AttachingEnergyToBenchedPokemon;
+
+            var realMessage = (AttachEnergyCardsToBenchMessage)message;
+
+            foreach (var card in realMessage.EnergyCards)
+            {
+                energyCardsToAttach.Enqueue(card);
+            }
+
+            infoText.text = $"Select one of your benched pokemon to attach {realMessage.EnergyCards.First().GetName()} to";
         }
 
         private void OnStartPickFromList(object message, NetworkId messageId)
