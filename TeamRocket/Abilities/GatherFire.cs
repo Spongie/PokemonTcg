@@ -2,7 +2,6 @@
 using System.Linq;
 using TCGCards;
 using TCGCards.Core;
-using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 
 namespace TeamRocket.Abilities
@@ -18,21 +17,18 @@ namespace TeamRocket.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken)
         {
-            var availablePokemons = new List<PokemonCard>(owner.BenchedPokemon);
-            availablePokemons.Add(owner.ActivePokemonCard);
-            availablePokemons.Remove(PokemonOwner);
+            var allPokemons = new List<PokemonCard>(owner.BenchedPokemon);
+            allPokemons.Add(owner.ActivePokemonCard);
+            allPokemons.Remove(PokemonOwner);
 
-            var message = new SelectEnergyFromPokemonMessage
-            {
-                Amount = 1,
-                Filter = new EnergyTypeFilter(EnergyTypes.Fire),
-                Pokemons = availablePokemons
-            }.ToNetworkMessage(owner.Id);
+            var availablePokemons = allPokemons.Where(card => card.AttachedEnergy.Any(energy => energy.EnergyType == EnergyTypes.Fire));
+
+            var message = new PickFromListMessage(availablePokemons, 1).ToNetworkMessage(owner.Id);
 
             var selectedEnergy = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.OfType<EnergyCard>().First();
             owner.AttachEnergyToPokemon(selectedEnergy, PokemonOwner);
 
-            foreach (var pokemon in availablePokemons)
+            foreach (var pokemon in allPokemons)
             {
                 if (pokemon.AttachedEnergy.Contains(selectedEnergy))
                 {

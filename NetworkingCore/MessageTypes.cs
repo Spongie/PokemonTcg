@@ -10,7 +10,6 @@
         DeckSearch,
         PickFromList,
         SelectColor,
-        SelectEnergyFromPokemon,
         SelectFromOpponentBench,
         GameUpdate,
         SelectFromYourBench,

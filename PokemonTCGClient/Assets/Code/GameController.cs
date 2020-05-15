@@ -88,10 +88,17 @@ namespace Assets.Code
 
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
-                { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentBenchedPokemon },
+                { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentPokemon },
                 { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
-                { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy }
+                { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
+                { SpecialGameState.DiscardingCards, ToggleCardSelected },
+                { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon }
             };
+        }
+
+        private void ToggleCardSelected(CardRenderer clickedCard)
+        {
+            clickedCard.SetSelected(!clickedCard.isSelected);
         }
 
         private void SelectedBenchedPokemonForEnergy(CardRenderer selectedCard)
@@ -125,7 +132,6 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourBench, OnStartSelectingYourBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectColor, OnStartSelectColor);
             NetworkManager.Instance.RegisterCallback(MessageTypes.PickFromList, OnStartPickFromList);
-            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectEnergyFromPokemon, OnStartSelectAttachedEnergy);
             NetworkManager.Instance.RegisterCallback(MessageTypes.AttachEnergyToBench, OnStartAttachingEnergyBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
@@ -151,11 +157,6 @@ namespace Assets.Code
 
         private void OnStartAttachingEnergyBench(object message, NetworkId messageId)
         {
-            throw new NotImplementedException();
-        }
-
-        private void OnStartSelectAttachedEnergy(object message, NetworkId messageId)
-        {
             energyCardsToAttach.Clear();
             doneButton.SetActive(true);
             SpecialState = SpecialGameState.AttachingEnergyToBenchedPokemon;
@@ -168,6 +169,14 @@ namespace Assets.Code
             }
 
             infoText.text = $"Select one of your benched pokemon to attach {realMessage.EnergyCards.First().GetName()} to";
+        }
+
+        private void OnStartSelectAttachedEnergy(object message, NetworkId messageId)
+        {
+            infoText.text = "Select one of your pokemon to move a Fire energy from";
+
+            selectFromListPanel.SetActive(true);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
         }
 
         private void OnStartPickFromList(object message, NetworkId messageId)
@@ -256,7 +265,18 @@ namespace Assets.Code
                 return;
             }
 
-            cardController.SetSelected(true);
+            cardController.SetSelected(!cardController.isSelected);
+            selectedCards.Add(cardController.card);
+        }
+
+        private void SelectedPlayerBenchedPokemon(CardRenderer cardController)
+        {
+            if (!playerBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)))
+            {
+                return;
+            }
+
+            cardController.SetSelected(!cardController.isSelected);
             selectedCards.Add(cardController.card);
         }
 

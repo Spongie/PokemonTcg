@@ -50,7 +50,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameController.Instance.selectFromListPanel.activeSelf)
+        if (GameController.Instance.SpecialState == SpecialGameState.SelectingColor)
         {
             GameController.Instance.selectFromListPanel.GetComponent<SelectFromListPanel>().OnCardClicked(this);
         }
