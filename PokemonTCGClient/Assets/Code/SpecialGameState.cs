@@ -6,6 +6,7 @@ namespace Assets.Code
         SelectingOpponentsPokemon,
         SelectingOpponentsBenchedPokemon,
         SelectingYourBenchedPokemon,
-        DiscardingCards
+        DiscardingCards,
+        SelectingColor
     }
 }

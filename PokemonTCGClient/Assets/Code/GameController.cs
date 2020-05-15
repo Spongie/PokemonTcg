@@ -43,7 +43,6 @@ namespace Assets.Code
 
         public bool IsMyTurn;
 
-        public GameObject infoPanel;
         public Text infoText;
 
         private int minSelectedCardCount;
@@ -92,7 +91,6 @@ namespace Assets.Code
 
         private void Start()
         {
-            return;
             myId = NetworkManager.Instance.Me.Id;
             var messageId = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
 
@@ -117,7 +115,6 @@ namespace Assets.Code
             minSelectedCardCount = ((DiscardCardsMessage)message).Count;
 
             doneButton.SetActive(true);
-            infoPanel.SetActive(true);
 
             infoText.text = $"Discard {minSelectedCardCount} cards";
         }
@@ -147,7 +144,7 @@ namespace Assets.Code
         private void OnStartSelectColor(object message, NetworkId messageId)
         {
             selectColorPanel.SetActive(true);
-            selectColorPanel.GetComponent<SelectColorPanel>().Init(((SelectColorMessage)message).Message);
+            SpecialState = SpecialGameState.SelectingColor;
         }
 
         private void OnStartSelectingYourBench(object message, NetworkId messageId)
@@ -159,8 +156,6 @@ namespace Assets.Code
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
             doneButton.SetActive(true);
-
-            infoPanel.SetActive(true);
 
             var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
             infoText.text = $"Select {countString} of your benched pokemon";
@@ -174,8 +169,6 @@ namespace Assets.Code
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
             doneButton.SetActive(true);
-
-            infoPanel.SetActive(true);
 
             var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
             infoText.text = $"Select {countString} of your oppoents benched pokemon";
@@ -192,7 +185,6 @@ namespace Assets.Code
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             doneButton.SetActive(true);
 
-            infoPanel.SetActive(true);
             var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
             infoText.text = $"Select {countString} of your oppoents pokemon";
         }
@@ -289,7 +281,7 @@ namespace Assets.Code
                 message.ResponseTo = NetworkManager.Instance.RespondingTo;
                 NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;
-                infoPanel.SetActive(false);
+                infoText.text = string.Empty;
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon
             || SpecialState == SpecialGameState.SelectingYourBenchedPokemon
@@ -304,7 +296,7 @@ namespace Assets.Code
                 message.ResponseTo = NetworkManager.Instance.RespondingTo;
                 NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;
-                infoPanel.SetActive(false);
+                infoText.text = string.Empty;
             }
 
             NetworkManager.Instance.RespondingTo = null;
@@ -374,24 +366,23 @@ namespace Assets.Code
 
             playerHand.SetHand(me.Hand);
 
-            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard);
-            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard);
+            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard, ZoomMode.Center);
+            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard, ZoomMode.FromTop);
 
-            SetBenchedPokemon(playerBench, me.BenchedPokemon);
-            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
+            SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
+            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromBottom);
 
             if (gameStateInfo.ContainsKey(gameField.GameState))
             {
-                infoPanel.SetActive(true);
                 infoText.text = gameStateInfo[gameField.GameState];
             }
             else
             {
-                infoPanel.SetActive(false);
+                infoText.text = string.Empty;
             }
         }
 
-        private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)
+        private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons, ZoomMode zoomMode)
         {
             parent.DestroyAllChildren();
 
@@ -400,12 +391,12 @@ namespace Assets.Code
                 var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
                 var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-                controller.SetCard(pokemon);
+                controller.SetCard(pokemon, zoomMode);
                 controller.SetIsBenched();
             }
         }
 
-        private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
+        private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard, ZoomMode zoomMode)
         {
             if (pokemonCard == null)
             {
@@ -417,7 +408,7 @@ namespace Assets.Code
             var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
             var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-            controller.SetCard(pokemonCard);
+            controller.SetCard(pokemonCard, zoomMode);
             controller.SetIsActivePokemon();
         }
 
@@ -466,6 +457,15 @@ namespace Assets.Code
 
                 var texture = DownloadHandlerTexture.GetContent(request);
                 target.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            }
+        }
+
+        internal void OnEnergyTypeClicked(EnergyTypes energyType)
+        {
+            if (SpecialState == SpecialGameState.SelectingColor)
+            {
+                NetworkManager.Instance.SendToServer(new SelectColorMessage(energyType), true);
+                selectColorPanel.SetActive(false);
             }
         }
     }

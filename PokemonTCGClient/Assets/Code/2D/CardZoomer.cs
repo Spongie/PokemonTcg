@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public enum ZoomMode
-    {
-        FromBottom,
-        FromTop,
-        Center
-    }
 
     private int oldOrder = 0;
     private Vector2 originalSize;

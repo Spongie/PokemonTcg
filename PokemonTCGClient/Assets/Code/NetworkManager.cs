@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using UnityEditor.Build;
 using UnityEngine;
 
 namespace Assets.Code
@@ -134,6 +135,18 @@ namespace Assets.Code
         private void OnDestroy()
         {
             Me.Disconnect(true);
+        }
+
+        public void SendToServer(AbstractNetworkMessage networkMessage, bool isResponse)
+        {
+            var message = networkMessage.ToNetworkMessage(Me.Id);
+
+            if (isResponse)
+            {
+                message.ResponseTo = RespondingTo;
+            }
+
+            Me.Send(message);
         }
 
         public NetworkId RespondingTo { get; set; }

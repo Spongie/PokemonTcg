@@ -20,8 +20,7 @@ namespace Assets.Code._2D
             foreach (var card in cards)
             {
                 var spawnedCard = Instantiate(cardPrefab, transform);
-                spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card);
-                spawnedCard.GetComponent<Canvas>().sortingOrder = index;
+                spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom);
                 index++;
             }
         }

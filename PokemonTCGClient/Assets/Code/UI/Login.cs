@@ -12,6 +12,6 @@ public class Login : MonoBehaviour
     public void LoginClick()
     {
         //TODO register username with server
-        SceneManager.LoadScene("CustomCard");
+        SceneManager.LoadScene("UI_2D");
     }
 }

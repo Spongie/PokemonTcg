@@ -11,7 +11,6 @@ public class CardSpawner : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             var spawnedCard = Instantiate(cardPrefab, transform);
-            spawnedCard.GetComponentInChildren<CardRenderer>().SetPokemonCard(card);
             spawnedCard.GetComponent<Canvas>().sortingOrder = i;
         }
     }
