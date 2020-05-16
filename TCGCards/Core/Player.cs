@@ -39,6 +39,7 @@ namespace TCGCards.Core
             foreach (var card in cards)
             {
                 Hand.Remove(card);
+                card.IsRevealed = true;
             }
         }
 
@@ -46,6 +47,7 @@ namespace TCGCards.Core
         {
             DiscardPile.Add(card);
             Hand.Remove(card);
+            card.IsRevealed = true;
         }
 
         public void DrawCardsFromDeck(IEnumerable<Card> selectedCards)
@@ -66,6 +68,7 @@ namespace TCGCards.Core
                 }
 
                 BenchedPokemon.Add(pokemon);
+                pokemon.IsRevealed = true;
             }
         }
 
@@ -122,6 +125,8 @@ namespace TCGCards.Core
                 ActivePokemonCard = card;
             else
                 BenchedPokemon.Add(card);
+
+            card.IsRevealed = true;
         }
         
         public void SetActivePokemon(PokemonCard pokemon)
@@ -138,6 +143,7 @@ namespace TCGCards.Core
                 BenchedPokemon.Remove(pokemon);
 
             ActivePokemonCard = pokemon;
+            pokemon.IsRevealed = true;
         }
 
         public void AttachEnergyToPokemon(EnergyCard energyCard, PokemonCard targetPokemonCard)

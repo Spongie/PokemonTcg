@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4089488600536689639, guid: 463e7cea3b78c9b49b963b202435dea7,
         type: 3}
       propertyPath: m_Name
-      value: Preview Card
+      value: Preview Card Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4089488600536689640, guid: 463e7cea3b78c9b49b963b202435dea7,
         type: 3}
@@ -116,6 +116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089488600536689643, guid: 463e7cea3b78c9b49b963b202435dea7,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463e7cea3b78c9b49b963b202435dea7, type: 3}

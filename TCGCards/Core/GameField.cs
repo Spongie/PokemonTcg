@@ -27,6 +27,10 @@ namespace TCGCards.Core
 
         public void RevealCardsTo(List<Card> pickedCards, Player nonActivePlayer)
         {
+            foreach (var card in pickedCards)
+            {
+                card.IsRevealed = true;
+            }
             //TODO: Complete this
         }
 

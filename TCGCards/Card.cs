@@ -23,6 +23,8 @@ namespace TCGCards
 
         public Player Owner { get; set; }
 
+        public bool IsRevealed { get; set; }
+
         public override bool Equals(object obj)
         {
             var item = obj as Card;

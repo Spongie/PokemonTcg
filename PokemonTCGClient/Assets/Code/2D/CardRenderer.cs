@@ -6,7 +6,6 @@ using System.IO;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using Assets.Code;
-using System;
 using Assets.Code.UI.Game;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
@@ -20,26 +19,39 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public void SetCard(Card card, ZoomMode zoomMode)
     {
         this.card = card;
-        GetComponentInChildren<CardZoomer>().zoomMode = zoomMode;
+        var zoomer = GetComponentInChildren<CardZoomer>();
+
+        if (zoomer != null)
+        {
+            zoomer.zoomMode = zoomMode;
+        }
+
         StartCoroutine(LoadSprite(card));
     }
 
     IEnumerator LoadSprite(Card card)
     {
-        string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
-        string finalPath = "file:///" + fullCardPath;
-        
-        using (var request = UnityWebRequestTexture.GetTexture(finalPath))
+        if (!card.IsRevealed)
         {
-            yield return request.SendWebRequest();
+            art.sprite = GameController.Instance.CardBack;
+        }
+        else
+        {
+            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
+            string finalPath = "file:///" + fullCardPath;
 
-            if (request.isNetworkError || request.isHttpError)
+            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
             {
-                Debug.LogError("Error fetching texture");
-            }
+                yield return request.SendWebRequest();
 
-            var texture = DownloadHandlerTexture.GetContent(request);
-            art.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.LogError("Error fetching texture");
+                }
+
+                var texture = DownloadHandlerTexture.GetContent(request);
+                art.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            }
         }
     }
 

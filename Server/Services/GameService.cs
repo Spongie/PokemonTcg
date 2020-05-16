@@ -60,7 +60,7 @@ namespace Server.Services
                     new GrassEnergy()
                 })
             });
-            p.DiscardPile.Add(new Oddish(p));
+            p.DiscardPile.Add(new Oddish(p) { IsRevealed = true });
 
             theOnlyActiveGame.Players.Add(p);
 
@@ -70,7 +70,7 @@ namespace Server.Services
         public GameField JoinTheActiveGame(NetworkId playerToJoin)
         {
             var p = new Player(MasterServer.Instance.Clients[playerToJoin]);
-            p.DiscardPile.Add(new Oddish(p));
+            p.DiscardPile.Add(new Oddish(p) { IsRevealed = true });
             p.SetDeck(new Deck
             {
                 Cards = new Stack<Card>(new List<Card>

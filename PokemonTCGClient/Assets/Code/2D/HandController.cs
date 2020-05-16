@@ -8,6 +8,7 @@ namespace Assets.Code._2D
     public class HandController : MonoBehaviour
     {
         public GameObject cardPrefab;
+        public bool isPlayerHand;
 
         public void SetHand(IEnumerable<Card> cards)
         {
@@ -19,6 +20,7 @@ namespace Assets.Code._2D
             int index = 0;
             foreach (var card in cards)
             {
+                card.IsRevealed = isPlayerHand;
                 var spawnedCard = Instantiate(cardPrefab, transform);
                 spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom);
                 index++;

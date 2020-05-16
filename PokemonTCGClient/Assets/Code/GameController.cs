@@ -33,13 +33,7 @@ namespace Assets.Code
         public NetworkId myId;
         public GameObject doneButton;
         public GameObject endTurnButton;
-        public TextMeshProUGUI playerDeckCountText;
-        public TextMeshProUGUI opponentDeckCountText;
-
-        public TextMeshProUGUI playerDiscardCountText;
-        public Image playedDiscardArt;
-        public TextMeshProUGUI opponentDiscardCountText;
-        public Image opponentDiscardArt;
+        public Sprite CardBack;
 
         public bool IsMyTurn;
 
@@ -282,7 +276,7 @@ namespace Assets.Code
 
         private void BothSelectingBenchClicked(CardRenderer cardController)
         {
-            cardController.SetSelected(true);
+            cardController.SetSelected(!cardController.isSelected);
             selectedCards.Add(cardController.card);
         }
 
@@ -372,6 +366,28 @@ namespace Assets.Code
             gameField = gameMessage;
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
 
+            switch (gameField.GameState)
+            {
+                case GameFieldState.WaitingForConnection:
+                    infoText.text = "Waiting for opponent to connect";
+                    break;
+                case GameFieldState.WaitingForRegistration:
+                    infoText.text = "Waiting for opponent to register";
+                    break;
+                case GameFieldState.BothSelectingActive:
+                    infoText.text = "Select your active pokemon";
+                    break;
+                case GameFieldState.BothSelectingBench:
+                    infoText.text = "Select pokemon to add to your bench";
+                    break;
+                case GameFieldState.InTurn:
+                    infoText.text = IsMyTurn ? "Your turn!" : "Opponents turn!";
+                    break;
+                default:
+                    infoText.text = string.Empty;
+                    break;
+            }
+
             doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
             endTurnButton.SetActive(IsMyTurn);
 
@@ -383,49 +399,13 @@ namespace Assets.Code
             Player me = gameField.Players.First(p => p.Id.Equals(myId));
             Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
 
-            if (me.DiscardPile != null)
-            {
-                playerDiscardCountText.text = me.DiscardPile.Count.ToString();
-                if (me.DiscardPile.Any())
-                {
-                    playedDiscardArt.enabled = true;
-                    StartCoroutine(LoadSprite(me.DiscardPile.Last(), playedDiscardArt));
-                }
-                else
-                {
-                    playedDiscardArt.enabled = false;
-                }
-            }
-            if (opponent.DiscardPile != null)
-            {
-                opponentDiscardCountText.text = opponent.DiscardPile.Count.ToString();
-                if (opponent.DiscardPile.Any())
-                {
-                    opponentDiscardArt.enabled = true;
-                    StartCoroutine(LoadSprite(opponent.DiscardPile.Last(), opponentDiscardArt));
-                }
-                else
-                {
-                    opponentDiscardArt.enabled = false;
-                }
-            }
-
-            if (me.Deck != null)
-            {
-                playerDeckCountText.text = me.Deck.Cards.Count.ToString();
-            }
-            if (opponent.Deck != null)
-            {
-                opponentDeckCountText.text = opponent.Deck.Cards.Count.ToString();
-            }
-
             playerHand.SetHand(me.Hand);
 
             SetActivePokemon(playerActivePokemon, me.ActivePokemonCard, ZoomMode.Center);
             SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard, ZoomMode.FromTop);
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
-            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromBottom);
+            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
 
             if (gameStateInfo.ContainsKey(gameField.GameState))
             {
@@ -484,14 +464,22 @@ namespace Assets.Code
             switch (gameField.GameState)
             {
                 case GameFieldState.WaitingForConnection:
+                    infoText.text = "Waiting for opponent to connect";
                     break;
                 case GameFieldState.WaitingForRegistration:
+                    infoText.text = "Waiting for opponent to register";
                     break;
                 case GameFieldState.BothSelectingActive:
+                    infoText.text = "Select your active pokemon";
                     break;
                 case GameFieldState.BothSelectingBench:
+                    infoText.text = "Select pokemon to add to your bench";
+                    break;
+                case GameFieldState.InTurn:
+                    infoText.text = IsMyTurn ? "Your turn!" : "Opponents turn!";
                     break;
                 default:
+                    infoText.text = string.Empty;
                     break;
             }
         }
@@ -521,6 +509,22 @@ namespace Assets.Code
             {
                 NetworkManager.Instance.SendToServer(new SelectColorMessage(energyType), true);
                 selectColorPanel.SetActive(false);
+            }
+        }
+
+        public Player Player
+        {
+            get
+            {
+                return gameField?.Players?.FirstOrDefault(player => player.Id.Equals(myId));
+            }
+        }
+
+        public Player OpponentPlayer
+        {
+            get
+            {
+                return gameField?.Players?.FirstOrDefault(player => !player.Id.Equals(myId));
             }
         }
     }

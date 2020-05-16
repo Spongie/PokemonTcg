@@ -8,6 +8,7 @@ namespace Assets.Code
         SelectingYourBenchedPokemon,
         DiscardingCards,
         SelectingColor,
-        AttachingEnergyToBenchedPokemon
+        AttachingEnergyToBenchedPokemon,
+        SelectPokemonMatchingFilter
     }
 }

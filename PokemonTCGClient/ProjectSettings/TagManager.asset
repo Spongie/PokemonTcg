@@ -10,6 +10,7 @@ TagManager:
   - OpponentBench
   - PlayerHand
   - _global_
+  - Ignore
   layers:
   - Default
   - TransparentFX
