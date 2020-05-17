@@ -5,7 +5,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class Fireball : Attack
+    public class Fireball : Attack
     {
         public Fireball()
         {
