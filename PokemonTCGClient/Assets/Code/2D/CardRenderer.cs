@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using Assets.Code;
 using Assets.Code.UI.Game;
+using Assets.Code.UI.Gameplay;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -15,6 +16,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public bool isActivePokemon;
     public bool isSelected;
     public GameObject overlay;
+    public CardPopupHandler popupHandler;
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
@@ -86,5 +88,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         isSelected = selected;
         overlay.SetActive(isSelected);
+    }
+
+    public void DisplayPopup()
+    {
+        popupHandler.gameObject.SetActive(true);
+        popupHandler.Init(card);
     }
 }

@@ -30,16 +30,16 @@ namespace NetworkingCore
             }
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
-            var other = obj as NetworkId;
+            var otherId = other as NetworkId;
 
-            if (other == null)
+            if (otherId == null)
             {
                 return false;
             }
 
-            return other.Value.Equals(Value);
+            return otherId.Value.Equals(Value);
         }
 
         public override int GetHashCode()

@@ -239,6 +239,10 @@ namespace Assets.Code
             {
                 onClickHandlers[gameField.GameState].Invoke(cardController);
             }
+            else
+            {
+                cardController.DisplayPopup();
+            }
         }
 
         private void SelectedOpponentPokemon(CardRenderer cardController)
@@ -316,7 +320,6 @@ namespace Assets.Code
             if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
                 var id = NetworkManager.Instance.gameService.AddToBench(myId, selectedCards.OfType<PokemonCard>().ToList());
-                NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
                 selectedCards.Clear();
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)

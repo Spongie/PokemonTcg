@@ -25,16 +25,16 @@ namespace TCGCards
 
         public bool IsRevealed { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
-            var item = obj as Card;
+            var otherCard = other as Card;
 
-            if(item == null)
+            if(otherCard == null)
             {
                 return false;
             }
 
-            return item.Id.Equals(Id);
+            return otherCard.Id.Equals(Id);
         }
 
         public virtual string GetLogicalName()

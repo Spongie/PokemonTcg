@@ -120,12 +120,9 @@ namespace Server.Services
 
         public GameField AddToBench(NetworkId playerId, List<PokemonCard> pokemons)
         {
-            foreach (var pokemon in pokemons)
-            {
-                theOnlyActiveGame.OnBenchPokemonSelected(theOnlyActiveGame.Players.First(p => p.Id.Equals(playerId)), pokemons);
-            }
+            theOnlyActiveGame.OnBenchPokemonSelected(theOnlyActiveGame.Players.First(p => p.Id.Equals(playerId)), pokemons);
 
-            SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(playerId)));
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
 
             return theOnlyActiveGame;
         }
@@ -143,7 +140,7 @@ namespace Server.Services
         {
             theOnlyActiveGame.OnActivePokemonSelected(playerId, pokemon);
 
-            SendUpdateToPlayers(theOnlyActiveGame.Players.Where(player => !player.Id.Equals(playerId)));
+            SendUpdateToPlayers(theOnlyActiveGame.Players);
 
             return theOnlyActiveGame;
         }
