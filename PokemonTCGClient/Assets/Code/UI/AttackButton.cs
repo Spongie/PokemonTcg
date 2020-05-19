@@ -9,6 +9,8 @@ namespace Assets.Code.UI
 {
     public class AttackButton : MonoBehaviour
     {
+        private Attack attack;
+
         public GameObject costPrefab;
         public GameObject costGrid;
         public TextMeshProUGUI nameText;
@@ -28,6 +30,12 @@ namespace Assets.Code.UI
                     Instantiate(costPrefab, costGrid.transform).GetComponent<Image>().sprite = energyResources.Icons[cost.EnergyType];
                 }
             }
+        }
+
+        public void OnClick()
+        {
+            NetworkManager.Instance.gameService.Attack(attack);
+            gameObject.SetActive(false);
         }
     }
 }
