@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using UnityEngine;
 
@@ -18,13 +19,14 @@ namespace Assets.Code.UI.Gameplay
 
             if (card is PokemonCard && GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
             {
-                foreach (var attack in ((PokemonCard)card).Attacks)
+                foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
                 {
                     if (!attack.CanBeUsed(GameController.Instance.gameField, card.Owner, GameController.Instance.OpponentPlayer))
                         continue;
 
                     var attackButton = Instantiate(AttackButtonPrefab, transform);
                     attackButton.GetComponent<AttackButton>().Init(attack);
+                    attackButton.gameObject.transform.SetAsFirstSibling();
                 }
             }
         }
