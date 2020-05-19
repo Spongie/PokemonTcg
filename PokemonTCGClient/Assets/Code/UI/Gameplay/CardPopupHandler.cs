@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code.UI.Game;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
+using TCGCards.Core;
 using UnityEngine;
 
 namespace Assets.Code.UI.Gameplay
@@ -10,6 +12,7 @@ namespace Assets.Code.UI.Gameplay
         private Card card;
         public GameObject AddToBenchButton;
         public GameObject AttackButtonPrefab;
+        public GameObject ActivateAbilityButton;
 
         public void Init(Card card)
         {
@@ -17,16 +20,32 @@ namespace Assets.Code.UI.Gameplay
             var player = GameController.Instance.Player;
             AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card));
 
-            if (card is PokemonCard && GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
+            if (card is PokemonCard)
             {
-                foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
+                if (GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
                 {
-                    if (!attack.CanBeUsed(GameController.Instance.gameField, card.Owner, GameController.Instance.OpponentPlayer))
-                        continue;
+                    foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
+                    {
+                        if (!attack.CanBeUsed(GameController.Instance.gameField, card.Owner, GameController.Instance.OpponentPlayer))
+                            continue;
 
-                    var attackButton = Instantiate(AttackButtonPrefab, transform);
-                    attackButton.GetComponent<AttackButton>().Init(attack);
-                    attackButton.gameObject.transform.SetAsFirstSibling();
+                        var attackButton = Instantiate(AttackButtonPrefab, transform);
+                        attackButton.GetComponent<AttackButton>().Init(attack);
+                        attackButton.gameObject.transform.SetAsFirstSibling();
+                    }
+                }
+
+                var ability = ((PokemonCard)card).Ability;
+
+                if (ability != null && ability.TriggerType == TriggerType.Activation && ability.CanActivate())
+                {
+                    ActivateAbilityButton.SetActive(true);
+                    var abilityButton = ActivateAbilityButton.GetComponent<AbilityButton>();
+                    abilityButton.Init(ability);
+                }
+                else
+                {
+                    ActivateAbilityButton.SetActive(false);
                 }
             }
         }
