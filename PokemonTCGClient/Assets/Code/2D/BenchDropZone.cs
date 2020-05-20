@@ -26,7 +26,7 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
             }
             else if (card.Stage == 0)
             {
-                NetworkManager.Instance.gameService.SetActivePokemon(GameController.Instance.myId, card);
+                NetworkManager.Instance.gameService.SetActivePokemon(GameController.Instance.myId, card.Id);
             }
             else if (card.Stage > 0)
             {
@@ -37,7 +37,7 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
                     return;
                 }
 
-                NetworkManager.Instance.gameService.EvolvePokemon((PokemonCard)cardRenderer.card, (PokemonCard)existingCard.card);
+                NetworkManager.Instance.gameService.EvolvePokemon(cardRenderer.card.Id, existingCard.card.Id);
             }
         }
         else if (cardRenderer.card is EnergyCard)
@@ -49,7 +49,7 @@ public class BenchDropZone : MonoBehaviour, IDropHandler
                 return;
             }
 
-            NetworkManager.Instance.gameService.AttachEnergy((PokemonCard)existingCard.card, (EnergyCard)cardRenderer.card);
+            NetworkManager.Instance.gameService.AttachEnergy(existingCard.card.Id, cardRenderer.card.Id);
         }
 
         var draggedObject = eventData.pointerDrag;

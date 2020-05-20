@@ -118,8 +118,9 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
-        public GameField AddToBench(NetworkId playerId, List<PokemonCard> pokemons)
+        public GameField AddToBench(NetworkId playerId, List<NetworkId> pokemonIds)
         {
+            var pokemons = pokemonIds.Select(id => (PokemonCard)theOnlyActiveGame.FindCardById(id));
             theOnlyActiveGame.OnBenchPokemonSelected(theOnlyActiveGame.Players.First(p => p.Id.Equals(playerId)), pokemons);
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);
@@ -136,17 +137,20 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
-        public GameField SetActivePokemon(NetworkId playerId, PokemonCard pokemon)
+        public GameField SetActivePokemon(NetworkId playerId, NetworkId pokemonId)
         {
-            theOnlyActiveGame.OnActivePokemonSelected(playerId, pokemon);
+            theOnlyActiveGame.OnActivePokemonSelected(playerId, (PokemonCard)theOnlyActiveGame.FindCardById(pokemonId));
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);
 
             return theOnlyActiveGame;
         }
-
-        public GameField AttachEnergy(PokemonCard target, EnergyCard energyCard)
+        //TODO Fixa så att ID används och sen leta uppp rätt kort...
+        public GameField AttachEnergy(NetworkId targetId, NetworkId energyCardId)
         {
+            var energyCard = (EnergyCard)theOnlyActiveGame.FindCardById(energyCardId);
+            var target = (PokemonCard)theOnlyActiveGame.FindCardById(targetId);
+
             theOnlyActiveGame.ActivePlayer.AttachEnergyToPokemon(energyCard, target);
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);
@@ -154,24 +158,29 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
-        public GameField ActivateAbility(Ability ability)
+        public GameField ActivateAbility(NetworkId abilityId)
         {
+            var ability = theOnlyActiveGame.FindAbilityById(abilityId);
             theOnlyActiveGame.ActivateAbility(ability);
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);
             return theOnlyActiveGame;
         }
 
-        public GameField Attack(Attack attack)
+        public GameField Attack(NetworkId attackId)
         {
+            var attack = theOnlyActiveGame.FindAttackById(attackId);
+
             theOnlyActiveGame.Attack(attack);
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);
             return theOnlyActiveGame;
         }
 
-        public GameField PlayCard(Card card)
+        public GameField PlayCard(NetworkId cardId)
         {
+            var card = theOnlyActiveGame.FindCardById(cardId);
+
             if (card is TrainerCard)
             {
                 theOnlyActiveGame.PlayerTrainerCard((TrainerCard)card);
@@ -185,8 +194,11 @@ namespace Server.Services
             return theOnlyActiveGame;
         }
 
-        public GameField EvolvePokemon(PokemonCard card, PokemonCard target)
+        public GameField EvolvePokemon(NetworkId basePokemonId, NetworkId targetPokemonId)
         {
+            var card = (PokemonCard)theOnlyActiveGame.FindCardById(basePokemonId);
+            var target = (PokemonCard)theOnlyActiveGame.FindCardById(targetPokemonId);
+
             theOnlyActiveGame.EvolvePokemon(card, target);
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);

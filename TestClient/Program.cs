@@ -60,12 +60,12 @@ namespace TestClient
             Console.Read();
 
             Console.WriteLine("Setting active pokemon");
-            gameField = gameService.SetActivePokemon(networkPlayer.Id, starter);
+            gameField = gameService.SetActivePokemon(networkPlayer.Id, starter.Id);
 
             Console.Read();
 
             Console.WriteLine("Setting benched pokemon");
-            gameField = gameService.AddToBench(networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).ToList());
+            gameField = gameService.AddToBench(networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).Select(x => x.Id).ToList());
 
             Console.Read();
 

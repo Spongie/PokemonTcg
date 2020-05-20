@@ -1,4 +1,5 @@
 ﻿using Assets.Code.UI.Game;
+using NetworkingCore;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
@@ -49,15 +50,11 @@ namespace Assets.Code.UI.Gameplay
                     ActivateAbilityButton.SetActive(false);
                 }
             }
-            else if (card is EnergyCard)
-            {
-                //Do nothing
-            }
         }
 
         public void AddToBenchClicked()
         {
-            NetworkManager.Instance.gameService.AddToBench(GameController.Instance.myId, new List<PokemonCard> { (PokemonCard)card });
+            NetworkManager.Instance.gameService.AddToBench(GameController.Instance.myId, new List<NetworkId> { card.Id });
             gameObject.SetActive(false);
         }
     }

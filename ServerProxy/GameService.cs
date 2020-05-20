@@ -35,13 +35,13 @@ public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId player
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField AddToBench(NetworkingCore.NetworkId playerId,System.Collections.Generic.List<TCGCards.PokemonCard> pokemons)
+public TCGCards.Core.GameField AddToBench(NetworkingCore.NetworkId playerId,System.Collections.Generic.List<NetworkingCore.NetworkId> pokemonIds)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "AddToBench",
 			TargetClass = "GameService",
-			Parameters = new object[] { playerId,pokemons }
+			Parameters = new object[] { playerId,pokemonIds }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
@@ -57,68 +57,68 @@ public TCGCards.Core.GameField EndTurn()
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField SetActivePokemon(NetworkingCore.NetworkId playerId,TCGCards.PokemonCard pokemon)
+public TCGCards.Core.GameField SetActivePokemon(NetworkingCore.NetworkId playerId,NetworkingCore.NetworkId pokemonId)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "SetActivePokemon",
 			TargetClass = "GameService",
-			Parameters = new object[] { playerId,pokemon }
+			Parameters = new object[] { playerId,pokemonId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField AttachEnergy(TCGCards.PokemonCard target,EnergyCard energyCard)
+public TCGCards.Core.GameField AttachEnergy(NetworkingCore.NetworkId targetId,NetworkingCore.NetworkId energyCardId)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "AttachEnergy",
 			TargetClass = "GameService",
-			Parameters = new object[] { target,energyCard }
+			Parameters = new object[] { targetId,energyCardId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField ActivateAbility(TCGCards.Core.Ability ability)
+public TCGCards.Core.GameField ActivateAbility(NetworkingCore.NetworkId abilityId)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "ActivateAbility",
 			TargetClass = "GameService",
-			Parameters = new object[] { ability }
+			Parameters = new object[] { abilityId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField Attack(TCGCards.Attack attack)
+public TCGCards.Core.GameField Attack(NetworkingCore.NetworkId attackId)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "Attack",
 			TargetClass = "GameService",
-			Parameters = new object[] { attack }
+			Parameters = new object[] { attackId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField PlayCard(TCGCards.Card card)
+public TCGCards.Core.GameField PlayCard(NetworkingCore.NetworkId cardId)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "PlayCard",
 			TargetClass = "GameService",
-			Parameters = new object[] { card }
+			Parameters = new object[] { cardId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField EvolvePokemon(TCGCards.PokemonCard card,TCGCards.PokemonCard target)
+public TCGCards.Core.GameField EvolvePokemon(NetworkingCore.NetworkId basePokemonId,NetworkingCore.NetworkId targetPokemonId)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "EvolvePokemon",
 			TargetClass = "GameService",
-			Parameters = new object[] { card,target }
+			Parameters = new object[] { basePokemonId,targetPokemonId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);

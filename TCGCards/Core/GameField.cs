@@ -119,7 +119,7 @@ namespace TCGCards.Core
             ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
         }
 
-        public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
+        public void OnBenchPokemonSelected(Player owner, IEnumerable<PokemonCard> selectedPokemons)
         {
             foreach (var pokemon in selectedPokemons)
             {
@@ -138,6 +138,142 @@ namespace TCGCards.Core
                     }
                 }
             }
+        }
+
+        public Card FindCardById(NetworkId id)
+        {
+            foreach (var player in Players)
+            {
+                foreach (var card in player.Hand)
+                {
+                    if (card.Id.Equals(id))
+                    {
+                        return card;
+                    }
+                }
+
+                foreach (var pokemon in player.BenchedPokemon)
+                {
+                    if (pokemon.Id.Equals(id))
+                    {
+                        return pokemon;
+                    }
+                }
+
+                if (player.ActivePokemonCard != null && player.ActivePokemonCard.Id.Equals(id))
+                {
+                    return player.ActivePokemonCard;
+                }
+
+                foreach (var card in player.Deck.Cards)
+                {
+                    if (card.Id.Equals(id))
+                    {
+                        return card;
+                    }
+                }
+
+                foreach (var card in player.DiscardPile)
+                {
+                    if (card.Id.Equals(id))
+                    {
+                        return card;
+                    }
+                }
+
+                foreach (var card in player.PrizeCards)
+                {
+                    if (card.Id.Equals(id))
+                    {
+                        return card;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public Attack FindAttackById(NetworkId attackId)
+        {
+            foreach (var player in Players)
+            {
+                if (player.ActivePokemonCard != null)
+                {
+                    foreach (var attack in player.ActivePokemonCard.Attacks)
+                    {
+                        if (attack.Id.Equals(attackId))
+                        {
+                            return attack;
+                        }
+                    }
+                }
+
+                foreach (var pokemon in player.BenchedPokemon)
+                {
+                    foreach (var attack in pokemon.Attacks)
+                    {
+                        if (attack.Id.Equals(attackId))
+                        {
+                            return attack;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public Ability FindAbilityById(NetworkId id)
+        {
+            foreach (var player in Players)
+            {
+                foreach (var card in player.Hand.OfType<PokemonCard>())
+                {
+                    if (card.Ability.Id.Equals(id))
+                    {
+                        return card.Ability;
+                    }
+                }
+
+                foreach (var pokemon in player.BenchedPokemon.OfType<PokemonCard>())
+                {
+                    if (pokemon.Ability.Id.Equals(id))
+                    {
+                        return pokemon.Ability;
+                    }
+                }
+
+                if (player.ActivePokemonCard != null && player.ActivePokemonCard.Ability.Id.Equals(id))
+                {
+                    return player.ActivePokemonCard.Ability;
+                }
+
+                foreach (var card in player.Deck.Cards.OfType<PokemonCard>())
+                {
+                    if (card.Ability.Id.Equals(id))
+                    {
+                        return card.Ability;
+                    }
+                }
+
+                foreach (var card in player.DiscardPile.OfType<PokemonCard>())
+                {
+                    if (card.Ability.Id.Equals(id))
+                    {
+                        return card.Ability;
+                    }
+                }
+
+                foreach (var card in player.PrizeCards.OfType<PokemonCard>())
+                {
+                    if (card.Ability.Id.Equals(id))
+                    {
+                        return card.Ability;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public void StartGame()

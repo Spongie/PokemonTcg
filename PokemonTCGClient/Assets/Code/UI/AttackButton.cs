@@ -34,7 +34,7 @@ namespace Assets.Code.UI
 
         public void OnClick()
         {
-            NetworkManager.Instance.gameService.Attack(attack);
+            NetworkManager.Instance.gameService.Attack(attack.Id);
             gameObject.SetActive(false);
         }
     }

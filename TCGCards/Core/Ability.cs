@@ -1,4 +1,6 @@
-﻿namespace TCGCards.Core
+﻿using NetworkingCore;
+
+namespace TCGCards.Core
 {
     public abstract class Ability
     {
@@ -7,6 +9,7 @@
         protected Ability(PokemonCard pokemonOwner)
         {
             PokemonOwner = pokemonOwner;
+            Id = NetworkId.Generate();
         }
 
         protected abstract void Activate(Player owner, Player opponent, int damageTaken);
@@ -17,6 +20,7 @@
 
         public string Name { get; set; }
         public string Description { get; set; }
+        public NetworkId Id { get; protected set; }
 
         public void Trigger(Player owner, Player opponent, int damageTaken)
         {

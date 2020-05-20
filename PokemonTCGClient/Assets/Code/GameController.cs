@@ -108,7 +108,7 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.AttachEnergy(pokemon, currentEnergyCard);
+            NetworkManager.Instance.gameService.AttachEnergy(pokemon.Id, currentEnergyCard.Id);
             currentEnergyCard = null;
             SpecialState = SpecialGameState.None;
             infoText.text = string.Empty;
@@ -314,7 +314,7 @@ namespace Assets.Code
 
         private void SetActiveStateClicked(CardRenderer cardController)
         {
-            var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, (PokemonCard)cardController.card);
+            var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, cardController.card.Id);
             NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
         }
 
@@ -325,7 +325,7 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.ActivateAbility(ability);
+            NetworkManager.Instance.gameService.ActivateAbility(ability.Id);
         }
 
         public void Attack(Attack attack)
@@ -335,7 +335,7 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.Attack(attack);
+            NetworkManager.Instance.gameService.Attack(attack.Id);
         }
 
         public void EndTurnButtonClicked()
@@ -347,7 +347,7 @@ namespace Assets.Code
         {
             if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
-                var id = NetworkManager.Instance.gameService.AddToBench(myId, selectedCards.OfType<PokemonCard>().ToList());
+                NetworkManager.Instance.gameService.AddToBench(myId, selectedCards.OfType<PokemonCard>().Select(card => card.Id).ToList());
                 selectedCards.Clear();
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
