@@ -253,6 +253,11 @@ namespace Assets.Code
 
         public void OnCardClicked(CardRenderer cardController)
         {
+            if (!IsMyTurn)
+            {
+                return;
+            }
+
             Debug.Log("Clicked: " + cardController.name);
 
             if (onSpecialClickHandlers.ContainsKey(SpecialState))
