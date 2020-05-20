@@ -8,8 +8,6 @@ using UnityEngine.EventSystems;
 using Assets.Code;
 using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
-using TeamRocket.PokemonCards;
-using TCGCards.EnergyCards;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -20,20 +18,6 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public bool isSelected;
     public GameObject overlay;
     public CardPopupHandler popupHandler;
-    //private static bool first = true;
-
-    //void Start()
-    //{
-    //    if (!first)
-    //        return;
-
-    //    first = false;
-    //    var x = new Oddish(null);
-    //    x.IsRevealed = true;
-    //    x.AttachedEnergy.Add(new GrassEnergy() { IsRevealed = true });
-    //    x.AttachedEnergy.Add(new GrassEnergy() { IsRevealed = true });
-    //    SetCard(x, ZoomMode.Center);
-    //}
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
@@ -58,6 +42,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
                 attachedOffset += offsetSize;
 
                 attachedObject.GetComponent<Canvas>().sortingOrder = sortOrder;
+                attachedObject.GetComponent<CardRenderer>().SetCard(attachedCard, zoomMode);
             }
         }
 
@@ -97,6 +82,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left)
+        {
+            return;
+        }
+
         if (GameController.Instance.SpecialState == SpecialGameState.SelectingColor)
         {
             GameController.Instance.selectFromListPanel.GetComponent<SelectFromListPanel>().OnCardClicked(this);
