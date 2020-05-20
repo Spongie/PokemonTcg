@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AddToBenchButton: {fileID: 5455691927181782973}
+  AttachToPokemon: {fileID: 0}
   AttackButtonPrefab: {fileID: 7185379420301616365, guid: 914faf2bf92a83c4d8e2c73de30c812e,
     type: 3}
   ActivateAbilityButton: {fileID: 8321727860577204258}
@@ -179,7 +180,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &4089488600536689642
 MonoBehaviour:
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a1499636a56174c8f2b83b0e58d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttachedCardPrefab: {fileID: 4089488600536689639}
   art: {fileID: 4089488601737517951}
   isActivePokemon: 0
   isSelected: 0

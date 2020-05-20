@@ -8,15 +8,32 @@ using UnityEngine.EventSystems;
 using Assets.Code;
 using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
+using TeamRocket.PokemonCards;
+using TCGCards.EnergyCards;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
+    public GameObject AttachedCardPrefab;
     public Image art;
     public Card card;
     public bool isActivePokemon;
     public bool isSelected;
     public GameObject overlay;
     public CardPopupHandler popupHandler;
+    //private static bool first = true;
+
+    //void Start()
+    //{
+    //    if (!first)
+    //        return;
+
+    //    first = false;
+    //    var x = new Oddish(null);
+    //    x.IsRevealed = true;
+    //    x.AttachedEnergy.Add(new GrassEnergy() { IsRevealed = true });
+    //    x.AttachedEnergy.Add(new GrassEnergy() { IsRevealed = true });
+    //    SetCard(x, ZoomMode.Center);
+    //}
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
@@ -26,6 +43,22 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         if (zoomer != null)
         {
             zoomer.zoomMode = zoomMode;
+        }
+
+        if (card is PokemonCard)
+        {
+            int sortOrder = GetComponent<Canvas>().sortingOrder;
+            float offsetSize = GetComponent<RectTransform>().sizeDelta.x / 5;
+            float attachedOffset = offsetSize;
+            foreach (var attachedCard in ((PokemonCard)card).AttachedEnergy)
+            {
+                var attachedObject = Instantiate(AttachedCardPrefab, transform);
+                var rect = attachedObject.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(attachedOffset, rect.anchoredPosition.y);
+                attachedOffset += offsetSize;
+
+                attachedObject.GetComponent<Canvas>().sortingOrder = sortOrder;
+            }
         }
 
         StartCoroutine(LoadSprite(card));

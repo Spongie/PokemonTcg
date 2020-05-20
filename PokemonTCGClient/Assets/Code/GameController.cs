@@ -46,6 +46,7 @@ namespace Assets.Code
         private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
         private Queue<EnergyCard> energyCardsToAttach;
         private Dictionary<NetworkId, NetworkId> energyPokemonMap;
+        private EnergyCard currentEnergyCard;
 
         private static GameFieldState[] statesWithDoneAction = new[]
         {
@@ -61,6 +62,13 @@ namespace Assets.Code
 
             InitGamestateInfo();
             RegisterClickHandlers();
+        }
+
+        internal void StartAttachingEnergy(EnergyCard card)
+        {
+            SpecialState = SpecialGameState.AttachingEnergyToPokemon;
+            currentEnergyCard = card;
+            infoText.text = "Select a pokemon to attach your energy to";
         }
 
         private void InitGamestateInfo()
@@ -86,8 +94,24 @@ namespace Assets.Code
                 { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
                 { SpecialGameState.DiscardingCards, ToggleCardSelected },
-                { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon }
+                { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
+                { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy }
             };
+        }
+
+        private void OnTryAttachEnergy(CardRenderer cardRenderer)
+        {
+            PokemonCard pokemon = cardRenderer.card as PokemonCard;
+
+            if (pokemon == null)
+            {
+                return;
+            }
+
+            NetworkManager.Instance.gameService.AttachEnergy(pokemon, currentEnergyCard);
+            currentEnergyCard = null;
+            SpecialState = SpecialGameState.None;
+            infoText.text = string.Empty;
         }
 
         private void ToggleCardSelected(CardRenderer clickedCard)
@@ -238,6 +262,10 @@ namespace Assets.Code
             else if (onClickHandlers.ContainsKey(gameField.GameState))
             {
                 onClickHandlers[gameField.GameState].Invoke(cardController);
+            }
+            else if (cardController.card is EnergyCard)
+            {
+                StartAttachingEnergy((EnergyCard)cardController.card);
             }
             else
             {
@@ -463,6 +491,11 @@ namespace Assets.Code
             }
 
             CurrentGameState = gameField.GameState;
+
+            if (SpecialState != SpecialGameState.None)
+            {
+                return;
+            }
 
             switch (gameField.GameState)
             {

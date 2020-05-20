@@ -11,6 +11,7 @@ namespace Assets.Code.UI.Gameplay
     {
         private Card card;
         public GameObject AddToBenchButton;
+        public GameObject AttachToPokemon;
         public GameObject AttackButtonPrefab;
         public GameObject ActivateAbilityButton;
 
@@ -47,6 +48,10 @@ namespace Assets.Code.UI.Gameplay
                 {
                     ActivateAbilityButton.SetActive(false);
                 }
+            }
+            else if (card is EnergyCard)
+            {
+                //Do nothing
             }
         }
 
