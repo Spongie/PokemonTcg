@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 using Assets.Code;
 using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
+using TMPro;
+using TeamRocket.PokemonCards;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -18,6 +20,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public bool isSelected;
     public GameObject overlay;
     public CardPopupHandler popupHandler;
+    public GameObject DamageDisplay;
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
@@ -43,6 +46,18 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
                 attachedObject.GetComponent<Canvas>().sortingOrder = sortOrder;
                 attachedObject.GetComponent<CardRenderer>().SetCard(attachedCard, zoomMode);
+            }
+
+            var pokemon = (PokemonCard)card;
+
+            if (pokemon.DamageCounters > 0)
+            {
+                DamageDisplay.SetActive(true);
+                DamageDisplay.GetComponentInChildren<TextMeshProUGUI>().text = pokemon.DamageCounters.ToString();
+            }
+            else
+            {
+                DamageDisplay.SetActive(false);
             }
         }
 
