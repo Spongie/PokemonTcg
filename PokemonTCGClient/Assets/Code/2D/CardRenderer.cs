@@ -9,7 +9,6 @@ using Assets.Code;
 using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
 using TMPro;
-using TeamRocket.PokemonCards;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -21,6 +20,12 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject overlay;
     public CardPopupHandler popupHandler;
     public GameObject DamageDisplay;
+
+    public GameObject PoisonIcon;
+    public GameObject BurnedIcon;
+    public GameObject ParalyzedIcon;
+    public GameObject AsleepIcon;
+    public GameObject ConfusedIcon;
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
@@ -59,6 +64,12 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             {
                 DamageDisplay.SetActive(false);
             }
+
+            PoisonIcon.SetActive(pokemon.IsPoisoned);
+            AsleepIcon.SetActive(pokemon.IsAsleep);
+            ParalyzedIcon.SetActive(pokemon.IsParalyzed);
+            ConfusedIcon.SetActive(pokemon.IsConfused);
+            BurnedIcon.SetActive(pokemon.IsBurned);
         }
 
         StartCoroutine(LoadSprite(card));
