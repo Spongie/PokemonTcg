@@ -7,6 +7,7 @@ namespace TCGCards
         public TestPokemonCard(Player owner) : base(owner)
         {
             PokemonName = "Ekans";
+            IsTestCard = true;
             Stage = 0;
             Hp = 50;
             PokemonType = EnergyTypes.Grass;

@@ -14,6 +14,15 @@ namespace TeamRocket.TrainerCards
         public override void Process(GameField game, Player caster, Player opponent)
         {
             game.PrizeCardsFaceUp = true;
+
+            foreach (var card in caster.PrizeCards)
+            {
+                card.IsRevealed = true;
+            }
+            foreach (var card in opponent.PrizeCards)
+            {
+                card.IsRevealed = true;
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace TCGCards.EnergyCards
 {
-    public class ElectricEnergy : EnergyCard
+    public class LightningEnergy : EnergyCard
     {
-        public ElectricEnergy()
+        public LightningEnergy()
         {
             EnergyType = EnergyTypes.Electric;
         }
@@ -14,7 +14,7 @@
 
         public override string GetName()
         {
-            return "Electric Energy";
+            return "Lightning Energy";
         }
 
         public override void OnAttached(PokemonCard attachedTo, bool fromHand) { }

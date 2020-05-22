@@ -25,6 +25,8 @@ namespace TCGCards
 
         public bool IsRevealed { get; set; }
 
+        public bool IsTestCard { get; set; }
+
         public override bool Equals(object other)
         {
             var otherCard = other as Card;
