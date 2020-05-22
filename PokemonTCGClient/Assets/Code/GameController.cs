@@ -9,7 +9,6 @@ using NetworkingCore;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -47,6 +46,8 @@ namespace Assets.Code
         private Queue<EnergyCard> energyCardsToAttach;
         private Dictionary<NetworkId, NetworkId> energyPokemonMap;
         private EnergyCard currentEnergyCard;
+
+        public List<string> gameLog = new List<string>();
 
         private static GameFieldState[] statesWithDoneAction = new[]
         {
@@ -143,7 +144,7 @@ namespace Assets.Code
             myId = NetworkManager.Instance.Me.Id;
             var messageId = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
 
-            NetworkManager.Instance.RegisterCallback(messageId, OnGameHosted);
+            NetworkManager.Instance.RegisterCallbackById(messageId, OnGameHosted);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
@@ -154,6 +155,21 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickFromList);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
+        }
+
+        private void OnGameLogReload(object obj, NetworkId messageId)
+        {
+            var message = (GameLogReloadMessage)obj;
+            gameLog = message.GameLog.Messages;
+        }
+
+        private void OnNewLogMessage(object obj, NetworkId messageId)
+        {
+            var message = (GameLogAddMessage)obj;
+
+            gameLog.AddRange(message.NewMessages);
         }
 
         private void OnStartDiscardCards(object message, NetworkId messageId)
@@ -253,22 +269,25 @@ namespace Assets.Code
 
         public void OnCardClicked(CardRenderer cardController)
         {
-            if (!IsMyTurn)
-            {
-                return;
-            }
-
             Debug.Log("Clicked: " + cardController.name);
 
             if (onSpecialClickHandlers.ContainsKey(SpecialState))
             {
                 onSpecialClickHandlers[SpecialState].Invoke(cardController);
+                return;
             }
             else if (onClickHandlers.ContainsKey(gameField.GameState))
             {
                 onClickHandlers[gameField.GameState].Invoke(cardController);
+                return;
             }
-            else if (cardController.card is EnergyCard)
+
+            if (!IsMyTurn)
+            {
+                return;
+            }
+
+            if (cardController.card is EnergyCard)
             {
                 StartAttachingEnergy((EnergyCard)cardController.card);
             }
@@ -320,7 +339,7 @@ namespace Assets.Code
         private void SetActiveStateClicked(CardRenderer cardController)
         {
             var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, cardController.card.Id);
-            NetworkManager.Instance.RegisterCallback(id, OnGameUpdated);
+            NetworkManager.Instance.RegisterCallbackById(id, OnGameUpdated);
         }
 
         public void ActivateAbility(Ability ability)

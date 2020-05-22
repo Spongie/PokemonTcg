@@ -14,6 +14,8 @@
         GameUpdate,
         SelectFromYourBench,
         SelectOpponentPokemon,
-        SelectPriceCards
+        SelectPriceCards,
+        GameLogReload,
+        GameLogNewMessages
     }
 }

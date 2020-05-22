@@ -23,7 +23,7 @@ namespace TeamRocket.TrainerCards
                 flip = CoinFlipper.FlipCoin();
 
                 if (flip == CoinFlipper.TAILS)
-                    target.ActivePokemonCard.DealDamage(new Damage(0, 10));
+                    target.ActivePokemonCard.DealDamage(new Damage(0, 10), game.GameLog);
                 else
                     target = target == caster ? opponent : caster;
 

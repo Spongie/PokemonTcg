@@ -28,7 +28,7 @@ namespace TeamRocket.Attacks
         {
             var selectedCard = (PsychicEnergy)this.TriggerDeckSearch(owner).First();
 
-            owner.AttachEnergyToPokemon(selectedCard, owner.ActivePokemonCard);
+            owner.AttachEnergyToPokemon(selectedCard, owner.ActivePokemonCard, null);
             owner.ActivePokemonCard.Owner.DrawCardsFromDeck(new[] { selectedCard });
         }
 

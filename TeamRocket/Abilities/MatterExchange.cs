@@ -19,7 +19,7 @@ namespace TeamRocket.Abilities
             return PokemonOwner.Owner.Hand.Any() && base.CanActivate();
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new DiscardCardsMessage(1).ToNetworkMessage(owner.Id));
             owner.DiscardCards(response.Cards);

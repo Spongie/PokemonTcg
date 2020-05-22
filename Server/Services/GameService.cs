@@ -145,13 +145,13 @@ namespace Server.Services
 
             return theOnlyActiveGame;
         }
-        //TODO Fixa så att ID används och sen leta uppp rätt kort...
+
         public GameField AttachEnergy(NetworkId targetId, NetworkId energyCardId)
         {
             var energyCard = (EnergyCard)theOnlyActiveGame.FindCardById(energyCardId);
             var target = (PokemonCard)theOnlyActiveGame.FindCardById(targetId);
 
-            theOnlyActiveGame.ActivePlayer.AttachEnergyToPokemon(energyCard, target);
+            theOnlyActiveGame.ActivePlayer.AttachEnergyToPokemon(energyCard, target, theOnlyActiveGame);
 
             SendUpdateToPlayers(theOnlyActiveGame.Players);
 

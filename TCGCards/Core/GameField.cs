@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NetworkingCore;
+using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Core
@@ -14,7 +15,7 @@ namespace TCGCards.Core
         public const int BenchMaxSize = 5;
         private object lockObject = new object();
         private HashSet<NetworkId> playersSetStartBench;
-
+        
         public GameField()
         {
             Players = new List<Player>();
@@ -23,6 +24,7 @@ namespace TCGCards.Core
             DamageStoppers = new List<DamageStopper>();
             TemporaryPassiveAbilities = new List<TemporaryPassiveAbility>();
             GameState = GameFieldState.WaitingForConnection;
+            GameLog = new GameLog();
         }
 
         public void RevealCardsTo(List<Card> pickedCards, Player nonActivePlayer)
@@ -73,6 +75,8 @@ namespace TCGCards.Core
         {
             var owner = Players.First(p => p.Id.Equals(ownerId));
 
+            GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
+
             owner.SetActivePokemon(activePokemon);
 
             lock (lockObject)
@@ -89,6 +93,8 @@ namespace TCGCards.Core
                     }
                 }
             }
+
+            PushGameLogUpdatesToPlayers();
         }
 
         public bool CanRetreat(PokemonCard card)
@@ -113,7 +119,7 @@ namespace TCGCards.Core
 
             foreach (var ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
             {
-                ability.Trigger(NonActivePlayer, ActivePlayer, 0);
+                ability.Trigger(NonActivePlayer, ActivePlayer, 0, GameLog);
             }
             
             ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
@@ -278,8 +284,11 @@ namespace TCGCards.Core
 
         public void StartGame()
         {
+            GameLog.AddMessage("Game starting");
             ActivePlayer = Players[new Random().Next(2)];
             NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
+
+            GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
             foreach (var player in Players)
             {
@@ -299,23 +308,31 @@ namespace TCGCards.Core
             }
 
             GameState = GameFieldState.BothSelectingActive;
+            PushGameLogUpdatesToPlayers();
         }
 
         public void ActivateAbility(Ability ability)
         {
-            ability.Trigger(ActivePlayer, NonActivePlayer, 0);
+            GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates ability {ability.Name}");
+
+            ability.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
+
+            PushGameLogUpdatesToPlayers();
         }
 
         public void Attack(Attack attack)
         {
+            GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates attack {attack.Name}");
+
             if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
             {
-                ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage));
+                GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.GetName()} hurt itself in its confusion");
+                ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), GameLog);
 
                 if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage)
                 {
                     ActivePlayer.ActivePokemonCard.Ability.SetTarget(ActivePlayer.ActivePokemonCard);
-                    ActivePlayer.ActivePokemonCard.Ability.Trigger(ActivePlayer, NonActivePlayer, 30);
+                    ActivePlayer.ActivePokemonCard.Ability.Trigger(ActivePlayer, NonActivePlayer, 30, GameLog);
                     ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
                 }
 
@@ -324,7 +341,10 @@ namespace TCGCards.Core
             }
 
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
-                ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
+            {
+                GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.Ability.Name} is triggered by the attack");
+                ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
+            }
 
             if (!AttackStoppers.Any(x => x.IsAttackIgnored()) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored()))
             {
@@ -333,19 +353,31 @@ namespace TCGCards.Core
                     var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
                     damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
-                    NonActivePlayer.ActivePokemonCard.DealDamage(damage);
+                    NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
 
                     if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
-                        NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
+                    {
+                        GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by taking damage");
+                        NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, GameLog);
+                    }
                     if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage && !damage.IsZero())
                     {
+                        GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by dealing damage");
                         ActivePlayer.ActivePokemonCard.Ability.SetTarget(NonActivePlayer.ActivePokemonCard);
-                        ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
+                        ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, GameLog);
                         ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
                     }
                 }
+                else
+                {
+                    GameLog.AddMessage("Damage ignored because of effect");
+                }
 
                 attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
+            }
+            else
+            {
+                GameLog.AddMessage("Attack fully ignored because of effect");
             }
 
             PostAttack();
@@ -371,8 +403,9 @@ namespace TCGCards.Core
         {
             if (AbilityTriggeredByDeath())
             {
+                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by dying");
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
-                NonActivePlayer.ActivePokemonCard.Ability.Trigger(NonActivePlayer, ActivePlayer, 0);
+                NonActivePlayer.ActivePokemonCard.Ability.Trigger(NonActivePlayer, ActivePlayer, 0, GameLog);
             }
 
             AttackStoppers.ForEach(attackStopper => attackStopper.TurnsLeft--);
@@ -397,7 +430,7 @@ namespace TCGCards.Core
             ActivePlayer.PlayCard(pokemon);
 
             if(pokemon.Ability?.TriggerType == TriggerType.EnterPlay)
-                pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
+                pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
         }
 
         public void PlayerTrainerCard(TrainerCard trainerCard)
@@ -413,14 +446,18 @@ namespace TCGCards.Core
         {
             if(NonActivePlayer.ActivePokemonCard.IsDead())
             {
+                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.GetName() + "Dies");
+
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
                 if(NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
-                    NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0);
+                    NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, GameLog);
                 if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Kills)
-                    ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0);
+                    ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
+
+                PushGameLogUpdatesToPlayers();
 
                 if (ActivePlayer.PrizeCards.Count == 1)
                 {
@@ -433,12 +470,18 @@ namespace TCGCards.Core
                 
                 NonActivePlayer.SelectActiveFromBench();
             }
-            if(ActivePlayer.ActivePokemonCard.IsDead())
+
+            PushGameLogUpdatesToPlayers();
+
+            if (ActivePlayer.ActivePokemonCard.IsDead())
             {
+                GameLog.AddMessage(ActivePlayer.ActivePokemonCard.GetName() + "Dies");
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 NonActivePlayer.SelectPriceCard(1);
                 ActivePlayer.SelectActiveFromBench();
             }
+
+            PushGameLogUpdatesToPlayers();
         }
 
         public void EndTurn()
@@ -450,7 +493,10 @@ namespace TCGCards.Core
             NonActivePlayer.EndTurn();
             CheckDeadPokemon();
             SwapActivePlayer();
+            FirstTurn = false;
             StartNextTurn();
+
+            PushGameLogUpdatesToPlayers();
         }
 
         private void StartNextTurn()
@@ -480,16 +526,29 @@ namespace TCGCards.Core
             return passiveAbilities;
         }
 
+        public void PushGameLogUpdatesToPlayers()
+        {
+            var message = new GameLogAddMessage(GameLog.NewMessages).ToNetworkMessage(NetworkId.Generate());
+
+            foreach (var player in Players)
+            {
+                player.NetworkPlayer?.Send(message);
+            }
+
+            GameLog.CommitMessages();
+        }
+
         public GameFieldState GameState { get; set; }
 
         public List<Player> Players { get; set; }
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get; set; }
         public int Mode { get; set; }
-
+        public GameLog GameLog { get; set; } = new GameLog();
         public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
         public List<TemporaryPassiveAbility> TemporaryPassiveAbilities { get; set; }
         public bool PrizeCardsFaceUp { get; set; }
+        public bool FirstTurn { get; set; } = true;
     }
 }

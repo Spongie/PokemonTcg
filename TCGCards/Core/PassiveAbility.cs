@@ -9,7 +9,7 @@
 
         public PassiveModifierType ModifierType { get; set; }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
         }
     }

@@ -24,7 +24,7 @@ namespace Assets.Code.UI.Gameplay
 
             if (card is PokemonCard)
             {
-                if (GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
+                if (GameController.Instance.Player?.ActivePokemonCard != null && GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
                 {
                     foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
                     {

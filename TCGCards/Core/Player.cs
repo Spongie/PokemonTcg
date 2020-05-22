@@ -146,16 +146,20 @@ namespace TCGCards.Core
             pokemon.IsRevealed = true;
         }
 
-        public void AttachEnergyToPokemon(EnergyCard energyCard, PokemonCard targetPokemonCard)
+        public void AttachEnergyToPokemon(EnergyCard energyCard, PokemonCard targetPokemonCard, GameField game = null)
         {
             if(HasPlayedEnergy)
                 return;
+
+            game?.GameLog.AddMessage($"Attaching {energyCard.GetName()} to {targetPokemonCard.GetName()}");
 
             HasPlayedEnergy = true;
             targetPokemonCard.AttachedEnergy.Add(energyCard);
 
             energyCard.OnAttached(targetPokemonCard, Hand.Contains(energyCard));
             Hand.Remove(energyCard);
+
+            game?.PushGameLogUpdatesToPlayers();
         }
 
         internal void ResetTurn()

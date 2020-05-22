@@ -19,7 +19,7 @@ namespace TeamRocketTests.Abilities
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             var ability = new LongDistanceHypnosis(player.ActivePokemonCard);
-            ability.Trigger(player, opponent, 0);
+            ability.Trigger(player, opponent, 0, new GameLog());
 
             Assert.IsTrue(opponent.ActivePokemonCard.IsAsleep);
             Assert.IsFalse(player.ActivePokemonCard.IsAsleep);
@@ -36,7 +36,7 @@ namespace TeamRocketTests.Abilities
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
             var ability = new LongDistanceHypnosis(player.ActivePokemonCard);
-            ability.Trigger(player, opponent, 0);
+            ability.Trigger(player, opponent, 0, new GameLog());
 
             Assert.IsFalse(opponent.ActivePokemonCard.IsAsleep);
             Assert.IsTrue(player.ActivePokemonCard.IsAsleep);

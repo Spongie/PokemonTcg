@@ -27,7 +27,9 @@ namespace TeamRocketTests.Abilities
 
             opponent.BenchedPokemon.Add(new DarkGolbat(opponent));
 
+            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
             game.OnPokemonRetreated(opponent.BenchedPokemon.First(), new List<EnergyCard>(opponent.ActivePokemonCard.AttachedEnergy));
+
 
             Assert.AreEqual(20, opponent.BenchedPokemon.First().DamageCounters);
         }
@@ -49,7 +51,7 @@ namespace TeamRocketTests.Abilities
             opponent.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
 
             opponent.BenchedPokemon.Add(new DarkGolbat(opponent));
-
+            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
             game.OnPokemonRetreated(opponent.BenchedPokemon.First(), new List<EnergyCard>(opponent.ActivePokemonCard.AttachedEnergy));
 
             Assert.AreEqual(20, opponent.BenchedPokemon.First().DamageCounters);

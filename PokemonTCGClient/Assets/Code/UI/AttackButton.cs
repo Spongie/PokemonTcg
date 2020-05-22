@@ -1,6 +1,5 @@
 ﻿using Assets.Code._2D;
 using TCGCards;
-using TCGCards.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +19,7 @@ namespace Assets.Code.UI
         {
             var energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
 
+            this.attack = attack;
             nameText.text = attack.Name;
             damageText.text = attack.DamageText;
 

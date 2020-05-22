@@ -19,7 +19,7 @@ namespace TeamRocketTests.Abilities
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             var ability = new PollenStench(player.ActivePokemonCard);
-            ability.Trigger(player, opponent, 0);
+            ability.Trigger(player, opponent, 0, new GameLog());
 
             Assert.IsTrue(opponent.ActivePokemonCard.IsConfused);
             Assert.IsFalse(player.ActivePokemonCard.IsConfused);
@@ -36,7 +36,7 @@ namespace TeamRocketTests.Abilities
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
             var ability = new PollenStench(player.ActivePokemonCard);
-            ability.Trigger(player, opponent, 0);
+            ability.Trigger(player, opponent, 0, new GameLog());
 
             Assert.IsFalse(opponent.ActivePokemonCard.IsConfused);
             Assert.IsTrue(player.ActivePokemonCard.IsConfused);

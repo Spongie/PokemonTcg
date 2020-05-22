@@ -1,6 +1,4 @@
-﻿using Assets.Code;
-using NetworkingCore;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 

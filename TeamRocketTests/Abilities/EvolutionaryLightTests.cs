@@ -35,7 +35,7 @@ namespace TeamRocketTests.Abilities
 
             player.SetNetworkPlayer(networkPlayer);
 
-            ability.Trigger(player, null, 0);
+            ability.Trigger(player, null, 0, new GameLog());
 
             Assert.AreEqual(oldDeckSize - 1, player.Deck.Cards.Count);
             Assert.AreEqual(1, player.Hand.Count);

@@ -33,7 +33,7 @@ namespace TeamRocketTests.Abilities
 
             var ability = new GatherFire(player.ActivePokemonCard);
 
-            ability.Trigger(player, null, 0);
+            ability.Trigger(player, null, 0, new GameLog());
 
             Assert.AreEqual(0, player.BenchedPokemon.First().AttachedEnergy.Count);
             Assert.AreEqual(1, player.ActivePokemonCard.AttachedEnergy.Count);

@@ -21,7 +21,7 @@ namespace TeamRocket.Abilities
 
         public int GetNumberOfCards() => searchCount;
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             searchCount = Math.Min(5 - owner.BenchedPokemon.Count, 2);
 

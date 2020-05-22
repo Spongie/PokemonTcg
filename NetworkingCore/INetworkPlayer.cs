@@ -6,5 +6,6 @@
         T SendAndWaitForResponse<T>(NetworkMessage message);
 
         NetworkId Id { get; set; }
+        string Name { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace TeamRocket.Abilities
             Description = "Switch on of your prizes with the top card of your deck";
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             var message = new PickFromListMessage(owner.PrizeCards, 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);

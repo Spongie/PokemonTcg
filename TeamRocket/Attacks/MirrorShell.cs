@@ -35,7 +35,7 @@ namespace TeamRocket.Attacks
                 TriggerType = TriggerType.TakesDamage;
             }
 
-            protected override void Activate(Player owner, Player opponent, int damageTaken)
+            protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
             {
                 opponent.ActivePokemonCard.DamageCounters += damageTaken;
             }

@@ -13,14 +13,14 @@ namespace TeamRocket.Abilities
             Description = "When Dark Gyarados is knocked out by an attack flip a coin. If heads Dark Gyarados deals 20 damage for each attached water energy, to that pokemon";
         }
 
-        protected override void Activate(Player player, Player opponent, int damageTake)
+        protected override void Activate(Player player, Player opponent, int damageTake, GameLog log)
         {
             if(CoinFlipper.FlipCoin() != CoinFlipper.HEADS)
                 return;
 
             var damage = PokemonOwner.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water);
 
-            PokemonOwner.KnockedOutBy.DealDamage(new Damage(damage * 20));
+            PokemonOwner.KnockedOutBy.DealDamage(new Damage(damage * 20), log);
 
             if(PokemonOwner.KnockedOutBy.IsDead())
                 PokemonOwner.KnockedOutBy.KnockedOutBy = PokemonOwner;

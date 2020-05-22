@@ -12,7 +12,7 @@ namespace TCGCards.Core
             Id = NetworkId.Generate();
         }
 
-        protected abstract void Activate(Player owner, Player opponent, int damageTaken);
+        protected abstract void Activate(Player owner, Player opponent, int damageTaken, GameLog log);
 
         public TriggerType TriggerType { get; protected set; }
 
@@ -22,10 +22,10 @@ namespace TCGCards.Core
         public string Description { get; set; }
         public NetworkId Id { get; protected set; }
 
-        public void Trigger(Player owner, Player opponent, int damageTaken)
+        public void Trigger(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             if (CanActivate())
-                Activate(owner, opponent, damageTaken);
+                Activate(owner, opponent, damageTaken, log);
         }
 
         public virtual bool CanActivate()

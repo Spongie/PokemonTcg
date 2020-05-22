@@ -30,7 +30,7 @@ namespace TeamRocketTests.Abilities
 
             var ability = new SummonMinions(player.ActivePokemonCard);
 
-            ability.Trigger(player, null, 0);
+            ability.Trigger(player, null, 0, new GameLog());
 
             Assert.AreEqual(2, player.BenchedPokemon.Count);
         }
@@ -57,7 +57,7 @@ namespace TeamRocketTests.Abilities
 
             var ability = new SummonMinions(player.ActivePokemonCard);
 
-            ability.Trigger(player, null, 0);
+            ability.Trigger(player, null, 0, new GameLog());
 
             networkPlayer.DidNotReceive().SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>());
         }

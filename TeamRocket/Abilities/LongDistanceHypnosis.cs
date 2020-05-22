@@ -12,7 +12,7 @@ namespace TeamRocket.Abilities
             Description = "Flip a coin. If heads, the defending pokemon is now asleep; if tails, your active pokemon is now asleep";
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             if (CoinFlipper.FlipCoin() == CoinFlipper.HEADS)
                 opponent.ActivePokemonCard.IsAsleep = true;

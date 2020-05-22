@@ -12,9 +12,12 @@ namespace TeamRocket.Abilities
             Description = "Whenever your oppoent's active pokemon retreats your opponent flips a coin. If tails this power does 20 damage to that pokemon";
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
-            opponent.ActivePokemonCard.DealDamage(new Damage(0, 20));
+            if (CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
+            {
+                opponent.ActivePokemonCard.DealDamage(new Damage(0, 20), log);
+            }
         }
     }
 }

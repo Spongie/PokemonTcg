@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
-using UnityEditor.Build;
 using UnityEngine;
 
 namespace Assets.Code
@@ -17,7 +16,7 @@ namespace Assets.Code
         public Dictionary<MessageTypes, Action<object, NetworkId>> messageConsumers;
         private Dictionary<NetworkId, Action<object>> responseMapper;
 
-        internal void RegisterCallback(NetworkId responseId, Action<object> callback)
+        internal void RegisterCallbackById(NetworkId responseId, Action<object> callback)
         {
             responseMapper.Add(responseId, callback);
         }

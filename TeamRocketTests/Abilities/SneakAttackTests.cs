@@ -32,7 +32,7 @@ namespace TeamRocketTests.Abilities
 
             var pokemon = new DarkGolbat(owner);
 
-            pokemon.Ability.Trigger(owner, opponent, 0);
+            pokemon.Ability.Trigger(owner, opponent, 0, new GameLog());
 
             Assert.AreEqual(10, opponent.ActivePokemonCard.DamageCounters);
         }

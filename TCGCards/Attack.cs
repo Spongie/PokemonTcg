@@ -31,6 +31,11 @@ namespace TCGCards
 
         public virtual bool CanBeUsed(GameField game, Player owner, Player opponent)
         {
+            if (game.FirstTurn)
+            {
+                return false;
+            }
+
             var availableEnergy = new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy).OrderBy(card => card.IsBasic).ToList();
 
             foreach (var energy in Cost.OrderByDescending(cost => cost.EnergyType != EnergyTypes.Colorless))

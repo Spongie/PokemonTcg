@@ -14,7 +14,7 @@ namespace TeamRocket.Abilities
             Description = "Search your deck for an evolution card and put it into your hand";
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             var message = new DeckSearchMessage(owner.Deck, new List<IDeckFilter> { new Filter() }, 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);

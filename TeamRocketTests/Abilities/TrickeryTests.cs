@@ -28,7 +28,7 @@ namespace TeamRocketTests.Abilities
             player.SetNetworkPlayer(networkPlayer);
 
             player.ActivePokemonCard = new Rattata(player);
-            player.ActivePokemonCard.Ability.Trigger(player, null, 0);
+            player.ActivePokemonCard.Ability.Trigger(player, null, 0, new GameLog());
 
             Assert.IsTrue(player.PrizeCards.First() is DarkGloom);
             Assert.IsTrue(player.Deck.Cards.First() is Oddish);
