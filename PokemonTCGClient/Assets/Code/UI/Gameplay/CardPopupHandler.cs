@@ -72,5 +72,11 @@ namespace Assets.Code.UI.Gameplay
             GameController.Instance.StartEvolving((PokemonCard)card);
             gameObject.SetActive(false);
         }
+
+        public void OnAbilityClick()
+        {
+            NetworkManager.Instance.gameService.ActivateAbility(((PokemonCard)card).Ability.Id);
+            gameObject.SetActive(false);
+        }
     }
 }
