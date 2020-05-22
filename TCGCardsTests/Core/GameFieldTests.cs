@@ -348,11 +348,11 @@ namespace TCGCards.Core.Tests
             var arbok = new DarkArbok(gameField.ActivePlayer);
             gameField.EvolvePokemon(first, arbok);
 
-            Assert.AreEqual(first.Id, arbok.Id);
-            Assert.IsTrue(first is DarkArbok);
+            Assert.AreEqual(gameField.ActivePlayer.BenchedPokemon[0].Id, arbok.Id);
+            Assert.IsTrue(gameField.ActivePlayer.BenchedPokemon[0] is DarkArbok);
 
-            Assert.AreNotEqual(second.Id, arbok.Id);
-            Assert.IsTrue(second is Ekans);
+            Assert.AreNotEqual(gameField.ActivePlayer.BenchedPokemon[1].Id, arbok.Id);
+            Assert.IsTrue(gameField.ActivePlayer.BenchedPokemon[1] is Ekans);
         }
 
         private void FillPlayerDecksWithJunk(GameField gameField)

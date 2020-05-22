@@ -73,6 +73,33 @@ namespace TCGCards.Tests
         }
 
         [TestMethod()]
+        public void CanBeUsed_EnoughAttached_FirstTurn()
+        {
+            var game = createTestGame();
+            game.FirstTurn = true;
+
+            var pokemon = game.ActivePlayer.ActivePokemonCard;
+            pokemon.Attacks = new List<Attack>
+            {
+                new TestAttack
+                {
+                    Cost = new List<Energy>
+                    {
+                        new Energy(EnergyTypes.Colorless, 1),
+                        new Energy(EnergyTypes.Fire, 1)
+                    }
+                }
+            };
+            pokemon.AttachedEnergy = new List<EnergyCard>
+            {
+                new FireEnergy(),
+                new FireEnergy()
+            };
+
+            Assert.IsFalse(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
+        }
+
+        [TestMethod()]
         public void CanBeUsed_EnoughAttached_Colorless_Cost_Double()
         {
             var game = createTestGame();
@@ -127,6 +154,7 @@ namespace TCGCards.Tests
         private GameField createTestGame()
         {
             var game = new GameField();
+            game.FirstTurn = false;
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
