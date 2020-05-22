@@ -10,6 +10,7 @@ namespace Assets.Code
         SelectingColor,
         AttachingEnergyToBenchedPokemon,
         SelectPokemonMatchingFilter,
-        AttachingEnergyToPokemon
+        AttachingEnergyToPokemon,
+        SelectPokemonToEvolveOn
     }
 }

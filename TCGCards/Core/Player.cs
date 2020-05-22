@@ -154,6 +154,7 @@ namespace TCGCards.Core
             game?.GameLog.AddMessage($"Attaching {energyCard.GetName()} to {targetPokemonCard.GetName()}");
 
             HasPlayedEnergy = true;
+            energyCard.IsRevealed = true;
             targetPokemonCard.AttachedEnergy.Add(energyCard);
 
             energyCard.OnAttached(targetPokemonCard, Hand.Contains(energyCard));
@@ -222,7 +223,7 @@ namespace TCGCards.Core
 
         public void SelectPriceCard(int amount)
         {
-            var message = new SelectPriceCardsMessage(1).ToNetworkMessage(NetworkId.Generate());
+            var message = new PickFromListMessage(PrizeCards, amount).ToNetworkMessage(NetworkId.Generate());
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 

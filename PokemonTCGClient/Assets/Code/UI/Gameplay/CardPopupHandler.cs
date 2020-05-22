@@ -15,6 +15,7 @@ namespace Assets.Code.UI.Gameplay
         public GameObject AttachToPokemon;
         public GameObject AttackButtonPrefab;
         public GameObject ActivateAbilityButton;
+        public GameObject EvolveButton;
 
         public void Init(Card card)
         {
@@ -24,6 +25,8 @@ namespace Assets.Code.UI.Gameplay
 
             if (card is PokemonCard)
             {
+                var pokemonCard = (PokemonCard)card;
+
                 if (GameController.Instance.Player?.ActivePokemonCard != null && GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
                 {
                     foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
@@ -36,6 +39,8 @@ namespace Assets.Code.UI.Gameplay
                         attackButton.gameObject.transform.SetAsFirstSibling();
                     }
                 }
+
+                EvolveButton.SetActive(pokemonCard.Stage > 0);
 
                 var ability = ((PokemonCard)card).Ability;
 
@@ -50,11 +55,21 @@ namespace Assets.Code.UI.Gameplay
                     ActivateAbilityButton.SetActive(false);
                 }
             }
+            else
+            {
+                EvolveButton.SetActive(false);
+            }
         }
 
         public void AddToBenchClicked()
         {
             NetworkManager.Instance.gameService.AddToBench(GameController.Instance.myId, new List<NetworkId> { card.Id });
+            gameObject.SetActive(false);
+        }
+
+        public void OnEvolveClick()
+        {
+            GameController.Instance.StartEvolving((PokemonCard)card);
             gameObject.SetActive(false);
         }
     }

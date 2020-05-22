@@ -613,8 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a1499636a56174c8f2b83b0e58d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttachedCardPrefab: {fileID: 4089488600536689639, guid: c74ad8f902446d94ca3227dd1627e6c8,
-    type: 3}
+  AttachedCardPrefab: {fileID: 4089488600536689639}
   art: {fileID: 4089488601737517951}
   isActivePokemon: 0
   isSelected: 0

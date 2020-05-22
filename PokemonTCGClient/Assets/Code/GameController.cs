@@ -46,6 +46,7 @@ namespace Assets.Code
         private Queue<EnergyCard> energyCardsToAttach;
         private Dictionary<NetworkId, NetworkId> energyPokemonMap;
         private EnergyCard currentEnergyCard;
+        private PokemonCard currentEvolvingCard;
 
         public List<string> gameLog = new List<string>();
 
@@ -72,6 +73,13 @@ namespace Assets.Code
             infoText.text = "Select a pokemon to attach your energy to";
         }
 
+        internal void StartEvolving(PokemonCard card)
+        {
+            SpecialState = SpecialGameState.SelectPokemonToEvolveOn;
+            currentEvolvingCard = card;
+            infoText.text = "Select a pokemon to evolve";
+        }
+
         private void InitGamestateInfo()
         {
             gameStateInfo = new Dictionary<GameFieldState, string>
@@ -96,8 +104,24 @@ namespace Assets.Code
                 { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
                 { SpecialGameState.DiscardingCards, ToggleCardSelected },
                 { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
-                { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy }
+                { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy },
+                { SpecialGameState.SelectPokemonToEvolveOn, TryEvolvePokemon }
             };
+        }
+
+        private void TryEvolvePokemon(CardRenderer cardRenderer)
+        {
+            PokemonCard pokemon = cardRenderer.card as PokemonCard;
+
+            if (pokemon == null)
+            {
+                return;
+            }
+
+            NetworkManager.Instance.gameService.EvolvePokemon(pokemon.Id, currentEvolvingCard.Id);
+            currentEvolvingCard = null;
+            SpecialState = SpecialGameState.None;
+            infoText.text = string.Empty;
         }
 
         private void OnTryAttachEnergy(CardRenderer cardRenderer)
@@ -332,8 +356,16 @@ namespace Assets.Code
 
         private void BothSelectingBenchClicked(CardRenderer cardController)
         {
-            cardController.SetSelected(!cardController.isSelected);
-            selectedCards.Add(cardController.card);
+            if (cardController.isSelected)
+            {
+                cardController.SetSelected(false);
+                selectedCards.Remove(cardController.card);
+            }
+            else
+            {
+                cardController.SetSelected(true);
+                selectedCards.Add(cardController.card);
+            }
         }
 
         private void SetActiveStateClicked(CardRenderer cardController)

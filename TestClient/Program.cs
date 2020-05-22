@@ -67,7 +67,19 @@ namespace TestClient
             Console.WriteLine("Setting benched pokemon");
             gameField = gameService.AddToBench(networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).Select(x => x.Id).ToList());
 
-            Console.Read();
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                if (input.Trim() == "end")
+                {
+                    gameService.EndTurn();
+                }
+                else if (input.Trim() == "disc")
+                {
+                    break;
+                }
+            }
 
             networkPlayer.Disconnect(true);
         }

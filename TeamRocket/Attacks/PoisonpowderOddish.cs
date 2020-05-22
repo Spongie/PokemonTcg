@@ -10,7 +10,7 @@ namespace TeamRocket.Attacks
         {
             Name = "Poisonpowder";
             Description = "The Defending Pokémon is now Poisoned.";
-            DamageText = "10";
+            DamageText = "";
             Cost = new List<Energy>
             {
                 new Energy(EnergyTypes.Grass, 1)
@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 10;
+            return 0;
         }
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)

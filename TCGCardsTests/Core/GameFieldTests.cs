@@ -293,6 +293,7 @@ namespace TCGCards.Core.Tests
             Assert.AreEqual(trainerCard.Id, gameField.ActivePlayer.DiscardPile.Last().Id);
         }
 
+        [TestMethod]
         public void EvolvePokemon_ActivePokemon()
         {
             var gameField = new GameField();
@@ -309,6 +310,26 @@ namespace TCGCards.Core.Tests
             Assert.IsTrue(gameField.ActivePlayer.ActivePokemonCard is DarkArbok);
         }
 
+        [TestMethod]
+        public void EvolvePokemon_RemovedFromHand()
+        {
+            var gameField = new GameField();
+            gameField.InitTest();
+            FillPlayerDecksWithJunk(gameField);
+
+            gameField.GameState = GameFieldState.InTurn;
+            gameField.ActivePlayer.ActivePokemonCard = new Ekans(gameField.ActivePlayer);
+
+            var arbok = new DarkArbok(gameField.ActivePlayer);
+            gameField.ActivePlayer.Hand.Add(arbok);
+            gameField.EvolvePokemon(gameField.ActivePlayer.ActivePokemonCard, arbok);
+
+            Assert.AreEqual(gameField.ActivePlayer.ActivePokemonCard.Id, arbok.Id);
+            Assert.IsTrue(gameField.ActivePlayer.ActivePokemonCard is DarkArbok);
+            Assert.IsFalse(gameField.ActivePlayer.Hand.Contains(arbok));
+        }
+
+        [TestMethod]
         public void EvolvePokemon_BenchedPokemon()
         {
             var gameField = new GameField();

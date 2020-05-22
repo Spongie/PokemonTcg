@@ -43,18 +43,31 @@ namespace TCGCards.Core
                 return;
             }
 
+            GameLog.AddMessage($"Evolving {basePokemon.GetName()} to {evolution.GetName()}");
+
             if (ActivePlayer.ActivePokemonCard.Id.Equals(basePokemon.Id))
             {
-                ActivePlayer.ActivePokemonCard = basePokemon.Evolve(evolution);
+                basePokemon.Evolve(evolution);
+                ActivePlayer.ActivePokemonCard = evolution;
             }
 
             for (int i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
             {
                 if (ActivePlayer.BenchedPokemon[i].Id.Equals(basePokemon.Id))
                 {
-                    ActivePlayer.BenchedPokemon[i] = basePokemon.Evolve(evolution);
+                    basePokemon.Evolve(evolution);
+                    ActivePlayer.BenchedPokemon[i] = evolution;
                 }
             }
+
+            if (ActivePlayer.Hand.Contains(evolution))
+            {
+                ActivePlayer.Hand.Remove(evolution);
+            }
+
+            evolution.IsRevealed = true;
+
+            PushGameLogUpdatesToPlayers();
         }
 
         public void InitTest()

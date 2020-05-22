@@ -6,6 +6,11 @@ namespace TCGCards.Core.Messages
 {
     public class PickFromListMessage : AbstractNetworkMessage
     {
+        public PickFromListMessage()
+        {
+
+        }
+
         public PickFromListMessage(IEnumerable<Card> possibleChoices, int count) : this(possibleChoices, count, count)
         {
 
