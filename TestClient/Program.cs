@@ -51,8 +51,9 @@ namespace TestClient
 
         private static void PlayGame()
         {
+            var gameId = gameService.GetAvailableGames().First().Id;
             Console.WriteLine("Joining the game");
-            gameField = gameService.JoinTheActiveGame(networkPlayer.Id);
+            gameField = gameService.JoinTheActiveGame(networkPlayer.Id, gameId);
 
             Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
             PokemonCard starter = me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).FirstOrDefault();
@@ -60,12 +61,12 @@ namespace TestClient
             Console.Read();
 
             Console.WriteLine("Setting active pokemon");
-            gameField = gameService.SetActivePokemon(networkPlayer.Id, starter.Id);
+            gameField = gameService.SetActivePokemon(gameId, networkPlayer.Id, starter.Id);
 
             Console.Read();
 
             Console.WriteLine("Setting benched pokemon");
-            gameField = gameService.AddToBench(networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).Select(x => x.Id).ToList());
+            gameField = gameService.AddToBench(gameId, networkPlayer.Id, me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).Select(x => x.Id).ToList());
 
             while (true)
             {
@@ -73,7 +74,7 @@ namespace TestClient
 
                 if (input.Trim() == "end")
                 {
-                    gameService.EndTurn();
+                    gameService.EndTurn(gameId);
                 }
                 else if (input.Trim() == "disc")
                 {

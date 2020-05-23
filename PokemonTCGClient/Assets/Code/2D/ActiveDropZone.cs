@@ -29,7 +29,7 @@ public class ActiveDropZone : MonoBehaviour, IDropHandler
                     return;
                 }
 
-                NetworkManager.Instance.gameService.EvolvePokemon(cardRenderer.card.Id, existingCard.card.Id);
+                NetworkManager.Instance.gameService.EvolvePokemon(GameController.Instance.gameField.Id, cardRenderer.card.Id, existingCard.card.Id);
             }
         }
         if (cardRenderer.card is EnergyCard)
@@ -41,7 +41,7 @@ public class ActiveDropZone : MonoBehaviour, IDropHandler
                 return;
             }
 
-            NetworkManager.Instance.gameService.AttachEnergy(existingCard.card.Id, cardRenderer.card.Id);
+            NetworkManager.Instance.gameService.AttachEnergy(GameController.Instance.gameField.Id, existingCard.card.Id, cardRenderer.card.Id);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Code;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,7 +10,9 @@ public class Login : MonoBehaviour
 
     public void LoginClick()
     {
-        //TODO register username with server
+        NetworkManager.Instance.Me.Name = usernameInput.text;
+        NetworkManager.Instance.playerService.Login(usernameInput.text, NetworkManager.Instance.Me.Id);
+
         SceneManager.LoadScene("UI_2D");
     }
 }

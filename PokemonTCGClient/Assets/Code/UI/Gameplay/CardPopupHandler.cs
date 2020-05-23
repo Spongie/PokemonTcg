@@ -63,7 +63,7 @@ namespace Assets.Code.UI.Gameplay
 
         public void AddToBenchClicked()
         {
-            NetworkManager.Instance.gameService.AddToBench(GameController.Instance.myId, new List<NetworkId> { card.Id });
+            NetworkManager.Instance.gameService.AddToBench(GameController.Instance.gameField.Id, GameController.Instance.myId, new List<NetworkId> { card.Id });
             gameObject.SetActive(false);
         }
 
@@ -75,7 +75,7 @@ namespace Assets.Code.UI.Gameplay
 
         public void OnAbilityClick()
         {
-            NetworkManager.Instance.gameService.ActivateAbility(((PokemonCard)card).Ability.Id);
+            NetworkManager.Instance.gameService.ActivateAbility(GameController.Instance.gameField.Id, ((PokemonCard)card).Ability.Id);
             gameObject.SetActive(false);
         }
     }

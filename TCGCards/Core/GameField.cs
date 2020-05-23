@@ -18,6 +18,7 @@ namespace TCGCards.Core
         
         public GameField()
         {
+            Id = NetworkId.Generate();
             Players = new List<Player>();
             playersSetStartBench = new HashSet<NetworkId>();
             AttackStoppers = new List<AttackStopper>();
@@ -552,7 +553,7 @@ namespace TCGCards.Core
         }
 
         public GameFieldState GameState { get; set; }
-
+        public NetworkId Id { get; set; }
         public List<Player> Players { get; set; }
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get; set; }

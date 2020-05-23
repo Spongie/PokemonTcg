@@ -118,7 +118,7 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.EvolvePokemon(pokemon.Id, currentEvolvingCard.Id);
+            NetworkManager.Instance.gameService.EvolvePokemon(gameField.Id, pokemon.Id, currentEvolvingCard.Id);
             currentEvolvingCard = null;
             SpecialState = SpecialGameState.None;
             infoText.text = string.Empty;
@@ -133,7 +133,7 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.AttachEnergy(pokemon.Id, currentEnergyCard.Id);
+            NetworkManager.Instance.gameService.AttachEnergy(gameField.Id, pokemon.Id, currentEnergyCard.Id);
             currentEnergyCard = null;
             SpecialState = SpecialGameState.None;
             infoText.text = string.Empty;
@@ -370,7 +370,7 @@ namespace Assets.Code
 
         private void SetActiveStateClicked(CardRenderer cardController)
         {
-            var id = NetworkManager.Instance.gameService.SetActivePokemon(myId, cardController.card.Id);
+            var id = NetworkManager.Instance.gameService.SetActivePokemon(gameField.Id, myId, cardController.card.Id);
             NetworkManager.Instance.RegisterCallbackById(id, OnGameUpdated);
         }
 
@@ -381,7 +381,7 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.ActivateAbility(ability.Id);
+            NetworkManager.Instance.gameService.ActivateAbility(gameField.Id, ability.Id);
         }
 
         public void Attack(Attack attack)
@@ -391,19 +391,19 @@ namespace Assets.Code
                 return;
             }
 
-            NetworkManager.Instance.gameService.Attack(attack.Id);
+            NetworkManager.Instance.gameService.Attack(gameField.Id, attack.Id);
         }
 
         public void EndTurnButtonClicked()
         {
-            NetworkManager.Instance.gameService.EndTurn();
+            NetworkManager.Instance.gameService.EndTurn(gameField.Id);
         }
 
         public void DoneButtonClicked()
         {
             if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
-                NetworkManager.Instance.gameService.AddToBench(myId, selectedCards.OfType<PokemonCard>().Select(card => card.Id).ToList());
+                NetworkManager.Instance.gameService.AddToBench(gameField.Id, myId, selectedCards.OfType<PokemonCard>().Select(card => card.Id).ToList());
                 selectedCards.Clear();
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)

@@ -16,6 +16,6 @@
         SelectOpponentPokemon,
         SelectPriceCards,
         GameLogReload,
-        GameLogNewMessages
+        GameLogNewMessages,
     }
 }
