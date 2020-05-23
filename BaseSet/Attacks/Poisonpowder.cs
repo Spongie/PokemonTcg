@@ -1,0 +1,26 @@
+using System.Collections.Generic;
+using TCGCards;
+using TCGCards.Core;
+
+namespace BaseSet.Attacks
+{
+    internal class Poisonpowder : Attack
+    {
+        public Poisonpowder()
+        {
+            Name = "Poisonpowder";
+            Description = "The Defending Pokémon is now Poisoned.";
+			DamageText = "30";
+            Cost = new List<Energy>
+            {
+                new Energy(EnergyTypes.Grass, 3)
+            };
+        }
+
+        public override Damage GetDamage(Player owner, Player opponent)
+        {
+            return 30;
+        }
+		//TODO: Special effects
+    }
+}
