@@ -166,9 +166,8 @@ namespace Assets.Code
         private void Start()
         {
             myId = NetworkManager.Instance.Me.Id;
-            var messageId = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
+            gameField = NetworkManager.Instance.CurrentGame;
 
-            NetworkManager.Instance.RegisterCallbackById(messageId, OnGameHosted);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);

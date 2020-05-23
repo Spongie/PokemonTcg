@@ -13,6 +13,6 @@ public class Login : MonoBehaviour
         NetworkManager.Instance.Me.Name = usernameInput.text;
         NetworkManager.Instance.playerService.Login(usernameInput.text, NetworkManager.Instance.Me.Id);
 
-        SceneManager.LoadScene("UI_2D");
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using TCGCards.Core;
 using UnityEngine;
 
 namespace Assets.Code
@@ -153,5 +154,6 @@ namespace Assets.Code
         public NetworkId RespondingTo { get; set; }
         public static NetworkManager Instance { get; private set; }
         public NetworkingCore.NetworkPlayer Me { get; internal set; }
+        public GameField CurrentGame { get; internal set; }
     }
 }
