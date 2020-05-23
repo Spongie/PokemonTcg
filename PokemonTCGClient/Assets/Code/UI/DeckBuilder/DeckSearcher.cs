@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,7 @@ namespace Assets.Code.UI.DeckBuilder
         public Text text;
         public GameObject Content;
         public GameObject CardPrefab;
+
         private List<Card> cards = new List<Card>();
         private string lastFrameSearch;
 
@@ -37,8 +39,6 @@ namespace Assets.Code.UI.DeckBuilder
             {
                 return;
             }
-
-            lastFrameSearch = searchString;
 
             foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
             {
