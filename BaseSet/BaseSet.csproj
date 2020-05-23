@@ -8,4 +8,8 @@
     <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&quot;&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\Server\bin\debug\netcoreapp2.0\Cards\$(TargetFileName)&quot;" />
+  </Target>
+
 </Project>
