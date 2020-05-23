@@ -10,7 +10,8 @@ namespace NetworkingCore
             Formatting = Formatting.None,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
             ObjectCreationHandling = ObjectCreationHandling.Replace,
-            ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+            SerializationBinder = new NetCoreSerializationBinder()
         };
 
         public static T Deserialize<T>(string json)
