@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TCGCards.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,11 +18,17 @@ namespace Assets.Code.UI.MainMenu
         {
             RefreshGames();
 
+            deckDropDown.options.Clear();
             var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
 
-            foreach (var file in Directory.GetFiles(directory))
+            foreach (var file in Directory.GetFiles(directory).Where(f => !f.EndsWith(".meta")))
             {
-                deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name));
+                deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(".dck", string.Empty)));
+            }
+
+            if (deckDropDown.options.Count > 0)
+            {
+                deckDropDown.value = 1;
             }
         }
 

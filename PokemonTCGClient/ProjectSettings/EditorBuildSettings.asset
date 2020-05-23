@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI_2D.unity
     guid: 9517e220fe5e29142adb3bbac389c2a1
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: bb5863497e28c024b99d6eb4a246c002
+  - enabled: 1
+    path: Assets/Scenes/DeckBuilder.unity
+    guid: 36d70c33e5b1e124aa02b6422d7c89c0
   m_configObjects: {}

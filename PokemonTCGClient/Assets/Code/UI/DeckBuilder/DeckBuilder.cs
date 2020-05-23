@@ -7,18 +7,43 @@ using System.Linq;
 using System.Reflection;
 using TCGCards;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Code.UI.DeckBuilder
 {
     public class DeckBuilder : MonoBehaviour
     {
+        public static string CurrentDeck;
         public InputField deckName;
         public GameObject cardPrefab;
         public GameObject deckContent;
 
+        private void Start()
+        {
+            if (!string.IsNullOrWhiteSpace(CurrentDeck))
+            {
+                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", CurrentDeck + ".dck");
+                var deck = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(fullPath));
+
+                foreach (var type in deck)
+                {
+                    var card = Card.CreateFromTypeInfo(type);
+
+                    if (card != null)
+                    {
+                        AddToDeck(card);
+                    }
+                }
+
+                deckName.text = CurrentDeck;
+            }
+        }
+
         public void OnExitClick()
         {
+            CurrentDeck = null;
+            SceneManager.LoadScene("MainMenu");
         }
 
         public void OnSaveClick()
