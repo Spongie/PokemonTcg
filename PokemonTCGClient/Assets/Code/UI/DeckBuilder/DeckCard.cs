@@ -66,26 +66,5 @@ namespace Assets.Code.UI.DeckBuilder
                 break;
             }
         }
-
-        IEnumerator LoadSprite(Card card)
-        {
-            yield return new WaitForFixedUpdate();
-
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
-            string finalPath = "file:///" + fullCardPath;
-
-            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
-            {
-                yield return request.SendWebRequest();
-
-                if (request.isNetworkError || request.isHttpError)
-                {
-                    Debug.LogError("Error fetching texture");
-                }
-
-                var texture = DownloadHandlerTexture.GetContent(request);
-                art.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            }
-        }
     }
 }

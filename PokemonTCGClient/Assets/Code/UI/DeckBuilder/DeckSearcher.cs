@@ -35,14 +35,25 @@ namespace Assets.Code.UI.DeckBuilder
 
             var searchString = searchInput.text;
 
+            if (string.IsNullOrWhiteSpace(searchString) && searchString.Trim() != lastFrameSearch)
+            {
+                foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
+                {
+                    deckCard.gameObject.SetActive(true);
+                }
+            }
+
             if (string.IsNullOrWhiteSpace(searchString) || searchString.Trim() == lastFrameSearch)
             {
                 return;
             }
 
+            lastFrameSearch = searchString;
+            var formattedSearch = searchString.ToLower();
+
             foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
             {
-                if (!deckCard.card.GetName().Contains(searchString))
+                if (!deckCard.card.GetName().ToLower().Contains(formattedSearch))
                 {
                     deckCard.gameObject.SetActive(false);
                 }
@@ -62,18 +73,11 @@ namespace Assets.Code.UI.DeckBuilder
             {
                 foreach (var type in Assembly.Load(assembly).DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
                 {
-                    var constructor = type.DeclaredConstructors.First();
-                    var parameters = new List<object>();
+                    var card = Card.CreateFromTypeInfo(type);
 
-                    for (int i = 0; i < constructor.GetParameters().Length; i++)
+                    if (card == null)
                     {
-                        parameters.Add(null);
-                    }
-
-                    var card = (Card)constructor.Invoke(parameters.ToArray());
-                    if (card.IsTestCard)
-                    {
-                        continue;
+                        continue;   
                     }
 
                     cards.Add(card);
@@ -84,7 +88,7 @@ namespace Assets.Code.UI.DeckBuilder
 
                     counter++;
 
-                    if (counter >= 10)
+                    if (counter >= 30)
                     {
                         yield return new WaitForEndOfFrame();
                     }

@@ -1,5 +1,10 @@
-﻿using System;
+﻿using NetworkingCore;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using TCGCards;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +19,6 @@ namespace Assets.Code.UI.DeckBuilder
 
         public void OnExitClick()
         {
-            //SceneManager.LoadScene
         }
 
         public void OnSaveClick()
@@ -26,9 +30,18 @@ namespace Assets.Code.UI.DeckBuilder
                 filename.Replace(character, '\0');
             }
 
-            var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", filename);
+            var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
 
-            var data = "";
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            var fullPath = Path.Combine(directory, filename);
+
+            var cards = deckContent.GetComponentsInChildren<DeckCard>().Select(deckCard => deckCard.card.GetType().GetTypeInfo()).ToList();
+
+            var data = Serializer.Serialize(cards);
 
             File.WriteAllText(fullPath, data);        
         }

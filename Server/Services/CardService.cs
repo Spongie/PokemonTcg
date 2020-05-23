@@ -19,15 +19,7 @@ namespace Server.Services
             foreach (var typeInfo in Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load).SelectMany(x => x.DefinedTypes)
                 .Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
             {
-                var constructor = typeInfo.DeclaredConstructors.First();
-                var parameters = new List<object>();
-
-                for (int i = 0; i < constructor.GetParameters().Length; i++)
-                {
-                    parameters.Add(null);
-                }
-
-                cards.Add((Card)constructor.Invoke(parameters.ToArray()));
+                cards.Add(Card.CreateFromTypeInfo(typeInfo));
             }
 
             Logger.Instance.Log($"Loaded {cards.Count} to cache");

@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using NetworkingCore;
 using TCGCards.Core;
 
@@ -53,6 +55,26 @@ namespace TCGCards
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public static Card CreateFromTypeInfo(TypeInfo type)
+        {
+            var constructor = type.DeclaredConstructors.First();
+            var parameters = new List<object>();
+
+            for (int i = 0; i < constructor.GetParameters().Length; i++)
+            {
+                parameters.Add(null);
+            }
+
+            var card = (Card)constructor.Invoke(parameters.ToArray());
+            
+            if (card.IsTestCard)
+            {
+                return null;
+            }
+
+            return card;
         }
     }
 }
