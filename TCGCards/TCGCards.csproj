@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d $(TargetDir)*.dll $(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\" />
+    <Exec Command="xcopy /y /d $(TargetDir)*.dll $(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\&#xD;&#xA;copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\Server\bin\debug\netcoreapp2.0\Cards\$(TargetFileName)&quot;" />
   </Target>
 
 </Project>

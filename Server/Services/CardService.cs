@@ -1,7 +1,9 @@
 ﻿using NetworkingCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using TCGCards;
 
 namespace Server.Services
@@ -16,10 +18,14 @@ namespace Server.Services
 
             cards = new List<Card>();
 
-            foreach (var typeInfo in Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load).SelectMany(x => x.DefinedTypes)
-                .Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+            foreach (var cardFile in Directory.GetFiles("Cards"))
             {
-                cards.Add(Card.CreateFromTypeInfo(typeInfo));
+                var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(new FileInfo(cardFile).FullName);
+
+                foreach (var typeInfo in assembly.DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+                {
+                    cards.Add(Card.CreateFromTypeInfo(typeInfo));
+                }
             }
 
             Logger.Instance.Log($"Loaded {cards.Count} to cache");
