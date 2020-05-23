@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 693078729}
@@ -1826,7 +1826,7 @@ GameObject:
   - component: {fileID: 1249422370}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: deckBuilder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1928,6 +1928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckName: {fileID: 934460865}
+  cardPrefab: {fileID: 5445838553115700739, guid: a8fe86c11bcc3454f87671bb3b219d6d,
+    type: 3}
+  deckContent: {fileID: 1847495039}
 --- !u!1 &1291656234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,7 +2394,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 991539772}

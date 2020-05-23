@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 
 public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
     private int oldOrder = 0;
     private Vector2 originalSize;
 
@@ -47,6 +46,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     private void OnZoomStart()
     {
+        Debug.Log("Zoom start");
         zooming = true;
         var rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(440, 540);
@@ -61,13 +61,22 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
             rectTransform.offsetMin = rectTransform.offsetMin - rectTransform.offsetMax;
             rectTransform.offsetMax = Vector2.zero;
         }
+        else if (zoomMode == ZoomMode.FromTopLeft)
+        {
+            var offset = rectTransform.offsetMin - rectTransform.offsetMax;
+            rectTransform.offsetMax = new Vector2(-offset.x, 0);
+            rectTransform.offsetMin = new Vector2(0, offset.y);
+
+            
+        }
         else if (zoomMode == ZoomMode.Center)
         {
             rectTransform.offsetMax = rectTransform.offsetMax - rectTransform.offsetMin;
             rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x / 2, rectTransform.offsetMax.y / 2);
         }
 
-        transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 100;
+        var canvas = transform.parent.gameObject.GetComponent<Canvas>();
+        canvas.sortingOrder = 100;
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -78,6 +87,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     private void OnZoomEnd()
     {
+        Debug.Log("Zoom End");
         zooming = false;
         var rectTransform = GetComponent<RectTransform>();
         
@@ -85,6 +95,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
         rectTransform.offsetMin = Vector2.zero;
         rectTransform.offsetMax = Vector2.zero;
 
-        transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = oldOrder;
+        var canvas = transform.parent.gameObject.GetComponent<Canvas>();
+        canvas.sortingOrder = oldOrder;
     }
 }

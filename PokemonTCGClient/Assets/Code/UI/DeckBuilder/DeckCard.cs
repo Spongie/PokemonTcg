@@ -1,21 +1,41 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCGCards;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 namespace Assets.Code.UI.DeckBuilder
 {
-    public class DeckCard : MonoBehaviour
+    public class DeckCard : MonoBehaviour, IPointerClickHandler
     {
         public Image art;
         public Card card;
+        public DeckBuilder deckBuilder;
+        public bool isInDeck;
+
+        void Start()
+        {
+            deckBuilder = GameObject.FindGameObjectWithTag("deckBuilder").GetComponent<DeckBuilder>();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
+
+            if (!isInDeck)
+            {
+                deckBuilder.AddToDeck(card);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         internal void Init(Card card)
         {

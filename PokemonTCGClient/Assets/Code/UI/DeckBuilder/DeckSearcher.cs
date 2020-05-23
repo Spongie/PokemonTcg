@@ -58,35 +58,39 @@ namespace Assets.Code.UI.DeckBuilder
             loading = true;
             int counter = 0;
 
-            foreach (var typeInfo in Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(Assembly.Load).SelectMany(x => x.DefinedTypes)
-                .Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+            foreach (var assembly in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
-                var constructor = typeInfo.DeclaredConstructors.First();
-                var parameters = new List<object>();
-
-                for (int i = 0; i < constructor.GetParameters().Length; i++)
+                foreach (var type in Assembly.Load(assembly).DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
                 {
-                    parameters.Add(null);
+                    var constructor = type.DeclaredConstructors.First();
+                    var parameters = new List<object>();
+
+                    for (int i = 0; i < constructor.GetParameters().Length; i++)
+                    {
+                        parameters.Add(null);
+                    }
+
+                    var card = (Card)constructor.Invoke(parameters.ToArray());
+                    if (card.IsTestCard)
+                    {
+                        continue;
+                    }
+
+                    cards.Add(card);
+
+                    text.text = cards.Count.ToString();
+                    var spawnedObject = Instantiate(CardPrefab, Content.transform);
+                    spawnedObject.GetComponent<DeckCard>().Init(card);
+
+                    counter++;
+
+                    if (counter >= 10)
+                    {
+                        yield return new WaitForEndOfFrame();
+                    }
                 }
 
-                var card = (Card)constructor.Invoke(parameters.ToArray());
-                if (card.IsTestCard)
-                {
-                    continue;
-                }
-
-                cards.Add(card);
-
-                text.text = cards.Count.ToString();
-                var spawnedObject = Instantiate(CardPrefab, Content.transform);
-                spawnedObject.GetComponent<DeckCard>().Init(card);
-
-                counter++;
-
-                if (counter >= 30)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
+                yield return new WaitForEndOfFrame();
             }
 
             loading = false;

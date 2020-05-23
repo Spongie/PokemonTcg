@@ -11,6 +11,7 @@ TagManager:
   - PlayerHand
   - _global_
   - Ignore
+  - deckBuilder
   layers:
   - Default
   - TransparentFX

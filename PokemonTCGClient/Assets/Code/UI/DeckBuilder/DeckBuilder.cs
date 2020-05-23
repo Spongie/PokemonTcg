@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using TCGCards;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,8 @@ namespace Assets.Code.UI.DeckBuilder
     public class DeckBuilder : MonoBehaviour
     {
         public InputField deckName;
+        public GameObject cardPrefab;
+        public GameObject deckContent;
 
         public void OnExitClick()
         {
@@ -27,6 +31,17 @@ namespace Assets.Code.UI.DeckBuilder
             var data = "";
 
             File.WriteAllText(fullPath, data);        
+        }
+
+        internal void AddToDeck(Card card)
+        {
+            var spawnedObject = Instantiate(cardPrefab, deckContent.transform);
+            var deckCard = spawnedObject.GetComponent<DeckCard>();
+
+            deckCard.Init(card);
+            deckCard.isInDeck = true;
+
+            spawnedObject.GetComponentInChildren<CardZoomer>().zoomMode = ZoomMode.FromTopLeft;
         }
     }
 }

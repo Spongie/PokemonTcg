@@ -3,5 +3,6 @@
     FromBottom,
     FromTop,
     Center,
-    None
+    None,
+    FromTopLeft
 }

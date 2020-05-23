@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68d512106bc2cb946912e92899fbee10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed26546be6e816b4c82b07dc4e37ec00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -211,3 +211,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   art: {fileID: 5445838553101863752}
+  deckBuilder: {fileID: 0}
+  isInDeck: 0
