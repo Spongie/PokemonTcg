@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
-using TeamRocket.Attacks;
+using {SETNAME}.Attacks;
 
 namespace {SETNAME}.PokemonCards
 {
-    public class {CLASSNAME} : IPokemonCard
+    public class {CLASSNAME} : PokemonCard
     {
         public {CLASSNAME}(Player owner) : base(owner)
         {

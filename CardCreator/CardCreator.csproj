@@ -11,8 +11,12 @@
   </ItemGroup>
   
   <ItemGroup>
-    <EmbeddedResource Include="Resources/AttackTemplate.txt" />
-    <EmbeddedResource Include="Resources/PokemonTemplate.txt" />
+    <EmbeddedResource Include="Resources/AttackTemplate.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources/PokemonTemplate.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -59,7 +59,7 @@ namespace CardCreator
             ClassName = generateSafeClassName(Name);
 
             var assembly = typeof(Program).GetTypeInfo().Assembly;
-            using (Stream resource = assembly.GetManifestResourceStream("Resources.PokemonTemplate.txt"))
+            using (Stream resource = assembly.GetManifestResourceStream("CardCreator.Resources.PokemonTemplate.txt"))
             using (var reader = new StreamReader(resource))
             {
                 string template = reader.ReadToEnd();
@@ -72,12 +72,16 @@ namespace CardCreator
                 code = code.Replace(templateWeakness, convertFullTypeToType(WeaknessResistenceInfo.Weakness));
                 code = code.Replace(templateResistence, convertFullTypeToType(WeaknessResistenceInfo.Resistence));
                 code = code.Replace(templateRetreat, WeaknessResistenceInfo.RetreatCost.ToString());
-                code = code.Replace(templateAttacks, String.Join("," + Environment.NewLine + "\t\t\t\t", Attacks.Select(x => x.generateAttackStringForPokemon())));
+                code = code.Replace(templateAttacks, string.Join("," + Environment.NewLine + "\t\t\t\t", Attacks.Select(x => x.generateAttackStringForPokemon())));
                 code = code.Replace(templateStage, Stage.ToString());
 
                 if (!string.IsNullOrEmpty(EvolvesFrom))
                 {
                     code = code.Replace(templateEvolvesFrom, $"EvolvesFrom = \"{EvolvesFrom}\";");
+                }
+                else
+                {
+                    code = code.Replace(templateEvolvesFrom, string.Empty);
                 }
 
                 code = code.Replace(templateSetName, setName);
@@ -130,7 +134,13 @@ namespace CardCreator
 
         private static string generateSafeClassName(string name)
         {
-            return name.Replace("-", string.Empty).Replace("é", "e").Replace("’", "").Replace("!", string.Empty).Replace(" ", string.Empty);
+            return name.Replace("-", string.Empty)
+                .Replace("é", "e")
+                .Replace("’", "")
+                .Replace("!", string.Empty)
+                .Replace(" ", string.Empty)
+                .Replace("'", string.Empty)
+                .Replace("♂", "Male");
         }
     }
 }

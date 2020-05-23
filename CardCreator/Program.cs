@@ -15,7 +15,6 @@ namespace CardCreator
             new Creator().Run(args[0], args[1]);
 
             Console.WriteLine("Completed");
-            Console.Read();
         }
     }
 }

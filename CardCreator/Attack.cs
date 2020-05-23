@@ -21,6 +21,7 @@ namespace CardCreator
             Name = attack.Name;
             Description = attack.Text;
             Damage = string.IsNullOrWhiteSpace(attack.Damage) ? "0" : attack.Damage;
+            Damage = Damage.Replace("+", string.Empty).Replace("×", string.Empty).Replace("-", string.Empty);
 
             foreach (var cost in attack.Cost)
             {
@@ -40,7 +41,7 @@ namespace CardCreator
         public string generateCode(string setName)
         {
             var assembly = typeof(Program).GetTypeInfo().Assembly;
-            using (Stream resource = assembly.GetManifestResourceStream("Resources.AttackTemplate.txt"))
+            using (Stream resource = assembly.GetManifestResourceStream("CardCreator.Resources.AttackTemplate.txt"))
             using (var reader = new StreamReader(resource))
             {
                 string template = reader.ReadToEnd();
