@@ -62,7 +62,14 @@ namespace TCGCards
             }
 
             if(IsAsleep)
+            {
                 IsAsleep = CoinFlipper.FlipCoin();
+            }
+
+            foreach (var attack in Attacks)
+            {
+                attack.Disabled = false;
+            }
 
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();

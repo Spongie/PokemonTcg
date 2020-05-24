@@ -24,6 +24,7 @@ namespace TCGCards
         public bool ApplyWeaknessAndResistance { get; set; } = true;
 
         public NetworkId Id { get; set; }
+        public bool Disabled { get; set; }
 
         public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) { }
 

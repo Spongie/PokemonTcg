@@ -355,6 +355,11 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
+            if (attack.Disabled)
+            {
+                return;
+            }
+
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates attack {attack.Name}");
 
             if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)

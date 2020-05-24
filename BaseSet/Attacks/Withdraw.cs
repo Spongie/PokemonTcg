@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace BaseSet.Attacks
 {
