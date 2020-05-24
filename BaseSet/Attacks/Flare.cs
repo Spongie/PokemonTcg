@@ -13,7 +13,7 @@ namespace BaseSet.Attacks
 			DamageText = "20";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Fighting, 1),
+                new Energy(EnergyTypes.Fire, 1),
 				new Energy(EnergyTypes.Colorless, 1)
             };
         }

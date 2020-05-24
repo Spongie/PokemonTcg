@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.EnergyCards;
 
 namespace BaseSet.Attacks
 {
-    internal class HydroPump : Attack
+    public class HydroPump : Attack
     {
         public HydroPump()
         {
@@ -19,8 +22,9 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 40;
+            var unusedWaterEnergy = owner.ActivePokemonCard.AttachedEnergy.OfType<WaterEnergy>().Count() - 3;
+
+            return 40 + (10 * Math.Min(unusedWaterEnergy, 2));
         }
-		//TODO: Special effects
     }
 }

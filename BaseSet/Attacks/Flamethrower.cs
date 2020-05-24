@@ -13,7 +13,7 @@ namespace BaseSet.Attacks
 			DamageText = "50";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Fighting, 2),
+                new Energy(EnergyTypes.Fire, 2),
 				new Energy(EnergyTypes.Colorless, 1)
             };
         }
@@ -22,6 +22,10 @@ namespace BaseSet.Attacks
         {
             return 50;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            AttackUtils.DiscardAttachedEnergy(owner.ActivePokemonCard, 1);
+        }
     }
 }

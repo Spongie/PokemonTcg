@@ -22,6 +22,16 @@ namespace BaseSet.Attacks
         {
             return 30;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            var heads = CoinFlipper.FlipCoins(2);
+
+            game.GameLog.AddMessage(owner.NetworkPlayer.Name + $" Flips 2 coins and gets {heads} heads");
+            var damage = heads * 30;
+            owner.ActivePokemonCard.DamageCounters += damage;
+
+            game.GameLog.AddMessage(owner.ActivePokemonCard.GetName() + $" Takes {damage} damage");
+        }
     }
 }

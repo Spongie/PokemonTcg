@@ -13,7 +13,7 @@ namespace BaseSet.Attacks
 			DamageText = "10";
             Cost = new List<Energy>
             {
-                new Energy(EnergyTypes.Fighting, 2)
+                new Energy(EnergyTypes.Fire, 2)
             };
         }
 
@@ -21,6 +21,10 @@ namespace BaseSet.Attacks
         {
             return 10;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            AttackUtils.FlipCoinIfHeadsConfused(game.GameLog, opponent.ActivePokemonCard);
+        }
     }
 }

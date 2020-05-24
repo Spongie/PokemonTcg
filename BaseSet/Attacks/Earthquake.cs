@@ -21,6 +21,13 @@ namespace BaseSet.Attacks
         {
             return 70;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            foreach (var pokemon in owner.BenchedPokemon)
+            {
+                pokemon.DamageCounters += 10;
+            }
+        }
     }
 }

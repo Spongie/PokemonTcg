@@ -21,6 +21,18 @@ namespace BaseSet.Attacks
         {
             return 50;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!CoinFlipper.FlipCoin())
+            {
+                game.GameLog.AddMessage($"Coin flipped tails {owner.ActivePokemonCard.GetName()} deals 10 damage to itself");
+                owner.ActivePokemonCard.DamageCounters += 10;
+            }
+            else
+            {
+                game.GameLog.AddMessage("Coin flipped heads, nothing happened");
+            }
+        }
     }
 }

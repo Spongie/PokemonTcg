@@ -21,6 +21,11 @@ namespace BaseSet.Attacks
         {
             return 0;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            game.GameLog.AddMessage(opponent.ActivePokemonCard.GetName() + " is now asleep");
+            opponent.ActivePokemonCard.IsAsleep = true;
+        }
     }
 }

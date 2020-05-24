@@ -21,6 +21,19 @@ namespace BaseSet.Attacks
         {
             return 10;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (CoinFlipper.FlipCoin())
+            {
+                game.GameLog.AddMessage(owner.NetworkPlayer?.Name + $"Flipped a heads {opponent.ActivePokemonCard.GetName()} is now poisoned");
+                opponent.ActivePokemonCard.IsPoisoned = true;
+            }
+            else
+            {
+                game.GameLog.AddMessage(owner.NetworkPlayer?.Name + $"Flipped a tails {opponent.ActivePokemonCard.GetName()} is now confused");
+                opponent.ActivePokemonCard.IsConfused = true;
+            }
+        }
     }
 }

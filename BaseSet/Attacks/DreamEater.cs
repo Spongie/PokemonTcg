@@ -9,7 +9,7 @@ namespace BaseSet.Attacks
         public DreamEater()
         {
             Name = "Dream Eater";
-            Description = "You can't this attack unless the Defending Pokémon is Asleep.";
+            Description = "You can't use this attack unless the Defending Pokémon is Asleep.";
 			DamageText = "50";
             Cost = new List<Energy>
             {
@@ -21,6 +21,10 @@ namespace BaseSet.Attacks
         {
             return 50;
         }
-		//TODO: Special effects
+
+        public override bool CanBeUsed(GameField game, Player owner, Player opponent)
+        {
+            return opponent.ActivePokemonCard.IsAsleep && base.CanBeUsed(game, owner, opponent);
+        }
     }
 }

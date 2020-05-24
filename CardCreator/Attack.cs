@@ -25,13 +25,13 @@ namespace CardCreator
 
             foreach (var cost in attack.Cost)
             {
-                Cost += cost.Substring(0, 1);
+                Cost.Add(cost);
             }
 
             ClassName = generateSafeClassName(Name);
         }
 
-        public string Cost { get; set; }
+        public List<string> Cost { get; set; } = new List<string>();
         public string Name { get; set; }
         public string Damage { get; set; }
         public bool NeedsMore { get { return !string.IsNullOrEmpty(Description); } }
@@ -62,7 +62,7 @@ namespace CardCreator
         {
             var costs = new List<string>();
 
-            foreach (var typeCodeGroup in Cost.ToCharArray().GroupBy(x => x))
+            foreach (var typeCodeGroup in Cost.GroupBy(x => x))
             {
                 string typeName = getEnergyType(typeCodeGroup.Key.ToString());
                 int count = typeCodeGroup.Count();
@@ -73,29 +73,30 @@ namespace CardCreator
             return string.Join("," + Environment.NewLine + "\t\t\t\t", costs);
         }
 
-        private string getEnergyType(string typeCode)
+        private string getEnergyType(string type)
         {
-            switch (typeCode)
+            switch (type)
             {
-                case "P":
+                case "Psychic":
                     return "EnergyTypes.Psychic";
-                case "G":
+                case "Grass":
                     return "EnergyTypes.Grass";
-                case "R":
+                case "Fire":
                     return "EnergyTypes.Fire";
-                case "W":
+                case "Water":
                     return "EnergyTypes.Water";
-                case "C":
+                case "Colorless":
                     return "EnergyTypes.Colorless";
-                case "F":
+                case "Fighting":
                     return "EnergyTypes.Fighting";
-                case "L":
+                case "Lightning":
                     return "EnergyTypes.Electric";
                 case "":
                 case "none":
+                case null:
                     return "EnergyTypes.None";
                 default:
-                    throw new InvalidOperationException(typeCode);
+                    throw new InvalidOperationException(type);
             }
         }
 

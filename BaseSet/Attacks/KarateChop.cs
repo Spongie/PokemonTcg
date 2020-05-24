@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
@@ -20,8 +21,8 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 50;
+            var damage = 50 - owner.ActivePokemonCard.DamageCounters;
+            return Math.Max(damage, 0);
         }
-		//TODO: Special effects
     }
 }

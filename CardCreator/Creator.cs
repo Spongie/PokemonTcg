@@ -1,6 +1,7 @@
 ﻿using PokemonTcgSdk;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -11,6 +12,7 @@ namespace CardCreator
     {
         public void Run(string setName, string namespaceName)
         {
+            Debugger.Launch();
             if (Directory.Exists(namespaceName))
             {
                 Directory.Delete(namespaceName, true);
