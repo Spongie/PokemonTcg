@@ -142,5 +142,107 @@ namespace TCGCards.Core.Tests
             Assert.AreEqual(card, p.ActivePokemonCard);
             Assert.AreEqual(card2, p.BenchedPokemon.First());
         }
+
+        [TestMethod]
+        public void KillActivePokemon_Basic_NothingAttached()
+        {
+            var player = new Player();
+            player.ActivePokemonCard = new Abra(player);
+
+            player.KillActivePokemon();
+
+            Assert.IsNull(player.ActivePokemonCard);
+            Assert.AreEqual(1, player.DiscardPile.Count);
+        }
+
+        [TestMethod]
+        public void KillActivePokemon_Basic_AttachedEnergy()
+        {
+            var player = new Player();
+            player.ActivePokemonCard = new Abra(player);
+            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+
+            player.KillActivePokemon();
+
+            Assert.IsNull(player.ActivePokemonCard);
+            Assert.AreEqual(3, player.DiscardPile.Count);
+        }
+
+        [TestMethod]
+        public void KillActivePokemon_StageOne_AttachedEnergy()
+        {
+            var player = new Player();
+            var abra = new Abra(player);
+            var kadabra = new DarkKadabra(player);
+
+            abra.Evolve(kadabra);
+
+            player.ActivePokemonCard = kadabra;
+            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+
+            player.KillActivePokemon();
+
+            Assert.IsNull(player.ActivePokemonCard);
+            Assert.AreEqual(4, player.DiscardPile.Count);
+        }
+
+        [TestMethod]
+        public void KillActivePokemon_StageOne_NoEnergy()
+        {
+            var player = new Player();
+            var abra = new Abra(player);
+            var kadabra = new DarkKadabra(player);
+
+            abra.Evolve(kadabra);
+
+            player.ActivePokemonCard = kadabra;
+
+            player.KillActivePokemon();
+
+            Assert.IsNull(player.ActivePokemonCard);
+            Assert.AreEqual(2, player.DiscardPile.Count);
+        }
+
+        [TestMethod]
+        public void KillActivePokemon_StageTwo_AttachedEnergy()
+        {
+            var player = new Player();
+            var abra = new Abra(player);
+            var kadabra = new DarkKadabra(player);
+            var alakazam = new DarkAlakazam(player);
+
+            abra.Evolve(kadabra);
+            kadabra.Evolve(alakazam);
+
+            player.ActivePokemonCard = alakazam;
+            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+
+            player.KillActivePokemon();
+
+            Assert.IsNull(player.ActivePokemonCard);
+            Assert.AreEqual(5, player.DiscardPile.Count);
+        }
+
+        [TestMethod]
+        public void KillActivePokemon_StageTwo_NoEnergy()
+        {
+            var player = new Player();
+            var abra = new Abra(player);
+            var kadabra = new DarkKadabra(player);
+            var alakazam = new DarkAlakazam(player);
+
+            abra.Evolve(kadabra);
+            kadabra.Evolve(alakazam);
+
+            player.ActivePokemonCard = alakazam;
+
+            player.KillActivePokemon();
+
+            Assert.IsNull(player.ActivePokemonCard);
+            Assert.AreEqual(3, player.DiscardPile.Count);
+        }
     }
 }
