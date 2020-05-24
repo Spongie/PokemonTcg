@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace BaseSet.Attacks
 {
@@ -21,6 +22,13 @@ namespace BaseSet.Attacks
         {
             return 10;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            game.AttackStoppers.Add(new AttackStopper((defender) =>
+            {
+                return !CoinFlipper.FlipCoin();
+            }));
+        }
     }
 }
