@@ -4,6 +4,7 @@ using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TCGCards.EnergyCards;
 
 namespace TeamRocket.Attacks
 {
@@ -22,16 +23,21 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            if (opponent.BenchedPokemon.Any())
+            if (opponent.BenchedPokemon.Any() && owner.ActivePokemonCard.AttachedEnergy.OfType<FireEnergy>().Any())
             {
                 var activateMessage = new YesNoMessage { Message = Description }.ToNetworkMessage(owner.Id);
                 var activateResponse = owner.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(activateMessage);
 
                 if (activateResponse.AnsweredYes)
                 {
+                    var pickEnergyMessage = new PickFromListMessage(owner.ActivePokemonCard.AttachedEnergy.OfType<FireEnergy>(), 1);
+                    var energyResponse = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(pickEnergyMessage.ToNetworkMessage(owner.Id));
+
+                    var selectedEnergy = owner.ActivePokemonCard.AttachedEnergy.First(x => x.Id.Equals(energyResponse.Cards.First()));
+                    owner.ActivePokemonCard.DiscardEnergyCard(selectedEnergy);
+
                     var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
                     var selectedId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    //TODO discard energy
                     var pokemon = opponent.BenchedPokemon.First(x => x.Id.Equals(selectedId));
                     pokemon.DamageCounters += 10;
                 }
