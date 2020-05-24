@@ -89,6 +89,7 @@ namespace TCGCards
             if (energyCard != null)
             {
                 AttachedEnergy.Remove(energyCard);
+                Owner.DiscardPile.Add(energyCard);
             }
         }
 

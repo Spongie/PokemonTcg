@@ -6,7 +6,7 @@ using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
-    internal class MagneticLines : Attack
+    public class MagneticLines : Attack
     {
         public MagneticLines()
         {
@@ -31,7 +31,7 @@ namespace TeamRocket.Attacks
 
             var selectedEnergyMessage = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy.OfType<EnergyCard>().Where(card => card.IsBasic), 1).ToNetworkMessage(owner.Id));
             var selectedPokemonMessage = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
-            var selectedEnergy = selectedEnergyMessage.Cards.OfType<EnergyCard>().First(); //TODO FIX
+            var selectedEnergy = (EnergyCard)game.FindCardById(selectedEnergyMessage.Cards.First());
 
             opponent.AttachEnergyToPokemon(selectedEnergy, (PokemonCard)game.FindCardById(selectedPokemonMessage.Cards.First()), null);
             opponent.ActivePokemonCard.AttachedEnergy.Remove(selectedEnergy);

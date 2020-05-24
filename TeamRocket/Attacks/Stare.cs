@@ -21,10 +21,18 @@ namespace TeamRocket.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
-            response.Cards.OfType<PokemonCard>().First().DamageCounters += 10;//TODO FIX
-
             return 0;
+        }
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            var target = GameUtils.SelectOnePokemonCardFromOpponent(game, owner);
+
+            if (target != null)
+            {
+                target.DamageCounters += 10;
+                //TODO Disable pokemon power
+            }
         }
     }
 }

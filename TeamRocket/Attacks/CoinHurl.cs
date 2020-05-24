@@ -26,13 +26,11 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
+            var target = GameUtils.SelectOnePokemonCardFromOpponent(game, owner);
 
-            var selectedPokemon = response.Cards.OfType<PokemonCard>().FirstOrDefault();  //TODO FIX
-
-            if (selectedPokemon != null)
+            if (target != null && CoinFlipper.FlipCoin())
             {
-                selectedPokemon.DamageCounters += 20;
+                target.DamageCounters += 20;
             }
         }
     }

@@ -30,7 +30,7 @@ namespace TeamRocketTests.Abilities
             var networkPlayer = Substitute.For<INetworkPlayer>();
             networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.Deck.Cards.OfType<PokemonCard>().First(x => x.Stage > 0).Id//TODO FIX
+                player.Deck.Cards.OfType<PokemonCard>().First(x => x.Stage > 0).Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

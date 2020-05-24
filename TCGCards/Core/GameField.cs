@@ -178,11 +178,30 @@ namespace TCGCards.Core
                     {
                         return pokemon;
                     }
+
+                    foreach (var energy in pokemon.AttachedEnergy)
+                    {
+                        if (energy.Id.Equals(id))
+                        {
+                            return energy;
+                        }
+                    }
                 }
 
-                if (player.ActivePokemonCard != null && player.ActivePokemonCard.Id.Equals(id))
+                if (player.ActivePokemonCard != null)
                 {
-                    return player.ActivePokemonCard;
+                    if (player.ActivePokemonCard.Id.Equals(id))
+                    {
+                        return player.ActivePokemonCard;
+                    }
+
+                    foreach (var energy in player.ActivePokemonCard.AttachedEnergy)
+                    {
+                        if (energy.Id.Equals(id))
+                        {
+                            return energy;
+                        }
+                    }
                 }
 
                 foreach (var card in player.Deck.Cards)
