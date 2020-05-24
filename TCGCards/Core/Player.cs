@@ -261,7 +261,6 @@ namespace TCGCards.Core
             SetActivePokemon(card);
         }
 
-        //TODO TEST
         public void KillActivePokemon()
         {
             var pokemon = ActivePokemonCard;
