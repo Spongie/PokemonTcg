@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Dragonair(Player owner) : base(owner)
         {
             PokemonName = "Dragonair";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Dratini;
             Hp = 80;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 2;

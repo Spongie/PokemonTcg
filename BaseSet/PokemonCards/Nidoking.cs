@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Nidoking(Player owner) : base(owner)
         {
             PokemonName = "Nidoking";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Nidorino;
             Hp = 90;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 3;

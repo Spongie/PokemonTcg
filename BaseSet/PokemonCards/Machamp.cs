@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Machamp(Player owner) : base(owner)
         {
             PokemonName = "Machamp";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Machoke;
             Hp = 100;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 3;

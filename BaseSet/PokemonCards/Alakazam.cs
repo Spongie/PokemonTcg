@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Alakazam(Player owner) : base(owner)
         {
             PokemonName = "Alakazam";
-			EvolvesFrom = "//TODO: Evolve";
+            EvolvesFrom = PokemonNames.Kadabra;
             Hp = 80;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 3;

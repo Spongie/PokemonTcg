@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Beedrill(Player owner) : base(owner)
         {
             PokemonName = "Beedrill";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Kakuna;
             Hp = 80;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 0;

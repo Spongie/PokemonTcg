@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Poliwhirl(Player owner) : base(owner)
         {
             PokemonName = "Poliwhirl";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Poliwag;
             Hp = 60;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

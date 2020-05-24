@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Blastoise(Player owner) : base(owner)
         {
             PokemonName = "Blastoise";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Wartortle;
             Hp = 100;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 3;

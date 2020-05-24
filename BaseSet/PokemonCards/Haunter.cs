@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Haunter(Player owner) : base(owner)
         {
             PokemonName = "Haunter";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Gastly;
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 1;

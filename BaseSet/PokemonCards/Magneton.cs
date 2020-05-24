@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Magneton(Player owner) : base(owner)
         {
             PokemonName = "Magneton";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Magnemite;
             Hp = 60;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

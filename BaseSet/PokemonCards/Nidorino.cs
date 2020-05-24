@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Nidorino(Player owner) : base(owner)
         {
             PokemonName = "Nidorino";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.NidoranMale;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

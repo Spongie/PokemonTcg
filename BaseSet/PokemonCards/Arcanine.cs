@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Arcanine(Player owner) : base(owner)
         {
             PokemonName = "Arcanine";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Growlithe;
             Hp = 100;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 3;

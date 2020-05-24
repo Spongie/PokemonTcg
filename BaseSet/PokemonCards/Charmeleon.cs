@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Charmeleon(Player owner) : base(owner)
         {
             PokemonName = "Charmeleon";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Charmander;
             Hp = 80;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

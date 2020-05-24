@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Ninetales(Player owner) : base(owner)
         {
             PokemonName = "Ninetales";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Vulpix;
             Hp = 80;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

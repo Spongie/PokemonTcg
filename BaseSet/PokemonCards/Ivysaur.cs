@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Ivysaur(Player owner) : base(owner)
         {
             PokemonName = "Ivysaur";
-			EvolvesFrom = "//TODO: Evolve";
+			EvolvesFrom = PokemonNames.Bulbasaur;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;
