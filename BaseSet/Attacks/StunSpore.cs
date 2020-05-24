@@ -21,6 +21,10 @@ namespace BaseSet.Attacks
         {
             return 20;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            AttackUtils.FlipCoinIfHeadsParalyzed(game.GameLog, opponent.ActivePokemonCard);
+        }
     }
 }

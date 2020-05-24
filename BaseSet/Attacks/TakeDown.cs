@@ -22,6 +22,10 @@ namespace BaseSet.Attacks
         {
             return 80;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            owner.ActivePokemonCard.DamageCounters += 30;
+        }
     }
 }

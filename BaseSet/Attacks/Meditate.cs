@@ -20,8 +20,7 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 20;
+            return 20 + opponent.ActivePokemonCard.DamageCounters;
         }
-		//TODO: Special effects
     }
 }

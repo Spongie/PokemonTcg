@@ -20,8 +20,15 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 30;
+            if (CoinFlipper.FlipCoin())
+            {
+                return 40;
+            }
+            else
+            {
+                owner.ActivePokemonCard.DamageCounters += 10;
+                return 30;
+            }
         }
-		//TODO: Special effects
     }
 }

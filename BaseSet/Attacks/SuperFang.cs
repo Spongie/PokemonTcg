@@ -19,8 +19,12 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 0;
+            var damage = (opponent.ActivePokemonCard.Hp - opponent.ActivePokemonCard.DamageCounters) / 2;
+
+            if (damage.ToString().EndsWith("5"))
+                damage += 5;
+
+            return damage;
         }
-		//TODO: Special effects
     }
 }

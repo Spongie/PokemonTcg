@@ -21,6 +21,15 @@ namespace BaseSet.Attacks
         {
             return 100;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            var energyCards = new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy);
+
+            foreach (var energyCard in energyCards)
+            {
+                owner.ActivePokemonCard.DiscardEnergyCard(energyCard);
+            }
+        }
     }
 }

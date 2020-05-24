@@ -19,7 +19,7 @@ namespace BaseSet.PokemonCards
 			Stage = 0;
             Attacks = new List<Attack>
             {
-				new WaterGun()
+				new WaterGun(10)
             };
 			
         }

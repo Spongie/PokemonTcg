@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace BaseSet.Attacks
 {
@@ -21,6 +23,15 @@ namespace BaseSet.Attacks
         {
             return 10;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!opponent.BenchedPokemon.Any())
+                return;
+
+            var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourBench(1).ToNetworkMessage(opponent.Id));
+            var newActive = (PokemonCard)game.FindCardById(response.Cards.First());
+            opponent.ForceRetreatActivePokemon(newActive);
+        }
     }
 }

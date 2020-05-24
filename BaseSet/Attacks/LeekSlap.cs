@@ -6,6 +6,8 @@ namespace BaseSet.Attacks
 {
     internal class LeekSlap : Attack
     {
+        private bool used;
+
         public LeekSlap()
         {
             Name = "Leek Slap";
@@ -19,8 +21,19 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
+            used = true;
+
+            if (!CoinFlipper.FlipCoin())
+            {
+                return 0;
+            }
+
             return 30;
         }
-		//TODO: Special effects
+
+        public override bool CanBeUsed(GameField game, Player owner, Player opponent)
+        {
+            return !used && base.CanBeUsed(game, owner, opponent);
+        }
     }
 }
