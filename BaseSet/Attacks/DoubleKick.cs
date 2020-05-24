@@ -20,8 +20,7 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 30;
+            return 30 * CoinFlipper.FlipCoins(2);
         }
-		//TODO: Special effects
     }
 }
