@@ -19,8 +19,8 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
+            AttackUtils.DiscardAttachedEnergy(owner.ActivePokemonCard, 1);
             return 80;
         }
-		//TODO: Special effects
     }
 }
