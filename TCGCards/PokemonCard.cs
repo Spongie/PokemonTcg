@@ -38,6 +38,7 @@ namespace TCGCards
         public string PokemonName { get; protected set; }
         public List<DamageStopper> DamageStoppers { get; set; }
         public List<AttackStopper> AttackStoppers { get; set; }
+        public int DamageTakenLastTurn { get; set; }
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
@@ -80,6 +81,8 @@ namespace TCGCards
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
 
             DamageCounters += totalDamage;
+
+            DamageTakenLastTurn = totalDamage;
 
             log.AddMessage(GetName() + $"Takes {totalDamage} damage");
 

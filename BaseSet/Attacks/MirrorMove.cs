@@ -19,8 +19,7 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 0;
+            return owner.ActivePokemonCard.DamageTakenLastTurn;
         }
-		//TODO: Special effects
     }
 }

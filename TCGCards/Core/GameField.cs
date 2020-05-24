@@ -556,6 +556,7 @@ namespace TCGCards.Core
             ActivePlayer.ResetTurn();
             NonActivePlayer.ResetTurn();
             ActivePlayer.DrawCards(1);
+            ActivePlayer.ActivePokemonCard.DamageTakenLastTurn = 0;
 
             GameState = GameFieldState.InTurn;
         }
