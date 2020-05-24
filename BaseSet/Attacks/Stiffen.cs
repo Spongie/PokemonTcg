@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.SpecialAbilities;
 
 namespace BaseSet.Attacks
 {
@@ -21,6 +22,17 @@ namespace BaseSet.Attacks
         {
             return 0;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (!CoinFlipper.FlipCoin())
+            {
+                game.GameLog.AddMessage("Flipped tails, nothing happens");
+                return;
+            }
+
+            game.GameLog.AddMessage("Flipped heads, damage will be prevented");
+            game.DamageStoppers.Add(new DamageStopper(() => true));
+        }
     }
 }
