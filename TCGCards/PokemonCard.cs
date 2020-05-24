@@ -71,6 +71,11 @@ namespace TCGCards
                 attack.Disabled = false;
             }
 
+            if (Ability != null)
+            {
+                Ability.UsedTimes = 0;
+            }
+
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
 

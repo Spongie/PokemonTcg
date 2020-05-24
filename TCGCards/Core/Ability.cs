@@ -21,16 +21,21 @@ namespace TCGCards.Core
         public string Name { get; set; }
         public string Description { get; set; }
         public NetworkId Id { get; protected set; }
+        public int Usages { get; set; } = 1;
+        public int UsedTimes { get; set; }
 
         public void Trigger(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             if (CanActivate())
+            {
+                UsedTimes++;
                 Activate(owner, opponent, damageTaken, log);
+            }
         }
 
         public virtual bool CanActivate()
         {
-            return !PokemonOwner.IsAsleep && !PokemonOwner.IsConfused && !PokemonOwner.IsParalyzed;
+            return !PokemonOwner.IsAsleep && !PokemonOwner.IsConfused && !PokemonOwner.IsParalyzed && UsedTimes < Usages;
         }
 
         public virtual void SetTarget(Card target)
