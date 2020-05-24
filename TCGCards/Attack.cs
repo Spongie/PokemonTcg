@@ -25,6 +25,8 @@ namespace TCGCards
 
         public NetworkId Id { get; set; }
 
+        public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) { }
+
         public abstract Damage GetDamage(Player owner, Player opponent);
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }

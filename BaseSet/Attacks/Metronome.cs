@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace BaseSet.Attacks
 {
     internal class Metronome : Attack
     {
+        private Attack chosenAttack;
+
         public Metronome()
         {
             Name = "Metronome";
@@ -19,8 +22,25 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            return 0;
+            var attacks = opponent.ActivePokemonCard.Attacks;
+
+            if (attacks.Count == 1)
+            {
+                chosenAttack = attacks[0];
+            }
+            else
+            {
+                var attackMessage = new SelectAttackMessage(opponent.ActivePokemonCard.Attacks).ToNetworkMessage(owner.Id);
+                chosenAttack = owner.NetworkPlayer.SendAndWaitForResponse<Attack>(attackMessage);
+            }
+
+            return chosenAttack.GetDamage(owner, opponent);
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            chosenAttack.ProcessEffects(game, owner, opponent);
+            chosenAttack = null;
+        }
     }
 }

@@ -23,6 +23,11 @@ namespace BaseSet.Attacks
             };
         }
 
+        public override void PayExtraCosts(GameField game, Player owner, Player opponent)
+        {
+            AttackUtils.DiscardAttachedEnergy(owner.ActivePokemonCard, 1);
+        }
+
         public override Damage GetDamage(Player owner, Player opponent)
         {
             return 0;
@@ -30,24 +35,6 @@ namespace BaseSet.Attacks
         
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            var pickFromListMessage = new PickFromListMessage(mewtwo.AttachedEnergy, 1);
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(pickFromListMessage.ToNetworkMessage(game.Id));
-
-            foreach (var cardId in response.Cards)
-            {
-                var energyCard = (EnergyCard)game.FindCardById(cardId);
-                mewtwo.AttachedEnergy.Remove(energyCard);
-                owner.DiscardPile.Add(energyCard);
-            }
-
-            if (!CoinFlipper.FlipCoin())
-            {
-                game.GameLog.AddMessage(owner.NetworkPlayer.Name + " Flips a coin and it's tails, nothing happens");
-                return;
-            }
-
-            game.GameLog.AddMessage(owner.NetworkPlayer.Name + " Flips a coin and it's heads, effect applied");
-
             game.AttackStoppers.Add(new AttackStopper((defender) =>
             {
                 return defender.Id == mewtwo.Id;

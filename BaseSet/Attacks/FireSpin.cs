@@ -17,9 +17,13 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override void PayExtraCosts(GameField game, Player owner, Player opponent)
         {
             AttackUtils.DiscardAttachedEnergy(owner.ActivePokemonCard, 2);
+        }
+
+        public override Damage GetDamage(Player owner, Player opponent)
+        {
             return 100;
         }
     }
