@@ -31,7 +31,7 @@ namespace TeamRocket.Attacks
                 opponent.ActivePokemonCard.DamageCounters += 20;
                 return;
             }
-
+            //TODO FIX
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
             response.Cards.OfType<PokemonCard>().First().DamageCounters += 20;
         }

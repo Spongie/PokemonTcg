@@ -17,12 +17,18 @@ namespace TeamRocketTests.Abilities
         {
             var player = new Player();
 
+            var card1 = new Oddish(player);
+            var card2 = new Oddish(player);
+
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<TCGCards.Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                new Oddish(player),
-                new Oddish(player)
+                card1.Id,
+                card2.Id
             }));
+
+            player.Deck.Cards.Push(card1);
+            player.Deck.Cards.Push(card2);
 
             player.SetNetworkPlayer(networkPlayer);
 
@@ -46,9 +52,9 @@ namespace TeamRocketTests.Abilities
             player.BenchedPokemon.Add(new Oddish(player));
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<TCGCards.Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                new Oddish(player)
+                new Oddish(player).Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

@@ -28,11 +28,11 @@ namespace TCGCards.Core
             GameLog = new GameLog();
         }
 
-        public void RevealCardsTo(List<Card> pickedCards, Player nonActivePlayer)
+        public void RevealCardsTo(List<NetworkId> pickedCards, Player nonActivePlayer)
         {
             foreach (var card in pickedCards)
             {
-                card.IsRevealed = true;
+                //card.IsRevealed = true;
             }
             //TODO: Complete this
         }
@@ -350,7 +350,11 @@ namespace TCGCards.Core
                     ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
                 }
 
-                PostAttack();
+                if (!IgnorePostAttack)
+                {
+                    PostAttack();
+                }
+
                 return;
             }
 
@@ -360,7 +364,7 @@ namespace TCGCards.Core
                 ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
             }
 
-            if (!AttackStoppers.Any(x => x.IsAttackIgnored()) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored()))
+            if (!AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
             {
                 if (!DamageStoppers.Any(x => x.IsDamageIgnored()))
                 {
@@ -394,7 +398,10 @@ namespace TCGCards.Core
                 GameLog.AddMessage("Attack fully ignored because of effect");
             }
 
-            PostAttack();
+            if (!IgnorePostAttack)
+            {
+                PostAttack();
+            }
         }
 
         private int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender)
@@ -458,7 +465,7 @@ namespace TCGCards.Core
 
         private void CheckDeadPokemon()
         {
-            if(NonActivePlayer.ActivePokemonCard.IsDead())
+            if(NonActivePlayer.ActivePokemonCard != null && NonActivePlayer.ActivePokemonCard.IsDead())
             {
                 GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.GetName() + "Dies");
 
@@ -481,19 +488,30 @@ namespace TCGCards.Core
                 {
                     ActivePlayer.SelectPriceCard(1);
                 }
-                
-                NonActivePlayer.SelectActiveFromBench();
+
+                NonActivePlayer.KillActivePokemon();
+                if (NonActivePlayer.BenchedPokemon.Any())
+                {
+                    NonActivePlayer.SelectActiveFromBench();
+                }//TODO Handle game win
             }
 
             PushGameLogUpdatesToPlayers();
 
-            if (ActivePlayer.ActivePokemonCard.IsDead())
+            if (ActivePlayer.ActivePokemonCard != null &&ActivePlayer.ActivePokemonCard.IsDead())
             {
                 GameLog.AddMessage(ActivePlayer.ActivePokemonCard.GetName() + "Dies");
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
+                ActivePlayer.KillActivePokemon();
                 NonActivePlayer.SelectPriceCard(1);
-                ActivePlayer.SelectActiveFromBench();
+                
+                if (ActivePlayer.BenchedPokemon.Any())
+                {
+                    ActivePlayer.SelectActiveFromBench();
+                } //TODO Handle game win
             }
+
+            //TODO CHECK DEAD BENCHED POKEMON
 
             PushGameLogUpdatesToPlayers();
         }
@@ -564,5 +582,6 @@ namespace TCGCards.Core
         public List<TemporaryPassiveAbility> TemporaryPassiveAbilities { get; set; }
         public bool PrizeCardsFaceUp { get; set; }
         public bool FirstTurn { get; set; } = true;
+        public bool IgnorePostAttack { get; set; }
     }
 }

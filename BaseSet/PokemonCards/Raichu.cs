@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Raichu(Player owner) : base(owner)
         {
             PokemonName = "Raichu";
-			EvolvesFrom = "//TODO: Evolve";
+            EvolvesFrom = PokemonNames.Pikachu;
             Hp = 80;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;
@@ -19,7 +19,7 @@ namespace BaseSet.PokemonCards
 			Stage = 1;
             Attacks = new List<Attack>
             {
-				new Agility(),
+				new Agility(this),
 				new Thunder()
             };
 			

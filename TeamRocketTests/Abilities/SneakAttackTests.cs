@@ -23,9 +23,9 @@ namespace TeamRocketTests.Abilities
             var networkPlayer = Substitute.For<INetworkPlayer>();
             networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(
                 new CardListMessage(       
-                    new List<Card>
+                    new List<NetworkId>
                     {
-                        opponent.ActivePokemonCard
+                        opponent.ActivePokemonCard.Id
                     }));
 
             owner.SetNetworkPlayer(networkPlayer);

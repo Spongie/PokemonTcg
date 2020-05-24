@@ -19,9 +19,10 @@ namespace TeamRocket.TrainerCards
 
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(availablePicks, 3).ToNetworkMessage(caster.Id));
 
-            caster.Deck.ShuffleInCards(response.Cards);
+            var selectedCards = response.Cards.Select(id => game.FindCardById(id)).ToList();
+            caster.Deck.ShuffleInCards(selectedCards);
 
-            foreach (var card in response.Cards)
+            foreach (var card in selectedCards)
             {
                 caster.DiscardPile.Remove(card);
             }

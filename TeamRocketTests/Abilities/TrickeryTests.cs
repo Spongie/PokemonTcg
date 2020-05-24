@@ -20,9 +20,9 @@ namespace TeamRocketTests.Abilities
             player.Deck.Cards.Push(new DarkGloom(player));
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<TCGCards.Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.PrizeCards.First()
+                player.PrizeCards.First().Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

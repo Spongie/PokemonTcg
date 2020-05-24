@@ -2,6 +2,7 @@
 using NetworkingCore;
 using NSubstitute;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using TCGCards.Core.Messages;
 using TCGCards.EnergyCards;
@@ -60,19 +61,22 @@ namespace TCGCards.Core.Tests
             gameField.ActivePlayer.SetActivePokemon(activePokemon);
             gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
 
+            var choice = new Magikarp(gameField.NonActivePlayer);
+            gameField.NonActivePlayer.BenchedPokemon.Add(choice);
+
             var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
             nonActiveNetworkPlayer.Id = gameField.NonActivePlayer.Id;
-            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                new Magikarp(gameField.NonActivePlayer)
+                choice.Id
             }));
             gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
 
             var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
             activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
-            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                gameField.ActivePlayer.PrizeCards.First()
+                gameField.ActivePlayer.PrizeCards.First().Id
             }));
             gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
 
@@ -110,19 +114,22 @@ namespace TCGCards.Core.Tests
             gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
             gameField.ActivePlayer.PrizeCards.Add(new WaterEnergy());
 
+            var choice = new Magikarp(gameField.ActivePlayer);
+            gameField.ActivePlayer.BenchedPokemon.Add(choice);
+
             var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
             activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
-            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                new Magikarp(gameField.ActivePlayer)
+                choice.Id
             }));
             gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
 
             var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
             nonActiveNetworkPlayer.Id = gameField.NonActivePlayer.Id;
-            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                gameField.NonActivePlayer.PrizeCards.First()
+                gameField.NonActivePlayer.PrizeCards.First().Id
             }));
             gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
 
@@ -150,12 +157,12 @@ namespace TCGCards.Core.Tests
 
             var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
             activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
-            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage(new List<Card> { gameField.ActivePlayer.BenchedPokemon.First() }));
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId> { gameField.ActivePlayer.BenchedPokemon.First().Id }));
             gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
             networkPlayer.Id = gameField.NonActivePlayer.Id;
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage(new List<Card> { gameField.NonActivePlayer.PrizeCards.First() }));
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId> { gameField.NonActivePlayer.PrizeCards.First().Id }));
             gameField.NonActivePlayer.SetNetworkPlayer(networkPlayer);
 
             var activePokemon = new Magikarp(gameField.ActivePlayer);
@@ -206,17 +213,20 @@ namespace TCGCards.Core.Tests
 
             var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
             activeNetworkPlayer.Id = gameField.ActivePlayer.Id;
-            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
 
             }));
             gameField.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
 
+            var benched = new Magikarp(gameField.NonActivePlayer);
+            gameField.NonActivePlayer.BenchedPokemon.Add(benched);
+
             var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
             nonActiveNetworkPlayer.Id = gameField.NonActivePlayer.Id;
-            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                new Magikarp(gameField.NonActivePlayer)
+                benched.Id
             }));
             gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
 

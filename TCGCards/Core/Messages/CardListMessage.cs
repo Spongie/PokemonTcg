@@ -5,11 +5,11 @@ namespace TCGCards.Core.Messages
 {
     public class CardListMessage : AbstractNetworkMessage
     {
-        public CardListMessage(List<Card> cards)
+        public CardListMessage(List<NetworkId> cards)
         {
-            Cards = new List<Card>(cards);
+            Cards = new List<NetworkId>(cards);
         }
 
-        public List<Card> Cards { get; set; }
+        public List<NetworkId> Cards { get; set; }
     }
 }

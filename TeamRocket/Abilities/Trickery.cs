@@ -20,7 +20,7 @@ namespace TeamRocket.Abilities
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             var topCard = owner.Deck.DrawCard();
-            var selectedCard = response.Cards.First();
+            var selectedCard = owner.PrizeCards.First(x => x.Id.Equals(response.Cards.First()));
 
             var selectedIndex = owner.PrizeCards.IndexOf(selectedCard);
             owner.PrizeCards.RemoveAt(selectedIndex);

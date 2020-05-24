@@ -20,7 +20,7 @@ namespace BaseSet.PokemonCards
             Attacks = new List<Attack>
             {
 				new Psychic(),
-				new Barrier()
+				new Barrier(this)
             };
 			
         }

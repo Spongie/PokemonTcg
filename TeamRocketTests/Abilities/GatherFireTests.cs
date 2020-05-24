@@ -22,9 +22,9 @@ namespace TeamRocketTests.Abilities
             player.BenchedPokemon.First().AttachedEnergy.Add(new FireEnergy());
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<TCGCards.Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.BenchedPokemon.First().AttachedEnergy.First()
+                player.BenchedPokemon.First().AttachedEnergy.First().Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

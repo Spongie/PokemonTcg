@@ -29,7 +29,7 @@ namespace TeamRocket.Attacks
         {
             var message = new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy, 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
-            opponent.ActivePokemonCard.DiscardEnergyCard(response.Cards.OfType<EnergyCard>().First());
+            opponent.ActivePokemonCard.DiscardEnergyCard(response.Cards.OfType<EnergyCard>().First());//TODO FIX
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NetworkingCore;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
 using TCGCards.Core;
@@ -35,9 +36,9 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            List<Card> selectedCards = this.TriggerDeckSearch(owner);
+            List<NetworkId> selectedCards = this.TriggerDeckSearch(owner);
 
-            PokemonCard evolution = owner.ActivePokemonCard.Evolve((PokemonCard)selectedCards.First());
+            PokemonCard evolution = owner.ActivePokemonCard.Evolve((PokemonCard)game.FindCardById(selectedCards.First()));
             owner.ActivePokemonCard = evolution;
         }
     }

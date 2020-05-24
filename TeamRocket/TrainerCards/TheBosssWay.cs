@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NetworkingCore;
+using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
@@ -15,7 +16,7 @@ namespace TeamRocket.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            List<Card> selectedCards = this.TriggerDeckSearch(caster);
+            List<NetworkId> selectedCards = this.TriggerDeckSearch(caster);
             game.ActivePlayer.DrawCardsFromDeck(selectedCards);
             game.RevealCardsTo(selectedCards, game.NonActivePlayer);
         }

@@ -25,11 +25,11 @@ namespace TeamRocketTests.Abilities
             player.DiscardPile.Add(new DarkAlakazam(player));
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.DiscardPile[0],
-                player.DiscardPile[1],
-                player.DiscardPile[2]
+                player.DiscardPile[0].Id,
+                player.DiscardPile[1].Id,
+                player.DiscardPile[2].Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

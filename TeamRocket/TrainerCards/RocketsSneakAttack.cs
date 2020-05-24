@@ -18,11 +18,11 @@ namespace TeamRocket.TrainerCards
             var message = new PickFromListMessage(opponent.Hand, 1);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(caster.Id));
 
-            var pickedCard = response.Cards.FirstOrDefault();
+            var pickedCard = game.FindCardById(response.Cards.FirstOrDefault());
 
             if (pickedCard != null)
             {
-                opponent.Hand = opponent.Hand.Except(response.Cards).ToList();
+                opponent.Hand.Remove(pickedCard);
                 opponent.Deck.Cards.Push(pickedCard);
                 opponent.Deck.Shuffle();
             }

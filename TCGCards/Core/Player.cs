@@ -1,5 +1,6 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core.Messages;
@@ -33,6 +34,13 @@ namespace TCGCards.Core
             }
         }
 
+        public void DiscardCards(IEnumerable<NetworkId> cardIds)
+        {
+            var cards = Hand.Where(card => cardIds.Contains(card.Id)).ToList();
+
+            DiscardCards(cards);
+        }
+
         public void DiscardCards(IEnumerable<Card> cards)
         {
             DiscardPile.AddRange(cards);
@@ -48,6 +56,13 @@ namespace TCGCards.Core
             DiscardPile.Add(card);
             Hand.Remove(card);
             card.IsRevealed = true;
+        }
+
+        public void DrawCardsFromDeck(IEnumerable<NetworkId> selectedCards)
+        {
+            var cards = Deck.Cards.Where(card => selectedCards.Contains(card.Id)).ToList();
+
+            DrawCardsFromDeck(cards);
         }
 
         public void DrawCardsFromDeck(IEnumerable<Card> selectedCards)
@@ -111,7 +126,7 @@ namespace TCGCards.Core
 
             endedTurn = true;
             HasPlayedEnergy = false;
-            ActivePokemonCard.EndTurn();
+            ActivePokemonCard?.EndTurn();
 
             foreach(var pokemon in BenchedPokemon)
             {
@@ -227,8 +242,9 @@ namespace TCGCards.Core
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            foreach (var card in response.Cards)
+            foreach (var cardId in response.Cards)
             {
+                var card = PrizeCards.First(x => x.Id.Equals(cardId));
                 PrizeCards.Remove(card);
                 Hand.Add(card);
             }
@@ -240,7 +256,34 @@ namespace TCGCards.Core
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            SetActivePokemon((PokemonCard)response.Cards.First());
+            var card = BenchedPokemon.First(x => x.Id.Equals(response.Cards.First()));
+
+            SetActivePokemon(card);
+        }
+
+        //TODO TEST
+        public void KillActivePokemon()
+        {
+            var pokemon = ActivePokemonCard;
+
+            DiscardPile.AddRange(pokemon.AttachedEnergy);
+            pokemon.AttachedEnergy.Clear();
+
+            if (pokemon.EvolvedFrom != null)
+            {
+                DiscardPile.Add(pokemon.EvolvedFrom);
+
+                if (pokemon.EvolvedFrom.EvolvedFrom != null)
+                {
+                    DiscardPile.Add(pokemon.EvolvedFrom.EvolvedFrom);
+                    pokemon.EvolvedFrom.EvolvedFrom = null;
+                }
+
+                pokemon.EvolvedFrom = null;
+            }
+
+            DiscardPile.Add(pokemon);
+            ActivePokemonCard = null;
         }
     }
 }

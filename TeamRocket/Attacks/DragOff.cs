@@ -25,7 +25,7 @@ namespace TeamRocket.Attacks
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
 
             PokemonCard currentActive = opponent.ActivePokemonCard;
-            PokemonCard newActive = (PokemonCard)response.Cards.First();
+            PokemonCard newActive = opponent.BenchedPokemon.First(x => x.Id.Equals(response.Cards.First()));
 
             opponent.ActivePokemonCard = newActive;
             opponent.BenchedPokemon.Remove(newActive);

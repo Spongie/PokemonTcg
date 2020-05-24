@@ -32,7 +32,7 @@ namespace TeamRocket.Attacks
             var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            opponent.ForceRetreatActivePokemon((PokemonCard)response.Cards.First());   
+            opponent.ForceRetreatActivePokemon((PokemonCard)game.FindCardById(response.Cards.First()));   
         }
 
         public override bool CanBeUsed(GameField game, Player owner, Player opponent)

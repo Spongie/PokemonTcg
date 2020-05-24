@@ -25,9 +25,9 @@ namespace TeamRocketTests.Abilities
             player.Deck.Cards.Push(new DarkAlakazam(player));
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.Hand[0]
+                player.Hand[0].Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);
@@ -49,9 +49,9 @@ namespace TeamRocketTests.Abilities
             player.Deck.Cards.Push(new DarkAlakazam(player));
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.Hand[0]
+                player.Hand[0].Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

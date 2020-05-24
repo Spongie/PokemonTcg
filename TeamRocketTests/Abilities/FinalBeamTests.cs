@@ -138,18 +138,18 @@ namespace TeamRocketTests.Abilities
             game.ActivePlayer.PrizeCards.Add(new WaterEnergy());
             var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
             activeNetworkPlayer.Id = game.ActivePlayer.Id;
-            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            activeNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                game.ActivePlayer.PrizeCards.First()
+                game.ActivePlayer.PrizeCards.First().Id
             }));
 
             game.ActivePlayer.SetNetworkPlayer(activeNetworkPlayer);
 
             var nonActiveNetworkPlayer = Substitute.For<INetworkPlayer>();
             nonActiveNetworkPlayer.Id = game.NonActivePlayer.Id;
-            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            nonActiveNetworkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                new Magikarp(game.NonActivePlayer)
+                new Magikarp(game.NonActivePlayer).Id
             }));
             game.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
             return game;

@@ -11,13 +11,31 @@ namespace TeamRocket.Abilities
         {
             TriggerType = TriggerType.EnterPlay;
             Name = "Sneak Attack";
-            Description = "When you player Dark Golbat from your hand choose 1 of your opponents Pokemon an deal 10 damage to it";
+            Description = "When you play Dark Golbat from your hand choose 1 of your opponents Pokemon an deal 10 damage to it";
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
-            response.Cards.OfType<PokemonCard>().ToList().ForEach(x => x.DealDamage(new Damage(10), log));
+
+            foreach (var id in response.Cards)
+            {
+                if (opponent.ActivePokemonCard.Id.Equals(id))
+                {
+                    opponent.ActivePokemonCard.DealDamage(new Damage(10), log);
+                }
+                else
+                {
+                    foreach (var pokemon in opponent.BenchedPokemon)
+                    {
+                        if (pokemon.Id.Equals(id))
+                        {
+                            pokemon.DealDamage(new Damage(10), log);
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

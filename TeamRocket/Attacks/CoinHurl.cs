@@ -28,7 +28,7 @@ namespace TeamRocket.Attacks
         {
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id));
 
-            var selectedPokemon = response.Cards.OfType<PokemonCard>().FirstOrDefault();
+            var selectedPokemon = response.Cards.OfType<PokemonCard>().FirstOrDefault();  //TODO FIX
 
             if (selectedPokemon != null)
             {

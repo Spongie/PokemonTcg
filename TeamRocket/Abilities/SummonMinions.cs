@@ -31,9 +31,9 @@ namespace TeamRocket.Abilities
             var cards = this.TriggerDeckSearch(owner);
 
             owner.DrawCardsFromDeck(cards);
-            foreach (var card in cards.OfType<PokemonCard>())
+            foreach (var card in cards)
             {
-                owner.SetBenchedPokemon(card);
+                owner.SetBenchedPokemon((PokemonCard)owner.Hand.First(x => x.Id.Equals(card)));
             }
         }
 

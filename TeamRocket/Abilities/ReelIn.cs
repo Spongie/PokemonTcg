@@ -26,8 +26,9 @@ namespace TeamRocket.Abilities
             var message = new PickFromListMessage(possibleChoices, 0, 3).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            owner.Hand.AddRange(response.Cards);
-            foreach (var card in response.Cards)
+            var selectedCards = owner.DiscardPile.Where(card => response.Cards.Contains(card.Id)).ToList();
+            owner.Hand.AddRange(selectedCards);
+            foreach (var card in selectedCards)
             {
                 owner.DiscardPile.Remove(card);
             }

@@ -28,9 +28,9 @@ namespace TeamRocketTests.Abilities
             int oldDeckSize = player.Deck.Cards.Count;
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
-            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<Card>
+            networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.Deck.Cards.OfType<PokemonCard>().First(x => x.Stage > 0)
+                player.Deck.Cards.OfType<PokemonCard>().First(x => x.Stage > 0).Id//TODO FIX
             }));
 
             player.SetNetworkPlayer(networkPlayer);

@@ -26,7 +26,7 @@ namespace TeamRocket.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            var selectedCard = (PsychicEnergy)this.TriggerDeckSearch(owner).First();
+            var selectedCard = (PsychicEnergy)game.FindCardById(this.TriggerDeckSearch(owner).First());
 
             owner.AttachEnergyToPokemon(selectedCard, owner.ActivePokemonCard, null);
             owner.ActivePokemonCard.Owner.DrawCardsFromDeck(new[] { selectedCard });

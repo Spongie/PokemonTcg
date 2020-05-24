@@ -1,4 +1,5 @@
-﻿using NetworkingCore.Messages;
+﻿using NetworkingCore;
+using NetworkingCore.Messages;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
@@ -46,8 +47,8 @@ namespace TeamRocket.TrainerCards
                 return;
             }
 
-            var casterPokemon = new List<Card>();
-            var opponentPokemon = new List<Card>();
+            var casterPokemon = new List<NetworkId>();
+            var opponentPokemon = new List<NetworkId>();
 
             if (caster.BenchedPokemon.Count < GameField.BenchMaxSize)
             {
@@ -60,8 +61,8 @@ namespace TeamRocket.TrainerCards
                 opponentPokemon = this.TriggerDeckSearch(opponent);
             }
 
-            caster.BenchedPokemon.AddRange(casterPokemon.OfType<PokemonCard>());
-            opponent.BenchedPokemon.AddRange(opponentPokemon.OfType<PokemonCard>());
+            caster.BenchedPokemon.AddRange(casterPokemon.Select(id => (PokemonCard)game.FindCardById(id)));
+            opponent.BenchedPokemon.AddRange(opponentPokemon.Select(id => (PokemonCard)game.FindCardById(id)));
         }
     }
 }

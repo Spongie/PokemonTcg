@@ -30,8 +30,10 @@ namespace TeamRocket.Attacks
                 if (activateResponse.AnsweredYes)
                 {
                     var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
-                    var selected = (PokemonCard)owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    selected.DamageCounters += 10;
+                    var selectedId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
+                    //TODO discard energy
+                    var pokemon = opponent.BenchedPokemon.First(x => x.Id.Equals(selectedId));
+                    pokemon.DamageCounters += 10;
                 }
             }
 
