@@ -8,14 +8,6 @@ namespace CardCreator.Tests
     public class AttackTests
     {
         [TestMethod()]
-        public void ParseTest_Cost()
-        {
-            Attack attack = new Attack(createTestPokemon().Attacks.First());
-
-            Assert.AreEqual("PPC", attack.Cost);
-        }
-
-        [TestMethod()]
         public void ParseTest_Name()
         {
             Attack attack = new Attack(createTestPokemon().Attacks.First());
@@ -37,14 +29,6 @@ namespace CardCreator.Tests
             Attack attack = new Attack(createTestPokemon().Attacks.First());
 
             Assert.AreEqual("You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)", attack.Description);
-        }
-
-        [TestMethod()]
-        public void ParseTest_Cost2()
-        {
-            Attack attack = new Attack(createTestPokemon2().Attacks.First());
-
-            Assert.AreEqual("P", attack.Cost);
         }
 
         [TestMethod()]

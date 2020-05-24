@@ -39,6 +39,7 @@ namespace TCGCards
         public List<DamageStopper> DamageStoppers { get; set; }
         public List<AttackStopper> AttackStoppers { get; set; }
         public int DamageTakenLastTurn { get; set; }
+        public bool DoublePoison { get; set; }
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
@@ -57,7 +58,7 @@ namespace TCGCards
 
             if (IsPoisoned)
             {
-                DamageCounters += 10;
+                DamageCounters += DoublePoison ? 20 : 10;
             }
 
             if(IsAsleep)
