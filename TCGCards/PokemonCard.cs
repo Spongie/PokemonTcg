@@ -69,12 +69,12 @@ namespace TCGCards
             AttackStoppers = AttackStoppers.Where(x => x.TurnsLeft > 0).ToList();
         }
 
-        public void DealDamage(Damage damage, GameLog log)
+        public int DealDamage(Damage damage, GameLog log)
         {
             if (DamageStoppers.Any(x => x.IsDamageIgnored()))
             {
                 log.AddMessage(GetName() + "Takes no damage");
-                return;
+                return 0;
             }
 
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
@@ -82,6 +82,8 @@ namespace TCGCards
             DamageCounters += totalDamage;
 
             log.AddMessage(GetName() + $"Takes {totalDamage} damage");
+
+            return totalDamage;
         }
 
         public void DiscardEnergyCard(EnergyCard energyCard)

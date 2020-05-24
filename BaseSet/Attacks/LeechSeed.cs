@@ -1,3 +1,4 @@
+using NetworkingCore.Messages;
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
@@ -21,6 +22,21 @@ namespace BaseSet.Attacks
         {
             return 20;
         }
-		//TODO: Special effects
+
+        public override void OnDamageDealt(int amount, Player owner)
+        {
+            if (amount <= 0)
+            {
+                return;
+            }
+
+            var activateMessage = new YesNoMessage { Message = Description }.ToNetworkMessage(owner.Id);
+            var activateResponse = owner.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(activateMessage);
+
+            if (activateResponse.AnsweredYes)
+            {
+                owner.ActivePokemonCard.DamageCounters -= 10;
+            }
+        }
     }
 }

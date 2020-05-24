@@ -29,6 +29,8 @@ namespace TCGCards
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }
 
+        public virtual void OnDamageDealt(int amount, Player owner) { }
+
         public virtual bool CanBeUsed(GameField game, Player owner, Player opponent)
         {
             if (game.FirstTurn)

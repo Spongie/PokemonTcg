@@ -390,7 +390,8 @@ namespace TCGCards.Core
                     var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
                     damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
-                    NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
+                    var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
+                    attack.OnDamageDealt(dealtDamage, ActivePlayer);
 
                     if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
                     {
