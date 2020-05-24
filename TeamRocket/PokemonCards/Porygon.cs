@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BaseSet.Attacks;
+using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 using TeamRocket.Attacks;

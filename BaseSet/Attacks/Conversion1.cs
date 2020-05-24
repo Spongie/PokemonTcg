@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace BaseSet.Attacks
 {
-    internal class Conversion1 : Attack
+    public class Conversion1 : Attack
     {
         public Conversion1()
         {
@@ -21,6 +22,13 @@ namespace BaseSet.Attacks
         {
             return 0;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            var message = new SelectColorMessage("Select a new weakness for your opponents active pokemon").ToNetworkMessage(owner.Id);
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<SelectColorMessage>(message);
+
+            opponent.ActivePokemonCard.Weakness = response.Color;
+        }
     }
 }

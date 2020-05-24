@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 
 namespace BaseSet.Attacks
 {
@@ -21,6 +22,13 @@ namespace BaseSet.Attacks
         {
             return 0;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            var message = new SelectColorMessage("Change Porygon's Resistance to a type of your choice other than Colorless.").ToNetworkMessage(owner.Id);
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<SelectColorMessage>(message);
+
+            owner.ActivePokemonCard.Resistance = response.Color;
+        }
     }
 }
