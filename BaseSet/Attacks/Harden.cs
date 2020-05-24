@@ -21,6 +21,30 @@ namespace BaseSet.Attacks
         {
             return 0;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            owner.ActivePokemonCard.TemporaryAbilities.Add(new HardenAbility(owner.ActivePokemonCard));
+        }
+
+        private class HardenAbility : TemporaryAbility
+        {
+            public HardenAbility(PokemonCard owner) : base(owner)
+            {
+                TriggerType = TriggerType.TakesDamage;
+            }
+
+            protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+            {
+                if (damageTaken > 30)
+                {
+                    log.AddMessage("Damge taken was over 30 no effect from Harden");
+                    return;
+                }
+
+                log.AddMessage("Damge taken was less than 30 damage prevented by Harden");
+                owner.ActivePokemonCard.DamageCounters -= damageTaken;
+            }
+        }
     }
 }
