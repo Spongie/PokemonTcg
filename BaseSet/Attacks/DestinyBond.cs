@@ -22,6 +22,25 @@ namespace BaseSet.Attacks
         {
             return 0;
         }
-		//TODO: Special effects
+
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            AttackUtils.DiscardAttachedEnergy(owner.ActivePokemonCard, 1);
+            owner.ActivePokemonCard.TemporaryAbilities.Add(new DestinyBondAbilty(owner.ActivePokemonCard));
+        }
+
+        private class DestinyBondAbilty : TemporaryAbility
+        {
+            public DestinyBondAbilty(PokemonCard owner) : base(owner)
+            {
+                TriggerType = TriggerType.Dies;
+            }
+
+            protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+            {
+                log.AddMessage($"{PokemonOwner.KnockedOutBy.GetName()} knocked out ghastly and dies itself");
+                PokemonOwner.KnockedOutBy.DamageCounters = 9000;
+            }
+        }
     }
 }
