@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 using BaseSet.Attacks;
+using TCGCards.Core.Abilities;
 
 namespace BaseSet.PokemonCards
 {
@@ -21,7 +22,7 @@ namespace BaseSet.PokemonCards
             {
 				new HydroPump()
             };
-			//TODO: Pokemon power
+            Ability = new AttachEnergyAbility(this, new[] { EnergyTypes.Water }, new[] { EnergyTypes.Water }, 9999);
         }
     }
 }

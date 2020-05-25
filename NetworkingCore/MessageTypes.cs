@@ -17,5 +17,6 @@
         SelectPriceCards,
         GameLogReload,
         GameLogNewMessages,
+        SelectFromYourPokemon,
     }
 }
