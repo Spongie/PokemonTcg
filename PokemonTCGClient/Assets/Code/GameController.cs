@@ -6,6 +6,7 @@ using System.Linq;
 using Assets.Code._2D;
 using Assets.Code.UI.Game;
 using NetworkingCore;
+using NetworkingCore.Messages;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
@@ -32,6 +33,8 @@ namespace Assets.Code
         public NetworkId myId;
         public GameObject doneButton;
         public GameObject endTurnButton;
+        public GameObject YesButton;
+        public GameObject NoButton;
         public Sprite CardBack;
 
         public bool IsMyTurn;
@@ -180,6 +183,32 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickFromList);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
+
+        }
+
+        private void OnYesNoMessage(object message, NetworkId messageId)
+        {
+            infoText.text = ((YesNoMessage)message).Message;
+            SpecialState = SpecialGameState.SelectingYesNo;
+            YesButton.SetActive(true);
+            NoButton.SetActive(true);
+        }
+
+        public void OnYesClicked()
+        {
+            SpecialState = SpecialGameState.None;
+            NetworkManager.Instance.SendToServer(new YesNoMessage { AnsweredYes = true }, true);
+            YesButton.SetActive(false);
+            NoButton.SetActive(false);
+        }
+
+        public void OnNoClicked()
+        {
+            SpecialState = SpecialGameState.None;
+            NetworkManager.Instance.SendToServer(new YesNoMessage { AnsweredYes = false }, true);
+            YesButton.SetActive(false);
+            NoButton.SetActive(false);
         }
 
         private void OnGameLogReload(object obj, NetworkId messageId)
@@ -412,7 +441,7 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new CardListMessage(selectedCards).ToNetworkMessage(myId);
+                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(myId);
                 message.ResponseTo = NetworkManager.Instance.RespondingTo;
                 NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;
@@ -427,7 +456,7 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new CardListMessage(selectedCards).ToNetworkMessage(myId);
+                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(myId);
                 message.ResponseTo = NetworkManager.Instance.RespondingTo;
                 NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;

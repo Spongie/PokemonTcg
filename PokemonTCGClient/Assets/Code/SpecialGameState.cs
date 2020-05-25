@@ -11,6 +11,7 @@ namespace Assets.Code
         AttachingEnergyToBenchedPokemon,
         SelectPokemonMatchingFilter,
         AttachingEnergyToPokemon,
-        SelectPokemonToEvolveOn
+        SelectPokemonToEvolveOn,
+        SelectingYesNo
     }
 }

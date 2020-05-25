@@ -123,7 +123,7 @@ namespace Assets.Code.UI.Game
                 return;
             }
 
-            var message = new CardListMessage(selectedCards).ToNetworkMessage(NetworkManager.Instance.Me.Id);
+            var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(NetworkManager.Instance.Me.Id);
             message.ResponseTo = NetworkManager.Instance.RespondingTo;
             NetworkManager.Instance.Me.Send(message);
 

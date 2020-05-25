@@ -18,5 +18,6 @@
         GameLogReload,
         GameLogNewMessages,
         SelectFromYourPokemon,
+        YesNoMessage,
     }
 }
