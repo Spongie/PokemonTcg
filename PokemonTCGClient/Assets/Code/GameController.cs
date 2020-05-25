@@ -9,6 +9,7 @@ using NetworkingCore;
 using NetworkingCore.Messages;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -50,6 +51,7 @@ namespace Assets.Code
         private Dictionary<NetworkId, NetworkId> energyPokemonMap;
         private EnergyCard currentEnergyCard;
         private PokemonCard currentEvolvingCard;
+        private IDeckFilter currentDeckFilter;
 
         public List<string> gameLog = new List<string>();
 
@@ -108,8 +110,17 @@ namespace Assets.Code
                 { SpecialGameState.DiscardingCards, ToggleCardSelected },
                 { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy },
-                { SpecialGameState.SelectPokemonToEvolveOn, TryEvolvePokemon }
+                { SpecialGameState.SelectPokemonToEvolveOn, TryEvolvePokemon },
+                { SpecialGameState.SelectPokemonMatchingFilter, OnSelectPokemonWithFilter }
             };
+        }
+
+        private void OnSelectPokemonWithFilter(CardRenderer clickedCard)
+        {
+            if (currentDeckFilter.IsCardValid(clickedCard.card))
+            {
+                ToggleCardSelected(clickedCard);
+            }
         }
 
         private void TryEvolvePokemon(CardRenderer cardRenderer)
@@ -184,7 +195,24 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
             NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourPokemon, OnBeginSelectYourPokemon);
+        }
 
+        private void OnBeginSelectYourPokemon(object message, NetworkId messageId)
+        {
+            var selectMessage = (SelectFromYourPokemonMessage)message;
+            SpecialState = SpecialGameState.SelectPokemonMatchingFilter;
+
+            if (selectMessage.TargetTypes.Any())
+            {
+                var typeText = string.Join(" ", selectMessage.TargetTypes.Select(type => Enum.GetName(typeof(EnergyTypes), type)));
+                infoText.text = $"Select one of your {typeText} pokemon";
+                currentDeckFilter = new PokemonOfTypeFilter(selectMessage.TargetTypes);
+            }
+            else
+            {
+                infoText.text = "Select one of your pokemon";
+            }
         }
 
         private void OnYesNoMessage(object message, NetworkId messageId)
@@ -434,7 +462,8 @@ namespace Assets.Code
                 NetworkManager.Instance.gameService.AddToBench(gameField.Id, myId, selectedCards.OfType<PokemonCard>().Select(card => card.Id).ToList());
                 selectedCards.Clear();
             }
-            else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon)
+            else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon || 
+                SpecialState == SpecialGameState.SelectPokemonMatchingFilter)
             {
                 if (minSelectedCardCount < selectedCards.Count)
                 {
