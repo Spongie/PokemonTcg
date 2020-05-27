@@ -29,6 +29,7 @@ namespace Server
                 { typeof(ImageService).Name, new ImageService() },
                 { typeof(CardService).Name, new CardService() },
                 { typeof(PlayerService).Name, new PlayerService() },
+                { typeof(InfoService).Name, new InfoService() },
             };
 
             foreach (var service in services.Values)

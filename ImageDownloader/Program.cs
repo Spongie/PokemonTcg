@@ -35,7 +35,7 @@ namespace CardDownloader
                 var response = Card.Get<Pokemon>(new Dictionary<string, string>
                 {
                     { CardQueryTypes.SetCode, set.Code},
-                    { CardQueryTypes.PageSize, "500" }
+                    { CardQueryTypes.PageSize, "500" },
                 });
 
                 List<PokemonCard> cards;
@@ -122,11 +122,6 @@ namespace CardDownloader
                 request.Timeout = 10000;
                 return request;
             }
-        }
-
-        private static void WriteStatusLine(float status)
-        {
-            Console.Write($"\rDownloading: {status.ToString("p2").PadLeft(7, '0')}");
         }
 
         private static string GetPokemonFileName(PokemonCard card)
