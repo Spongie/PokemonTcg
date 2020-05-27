@@ -92,7 +92,21 @@ namespace Server
                 var messageData = (GenericMessageData)messageReceivedEvent.Message.Data;
                 IService service = services[messageData.TargetClass];
                 var target = Assembly.GetExecutingAssembly().GetTypes().First(type => type.Name == messageData.TargetClass);
-                var result = target.GetMethod(messageData.TargetMethod).Invoke(service, messageData.Parameters);
+                object result;
+
+                try
+                {
+                     result = target.GetMethod(messageData.TargetMethod).Invoke(service, messageData.Parameters);
+                }
+                catch (Exception e)
+                {
+                    if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))
+                    {
+                        errorPlayer.Send(new ExceptionMessage(e).ToNetworkMessage(MasterServer.Instance.Id));
+                    }
+
+                    return;
+                }
 
                 if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
                 {

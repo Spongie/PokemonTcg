@@ -19,5 +19,6 @@
         GameLogNewMessages,
         SelectFromYourPokemon,
         YesNoMessage,
+        Error,
     }
 }
