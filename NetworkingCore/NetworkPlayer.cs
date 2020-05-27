@@ -69,7 +69,17 @@ namespace NetworkingCore
                 using(var inputStream = new MemoryStream())
                 {
                     byte[] dataPrefix = new byte[sizeof(int)];
-                    int receivedPrefixBytes = stream.Read(dataPrefix, 0, sizeof(int));
+                    int receivedPrefixBytes;
+
+                    try
+                    {
+                        receivedPrefixBytes = stream.Read(dataPrefix, 0, sizeof(int));
+                    }
+                    catch
+                    {
+                        Disconnect(false);
+                        return;
+                    }
 
                     if (receivedPrefixBytes != 4)
                     {
