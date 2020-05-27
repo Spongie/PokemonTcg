@@ -1,10 +1,7 @@
 ﻿using BaseSet.Attacks;
 using BaseSet.PokemonCards;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TCGCards.Core;
 using TCGCards.EnergyCards;
 

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using TCGCards;
+﻿using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 

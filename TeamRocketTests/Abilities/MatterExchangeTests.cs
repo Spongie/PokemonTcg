@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
 using NSubstitute;
-using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using TeamRocket.Abilities;

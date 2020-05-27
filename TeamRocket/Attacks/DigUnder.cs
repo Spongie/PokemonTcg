@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using TCGCards;
 using TCGCards.Core;
-using TCGCards.Core.Messages;
 
 namespace TeamRocket.Attacks
 {
