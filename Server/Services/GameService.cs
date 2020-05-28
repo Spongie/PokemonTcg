@@ -68,6 +68,11 @@ namespace Server.Services
                 return null;
             }
 
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
+            }
+
             var pokemons = pokemonIds.Select(id => (PokemonCard)game.FindCardById(id));
             game.OnBenchPokemonSelected(game.Players.First(p => p.Id.Equals(playerId)), pokemons);
 
@@ -83,6 +88,11 @@ namespace Server.Services
             if (!activeGames.TryGetValue(gameId, out game))
             {
                 return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
             }
 
             game.EndTurn();
@@ -101,6 +111,11 @@ namespace Server.Services
                 return null;
             }
 
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
+            }
+
             game.OnActivePokemonSelected(playerId, (PokemonCard)game.FindCardById(pokemonId));
 
             SendUpdateToPlayers(game.Players, game);
@@ -115,6 +130,11 @@ namespace Server.Services
             if (!activeGames.TryGetValue(gameId, out game))
             {
                 return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
             }
 
             var energyCard = (EnergyCard)game.FindCardById(energyCardId);
@@ -136,6 +156,11 @@ namespace Server.Services
                 return null;
             }
 
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
+            }
+
             var ability = game.FindAbilityById(abilityId);
             game.ActivateAbility(ability);
 
@@ -150,6 +175,11 @@ namespace Server.Services
             if (!activeGames.TryGetValue(gameId, out game))
             {
                 return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
             }
 
             var attack = game.FindAttackById(attackId);
@@ -167,6 +197,11 @@ namespace Server.Services
             if (!activeGames.TryGetValue(gameId, out game))
             {
                 return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
             }
 
             var card = game.FindCardById(cardId);
@@ -191,6 +226,11 @@ namespace Server.Services
             if (!activeGames.TryGetValue(gameId, out game))
             {
                 return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
             }
 
             var card = (PokemonCard)game.FindCardById(basePokemonId);
