@@ -19,6 +19,7 @@ namespace Server.Services
 
         public List<GameInfo> GetAvailableGames()
         {
+            RemoveCompletedGames();
             var allGames = activeGames.Values;
 
             return allGames.Where(game => game.Players.Count < 2).Select(game => new GameInfo
@@ -31,6 +32,7 @@ namespace Server.Services
 
         public GameField HostGame(NetworkId hostPlayer)
         {
+            RemoveCompletedGames();
             var player = new Player(MasterServer.Instance.Clients[hostPlayer]);
             var game = new GameField();
             game.Players.Add(player);
@@ -42,6 +44,7 @@ namespace Server.Services
 
         public GameField JoinTheActiveGame(NetworkId playerToJoin, NetworkId gameToJoin)
         {
+            RemoveCompletedGames();
             GameField game;
 
             if (!activeGames.TryGetValue(gameToJoin, out game))
@@ -248,6 +251,16 @@ namespace Server.Services
             {
                 var x = new GameFieldMessage(game);
                 player.NetworkPlayer.Send(x.ToNetworkMessage(MasterServer.Instance.Id));
+            }
+        }
+
+        private void RemoveCompletedGames()
+        {
+            var games = activeGames.Values.Where(game => game.GameState == GameFieldState.GameOver).ToArray();
+
+            foreach (var game in games)
+            {
+                activeGames.TryRemove(game.Id, out GameField _);
             }
         }
     }
