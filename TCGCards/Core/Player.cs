@@ -146,7 +146,9 @@ namespace TCGCards.Core
         public void SetActivePokemon(PokemonCard pokemon)
         {
             if (ActivePokemonCard != null)
+            {
                 return;
+            }
 
             if(Hand.Contains(pokemon))
             {

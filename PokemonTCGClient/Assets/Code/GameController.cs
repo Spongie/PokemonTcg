@@ -344,7 +344,7 @@ namespace Assets.Code
             doneButton.SetActive(true);
 
             var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-            infoText.text = $"Select {countString} of your oppoents pokemon";
+            infoText.text = $"Select {countString} of your opponents pokemon";
         }
 
         public void OnCardClicked(CardRenderer cardController)

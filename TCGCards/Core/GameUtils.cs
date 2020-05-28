@@ -16,5 +16,17 @@ namespace TCGCards.Core
 
             return null;
         }
+
+        public static void DiscardCardsFromHand(Player player, int amount)
+        {
+            var message = new PickFromListMessage(player.Hand, amount);
+            var response = player.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(player.Id));
+
+            foreach (var id in response.Cards)
+            {
+                var card = player.Hand.First(x => x.Id.Equals(id));
+                player.DiscardCard(card);
+            }
+        }
     }
 }
