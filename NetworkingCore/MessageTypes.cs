@@ -20,5 +20,6 @@
         SelectFromYourPokemon,
         YesNoMessage,
         Error,
+        GameOver,
     }
 }

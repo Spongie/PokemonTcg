@@ -507,7 +507,9 @@ namespace TCGCards.Core
 
                 if (ActivePlayer.PrizeCards.Count == 1)
                 {
-                    //TODO Handle game win
+                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(ActivePlayer.Id);
+                    return;
                 }
                 else
                 {
@@ -518,7 +520,13 @@ namespace TCGCards.Core
                 if (NonActivePlayer.BenchedPokemon.Any())
                 {
                     NonActivePlayer.SelectActiveFromBench();
-                }//TODO Handle game win
+                }
+                else
+                {
+                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + $" has no pokémon left, {ActivePlayer.NetworkPlayer?.Name} wins the game");
+                    EndGame(ActivePlayer.Id);
+                    return;
+                }
             }
 
             PushGameLogUpdatesToPlayers();
@@ -533,12 +541,65 @@ namespace TCGCards.Core
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
                     ActivePlayer.SelectActiveFromBench();
-                } //TODO Handle game win
+                }
+                else
+                {
+                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + $" has no pokémon left, {NonActivePlayer.NetworkPlayer?.Name} wins the game");
+                    EndGame(NonActivePlayer.Id);
+                    return;
+                }
             }
 
             //TODO CHECK DEAD BENCHED POKEMON
 
+            foreach (var pokemon in NonActivePlayer.BenchedPokemon)
+            {
+                if (!pokemon.IsDead())
+                {
+                    continue;
+                }
+
+                if (ActivePlayer.PrizeCards.Count <= 1)
+                {
+                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(ActivePlayer.Id);
+                    return;
+                }
+                else
+                {
+                    ActivePlayer.SelectPriceCard(1);
+                }
+            }
+
+            foreach (var pokemon in ActivePlayer.BenchedPokemon)
+            {
+                if (!pokemon.IsDead())
+                {
+                    continue;
+                }
+
+                if (NonActivePlayer.PrizeCards.Count <= 1)
+                {
+                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(NonActivePlayer.Id);
+                    return;
+                }
+                else
+                {
+                    NonActivePlayer.SelectPriceCard(1);
+                }
+            }
+
             PushGameLogUpdatesToPlayers();
+        }
+
+        private void EndGame(NetworkId winner)
+        {
+            GameState = GameFieldState.GameOver;
+            foreach (var player in Players)
+            {
+                player.NetworkPlayer.Send(new GameOverMessage(winner).ToNetworkMessage(Id));
+            }
         }
 
         public void EndTurn()

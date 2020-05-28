@@ -6,6 +6,7 @@
         WaitingForRegistration,
         BothSelectingActive,
         BothSelectingBench,
-        InTurn
+        InTurn,
+        GameOver
     }
 }
