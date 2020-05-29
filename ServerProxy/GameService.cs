@@ -134,4 +134,15 @@ public TCGCards.Core.GameField EvolvePokemon(NetworkingCore.NetworkId gameId,Net
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
+public TCGCards.Core.GameField RetreatPokemon(NetworkingCore.NetworkId gameId,NetworkingCore.NetworkId targetPokemon,System.Collections.Generic.List<NetworkingCore.NetworkId> energyCardIds)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "RetreatPokemon",
+			TargetClass = "GameService",
+			Parameters = new object[] { gameId,targetPokemon,energyCardIds }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
 }

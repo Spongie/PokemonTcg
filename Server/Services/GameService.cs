@@ -258,6 +258,27 @@ namespace Server.Services
             return game;
         }
 
+        public GameField RetreatPokemon(NetworkId gameId, NetworkId targetPokemon, List<NetworkId> energyCardIds)
+        {
+            GameField game;
+
+            if (!activeGames.TryGetValue(gameId, out game))
+            {
+                return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
+            }
+
+            var energyCards = energyCardIds.Select(cardId => (EnergyCard)game.FindCardById(cardId)).ToList();
+
+            game.OnPokemonRetreated((PokemonCard)game.FindCardById(targetPokemon), energyCards);
+
+            return game;
+        }
+
         private void SendUpdateToPlayers(IEnumerable<Player> players, GameField game)
         {
             foreach (var player in players)

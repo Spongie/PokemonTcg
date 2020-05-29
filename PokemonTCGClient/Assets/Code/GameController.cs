@@ -112,8 +112,42 @@ namespace Assets.Code
                 { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy },
                 { SpecialGameState.SelectPokemonToEvolveOn, TryEvolvePokemon },
-                { SpecialGameState.SelectPokemonMatchingFilter, OnSelectPokemonWithFilter }
+                { SpecialGameState.SelectPokemonMatchingFilter, OnSelectPokemonWithFilter },
+                { SpecialGameState.SelectingRetreatTarget, OnRetreatTargetSelected },
             };
+        }
+
+        private void OnRetreatTargetSelected(CardRenderer clickedCard)
+        {
+            SpecialState = SpecialGameState.None;
+            NetworkManager.Instance.gameService.RetreatPokemon(gameField.Id, clickedCard.card.Id, selectedCards.Select(card => card.Id).ToList());
+            selectedCards.Clear();
+        }
+
+        internal void StartRetreating(PokemonCard pokemonCard)
+        {
+            var totalAttachedEnergy = pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount);
+
+            if (totalAttachedEnergy == pokemonCard.RetreatCost)
+            {
+                SpecialState = SpecialGameState.SelectingRetreatTarget;
+                selectedCards.Clear();
+                selectedCards.AddRange(pokemonCard.AttachedEnergy);
+            }
+            else
+            {
+                SpecialState = SpecialGameState.SelectEnergyToRetreat;
+                selectedCards.Clear();
+                selectFromListPanel.SetActive(true);
+                selectFromListPanel.GetComponent<SelectFromListPanel>().InitEnergyCountSelect(pokemonCard.AttachedEnergy, pokemonCard.RetreatCost);
+            }
+        }
+
+        internal void SelectedEnergyForRetreat(List<Card> selectedCards)
+        {
+            SpecialState = SpecialGameState.SelectingRetreatTarget;
+            selectedCards.Clear();
+            selectedCards.AddRange(selectedCards);
         }
 
         private void OnSelectPokemonWithFilter(CardRenderer clickedCard)

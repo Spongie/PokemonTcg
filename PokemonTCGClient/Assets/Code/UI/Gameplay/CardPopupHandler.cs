@@ -16,6 +16,7 @@ namespace Assets.Code.UI.Gameplay
         public GameObject AttackButtonPrefab;
         public GameObject ActivateAbilityButton;
         public GameObject EvolveButton;
+        public GameObject RetreatButton;
         private List<GameObject> attackButtons;
 
         public void Init(Card card)
@@ -41,6 +42,12 @@ namespace Assets.Code.UI.Gameplay
                         attackButton.gameObject.transform.SetAsFirstSibling();
                         attackButtons.Add(attackButton);
                     }
+
+                    RetreatButton.SetActive(pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) > pokemonCard.RetreatCost);
+                }
+                else
+                {
+                    ActivateAbilityButton.SetActive(false);
                 }
 
                 EvolveButton.SetActive(pokemonCard.Stage > 0);
@@ -61,6 +68,7 @@ namespace Assets.Code.UI.Gameplay
             else
             {
                 EvolveButton.SetActive(false);
+                RetreatButton.SetActive(false);
             }
         }
 
@@ -92,6 +100,12 @@ namespace Assets.Code.UI.Gameplay
             NetworkManager.Instance.gameService.ActivateAbility(GameController.Instance.gameField.Id, ((PokemonCard)card).Ability.Id);
             gameObject.SetActive(false);
             ClearAttackButtons();
+        }
+
+        public void RetreatClick()
+        {
+            gameObject.SetActive(false);
+            GameController.Instance.StartRetreating(card);
         }
     }
 }

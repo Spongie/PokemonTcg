@@ -145,4 +145,16 @@ public NetworkingCore.NetworkId EvolvePokemon(NetworkingCore.NetworkId gameId,Ne
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId RetreatPokemon(NetworkingCore.NetworkId gameId,NetworkingCore.NetworkId targetPokemon,System.Collections.Generic.List<NetworkingCore.NetworkId> energyCardIds)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "RetreatPokemon",
+			TargetClass = "GameService",
+			Parameters = new object[] { gameId,targetPokemon,energyCardIds }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 }

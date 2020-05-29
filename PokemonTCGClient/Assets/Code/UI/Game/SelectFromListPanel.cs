@@ -15,6 +15,7 @@ namespace Assets.Code.UI.Game
         private int limit;
         private int minCount;
         public bool onlyView = false;
+        private int energyAmountToSelect;
 
         private void ClearOldCards()
         {
@@ -58,6 +59,22 @@ namespace Assets.Code.UI.Game
                     cardRenderer.FadeOut();
                     cardRenderer.SetCard(card, ZoomMode.None);
                 }
+            }
+        }
+
+        public void InitEnergyCountSelect(List<EnergyCard> cards, int energyAmountToSelect)
+        {
+            ClearOldCards();
+            selectedCards.Clear();
+            onlyView = false;
+            availableCards = new HashSet<NetworkId>();
+            this.energyAmountToSelect = energyAmountToSelect;
+
+            foreach (var card in cards)
+            {
+                var spawnedCard = Instantiate(previewCard, transform);
+                spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
+                availableCards.Add(card.Id);
             }
         }
 
@@ -115,6 +132,21 @@ namespace Assets.Code.UI.Game
             {
                 selectedCards?.Clear();
                 gameObject.SetActive(false);
+                return;
+            }
+            else if (energyAmountToSelect > 0)
+            {
+                var amountSelected = selectedCards.OfType<EnergyCard>().Sum(card => card.GetEnergry().Amount);
+
+                if (amountSelected < energyAmountToSelect)
+                {
+                    return;
+                }
+
+                GameController.Instance.SelectedEnergyForRetreat(selectedCards);
+                selectedCards?.Clear();
+                gameObject.SetActive(false);
+
                 return;
             }
 

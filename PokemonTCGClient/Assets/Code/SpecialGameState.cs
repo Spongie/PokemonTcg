@@ -12,6 +12,8 @@ namespace Assets.Code
         SelectPokemonMatchingFilter,
         AttachingEnergyToPokemon,
         SelectPokemonToEvolveOn,
-        SelectingYesNo
+        SelectingYesNo,
+        SelectingRetreatTarget,
+        SelectEnergyToRetreat
     }
 }
