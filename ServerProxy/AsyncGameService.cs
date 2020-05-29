@@ -25,25 +25,25 @@ public class AsyncGameService
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId HostGame(NetworkingCore.NetworkId hostPlayer)
+public NetworkingCore.NetworkId HostGame(NetworkingCore.NetworkId hostPlayer,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "HostGame",
 			TargetClass = "GameService",
-			Parameters = new object[] { hostPlayer }
+			Parameters = new object[] { hostPlayer,deckInfo }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin)
+public NetworkingCore.NetworkId JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "JoinTheActiveGame",
 			TargetClass = "GameService",
-			Parameters = new object[] { playerToJoin,gameToJoin }
+			Parameters = new object[] { playerToJoin,gameToJoin,deckInfo }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		networkPlayer.Send(message);	

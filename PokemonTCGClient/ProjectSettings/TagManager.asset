@@ -12,6 +12,7 @@ TagManager:
   - _global_
   - Ignore
   - deckBuilder
+  - mainMenu
   layers:
   - Default
   - TransparentFX

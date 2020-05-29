@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using NetworkingCore;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using TCGCards.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -51,7 +55,7 @@ namespace Assets.Code.UI.MainMenu
 
         public void OnHostGameClicked()
         {
-            var id = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id);
+            var id = NetworkManager.Instance.gameService.HostGame(NetworkManager.Instance.Me.Id, LoadDeckSelectedDeck());
             NetworkManager.Instance.RegisterCallbackById(id, OnGameHosted);
         }
 
@@ -59,6 +63,13 @@ namespace Assets.Code.UI.MainMenu
         {
             NetworkManager.Instance.CurrentGame = (GameField)obj;
             SceneManager.LoadScene("UI_2D");
+        }
+
+        public List<TypeInfo> LoadDeckSelectedDeck()
+        {
+            var deck = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + ".dck");
+
+            return Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(deck));
         }
     }
 }

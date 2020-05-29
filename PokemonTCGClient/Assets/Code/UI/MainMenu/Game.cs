@@ -21,7 +21,8 @@ namespace Assets.Code.UI.MainMenu
 
         public void OnJoinGameClick()
         {
-            var id = NetworkManager.Instance.gameService.JoinTheActiveGame(NetworkManager.Instance.Me.Id, game.Id);
+            var menu = GameObject.FindGameObjectWithTag("mainMenu").GetComponent<MainMenu>();
+            var id = NetworkManager.Instance.gameService.JoinTheActiveGame(NetworkManager.Instance.Me.Id, game.Id, menu.LoadDeckSelectedDeck());
             NetworkManager.Instance.RegisterCallbackById(id, OnGameJoined);
         }
 

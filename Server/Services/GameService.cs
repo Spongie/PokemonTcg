@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using NetworkingCore;
 using TCGCards;
 using TCGCards.Core;
@@ -30,19 +31,25 @@ namespace Server.Services
             }).ToList();
         }
 
-        public GameField HostGame(NetworkId hostPlayer)
+        public GameField HostGame(NetworkId hostPlayer, List<TypeInfo> deckInfo)
         {
             RemoveCompletedGames();
             var player = new Player(MasterServer.Instance.Clients[hostPlayer]);
             var game = new GameField();
-            game.Players.Add(player);
+            
+            foreach (var type in deckInfo)
+            {
+                var card = Card.CreateFromTypeInfo(type);
+                player.Deck.Cards.Push(card);
+            }
 
+            game.Players.Add(player);
             activeGames.TryAdd(game.Id, game);
 
             return game;
         }
 
-        public GameField JoinTheActiveGame(NetworkId playerToJoin, NetworkId gameToJoin)
+        public GameField JoinTheActiveGame(NetworkId playerToJoin, NetworkId gameToJoin, List<TypeInfo> deckInfo)
         {
             RemoveCompletedGames();
             GameField game;
@@ -53,6 +60,12 @@ namespace Server.Services
             }
 
             var player = new Player(MasterServer.Instance.Clients[playerToJoin]);
+
+            foreach (var type in deckInfo)
+            {
+                var card = Card.CreateFromTypeInfo(type);
+                player.Deck.Cards.Push(card);
+            }
 
             game.Players.Add(player);
             game.StartGame();

@@ -35,7 +35,7 @@ namespace TestClient
 
                     for (int i = 1; i <= 1000; i++)
                     {
-                        var xxxx  = new GameService(networkPlayer).HostGame(networkPlayer.Id);
+                        var xxxx  = new GameService(networkPlayer).HostGame(networkPlayer.Id, new System.Collections.Generic.List<System.Reflection.TypeInfo>());
                         Console.SetCursorPosition(0, 0);
                         Console.WriteLine($"{i} / 1000");
                         Thread.Sleep(25);
@@ -53,7 +53,7 @@ namespace TestClient
         {
             var gameId = gameService.GetAvailableGames().First().Id;
             Console.WriteLine("Joining the game");
-            gameField = gameService.JoinTheActiveGame(networkPlayer.Id, gameId);
+            gameField = gameService.JoinTheActiveGame(networkPlayer.Id, gameId, new System.Collections.Generic.List<System.Reflection.TypeInfo>());
 
             Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
             PokemonCard starter = me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).FirstOrDefault();

@@ -24,24 +24,24 @@ public class GameService
 		
 		return networkPlayer.SendAndWaitForResponse<System.Collections.Generic.List<TCGCards.Core.GameInfo>>(message);
 	}
-public TCGCards.Core.GameField HostGame(NetworkingCore.NetworkId hostPlayer)
+public TCGCards.Core.GameField HostGame(NetworkingCore.NetworkId hostPlayer,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "HostGame",
 			TargetClass = "GameService",
-			Parameters = new object[] { hostPlayer }
+			Parameters = new object[] { hostPlayer,deckInfo }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin)
+public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "JoinTheActiveGame",
 			TargetClass = "GameService",
-			Parameters = new object[] { playerToJoin,gameToJoin }
+			Parameters = new object[] { playerToJoin,gameToJoin,deckInfo }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);

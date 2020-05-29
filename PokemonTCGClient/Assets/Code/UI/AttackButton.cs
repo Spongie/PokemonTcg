@@ -1,4 +1,6 @@
 ﻿using Assets.Code._2D;
+using Assets.Code.UI.Gameplay;
+using System.Collections.Generic;
 using TCGCards;
 using TMPro;
 using UnityEngine;
@@ -27,7 +29,8 @@ namespace Assets.Code.UI
             {
                 for (int i = 0; i < cost.Amount; i++)
                 {
-                    Instantiate(costPrefab, costGrid.transform).GetComponent<Image>().sprite = energyResources.Icons[cost.EnergyType];
+                    var attackObject = Instantiate(costPrefab, costGrid.transform);
+                    attackObject.GetComponent<Image>().sprite = energyResources.Icons[cost.EnergyType];
                 }
             }
         }
@@ -35,7 +38,9 @@ namespace Assets.Code.UI
         public void OnClick()
         {
             NetworkManager.Instance.gameService.Attack(GameController.Instance.gameField.Id, attack.Id);
-            gameObject.SetActive(false);
+            transform.parent.gameObject.GetComponent<CardPopupHandler>().ClearAttackButtons();
+            transform.gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

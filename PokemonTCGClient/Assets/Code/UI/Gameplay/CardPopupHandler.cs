@@ -16,9 +16,11 @@ namespace Assets.Code.UI.Gameplay
         public GameObject AttackButtonPrefab;
         public GameObject ActivateAbilityButton;
         public GameObject EvolveButton;
+        private List<GameObject> attackButtons;
 
         public void Init(Card card)
         {
+            attackButtons = new List<GameObject>();
             this.card = card;
             var player = GameController.Instance.Player;
             AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card));
@@ -37,6 +39,7 @@ namespace Assets.Code.UI.Gameplay
                         var attackButton = Instantiate(AttackButtonPrefab, transform);
                         attackButton.GetComponent<AttackButton>().Init(attack);
                         attackButton.gameObject.transform.SetAsFirstSibling();
+                        attackButtons.Add(attackButton);
                     }
                 }
 
@@ -65,18 +68,30 @@ namespace Assets.Code.UI.Gameplay
         {
             NetworkManager.Instance.gameService.AddToBench(GameController.Instance.gameField.Id, GameController.Instance.myId, new List<NetworkId> { card.Id });
             gameObject.SetActive(false);
+
+            ClearAttackButtons();
+        }
+
+        public void ClearAttackButtons()
+        {
+            foreach (var attackButton in attackButtons)
+            {
+                Destroy(attackButton);
+            }
         }
 
         public void OnEvolveClick()
         {
             GameController.Instance.StartEvolving((PokemonCard)card);
             gameObject.SetActive(false);
+            ClearAttackButtons();
         }
 
         public void OnAbilityClick()
         {
             NetworkManager.Instance.gameService.ActivateAbility(GameController.Instance.gameField.Id, ((PokemonCard)card).Ability.Id);
             gameObject.SetActive(false);
+            ClearAttackButtons();
         }
     }
 }
