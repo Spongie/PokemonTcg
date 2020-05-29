@@ -13,6 +13,7 @@ using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Code
@@ -196,6 +197,16 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
             NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourPokemon, OnBeginSelectYourPokemon);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
+        }
+
+        private void OnGameEnded(object message, NetworkId messageId)
+        {
+            var gameOverMessage = (GameOverMessage)message;
+            bool iWon = gameOverMessage.WinnerId.Equals(myId);
+            gameField.GameState = GameFieldState.GameOver;
+            infoText.text = iWon ? "You have won" : "You have lost";
+            doneButton.SetActive(true);
         }
 
         private void OnBeginSelectYourPokemon(object message, NetworkId messageId)
@@ -457,6 +468,11 @@ namespace Assets.Code
 
         public void DoneButtonClicked()
         {
+            if (gameField.GameState == GameFieldState.GameOver)
+            {
+                SceneManager.LoadScene("MainMenu");
+                return;
+            }
             if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
                 NetworkManager.Instance.gameService.AddToBench(gameField.Id, myId, selectedCards.OfType<PokemonCard>().Select(card => card.Id).ToList());
