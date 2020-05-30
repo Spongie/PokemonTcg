@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Server\Server.csproj" />
 	  <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
 	  <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
+	  <ProjectReference Include="..\TeamRocket\TeamRocket.csproj" />
   </ItemGroup>
 
 </Project>

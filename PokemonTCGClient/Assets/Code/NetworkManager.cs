@@ -41,7 +41,7 @@ namespace Assets.Code
             messagesToPrint = new Queue<NetworkMessage>();
 
             var tcp = new TcpClient();
-            tcp.Connect("127.0.0.1", 1565);
+            tcp.Connect("85.90.244.171", 80);
             networkPlayer = new NetworkingCore.NetworkPlayer(tcp);
 
             Me = networkPlayer;

@@ -5,9 +5,9 @@ using BaseSet.Attacks;
 
 namespace BaseSet.PokemonCards
 {
-    public class NidoranMale : PokemonCard
+    public class Nidoran : PokemonCard
     {
-        public NidoranMale(Player owner) : base(owner)
+        public Nidoran(Player owner) : base(owner)
         {
             PokemonName = "Nidoran♂";
             Hp = 40;

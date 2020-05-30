@@ -5,9 +5,9 @@ using TCGCards.Core.Messages;
 
 namespace BaseSet.TrainerCards
 {
-    public class EnergyRetreival : TrainerCard
+    public class EnergyRetrieval : TrainerCard
     {
-        public EnergyRetreival()
+        public EnergyRetrieval()
         {
             Name = "Energy Retreival";
             Description = "Discard 1 card from your hand. Return up to 2 basic energy cards from your discard pile to your hand";

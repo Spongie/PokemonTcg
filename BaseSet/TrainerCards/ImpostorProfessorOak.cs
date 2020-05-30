@@ -3,9 +3,9 @@ using TCGCards.Core;
 
 namespace BaseSet.TrainerCards
 {
-    public class ImposterProfessorOak : TrainerCard
+    public class ImpostorProfessorOak : TrainerCard
     {
-        public ImposterProfessorOak()
+        public ImpostorProfessorOak()
         {
             Name = "Imposter Professor Oak";
             Description = "Your opponent shuffles his or her hand into their deck, then draws 7 cards";

@@ -16,7 +16,7 @@ namespace Server
         private static void RunServer(object obj)
         {
             var server = new MasterServer();
-            server.Start(1565);
+            server.Start(80);
         }
     }
 }

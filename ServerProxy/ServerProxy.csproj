@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)\PokemonTCGClient\Assets\Dependencies\&quot;" />
+    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)\..\PokemonTCGClient\Assets\Dependencies\&quot;" />
   </Target>
 
 </Project>

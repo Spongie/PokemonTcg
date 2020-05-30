@@ -1,4 +1,5 @@
 ﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,13 +19,21 @@ namespace Server.Services
 
             cards = new List<Card>();
 
-            foreach (var cardFile in Directory.GetFiles("Cards"))
-            {
-                var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(new FileInfo(cardFile).FullName);
 
-                foreach (var typeInfo in assembly.DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+            foreach (var cardFile in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll"))
+            {
+                try
                 {
-                    cards.Add(Card.CreateFromTypeInfo(typeInfo));
+                    var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(new FileInfo(cardFile).FullName);
+
+                    foreach (var typeInfo in assembly.DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+                    {
+                        cards.Add(Card.CreateFromTypeInfo(typeInfo));
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Failed to load " + cardFile);
                 }
             }
 

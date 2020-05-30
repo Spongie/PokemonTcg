@@ -52,6 +52,8 @@ namespace Launcher
 
 		public void UpdateStart()
 		{
+			UpdateEnabled = false;
+			LaunchEnabled = false;
 			workerThread = new Thread(Update);
 			workerThread.Start();
 		}
@@ -94,6 +96,8 @@ namespace Launcher
 			var assembliesFolder = Path.Combine(streamingAssetsFolder, "Assemblies");
 			var sets = new List<IPokemonSet>();
 
+			Directory.CreateDirectory(Path.Combine(streamingAssetsFolder, "Decks"));
+
 			foreach (var cardFile in Directory.GetFiles(assembliesFolder))
 			{
 				var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(new FileInfo(cardFile).FullName);
@@ -120,6 +124,7 @@ namespace Launcher
 
 			UpdateEnabled = false;
 			LaunchEnabled = true;
+			VersionNumber = newVersion.ToString();
 
 			File.WriteAllText("version", newVersion.ToString());
 		}
@@ -213,6 +218,7 @@ namespace Launcher
 				.Replace("’", "")
 				.Replace("?", "")
 				.Replace("!", "")
+				.Replace("♂", "")
 				.Replace("&#8217;", "") + ".png";
 		}
 
@@ -221,8 +227,11 @@ namespace Launcher
 			try
 			{
 				Logs.Add("Connecting to the server...");
-				var tcp = new TcpClient();
-				tcp.Connect("127.0.0.1", 1565);
+				
+				var tcp = new TcpClient(AddressFamily.InterNetwork);
+
+				tcp.Connect("85.90.244.171", 80);
+				//tcp.Connect("127.0.0.1", 80);
 				networkConnection = new NetworkPlayer(tcp);
 				networkConnection.DataReceived += NetworkPlayer_DataReceived;
 
