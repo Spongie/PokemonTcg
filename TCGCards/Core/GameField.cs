@@ -10,7 +10,7 @@ namespace TCGCards.Core
     public class GameField
     {
         public const int StartingHandsize = 7;
-        public const int PriceCards = 1;
+        public const int PriceCards = 6;
         public const int ConfusedDamage = 30;
         public const int BenchMaxSize = 5;
         private object lockObject = new object();
@@ -50,6 +50,7 @@ namespace TCGCards.Core
             {
                 basePokemon.Evolve(evolution);
                 ActivePlayer.ActivePokemonCard = evolution;
+                evolution.EvolvedThisTurn = true;
             }
 
             for (int i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
@@ -355,7 +356,7 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
-            if (attack.Disabled)
+            if (attack.Disabled || attack.CanBeUsed(this, ActivePlayer, NonActivePlayer))
             {
                 return;
             }

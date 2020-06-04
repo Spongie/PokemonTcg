@@ -9,6 +9,7 @@ using Assets.Code;
 using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
 using TMPro;
+using Assets.Code._2D;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -86,17 +87,30 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
             string finalPath = "file:///" + fullCardPath;
 
-            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
+            if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))
             {
-                yield return request.SendWebRequest();
-
-                if (request.isNetworkError || request.isHttpError)
+                art.sprite = SpriteCache.Instance.cache[fullCardPath];
+            }
+            else
+            {
+                using (var request = UnityWebRequestTexture.GetTexture(finalPath))
                 {
-                    Debug.LogError("Error fetching texture");
-                }
+                    yield return request.SendWebRequest();
 
-                var texture = DownloadHandlerTexture.GetContent(request);
-                art.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                    if (request.isNetworkError || request.isHttpError)
+                    {
+                        Debug.LogError("Error fetching texture");
+                    }
+
+                    var texture = DownloadHandlerTexture.GetContent(request);
+                    var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                    art.sprite = sprite;
+
+                    if (!SpriteCache.Instance.cache.ContainsKey(fullCardPath))
+                    {
+                        SpriteCache.Instance.cache.Add(fullCardPath, sprite);
+                    }
+                }
             }
         }
     }

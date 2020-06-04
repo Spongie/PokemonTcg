@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Code._2D;
+using System.Collections;
 using System.IO;
 using TCGCards;
 using UnityEngine;
@@ -49,6 +50,11 @@ namespace Assets.Code.UI.DeckBuilder
             {
                 var imagePath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
 
+                if (SpriteCache.Instance.cache.ContainsKey(imagePath))
+                {
+                    art.sprite = SpriteCache.Instance.cache[imagePath];
+                }
+
                 if (imagePath == null)
                 {
                     yield return new WaitForSeconds(0.05f);
@@ -61,7 +67,13 @@ namespace Assets.Code.UI.DeckBuilder
                 var texture = new Texture2D(256, 256);
                 texture.LoadImage(imageBytes);
 
-                art.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100);
+                var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100);
+                art.sprite = sprite;
+
+                if (!SpriteCache.Instance.cache.ContainsKey(imagePath))
+                {
+                    SpriteCache.Instance.cache.Add(imagePath, sprite);
+                }
 
                 break;
             }

@@ -1,6 +1,6 @@
 ﻿using TCGCards;
 
-namespace TeamRocket
+namespace BaseSet
 {
     public class Set : IPokemonSet
     {

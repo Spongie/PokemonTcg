@@ -12,7 +12,6 @@ namespace Assets.Code.UI.Gameplay
     {
         private Card card;
         public GameObject AddToBenchButton;
-        public GameObject AttachToPokemon;
         public GameObject AttackButtonPrefab;
         public GameObject ActivateAbilityButton;
         public GameObject EvolveButton;
@@ -34,9 +33,6 @@ namespace Assets.Code.UI.Gameplay
                 {
                     foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
                     {
-                        if (!attack.CanBeUsed(GameController.Instance.gameField, card.Owner, GameController.Instance.OpponentPlayer))
-                            continue;
-
                         var attackButton = Instantiate(AttackButtonPrefab, transform);
                         attackButton.GetComponent<AttackButton>().Init(attack);
                         attackButton.gameObject.transform.SetAsFirstSibling();
@@ -47,10 +43,10 @@ namespace Assets.Code.UI.Gameplay
                 }
                 else
                 {
-                    ActivateAbilityButton.SetActive(false);
+                    RetreatButton.SetActive(false);
                 }
 
-                EvolveButton.SetActive(pokemonCard.Stage > 0);
+                EvolveButton.SetActive(pokemonCard.Stage > 1 && GameController.Instance.Player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
 
                 var ability = ((PokemonCard)card).Ability;
 
@@ -67,6 +63,7 @@ namespace Assets.Code.UI.Gameplay
             }
             else
             {
+                ActivateAbilityButton.SetActive(false);
                 EvolveButton.SetActive(false);
                 RetreatButton.SetActive(false);
             }

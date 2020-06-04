@@ -416,6 +416,10 @@ namespace Assets.Code
             {
                 StartAttachingEnergy((EnergyCard)cardController.card);
             }
+            else if (cardController.card is TrainerCard)
+            {
+                NetworkManager.Instance.gameService.PlayCard(gameField.Id, cardController.card.Id);
+            }
             else
             {
                 cardController.DisplayPopup();

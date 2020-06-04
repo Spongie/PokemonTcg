@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\StreamingAssets\Assemblies\$(TargetFileName)&quot;" />
+    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\$(TargetFileName)&quot;" />
   </Target>
 
 </Project>

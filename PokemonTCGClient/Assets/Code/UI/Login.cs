@@ -8,6 +8,11 @@ public class Login : MonoBehaviour
     public InputField usernameInput;
     public InputField passwordInput;
 
+    private void Start()
+    {
+        QualitySettings.vSyncCount = 1;
+    }
+
     public void LoginClick()
     {
         NetworkManager.Instance.Me.Name = usernameInput.text;

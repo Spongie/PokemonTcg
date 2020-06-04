@@ -1,11 +1,16 @@
-﻿using NetworkingCore;
+﻿using BaseSet.PokemonCards;
+using NetworkingCore;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Threading;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TCGCards.EnergyCards;
 
 namespace TestClient
 {
@@ -16,6 +21,12 @@ namespace TestClient
 
         static void Main(string[] args)
         {
+            var xxx = new List<TypeInfo> { new WaterEnergy().GetType().GetTypeInfo(), new Magikarp(null).GetType().GetTypeInfo() };
+            var json = Serializer.Serialize(xxx);
+            File.WriteAllText("test", json);
+            var back = Serializer.Deserialize<List<TypeInfo>>(json);
+            var back2 = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText("test"));
+
             var thread = new Thread(RunPlayer);
             thread.Start();
 
@@ -53,7 +64,8 @@ namespace TestClient
         {
             var gameId = gameService.GetAvailableGames().First().Id;
             Console.WriteLine("Joining the game");
-            gameField = gameService.JoinTheActiveGame(networkPlayer.Id, gameId, new System.Collections.Generic.List<System.Reflection.TypeInfo>());
+            var deck = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText("Karpen.dck"));
+            gameField = gameService.JoinTheActiveGame(networkPlayer.Id, gameId, deck);
 
             Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
             PokemonCard starter = me.Hand.OfType<PokemonCard>().Where(p => p.Stage == 0).FirstOrDefault();
@@ -88,7 +100,7 @@ namespace TestClient
         private static void RunPlayer(object obj)
         {
             var tcp = new TcpClient();
-            tcp.Connect("127.0.0.1", 1565);
+            tcp.Connect("85.90.244.171", 80);
             Console.WriteLine("Connected to server");
 
             networkPlayer = new NetworkPlayer(tcp);

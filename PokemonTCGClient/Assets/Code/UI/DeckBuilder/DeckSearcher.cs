@@ -70,11 +70,7 @@ namespace Assets.Code.UI.DeckBuilder
             loading = true;
             int counter = 0;
 
-            var assemblies = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
-            var assembliesPath = Path.Combine(Application.streamingAssetsPath, "Assemblies");
-            var cardAssemblies = Directory.GetFiles(assembliesPath).Select(file => AssemblyName.GetAssemblyName(file));
-
-            foreach (var assembly in assemblies.Concat(cardAssemblies))
+            foreach (var assembly in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
                 foreach (var type in Assembly.Load(assembly).DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
                 {

@@ -18,6 +18,12 @@ namespace Assets.Code.UI.MainMenu
         public GameObject gamePrefab;
         public Dropdown deckDropDown;
 
+        private void Awake()
+        {
+            new TeamRocket.Set();
+            new BaseSet.Set();
+        }
+
         private void Start()
         {
             RefreshGames();

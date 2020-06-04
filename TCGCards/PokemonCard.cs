@@ -40,6 +40,7 @@ namespace TCGCards
         public List<AttackStopper> AttackStoppers { get; set; }
         public int DamageTakenLastTurn { get; set; }
         public bool DoublePoison { get; set; }
+        public bool EvolvedThisTurn { get; set; }
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
@@ -49,6 +50,7 @@ namespace TCGCards
             TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnsLeft > 0).ToList();
 
             PlayedThisTurn = false;
+            EvolvedThisTurn = false;
 
             if (IsBurned)
             {
@@ -150,7 +152,7 @@ namespace TCGCards
 
         public bool IsDead() => DamageCounters >= Hp;
 
-        public bool CanEvolve() => !PlayedThisTurn;
+        public bool CanEvolve() => !PlayedThisTurn && !EvolvedThisTurn;
 
         public bool CanAttack() => !IsParalyzed && !IsAsleep;
 
