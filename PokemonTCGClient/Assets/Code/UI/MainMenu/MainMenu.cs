@@ -77,5 +77,10 @@ namespace Assets.Code.UI.MainMenu
 
             return Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(deck));
         }
+
+        public void ExitClick()
+        {
+            Application.Quit();
+        }
     }
 }

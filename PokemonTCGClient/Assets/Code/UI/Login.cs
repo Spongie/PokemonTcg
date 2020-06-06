@@ -20,4 +20,9 @@ public class Login : MonoBehaviour
 
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void ExitClick()
+    {
+        Application.Quit();
+    }
 }

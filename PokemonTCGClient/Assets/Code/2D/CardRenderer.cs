@@ -31,7 +31,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
+        //SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
     }
 
     public void SetCard(Card card, ZoomMode zoomMode)
