@@ -396,14 +396,16 @@ namespace Assets.Code
         {
             Debug.Log("Clicked: " + cardController.name);
 
+            var state = gameField == null ? GameFieldState.InTurn : gameField.GameState;
+
             if (onSpecialClickHandlers.ContainsKey(SpecialState))
             {
                 onSpecialClickHandlers[SpecialState].Invoke(cardController);
                 return;
             }
-            else if (onClickHandlers.ContainsKey(gameField.GameState))
+            else if (onClickHandlers.ContainsKey(state))
             {
-                onClickHandlers[gameField.GameState].Invoke(cardController);
+                onClickHandlers[state].Invoke(cardController);
                 return;
             }
 

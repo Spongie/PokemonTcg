@@ -22,7 +22,7 @@ namespace Assets.Code.UI.Gameplay
         {
             attackButtons = new List<GameObject>();
             this.card = card;
-            var player = GameController.Instance.Player;
+            var player = GameController.Instance.Player ?? new Player() { ActivePokemonCard = (PokemonCard)card };
             AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card));
 
             if (card is PokemonCard)
@@ -46,7 +46,7 @@ namespace Assets.Code.UI.Gameplay
                     RetreatButton.SetActive(false);
                 }
 
-                EvolveButton.SetActive(pokemonCard.Stage > 1 && GameController.Instance.Player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
+                EvolveButton.SetActive(pokemonCard.Stage >= 1 && GameController.Instance.Player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
 
                 var ability = ((PokemonCard)card).Ability;
 
@@ -75,6 +75,12 @@ namespace Assets.Code.UI.Gameplay
             gameObject.SetActive(false);
 
             ClearAttackButtons();
+        }
+
+        public void CancelClick()
+        {
+            ClearAttackButtons();
+            gameObject.SetActive(false);
         }
 
         public void ClearAttackButtons()

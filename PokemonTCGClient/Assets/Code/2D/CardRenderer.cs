@@ -10,6 +10,7 @@ using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
 using TMPro;
 using Assets.Code._2D;
+using BaseSet.PokemonCards;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -27,6 +28,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject ParalyzedIcon;
     public GameObject AsleepIcon;
     public GameObject ConfusedIcon;
+
+    void Start()
+    {
+        SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
+    }
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
