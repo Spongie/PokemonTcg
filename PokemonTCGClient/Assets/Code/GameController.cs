@@ -145,6 +145,7 @@ namespace Assets.Code
 
         internal void SelectedEnergyForRetreat(List<Card> selectedCards)
         {
+            infoText.text = "Select new active pokemon";
             SpecialState = SpecialGameState.SelectingRetreatTarget;
             selectedCards.Clear();
             selectedCards.AddRange(selectedCards);

@@ -39,7 +39,7 @@ namespace Assets.Code.UI.Gameplay
                         attackButtons.Add(attackButton);
                     }
 
-                    RetreatButton.SetActive(pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) > pokemonCard.RetreatCost);
+                    RetreatButton.SetActive(pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= pokemonCard.RetreatCost);
                 }
                 else
                 {

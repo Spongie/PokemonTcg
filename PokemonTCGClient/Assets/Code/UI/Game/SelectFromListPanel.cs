@@ -10,6 +10,7 @@ namespace Assets.Code.UI.Game
     public class SelectFromListPanel : MonoBehaviour
     {
         public GameObject previewCard;
+        public GameObject contentObject;
         private List<Card> selectedCards = new List<Card>();
         private HashSet<NetworkId> availableCards;
         private int limit;
@@ -19,9 +20,9 @@ namespace Assets.Code.UI.Game
 
         private void ClearOldCards()
         {
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < contentObject.transform.childCount; i++)
             {
-                var child = transform.GetChild(i);
+                var child = contentObject.transform.GetChild(i);
                 if (child.tag == "Ignore")
                 {
                     continue;
@@ -44,7 +45,7 @@ namespace Assets.Code.UI.Game
             {
                 if (deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
-                    var spawnedCard = Instantiate(previewCard, transform);
+                    var spawnedCard = Instantiate(previewCard, contentObject.transform);
                     spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
                     availableCards.Add(card.Id);
                 }
@@ -54,7 +55,7 @@ namespace Assets.Code.UI.Game
             {
                 if (!deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
-                    var spawnedCard = Instantiate(previewCard, transform);
+                    var spawnedCard = Instantiate(previewCard, contentObject.transform);
                     var cardRenderer = spawnedCard.GetComponent<CardRenderer>();
                     cardRenderer.FadeOut();
                     cardRenderer.SetCard(card, ZoomMode.None);
@@ -72,7 +73,7 @@ namespace Assets.Code.UI.Game
 
             foreach (var card in cards)
             {
-                var spawnedCard = Instantiate(previewCard, transform);
+                var spawnedCard = Instantiate(previewCard, contentObject.transform);
                 spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
                 availableCards.Add(card.Id);
             }
@@ -85,7 +86,7 @@ namespace Assets.Code.UI.Game
 
             foreach (var card in discardPile)
             {
-                var spawnedCard = Instantiate(previewCard, transform);
+                var spawnedCard = Instantiate(previewCard, contentObject.transform);
                 spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
             }
         }
@@ -101,7 +102,7 @@ namespace Assets.Code.UI.Game
 
             foreach (var card in pickFromListMessage.PossibleChoices)
             {
-                var spawnedCard = Instantiate(previewCard, transform);
+                var spawnedCard = Instantiate(previewCard, contentObject.transform);
                 spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
                 availableCards.Add(card.Id);
             }

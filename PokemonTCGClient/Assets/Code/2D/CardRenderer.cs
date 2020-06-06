@@ -49,6 +49,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             int sortOrder = GetComponent<Canvas>().sortingOrder;
             float offsetSize = GetComponent<RectTransform>().sizeDelta.x / 5;
             float attachedOffset = offsetSize;
+            
             foreach (var attachedCard in ((PokemonCard)card).AttachedEnergy)
             {
                 var attachedObject = Instantiate(AttachedCardPrefab, transform);
@@ -133,7 +134,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        if (GameController.Instance.SpecialState == SpecialGameState.SelectingColor)
+        if (GameController.Instance.SpecialState == SpecialGameState.SelectingColor ||
+            GameController.Instance.SpecialState == SpecialGameState.SelectEnergyToRetreat)
         {
             GameController.Instance.selectFromListPanel.GetComponent<SelectFromListPanel>().OnCardClicked(this);
         }

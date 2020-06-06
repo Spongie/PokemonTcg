@@ -6065,7 +6065,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1572427747}
   m_HandleRect: {fileID: 1572427746}
   m_Direction: 0
-  m_Value: -0.00040683482
+  m_Value: 0
   m_Size: 0.9999106
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6783,6 +6783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewCard: {fileID: 8897528397859718862, guid: 89ae1b323a80e8d4b9e5bac1f6bbbcb6,
     type: 3}
+  contentObject: {fileID: 1648883421}
   onlyView: 0
 --- !u!114 &2011967207
 MonoBehaviour:
