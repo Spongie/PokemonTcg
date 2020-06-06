@@ -100,9 +100,16 @@ namespace Server
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
+
+                    if (e.InnerException != null)
+                    {
+                        Console.WriteLine(e.InnerException.Message);
+                    }
+
                     if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))
                     {
-                        errorPlayer.Send(new ExceptionMessage(e).ToNetworkMessage(MasterServer.Instance.Id));
+                        errorPlayer.Send(new ExceptionMessage(e).ToNetworkMessage(Id));
                     }
 
                     return;

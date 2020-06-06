@@ -19,9 +19,11 @@ namespace NetworkingCore
         public event EventHandler<NetworkId> OnDisconnected;
         private bool writing = true;
         private bool reading = true;
+        private DateTime lastMessage;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
+            lastMessage = DateTime.Now;
             messageQueue = new ConcurrentQueue<NetworkMessage>();
             SpecificResponses = new ConcurrentDictionary<NetworkId, NetworkMessage>();
             SetTcpClient(tcpClient);
@@ -48,15 +50,33 @@ namespace NetworkingCore
         {
             while(writing)
             {
-                if(!messageQueue.Any())
+                var minutesSinceLastMessage = (DateTime.Now - lastMessage).TotalMinutes;
+
+                if (minutesSinceLastMessage > 30)
+                {
+                    Console.WriteLine("Disconnecting due to inactivity");
+                    Disconnect(false);
+                    return;
+                }
+
+                if (!messageQueue.Any())
                 {
                     Thread.Sleep(50);
                     continue;
                 }
 
-                if (messageQueue.TryDequeue(out NetworkMessage message))
+                try
                 {
-                    message.Send(stream);
+                    if (messageQueue.TryDequeue(out NetworkMessage message))
+                    {
+                        message.Send(stream);
+                        lastMessage = DateTime.Now;
+                    }
+                }
+                catch
+                {
+                    Disconnect(false);
+                    return;
                 }
             }
         }
@@ -65,6 +85,15 @@ namespace NetworkingCore
         {
             while(reading)
             {
+                var minutesSinceLastMessage = (DateTime.Now - lastMessage).TotalMinutes;
+
+                if (minutesSinceLastMessage > 30)
+                {
+                    Console.WriteLine("Disconnecting due to inactivity");
+                    Disconnect(false);
+                    return;
+                }
+
                 byte[] data;
                 using(var inputStream = new MemoryStream())
                 {
@@ -95,11 +124,20 @@ namespace NetworkingCore
 
                     while (bytesRemaining > 0)
                     {
-                        var readBytes = stream.Read(data, offset, bytesRemaining);
-                        bytesRemaining -= readBytes;
-                        offset += readBytes;
+                        try
+                        {
+                            var readBytes = stream.Read(data, offset, bytesRemaining);
+                            bytesRemaining -= readBytes;
+                            offset += readBytes;
+                        }
+                        catch
+                        {
+                            Disconnect(false);
+                            return;
+                        }
                     }
 
+                    lastMessage = DateTime.Now;
                     inputStream.Write(data, 0, dataSize);
 
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
