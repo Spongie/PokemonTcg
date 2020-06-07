@@ -11,17 +11,17 @@ namespace Server.Services
 {
     public class GameService : IService
     {
-        private ConcurrentDictionary<NetworkId, GameField> activeGames;
+        public ConcurrentDictionary<NetworkId, GameField> ActiveGames { get; private set; }
 
         public void InitTypes()
         {
-            activeGames = new ConcurrentDictionary<NetworkId, GameField>();
+            ActiveGames = new ConcurrentDictionary<NetworkId, GameField>();
         }
 
         public List<GameInfo> GetAvailableGames()
         {
             RemoveCompletedGames();
-            var allGames = activeGames.Values;
+            var allGames = ActiveGames.Values;
 
             return allGames.Where(game => game.Players.Count < 2).Select(game => new GameInfo
             {
@@ -44,7 +44,7 @@ namespace Server.Services
             }
 
             game.Players.Add(player);
-            activeGames.TryAdd(game.Id, game);
+            ActiveGames.TryAdd(game.Id, game);
 
             return game;
         }
@@ -54,7 +54,7 @@ namespace Server.Services
             RemoveCompletedGames();
             GameField game;
 
-            if (!activeGames.TryGetValue(gameToJoin, out game))
+            if (!ActiveGames.TryGetValue(gameToJoin, out game))
             {
                 return null;
             }
@@ -79,7 +79,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -101,7 +101,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -122,7 +122,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -143,7 +143,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -167,7 +167,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -188,7 +188,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -210,7 +210,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -239,7 +239,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -262,7 +262,7 @@ namespace Server.Services
         {
             GameField game;
 
-            if (!activeGames.TryGetValue(gameId, out game))
+            if (!ActiveGames.TryGetValue(gameId, out game))
             {
                 return null;
             }
@@ -290,11 +290,11 @@ namespace Server.Services
 
         private void RemoveCompletedGames()
         {
-            var games = activeGames.Values.Where(game => game.GameState == GameFieldState.GameOver).ToArray();
+            var games = ActiveGames.Values.Where(game => game.GameState == GameFieldState.GameOver).ToArray();
 
             foreach (var game in games)
             {
-                activeGames.TryRemove(game.Id, out GameField _);
+                ActiveGames.TryRemove(game.Id, out GameField _);
             }
         }
     }

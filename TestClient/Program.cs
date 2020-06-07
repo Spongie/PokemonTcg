@@ -21,11 +21,26 @@ namespace TestClient
 
         static void Main(string[] args)
         {
-            var xxx = new List<TypeInfo> { new WaterEnergy().GetType().GetTypeInfo(), new Magikarp(null).GetType().GetTypeInfo() };
-            var json = Serializer.Serialize(xxx);
-            File.WriteAllText("test", json);
-            var back = Serializer.Deserialize<List<TypeInfo>>(json);
-            var back2 = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText("test"));
+            Console.WriteLine("Perform stresstest?");
+            var stress = Console.ReadLine();
+
+            if (stress.Trim() == "yes")
+            {
+                Console.WriteLine("How many clients?");
+                var count = Console.ReadLine();
+
+                for (int i = 0; i < int.Parse(count); i++)
+                {
+                    var tcp = new TcpClient();
+                    tcp.Connect("localhost", 80);
+                    var player = new NetworkPlayer(tcp);
+                }
+
+                Console.WriteLine(count + " players connected");
+
+                Console.Read();
+                return;
+            }
 
             var thread = new Thread(RunPlayer);
             thread.Start();

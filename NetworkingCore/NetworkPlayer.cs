@@ -52,11 +52,9 @@ namespace NetworkingCore
             {
                 var minutesSinceLastMessage = (DateTime.Now - lastMessage).TotalMinutes;
 
-                if (minutesSinceLastMessage > 30)
+                if (minutesSinceLastMessage > 5)
                 {
-                    Console.WriteLine("Disconnecting due to inactivity");
-                    Disconnect(false);
-                    return;
+                    messageQueue.Enqueue(new NetworkMessage(MessageTypes.Ping, "", Id, NetworkId.Generate()));
                 }
 
                 if (!messageQueue.Any())
@@ -87,7 +85,7 @@ namespace NetworkingCore
             {
                 var minutesSinceLastMessage = (DateTime.Now - lastMessage).TotalMinutes;
 
-                if (minutesSinceLastMessage > 30)
+                if (minutesSinceLastMessage > 15)
                 {
                     Console.WriteLine("Disconnecting due to inactivity");
                     Disconnect(false);
@@ -182,6 +180,8 @@ namespace NetworkingCore
             Thread.Sleep(16);
             stream.Close();
             client.Close();
+
+            OnDisconnected?.Invoke(this, Id);
         }
 
         private void SendAndWaitForDisconnect()

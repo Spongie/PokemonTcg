@@ -5,17 +5,30 @@ namespace Server
 {
     class Program
     {
+        private static MasterServer server;
+
         static void Main(string[] args)
         {
             var t = new Thread(RunServer);
             t.Start();
 
-            Console.Read();
+            while (true)
+            {
+                if (server == null)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
+
+                server.PrintInfo();
+
+                Thread.Sleep(1000);
+            }
         }
 
         private static void RunServer(object obj)
         {
-            var server = new MasterServer();
+            server = new MasterServer();
             server.Start(80);
         }
     }

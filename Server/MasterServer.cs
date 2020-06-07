@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Server
 {
@@ -17,6 +18,24 @@ namespace Server
         private Thread serverThread;
         private TcpListener listener;
         private Dictionary<string, IService> services;
+        private int defaultConsoleTop;
+
+        internal void PrintInfo()
+        {
+            if (listener == null)
+            {
+                return;
+            }
+
+            Console.CursorTop = defaultConsoleTop;
+
+            Console.WriteLine("Active Connections: " + Clients.Count);
+            using (var process = Process.GetCurrentProcess())
+            {
+                Console.WriteLine($"Memory Usage: {process.PrivateMemorySize64 / 1000000} MB");
+            }
+            Console.WriteLine("Active Games: " + ((GameService)services[typeof(GameService).Name]).ActiveGames.Count);
+        }
 
         public void Start(int port)
         {
@@ -42,6 +61,8 @@ namespace Server
             listener.Start();
 
             Console.WriteLine("Listening for connections...");
+
+            defaultConsoleTop = Console.CursorTop;
 
             serverThread = new Thread(Run);
             serverThread.Start();
@@ -69,19 +90,8 @@ namespace Server
         {
             if (Clients.TryGetValue(playerId, out NetworkPlayer player))
             {
-                try
-                {
-                    player.Disconnect(false);
-                }
-                catch (Exception)
-                {
-
-                }
-                finally
-                {
-                    Clients.TryRemove(playerId, out player);
-                    Logger.Instance.Log($"Player with id {playerId} disconnected");
-                }
+                Clients.TryRemove(playerId, out player);
+                Logger.Instance.Log($"Player with id {playerId} disconnected");
             }
         }
 
@@ -125,7 +135,7 @@ namespace Server
             }
             else
             {
-                throw new InvalidOperationException("Bad message");
+                //throw new InvalidOperationException("Bad message");
             }
         }
 

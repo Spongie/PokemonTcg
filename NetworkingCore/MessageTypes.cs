@@ -21,5 +21,6 @@
         YesNoMessage,
         Error,
         GameOver,
+        Ping,
     }
 }
