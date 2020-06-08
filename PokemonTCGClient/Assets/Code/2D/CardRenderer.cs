@@ -46,14 +46,16 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
         if (card is PokemonCard)
         {
+            var myRect = GetComponent<RectTransform>();
             int sortOrder = GetComponent<Canvas>().sortingOrder;
-            float offsetSize = GetComponent<RectTransform>().sizeDelta.x / 5;
+            float offsetSize = myRect.sizeDelta.x / 5;
             float attachedOffset = offsetSize;
             
             foreach (var attachedCard in ((PokemonCard)card).AttachedEnergy)
             {
                 var attachedObject = Instantiate(AttachedCardPrefab, transform);
                 var rect = attachedObject.GetComponent<RectTransform>();
+                rect.sizeDelta = myRect.sizeDelta;
                 rect.anchoredPosition = new Vector2(attachedOffset, rect.anchoredPosition.y);
                 attachedOffset += offsetSize;
 
