@@ -2,6 +2,7 @@
 using TCGCards.Core;
 using System.Linq;
 using NetworkingCore;
+using TCGCards.Core.Abilities;
 
 namespace TCGCards
 {
@@ -42,14 +43,22 @@ namespace TCGCards
             }
 
             var availableEnergy = new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy).OrderBy(card => card.IsBasic).ToList();
+            var energyOverride = owner.ActivePokemonCard.TemporaryAbilities.OfType<EnergyTypeOverrideTemporaryAbility>().FirstOrDefault();
 
             foreach (var energy in Cost.OrderByDescending(cost => cost.EnergyType != EnergyTypes.Colorless))
             {
                 for (int i = 0; i < energy.Amount; i+=0)
                 {
-                    EnergyCard energyCard = energy.EnergyType == EnergyTypes.Colorless ?
+                    var actualType = energy.EnergyType;
+
+                    if (energyOverride != null && energyOverride.SourceTypes.Contains(energy.EnergyType))
+                    {
+                        actualType = energyOverride.NewType;
+                    }
+
+                    EnergyCard energyCard = actualType == EnergyTypes.Colorless ?
                         availableEnergy.FirstOrDefault()
-                        : availableEnergy.FirstOrDefault(card => card.EnergyType == energy.EnergyType);
+                        : availableEnergy.FirstOrDefault(card => card.EnergyType == actualType);
 
                     if (energyCard == null)
                     {                 
