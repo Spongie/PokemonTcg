@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;
 using BaseSet.Attacks;
+using TCGCards.Core.Abilities;
 
 namespace BaseSet.PokemonCards
 {
@@ -21,7 +22,7 @@ namespace BaseSet.PokemonCards
             {
 				new Solarbeam()
             };
-			//TODO: Pokemon power
+            Ability = new MoveEnergyAbility(this, "Energy Trans", EnergyTypes.Grass);
         }
     }
 }

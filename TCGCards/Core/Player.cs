@@ -208,16 +208,15 @@ namespace TCGCards.Core
 
         public IEnumerable<PokemonCard> GetAllPokemonCards()
         {
-            var list = new List<PokemonCard>();
-
             if (ActivePokemonCard != null)
             {
-                list.Add(ActivePokemonCard);
+                yield return ActivePokemonCard;
             }
-            
-            list.AddRange(BenchedPokemon);
 
-            return list;
+            foreach (var pokemon in BenchedPokemon)
+            {
+                yield return pokemon;
+            }
         }
 
         public List<PokemonCard> BenchedPokemon { get; set; }

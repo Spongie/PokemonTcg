@@ -249,6 +249,10 @@ namespace Assets.Code
             var selectMessage = (SelectFromYourPokemonMessage)message;
             SpecialState = SpecialGameState.SelectPokemonMatchingFilter;
 
+            if (!string.IsNullOrWhiteSpace(selectMessage.Info))
+            {
+                infoText.text = selectMessage.Info;
+            }
             if (selectMessage.TargetTypes.Any())
             {
                 var typeText = string.Join(" ", selectMessage.TargetTypes.Select(type => Enum.GetName(typeof(EnergyTypes), type)));
