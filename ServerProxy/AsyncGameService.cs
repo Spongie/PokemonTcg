@@ -13,7 +13,19 @@ public class AsyncGameService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public NetworkingCore.NetworkId GetAvailableGames()
+	public NetworkingCore.NetworkId get_ActiveGames()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "get_ActiveGames",
+			TargetClass = "GameService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId GetAvailableGames()
 	{
 		var message = new GenericMessageData
 		{
@@ -152,6 +164,18 @@ public NetworkingCore.NetworkId RetreatPokemon(NetworkingCore.NetworkId gameId,N
 			TargetMethod = "RetreatPokemon",
 			TargetClass = "GameService",
 			Parameters = new object[] { gameId,targetPokemon,energyCardIds }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId LeaveGame(NetworkingCore.NetworkId playerId,NetworkingCore.NetworkId gameId)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "LeaveGame",
+			TargetClass = "GameService",
+			Parameters = new object[] { playerId,gameId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		networkPlayer.Send(message);	

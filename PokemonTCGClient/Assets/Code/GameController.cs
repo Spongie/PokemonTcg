@@ -722,6 +722,12 @@ namespace Assets.Code
             }
         }
 
+        public void ExitGameClick()
+        {
+            NetworkManager.Instance.gameService.LeaveGame(myId, gameField.Id);
+            SceneManager.LoadScene("MainMenu");
+        }
+
         public Player Player
         {
             get

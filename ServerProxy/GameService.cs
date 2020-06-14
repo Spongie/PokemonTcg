@@ -13,7 +13,18 @@ public class GameService
 		this.networkPlayer = networkPlayer;
 	}
 	
-	public System.Collections.Generic.List<TCGCards.Core.GameInfo> GetAvailableGames()
+	public System.Collections.Generic.List<NetworkingCore.NetworkId> get_ActiveGames()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "get_ActiveGames",
+			TargetClass = "GameService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<System.Collections.Generic.List<NetworkingCore.NetworkId>>(message);
+	}
+public System.Collections.Generic.List<TCGCards.Core.GameInfo> GetAvailableGames()
 	{
 		var message = new GenericMessageData
 		{
@@ -141,6 +152,17 @@ public TCGCards.Core.GameField RetreatPokemon(NetworkingCore.NetworkId gameId,Ne
 			TargetMethod = "RetreatPokemon",
 			TargetClass = "GameService",
 			Parameters = new object[] { gameId,targetPokemon,energyCardIds }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
+public TCGCards.Core.GameField LeaveGame(NetworkingCore.NetworkId playerId,NetworkingCore.NetworkId gameId)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "LeaveGame",
+			TargetClass = "GameService",
+			Parameters = new object[] { playerId,gameId }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);

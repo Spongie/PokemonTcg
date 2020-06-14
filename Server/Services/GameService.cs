@@ -279,12 +279,32 @@ namespace Server.Services
             return game;
         }
 
+        public GameField LeaveGame(NetworkId playerId, NetworkId gameId)
+        {
+            GameField game;
+
+            if (!ActiveGames.TryGetValue(gameId, out game))
+            {
+                return null;
+            }
+
+            if (game.GameState == GameFieldState.GameOver)
+            {
+                return game;
+            }
+
+            game.GameState = GameFieldState.GameOver;
+            SendUpdateToPlayers(game.Players, game);
+
+            return game;
+        }
+
         private void SendUpdateToPlayers(IEnumerable<Player> players, GameField game)
         {
             foreach (var player in players)
             {
-                var x = new GameFieldMessage(game);
-                player.NetworkPlayer.Send(x.ToNetworkMessage(MasterServer.Instance.Id));
+                var gameMessage = new GameFieldMessage(game);
+                player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(MasterServer.Instance.Id));
             }
         }
 
