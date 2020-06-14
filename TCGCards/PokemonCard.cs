@@ -110,6 +110,7 @@ namespace TCGCards
             {
                 AttachedEnergy.Remove(energyCard);
                 Owner.DiscardPile.Add(energyCard);
+                energyCard.OnPutInDiscard(Owner);
             }
         }
 

@@ -319,6 +319,8 @@ namespace TCGCards.Core
 
             ability.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
 
+            CheckDeadPokemon();
+
             PushGameLogUpdatesToPlayers();
         }
 
@@ -343,7 +345,7 @@ namespace TCGCards.Core
                 ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
             }
 
-            if (AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
+            if (AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) || ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
             {
                 GameLog.AddMessage("Attack fully ignored because of effect");
                 if (!IgnorePostAttack)
@@ -367,6 +369,10 @@ namespace TCGCards.Core
 
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
+            if (!IgnorePostAttack)
+            {
+                PostAttack();
+            }
         }
 
         private void DealDamageWithAttack(Attack attack)
