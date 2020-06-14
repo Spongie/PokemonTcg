@@ -13,8 +13,8 @@ namespace TCGCards.Core
         public const int PriceCards = 6;
         public const int ConfusedDamage = 30;
         public const int BenchMaxSize = 5;
-        private object lockObject = new object();
-        private HashSet<NetworkId> playersSetStartBench;
+        private readonly object lockObject = new object();
+        private readonly HashSet<NetworkId> playersSetStartBench;
         
         public GameField()
         {
@@ -53,7 +53,7 @@ namespace TCGCards.Core
                 evolution.EvolvedThisTurn = true;
             }
 
-            for (int i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
+            for (var i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
             {
                 if (ActivePlayer.BenchedPokemon[i].Id.Equals(basePokemon.Id))
                 {
@@ -79,7 +79,7 @@ namespace TCGCards.Core
             ActivePlayer = Players[0];
             NonActivePlayer = Players[1];
 
-            for (int i = 0; i < 20; i++)
+            for (var i = 0; i < 20; i++)
             {
                 ActivePlayer.Deck.Cards.Push(new TestPokemonCard(ActivePlayer));
                 NonActivePlayer.Deck.Cards.Push(new TestPokemonCard(NonActivePlayer));
@@ -88,7 +88,7 @@ namespace TCGCards.Core
 
         public void OnActivePokemonSelected(NetworkId ownerId, PokemonCard activePokemon)
         {
-            var owner = Players.First(p => p.Id.Equals(ownerId));
+            Player owner = Players.First(p => p.Id.Equals(ownerId));
 
             GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
 
@@ -114,13 +114,13 @@ namespace TCGCards.Core
 
         public bool CanRetreat(PokemonCard card)
         {
-            var costModifierAbilities = GetAllPassiveAbilities()
+            IEnumerable<CostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
                 .OfType<CostModifierAbility>()
                 .Where(ability => ability.IsActive()
                     && ability.ModifierType == PassiveModifierType.RetreatCost
                     && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id));
 
-            int retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
+            var retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
 
             return card.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= retreatCost;
         }
@@ -132,7 +132,7 @@ namespace TCGCards.Core
                 return;
             }
 
-            foreach (var ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
+            foreach (Ability ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
             {
                 ability.Trigger(NonActivePlayer, ActivePlayer, 0, GameLog);
             }
@@ -142,7 +142,7 @@ namespace TCGCards.Core
 
         public void OnBenchPokemonSelected(Player owner, IEnumerable<PokemonCard> selectedPokemons)
         {
-            foreach (var pokemon in selectedPokemons)
+            foreach (PokemonCard pokemon in selectedPokemons)
             {
                 owner.SetBenchedPokemon(pokemon);
             }
@@ -163,9 +163,9 @@ namespace TCGCards.Core
 
         public Card FindCardById(NetworkId id)
         {
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
-                foreach (var card in player.Hand)
+                foreach (Card card in player.Hand)
                 {
                     if (card.Id.Equals(id))
                     {
@@ -173,14 +173,14 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var pokemon in player.GetAllPokemonCards())
+                foreach (PokemonCard pokemon in player.GetAllPokemonCards())
                 {
                     if (pokemon.Id.Equals(id))
                     {
                         return pokemon;
                     }
 
-                    foreach (var energy in pokemon.AttachedEnergy)
+                    foreach (EnergyCard energy in pokemon.AttachedEnergy)
                     {
                         if (energy.Id.Equals(id))
                         {
@@ -189,7 +189,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var card in player.DiscardPile)
+                foreach (Card card in player.DiscardPile)
                 {
                     if (card.Id.Equals(id))
                     {
@@ -197,7 +197,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var card in player.PrizeCards)
+                foreach (Card card in player.PrizeCards)
                 {
                     if (card.Id.Equals(id))
                     {
@@ -205,7 +205,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var card in player.Deck.Cards)
+                foreach (Card card in player.Deck.Cards)
                 {
                     if (card.Id.Equals(id))
                     {
@@ -219,11 +219,11 @@ namespace TCGCards.Core
 
         public Attack FindAttackById(NetworkId attackId)
         {
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
-                foreach (var pokemon in player.GetAllPokemonCards())
+                foreach (PokemonCard pokemon in player.GetAllPokemonCards())
                 {
-                    foreach (var attack in pokemon.Attacks)
+                    foreach (Attack attack in pokemon.Attacks)
                     {
                         if (attack.Id.Equals(attackId))
                         {
@@ -238,9 +238,9 @@ namespace TCGCards.Core
 
         public Ability FindAbilityById(NetworkId id)
         {
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
-                foreach (var card in player.Hand.OfType<PokemonCard>())
+                foreach (PokemonCard card in player.Hand.OfType<PokemonCard>())
                 {
                     if (card.Ability.Id.Equals(id))
                     {
@@ -248,7 +248,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var pokemon in player.GetAllPokemonCards())
+                foreach (PokemonCard pokemon in player.GetAllPokemonCards())
                 {
                     if (pokemon.Ability.Id.Equals(id))
                     {
@@ -256,7 +256,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var card in player.DiscardPile.OfType<PokemonCard>())
+                foreach (PokemonCard card in player.DiscardPile.OfType<PokemonCard>())
                 {
                     if (card.Ability.Id.Equals(id))
                     {
@@ -264,7 +264,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var card in player.PrizeCards.OfType<PokemonCard>())
+                foreach (PokemonCard card in player.PrizeCards.OfType<PokemonCard>())
                 {
                     if (card.Ability.Id.Equals(id))
                     {
@@ -272,7 +272,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var card in player.Deck.Cards.OfType<PokemonCard>())
+                foreach (PokemonCard card in player.Deck.Cards.OfType<PokemonCard>())
                 {
                     if (card.Ability.Id.Equals(id))
                     {
@@ -292,11 +292,11 @@ namespace TCGCards.Core
 
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
                 do
                 {
-                    foreach (var card in player.Hand)
+                    foreach (Card card in player.Hand)
                     {
                         player.Deck.Cards.Push(card);
                     }
@@ -371,7 +371,7 @@ namespace TCGCards.Core
 
         private void DealDamageWithAttack(Attack attack)
         {
-            var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
+            Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
             damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
             var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
@@ -411,7 +411,7 @@ namespace TCGCards.Core
 
         private int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender)
         {
-            int realDamage = damage;
+            var realDamage = damage;
 
             if (defender.Resistance == attacker.PokemonType)
             {
@@ -532,7 +532,7 @@ namespace TCGCards.Core
 
             //TODO CHECK DEAD BENCHED POKEMON
 
-            foreach (var pokemon in NonActivePlayer.BenchedPokemon)
+            foreach (PokemonCard pokemon in NonActivePlayer.BenchedPokemon)
             {
                 if (!pokemon.IsDead())
                 {
@@ -551,7 +551,7 @@ namespace TCGCards.Core
                 }
             }
 
-            foreach (var pokemon in ActivePlayer.BenchedPokemon)
+            foreach (PokemonCard pokemon in ActivePlayer.BenchedPokemon)
             {
                 if (!pokemon.IsDead())
                 {
@@ -576,7 +576,7 @@ namespace TCGCards.Core
         private void EndGame(NetworkId winner)
         {
             GameState = GameFieldState.GameOver;
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
                 player.NetworkPlayer.Send(new GameOverMessage(winner).ToNetworkMessage(Id));
             }
@@ -633,7 +633,7 @@ namespace TCGCards.Core
         {
             var message = new GameLogAddMessage(GameLog.NewMessages).ToNetworkMessage(NetworkId.Generate());
 
-            foreach (var player in Players)
+            foreach (Player player in Players)
             {
                 player.NetworkPlayer?.Send(message);
             }
