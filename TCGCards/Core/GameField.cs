@@ -472,6 +472,12 @@ namespace TCGCards.Core
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             ActivePlayer.DiscardCard(trainerCard);
+
+            if (ActivePlayer.IsDead)
+            {
+                GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
+                EndGame(NonActivePlayer.Id);
+            }
         }
 
         private void CheckDeadPokemon()
@@ -536,8 +542,6 @@ namespace TCGCards.Core
                 }
             }
 
-            //TODO CHECK DEAD BENCHED POKEMON
-
             foreach (PokemonCard pokemon in NonActivePlayer.BenchedPokemon)
             {
                 if (!pokemon.IsDead())
@@ -584,7 +588,7 @@ namespace TCGCards.Core
             GameState = GameFieldState.GameOver;
             foreach (Player player in Players)
             {
-                player.NetworkPlayer.Send(new GameOverMessage(winner).ToNetworkMessage(Id));
+                player.NetworkPlayer?.Send(new GameOverMessage(winner).ToNetworkMessage(Id));
             }
         }
 
@@ -608,6 +612,13 @@ namespace TCGCards.Core
             ActivePlayer.ResetTurn();
             NonActivePlayer.ResetTurn();
             ActivePlayer.DrawCards(1);
+
+            if (ActivePlayer.IsDead)
+            {
+                GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
+                EndGame(NonActivePlayer.Id);
+                return;
+            }
             
             if (ActivePlayer.ActivePokemonCard != null)
             {

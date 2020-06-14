@@ -193,6 +193,11 @@ namespace TCGCards.Core
 
         public void DrawCards(int amount)
         {
+            if (amount > Deck.Cards.Count)
+            {
+                IsDead = true;
+            }
+
             for(int i = 0; i < amount; i++)
             {
                 if (Deck.Cards.Count > 0)
@@ -227,6 +232,7 @@ namespace TCGCards.Core
         public List<Card> Hand { get; set; }
         public bool HasPlayedEnergy { get; protected set; }
         public NetworkId Id { get; set; }
+        public bool IsDead { get; set; }
 
         [JsonIgnore]
         public INetworkPlayer NetworkPlayer { get; private set; }
