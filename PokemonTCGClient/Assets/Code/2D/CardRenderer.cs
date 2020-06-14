@@ -23,11 +23,24 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public CardPopupHandler popupHandler;
     public GameObject DamageDisplay;
 
+    [Header("Status Images")]
     public GameObject PoisonIcon;
     public GameObject BurnedIcon;
     public GameObject ParalyzedIcon;
     public GameObject AsleepIcon;
     public GameObject ConfusedIcon;
+    
+    [Header("Attached Energy")]
+    public GameObject AttachedEnergyList;
+    public GameObject AttachedEnergyPrefab;
+    public Sprite FireIcon;
+    public Sprite WaterIcon;
+    public Sprite ElectricIcon;
+    public Sprite GrassIcon;
+    public Sprite FightingIcon;
+    public Sprite PsychicIcon;
+    public Sprite DoubleColorlessIcon;
+    public Sprite SpecialIcon;
 
     void Start()
     {
@@ -50,18 +63,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             int sortOrder = GetComponent<Canvas>().sortingOrder;
             float offsetSize = myRect.sizeDelta.x / 5;
             float attachedOffset = offsetSize;
-            
-            foreach (var attachedCard in ((PokemonCard)card).AttachedEnergy)
-            {
-                var attachedObject = Instantiate(AttachedCardPrefab, transform);
-                var rect = attachedObject.GetComponent<RectTransform>();
-                rect.sizeDelta = myRect.sizeDelta;
-                rect.anchoredPosition = new Vector2(attachedOffset, rect.anchoredPosition.y);
-                attachedOffset += offsetSize;
 
-                attachedObject.GetComponent<Canvas>().sortingOrder = sortOrder;
-                attachedObject.GetComponent<CardRenderer>().SetCard(attachedCard, zoomMode);
-            }
+            SpawnAttachedEnergy(card, zoomMode, myRect, sortOrder, offsetSize, attachedOffset);
 
             var pokemon = (PokemonCard)card;
 
@@ -83,6 +86,65 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
 
         StartCoroutine(LoadSprite(card));
+    }
+
+    private void SpawnAttachedEnergy(Card card, ZoomMode zoomMode, RectTransform myRect, int sortOrder, float offsetSize, float attachedOffset)
+    {
+        var activePokemonCard = GameController.Instance.Player.ActivePokemonCard;
+
+        if (activePokemonCard != null && activePokemonCard.Id.Equals(card.Id))
+        {
+            foreach (var attachedEnergy in ((PokemonCard)card).AttachedEnergy)
+            {
+                var attachedObject = Instantiate(AttachedCardPrefab, transform);
+                var rect = attachedObject.GetComponent<RectTransform>();
+                rect.sizeDelta = myRect.sizeDelta;
+                rect.anchoredPosition = new Vector2(attachedOffset, rect.anchoredPosition.y);
+                attachedOffset += offsetSize;
+
+                attachedObject.GetComponent<Canvas>().sortingOrder = sortOrder;
+                attachedObject.GetComponent<CardRenderer>().SetCard(attachedEnergy, zoomMode);
+            }
+        }
+        else
+        {
+            foreach (var attachedEnergy in ((PokemonCard)card).AttachedEnergy)
+            {
+                var attachedObject = Instantiate(AttachedEnergyPrefab, AttachedEnergyList.transform);
+                attachedObject.GetComponent<Image>().sprite = GetSpriteFromEnergyType(attachedEnergy.EnergyType);
+            }
+        }
+    }
+
+    private Sprite GetSpriteFromEnergyType(EnergyTypes energyType)
+    {
+        switch (energyType)
+        {
+            case EnergyTypes.Colorless:
+                return DoubleColorlessIcon;
+            case EnergyTypes.Water:
+                return WaterIcon;
+            case EnergyTypes.Fire:
+                return FireIcon;
+            case EnergyTypes.Grass:
+                return GrassIcon;
+            case EnergyTypes.Electric:
+                return ElectricIcon;
+            case EnergyTypes.Psychic:
+                return PsychicIcon;
+            case EnergyTypes.Fighting:
+                return FightingIcon;
+            case EnergyTypes.Darkness:
+                return null;
+            case EnergyTypes.Steel:
+                return null;
+            case EnergyTypes.Fairy:
+                return null;
+            case EnergyTypes.Dragon:
+                return null;
+            default:
+                return SpecialIcon;
+        }
     }
 
     IEnumerator LoadSprite(Card card)
