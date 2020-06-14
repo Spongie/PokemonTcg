@@ -4297,7 +4297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Centered: 1
   maxCards: 0
-  width: 200
+  width: 88
   height: 200
   overrideHeight: 1
   adjustZoneWidth: 0
