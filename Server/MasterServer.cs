@@ -27,12 +27,20 @@ namespace Server
                 return;
             }
 
+            var clientsToDisconnect = Clients.Values.Where(x => (DateTime.Now - x.LastMessage).TotalMinutes > 15);
+
+            foreach (var client in clientsToDisconnect)
+            {
+                client.Disconnect(false);
+            }
+
             Console.CursorTop = defaultConsoleTop;
 
-            Console.WriteLine("Active Connections: " + Clients.Count);
+            Console.WriteLine("Active Connections: " + Clients.Count.ToString().PadLeft(5));
             using (var process = Process.GetCurrentProcess())
             {
-                Console.WriteLine($"Memory Usage: {process.PrivateMemorySize64 / 1000000} MB");
+                var memory = (process.PrivateMemorySize64 / 1000000).ToString().PadLeft(8);
+                Console.WriteLine($"Memory Usage: {memory} MB");
             }
             Console.WriteLine("Active Games: " + ((GameService)services[typeof(GameService).Name]).ActiveGames.Count);
         }
@@ -77,7 +85,7 @@ namespace Server
 
                 player.Id = NetworkId.Generate();
 
-                Console.WriteLine("Player connected with id: " + player.Id);
+                Logger.Instance.Log("Player connected with id: " + player.Id);
 
                 player.Send(new NetworkMessage(MessageTypes.Connected, player.Id, Id, NetworkId.Generate()));
                 player.DataReceived += Player_DataReceived;
@@ -110,11 +118,11 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    Logger.Instance.Log(e.Message);
 
                     if (e.InnerException != null)
                     {
-                        Console.WriteLine(e.InnerException.Message);
+                        Logger.Instance.Log(e.InnerException.Message);
                     }
 
                     if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))

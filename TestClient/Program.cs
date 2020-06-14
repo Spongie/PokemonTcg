@@ -32,11 +32,15 @@ namespace TestClient
                 for (int i = 0; i < int.Parse(count); i++)
                 {
                     var tcp = new TcpClient();
-                    tcp.Connect("localhost", 80);
+                    //tcp.Connect("85.90.244.171", 80);
+                    tcp.Connect("127.0.0.1", 80);
                     var player = new NetworkPlayer(tcp);
+                    Thread.Sleep(100);
                 }
 
                 Console.WriteLine(count + " players connected");
+
+                Thread.Sleep(100000);
 
                 Console.Read();
                 return;
@@ -115,7 +119,7 @@ namespace TestClient
         private static void RunPlayer(object obj)
         {
             var tcp = new TcpClient();
-            tcp.Connect("85.90.244.171", 80);
+            tcp.Connect("127.0.0.1", 80);
             Console.WriteLine("Connected to server");
 
             networkPlayer = new NetworkPlayer(tcp);
