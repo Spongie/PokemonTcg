@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.Core
@@ -19,7 +21,12 @@ namespace TCGCards.Core
 
         public static void DiscardCardsFromHand(Player player, int amount)
         {
-            var message = new PickFromListMessage(player.Hand, amount);
+            DiscardCardsFromHand(player, amount, new Card[] { });
+        }
+
+        public static void DiscardCardsFromHand(Player player, int amount, IEnumerable<Card> exceptions)
+        {
+            var message = new PickFromListMessage(player.Hand.Except(exceptions), amount);
             var response = player.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(player.Id));
 
             foreach (var id in response.Cards)
