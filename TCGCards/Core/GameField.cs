@@ -173,7 +173,7 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var pokemon in player.BenchedPokemon)
+                foreach (var pokemon in player.GetAllPokemonCards())
                 {
                     if (pokemon.Id.Equals(id))
                     {
@@ -186,30 +186,6 @@ namespace TCGCards.Core
                         {
                             return energy;
                         }
-                    }
-                }
-
-                if (player.ActivePokemonCard != null)
-                {
-                    if (player.ActivePokemonCard.Id.Equals(id))
-                    {
-                        return player.ActivePokemonCard;
-                    }
-
-                    foreach (var energy in player.ActivePokemonCard.AttachedEnergy)
-                    {
-                        if (energy.Id.Equals(id))
-                        {
-                            return energy;
-                        }
-                    }
-                }
-
-                foreach (var card in player.Deck.Cards)
-                {
-                    if (card.Id.Equals(id))
-                    {
-                        return card;
                     }
                 }
 
@@ -228,6 +204,14 @@ namespace TCGCards.Core
                         return card;
                     }
                 }
+
+                foreach (var card in player.Deck.Cards)
+                {
+                    if (card.Id.Equals(id))
+                    {
+                        return card;
+                    }
+                }
             }
 
             return null;
@@ -237,18 +221,7 @@ namespace TCGCards.Core
         {
             foreach (var player in Players)
             {
-                if (player.ActivePokemonCard != null)
-                {
-                    foreach (var attack in player.ActivePokemonCard.Attacks)
-                    {
-                        if (attack.Id.Equals(attackId))
-                        {
-                            return attack;
-                        }
-                    }
-                }
-
-                foreach (var pokemon in player.BenchedPokemon)
+                foreach (var pokemon in player.GetAllPokemonCards())
                 {
                     foreach (var attack in pokemon.Attacks)
                     {
@@ -275,24 +248,11 @@ namespace TCGCards.Core
                     }
                 }
 
-                foreach (var pokemon in player.BenchedPokemon.OfType<PokemonCard>())
+                foreach (var pokemon in player.GetAllPokemonCards())
                 {
                     if (pokemon.Ability.Id.Equals(id))
                     {
                         return pokemon.Ability;
-                    }
-                }
-
-                if (player.ActivePokemonCard != null && player.ActivePokemonCard.Ability.Id.Equals(id))
-                {
-                    return player.ActivePokemonCard.Ability;
-                }
-
-                foreach (var card in player.Deck.Cards.OfType<PokemonCard>())
-                {
-                    if (card.Ability.Id.Equals(id))
-                    {
-                        return card.Ability;
                     }
                 }
 
@@ -305,6 +265,14 @@ namespace TCGCards.Core
                 }
 
                 foreach (var card in player.PrizeCards.OfType<PokemonCard>())
+                {
+                    if (card.Ability.Id.Equals(id))
+                    {
+                        return card.Ability;
+                    }
+                }
+
+                foreach (var card in player.Deck.Cards.OfType<PokemonCard>())
                 {
                     if (card.Ability.Id.Equals(id))
                     {
@@ -365,21 +333,7 @@ namespace TCGCards.Core
 
             if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
             {
-                GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.GetName()} hurt itself in its confusion");
-                ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), GameLog);
-
-                if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage)
-                {
-                    ActivePlayer.ActivePokemonCard.Ability.SetTarget(ActivePlayer.ActivePokemonCard);
-                    ActivePlayer.ActivePokemonCard.Ability.Trigger(ActivePlayer, NonActivePlayer, 30, GameLog);
-                    ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
-                }
-
-                if (!IgnorePostAttack)
-                {
-                    PostAttack();
-                }
-
+                HitItselfInConfusion();
                 return;
             }
 
@@ -389,39 +343,64 @@ namespace TCGCards.Core
                 ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
             }
 
-            if (!AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
-            {
-                if (!DamageStoppers.Any(x => x.IsDamageIgnored()))
-                {
-                    var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
-                    damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
-
-                    var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
-                    attack.OnDamageDealt(dealtDamage, ActivePlayer);
-
-                    if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
-                    {
-                        GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by taking damage");
-                        NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, GameLog);
-                    }
-                    if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage && !damage.IsZero())
-                    {
-                        GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by dealing damage");
-                        ActivePlayer.ActivePokemonCard.Ability.SetTarget(NonActivePlayer.ActivePokemonCard);
-                        ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, GameLog);
-                        ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
-                    }
-                }
-                else
-                {
-                    GameLog.AddMessage("Damage ignored because of effect");
-                }
-
-                attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
-            }
-            else
+            if (AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) && !ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
             {
                 GameLog.AddMessage("Attack fully ignored because of effect");
+                if (!IgnorePostAttack)
+                {
+                    PostAttack();
+                }
+                return;
+            }
+
+            if (DamageStoppers.Any(x => x.IsDamageIgnored()))
+            {
+                GameLog.AddMessage("Damage ignored because of effect");
+                if (!IgnorePostAttack)
+                {
+                    PostAttack();
+                }
+                return;
+            }
+
+            DealDamageWithAttack(attack);
+
+            attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
+
+        }
+
+        private void DealDamageWithAttack(Attack attack)
+        {
+            var damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
+            damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
+
+            var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
+            attack.OnDamageDealt(dealtDamage, ActivePlayer);
+
+            if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
+            {
+                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by taking damage");
+                NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, GameLog);
+            }
+            if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage && !damage.IsZero())
+            {
+                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by dealing damage");
+                ActivePlayer.ActivePokemonCard.Ability.SetTarget(NonActivePlayer.ActivePokemonCard);
+                ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, GameLog);
+                ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
+            }
+        }
+
+        private void HitItselfInConfusion()
+        {
+            GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.GetName()} hurt itself in its confusion");
+            ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), GameLog);
+
+            if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage)
+            {
+                ActivePlayer.ActivePokemonCard.Ability.SetTarget(ActivePlayer.ActivePokemonCard);
+                ActivePlayer.ActivePokemonCard.Ability.Trigger(ActivePlayer, NonActivePlayer, ConfusedDamage, GameLog);
+                ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
             }
 
             if (!IgnorePostAttack)
