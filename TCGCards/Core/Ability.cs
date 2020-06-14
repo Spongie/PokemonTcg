@@ -31,11 +31,15 @@ namespace TCGCards.Core
                 UsedTimes++;
                 Activate(owner, opponent, damageTaken, log);
             }
+            else
+            {
+                log.AddMessage(Name + " did not activate because of something");
+            }
         }
 
         public virtual bool CanActivate()
         {
-            return !PokemonOwner.IsAsleep && !PokemonOwner.IsConfused && !PokemonOwner.IsParalyzed && UsedTimes < Usages;
+            return !PokemonOwner.AbilityDisabled && !PokemonOwner.IsAsleep && !PokemonOwner.IsConfused && !PokemonOwner.IsParalyzed && UsedTimes < Usages;
         }
 
         public virtual void SetTarget(Card target)

@@ -598,6 +598,12 @@ namespace TCGCards.Core
             TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0).ToList();
 
             ActivePlayer.EndTurn();
+
+            foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
+            {
+                pokemon.AbilityDisabled = false;
+            }
+
             NonActivePlayer.EndTurn();
             CheckDeadPokemon();
             SwapActivePlayer();
