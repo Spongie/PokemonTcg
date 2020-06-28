@@ -123,6 +123,11 @@ namespace NetworkingCore
                     {
                         try
                         {
+                            if (!reading)
+                            {
+                                return;
+                            }
+
                             var readBytes = stream.Read(data, offset, bytesRemaining);
                             bytesRemaining -= readBytes;
                             offset += readBytes;

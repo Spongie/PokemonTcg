@@ -76,7 +76,7 @@ namespace Assets.Code.UI.DeckBuilder
                 {
                     var card = Card.CreateFromTypeInfo(type);
 
-                    if (card == null)
+                    if (card == null || card.IgnoreInBuilder)
                     {
                         continue;   
                     }

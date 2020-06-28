@@ -40,6 +40,7 @@ namespace Server.Services
             foreach (var type in deckInfo)
             {
                 var card = Card.CreateFromTypeInfo(type);
+                card.Owner = player;
                 player.Deck.Cards.Push(card);
             }
 
@@ -64,13 +65,14 @@ namespace Server.Services
             foreach (var type in deckInfo)
             {
                 var card = Card.CreateFromTypeInfo(type);
+                card.Owner = player;
                 player.Deck.Cards.Push(card);
             }
 
             game.Players.Add(player);
             game.StartGame();
 
-            SendUpdateToPlayers(game.Players.Where(x => !x.Id.Equals(player.Id)), game);
+            SendUpdateToPlayers(game.Players, game);
 
             return game;
         }

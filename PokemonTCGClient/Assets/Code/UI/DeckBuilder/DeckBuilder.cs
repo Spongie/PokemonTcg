@@ -19,6 +19,11 @@ namespace Assets.Code.UI.DeckBuilder
         public GameObject cardPrefab;
         public GameObject deckContent;
 
+        public Text textFieldCount;
+        public Text textFieldEnergyCount;
+        public Text textFieldTrainerCount;
+        public Text textFieldPokemonCount;
+
         private void Start()
         {
             if (!string.IsNullOrWhiteSpace(CurrentDeck))
@@ -80,6 +85,17 @@ namespace Assets.Code.UI.DeckBuilder
             deckCard.isInDeck = true;
 
             spawnedObject.GetComponentInChildren<CardZoomer>().zoomMode = ZoomMode.FromTopLeft;
+
+            UpdateCountInfo();
+        }
+
+        public void UpdateCountInfo()
+        {
+            var cards = deckContent.GetComponentsInChildren<DeckCard>().Select(x => x.card);
+            textFieldCount.text = cards.Count().ToString();
+            textFieldEnergyCount.text = cards.OfType<EnergyCard>().ToString();
+            textFieldTrainerCount.text = cards.OfType<TrainerCard>().ToString();
+            textFieldPokemonCount.text = cards.OfType<PokemonCard>().ToString();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace BaseSet.EnergyCards
         {
             createdBy = pokemonOwner;
             this.energyType = energyType;
+            IgnoreInBuilder = true;
         }
 
         public override Energy GetEnergry() => new Energy(energyType, 2);

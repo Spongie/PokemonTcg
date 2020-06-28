@@ -24,7 +24,7 @@ namespace BaseSet.Attacks
         {
             var unusedWaterEnergy = owner.ActivePokemonCard.AttachedEnergy.Count - 3;
 
-            return baseDamage + (10 * Math.Min(unusedWaterEnergy, 2));
+            return baseDamage + (10 * Math.Max(0, Math.Min(unusedWaterEnergy, 2)));
         }
     }
 }

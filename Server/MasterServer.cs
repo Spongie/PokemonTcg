@@ -66,6 +66,7 @@ namespace Server
 
             Id = NetworkId.Generate();
             listener = new TcpListener(IPAddress.Parse("0.0.0.0"), port);
+            //listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             listener.Start();
 
             Console.WriteLine("Listening for connections...");
@@ -99,6 +100,8 @@ namespace Server
             if (Clients.TryGetValue(playerId, out NetworkPlayer player))
             {
                 Clients.TryRemove(playerId, out player);
+                player.OnDisconnected -= Player_OnDisconnected;
+                player.DataReceived -= Player_DataReceived;
                 Logger.Instance.Log($"Player with id {playerId} disconnected");
             }
         }

@@ -107,6 +107,7 @@ namespace Assets.Code.UI.Gameplay
 
         public void RetreatClick()
         {
+            ClearAttackButtons();
             gameObject.SetActive(false);
             GameController.Instance.StartRetreating((PokemonCard)card);
         }

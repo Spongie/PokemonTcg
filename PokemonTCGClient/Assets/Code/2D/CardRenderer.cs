@@ -91,8 +91,9 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     private void SpawnAttachedEnergy(Card card, ZoomMode zoomMode, RectTransform myRect, int sortOrder, float offsetSize, float attachedOffset)
     {
         var activePokemonCard = GameController.Instance.Player.ActivePokemonCard;
+        var otherActtive = GameController.Instance.OpponentPlayer.ActivePokemonCard;
 
-        if (activePokemonCard != null && activePokemonCard.Id.Equals(card.Id))
+        if ((activePokemonCard != null && activePokemonCard.Id.Equals(card.Id)) || (otherActtive != null && otherActtive.Id.Equals(card.Id)))
         {
             foreach (var attachedEnergy in ((PokemonCard)card).AttachedEnergy)
             {

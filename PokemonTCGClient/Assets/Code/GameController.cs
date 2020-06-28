@@ -130,12 +130,14 @@ namespace Assets.Code
 
             if (totalAttachedEnergy == pokemonCard.RetreatCost)
             {
+                infoText.text = "Select new active pokemon";
                 SpecialState = SpecialGameState.SelectingRetreatTarget;
                 selectedCards.Clear();
                 selectedCards.AddRange(pokemonCard.AttachedEnergy);
             }
             else
             {
+                infoText.text = "Pick energy to use for retreat";
                 SpecialState = SpecialGameState.SelectEnergyToRetreat;
                 selectedCards.Clear();
                 selectFromListPanel.SetActive(true);
@@ -218,6 +220,7 @@ namespace Assets.Code
             myId = NetworkManager.Instance.Me.Id;
             gameField = NetworkManager.Instance.CurrentGame;
 
+            //TODO UNREGISTER CALLBACKS
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);

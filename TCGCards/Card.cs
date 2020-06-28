@@ -29,6 +29,8 @@ namespace TCGCards
 
         public bool IsTestCard { get; set; }
 
+        public bool IgnoreInBuilder { get; set; }
+
         public override bool Equals(object other)
         {
             var otherCard = other as Card;

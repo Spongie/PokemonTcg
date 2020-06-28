@@ -129,11 +129,13 @@ namespace TCGCards.Core
         {
             if (!CanRetreat(ActivePlayer.ActivePokemonCard))
             {
+                GameLog.AddMessage("Tried to retreat but did not have enough energy");
                 return;
             }
 
             foreach (Ability ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
             {
+                GameLog.AddMessage($"Ability {ability.Name} triggers becasue of retreat");
                 ability.Trigger(NonActivePlayer, ActivePlayer, 0, GameLog);
             }
             
@@ -242,7 +244,7 @@ namespace TCGCards.Core
             {
                 foreach (PokemonCard card in player.Hand.OfType<PokemonCard>())
                 {
-                    if (card.Ability.Id.Equals(id))
+                    if (card.Ability != null && card.Ability.Id.Equals(id))
                     {
                         return card.Ability;
                     }
@@ -250,7 +252,7 @@ namespace TCGCards.Core
 
                 foreach (PokemonCard pokemon in player.GetAllPokemonCards())
                 {
-                    if (pokemon.Ability.Id.Equals(id))
+                    if (pokemon.Ability != null && pokemon.Ability.Id.Equals(id))
                     {
                         return pokemon.Ability;
                     }
@@ -258,7 +260,7 @@ namespace TCGCards.Core
 
                 foreach (PokemonCard card in player.DiscardPile.OfType<PokemonCard>())
                 {
-                    if (card.Ability.Id.Equals(id))
+                    if (card.Ability != null && card.Ability.Id.Equals(id))
                     {
                         return card.Ability;
                     }
@@ -266,7 +268,7 @@ namespace TCGCards.Core
 
                 foreach (PokemonCard card in player.PrizeCards.OfType<PokemonCard>())
                 {
-                    if (card.Ability.Id.Equals(id))
+                    if (card.Ability != null && card.Ability.Id.Equals(id))
                     {
                         return card.Ability;
                     }
@@ -274,7 +276,7 @@ namespace TCGCards.Core
 
                 foreach (PokemonCard card in player.Deck.Cards.OfType<PokemonCard>())
                 {
-                    if (card.Ability.Id.Equals(id))
+                    if (card.Ability != null && card.Ability.Id.Equals(id))
                     {
                         return card.Ability;
                     }
@@ -326,8 +328,9 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
-            if (attack.Disabled || attack.CanBeUsed(this, ActivePlayer, NonActivePlayer))
+            if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer))
             {
+                GameLog.AddMessage($"Attack not used becasue GameFirst: {FirstTurn} Disabled: {attack.Disabled} or CanBeUsed:{attack.CanBeUsed(this, ActivePlayer, NonActivePlayer)}");
                 return;
             }
 

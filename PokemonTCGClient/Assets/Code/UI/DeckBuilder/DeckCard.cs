@@ -34,6 +34,7 @@ namespace Assets.Code.UI.DeckBuilder
             }
             else
             {
+                deckBuilder.UpdateCountInfo();
                 Destroy(gameObject);
             }
         }
