@@ -14,6 +14,7 @@ namespace Assets.Code
         SelectPokemonToEvolveOn,
         SelectingYesNo,
         SelectingRetreatTarget,
-        SelectEnergyToRetreat
+        SelectEnergyToRetreat,
+        SelectingPrize
     }
 }

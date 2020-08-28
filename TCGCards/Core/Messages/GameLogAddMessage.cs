@@ -5,6 +5,11 @@ namespace TCGCards.Core.Messages
 {
     public class GameLogAddMessage : AbstractNetworkMessage
     {
+        public GameLogAddMessage()
+        {
+
+        }
+
         public GameLogAddMessage(List<string> messages)
         {
             MessageType = MessageTypes.GameLogNewMessages;

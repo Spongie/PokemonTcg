@@ -4,6 +4,11 @@ namespace TCGCards.Core.Messages
 {
     public class DiscardCardsMessage : AbstractNetworkMessage
     {
+        public DiscardCardsMessage()
+        {
+
+        }
+
         public DiscardCardsMessage(int count)
         {
             MessageType = MessageTypes.DiscardCards;

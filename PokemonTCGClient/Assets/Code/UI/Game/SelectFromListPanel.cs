@@ -1,4 +1,5 @@
 ﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
@@ -93,14 +94,19 @@ namespace Assets.Code.UI.Game
 
         public void Init(PickFromListMessage pickFromListMessage)
         {
+            InitForCards(pickFromListMessage.PossibleChoices, pickFromListMessage.MinCount, pickFromListMessage.MaxCount);
+        }
+
+        private void InitForCards(IEnumerable<Card> cards, int minCount, int maxCount)
+        {
             ClearOldCards();
             selectedCards.Clear();
             onlyView = false;
             availableCards = new HashSet<NetworkId>();
-            limit = pickFromListMessage.MaxCount;
-            minCount = pickFromListMessage.MinCount;
+            limit = maxCount;
+            this.minCount = minCount;
 
-            foreach (var card in pickFromListMessage.PossibleChoices)
+            foreach (var card in cards)
             {
                 var spawnedCard = Instantiate(previewCard, contentObject.transform);
                 spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None);
@@ -156,12 +162,17 @@ namespace Assets.Code.UI.Game
                 return;
             }
 
-            var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(NetworkManager.Instance.Me.Id);
-            message.ResponseTo = NetworkManager.Instance.RespondingTo;
-            NetworkManager.Instance.Me.Send(message);
+            var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList());
+            
+            NetworkManager.Instance.SendToServer(message, true);
 
             selectedCards.Clear();
             gameObject.SetActive(false);
+        }
+
+        internal void Init(SelectPriceCardsMessage message, IEnumerable<Card> cards)
+        {
+            InitForCards(cards, message.Amount, message.Amount);
         }
     }
 }

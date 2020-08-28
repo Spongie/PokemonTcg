@@ -4,6 +4,11 @@ namespace TCGCards.Core.Messages
 {
     public class SelectFromOpponentBench : AbstractNetworkMessage
     {
+        public SelectFromOpponentBench()
+        {
+
+        }
+
         public SelectFromOpponentBench(int count) : this(count, count)
         {
 

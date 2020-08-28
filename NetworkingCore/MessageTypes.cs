@@ -22,5 +22,6 @@
         Error,
         GameOver,
         Ping,
+        CardListMessage,
     }
 }

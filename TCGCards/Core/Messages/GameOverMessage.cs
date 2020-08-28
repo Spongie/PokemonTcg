@@ -4,6 +4,11 @@ namespace TCGCards.Core.Messages
 {
     public class GameOverMessage : AbstractNetworkMessage
     {
+        public GameOverMessage()
+        {
+
+        }
+
         public GameOverMessage(NetworkId winner)
         {
             WinnerId = winner;

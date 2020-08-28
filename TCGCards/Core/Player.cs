@@ -244,7 +244,7 @@ namespace TCGCards.Core
 
         public void SelectPriceCard(int amount)
         {
-            var message = new PickFromListMessage(PrizeCards, amount).ToNetworkMessage(NetworkId.Generate());
+            var message = new SelectPriceCardsMessage(amount).ToNetworkMessage(NetworkId.Generate());
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 

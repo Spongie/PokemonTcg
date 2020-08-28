@@ -4,6 +4,11 @@ namespace TCGCards.Core.Messages
 {
     public class SelectPriceCardsMessage : AbstractNetworkMessage
     {
+        public SelectPriceCardsMessage()
+        {
+
+        }
+
         public SelectPriceCardsMessage(int amount)
         {
             Amount = amount;

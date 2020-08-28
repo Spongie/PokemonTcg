@@ -5,6 +5,11 @@ namespace TCGCards.Core.Messages
 {
     public class AttachEnergyCardsToBenchMessage : AbstractNetworkMessage
     {
+        public AttachEnergyCardsToBenchMessage()
+        {
+
+        }
+
         public AttachEnergyCardsToBenchMessage(List<EnergyCard> energyCards)
         {
             MessageType = MessageTypes.AttachEnergyToBench;
@@ -12,15 +17,5 @@ namespace TCGCards.Core.Messages
         }
 
         public List<EnergyCard> EnergyCards { get; set; }
-    }
-
-    public class AttachedEnergyDoneMessage : AbstractNetworkMessage
-    {
-        public AttachedEnergyDoneMessage(Dictionary<NetworkId, NetworkId> energyPokemonMap)
-        {
-            EnergyPokemonMap = energyPokemonMap;
-        }
-
-        public Dictionary<NetworkId, NetworkId> EnergyPokemonMap { get; set; }
     }
 }

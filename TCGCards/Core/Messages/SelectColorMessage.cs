@@ -4,6 +4,11 @@ namespace TCGCards.Core.Messages
 {
     public class SelectColorMessage : AbstractNetworkMessage
     {
+        public SelectColorMessage()
+        {
+
+        }
+
         public SelectColorMessage(string message)
         {
             Message = message;

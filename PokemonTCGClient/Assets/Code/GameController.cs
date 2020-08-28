@@ -230,7 +230,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.AttachEnergyToBench, OnStartAttachingEnergyBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
-            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickFromList);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickPrize);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
             NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
@@ -344,6 +344,13 @@ namespace Assets.Code
 
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
+        }
+
+        private void OnStartPickPrize(object message, NetworkId messageId)
+        {
+            SpecialState = SpecialGameState.SelectingPrize;
+            selectFromListPanel.SetActive(true);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((SelectPriceCardsMessage)message, Player.PrizeCards);
         }
 
         private void OnStartPickFromList(object message, NetworkId messageId)

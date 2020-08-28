@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Server
 {
@@ -113,40 +114,40 @@ namespace Server
                 var messageData = (GenericMessageData)messageReceivedEvent.Message.Data;
                 IService service = services[messageData.TargetClass];
                 var target = Assembly.GetExecutingAssembly().GetTypes().First(type => type.Name == messageData.TargetClass);
-                object result;
 
-                try
+                Task.Run(() => 
                 {
-                     result = target.GetMethod(messageData.TargetMethod).Invoke(service, messageData.Parameters);
-                }
-                catch (Exception e)
-                {
-                    Logger.Instance.Log(e.Message);
-
-                    if (e.InnerException != null)
+                    try
                     {
-                        Logger.Instance.Log(e.InnerException.Message);
+                        object result = target.GetMethod(messageData.TargetMethod).Invoke(service, messageData.Parameters);
+
+                        if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
+                        {
+                            networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId)
+                            {
+                                RequiresResponse = false
+                            });
+                        }
                     }
-
-                    if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))
+                    catch (Exception e)
                     {
-                        errorPlayer.Send(new ExceptionMessage(e).ToNetworkMessage(Id));
+                        Logger.Instance.Log(e.Message);
+
+                        if (e.InnerException != null)
+                        {
+                            Logger.Instance.Log(e.InnerException.Message);
+                        }
+
+                        if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))
+                        {
+                            errorPlayer.Send(new ExceptionMessage(e).ToNetworkMessage(Id));
+                        }
                     }
-
-                    return;
-                }
-
-                if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
-                {
-                    networkPlayer.Send(new NetworkMessage(MessageTypes.Generic, result, NetworkId.Generate(), NetworkId.Generate(), messageReceivedEvent.Message.MessageId)
-                    {
-                        RequiresResponse = false
-                    });
-                }
+                });
             }
             else
             {
-                //throw new InvalidOperationException("Bad message");
+                //Hmm mauybe do something i dont know
             }
         }
 

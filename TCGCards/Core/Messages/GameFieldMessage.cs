@@ -4,6 +4,11 @@ namespace TCGCards.Core.Messages
 {
     public class GameFieldMessage : AbstractNetworkMessage
     {
+        public GameFieldMessage()
+        {
+
+        }
+
         public GameFieldMessage(GameField game)
         {
             Game = game;
