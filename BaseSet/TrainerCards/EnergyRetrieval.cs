@@ -15,7 +15,7 @@ namespace BaseSet.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            GameUtils.DiscardCardsFromHand(caster, 1);
+            GameUtils.DiscardCardsFromHand(caster, 1, new[] { this });
 
             var message = new PickFromListMessage(caster.DiscardPile.OfType<EnergyCard>().Where(card => card.IsBasic), 0, 2).ToNetworkMessage(game.Id);
 
