@@ -221,6 +221,7 @@ namespace Assets.Code
             gameField = NetworkManager.Instance.CurrentGame;
 
             //TODO UNREGISTER CALLBACKS
+            //TODO Send more info messages
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
@@ -236,6 +237,25 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourPokemon, OnBeginSelectYourPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
+        }
+
+        private void OnDestroy()
+        {
+            DeRegisterCallbacks();
+        }
+
+        private void DeRegisterCallbacks()
+        {
+            foreach (MessageTypes messageType in Enum.GetValues(typeof(MessageTypes)))
+            {
+                NetworkManager.Instance.DeRegisterCallback(messageType);
+            }
+        }
+
+        private void OnInfoReceived(object message, NetworkId messageId)
+        {
+            infoText.text = ((InfoMessage)message).Info;
         }
 
         private void OnGameEnded(object message, NetworkId messageId)
@@ -645,6 +665,7 @@ namespace Assets.Code
                 controller.SetIsBenched();
             }
         }
+
 
         private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard, ZoomMode zoomMode)
         {

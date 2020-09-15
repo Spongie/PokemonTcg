@@ -18,12 +18,19 @@ namespace TCGCards.Core.Tests
         {
             var gameField = new GameField();
             gameField.InitTest();
+            gameField.GameState = GameFieldState.InTurn;
+            gameField.FirstTurn = false;
             var originalActive = gameField.ActivePlayer;
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
             gameField.ActivePlayer.Hand.Add(new WaterEnergy());
 
             var activePokemon = new Magikarp(gameField.ActivePlayer);
+
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+
             var otherPokemon = new Magikarp(gameField.NonActivePlayer);
 
             gameField.ActivePlayer.SetActivePokemon(activePokemon);
@@ -40,12 +47,18 @@ namespace TCGCards.Core.Tests
         {
             var gameField = new GameField();
             gameField.InitTest();
+            gameField.GameState = GameFieldState.InTurn;
+            gameField.FirstTurn = false;
             var originalActive = gameField.ActivePlayer;
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
             gameField.ActivePlayer.Hand.Add(new WaterEnergy());
 
             var activePokemon = new Magikarp(gameField.ActivePlayer);
+
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
             var otherPokemon = new Magikarp(gameField.NonActivePlayer);
             otherPokemon.DamageCounters += otherPokemon.Hp - 1;
 
@@ -81,7 +94,6 @@ namespace TCGCards.Core.Tests
 
             gameField.Attack(activePokemon.Attacks.First());
 
-            Assert.AreEqual(originalActive.Id, gameField.NonActivePlayer.Id);
             Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
             Assert.AreEqual(2, gameField.NonActivePlayer.PrizeCards.Count);
             Assert.AreEqual(3, gameField.ActivePlayer.PrizeCards.Count);
@@ -92,6 +104,8 @@ namespace TCGCards.Core.Tests
         {
             var gameField = new GameField();
             gameField.InitTest();
+            gameField.GameState = GameFieldState.InTurn;
+            gameField.FirstTurn = false;
             var originalActive = gameField.ActivePlayer;
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
@@ -101,6 +115,9 @@ namespace TCGCards.Core.Tests
             var otherPokemon = new Magikarp(gameField.NonActivePlayer);
 
             activePokemon.DamageCounters = activePokemon.Hp;
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
 
             gameField.ActivePlayer.SetActivePokemon(activePokemon);
             gameField.NonActivePlayer.SetActivePokemon(otherPokemon);
@@ -134,7 +151,6 @@ namespace TCGCards.Core.Tests
 
             gameField.Attack(activePokemon.Attacks.First());
 
-            Assert.AreEqual(originalActive.Id, gameField.NonActivePlayer.Id);
             Assert.AreEqual(GameFieldState.InTurn, gameField.GameState);
             Assert.AreEqual(3, gameField.NonActivePlayer.PrizeCards.Count);
             Assert.AreEqual(2, gameField.ActivePlayer.PrizeCards.Count);
@@ -145,6 +161,7 @@ namespace TCGCards.Core.Tests
         {
             var gameField = new GameField();
             gameField.InitTest();
+            gameField.FirstTurn = false;
             var originalActive = gameField.ActivePlayer;
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
@@ -205,6 +222,7 @@ namespace TCGCards.Core.Tests
         public void KnockedOutBy_IsSet()
         {
             var gameField = new GameField();
+            gameField.FirstTurn = false;
             gameField.InitTest();
 
             gameField.NonActivePlayer.Hand.Add(new WaterEnergy());
@@ -230,6 +248,9 @@ namespace TCGCards.Core.Tests
             gameField.NonActivePlayer.SetNetworkPlayer(nonActiveNetworkPlayer);
 
             PokemonCard activePokemon = new Magikarp(gameField.ActivePlayer);
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
+            activePokemon.AttachedEnergy.Add(new WaterEnergy());
             PokemonCard otherPokemon = new Magikarp(gameField.NonActivePlayer);
 
             gameField.ActivePlayer.SetActivePokemon(activePokemon);

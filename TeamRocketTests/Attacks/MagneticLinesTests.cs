@@ -20,11 +20,12 @@ namespace TeamRocketTests.Attacks
             var game = new GameField();
             game.IgnorePostAttack = true;
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkMagneton(owner);
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
 
             var opponent = game.NonActivePlayer;
             opponent.ActivePokemonCard = new DarkPrimeape(opponent);
@@ -48,11 +49,12 @@ namespace TeamRocketTests.Attacks
             var game = new GameField();
             game.IgnorePostAttack = true;
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkMagneton(owner);
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
 
             var opponent = game.NonActivePlayer;
             opponent.ActivePokemonCard = new DarkPrimeape(opponent);
@@ -77,11 +79,12 @@ namespace TeamRocketTests.Attacks
             var game = new GameField();
             game.IgnorePostAttack = true;
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkMagneton(owner);
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
 
             var opponent = game.NonActivePlayer;
             opponent.ActivePokemonCard = new DarkPrimeape(opponent);

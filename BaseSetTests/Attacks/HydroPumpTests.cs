@@ -16,6 +16,7 @@ namespace BaseSetTests.Attacks
             var game = new GameField();
             game.InitTest();
             game.IgnorePostAttack = true;
+            game.FirstTurn = false;
 
             var player = game.ActivePlayer;
             
@@ -40,6 +41,7 @@ namespace BaseSetTests.Attacks
             var game = new GameField();
             game.InitTest();
             game.IgnorePostAttack = true;
+            game.FirstTurn = false;
 
             var player = game.ActivePlayer;
 
@@ -65,6 +67,7 @@ namespace BaseSetTests.Attacks
             var game = new GameField();
             game.InitTest();
             game.IgnorePostAttack = true;
+            game.FirstTurn = false;
 
             var player = game.ActivePlayer;
 
@@ -91,6 +94,7 @@ namespace BaseSetTests.Attacks
             var game = new GameField();
             game.InitTest();
             game.IgnorePostAttack = true;
+            game.FirstTurn = false;
 
             var player = game.ActivePlayer;
 
@@ -120,6 +124,7 @@ namespace BaseSetTests.Attacks
             var game = new GameField();
             game.InitTest();
             game.IgnorePostAttack = true;
+            game.FirstTurn = false;
 
             var player = game.ActivePlayer;
 

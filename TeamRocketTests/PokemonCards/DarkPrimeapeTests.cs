@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TCGCards.Core;
+using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 
 namespace TeamRocketTests.PokemonCards
@@ -11,6 +12,7 @@ namespace TeamRocketTests.PokemonCards
         public void FrenzyAbility_Triggers()
         {
             var gameField = createGameField();
+            gameField.FirstTurn = false;
             gameField.ActivePlayer.ActivePokemonCard.IsConfused = true;
             CoinFlipper.ForcedNextFlips.Enqueue(false);
 
@@ -28,6 +30,10 @@ namespace TeamRocketTests.PokemonCards
 
             gameField.ActivePlayer.ActivePokemonCard = new DarkPrimeape(gameField.ActivePlayer);
             gameField.NonActivePlayer.ActivePokemonCard = new DarkPrimeape(gameField.NonActivePlayer);
+
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
 
             return gameField;
         }

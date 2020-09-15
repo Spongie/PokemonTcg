@@ -19,11 +19,12 @@ namespace TeamRocketTests.Attacks
             var game = new GameField();
             game.IgnorePostAttack = true;
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkGolbat(owner);
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
-            owner.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
+            owner.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
 
             var opponent = game.NonActivePlayer;
             opponent.ActivePokemonCard = new DarkPrimeape(opponent);

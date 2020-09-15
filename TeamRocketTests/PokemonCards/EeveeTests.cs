@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 
 namespace TeamRocketTests.PokemonCards
@@ -33,9 +34,17 @@ namespace TeamRocketTests.PokemonCards
         {
             var gameField = new GameField();
             gameField.InitTest();
+            gameField.FirstTurn = false;
 
             gameField.ActivePlayer.ActivePokemonCard = new Eevee(gameField.ActivePlayer);
             gameField.NonActivePlayer.ActivePokemonCard = new Eevee(gameField.NonActivePlayer);
+
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new FightingEnergy());
 
             return gameField;
         }

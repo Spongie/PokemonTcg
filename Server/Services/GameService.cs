@@ -91,7 +91,7 @@ namespace Server.Services
                 return game;
             }
 
-            var pokemons = pokemonIds.Select(id => (PokemonCard)game.FindCardById(id));
+            var pokemons = pokemonIds.Distinct().Select(id => (PokemonCard)game.FindCardById(id));
             game.OnBenchPokemonSelected(game.Players.First(p => p.Id.Equals(playerId)), pokemons);
 
             SendUpdateToPlayers(game.Players, game);

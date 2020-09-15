@@ -2,6 +2,7 @@
 using NetworkingCore;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 
 namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
@@ -15,6 +16,7 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
 
             var game = new GameField();
+            game.FirstTurn = false;
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
             game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
@@ -23,6 +25,8 @@ namespace TCGCards.PokemonCards.TeamRocket.Attacks.Tests
             var attack = new Abra(game.ActivePlayer).Attacks[1];
 
             game.ActivePlayer.ActivePokemonCard = new Abra(game.ActivePlayer);
+            game.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+            game.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
             game.NonActivePlayer.ActivePokemonCard = new Abra(game.NonActivePlayer);
 
             game.Attack(attack);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.EnergyCards;
 using TeamRocket.PokemonCards;
 
 namespace TeamRocketTests.PokemonCards
@@ -12,6 +13,7 @@ namespace TeamRocketTests.PokemonCards
         public void LightningFlashEffectAppliedOnOpponent()
         {
             var gameField = createGameField();
+            
             gameField.Attack(gameField.ActivePlayer.ActivePokemonCard.Attacks[0]);
 
             Assert.IsTrue(gameField.ActivePlayer.ActivePokemonCard.AttackStoppers.Any());
@@ -25,7 +27,7 @@ namespace TeamRocketTests.PokemonCards
 
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
-            gameField.Attack(gameField.ActivePlayer.ActivePokemonCard.Attacks[1]);
+            gameField.Attack(gameField.ActivePlayer.ActivePokemonCard.Attacks[0]);
             Assert.AreEqual(0, gameField.ActivePlayer.ActivePokemonCard.DamageCounters);
         }
 
@@ -33,9 +35,18 @@ namespace TeamRocketTests.PokemonCards
         {
             var gameField = new GameField();
             gameField.InitTest();
+            gameField.FirstTurn = false;
 
             gameField.ActivePlayer.ActivePokemonCard = new DarkJolteon(gameField.ActivePlayer);
             gameField.NonActivePlayer.ActivePokemonCard = new DarkJolteon(gameField.NonActivePlayer);
+
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            gameField.ActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
+            gameField.NonActivePlayer.ActivePokemonCard.AttachedEnergy.Add(new LightningEnergy());
 
             return gameField;
         }

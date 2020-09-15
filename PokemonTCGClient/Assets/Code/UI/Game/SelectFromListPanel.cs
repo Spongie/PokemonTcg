@@ -172,6 +172,8 @@ namespace Assets.Code.UI.Game
 
         internal void Init(SelectPriceCardsMessage message, IEnumerable<Card> cards)
         {
+            minCount = 1;
+            limit = 1;
             InitForCards(cards, message.Amount, message.Amount);
         }
     }

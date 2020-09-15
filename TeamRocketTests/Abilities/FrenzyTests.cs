@@ -34,6 +34,7 @@ namespace TeamRocketTests.Abilities
         {
             var game = new GameField();
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkPrimeape(owner);
@@ -57,6 +58,7 @@ namespace TeamRocketTests.Abilities
         {
             var game = new GameField();
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new DarkPrimeape(owner);

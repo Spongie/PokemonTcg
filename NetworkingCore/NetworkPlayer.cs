@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
@@ -119,11 +120,12 @@ namespace NetworkingCore
                     int bytesRemaining = dataSize;
                     int offset = 0;
 
+                    var readTimer = Stopwatch.StartNew();
                     while (bytesRemaining > 0)
                     {
                         try
                         {
-                            if (!reading)
+                            if (!reading || readTimer.ElapsedMilliseconds > 10000)
                             {
                                 return;
                             }

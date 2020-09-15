@@ -19,6 +19,7 @@ namespace TeamRocketTests.Attacks
             var game = new GameField();
             game.IgnorePostAttack = true;
             game.InitTest();
+            game.FirstTurn = false;
 
             var owner = game.ActivePlayer;
             owner.ActivePokemonCard = new Meowth(owner);

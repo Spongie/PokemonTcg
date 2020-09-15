@@ -14,7 +14,7 @@ namespace BaseSet.TrainerCards
 
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            caster.DiscardCards(caster.Hand.Select(x => x.Id));
+            caster.DiscardCards(caster.Hand.Select(x => x.Id).Except(new[] { Id }));
             caster.DrawCards(7);
         }
     }

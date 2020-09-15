@@ -473,6 +473,9 @@ namespace TCGCards.Core
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
                 return;
 
+            GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
+            PushGameLogUpdatesToPlayers();
+
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             ActivePlayer.DiscardCard(trainerCard);
 
@@ -560,6 +563,8 @@ namespace TCGCards.Core
                 }
                 else
                 {
+                    PushStateToPlayer(NonActivePlayer);
+                    PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
                     ActivePlayer.SelectPriceCard(1);
                 }
             }
@@ -579,6 +584,8 @@ namespace TCGCards.Core
                 }
                 else
                 {
+                    PushStateToPlayer(ActivePlayer);
+                    PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
                     NonActivePlayer.SelectPriceCard(1);
                 }
             }
@@ -665,6 +672,18 @@ namespace TCGCards.Core
             }
 
             GameLog.CommitMessages();
+        }
+
+        public void PushStateToPlayer(Player player)
+        {
+            var gameMessage = new GameFieldMessage(this);
+            player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
+        }
+
+        public void PushInfoToPlayer(string info, Player player)
+        {
+            var message = new InfoMessage(info);
+            player.NetworkPlayer.Send(message.ToNetworkMessage(Id));
         }
 
         public GameFieldState GameState { get; set; }

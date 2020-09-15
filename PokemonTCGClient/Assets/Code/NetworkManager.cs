@@ -28,6 +28,11 @@ namespace Assets.Code
             messageConsumers.Add(messageTypes, callback);
         }
 
+        internal void DeRegisterCallback(MessageTypes messageType)
+        {
+            messageConsumers.Remove(messageType);
+        }
+
         void Awake()
         {
             Instance = this;
@@ -41,8 +46,8 @@ namespace Assets.Code
             messagesToPrint = new Queue<NetworkMessage>();
 
             var tcp = new TcpClient();
-            //tcp.Connect("85.90.244.171", 80);
-            tcp.Connect("localhost", 80);
+            tcp.Connect("85.90.244.171", 80);
+            //tcp.Connect("localhost", 80);
             networkPlayer = new NetworkingCore.NetworkPlayer(tcp);
 
             Me = networkPlayer;

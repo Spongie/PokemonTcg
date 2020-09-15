@@ -11,7 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = "Dark Charmeleon";
 			EvolvesFrom = "Charmander";
-            Stage = 0;
+            Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 2;

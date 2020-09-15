@@ -23,5 +23,6 @@
         GameOver,
         Ping,
         CardListMessage,
+        Info,
     }
 }

@@ -4,7 +4,7 @@ namespace TCGCards.Core.Messages
 {
     public class SelectOpponentPokemon : AbstractNetworkMessage
     {
-        public SelectOpponentPokemon()
+        public SelectOpponentPokemon() :this(0)
         {
 
         }

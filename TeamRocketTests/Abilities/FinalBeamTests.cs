@@ -133,6 +133,7 @@ namespace TeamRocketTests.Abilities
         {
             var game = new GameField();
             game.InitTest();
+            game.FirstTurn = false;
 
             game.ActivePlayer.PrizeCards.Add(new WaterEnergy());
             var activeNetworkPlayer = Substitute.For<INetworkPlayer>();
