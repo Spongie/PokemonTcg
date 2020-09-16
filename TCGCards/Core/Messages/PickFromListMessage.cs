@@ -6,7 +6,7 @@ namespace TCGCards.Core.Messages
 {
     public class PickFromListMessage : AbstractNetworkMessage
     {
-        public PickFromListMessage()
+        public PickFromListMessage() :this(Enumerable.Empty<Card>(), 1)
         {
 
         }
@@ -24,8 +24,8 @@ namespace TCGCards.Core.Messages
             MinCount = minCount;
         }
 
-        public List<Card> PossibleChoices { get; }
-        public int MaxCount { get; }
-        public int MinCount { get; }
+        public List<Card> PossibleChoices { get; set; }
+        public int MaxCount { get; set; }
+        public int MinCount { get; set; }
     }
 }

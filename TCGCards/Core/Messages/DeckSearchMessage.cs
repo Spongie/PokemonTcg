@@ -19,9 +19,9 @@ namespace TCGCards.Core.Messages
             MessageType = MessageTypes.DeckSearch;
         }
 
-        public Deck Deck { get; }
-        public List<IDeckFilter> Filters { get; }
-        public int CardCount { get; }
+        public Deck Deck { get; set; }
+        public List<IDeckFilter> Filters { get; set; }
+        public int CardCount { get; set; }
         public List<Card> PickedCards { get; set; }
     }
 }

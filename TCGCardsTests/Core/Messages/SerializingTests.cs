@@ -103,6 +103,19 @@ namespace TCGCardsTests.Core.Messages
         }
 
         [TestMethod]
+        public void PickFromListMessageDeserialize()
+        {
+            var player = new Player();
+            var message = new PickFromListMessage(new List<Card> { new WaterEnergy(), new WaterEnergy(), new Magikarp(player)}, 1, 1);
+
+            var result = SerializeAndBack(message);
+
+            Assert.AreEqual(1, result.MinCount);
+            Assert.AreEqual(1, result.MaxCount);
+            Assert.AreEqual(3, result.PossibleChoices.Count);
+        }
+
+        [TestMethod]
         public void SelectAttackMessage()
         {
             var pokemon = new Magikarp(new Player());
@@ -117,7 +130,8 @@ namespace TCGCardsTests.Core.Messages
         {
             var message = new SelectColorMessage(EnergyTypes.Colorless);
 
-            Assert.IsNotNull(SerializeAndBack(message));
+            var data = SerializeAndBack(message);
+            Assert.AreEqual(EnergyTypes.Colorless, data.Color);
         }
 
         [TestMethod]
@@ -157,7 +171,8 @@ namespace TCGCardsTests.Core.Messages
         {
             var message = new SelectPriceCardsMessage(1);
 
-            Assert.IsNotNull(SerializeAndBack(message));
+            var data = SerializeAndBack(message);
+            Assert.AreEqual(1, data.Amount);
         }
 
         private T SerializeAndBack<T>(T message)

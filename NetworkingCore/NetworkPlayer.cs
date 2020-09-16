@@ -164,7 +164,7 @@ namespace NetworkingCore
             {
                 Disconnect(false);
             }
-            else if (!message.ResponseTo.Value.Equals(NetworkId.Empty))
+            else if (message.ResponseTo != null && !message.ResponseTo.Value.Equals(NetworkId.Empty))
             {
                 SpecificResponses.TryAdd(message.ResponseTo, message);
             }

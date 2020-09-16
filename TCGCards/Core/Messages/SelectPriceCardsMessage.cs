@@ -15,6 +15,6 @@ namespace TCGCards.Core.Messages
             MessageType = MessageTypes.SelectPriceCards;
         }
 
-        public int Amount { get; }
+        public int Amount { get; set; }
     }
 }

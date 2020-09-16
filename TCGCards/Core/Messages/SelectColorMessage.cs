@@ -20,8 +20,8 @@ namespace TCGCards.Core.Messages
             Color = color;
         }
 
-        public string Message { get; private set; }
+        public string Message { get; set; }
 
-        public EnergyTypes Color { get; private set; }
+        public EnergyTypes Color { get; set; }
     }
 }
