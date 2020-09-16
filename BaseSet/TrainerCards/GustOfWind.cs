@@ -14,7 +14,7 @@ namespace BaseSet.TrainerCards
         }
         public override void Process(GameField game, Player caster, Player opponent)
         {
-            var selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBench(1).ToNetworkMessage(game.Id)).Cards.First();
+            var selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id)).Cards.First();
 
             var currentActive = opponent.ActivePokemonCard;
             opponent.ActivePokemonCard = null;

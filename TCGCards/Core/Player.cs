@@ -258,7 +258,7 @@ namespace TCGCards.Core
 
         public void SelectActiveFromBench()
         {
-            var message = new SelectFromYourBench(1).ToNetworkMessage(Id);
+            var message = new SelectFromYourBenchMessage(1).ToNetworkMessage(Id);
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 

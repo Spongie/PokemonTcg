@@ -36,7 +36,7 @@ namespace TeamRocket.Attacks
                     var selectedEnergy = owner.ActivePokemonCard.AttachedEnergy.First(x => x.Id.Equals(energyResponse.Cards.First()));
                     owner.ActivePokemonCard.DiscardEnergyCard(selectedEnergy);
 
-                    var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
+                    var message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(owner.Id);
                     var selectedId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     var pokemon = opponent.BenchedPokemon.First(x => x.Id.Equals(selectedId));
                     pokemon.DamageCounters += 10;

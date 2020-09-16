@@ -30,7 +30,7 @@ namespace TeamRocket.Attacks
             if (!opponent.BenchedPokemon.Any())
                 return;
 
-            var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourBench(1).ToNetworkMessage(opponent.Id));
+            var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourBenchMessage(1).ToNetworkMessage(opponent.Id));
             var newActive = (PokemonCard)game.FindCardById(response.Cards.First());
             opponent.ForceRetreatActivePokemon(newActive);
         }

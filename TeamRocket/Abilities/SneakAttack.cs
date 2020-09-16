@@ -15,7 +15,7 @@ namespace TeamRocket.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
-            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(owner.Id));
+            var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemonMessage(1).ToNetworkMessage(owner.Id));
 
             foreach (var id in response.Cards)
             {

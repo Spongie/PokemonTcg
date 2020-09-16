@@ -29,7 +29,7 @@ namespace TeamRocket.Attacks
             if (!CoinFlipper.FlipCoin())
                 return;
 
-            var message = new SelectFromOpponentBench(1).ToNetworkMessage(owner.Id);
+            var message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             opponent.ForceRetreatActivePokemon((PokemonCard)game.FindCardById(response.Cards.First()));   

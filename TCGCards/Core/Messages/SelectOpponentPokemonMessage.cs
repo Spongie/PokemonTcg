@@ -2,19 +2,19 @@
 
 namespace TCGCards.Core.Messages
 {
-    public class SelectOpponentPokemon : AbstractNetworkMessage
+    public class SelectOpponentPokemonMessage : AbstractNetworkMessage
     {
-        public SelectOpponentPokemon() :this(0)
+        public SelectOpponentPokemonMessage() :this(0)
         {
 
         }
 
-        public SelectOpponentPokemon(int count) :this(count, count)
+        public SelectOpponentPokemonMessage(int count) :this(count, count)
         {
             
         }
 
-        public SelectOpponentPokemon(int minCount, int maxCount)
+        public SelectOpponentPokemonMessage(int minCount, int maxCount)
         {
             MessageType = MessageTypes.SelectOpponentPokemon;
             MaxCount = maxCount;

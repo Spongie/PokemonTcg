@@ -29,7 +29,7 @@ namespace TeamRocket.Attacks
             owner.Deck.Cards.Push(owner.ActivePokemonCard);
             owner.Deck.Shuffle();
 
-            var message = new SelectFromYourBench(1).ToNetworkMessage(owner.Id);
+            var message = new SelectFromYourBenchMessage(1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
             owner.ForceRetreatActivePokemon((PokemonCard)game.FindCardById(response.Cards.First()));
         }

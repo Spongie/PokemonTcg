@@ -18,7 +18,7 @@ namespace BaseSet.TrainerCards
             PokemonCard selectedPokemon;
             do
             {
-                var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemon(1).ToNetworkMessage(game.Id));
+                var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectOpponentPokemonMessage(1).ToNetworkMessage(game.Id));
                 selectedPokemon = (PokemonCard)game.FindCardById(response.Cards.First());
             } while (selectedPokemon.AttachedEnergy.Count == 0);
 

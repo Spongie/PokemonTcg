@@ -2,19 +2,19 @@
 
 namespace TCGCards.Core.Messages
 {
-    public class SelectFromYourBench : AbstractNetworkMessage
+    public class SelectFromYourBenchMessage : AbstractNetworkMessage
     {
-        public SelectFromYourBench()
+        public SelectFromYourBenchMessage()
         {
 
         }
 
-        public SelectFromYourBench(int count) : this(count, count)
+        public SelectFromYourBenchMessage(int count) : this(count, count)
         {
 
         }
 
-        public SelectFromYourBench(int maxCount, int minCount)
+        public SelectFromYourBenchMessage(int maxCount, int minCount)
         {
             MinCount = minCount;
             MaxCount = maxCount;
