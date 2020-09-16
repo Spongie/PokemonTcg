@@ -389,8 +389,8 @@ namespace Assets.Code
         {
             selectedCards.Clear();
 
-            var maxCount = ((SelectFromYourBench)message).MaxCount;
-            var minCount = ((SelectFromYourBench)message).MinCount;
+            var maxCount = ((SelectFromYourBenchMessage)message).MaxCount;
+            var minCount = ((SelectFromYourBenchMessage)message).MinCount;
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
             doneButton.SetActive(true);
@@ -402,8 +402,8 @@ namespace Assets.Code
         private void OnStartSelectingOpponentBench(object message, NetworkId messageId)
         {
             selectedCards.Clear();
-            var maxCount = ((SelectFromOpponentBench)message).MaxCount;
-            var minCount = ((SelectFromOpponentBench)message).MinCount;
+            var maxCount = ((SelectFromOpponentBenchMessage)message).MaxCount;
+            var minCount = ((SelectFromOpponentBenchMessage)message).MinCount;
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
             doneButton.SetActive(true);
@@ -416,8 +416,8 @@ namespace Assets.Code
         {
             selectedCards.Clear();
 
-            var maxCount = ((SelectOpponentPokemon)message).MaxCount;
-            var minCount = ((SelectOpponentPokemon)message).MinCount;
+            var maxCount = ((SelectOpponentPokemonMessage)message).MaxCount;
+            var minCount = ((SelectOpponentPokemonMessage)message).MinCount;
             minSelectedCardCount = minCount;
 
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
