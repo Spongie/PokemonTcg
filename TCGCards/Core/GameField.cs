@@ -468,7 +468,7 @@ namespace TCGCards.Core
                 pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, GameLog);
         }
 
-        public void PlayerTrainerCard(TrainerCard trainerCard)
+        public void PlayTrainerCard(TrainerCard trainerCard)
         {
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
                 return;

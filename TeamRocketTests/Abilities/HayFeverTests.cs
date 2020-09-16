@@ -20,7 +20,7 @@ namespace TeamRocketTests.Abilities
 
             game.ActivePlayer.Hand.Add(new HereComesTeamRocket());
 
-            game.PlayerTrainerCard((TrainerCard)game.ActivePlayer.Hand.First());
+            game.PlayTrainerCard((TrainerCard)game.ActivePlayer.Hand.First());
 
             Assert.AreEqual(0, game.ActivePlayer.DiscardPile.Count);
         }

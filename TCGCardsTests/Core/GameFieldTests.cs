@@ -318,7 +318,7 @@ namespace TCGCards.Core.Tests
             gameField.ActivePlayer.Hand.Add(new HereComesTeamRocket());
 
             TrainerCard trainerCard = gameField.ActivePlayer.Hand.OfType<TrainerCard>().First();
-            gameField.PlayerTrainerCard(trainerCard);
+            gameField.PlayTrainerCard(trainerCard);
 
             Assert.AreEqual(trainerCard.Id, gameField.ActivePlayer.DiscardPile.Last().Id);
         }

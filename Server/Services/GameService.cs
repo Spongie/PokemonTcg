@@ -226,7 +226,7 @@ namespace Server.Services
 
             if (card is TrainerCard)
             {
-                game.PlayerTrainerCard((TrainerCard)card);
+                game.PlayTrainerCard((TrainerCard)card);
             }
             else if (card is PokemonCard)
             {
