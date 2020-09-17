@@ -93,9 +93,9 @@ namespace Assets.Code.UI.DeckBuilder
         {
             var cards = deckContent.GetComponentsInChildren<DeckCard>().Select(x => x.card);
             textFieldCount.text = cards.Count().ToString();
-            textFieldEnergyCount.text = cards.OfType<EnergyCard>().ToString();
-            textFieldTrainerCount.text = cards.OfType<TrainerCard>().ToString();
-            textFieldPokemonCount.text = cards.OfType<PokemonCard>().ToString();
+            textFieldEnergyCount.text = cards.OfType<EnergyCard>().Count().ToString();
+            textFieldTrainerCount.text = cards.OfType<TrainerCard>().Count().ToString();
+            textFieldPokemonCount.text = cards.OfType<PokemonCard>().Count().ToString();
         }
     }
 }
