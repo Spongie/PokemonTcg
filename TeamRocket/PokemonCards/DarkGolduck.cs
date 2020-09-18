@@ -11,6 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = PokemonNames.DarkGolduck;
 			EvolvesFrom = PokemonNames.Psyduck;
+            Set = Singleton.Get<Set>();
             Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Water;

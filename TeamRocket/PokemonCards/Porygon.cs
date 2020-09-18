@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = PokemonNames.Porygon;
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 0;
             Stage = 0;

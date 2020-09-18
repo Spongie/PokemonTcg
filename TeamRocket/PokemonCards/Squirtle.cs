@@ -14,6 +14,7 @@ namespace TeamRocket.PokemonCards
             Weakness = EnergyTypes.Electric;
             Stage = 0;
             RetreatCost = 1;
+            Set = Singleton.Get<Set>();
             PokemonName = PokemonNames.Squirtle;
             Attacks = new List<Attack>
             {

@@ -16,6 +16,7 @@ namespace TeamRocket.PokemonCards
         public DarkGyarados(Player owner) : base(owner)
         {
             Hp = 70;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Water;
             Weakness = EnergyTypes.Grass;
             Resistance = EnergyTypes.Fighting;

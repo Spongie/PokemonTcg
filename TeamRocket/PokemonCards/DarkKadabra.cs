@@ -14,6 +14,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Abra;
             Stage = 1;
             Hp = 50;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 2;
             Weakness = EnergyTypes.Psychic;

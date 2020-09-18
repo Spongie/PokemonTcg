@@ -11,6 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = "Dark Arbok";
 			EvolvesFrom = "Ekans";
+            Set = Singleton.Get<Set>();
             Stage = 0;
             Hp = 60;
             PokemonType = EnergyTypes.Grass;

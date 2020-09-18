@@ -7,6 +7,7 @@ namespace TeamRocket.EnergyCards
         public FullHealEnergy()
         {
             IsBasic = false;
+            Set = Singleton.Get<Set>();
         }
 
         public override Energy GetEnergry() => new Energy(EnergyTypes.Colorless, 1);

@@ -11,6 +11,7 @@ namespace TeamRocket.TrainerCards
         {
             Name = "Nightly Garbage Run";
             Description = "Choose up to 3 basic Pokémon cards, Evolution cards, and/or basic Energy cards from your discard pile. Show them to your opponent and shuffle them into your deck";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

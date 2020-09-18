@@ -14,6 +14,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Mankey;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 1;
             Weakness = EnergyTypes.Psychic;

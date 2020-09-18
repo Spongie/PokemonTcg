@@ -10,6 +10,7 @@ namespace TeamRocket.PokemonCards
         public Zubat(Player owner) : base(owner)
         {
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Grass;
             Weakness = EnergyTypes.Psychic;
             Resistance = EnergyTypes.Fighting;

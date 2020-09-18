@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = "Dark Dugtrio";
 			EvolvesFrom = "Diglett";
+            Set = Singleton.Get<Set>();
             Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Fighting;

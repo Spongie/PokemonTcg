@@ -10,6 +10,7 @@ namespace TeamRocket.PokemonCards
         public Voltorb(Player owner) : base(owner)
         {
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Electric;
             Weakness = EnergyTypes.Fighting;
             Resistance = EnergyTypes.None;

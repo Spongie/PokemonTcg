@@ -11,7 +11,8 @@ namespace TeamRocket.PokemonCards
         public DarkDragonair(Player owner) : base(owner)
         {
             PokemonName = "Dark Dragonair";
-			EvolvesFrom = "Dratini";
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = "Dratini";
             Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Colorless;

@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
             PokemonName = "Drowzee";
 			Stage = 0;
             Hp = 50;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 1;
             Weakness = EnergyTypes.Psychic;

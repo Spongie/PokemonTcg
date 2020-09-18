@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = "Dark Dragonite";
 			EvolvesFrom = "Dark Dragonair";
+            Set = Singleton.Get<Set>();
             Stage = 2;
             Hp = 70;
             PokemonType = EnergyTypes.Colorless;

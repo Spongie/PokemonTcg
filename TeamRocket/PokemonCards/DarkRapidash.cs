@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Ponyta;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 0;
             Weakness = EnergyTypes.Water;

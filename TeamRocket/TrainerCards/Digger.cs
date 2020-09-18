@@ -11,6 +11,7 @@ namespace TeamRocket.TrainerCards
             Description = "Flip a coin. If tails, do 10 damage to your active pokemon. " +
                 "If heads your opponent flips a coin. If tails, your opponent does 10 damage to his or her active pokemon. " +
                 "If heads, you flip a coin. Keep doing this until a player gets tails.";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

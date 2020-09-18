@@ -12,6 +12,7 @@ namespace TeamRocket.TrainerCards
         {
             Name = "The Boss's way";
             Description = "Search your deck for en Evolution card with Dark in its name. Show it to your opponent and put it into your hand. Shuffle your deck afterward";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

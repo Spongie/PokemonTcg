@@ -9,6 +9,7 @@ namespace TeamRocket.TrainerCards
         {
             Name = "Goop Gas Attack";
             Description = "All Pokemon Powers stop working until the end of your opponents next turn";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

@@ -4,6 +4,11 @@ namespace TeamRocket.EnergyCards
 {
     public class PotionEnergy : EnergyCard
     {
+        public PotionEnergy()
+        {
+            Set = Singleton.Get<Set>();
+        }
+
         public override Energy GetEnergry() => new Energy(EnergyTypes.Colorless, 1);
 
         public override string GetName() => "Potion Energy";

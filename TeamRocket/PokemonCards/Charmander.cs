@@ -11,7 +11,8 @@ namespace TeamRocket.PokemonCards
         public Charmander(Player owner) : base(owner)
         {
             PokemonName = "Charmander";
-			Stage = 0;
+            Set = Singleton.Get<Set>();
+            Stage = 0;
             Hp = 40;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

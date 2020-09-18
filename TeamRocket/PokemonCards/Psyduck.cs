@@ -11,6 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = PokemonNames.Psyduck;
             Hp = 50;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;
             Stage = 0;

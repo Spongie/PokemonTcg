@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
             EvolvesFrom = PokemonNames.Squirtle;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;
             Weakness = EnergyTypes.Electric;

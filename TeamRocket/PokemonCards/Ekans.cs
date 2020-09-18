@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
             PokemonName = "Ekans";
 			Stage = 0;
             Hp = 50;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;
             Weakness = EnergyTypes.Psychic;

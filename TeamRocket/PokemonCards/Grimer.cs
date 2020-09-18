@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
             PokemonName = "Grimer";
 			Stage = 0;
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;
             Weakness = EnergyTypes.Psychic;

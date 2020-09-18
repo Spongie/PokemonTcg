@@ -11,6 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = PokemonNames.DarkFlareon;
 			EvolvesFrom = PokemonNames.Eevee;
+            Set = Singleton.Get<Set>();
             Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Fire;

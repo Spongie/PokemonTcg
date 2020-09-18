@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
             EvolvesFrom = PokemonNames.Magnemite;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 2;
             Weakness = EnergyTypes.Fighting;

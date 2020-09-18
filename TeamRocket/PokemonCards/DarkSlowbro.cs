@@ -14,6 +14,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Slowpoke;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 2;
             Weakness = EnergyTypes.Psychic;

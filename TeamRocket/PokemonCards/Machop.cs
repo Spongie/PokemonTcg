@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
             PokemonName = "Machop";
 			Stage = 0;
             Hp = 50;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 1;
             Weakness = EnergyTypes.Psychic;

@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
             PokemonName = "Mankey";
 			Stage = 0;
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 0;
             Weakness = EnergyTypes.Psychic;

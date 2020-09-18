@@ -11,6 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = PokemonNames.Ponyta;
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fire;
             Weakness = EnergyTypes.Water;
             RetreatCost = 1;

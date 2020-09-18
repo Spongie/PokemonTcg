@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.DarkMachoke;
             Stage = 2;
             Hp = 70;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 3;
             Weakness = EnergyTypes.Psychic;

@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Rattata;
             Stage = 1;
             Hp = 50;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;
             Weakness = EnergyTypes.Fighting;

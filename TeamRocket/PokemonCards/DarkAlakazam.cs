@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkAlakazam(Player owner) : base(owner)
         {
             PokemonName = "Dark Alakazam";
-			EvolvesFrom = "Dark Kadabra";
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = "Dark Kadabra";
             Stage = 2;
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;

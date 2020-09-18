@@ -15,6 +15,7 @@ namespace TeamRocket.PokemonCards
         public Magikarp(Player owner) :base(owner)
         {
             Hp = 30;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Water;
             Weakness = EnergyTypes.Electric;
             Resistance = EnergyTypes.None;

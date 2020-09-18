@@ -10,6 +10,7 @@ namespace TeamRocket.PokemonCards
         public Abra(Player owner) : base(owner)
         {
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Psychic;
             Weakness = EnergyTypes.Psychic;
             Resistance = EnergyTypes.None;

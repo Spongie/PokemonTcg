@@ -11,7 +11,8 @@ namespace TeamRocket.PokemonCards
         public DarkGolbat(Player owner) : base(owner)
         {
             PokemonName = PokemonNames.DarkGolbat;
-			EvolvesFrom = PokemonNames.Zubat;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Zubat;
             Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Grass;

@@ -11,6 +11,7 @@ namespace TeamRocket.TrainerCards
         {
             Name = "Rocket's Sneak Attack";
             Description = "Look at your opponent's hand. If he or she has any Trainer Cards, choose 1 of them. Your opponent shuffles that card into his or her deck.";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

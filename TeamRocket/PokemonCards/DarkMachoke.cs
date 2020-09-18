@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Machop;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 2;
             Weakness = EnergyTypes.Psychic;

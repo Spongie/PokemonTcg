@@ -10,6 +10,7 @@ namespace TeamRocket.TrainerCards
         {
             Name = "Imposter Oaks Revenge";
             Description = "Discard a card from your hand in order to play this card. Your opponent shuffles his or her hand into his or her deck, then draws 4 cards.";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

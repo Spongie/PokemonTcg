@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Pikachu;
             Stage = 1;
             Hp = 70;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;
             Weakness = EnergyTypes.Fighting;

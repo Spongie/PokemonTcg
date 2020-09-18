@@ -13,6 +13,7 @@ namespace TeamRocket.PokemonCards
             PokemonType = EnergyTypes.Psychic;
             Weakness = EnergyTypes.Psychic;
             Stage = 0;
+            Set = Singleton.Get<Set>();
             RetreatCost = 1;
             PokemonName = PokemonNames.Slowpoke;
             Attacks = new List<Attack>

@@ -10,7 +10,8 @@ namespace TeamRocket.PokemonCards
         public DarkBlastoise(Player owner) : base(owner)
         {
             PokemonName = "Dark Blastoise";
-			EvolvesFrom = "Dark Wartortle";
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = "Dark Wartortle";
             Stage = 2;
             Hp = 70;
             PokemonType = EnergyTypes.Water;

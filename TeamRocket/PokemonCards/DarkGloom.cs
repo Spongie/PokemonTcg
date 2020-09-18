@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = PokemonNames.DarkGloom;
 			EvolvesFrom = PokemonNames.Oddish;
+            Set = Singleton.Get<Set>();
             Stage = 1;
             Hp = 50;
             PokemonType = EnergyTypes.Grass;

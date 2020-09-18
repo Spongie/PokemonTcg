@@ -12,6 +12,7 @@ namespace TeamRocket.PokemonCards
             PokemonName = "Meowth";
 			Stage = 0;
             Hp = 40;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;
             Weakness = EnergyTypes.Fighting;

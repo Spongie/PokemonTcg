@@ -11,6 +11,7 @@ namespace TeamRocket.PokemonCards
         {
             PokemonName = "Dark Electrode";
 			EvolvesFrom = "Voltorb";
+            Set = Singleton.Get<Set>();
             Stage = 1;
             Hp = 60;
             PokemonType = EnergyTypes.Electric;

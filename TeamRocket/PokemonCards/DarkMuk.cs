@@ -14,6 +14,7 @@ namespace TeamRocket.PokemonCards
 			EvolvesFrom = PokemonNames.Grimer;
             Stage = 1;
             Hp = 60;
+            Set = Singleton.Get<Set>();
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;
             Weakness = EnergyTypes.Psychic;

@@ -9,6 +9,7 @@ namespace TeamRocket.TrainerCards
         {
             Name = "Sleep! (Rockets Secret Machine)";
             Description = "Flip a coin. If Heads, the Defending Pokémon is now Asleep.";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)
