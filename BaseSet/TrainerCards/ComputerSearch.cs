@@ -10,6 +10,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Computer Search";
             Description = "Discard 2 cards from your hand, search your library for any card and put it into your hand. Shuffle your deck.";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

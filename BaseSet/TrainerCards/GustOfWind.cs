@@ -11,6 +11,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Gust of Wind";
             Description = "Choose 1 of your opponent's Benched Pokémon and switch it with their Active Pokémon";
+            Set = Singleton.Get<Set>();
         }
         public override void Process(GameField game, Player caster, Player opponent)
         {

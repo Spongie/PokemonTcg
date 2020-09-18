@@ -14,7 +14,8 @@ namespace BaseSet.PokemonCards
         public Electrode(Player owner) : base(owner)
         {
             PokemonName = "Electrode";
-			EvolvesFrom = PokemonNames.Electrode;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Electrode;
             Hp = 80;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

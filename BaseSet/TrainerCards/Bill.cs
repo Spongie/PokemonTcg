@@ -8,6 +8,7 @@ namespace BaseSet.TrainerCards
         public Bill()
         {
             Name = "Bill";
+            Set = Singleton.Get<Set>();
             Description = "Draw 2 cards.";
         }
 

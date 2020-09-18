@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Gastly(Player owner) : base(owner)
         {
             PokemonName = "Gastly";
-			
+            Set = Singleton.Get<Set>();
             Hp = 30;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 0;

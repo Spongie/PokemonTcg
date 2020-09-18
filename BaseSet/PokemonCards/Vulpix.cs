@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Vulpix(Player owner) : base(owner)
         {
             PokemonName = "Vulpix";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

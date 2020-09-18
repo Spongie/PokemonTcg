@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Farfetchd(Player owner) : base(owner)
         {
             PokemonName = "Farfetch'd";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

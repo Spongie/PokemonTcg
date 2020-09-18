@@ -10,6 +10,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Professor Oak";
             Description = "Discard your hand, then draw 7 cards";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

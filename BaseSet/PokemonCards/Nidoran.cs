@@ -10,6 +10,7 @@ namespace BaseSet.PokemonCards
         public Nidoran(Player owner) : base(owner)
         {
             PokemonName = "Nidoran♂";
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

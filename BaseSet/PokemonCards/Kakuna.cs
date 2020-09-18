@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Kakuna(Player owner) : base(owner)
         {
             PokemonName = "Kakuna";
-			EvolvesFrom = PokemonNames.Weedle;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Weedle;
             Hp = 80;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;

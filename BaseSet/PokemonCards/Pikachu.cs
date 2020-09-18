@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Pikachu(Player owner) : base(owner)
         {
             PokemonName = "Pikachu";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

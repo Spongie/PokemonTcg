@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Drowzee(Player owner) : base(owner)
         {
             PokemonName = "Drowzee";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 0;

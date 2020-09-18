@@ -11,6 +11,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Super Energy Removal";
             Description = "Discard 1 Energy card attached to 1 of your own pokemon. Then discard up to 2 Energy cards from an opponents pokemon";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

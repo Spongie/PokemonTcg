@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Magnemite(Player owner) : base(owner)
         {
             PokemonName = "Magnemite";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

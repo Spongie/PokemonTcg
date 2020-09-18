@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Ponyta(Player owner) : base(owner)
         {
             PokemonName = "Ponyta";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

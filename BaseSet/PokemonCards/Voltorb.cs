@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Voltorb(Player owner) : base(owner)
         {
             PokemonName = "Voltorb";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 1;

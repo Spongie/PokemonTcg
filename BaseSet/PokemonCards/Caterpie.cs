@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Caterpie(Player owner) : base(owner)
         {
             PokemonName = "Caterpie";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

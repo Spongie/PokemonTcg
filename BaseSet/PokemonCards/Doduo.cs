@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Doduo(Player owner) : base(owner)
         {
             PokemonName = "Doduo";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 0;

@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Jynx(Player owner) : base(owner)
         {
             PokemonName = "Jynx";
-			
+            Set = Singleton.Get<Set>();
             Hp = 70;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 2;

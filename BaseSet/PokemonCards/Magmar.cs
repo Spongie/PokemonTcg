@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Magmar(Player owner) : base(owner)
         {
             PokemonName = "Magmar";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 2;

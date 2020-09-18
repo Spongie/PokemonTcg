@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Pidgeotto(Player owner) : base(owner)
         {
             PokemonName = "Pidgeotto";
-			EvolvesFrom = PokemonNames.Pidgey;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Pidgey;
             Hp = 60;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

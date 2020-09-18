@@ -11,6 +11,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Item Finder";
             Description = "Discard 2 other cards from your hand in order to put a Trainer card from your discard pile into your hand";
+            Set = Singleton.Get<Set>();
         }
 
         public override bool CanCast(GameField game, Player caster, Player opponent)

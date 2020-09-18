@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Gyarados(Player owner) : base(owner)
         {
             PokemonName = "Gyarados";
-			EvolvesFrom = PokemonNames.Magikarp;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Magikarp;
             Hp = 100;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 3;

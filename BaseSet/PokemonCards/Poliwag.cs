@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Poliwag(Player owner) : base(owner)
         {
             PokemonName = "Poliwag";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

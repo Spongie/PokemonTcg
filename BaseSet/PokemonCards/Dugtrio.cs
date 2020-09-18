@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Dugtrio(Player owner) : base(owner)
         {
             PokemonName = "Dugtrio";
-			EvolvesFrom = PokemonNames.Diglett;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Diglett;
             Hp = 70;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 2;

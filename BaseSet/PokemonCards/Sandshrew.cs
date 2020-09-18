@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Sandshrew(Player owner) : base(owner)
         {
             PokemonName = "Sandshrew";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 1;

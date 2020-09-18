@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Magikarp(Player owner) : base(owner)
         {
             PokemonName = "Magikarp";
-			
+            Set = Singleton.Get<Set>();
             Hp = 30;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

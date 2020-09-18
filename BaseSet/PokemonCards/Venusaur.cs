@@ -11,7 +11,8 @@ namespace BaseSet.PokemonCards
         public Venusaur(Player owner) : base(owner)
         {
             PokemonName = "Venusaur";
-			EvolvesFrom = PokemonNames.Ivysaur;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Ivysaur;
             Hp = 100;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;

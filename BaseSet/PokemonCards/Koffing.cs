@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Koffing(Player owner) : base(owner)
         {
             PokemonName = "Koffing";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

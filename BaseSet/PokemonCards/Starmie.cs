@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Starmie(Player owner) : base(owner)
         {
             PokemonName = "Starmie";
-			EvolvesFrom = PokemonNames.Staryu;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Staryu;
             Hp = 60;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Clefairy(Player owner) : base(owner)
         {
             PokemonName = "Clefairy";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Diglett(Player owner) : base(owner)
         {
             PokemonName = "Diglett";
-			
+            Set = Singleton.Get<Set>();
             Hp = 30;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 0;

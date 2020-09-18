@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Wartortle(Player owner) : base(owner)
         {
             PokemonName = "Wartortle";
-			EvolvesFrom = PokemonNames.Squirtle;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Squirtle;
             Hp = 70;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

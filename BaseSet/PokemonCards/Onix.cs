@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Onix(Player owner) : base(owner)
         {
             PokemonName = "Onix";
-			
+            Set = Singleton.Get<Set>();
             Hp = 90;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 3;

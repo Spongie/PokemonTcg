@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Abra(Player owner) : base(owner)
         {
             PokemonName = "Abra";
-			
+            Set = Singleton.Get<Set>();
             Hp = 30;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 0;

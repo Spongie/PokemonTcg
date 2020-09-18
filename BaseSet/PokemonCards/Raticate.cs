@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Raticate(Player owner) : base(owner)
         {
             PokemonName = "Raticate";
-			EvolvesFrom = PokemonNames.Rattata;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Rattata;
             Hp = 60;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

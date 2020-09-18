@@ -9,6 +9,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Full Heal";
             Description = "Your active pokemon is no longer asleep, confused, paralyzed or Poisoned";
+            Set = Singleton.Get<Set>();
         }
         public override void Process(GameField game, Player caster, Player opponent)
         {

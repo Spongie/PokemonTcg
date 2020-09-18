@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Nidoking(Player owner) : base(owner)
         {
             PokemonName = "Nidoking";
-			EvolvesFrom = PokemonNames.Nidorino;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Nidorino;
             Hp = 90;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 3;

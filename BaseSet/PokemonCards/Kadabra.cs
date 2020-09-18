@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Kadabra(Player owner) : base(owner)
         {
             PokemonName = "Kadabra";
-			EvolvesFrom = PokemonNames.Abra;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Abra;
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 3;

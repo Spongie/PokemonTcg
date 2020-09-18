@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Squirtle(Player owner) : base(owner)
         {
             PokemonName = "Squirtle";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

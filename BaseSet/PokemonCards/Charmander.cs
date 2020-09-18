@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Charmander(Player owner) : base(owner)
         {
             PokemonName = "Charmander";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

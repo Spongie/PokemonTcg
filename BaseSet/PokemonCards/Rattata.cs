@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Rattata(Player owner) : base(owner)
         {
             PokemonName = "Rattata";
-			
+            Set = Singleton.Get<Set>();
             Hp = 30;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 0;

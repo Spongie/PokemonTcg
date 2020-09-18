@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Zapdos(Player owner) : base(owner)
         {
             PokemonName = "Zapdos";
-			
+            Set = Singleton.Get<Set>();
             Hp = 90;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 3;

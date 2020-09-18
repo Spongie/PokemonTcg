@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Dratini(Player owner) : base(owner)
         {
             PokemonName = "Dratini";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

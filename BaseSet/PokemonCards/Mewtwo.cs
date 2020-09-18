@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Mewtwo(Player owner) : base(owner)
         {
             PokemonName = "Mewtwo";
-			
+            Set = Singleton.Get<Set>();
             Hp = 60;
             PokemonType = EnergyTypes.Psychic;
             RetreatCost = 3;

@@ -9,6 +9,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Pokémon Center";
             Description = "Remove all damage counters from your pokémon and then discard all their attached energy";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

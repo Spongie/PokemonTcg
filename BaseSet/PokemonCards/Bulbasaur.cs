@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Bulbasaur(Player owner) : base(owner)
         {
             PokemonName = "Bulbasaur";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

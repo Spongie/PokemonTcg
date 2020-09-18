@@ -11,7 +11,8 @@ namespace BaseSet.PokemonCards
         public Charizard(Player owner) : base(owner)
         {
             PokemonName = "Charizard";
-			EvolvesFrom = PokemonNames.Charmeleon;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Charmeleon;
             Hp = 120;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 3;

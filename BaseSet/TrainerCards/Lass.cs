@@ -13,6 +13,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Lass";
             Description = "You and your opponent show each other your hands, then shuffle all the trainer cards from your hands into your decks";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

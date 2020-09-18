@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Dewgong(Player owner) : base(owner)
         {
             PokemonName = "Dewgong";
-			EvolvesFrom = PokemonNames.Seel;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Seel;
             Hp = 80;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 3;

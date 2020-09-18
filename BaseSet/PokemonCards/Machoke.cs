@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Machoke(Player owner) : base(owner)
         {
             PokemonName = "Machoke";
-			EvolvesFrom = PokemonNames.Machop;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Machop;
             Hp = 80;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 3;

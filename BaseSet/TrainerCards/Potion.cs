@@ -11,6 +11,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Potion";
             Description = "Remove up to 2 damage counters from 1 of your Pokémon.";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

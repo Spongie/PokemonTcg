@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Poliwrath(Player owner) : base(owner)
         {
             PokemonName = "Poliwrath";
-			EvolvesFrom = PokemonNames.Poliwhirl;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Poliwhirl;
             Hp = 90;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 3;

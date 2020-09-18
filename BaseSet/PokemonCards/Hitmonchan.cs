@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Hitmonchan(Player owner) : base(owner)
         {
             PokemonName = "Hitmonchan";
-			
+            Set = Singleton.Get<Set>();
             Hp = 70;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 2;

@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Seel(Player owner) : base(owner)
         {
             PokemonName = "Seel";
-			
+            Set = Singleton.Get<Set>();
             Hp = 60;
             PokemonType = EnergyTypes.Water;
             RetreatCost = 1;

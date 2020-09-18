@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Electabuzz(Player owner) : base(owner)
         {
             PokemonName = "Electabuzz";
-			
+            Set = Singleton.Get<Set>();
             Hp = 70;
             PokemonType = EnergyTypes.Electric;
             RetreatCost = 2;

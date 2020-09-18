@@ -21,7 +21,7 @@ namespace TCGCards
 
         public NetworkId Id { get; set; }
 
-        public CardSet Set { get; set; }
+        public IPokemonSet Set { get; set; }
 
         public Player Owner { get; set; }
 

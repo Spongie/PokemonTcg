@@ -12,6 +12,7 @@ namespace BaseSet.PokemonCards
         public Alakazam(Player owner) : base(owner)
         {
             PokemonName = "Alakazam";
+            Set = Singleton.Get<Set>();
             EvolvesFrom = PokemonNames.Kadabra;
             Hp = 80;
             PokemonType = EnergyTypes.Psychic;

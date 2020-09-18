@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Chansey(Player owner) : base(owner)
         {
             PokemonName = "Chansey";
-			
+            Set = Singleton.Get<Set>();
             Hp = 120;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

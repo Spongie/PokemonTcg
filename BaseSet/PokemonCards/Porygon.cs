@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Porygon(Player owner) : base(owner)
         {
             PokemonName = "Porygon";
-			
+            Set = Singleton.Get<Set>();
             Hp = 30;
             PokemonType = EnergyTypes.Colorless;
             RetreatCost = 1;

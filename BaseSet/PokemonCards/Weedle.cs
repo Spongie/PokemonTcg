@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Weedle(Player owner) : base(owner)
         {
             PokemonName = "Weedle";
-			
+            Set = Singleton.Get<Set>();
             Hp = 40;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 1;

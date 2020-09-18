@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Growlithe(Player owner) : base(owner)
         {
             PokemonName = "Growlithe";
-			
+            Set = Singleton.Get<Set>();
             Hp = 60;
             PokemonType = EnergyTypes.Fire;
             RetreatCost = 1;

@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Machop(Player owner) : base(owner)
         {
             PokemonName = "Machop";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Fighting;
             RetreatCost = 1;

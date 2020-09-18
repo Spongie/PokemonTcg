@@ -11,6 +11,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Energy Retreival";
             Description = "Discard 1 card from your hand. Return up to 2 basic energy cards from your discard pile to your hand";
+            Set = Singleton.Get<Set>();
         }
 
         public override void Process(GameField game, Player caster, Player opponent)

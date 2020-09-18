@@ -10,6 +10,7 @@ namespace BaseSet.PokemonCards
         public Raichu(Player owner) : base(owner)
         {
             PokemonName = "Raichu";
+            Set = Singleton.Get<Set>();
             EvolvesFrom = PokemonNames.Pikachu;
             Hp = 80;
             PokemonType = EnergyTypes.Electric;

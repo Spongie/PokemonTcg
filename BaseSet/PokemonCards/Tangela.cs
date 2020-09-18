@@ -10,7 +10,7 @@ namespace BaseSet.PokemonCards
         public Tangela(Player owner) : base(owner)
         {
             PokemonName = "Tangela";
-			
+            Set = Singleton.Get<Set>();
             Hp = 50;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;

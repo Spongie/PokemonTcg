@@ -10,7 +10,8 @@ namespace BaseSet.PokemonCards
         public Metapod(Player owner) : base(owner)
         {
             PokemonName = "Metapod";
-			EvolvesFrom = PokemonNames.Caterpie;
+            Set = Singleton.Get<Set>();
+            EvolvesFrom = PokemonNames.Caterpie;
             Hp = 70;
             PokemonType = EnergyTypes.Grass;
             RetreatCost = 2;

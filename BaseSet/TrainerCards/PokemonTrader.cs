@@ -14,6 +14,7 @@ namespace BaseSet.TrainerCards
         {
             Name = "Pokémon Trader";
             Description = "Trade 1 of the Basic Pokémon or Evolution cards in your hand for 1 of the Basic Pokémon or Evolution cards from your deck. Show both cards to your opponent. Shuffle your deck afterward.";
+            Set = Singleton.Get<Set>();
         }
 
         public override bool CanCast(GameField game, Player caster, Player opponent)
