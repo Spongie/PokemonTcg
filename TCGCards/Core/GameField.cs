@@ -511,13 +511,19 @@ namespace TCGCards.Core
 
                 if (ActivePlayer.PrizeCards.Count == 1)
                 {
+                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + $" has no pokémon left, {ActivePlayer.NetworkPlayer?.Name} wins the game");
+                    EndGame(ActivePlayer.Id);
+                    return;
+                }
+                else if (NonActivePlayer.BenchedPokemon.Count == 0)
+                {
                     GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
                     EndGame(ActivePlayer.Id);
                     return;
                 }
                 else
                 {
-                    ActivePlayer.SelectPriceCard(1); //TODO: Not if player not have any pokemon left
+                    ActivePlayer.SelectPriceCard(1);
                 }
 
                 NonActivePlayer.KillActivePokemon();
