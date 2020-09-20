@@ -37,6 +37,7 @@ namespace Assets.Code
         public GameObject endTurnButton;
         public GameObject YesButton;
         public GameObject NoButton;
+        public GameObject EscapeMenu;
         public Sprite CardBack;
 
         public bool IsMyTurn;
@@ -691,6 +692,11 @@ namespace Assets.Code
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                EscapeMenu.SetActive(!EscapeMenu.activeSelf);
+            }
+
             if (gameField == null)
             {
                 return;
