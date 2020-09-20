@@ -152,6 +152,7 @@ namespace Assets.Code
             if (isResponse)
             {
                 message.ResponseTo = RespondingTo;
+                RespondingTo = null;
             }
 
             Me.Send(message);
