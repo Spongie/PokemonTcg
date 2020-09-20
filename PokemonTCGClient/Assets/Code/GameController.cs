@@ -225,7 +225,6 @@ namespace Assets.Code
             myId = NetworkManager.Instance.Me.Id;
             gameField = NetworkManager.Instance.CurrentGame;
 
-            //TODO UNREGISTER CALLBACKS
             //TODO Send more info messages
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
