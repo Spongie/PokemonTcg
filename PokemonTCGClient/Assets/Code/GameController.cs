@@ -105,6 +105,7 @@ namespace Assets.Code
 
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
+                //TODO: SelectAttackMessage
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentPokemon },
                 { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
@@ -155,7 +156,7 @@ namespace Assets.Code
 
         private void OnSelectPokemonWithFilter(CardRenderer clickedCard)
         {
-            if (currentDeckFilter.IsCardValid(clickedCard.card))
+            if (currentDeckFilter == null || currentDeckFilter.IsCardValid(clickedCard.card))
             {
                 ToggleCardSelected(clickedCard);
             }
