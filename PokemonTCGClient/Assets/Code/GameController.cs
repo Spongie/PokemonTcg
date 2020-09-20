@@ -38,6 +38,9 @@ namespace Assets.Code
         public GameObject YesButton;
         public GameObject NoButton;
         public GameObject EscapeMenu;
+        public GameObject WinMenu;
+        public Text winnerText;
+
         public Sprite CardBack;
 
         public bool IsMyTurn;
@@ -267,6 +270,9 @@ namespace Assets.Code
             gameField.GameState = GameFieldState.GameOver;
             infoText.text = iWon ? "You have won" : "You have lost";
             doneButton.SetActive(true);
+
+            WinMenu.SetActive(true);
+            winnerText.text = infoText.text;
         }
 
         private void OnBeginSelectYourPokemon(object message, NetworkId messageId)
