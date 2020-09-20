@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards;
 using TCGCards.Core;
 
@@ -8,6 +9,7 @@ namespace BaseSet.Attacks
     internal class WaterGun : Attack
     {
         private int baseDamage;
+
         public WaterGun(int baseDamage)
         {
             this.baseDamage = baseDamage;
@@ -22,9 +24,14 @@ namespace BaseSet.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent)
         {
-            var unusedWaterEnergy = owner.ActivePokemonCard.AttachedEnergy.Count - 3;
+            int waterEnergyAmount = owner.ActivePokemonCard.AttachedEnergy.Count(energy => energy.EnergyType == EnergyTypes.Water) - 1;
 
-            return baseDamage + (10 * Math.Max(0, Math.Min(unusedWaterEnergy, 2)));
+            if (!owner.ActivePokemonCard.AttachedEnergy.Any(energy => energy.EnergyType != EnergyTypes.Water))
+            {
+                waterEnergyAmount--;
+            }
+
+            return 10 + Math.Min(10, waterEnergyAmount * 10);
         }
     }
 }
