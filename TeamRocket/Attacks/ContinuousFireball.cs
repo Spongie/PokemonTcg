@@ -5,7 +5,7 @@ using TCGCards.Core;
 
 namespace TeamRocket.Attacks
 {
-    internal class ContinuousFireball : Attack
+    public class ContinuousFireball : Attack
     {
         public ContinuousFireball()
         {
@@ -25,7 +25,9 @@ namespace TeamRocket.Attacks
 
             for (int i = 0; i < headsCount; i++)
             {
-                caster.AttachedEnergy.Remove(caster.AttachedEnergy.FirstOrDefault(energy => energy.EnergyType == EnergyTypes.Fire));
+                var energyCard = caster.AttachedEnergy.FirstOrDefault(energy => energy.EnergyType == EnergyTypes.Fire);
+                caster.AttachedEnergy.Remove(energyCard);
+                owner.DiscardPile.Add(energyCard);
             }
 
             return headsCount * 50;

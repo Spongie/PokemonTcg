@@ -28,6 +28,12 @@ namespace TCGCards.Core
 
             for(int _ = 0; _ < count; _++)
             {
+                if (ForcedNextFlips.Any())
+                {
+                    heads += ForcedNextFlips.Dequeue() ? 1 : 0;
+                    continue;
+                }
+
                 heads += random.Next(2);
             }
 

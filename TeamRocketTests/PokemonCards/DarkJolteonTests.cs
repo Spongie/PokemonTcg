@@ -25,6 +25,7 @@ namespace TeamRocketTests.PokemonCards
             var gameField = createGameField();
             gameField.Attack(gameField.ActivePlayer.ActivePokemonCard.Attacks[0]);
 
+            CoinFlipper.ForcedNextFlips.Clear();
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
             gameField.Attack(gameField.ActivePlayer.ActivePokemonCard.Attacks[0]);

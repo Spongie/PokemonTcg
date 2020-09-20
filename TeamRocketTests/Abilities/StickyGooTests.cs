@@ -40,7 +40,7 @@ namespace TeamRocketTests.Abilities
             opponent.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
             opponent.ActivePokemonCard.AttachedEnergy.Add(new GrassEnergy());
 
-            game.OnActivePokemonSelected(owner.Id, new DarkMuk(owner));
+            owner.ActivePokemonCard = new DarkMuk(owner);
 
             Assert.IsFalse(game.CanRetreat(opponent.ActivePokemonCard));
         }

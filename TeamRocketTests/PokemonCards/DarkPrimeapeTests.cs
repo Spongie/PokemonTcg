@@ -14,6 +14,8 @@ namespace TeamRocketTests.PokemonCards
             var gameField = createGameField();
             gameField.FirstTurn = false;
             gameField.ActivePlayer.ActivePokemonCard.IsConfused = true;
+
+            CoinFlipper.ForcedNextFlips.Clear();
             CoinFlipper.ForcedNextFlips.Enqueue(false);
 
             gameField.ActivePlayer.ActivePokemonCard.DamageCounters = -100000; //So it does not die :)

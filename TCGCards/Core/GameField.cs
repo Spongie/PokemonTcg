@@ -90,9 +90,15 @@ namespace TCGCards.Core
         {
             Player owner = Players.First(p => p.Id.Equals(ownerId));
 
-            GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
-
-            owner.SetActivePokemon(activePokemon);
+            if (activePokemon.Stage == 0)
+            {
+                GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
+                owner.SetActivePokemon(activePokemon);
+            }
+            else
+            {
+                return;
+            }
 
             lock (lockObject)
             {
@@ -490,7 +496,7 @@ namespace TCGCards.Core
         {
             if(NonActivePlayer.ActivePokemonCard != null && NonActivePlayer.ActivePokemonCard.IsDead())
             {
-                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.GetName() + "Dies");
+                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.GetName() + " Dies");
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
@@ -511,7 +517,7 @@ namespace TCGCards.Core
                 }
                 else
                 {
-                    ActivePlayer.SelectPriceCard(1);
+                    ActivePlayer.SelectPriceCard(1); //TODO: Not if player not have any pokemon left
                 }
 
                 NonActivePlayer.KillActivePokemon();
