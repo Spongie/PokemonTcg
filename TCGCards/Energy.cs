@@ -1,4 +1,6 @@
-﻿namespace TCGCards
+﻿using Entities;
+
+namespace TCGCards
 {
     public struct Energy
     {

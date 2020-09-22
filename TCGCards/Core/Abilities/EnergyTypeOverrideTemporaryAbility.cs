@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Linq;
 
 namespace TCGCards.Core.Abilities

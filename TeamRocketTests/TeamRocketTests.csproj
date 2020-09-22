@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
-    <ProjectReference Include="..\TeamRocket\TeamRocket.csproj" />
   </ItemGroup>
 
 </Project>

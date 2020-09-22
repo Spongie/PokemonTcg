@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
+using PokemonTcgSdk;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,16 +14,19 @@ namespace CardEditor.ViewModels
     public class MainViewModel : DataModel
     {
 		private SetsViewModel setViewModel;
+		private PokemonsViewModel pokemonsViewModel;
 
 		public MainViewModel()
 		{
 			SetViewModel = new SetsViewModel();
+			PokemonsViewModel = new PokemonsViewModel(SetViewModel.Sets);
 		}
 
 		public async Task Save()
 		{
 			Directory.CreateDirectory("Data");
 			await SetViewModel.Save();
+			await PokemonsViewModel.Save();
 		}
 
 		public async Task Load()
@@ -31,7 +35,19 @@ namespace CardEditor.ViewModels
 				return;
 
 			await SetViewModel.LoadSets();
+			await PokemonsViewModel.Load();
 		}
+
+		public PokemonsViewModel PokemonsViewModel
+		{
+			get { return pokemonsViewModel; }
+			set
+			{
+				pokemonsViewModel = value;
+				FirePropertyChanged();
+			}
+		}
+
 
 		public SetsViewModel SetViewModel
 		{

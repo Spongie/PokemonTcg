@@ -1,4 +1,5 @@
-﻿    using System.Linq;
+﻿using Entities;
+using System.Linq;
 
 namespace TCGCards.Core.Deckfilters
 {

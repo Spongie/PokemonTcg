@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entities;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.SpecialAbilities;

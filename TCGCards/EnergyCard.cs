@@ -1,4 +1,5 @@
-﻿using TCGCards;
+﻿using Entities;
+using TCGCards;
 using TCGCards.Core;
 
 public abstract class EnergyCard : Card

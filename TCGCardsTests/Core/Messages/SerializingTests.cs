@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using TCGCards.EnergyCards;
-using TeamRocket.PokemonCards;
 
 namespace TCGCardsTests.Core.Messages
 {
@@ -106,21 +106,19 @@ namespace TCGCardsTests.Core.Messages
         public void PickFromListMessageDeserialize()
         {
             var player = new Player();
-            var message = new PickFromListMessage(new List<Card> { new WaterEnergy(), new WaterEnergy(), new Magikarp(player)}, 1, 1);
+            var message = new PickFromListMessage(new List<Card> { new WaterEnergy(), new WaterEnergy()}, 1, 1);
 
             var result = SerializeAndBack(message);
 
             Assert.AreEqual(1, result.MinCount);
             Assert.AreEqual(1, result.MaxCount);
-            Assert.AreEqual(3, result.PossibleChoices.Count);
+            Assert.AreEqual(2, result.PossibleChoices.Count);
         }
 
         [TestMethod]
         public void SelectAttackMessage()
         {
-            var pokemon = new Magikarp(new Player());
-
-            var message = new SelectAttackMessage(new List<Attack>(pokemon.Attacks));
+            var message = new SelectAttackMessage(new List<Attack>(new List<Attack>()));
 
             Assert.IsNotNull(SerializeAndBack(message));
         }

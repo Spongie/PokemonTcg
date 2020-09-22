@@ -1,5 +1,4 @@
-﻿using BaseSet.PokemonCards;
-using NetworkingCore;
+﻿using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.IO;

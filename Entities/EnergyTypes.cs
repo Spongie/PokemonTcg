@@ -1,4 +1,4 @@
-﻿namespace TCGCards
+﻿namespace Entities
 {
     public enum EnergyTypes
     {

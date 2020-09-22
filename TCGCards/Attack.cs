@@ -3,6 +3,7 @@ using TCGCards.Core;
 using System.Linq;
 using NetworkingCore;
 using TCGCards.Core.Abilities;
+using Entities;
 
 namespace TCGCards
 {

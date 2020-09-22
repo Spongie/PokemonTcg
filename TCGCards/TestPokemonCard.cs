@@ -1,4 +1,5 @@
-﻿using TCGCards.Core;
+﻿using Entities;
+using TCGCards.Core;
 
 namespace TCGCards
 {

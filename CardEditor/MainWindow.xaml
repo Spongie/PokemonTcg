@@ -16,8 +16,8 @@
             <Button Content="Push" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" Width="64"/>
         </DockPanel>
         <TabControl DockPanel.Dock="Top">
-            <TabItem Header="Pokemon" Name="tabPokemon">
-                <Label Content="Pokemon"/>
+            <TabItem Header="Pokemon" DataContext="{Binding PokemonsViewModel}">
+                <views:PokemonsView/>
             </TabItem>
             <TabItem Header="Trainer" Name="tabTrainer">
                 <Label Content="Trainer"/>

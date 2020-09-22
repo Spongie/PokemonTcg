@@ -1,4 +1,6 @@
-﻿namespace TCGCards.EnergyCards
+﻿using Entities;
+
+namespace TCGCards.EnergyCards
 {
     public class DarknessEnergy : EnergyCard
     {

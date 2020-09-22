@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
 using System.Collections.Generic;
 using System.Linq;

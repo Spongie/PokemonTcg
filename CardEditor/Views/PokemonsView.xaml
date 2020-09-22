@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="CardEditor.Views.PokemonsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:CardEditor.Views"
+             xmlns:vm="clr-namespace:CardEditor.ViewModels"
+             xmlns:en="clr-namespace:Entities;assembly=Entities"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:PokemonsViewModel, IsDesignTimeCreatable=True}"
+             Background="White"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="energyTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="en:EnergyTypes"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+            <Button Content="Add Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddPokemonCommand}"/>
+            <Button Content="Import Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding ImportPokemonCommand}"/>
+            <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding Sets}" SelectedItem="{Binding SelectedSet}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ListBox DockPanel.Dock="Top" ItemsSource="{Binding FilteredPokemonCards}" SelectedItem="{Binding SelectedCard}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <DockPanel Grid.Column="1" DataContext="{Binding SelectedCard}" LastChildFill="False">
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Name" MinWidth="70"/>
+                <TextBox Text="{Binding Name}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="HP" MinWidth="70"/>
+                <TextBox Text="{Binding Hp}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="SetCode" MinWidth="70"/>
+                <TextBox Text="{Binding Set}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Type" MinWidth="70"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Type}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Resistance" MinWidth="70"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Resistance}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Weakness" MinWidth="70"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Weakness}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Evolves From" MinWidth="70"/>
+                <ComboBox ItemsSource="{Binding DataContext.AllPokemonNames, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding EvolvesFrom}"/>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -14,8 +14,4 @@
     <PackageReference Include="NSubstitute" Version="4.2.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BaseSet\BaseSet.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
 using BaseSet.PokemonCards;
+using Entities;
 using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core;

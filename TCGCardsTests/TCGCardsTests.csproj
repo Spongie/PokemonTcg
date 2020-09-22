@@ -19,7 +19,6 @@
     <ProjectReference Include="..\Server\Server.csproj" />
 	  <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
 	  <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
-	  <ProjectReference Include="..\TeamRocket\TeamRocket.csproj" />
   </ItemGroup>
 
 </Project>
