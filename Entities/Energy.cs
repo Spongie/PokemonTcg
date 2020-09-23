@@ -1,9 +1,15 @@
 ﻿using Entities;
+using Entities.Models;
 
-namespace TCGCards
+namespace Entities
 {
-    public struct Energy
+    public class Energy : DataModel
     {
+        public Energy()
+        {
+
+        }
+
         public Energy(EnergyTypes energyType, int amount)
         {
             Amount = amount;

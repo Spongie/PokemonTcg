@@ -1,4 +1,7 @@
-﻿namespace Entities.Models
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Entities.Models
 {
 	public class PokemonCard : DataModel
     {
@@ -11,8 +14,19 @@
 		private EnergyTypes resistance;
 		private string evolvesFrom;
 		private int stage;
-
 		private string imageUrl;
+		private ObservableCollection<Attack> attacks;
+
+		public ObservableCollection<Attack> Attacks
+		{
+			get { return attacks; }
+			set
+			{
+				attacks = value;
+				FirePropertyChanged();
+			}
+		}
+
 
 		public string ImageUrl
 		{

@@ -2,6 +2,7 @@
 using CardEditor.Views;
 using Entities;
 using Entities.Models;
+using NetworkingCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace CardEditor.ViewModels
 {
     public class PokemonsViewModel : DataModel
     {
-		private ObservableCollection<PokemonCard> pokemonCards = new ObservableCollection<PokemonCard>();
-		private List<PokemonCard> filteredPokemonCards = new List<PokemonCard>();
+		private ObservableCollection<PokemonViewModel> pokemonCards = new ObservableCollection<PokemonViewModel>();
+		private List<PokemonViewModel> filteredPokemonCards = new List<PokemonViewModel>();
 		private List<string> allPokemonNames = new List<string>();
-		private PokemonCard pokemonCard;
+		private PokemonViewModel pokemonCard;
 		private Set selectedSet;
 		private ObservableCollection<Set> sets = new ObservableCollection<Set>();
 
@@ -81,7 +82,7 @@ namespace CardEditor.ViewModels
 							pokemon.Resistance = EnergyTypes.None;
 						}
 
-						PokemonCards.Add(pokemon);
+						PokemonCards.Add(new PokemonViewModel(pokemon));
 						SelectedCard = PokemonCards.Last();
 					}
 					catch
@@ -136,7 +137,7 @@ namespace CardEditor.ViewModels
 
 		private void AddNewPokemon(object obj)
 		{
-			PokemonCards.Add(new PokemonCard());
+			PokemonCards.Add(new PokemonViewModel());
 			SelectedCard = PokemonCards.Last();
 		}
 
@@ -147,7 +148,7 @@ namespace CardEditor.ViewModels
 
 		internal async Task Save()
 		{
-			var json = JsonConvert.SerializeObject(PokemonCards.ToList());
+			var json = Serializer.Serialize(PokemonCards.Select(card => card.Card).ToList());
 
 			await File.WriteAllTextAsync("Data/pokemon.json", json);
 		}
@@ -163,16 +164,16 @@ namespace CardEditor.ViewModels
 
 			PokemonCards.Clear();
 
-			foreach (var pokemon in JsonConvert.DeserializeObject<List<PokemonCard>>(json))
+			foreach (var pokemon in Serializer.Deserialize<List<PokemonCard>>(json))
 			{
-				PokemonCards.Add(pokemon);
+				PokemonCards.Add(new PokemonViewModel(pokemon));
 			}
 		}
 
 		private void PokemonCards_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			UpdatePokemonFilter();
-			AllPokemonNames = PokemonCards.Select(p => p.Name).Distinct().ToList();
+			AllPokemonNames = PokemonCards.Select(p => p.Card.Name).Distinct().ToList();
 			AllPokemonNames.Insert(0, string.Empty);
 		}
 
@@ -192,7 +193,7 @@ namespace CardEditor.ViewModels
 				return;
 			}
 
-			FilteredPokemonCards = pokemonCards.Where(card => card.SetCode == SelectedSet.SetCode).ToList();
+			FilteredPokemonCards = pokemonCards.Where(card => card.Card.SetCode == SelectedSet.SetCode).ToList();
 		}
 
 		public ObservableCollection<Set> Sets
@@ -215,7 +216,7 @@ namespace CardEditor.ViewModels
 			}
 		}
 
-		public List<PokemonCard> FilteredPokemonCards
+		public List<PokemonViewModel> FilteredPokemonCards
 		{
 			get { return filteredPokemonCards; }
 			set
@@ -235,7 +236,7 @@ namespace CardEditor.ViewModels
 			}
 		}
 
-		public ObservableCollection<PokemonCard> PokemonCards
+		public ObservableCollection<PokemonViewModel> PokemonCards
 		{
 			get { return pokemonCards; }
 			set
@@ -245,7 +246,7 @@ namespace CardEditor.ViewModels
 			}
 		}
 
-		public PokemonCard SelectedCard
+		public PokemonViewModel SelectedCard
 		{
 			get { return pokemonCard; }
 			set

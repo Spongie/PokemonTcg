@@ -9,7 +9,7 @@
         d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Card Editor" Height="850" Width="1200">
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" VerticalAlignment="Bottom" MinHeight="32" Margin="5">
             <Button Content="Save" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" Width="64" Click="Button_Save_Click"/>

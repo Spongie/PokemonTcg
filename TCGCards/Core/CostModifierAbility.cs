@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entities;
 using NetworkingCore;
 
 namespace TCGCards.Core
