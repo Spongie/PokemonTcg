@@ -14,14 +14,19 @@ namespace Effects
         {
             Parameters = new ObservableCollection<Parameter>
             {
-                new Parameter {Name = "Amount", Value = "0"}
+                new Parameter {Name = "Amount", Value = 0}
             };
             Name = "Damage";
         }
 
+        public DamageEffect(int damage) :this()
+        {
+            Parameters.First().Value = damage;
+        }
+
         public override void Process(Dictionary<EffectValues, object> values)
         {
-            int damage = int.Parse((string)Parameters.First().Value);
+            var damage = (int)Parameters.First().Value;
             values.Add(EffectValues.Damage, new Damage(damage));
         }
     }

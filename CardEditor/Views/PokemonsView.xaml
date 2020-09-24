@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:CardEditor.Views"
+             xmlns:m="clr-namespace:CardEditor"
              xmlns:vm="clr-namespace:CardEditor.ViewModels"
              xmlns:en="clr-namespace:Entities;assembly=Entities"
              mc:Ignorable="d" 
@@ -12,6 +13,7 @@
              Background="White">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibility" />
+        <m:BooleanToColorConverter x:Key="boolToColor" />
         <ObjectDataProvider x:Key="energyTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="en:EnergyTypes"/>
@@ -31,49 +33,60 @@
         <DockPanel>
             <Button Content="Add Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddPokemonCommand}"/>
             <Button Content="Import Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding ImportPokemonCommand}"/>
-            <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding Sets}" SelectedItem="{Binding SelectedSet}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ListBox DockPanel.Dock="Top" ItemsSource="{Binding FilteredPokemonCards}" SelectedItem="{Binding SelectedCard}">
+            <DockPanel DockPanel.Dock="Top" Margin="2">
+                <Label Content="Set" DockPanel.Dock="Left"/>
+                <ComboBox DockPanel.Dock="Left" ItemsSource="{Binding Sets}" SelectedItem="{Binding SelectedSet}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </DockPanel>
+            <ListBox Margin="2" DockPanel.Dock="Top" ItemsSource="{Binding FilteredPokemonCards}" SelectedItem="{Binding SelectedCard}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding Card.Name}" />
+                        <Label FontSize="18" FontWeight="Bold" Content="{Binding Card.Name}" Foreground="{Binding Card.Completed, Converter={StaticResource boolToColor}, Mode=TwoWay}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
         <DockPanel Grid.Column="1" DataContext="{Binding SelectedCard}" LastChildFill="True" Margin="0,0,5,0">
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="Name" MinWidth="70"/>
-                <TextBox Text="{Binding Card.Name}"/>
+                <Label Content="Name" MinWidth="80"/>
+                <TextBox Text="{Binding Card.Name, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="HP" MinWidth="70"/>
+                <Label Content="HP" MinWidth="80"/>
                 <TextBox Text="{Binding Card.Hp}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="SetCode" MinWidth="70"/>
+                <Label Content="SetCode" MinWidth="80"/>
                 <TextBox Text="{Binding Card.SetCode}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="Type" MinWidth="70"/>
+                <Label Content="Type" MinWidth="80"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Card.Type}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="Resistance" MinWidth="70"/>
+                <Label Content="Resistance" MinWidth="80"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Card.Resistance}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="Weakness" MinWidth="70"/>
+                <Label Content="Weakness" MinWidth="80"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Card.Weakness}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
-                <Label Content="Evolves From" MinWidth="70"/>
+                <Label Content="Retreat Cost" MinWidth="80"/>
+                <TextBox Text="{Binding Card.RetreatCost}" />
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Evolves From" MinWidth="80"/>
                 <ComboBox ItemsSource="{Binding DataContext.AllPokemonNames, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Card.EvolvesFrom}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Completed" MinWidth="80"/>
+                <CheckBox IsChecked="{Binding Card.Completed}" VerticalAlignment="Center" />
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
                 <Grid>
@@ -84,7 +97,7 @@
                     <DockPanel>
                         <Label Content="Attacks" DockPanel.Dock="Top" />
                         <Button Content="Add Attack" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddAttackCommand}" />
-                        <ListBox ItemsSource="{Binding Card.Attacks}" SelectedItem="{Binding SelectedAttack}" DockPanel.Dock="Top">
+                        <ListBox Margin="5" ItemsSource="{Binding Card.Attacks}" SelectedItem="{Binding SelectedAttack}" DockPanel.Dock="Top">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -116,7 +129,8 @@
                             <TextBox Text="{Binding SelectedAttack.DamageText}"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <DataGrid ItemsSource="{Binding SelectedAttack.Cost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
+                            <Label Content="Cost" DockPanel.Dock="Top" />
+                            <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.Cost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
                                     <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
                                     <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
@@ -132,7 +146,8 @@
                                 <DockPanel>
                                     <Button Content="Add Effect" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddEffectCommand}"/>
                                     <Button Content="Delete Effect" DockPanel.Dock="Bottom" Margin="5" Command="{Binding RemoveEffectCommand}"/>
-                                    <ListBox DockPanel.Dock="Top" ItemsSource="{Binding SelectedAttack.Effects}" SelectedItem="{Binding SelectedEffect}">
+                                    <Label Content="Effects" DockPanel.Dock="Top" />
+                                    <ListBox Margin="5" DockPanel.Dock="Top" ItemsSource="{Binding SelectedAttack.Effects}" SelectedItem="{Binding SelectedEffect}">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Label Content="{Binding Name}" />
@@ -142,7 +157,7 @@
                                 </DockPanel>
                                 <DockPanel Grid.Column="1">
                                     <Label Content="{Binding SelectedEffect.Name}" DockPanel.Dock="Top"/>
-                                    <ListBox ItemsSource="{Binding SelectedEffect.Parameters}" DockPanel.Dock="Top">
+                                    <ListBox Margin="5" ItemsSource="{Binding SelectedEffect.Parameters}" DockPanel.Dock="Top">
                                         <ListBox.ItemContainerStyle>
                                             <Style TargetType="ListBoxItem">
                                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -154,7 +169,7 @@
                                                     <Label Content="{Binding Name}" Width="100" DockPanel.Dock="Left"/>
                                                     <ComboBox Visibility="{Binding ShowStatusInput, Converter={StaticResource boolToVisibility}}" ItemsSource="{Binding Source={StaticResource statusEffects}}" SelectedItem="{Binding Value}" DockPanel.Dock="Left" />
                                                     <ComboBox Visibility="{Binding ShowTypeInput, Converter={StaticResource boolToVisibility}}" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Value}" DockPanel.Dock="Left" />
-                                                    <TextBox Visibility="{Binding ShowTextInput, Converter={StaticResource boolToVisibility}}" Text="{Binding Value}" DockPanel.Dock="Left" />
+                                                    <TextBox Visibility="{Binding ShowTextInput, Converter={StaticResource boolToVisibility}}" Text="{Binding Value}" DockPanel.Dock="Left"/>
                                                 </DockPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>

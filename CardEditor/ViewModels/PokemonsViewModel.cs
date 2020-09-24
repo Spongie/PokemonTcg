@@ -1,5 +1,6 @@
 ﻿using CardEditor.Models;
 using CardEditor.Views;
+using Effects;
 using Entities;
 using Entities.Models;
 using NetworkingCore;
@@ -82,6 +83,32 @@ namespace CardEditor.ViewModels
 							pokemon.Resistance = EnergyTypes.None;
 						}
 
+						bool isComplete = true;
+
+						foreach (var atk in pokemonSdk.Card.Attacks)
+						{
+							var attack = new Attack
+							{
+								Name = atk.Name,
+								Description = atk.Text,
+								DamageText = atk.Damage,
+								Cost = new ObservableCollection<Energy>(GenerateCost(atk.Cost)),
+							};
+
+							if (!string.IsNullOrEmpty(attack.Description) || pokemonSdk.Card.Ability != null)
+							{
+								isComplete = false;
+							}
+							else
+							{
+								attack.Effects.Add(new DamageEffect(int.Parse(attack.DamageText)));
+							}
+
+							pokemon.Attacks.Add(attack);
+						}
+
+						pokemon.Completed = isComplete;
+
 						PokemonCards.Add(new PokemonViewModel(pokemon));
 						SelectedCard = PokemonCards.Last();
 					}
@@ -90,6 +117,48 @@ namespace CardEditor.ViewModels
 
 					}
 				}
+			}
+		}
+
+		private List<Energy> GenerateCost(List<string> cost)
+		{
+			var costs = new List<Energy>();
+
+			foreach (var typeCodeGroup in cost.GroupBy(x => x))
+			{
+				var type = getEnergyType(typeCodeGroup.Key.ToString());
+				int count = typeCodeGroup.Count();
+
+				costs.Add(new Energy(type, count));
+			}
+
+			return costs;
+		}
+
+		private EnergyTypes getEnergyType(string type)
+		{
+			switch (type)
+			{
+				case "Psychic":
+					return EnergyTypes.Psychic;
+				case "Grass":
+					return EnergyTypes.Grass;
+				case "Fire":
+					return EnergyTypes.Fire;
+				case "Water":
+					return EnergyTypes.Water;
+				case "Colorless":
+					return EnergyTypes.Colorless;
+				case "Fighting":
+					return EnergyTypes.Fighting;
+				case "Lightning":
+					return EnergyTypes.Electric;
+				case "":
+				case "none":
+				case null:
+					return EnergyTypes.None;
+				default:
+					throw new InvalidOperationException(type);
 			}
 		}
 

@@ -15,7 +15,18 @@ namespace Entities.Models
 		private string evolvesFrom;
 		private int stage;
 		private string imageUrl;
-		private ObservableCollection<Attack> attacks;
+		private ObservableCollection<Attack> attacks = new ObservableCollection<Attack>();
+		private bool completed;
+
+		public bool Completed
+		{
+			get { return completed; }
+			set
+			{
+				completed = value;
+				FirePropertyChanged();
+			}
+		}
 
 		public ObservableCollection<Attack> Attacks
 		{
