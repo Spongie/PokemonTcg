@@ -9,12 +9,17 @@
              xmlns:en="clr-namespace:Entities;assembly=Entities"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:PokemonsViewModel, IsDesignTimeCreatable=True}"
-             Background="White"
-             d:DesignHeight="850" Width="1200">
+             Background="White">
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVisibility" />
         <ObjectDataProvider x:Key="energyTypes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="en:EnergyTypes"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="statusEffects" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="en:StatusEffect"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
@@ -41,7 +46,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
-        <DockPanel Grid.Column="1" DataContext="{Binding SelectedCard}" LastChildFill="True">
+        <DockPanel Grid.Column="1" DataContext="{Binding SelectedCard}" LastChildFill="True" Margin="0,0,5,0">
             <DockPanel DockPanel.Dock="Top">
                 <Label Content="Name" MinWidth="70"/>
                 <TextBox Text="{Binding Card.Name}"/>
@@ -145,9 +150,11 @@
                                         </ListBox.ItemContainerStyle>
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <DockPanel>
+                                                <DockPanel LastChildFill="true">
                                                     <Label Content="{Binding Name}" Width="100" DockPanel.Dock="Left"/>
-                                                    <TextBox Text="{Binding Value}" DockPanel.Dock="Right"/>
+                                                    <ComboBox Visibility="{Binding ShowStatusInput, Converter={StaticResource boolToVisibility}}" ItemsSource="{Binding Source={StaticResource statusEffects}}" SelectedItem="{Binding Value}" DockPanel.Dock="Left" />
+                                                    <ComboBox Visibility="{Binding ShowTypeInput, Converter={StaticResource boolToVisibility}}" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Value}" DockPanel.Dock="Left" />
+                                                    <TextBox Visibility="{Binding ShowTextInput, Converter={StaticResource boolToVisibility}}" Text="{Binding Value}" DockPanel.Dock="Left" />
                                                 </DockPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>

@@ -6,7 +6,7 @@ namespace Entities.Models
 {
     public class Attack : DataModel
     {
-        private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
+        private ObservableCollection<Effect> effects = new ObservableCollection<Effect>();
         private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
         private string name;
         private string description;
@@ -54,7 +54,7 @@ namespace Entities.Models
             }
         }
 
-        public ObservableCollection<IEffect> Effects
+        public ObservableCollection<Effect> Effects
         {
             get { return effects; }
             set

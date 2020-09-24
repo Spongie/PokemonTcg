@@ -3,6 +3,10 @@
     public enum EffectValues
     {
         HeadsCount,
-        TailsCount
+        TailsCount,
+        Damage,
+        Player,
+        Opponent,
+        Game,
     }
 }

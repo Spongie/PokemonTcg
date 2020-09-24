@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Entities;
 using NetworkingCore;
 using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;

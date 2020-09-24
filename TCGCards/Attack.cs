@@ -4,6 +4,7 @@ using System.Linq;
 using NetworkingCore;
 using TCGCards.Core.Abilities;
 using Entities;
+using Entities.Effects;
 
 namespace TCGCards
 {
@@ -22,8 +23,6 @@ namespace TCGCards
         public string Description { get; set; }
 
         public List<Energy> Cost { get; set; }
-
-        public bool ApplyWeaknessAndResistance { get; set; } = true;
 
         public NetworkId Id { get; set; }
         public bool Disabled { get; set; }
@@ -93,9 +92,27 @@ namespace TCGCards
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             hashCode = hashCode * -1521134295 + EqualityComparer<List<Energy>>.Default.GetHashCode(Cost);
-            hashCode = hashCode * -1521134295 + ApplyWeaknessAndResistance.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<NetworkId>.Default.GetHashCode(Id);
             return hashCode;
+        }
+
+        public List<Effect> Effects { get; set; }
+
+        public Damage Process(Player player, Player opponent, GameField game)
+        {
+            var effectData = new Dictionary<EffectValues, object>
+            {
+                { EffectValues.Player, player },
+                { EffectValues.Opponent, opponent },
+                { EffectValues.Game, game }
+            };
+
+            foreach (var effect in Effects)
+            {
+                effect.Process(effectData);
+            }
+
+            return (Damage)effectData[EffectValues.Damage];
         }
     }
 }

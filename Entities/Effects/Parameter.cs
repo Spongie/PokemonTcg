@@ -5,9 +5,9 @@ namespace Entities.Effects
     public class Parameter : DataModel
     {
         private string name;
-        private string value;
+        private object value;
 
-        public string Value
+        public object Value
         {
             get { return value; }
             set
@@ -27,5 +27,8 @@ namespace Entities.Effects
             }
         }
 
+        public bool ShowTextInput { get; set; } = true;
+        public bool ShowStatusInput { get; set; } = false;
+        public bool ShowTypeInput { get; set; } = false;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TCGCards.Core
+namespace Entities
 {
     public static class CoinFlipper
     {

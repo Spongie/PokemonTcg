@@ -1,4 +1,5 @@
 ﻿using CardEditor.ViewModels;
+using Effects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace CardEditor
         private MainViewModel viewModel;
         public MainWindow()
         {
+            var unused = new DamageEffect();
             viewModel = new MainViewModel();
             InitializeComponent();
             DataContext = viewModel;

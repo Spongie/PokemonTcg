@@ -1,4 +1,4 @@
-﻿namespace TCGCards.Core
+﻿namespace Entities
 {
     public class Damage
     {
@@ -26,7 +26,7 @@
             return new Damage(value);
         }
 
-        internal bool IsZero()
+        public bool IsZero()
         {
             return NormalDamage == 0 && DamageWithoutResistAndWeakness == 0;
         }

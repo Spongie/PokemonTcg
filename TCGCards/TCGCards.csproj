@@ -10,10 +10,6 @@
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Effects\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy /y /d $(TargetDir)*.dll $(ProjectDir)..\PokemonTCGClient\Assets\Dependencies\" />
   </Target>

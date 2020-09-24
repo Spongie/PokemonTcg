@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Entities;
+using System.Linq;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.Core

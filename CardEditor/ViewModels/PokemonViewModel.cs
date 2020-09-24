@@ -12,7 +12,7 @@ namespace CardEditor.ViewModels
     {
 		private PokemonCard card;
 		private Attack selectedAttack;
-		private IEffect selectedEffect;
+		private Effect selectedEffect;
 
 		public PokemonViewModel() :this(new PokemonCard())
 		{
@@ -76,7 +76,7 @@ namespace CardEditor.ViewModels
 			}
 		}
 		
-		public IEffect SelectedEffect
+		public Effect SelectedEffect
 		{
 			get { return selectedEffect; }
 			set
