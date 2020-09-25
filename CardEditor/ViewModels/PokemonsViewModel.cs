@@ -1,4 +1,5 @@
 ﻿using CardEditor.Models;
+using CardEditor.Util;
 using CardEditor.Views;
 using Effects;
 using Entities;
@@ -12,6 +13,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -36,10 +38,36 @@ namespace CardEditor.ViewModels
 		{
 			AddPokemonCommand = new RelayCommand(IsReady, AddNewPokemon);
 			ImportPokemonCommand = new RelayCommand(IsReady, ImportPokemon);
+			ImportPokemonSetCommand = new AsyncRelayCommand(IsReady, ImportPokemonSet);
 			Sets = sets;
 			pokemonCards.CollectionChanged += PokemonCards_CollectionChanged;
 			PropertyChanged += PokemonsViewModel_PropertyChanged;
 			SelectedSet = Sets.FirstOrDefault();
+		}
+
+		private async Task ImportPokemonSet(object arg)
+		{
+			using (var client = new WebClient())
+			{
+				var json = await client.DownloadStringTaskAsync($"https://api.pokemontcg.io/v1/cards?setCode={SelectedSet.SetCode}&supertype=Pok%C3%A9mon").ConfigureAwait(false);
+				var headers = client.ResponseHeaders;
+
+				int cardsFound = int.Parse(headers.Get("Count"));
+				int pageSize = int.Parse(headers.Get("Page-Size"));
+
+				if (cardsFound > pageSize)
+				{
+					//TODO
+				}
+
+				foreach (var card in JsonConvert.DeserializeObject<JsonPokemonList>(json).Cards)
+				{
+					var pokemon = PokemonCreator.CreateCardFromSdkCard(card);
+
+					PokemonCards.Add(new PokemonViewModel(pokemon));
+					SelectedCard = PokemonCards.Last();
+				}
+			}
 		}
 
 		private void ImportPokemon(object obj)
@@ -54,60 +82,7 @@ namespace CardEditor.ViewModels
 						var json = client.DownloadString(dialog.Url);
 						var pokemonSdk = JsonConvert.DeserializeObject<JsonPokemon>(json);
 
-						var pokemon = new PokemonCard
-						{
-							Name = pokemonSdk.Card.Name,
-							Hp = int.Parse(pokemonSdk.Card.Hp),
-							ImageUrl = pokemonSdk.Card.ImageUrlHiRes,
-							EvolvesFrom = pokemonSdk.Card.EvolvesFrom.Replace("-", string.Empty),
-							SetCode = pokemonSdk.Card.SetCode,
-							Stage = SubTypToStage(pokemonSdk.Card.SubType),
-							RetreatCost = pokemonSdk.Card.ConvertedRetreatCost,
-							Type = convertFullTypeToType(pokemonSdk.Card.Types.First())
-						};
-
-						if (pokemonSdk.Card.Weaknesses != null)
-						{
-							pokemon.Weakness = convertFullTypeToType(pokemonSdk.Card.Weaknesses.First().Type);
-						}
-						else
-						{
-							pokemon.Weakness = EnergyTypes.None;
-						}
-						if (pokemonSdk.Card.Resistances != null)
-						{
-							pokemon.Resistance = convertFullTypeToType(pokemonSdk.Card.Resistances.First().Type);
-						}
-						else
-						{
-							pokemon.Resistance = EnergyTypes.None;
-						}
-
-						bool isComplete = true;
-
-						foreach (var atk in pokemonSdk.Card.Attacks)
-						{
-							var attack = new Attack
-							{
-								Name = atk.Name,
-								Description = atk.Text,
-								DamageText = atk.Damage,
-								Cost = new ObservableCollection<Energy>(GenerateCost(atk.Cost)),
-							};
-
-							if (!string.IsNullOrEmpty(attack.Description) || pokemonSdk.Card.Ability != null)
-							{
-								isComplete = false;
-							}
-							else
-							{
-								attack.Effects.Add(new DamageEffect(int.Parse(attack.DamageText)));
-							}
-
-							pokemon.Attacks.Add(attack);
-						}
-
-						pokemon.Completed = isComplete;
+						var pokemon = PokemonCreator.CreateCardFromSdkCard(pokemonSdk);
 
 						PokemonCards.Add(new PokemonViewModel(pokemon));
 						SelectedCard = PokemonCards.Last();
@@ -117,90 +92,6 @@ namespace CardEditor.ViewModels
 
 					}
 				}
-			}
-		}
-
-		private List<Energy> GenerateCost(List<string> cost)
-		{
-			var costs = new List<Energy>();
-
-			foreach (var typeCodeGroup in cost.GroupBy(x => x))
-			{
-				var type = getEnergyType(typeCodeGroup.Key.ToString());
-				int count = typeCodeGroup.Count();
-
-				costs.Add(new Energy(type, count));
-			}
-
-			return costs;
-		}
-
-		private EnergyTypes getEnergyType(string type)
-		{
-			switch (type)
-			{
-				case "Psychic":
-					return EnergyTypes.Psychic;
-				case "Grass":
-					return EnergyTypes.Grass;
-				case "Fire":
-					return EnergyTypes.Fire;
-				case "Water":
-					return EnergyTypes.Water;
-				case "Colorless":
-					return EnergyTypes.Colorless;
-				case "Fighting":
-					return EnergyTypes.Fighting;
-				case "Lightning":
-					return EnergyTypes.Electric;
-				case "":
-				case "none":
-				case null:
-					return EnergyTypes.None;
-				default:
-					throw new InvalidOperationException(type);
-			}
-		}
-
-		private static EnergyTypes convertFullTypeToType(string type)
-		{
-			switch (type)
-			{
-				case "Psychic":
-					return EnergyTypes.Psychic;
-				case "Grass":
-					return EnergyTypes.Grass;
-				case "Fire":
-					return EnergyTypes.Fire;
-				case "Water":
-					return EnergyTypes.Water;
-				case "Colorless":
-					return EnergyTypes.Colorless;
-				case "Fighting":
-					return EnergyTypes.Fighting;
-				case "Lightning":
-					return EnergyTypes.Electric;
-				case "":
-				case "none":
-				case null:
-					return EnergyTypes.None;
-				default:
-					throw new InvalidOperationException(type);
-			}
-		}
-
-		private int SubTypToStage(string subtype)
-		{
-			switch (subtype.ToLower())
-			{
-				case "basic":
-					return 0;
-				case "stage 1":
-					return 1;
-				case "stage 2":
-					return 2;
-				default:
-					return 0;
 			}
 		}
 
@@ -327,5 +218,6 @@ namespace CardEditor.ViewModels
 
 		public ICommand ImportPokemonCommand { get; set; }
 		public ICommand AddPokemonCommand { get; set; }
+		public ICommand ImportPokemonSetCommand { get; set; }
 	}
 }

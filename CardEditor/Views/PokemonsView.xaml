@@ -33,6 +33,7 @@
         <DockPanel>
             <Button Content="Add Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddPokemonCommand}"/>
             <Button Content="Import Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding ImportPokemonCommand}"/>
+            <Button Content="Import From set" DockPanel.Dock="Bottom" Margin="5" Command="{Binding ImportPokemonSetCommand}"/>
             <DockPanel DockPanel.Dock="Top" Margin="2">
                 <Label Content="Set" DockPanel.Dock="Left"/>
                 <ComboBox DockPanel.Dock="Left" ItemsSource="{Binding Sets}" SelectedItem="{Binding SelectedSet}">

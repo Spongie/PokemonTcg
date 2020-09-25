@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CardEditor.ViewModels
 {
-
-    public class RelayCommand : ICommand
+    public class AsyncRelayCommand : ICommand
     {
         private readonly Predicate<object> _canExecute;
-        private readonly Action<object> _execute;
+        private readonly Func<object, Task> _execute;
 
-        public RelayCommand(Predicate<object> canExecute, Action<object> execute)
+        public AsyncRelayCommand(Predicate<object> canExecute, Func<object, Task> execute)
         {
             _canExecute = canExecute;
             _execute = execute;
@@ -26,9 +26,9 @@ namespace CardEditor.ViewModels
             return _canExecute(parameter);
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            _execute(parameter);
+            await _execute(parameter);
         }
     }
 }
