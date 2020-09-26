@@ -541,7 +541,9 @@ namespace TCGCards.Core
                 {
                     Me = activePlayer,
                     Opponent = nonActivePlayer,
-                    CardsInMyHand = ActivePlayer.Hand
+                    CardsInMyHand = ActivePlayer.Hand,
+                    CurrentState = GameState,
+                    ActivePlayer = ActivePlayer.Id
                 };
             }
             else
@@ -550,7 +552,9 @@ namespace TCGCards.Core
                 {
                     Me = nonActivePlayer,
                     Opponent = activePlayer,
-                    CardsInMyHand = NonActivePlayer.Hand
+                    CardsInMyHand = NonActivePlayer.Hand,
+                    CurrentState = GameState,
+                    ActivePlayer = ActivePlayer.Id
                 };
             }
         }
