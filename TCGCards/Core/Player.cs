@@ -1,5 +1,6 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core.Messages;
@@ -10,6 +11,7 @@ namespace TCGCards.Core
     {
         private readonly int MaxBenchedPokemons = 5;
         private bool endedTurn = false;
+        public event EventHandler<PlayerCardDraw> OnCardsDrawn;
 
         public Player()
         {
@@ -69,6 +71,13 @@ namespace TCGCards.Core
             Deck.Cards = new Stack<Card>(Deck.Cards.Except(selectedCards));
             Hand.AddRange(selectedCards);
             Deck.Shuffle();
+
+            OnCardsDrawn?.Invoke(this, new PlayerCardDraw()
+            {
+                Amount = selectedCards.Count(),
+                Cards = selectedCards.ToList(),
+                Player = this
+            });
         }
 
         public void SetBenchedPokemon(PokemonCard pokemon)
@@ -198,11 +207,24 @@ namespace TCGCards.Core
                 IsDead = true;
             }
 
+            var drawnCards = new List<Card>();
+
             for(int i = 0; i < amount; i++)
             {
                 if (Deck.Cards.Count > 0)
-                    Hand.Add(Deck.DrawCard());
+                {
+                    var card = Deck.DrawCard();
+                    drawnCards.Add(card);
+                    Hand.Add(card);
+                }
             }
+
+            OnCardsDrawn?.Invoke(this, new PlayerCardDraw()
+            {
+                Amount = drawnCards.Count(),
+                Cards = drawnCards.ToList(),
+                Player = this
+            });
         }
 
         public void SetNetworkPlayer(INetworkPlayer networkPlayer)

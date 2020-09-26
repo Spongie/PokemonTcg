@@ -299,6 +299,9 @@ namespace TCGCards.Core
             ActivePlayer = Players[new Random().Next(2)];
             NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
 
+            ActivePlayer.OnCardsDrawn += PlayerDrewCards;
+            NonActivePlayer.OnCardsDrawn += PlayerDrewCards;
+
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
             foreach (Player player in Players)
@@ -320,6 +323,24 @@ namespace TCGCards.Core
 
             GameState = GameFieldState.BothSelectingActive;
             PushGameLogUpdatesToPlayers();
+        }
+
+        private void PlayerDrewCards(object sender, PlayerCardDraw e)
+        {
+            var gameEvent = new DrawCardsEvent(CreateGameInfo(true))
+            {
+                Amount = e.Amount,
+                Player = ActivePlayer.Id,
+                Cards = e.Cards
+            };
+
+
+            SendEventMessage(gameEvent, ActivePlayer);
+
+            gameEvent.GameField = CreateGameInfo(false);
+            gameEvent.Cards = new List<Card>();
+
+            SendEventMessage(gameEvent, NonActivePlayer);
         }
 
         public void ActivateAbility(Ability ability)
@@ -511,7 +532,7 @@ namespace TCGCards.Core
             target.NetworkPlayer.Send(message);
         }
 
-        private GameFieldInfo CreateGameInfo(bool forActive)
+        public GameFieldInfo CreateGameInfo(bool forActive)
         {
             var activePlayer = new PlayerInfo
             {
