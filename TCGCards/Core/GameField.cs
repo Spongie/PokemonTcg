@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NetworkingCore;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;
 
@@ -482,6 +483,17 @@ namespace TCGCards.Core
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
             PushGameLogUpdatesToPlayers();
 
+            var trainerEvent = new TrainerCardPlayed(CreateGameInfo(true))
+            {
+                Card = trainerCard,
+                Player = ActivePlayer.Id
+            };
+
+            SendEventMessage(trainerEvent, ActivePlayer);
+
+            trainerEvent.GameField = CreateGameInfo(false);
+            SendEventMessage(trainerEvent, NonActivePlayer);
+
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             ActivePlayer.DiscardCard(trainerCard);
 
@@ -489,6 +501,57 @@ namespace TCGCards.Core
             {
                 GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
                 EndGame(NonActivePlayer.Id);
+            }
+        }
+
+        private void SendEventMessage(Event playEvent, Player target)
+        {
+            var message = new EventMessage(playEvent).ToNetworkMessage(Id);
+
+            target.NetworkPlayer.Send(message);
+        }
+
+        private GameFieldInfo CreateGameInfo(bool forActive)
+        {
+            var activePlayer = new PlayerInfo
+            {
+                Id = ActivePlayer.Id,
+                ActivePokemon = ActivePlayer.ActivePokemonCard,
+                BenchedPokemon = ActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
+                CardsInDeck = ActivePlayer.Deck.Cards.Count,
+                CardsInDiscard = ActivePlayer.DiscardPile,
+                CardsInHand = ActivePlayer.Hand.Count,
+                PrizeCards = ActivePlayer.PrizeCards
+            };
+
+            var nonActivePlayer = new PlayerInfo
+            {
+                Id = ActivePlayer.Id,
+                ActivePokemon = NonActivePlayer.ActivePokemonCard,
+                BenchedPokemon = NonActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
+                CardsInDeck = NonActivePlayer.Deck.Cards.Count,
+                CardsInDiscard = NonActivePlayer.DiscardPile,
+                CardsInHand = NonActivePlayer.Hand.Count,
+                PrizeCards = NonActivePlayer.PrizeCards
+            };
+
+            if (forActive)
+            {
+                return new GameFieldInfo
+                {
+                    Me = activePlayer,
+                    Opponent = nonActivePlayer,
+                    CardsInMyHand = ActivePlayer.Hand
+                };
+            }
+            else
+            {
+                return new GameFieldInfo
+                {
+                    Me = nonActivePlayer,
+                    Opponent = activePlayer,
+                    CardsInMyHand = NonActivePlayer.Hand
+                };
             }
         }
 

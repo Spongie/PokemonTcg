@@ -24,5 +24,6 @@
         Ping,
         CardListMessage,
         Info,
+        GameEvent,
     }
 }
