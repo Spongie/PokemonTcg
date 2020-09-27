@@ -8,6 +8,11 @@ namespace TCGCards.Core.GameEvents
         {
         }
 
+        public override Card GetCardToDisplay()
+        {
+            return Card;
+        }
+
         public NetworkId Player { get; set; }
         public TrainerCard Card { get; set; }
     }

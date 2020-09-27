@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Code._2D;
+using BaseSet.TrainerCards;
+using System.Collections;
 using System.IO;
 using TCGCards;
 using UnityEngine;
@@ -19,22 +21,32 @@ namespace Assets.Code
             StartCoroutine(LoadSpriteRoutine(card, targetImage));
         }
 
-        IEnumerator LoadSpriteRoutine(Card card, Image targetImage)
+        public IEnumerator LoadSpriteRoutine(Card card, Image targetImage)
         {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".jpg";
+            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
             string finalPath = "file:///" + fullCardPath;
 
-            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
+            if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))
             {
-                yield return request.SendWebRequest();
-
-                if (request.isNetworkError || request.isHttpError)
+                targetImage.sprite = SpriteCache.Instance.cache[fullCardPath];
+            }
+            else
+            {
+                using (var request = UnityWebRequestTexture.GetTexture(finalPath))
                 {
-                    Debug.LogError("Error fetching texture");
-                }
+                    yield return request.SendWebRequest();
 
-                var texture = DownloadHandlerTexture.GetContent(request);
-                targetImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                    if (request.isNetworkError || request.isHttpError)
+                    {
+                        Debug.LogError("Error fetching texture");
+                    }
+
+                    var texture = DownloadHandlerTexture.GetContent(request);
+                    var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                    targetImage.sprite = sprite;
+
+                    SpriteCache.Instance.cache.Add(fullCardPath, sprite);
+                }
             }
         }
 

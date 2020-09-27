@@ -10,6 +10,7 @@ using NetworkingCore.Messages;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -40,6 +41,7 @@ namespace Assets.Code
         public GameObject EscapeMenu;
         public GameObject WinMenu;
         public Text winnerText;
+        public EventLogViewer eventViewer;
 
         public Sprite CardBack;
 
@@ -242,6 +244,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourPokemon, OnBeginSelectYourPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
             NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.GameEvent, OnGameEventReceived);
         }
 
         private void OnDestroy()
@@ -341,6 +344,18 @@ namespace Assets.Code
             doneButton.SetActive(true);
 
             infoText.text = $"Discard {minSelectedCardCount} cards";
+        }
+
+        private void OnGameEventReceived(object arg1, NetworkId arg2)
+        {
+            var card = ((EventMessage)arg1).GameEvent.GetCardToDisplay();
+
+            if (card == null)
+            {
+                return;
+            }
+
+            eventViewer?.QueueEvent(card);
         }
 
         private void OnDeckSearch(object message, NetworkId messageId)

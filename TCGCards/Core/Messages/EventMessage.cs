@@ -15,6 +15,14 @@ namespace TCGCards.Core.Messages
             GameEvent = gameEvent;
         }
 
+        public override NetworkMessage ToNetworkMessage(NetworkId senderId)
+        {
+            var message = base.ToNetworkMessage(senderId);
+            message.RequiresResponse = false;
+
+            return message;
+        }
+
         public Event GameEvent { get; set; }
     }
 }

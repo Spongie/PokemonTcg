@@ -7,6 +7,11 @@
             GameField = gameField;
         }
 
+        public virtual Card GetCardToDisplay()
+        {
+            return null;
+        }
+
         public GameFieldInfo GameField { get; set; }
     }
 }

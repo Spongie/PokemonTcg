@@ -334,7 +334,6 @@ namespace TCGCards.Core
                 Cards = e.Cards
             };
 
-
             SendEventMessage(gameEvent, ActivePlayer);
 
             gameEvent.GameField = CreateGameInfo(false);
