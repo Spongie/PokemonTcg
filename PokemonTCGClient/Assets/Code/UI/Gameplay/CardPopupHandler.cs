@@ -23,7 +23,7 @@ namespace Assets.Code.UI.Gameplay
             attackButtons = new List<GameObject>();
             this.card = card;
             var player = GameController.Instance.Player ?? new Player() { ActivePokemonCard = (PokemonCard)card };
-            AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card));
+            AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card) && ((PokemonCard)card).Stage == 0);
 
             if (card is PokemonCard)
             {
