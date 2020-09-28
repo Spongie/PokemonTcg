@@ -16,7 +16,7 @@ namespace TeamRocket.Attacks
             DamageText = "20";
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             return 20;
         }

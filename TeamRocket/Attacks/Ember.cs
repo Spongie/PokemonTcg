@@ -26,7 +26,7 @@ namespace TeamRocket.Attacks
             owner.DiscardPile.Add(fireEnergy);
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             return 30;
         }

@@ -20,7 +20,7 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             var attacks = opponent.ActivePokemonCard.Attacks;
 
@@ -34,7 +34,7 @@ namespace BaseSet.Attacks
                 chosenAttack = owner.NetworkPlayer.SendAndWaitForResponse<Attack>(attackMessage);
             }
 
-            return chosenAttack.GetDamage(owner, opponent);
+            return chosenAttack.GetDamage(owner, opponent, game);
         }
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)

@@ -21,7 +21,7 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             if (opponent.BenchedPokemon.Any() && owner.ActivePokemonCard.AttachedEnergy.OfType<FireEnergy>().Any())
             {

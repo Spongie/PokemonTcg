@@ -29,7 +29,7 @@ namespace TCGCards
 
         public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) { }
 
-        public abstract Damage GetDamage(Player owner, Player opponent);
+        public abstract Damage GetDamage(Player owner, Player opponent, GameField game);
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }
 

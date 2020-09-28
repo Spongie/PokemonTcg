@@ -19,7 +19,7 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             var damage = 50 - owner.ActivePokemonCard.DamageCounters;
             return Math.Max(damage, 0);

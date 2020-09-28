@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             var pokemonNames = new[] { PokemonNames.Magnemite, PokemonNames.Magneton, PokemonNames.DarkMagneton };
             var validPokemons = owner.BenchedPokemon.Count(pokemon => pokemonNames.Contains(pokemon.PokemonName));

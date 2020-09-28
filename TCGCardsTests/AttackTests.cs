@@ -9,7 +9,7 @@ namespace TCGCards.Tests
 {
     class TestAttack : Attack
     {
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             return 20;
         }

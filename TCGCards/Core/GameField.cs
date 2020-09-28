@@ -29,6 +29,15 @@ namespace TCGCards.Core
             GameLog = new GameLog();
         }
 
+        public int FlipCoins(int coins)
+        {
+            var heads = CoinFlipper.FlipCoins(coins);
+
+            GameLog.AddMessage($"Flips 2 coins and gets {heads} heads");
+
+            return heads;
+        }
+
         public void RevealCardsTo(List<NetworkId> pickedCards, Player nonActivePlayer)
         {
             foreach (var card in pickedCards)
@@ -407,7 +416,7 @@ namespace TCGCards.Core
 
         private void DealDamageWithAttack(Attack attack)
         {
-            Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
+            Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer, this);
             damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
             var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
