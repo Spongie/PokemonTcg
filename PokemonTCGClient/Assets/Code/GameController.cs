@@ -152,6 +152,11 @@ namespace Assets.Code
             }
         }
 
+        internal void OnCardPicked()
+        {
+            SpecialState = SpecialGameState.None;
+        }
+
         internal void SelectedEnergyForRetreat(List<Card> selectedCards)
         {
             infoText.text = "Select new active pokemon";

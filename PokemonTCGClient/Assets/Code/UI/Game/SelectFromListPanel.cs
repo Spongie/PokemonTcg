@@ -166,6 +166,8 @@ namespace Assets.Code.UI.Game
             
             NetworkManager.Instance.SendToServer(message, true);
 
+            GameController.Instance.OnCardPicked();
+
             selectedCards.Clear();
             gameObject.SetActive(false);
         }

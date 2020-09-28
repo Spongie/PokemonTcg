@@ -8202,17 +8202,17 @@ PrefabInstance:
     - target: {fileID: 198513460512758089, guid: 92a31ccd58aabe64cad41393712e674a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 82.2
       objectReference: {fileID: 0}
     - target: {fileID: 198513460512758089, guid: 92a31ccd58aabe64cad41393712e674a,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 440.4
+      value: 482.4
       objectReference: {fileID: 0}
     - target: {fileID: 198513460512758089, guid: 92a31ccd58aabe64cad41393712e674a,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 676
+      value: 698.1
       objectReference: {fileID: 0}
     - target: {fileID: 198513460512758089, guid: 92a31ccd58aabe64cad41393712e674a,
         type: 3}
@@ -8252,6 +8252,11 @@ PrefabInstance:
     - target: {fileID: 198513461420896868, guid: 92a31ccd58aabe64cad41393712e674a,
         type: 3}
       propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896868, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
