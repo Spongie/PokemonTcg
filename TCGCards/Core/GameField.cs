@@ -528,7 +528,7 @@ namespace TCGCards.Core
         {
             var message = new EventMessage(playEvent).ToNetworkMessage(Id);
 
-            target.NetworkPlayer.Send(message);
+            target.NetworkPlayer?.Send(message);
         }
 
         public GameFieldInfo CreateGameInfo(bool forActive)
