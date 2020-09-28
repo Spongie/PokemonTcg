@@ -201,7 +201,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
         if (GameController.Instance.SpecialState == SpecialGameState.SelectingColor ||
             GameController.Instance.SpecialState == SpecialGameState.SelectEnergyToRetreat ||
-            GameController.Instance.SpecialState == SpecialGameState.SelectingPrize)
+            GameController.Instance.SpecialState == SpecialGameState.SelectingPrize ||
+            GameController.Instance.SpecialState == SpecialGameState.SelectingFromList)
         {
             GameController.Instance.selectFromListPanel.GetComponent<SelectFromListPanel>().OnCardClicked(this);
         }

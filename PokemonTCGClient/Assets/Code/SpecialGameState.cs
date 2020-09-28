@@ -15,6 +15,7 @@ namespace Assets.Code
         SelectingYesNo,
         SelectingRetreatTarget,
         SelectEnergyToRetreat,
-        SelectingPrize
+        SelectingPrize,
+        SelectingFromList
     }
 }

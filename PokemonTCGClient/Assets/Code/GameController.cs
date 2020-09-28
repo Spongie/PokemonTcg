@@ -402,6 +402,7 @@ namespace Assets.Code
 
         private void OnStartPickFromList(object message, NetworkId messageId)
         {
+            SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
         }
