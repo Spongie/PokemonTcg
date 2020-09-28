@@ -278,6 +278,8 @@ namespace Server.Services
 
             game.OnPokemonRetreated((PokemonCard)game.FindCardById(targetPokemon), energyCards);
 
+            SendUpdateToPlayers(game.Players, game);
+
             return game;
         }
 
