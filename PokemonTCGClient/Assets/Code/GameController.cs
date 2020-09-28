@@ -169,6 +169,16 @@ namespace Assets.Code
         {
             if (currentDeckFilter == null || currentDeckFilter.IsCardValid(clickedCard.card))
             {
+                if (minSelectedCardCount == 1)
+                {
+                    var message = new CardListMessage(new[] { clickedCard.card.Id }.ToList());
+                    NetworkManager.Instance.SendToServer(message, true);
+                    SpecialState = SpecialGameState.None;
+                    infoText.text = string.Empty;
+
+                    return;
+                }
+
                 ToggleCardSelected(clickedCard);
             }
         }
@@ -286,6 +296,8 @@ namespace Assets.Code
         {
             var selectMessage = (SelectFromYourPokemonMessage)message;
             SpecialState = SpecialGameState.SelectPokemonMatchingFilter;
+            doneButton.SetActive(true);
+            minSelectedCardCount = 1;
 
             if (!string.IsNullOrWhiteSpace(selectMessage.Info))
             {
@@ -493,18 +505,18 @@ namespace Assets.Code
 
         private void SelectedOpponentPokemon(CardRenderer cardController)
         {
-            if (cardController.card.Owner.Id.Equals(myId))
+            if (cardController.card.Owner.Id.Equals(myId) || !(cardController.card is PokemonCard))
             {
                 return;
             }
-
+            
             cardController.SetSelected(true);
             selectedCards.Add(cardController.card);
         }
 
         private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
         {
-            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)))
+            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) || !(cardController.card is PokemonCard))
             {
                 return;
             }
@@ -573,6 +585,7 @@ namespace Assets.Code
         {
             if (gameField.GameState == GameFieldState.GameOver)
             {
+                doneButton.SetActive(true);
                 SceneManager.LoadScene("MainMenu");
                 return;
             }
@@ -589,9 +602,8 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(myId);
-                message.ResponseTo = NetworkManager.Instance.RespondingTo;
-                NetworkManager.Instance.Me.Send(message);
+                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList());
+                NetworkManager.Instance.SendToServer(message, true);
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
             }
@@ -612,6 +624,7 @@ namespace Assets.Code
             }
 
             NetworkManager.Instance.RespondingTo = null;
+            doneButton.SetActive(true);
         }
 
         private void OnGameUpdated(object message)
@@ -651,7 +664,11 @@ namespace Assets.Code
                     break;
             }
 
-            doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
+            if (gameField.GameState == GameFieldState.BothSelectingBench)
+            {
+                doneButton.SetActive(true);
+            }
+
             endTurnButton.SetActive(IsMyTurn);
 
             if (gameField.GameState == GameFieldState.WaitingForConnection)
