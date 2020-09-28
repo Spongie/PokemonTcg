@@ -27,11 +27,13 @@ namespace TCGCards.Core
             SetNetworkPlayer(networkPlayer);
         }
 
-        public void SetPrizeCards(int priceCards)
+        public void SetPrizeCards(int prizeCards)
         {
-            for(int _ = 0; _ < priceCards; _++)
+            for(int _ = 0; _ < prizeCards; _++)
             {
-                PrizeCards.Add(Deck.DrawCard());
+                var card = Deck.DrawCard();
+                card.IsRevealed = false;
+                PrizeCards.Add(card);
             }
         }
 

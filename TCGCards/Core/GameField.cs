@@ -11,7 +11,7 @@ namespace TCGCards.Core
     public class GameField
     {
         public const int StartingHandsize = 7;
-        public const int PriceCards = 6;
+        public const int PrizeCardCount = 6;
         public const int ConfusedDamage = 30;
         public const int BenchMaxSize = 5;
         private readonly object lockObject = new object();
@@ -163,7 +163,7 @@ namespace TCGCards.Core
                     playersSetStartBench.Add(owner.Id);
                     if (playersSetStartBench.Count == 2)
                     {
-                        Players.ForEach(x => x.SetPrizeCards(PriceCards));
+                        Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
                         GameState = GameFieldState.InTurn;
                     }
                 }
