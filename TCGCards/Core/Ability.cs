@@ -20,7 +20,7 @@ namespace TCGCards.Core
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public NetworkId Id { get; protected set; }
+        public NetworkId Id { get; set; }
         public int Usages { get; set; } = 1;
         public int UsedTimes { get; set; }
 

@@ -641,6 +641,10 @@ namespace Assets.Code
 
             gameField = gameMessage;
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
+            SpecialState = SpecialGameState.None;
+            selectColorPanel.SetActive(false);
+            selectedCards.Clear();
+            selectFromListPanel.SetActive(false);
 
             switch (gameField.GameState)
             {
