@@ -28,6 +28,6 @@ namespace TeamRocket.Abilities
             owner.Deck.Cards.Push(selectedCard);
         }
 
-        public Card Target { get; private set; }
+        public Card Target { get; set; }
     }
 }
