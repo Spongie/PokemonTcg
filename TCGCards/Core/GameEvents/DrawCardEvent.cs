@@ -13,6 +13,4 @@ namespace TCGCards.Core.GameEvents
         public int Amount { get; set; }
         public List<Card> Cards { get; set; }
     }
-
-    
 }

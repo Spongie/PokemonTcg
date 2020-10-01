@@ -770,31 +770,8 @@ namespace Assets.Code
                 case GameFieldState.BothSelectingBench:
                     infoText.text = "Select pokemon to add to your bench";
                     break;
-                case GameFieldState.InTurn:
-                    infoText.text = IsMyTurn ? "Your turn!" : "Opponents turn!";
-                    break;
                 default:
-                    infoText.text = string.Empty;
                     break;
-            }
-        }
-
-        IEnumerator LoadSprite(Card card, Image target)
-        {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
-            string finalPath = "file:///" + fullCardPath;
-
-            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
-            {
-                yield return request.SendWebRequest();
-
-                if (request.isNetworkError || request.isHttpError)
-                {
-                    Debug.LogError("Error fetching texture");
-                }
-
-                var texture = DownloadHandlerTexture.GetContent(request);
-                target.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             }
         }
 
