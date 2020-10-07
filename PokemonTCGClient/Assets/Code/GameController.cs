@@ -690,15 +690,6 @@ namespace Assets.Code
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
-
-            if (gameStateInfo.ContainsKey(gameField.GameState))
-            {
-                infoText.text = gameStateInfo[gameField.GameState];
-            }
-            else
-            {
-                infoText.text = string.Empty;
-            }
         }
 
         private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons, ZoomMode zoomMode)
