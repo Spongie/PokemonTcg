@@ -26,6 +26,8 @@ namespace Assets.Code
         public GameFieldState CurrentGameState;
         public SpecialGameState SpecialState;
         public HandController playerHand;
+        public GameObject selectAttackPanel;
+        public GameObject attackButtonPrefab;
         public GameObject playerBench;
         public GameObject opponentBench;
         public GameObject playerActivePokemon;
@@ -111,17 +113,22 @@ namespace Assets.Code
 
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
-                //TODO: SelectAttackMessage
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentPokemon },
                 { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
                 { SpecialGameState.DiscardingCards, ToggleCardSelected },
+                { SpecialGameState.SelectingAttack, DoNothing },
                 { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy },
                 { SpecialGameState.SelectPokemonToEvolveOn, TryEvolvePokemon },
                 { SpecialGameState.SelectPokemonMatchingFilter, OnSelectPokemonWithFilter },
                 { SpecialGameState.SelectingRetreatTarget, OnRetreatTargetSelected },
             };
+        }
+
+        private void DoNothing(CardRenderer obj)
+        {
+            //Yes this is on purpose..   
         }
 
         private void OnRetreatTargetSelected(CardRenderer clickedCard)
@@ -251,6 +258,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.PickFromList, OnStartPickFromList);
             NetworkManager.Instance.RegisterCallback(MessageTypes.AttachEnergyToBench, OnStartAttachingEnergyBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectAttack, OnStartSelectAttack);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickPrize);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
@@ -260,6 +268,31 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
             NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameEvent, OnGameEventReceived);
+        }
+
+        private void OnStartSelectAttack(object message, NetworkId messageId)
+        {
+            SpecialState = SpecialGameState.SelectingAttack;
+            var selectAttackMessage = (SelectAttackMessage)message;
+
+            selectAttackPanel.SetActive(true);
+            var parent = selectAttackPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject;
+
+            foreach (var attack in selectAttackMessage.AvailableAttacks)
+            {
+                var buttonObject = Instantiate(attackButtonPrefab, parent.transform);
+                buttonObject.GetComponentInChildren<Text>().text = attack.Name;
+                buttonObject.GetComponent<Button>().onClick.AddListener(() => { OnAttackSelected(attack); });
+            }
+        }
+
+        public void OnAttackSelected(Attack attack) 
+        {
+            selectAttackPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject.DestroyAllChildren();
+            selectAttackPanel.SetActive(true);
+
+            SpecialState = SpecialGameState.None;
+            NetworkManager.Instance.SendToServer(new AttackMessage(attack), true);
         }
 
         private void OnDestroy()

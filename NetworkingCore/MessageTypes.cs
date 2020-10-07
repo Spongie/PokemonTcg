@@ -25,5 +25,7 @@
         CardListMessage,
         Info,
         GameEvent,
+        SelectAttack,
+        SelectedAttack,
     }
 }

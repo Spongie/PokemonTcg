@@ -367,6 +367,7 @@ namespace TCGCards.Core
             if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer))
             {
                 GameLog.AddMessage($"Attack not used becasue GameFirst: {FirstTurn} Disabled: {attack.Disabled} or CanBeUsed:{attack.CanBeUsed(this, ActivePlayer, NonActivePlayer)}");
+                PushGameLogUpdatesToPlayers();
                 return;
             }
 
