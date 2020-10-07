@@ -38,7 +38,7 @@ namespace TeamRocket.Abilities
             }
 
             selectedPokemon.AttachedEnergy.Remove(selectedEnergyCard);
-            owner.AttachEnergyToPokemon(selectedEnergyCard, PokemonOwner, null);
+            PokemonOwner.AttachedEnergy.Add(selectedEnergyCard);
         }
     }
 }

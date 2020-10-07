@@ -619,12 +619,14 @@ namespace TCGCards.Core
                 }
                 else
                 {
+                    SendUpdateToPlayers();
                     ActivePlayer.SelectPriceCard(1);
                 }
 
                 NonActivePlayer.KillActivePokemon();
                 if (NonActivePlayer.BenchedPokemon.Any())
                 {
+                    SendUpdateToPlayers();
                     NonActivePlayer.SelectActiveFromBench();
                 }
                 else
@@ -782,16 +784,25 @@ namespace TCGCards.Core
             GameLog.CommitMessages();
         }
 
-        public void PushStateToPlayer(Player player)
+        private void PushStateToPlayer(Player player)
         {
             var gameMessage = new GameFieldMessage(this);
             player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
         }
 
-        public void PushInfoToPlayer(string info, Player player)
+        private void PushInfoToPlayer(string info, Player player)
         {
             var message = new InfoMessage(info);
             player.NetworkPlayer.Send(message.ToNetworkMessage(Id));
+        }
+
+        private void SendUpdateToPlayers()
+        {
+            foreach (var player in Players)
+            {
+                var gameMessage = new GameFieldMessage(this);
+                player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
+            }
         }
 
         public GameFieldState GameState { get; set; }

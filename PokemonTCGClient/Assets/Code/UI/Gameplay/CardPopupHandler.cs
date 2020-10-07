@@ -50,6 +50,11 @@ namespace Assets.Code.UI.Gameplay
 
                 var ability = ((PokemonCard)card).Ability;
 
+                if (ability != null)
+                {
+                    ability.PokemonOwner = (PokemonCard)card; //Stupid fix because of serialize not assigning it?!
+                }
+
                 if (ability != null && ability.TriggerType == TriggerType.Activation && ability.CanActivate())
                 {
                     ActivateAbilityButton.SetActive(true);
