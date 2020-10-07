@@ -721,6 +721,14 @@ namespace TCGCards.Core
 
             foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
             {
+                foreach (var attack in pokemon.Attacks)
+                {
+                    attack.Disabled = false;
+                }
+            }
+
+            foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
+            {
                 pokemon.AbilityDisabled = false;
             }
 

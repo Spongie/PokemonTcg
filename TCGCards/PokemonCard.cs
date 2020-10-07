@@ -69,11 +69,6 @@ namespace TCGCards
                 IsAsleep = CoinFlipper.FlipCoin();
             }
 
-            foreach (var attack in Attacks)
-            {
-                attack.Disabled = false;
-            }
-
             if (Ability != null)
             {
                 Ability.UsedTimes = 0;
