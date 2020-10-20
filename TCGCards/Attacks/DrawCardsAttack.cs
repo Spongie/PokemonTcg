@@ -1,4 +1,6 @@
 ﻿using CardEditor.Views;
+using Entities;
+using TCGCards.Core;
 
 namespace TCGCards.Attacks
 {
@@ -22,5 +24,9 @@ namespace TCGCards.Attacks
             }
         }
 
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            owner.DrawCards(Amount);
+        }
     }
 }
