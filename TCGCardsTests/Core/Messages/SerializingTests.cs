@@ -63,21 +63,6 @@ namespace TCGCardsTests.Core.Messages
         }
 
         [TestMethod]
-        public void GameFieldMessage_Ability()
-        {
-            var game = new GameField();
-            game.ActivePlayer = new Player();
-            game.ActivePlayer.ActivePokemonCard = new Charmander(game.ActivePlayer);
-
-            var message = new GameFieldMessage(game);
-
-            var result = SerializeAndBack(message);
-
-            Assert.AreEqual(game.ActivePlayer.ActivePokemonCard.Id, result.Game.ActivePlayer.ActivePokemonCard.Id);
-            Assert.AreEqual(game.ActivePlayer.ActivePokemonCard.Ability.Id, result.Game.ActivePlayer.ActivePokemonCard.Ability.Id);
-        }
-
-        [TestMethod]
         public void GameLogAddMessage()
         {
             var message = new GameLogAddMessage(new List<string> { "asd", "dskaj" });
