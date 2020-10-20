@@ -1,8 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using TCGCards.Core;
 
 namespace TCGCards.Attacks
 {
@@ -26,5 +24,31 @@ namespace TCGCards.Attacks
             }
         }
 
+        public override void ProcessEffects(GameField game, Player owner, Player opponent)
+        {
+            if (game.FlipCoins(1) > 0)
+            {
+                switch (StatusEffect)
+                {
+                    case StatusEffect.Sleep:
+                        opponent.ActivePokemonCard.IsAsleep = true;
+                        break;
+                    case StatusEffect.Poison:
+                        opponent.ActivePokemonCard.IsPoisoned = true;
+                        break;
+                    case StatusEffect.Paralyze:
+                        opponent.ActivePokemonCard.IsParalyzed = true;
+                        break;
+                    case StatusEffect.Burn:
+                        opponent.ActivePokemonCard.IsBurned = true;
+                        break;
+                    case StatusEffect.Confuse:
+                        opponent.ActivePokemonCard.IsConfused = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
