@@ -10,7 +10,7 @@ namespace TCGCards.Core.Deckfilters
             Types = types;
         }
 
-        public EnergyTypes[] Types { get; }
+        public EnergyTypes[] Types { get; set; }
 
         public bool IsCardValid(Card card)
         {

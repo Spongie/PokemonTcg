@@ -19,12 +19,13 @@ namespace TeamRocketTests.Abilities
         {
             var player = new Player();
             player.BenchedPokemon.Add(new Charmander(player));
-            player.BenchedPokemon.First().AttachedEnergy.Add(new FireEnergy());
+            var energyCard = new FireEnergy();
+            player.BenchedPokemon[0].AttachedEnergy.Add(energyCard);
 
             var networkPlayer = Substitute.For<INetworkPlayer>();
             networkPlayer.SendAndWaitForResponse<CardListMessage>(null).ReturnsForAnyArgs(new CardListMessage(new List<NetworkId>
             {
-                player.BenchedPokemon.First().AttachedEnergy.First().Id
+                player.BenchedPokemon[0].Id
             }));
 
             player.SetNetworkPlayer(networkPlayer);

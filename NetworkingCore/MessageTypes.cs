@@ -24,5 +24,8 @@
         Ping,
         CardListMessage,
         Info,
+        GameEvent,
+        SelectAttack,
+        SelectedAttack,
     }
 }

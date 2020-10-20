@@ -30,7 +30,7 @@ namespace TeamRocketTests.Attacks
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
 
-            var damage = attack.GetDamage(player, null);
+            var damage = attack.GetDamage(player, null, null);
 
             Assert.AreEqual(100, damage.NormalDamage);
             Assert.AreEqual(2, player.DiscardPile.Count);

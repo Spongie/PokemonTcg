@@ -19,7 +19,7 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             return 0;
         }
@@ -34,8 +34,9 @@ namespace BaseSet.Attacks
             }
 
             var attackMessage = new SelectAttackMessage(opponent.ActivePokemonCard.Attacks).ToNetworkMessage(owner.Id);
-            var chosenAttack = owner.NetworkPlayer.SendAndWaitForResponse<Attack>(attackMessage);
+            var chosenAttack = owner.NetworkPlayer.SendAndWaitForResponse<AttackMessage>(attackMessage).Attack;
 
+            game.GameLog.AddMessage($"{owner.NetworkPlayer?.Name} disables attack {chosenAttack.Name}");
             opponent.ActivePokemonCard.Attacks.First(x => x.Id.Equals(chosenAttack.Id)).Disabled = true;
         }
     }

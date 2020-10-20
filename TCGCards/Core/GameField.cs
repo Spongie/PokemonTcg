@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using NetworkingCore;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;
 
@@ -11,7 +12,7 @@ namespace TCGCards.Core
     public class GameField
     {
         public const int StartingHandsize = 7;
-        public const int PriceCards = 6;
+        public const int PrizeCardCount = 6;
         public const int ConfusedDamage = 30;
         public const int BenchMaxSize = 5;
         private readonly object lockObject = new object();
@@ -27,6 +28,15 @@ namespace TCGCards.Core
             TemporaryPassiveAbilities = new List<TemporaryPassiveAbility>();
             GameState = GameFieldState.WaitingForConnection;
             GameLog = new GameLog();
+        }
+
+        public int FlipCoins(int coins)
+        {
+            var heads = CoinFlipper.FlipCoins(coins);
+
+            GameLog.AddMessage($"Flips 2 coins and gets {heads} heads");
+
+            return heads;
         }
 
         public void RevealCardsTo(List<NetworkId> pickedCards, Player nonActivePlayer)
@@ -163,7 +173,7 @@ namespace TCGCards.Core
                     playersSetStartBench.Add(owner.Id);
                     if (playersSetStartBench.Count == 2)
                     {
-                        Players.ForEach(x => x.SetPrizeCards(PriceCards));
+                        Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
                         GameState = GameFieldState.InTurn;
                     }
                 }
@@ -299,6 +309,9 @@ namespace TCGCards.Core
             ActivePlayer = Players[new Random().Next(2)];
             NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
 
+            ActivePlayer.OnCardsDrawn += PlayerDrewCards;
+            NonActivePlayer.OnCardsDrawn += PlayerDrewCards;
+
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
             foreach (Player player in Players)
@@ -322,6 +335,23 @@ namespace TCGCards.Core
             PushGameLogUpdatesToPlayers();
         }
 
+        private void PlayerDrewCards(object sender, PlayerCardDraw e)
+        {
+            var gameEvent = new DrawCardsEvent(CreateGameInfo(true))
+            {
+                Amount = e.Amount,
+                Player = ActivePlayer.Id,
+                Cards = e.Cards
+            };
+
+            SendEventMessage(gameEvent, ActivePlayer);
+
+            gameEvent.GameField = CreateGameInfo(false);
+            gameEvent.Cards = new List<Card>();
+
+            SendEventMessage(gameEvent, NonActivePlayer);
+        }
+
         public void ActivateAbility(Ability ability)
         {
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates ability {ability.Name}");
@@ -338,6 +368,7 @@ namespace TCGCards.Core
             if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer))
             {
                 GameLog.AddMessage($"Attack not used becasue GameFirst: {FirstTurn} Disabled: {attack.Disabled} or CanBeUsed:{attack.CanBeUsed(this, ActivePlayer, NonActivePlayer)}");
+                PushGameLogUpdatesToPlayers();
                 return;
             }
 
@@ -387,7 +418,7 @@ namespace TCGCards.Core
 
         private void DealDamageWithAttack(Attack attack)
         {
-            Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer);
+            Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer, this);
             damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
 
             var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
@@ -483,6 +514,17 @@ namespace TCGCards.Core
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
             PushGameLogUpdatesToPlayers();
 
+            var trainerEvent = new TrainerCardPlayed(CreateGameInfo(true))
+            {
+                Card = trainerCard,
+                Player = ActivePlayer.Id
+            };
+
+            SendEventMessage(trainerEvent, ActivePlayer);
+
+            trainerEvent.GameField = CreateGameInfo(false);
+            SendEventMessage(trainerEvent, NonActivePlayer);
+
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             ActivePlayer.DiscardCard(trainerCard);
 
@@ -490,6 +532,61 @@ namespace TCGCards.Core
             {
                 GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
                 EndGame(NonActivePlayer.Id);
+            }
+        }
+
+        private void SendEventMessage(Event playEvent, Player target)
+        {
+            var message = new EventMessage(playEvent).ToNetworkMessage(Id);
+
+            target.NetworkPlayer?.Send(message);
+        }
+
+        public GameFieldInfo CreateGameInfo(bool forActive)
+        {
+            var activePlayer = new PlayerInfo
+            {
+                Id = ActivePlayer.Id,
+                ActivePokemon = ActivePlayer.ActivePokemonCard,
+                BenchedPokemon = ActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
+                CardsInDeck = ActivePlayer.Deck.Cards.Count,
+                CardsInDiscard = ActivePlayer.DiscardPile,
+                CardsInHand = ActivePlayer.Hand.Count,
+                PrizeCards = ActivePlayer.PrizeCards
+            };
+
+            var nonActivePlayer = new PlayerInfo
+            {
+                Id = ActivePlayer.Id,
+                ActivePokemon = NonActivePlayer.ActivePokemonCard,
+                BenchedPokemon = NonActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
+                CardsInDeck = NonActivePlayer.Deck.Cards.Count,
+                CardsInDiscard = NonActivePlayer.DiscardPile,
+                CardsInHand = NonActivePlayer.Hand.Count,
+                PrizeCards = NonActivePlayer.PrizeCards
+            };
+
+            if (forActive)
+            {
+                return new GameFieldInfo
+                {
+                    Me = activePlayer,
+                    Opponent = nonActivePlayer,
+                    CardsInMyHand = ActivePlayer.Hand,
+                    CurrentState = GameState,
+                    ActivePlayer = ActivePlayer.Id
+                };
+            }
+            else
+            {
+                return new GameFieldInfo
+                {
+                    Me = nonActivePlayer,
+                    Opponent = activePlayer,
+                    CardsInMyHand = NonActivePlayer.Hand,
+                    CurrentState = GameState,
+                    ActivePlayer = ActivePlayer.Id
+                };
             }
         }
 
@@ -524,12 +621,14 @@ namespace TCGCards.Core
                 }
                 else
                 {
+                    SendUpdateToPlayers();
                     ActivePlayer.SelectPriceCard(1);
                 }
 
                 NonActivePlayer.KillActivePokemon();
                 if (NonActivePlayer.BenchedPokemon.Any())
                 {
+                    SendUpdateToPlayers();
                     NonActivePlayer.SelectActiveFromBench();
                 }
                 else
@@ -624,6 +723,14 @@ namespace TCGCards.Core
 
             foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
             {
+                foreach (var attack in pokemon.Attacks)
+                {
+                    attack.Disabled = false;
+                }
+            }
+
+            foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
+            {
                 pokemon.AbilityDisabled = false;
             }
 
@@ -687,16 +794,25 @@ namespace TCGCards.Core
             GameLog.CommitMessages();
         }
 
-        public void PushStateToPlayer(Player player)
+        private void PushStateToPlayer(Player player)
         {
             var gameMessage = new GameFieldMessage(this);
             player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
         }
 
-        public void PushInfoToPlayer(string info, Player player)
+        private void PushInfoToPlayer(string info, Player player)
         {
             var message = new InfoMessage(info);
             player.NetworkPlayer.Send(message.ToNetworkMessage(Id));
+        }
+
+        private void SendUpdateToPlayers()
+        {
+            foreach (var player in Players)
+            {
+                var gameMessage = new GameFieldMessage(this);
+                player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
+            }
         }
 
         public GameFieldState GameState { get; set; }

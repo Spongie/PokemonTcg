@@ -42,6 +42,7 @@ namespace Assets.Code.UI.Game
             NetworkManager.Instance.Me.Send(message);
 
             NetworkManager.Instance.RespondingTo = null;
+            GameController.Instance.OnCardPicked();
             gameObject.SetActive(false);
         }
     }

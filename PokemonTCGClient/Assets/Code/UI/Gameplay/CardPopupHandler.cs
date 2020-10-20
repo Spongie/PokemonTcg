@@ -23,7 +23,7 @@ namespace Assets.Code.UI.Gameplay
             attackButtons = new List<GameObject>();
             this.card = card;
             var player = GameController.Instance.Player ?? new Player() { ActivePokemonCard = (PokemonCard)card };
-            AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card));
+            AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card) && ((PokemonCard)card).Stage == 0);
 
             if (card is PokemonCard)
             {
@@ -49,6 +49,11 @@ namespace Assets.Code.UI.Gameplay
                 EvolveButton.SetActive(pokemonCard.Stage >= 1 && GameController.Instance.Player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
 
                 var ability = ((PokemonCard)card).Ability;
+
+                if (ability != null)
+                {
+                    ability.PokemonOwner = (PokemonCard)card; //Stupid fix because of serialize not assigning it?!
+                }
 
                 if (ability != null && ability.TriggerType == TriggerType.Activation && ability.CanActivate())
                 {

@@ -16,7 +16,7 @@ namespace TCGCards
             AttackStoppers = new List<AttackStopper>();
         }
 
-        public int Hp { get; protected set; }
+        public int Hp { get; set; }
         public int DamageCounters { get; set; }
         public int Stage { get; set; }
         public string EvolvesFrom { get; set; }
@@ -34,7 +34,7 @@ namespace TCGCards
         public bool IsAsleep { get; set; }
         public bool IsConfused { get; set; }
         public PokemonCard KnockedOutBy { get; set; }
-        public Ability Ability { get; protected set; }
+        public Ability Ability { get; set; }
         public List<TemporaryAbility> TemporaryAbilities { get; set; }
         public string PokemonName { get; protected set; }
         public List<DamageStopper> DamageStoppers { get; set; }
@@ -68,11 +68,6 @@ namespace TCGCards
             if(IsAsleep)
             {
                 IsAsleep = CoinFlipper.FlipCoin();
-            }
-
-            foreach (var attack in Attacks)
-            {
-                attack.Disabled = false;
             }
 
             if (Ability != null)

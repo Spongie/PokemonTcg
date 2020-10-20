@@ -18,20 +18,11 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            return 30;
-        }
+            var heads = game.FlipCoins(2);
 
-        public override void ProcessEffects(GameField game, Player owner, Player opponent)
-        {
-            var heads = CoinFlipper.FlipCoins(2);
-
-            game.GameLog.AddMessage(owner.NetworkPlayer.Name + $" Flips 2 coins and gets {heads} heads");
-            var damage = heads * 30;
-            owner.ActivePokemonCard.DamageCounters += damage;
-
-            game.GameLog.AddMessage(owner.ActivePokemonCard.GetName() + $" Takes {damage} damage");
+            return  heads * 30;
         }
     }
 }

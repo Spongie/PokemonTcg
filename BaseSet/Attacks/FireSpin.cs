@@ -22,7 +22,7 @@ namespace BaseSet.Attacks
             AttackUtils.DiscardAttachedEnergy(owner.ActivePokemonCard, 2);
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             return 100;
         }

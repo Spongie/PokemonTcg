@@ -10,6 +10,7 @@ using NetworkingCore.Messages;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -25,6 +26,8 @@ namespace Assets.Code
         public GameFieldState CurrentGameState;
         public SpecialGameState SpecialState;
         public HandController playerHand;
+        public GameObject selectAttackPanel;
+        public GameObject attackButtonPrefab;
         public GameObject playerBench;
         public GameObject opponentBench;
         public GameObject playerActivePokemon;
@@ -40,6 +43,7 @@ namespace Assets.Code
         public GameObject EscapeMenu;
         public GameObject WinMenu;
         public Text winnerText;
+        public EventLogViewer eventViewer;
 
         public Sprite CardBack;
 
@@ -109,17 +113,32 @@ namespace Assets.Code
 
             onSpecialClickHandlers = new Dictionary<SpecialGameState, Action<CardRenderer>>
             {
-                //TODO: SelectAttackMessage
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentPokemon },
                 { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
-                { SpecialGameState.DiscardingCards, ToggleCardSelected },
+                { SpecialGameState.DiscardingCards, OnDiscardCardSelected },
+                { SpecialGameState.SelectingAttack, DoNothing },
                 { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy },
                 { SpecialGameState.SelectPokemonToEvolveOn, TryEvolvePokemon },
                 { SpecialGameState.SelectPokemonMatchingFilter, OnSelectPokemonWithFilter },
                 { SpecialGameState.SelectingRetreatTarget, OnRetreatTargetSelected },
             };
+        }
+
+        private void OnDiscardCardSelected(CardRenderer card)
+        {
+            ToggleCardSelected(card);
+
+            if (minSelectedCardCount == 1)
+            {
+                DoneButtonClicked();
+            }
+        }
+
+        private void DoNothing(CardRenderer obj)
+        {
+            //Yes this is on purpose..   
         }
 
         private void OnRetreatTargetSelected(CardRenderer clickedCard)
@@ -150,6 +169,11 @@ namespace Assets.Code
             }
         }
 
+        internal void OnCardPicked()
+        {
+            SpecialState = SpecialGameState.None;
+        }
+
         internal void SelectedEnergyForRetreat(List<Card> selectedCards)
         {
             infoText.text = "Select new active pokemon";
@@ -162,6 +186,16 @@ namespace Assets.Code
         {
             if (currentDeckFilter == null || currentDeckFilter.IsCardValid(clickedCard.card))
             {
+                if (minSelectedCardCount == 1)
+                {
+                    var message = new CardListMessage(new[] { clickedCard.card.Id }.ToList());
+                    NetworkManager.Instance.SendToServer(message, true);
+                    SpecialState = SpecialGameState.None;
+                    infoText.text = string.Empty;
+
+                    return;
+                }
+
                 ToggleCardSelected(clickedCard);
             }
         }
@@ -234,6 +268,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.PickFromList, OnStartPickFromList);
             NetworkManager.Instance.RegisterCallback(MessageTypes.AttachEnergyToBench, OnStartAttachingEnergyBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectAttack, OnStartSelectAttack);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickPrize);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
@@ -242,6 +277,32 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromYourPokemon, OnBeginSelectYourPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
             NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.GameEvent, OnGameEventReceived);
+        }
+
+        private void OnStartSelectAttack(object message, NetworkId messageId)
+        {
+            SpecialState = SpecialGameState.SelectingAttack;
+            var selectAttackMessage = (SelectAttackMessage)message;
+
+            selectAttackPanel.SetActive(true);
+            var parent = selectAttackPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject;
+
+            foreach (var attack in selectAttackMessage.AvailableAttacks)
+            {
+                var buttonObject = Instantiate(attackButtonPrefab, parent.transform);
+                buttonObject.GetComponentInChildren<Text>().text = attack.Name;
+                buttonObject.GetComponent<Button>().onClick.AddListener(() => { OnAttackSelected(attack); });
+            }
+        }
+
+        public void OnAttackSelected(Attack attack) 
+        {
+            selectAttackPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject.DestroyAllChildren();
+            selectAttackPanel.SetActive(true);
+
+            SpecialState = SpecialGameState.None;
+            NetworkManager.Instance.SendToServer(new AttackMessage(attack), true);
         }
 
         private void OnDestroy()
@@ -278,6 +339,8 @@ namespace Assets.Code
         {
             var selectMessage = (SelectFromYourPokemonMessage)message;
             SpecialState = SpecialGameState.SelectPokemonMatchingFilter;
+            doneButton.SetActive(true);
+            minSelectedCardCount = 1;
 
             if (!string.IsNullOrWhiteSpace(selectMessage.Info))
             {
@@ -338,9 +401,26 @@ namespace Assets.Code
             SpecialState = SpecialGameState.DiscardingCards;
             minSelectedCardCount = ((DiscardCardsMessage)message).Count;
 
-            doneButton.SetActive(true);
+            if (minSelectedCardCount > 1)
+            {
+                doneButton.SetActive(true);
+            }
 
-            infoText.text = $"Discard {minSelectedCardCount} cards";
+            string cardsText = minSelectedCardCount > 1 ? "cards" : "card";
+
+            infoText.text = $"Discard {minSelectedCardCount} {cardsText} from your hand";
+        }
+
+        private void OnGameEventReceived(object arg1, NetworkId arg2)
+        {
+            var card = ((EventMessage)arg1).GameEvent.GetCardToDisplay();
+
+            if (card == null)
+            {
+                return;
+            }
+
+            eventViewer?.QueueEvent(card);
         }
 
         private void OnDeckSearch(object message, NetworkId messageId)
@@ -382,6 +462,7 @@ namespace Assets.Code
 
         private void OnStartPickFromList(object message, NetworkId messageId)
         {
+            SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
         }
@@ -472,18 +553,18 @@ namespace Assets.Code
 
         private void SelectedOpponentPokemon(CardRenderer cardController)
         {
-            if (cardController.card.Owner.Id.Equals(myId))
+            if (cardController.card.Owner.Id.Equals(myId) || !(cardController.card is PokemonCard))
             {
                 return;
             }
-
+            
             cardController.SetSelected(true);
             selectedCards.Add(cardController.card);
         }
 
         private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
         {
-            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)))
+            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) || !(cardController.card is PokemonCard))
             {
                 return;
             }
@@ -552,6 +633,7 @@ namespace Assets.Code
         {
             if (gameField.GameState == GameFieldState.GameOver)
             {
+                doneButton.SetActive(true);
                 SceneManager.LoadScene("MainMenu");
                 return;
             }
@@ -568,9 +650,8 @@ namespace Assets.Code
                     return;
                 }
 
-                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(myId);
-                message.ResponseTo = NetworkManager.Instance.RespondingTo;
-                NetworkManager.Instance.Me.Send(message);
+                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList());
+                NetworkManager.Instance.SendToServer(message, true);
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
             }
@@ -591,6 +672,7 @@ namespace Assets.Code
             }
 
             NetworkManager.Instance.RespondingTo = null;
+            doneButton.SetActive(true);
         }
 
         private void OnGameUpdated(object message)
@@ -607,6 +689,10 @@ namespace Assets.Code
 
             gameField = gameMessage;
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
+            SpecialState = SpecialGameState.None;
+            selectColorPanel.SetActive(false);
+            selectedCards.Clear();
+            selectFromListPanel.SetActive(false);
 
             switch (gameField.GameState)
             {
@@ -630,7 +716,11 @@ namespace Assets.Code
                     break;
             }
 
-            doneButton.SetActive(statesWithDoneAction.Contains(gameField.GameState));
+            if (gameField.GameState == GameFieldState.BothSelectingBench)
+            {
+                doneButton.SetActive(true);
+            }
+
             endTurnButton.SetActive(IsMyTurn);
 
             if (gameField.GameState == GameFieldState.WaitingForConnection)
@@ -648,15 +738,6 @@ namespace Assets.Code
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
-
-            if (gameStateInfo.ContainsKey(gameField.GameState))
-            {
-                infoText.text = gameStateInfo[gameField.GameState];
-            }
-            else
-            {
-                infoText.text = string.Empty;
-            }
         }
 
         private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons, ZoomMode zoomMode)
@@ -728,31 +809,8 @@ namespace Assets.Code
                 case GameFieldState.BothSelectingBench:
                     infoText.text = "Select pokemon to add to your bench";
                     break;
-                case GameFieldState.InTurn:
-                    infoText.text = IsMyTurn ? "Your turn!" : "Opponents turn!";
-                    break;
                 default:
-                    infoText.text = string.Empty;
                     break;
-            }
-        }
-
-        IEnumerator LoadSprite(Card card, Image target)
-        {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
-            string finalPath = "file:///" + fullCardPath;
-
-            using (var request = UnityWebRequestTexture.GetTexture(finalPath))
-            {
-                yield return request.SendWebRequest();
-
-                if (request.isNetworkError || request.isHttpError)
-                {
-                    Debug.LogError("Error fetching texture");
-                }
-
-                var texture = DownloadHandlerTexture.GetContent(request);
-                target.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             }
         }
 

@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             var pokemonNames = new[] { PokemonNames.Koffing, PokemonNames.Weezing, PokemonNames.DarkWeezing };
             var validPokemons = owner.BenchedPokemon.Where(pokemon => pokemonNames.Contains(pokemon.PokemonName)).ToList();

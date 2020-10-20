@@ -19,7 +19,7 @@ namespace TeamRocket.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             int tails = opponent.BenchedPokemon.Count - CoinFlipper.FlipCoins(opponent.BenchedPokemon.Count);
             return new Damage(0, 20* tails);

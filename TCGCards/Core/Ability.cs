@@ -14,13 +14,13 @@ namespace TCGCards.Core
 
         protected abstract void Activate(Player owner, Player opponent, int damageTaken, GameLog log);
 
-        public TriggerType TriggerType { get; protected set; }
+        public TriggerType TriggerType { get; set; }
 
-        public PokemonCard PokemonOwner { get; protected set; }
+        public PokemonCard PokemonOwner { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public NetworkId Id { get; protected set; }
+        public NetworkId Id { get; set; }
         public int Usages { get; set; } = 1;
         public int UsedTimes { get; set; }
 

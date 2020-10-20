@@ -8,10 +8,10 @@ namespace TCGCards.Core.Messages
     {
         public SelectAttackMessage()
         {
-
+            MessageType = MessageTypes.SelectAttack;
         }
 
-        public SelectAttackMessage(IEnumerable<Attack> availableChoices)
+        public SelectAttackMessage(IEnumerable<Attack> availableChoices) :this()
         {
             AvailableAttacks = availableChoices.ToList();
         }

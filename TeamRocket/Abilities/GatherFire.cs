@@ -23,22 +23,22 @@ namespace TeamRocket.Abilities
 
             var availablePokemons = allPokemons.Where(card => card.AttachedEnergy.Any(energy => energy.EnergyType == EnergyTypes.Fire));
 
-            var message = new PickFromListMessage(availablePokemons, 1).ToNetworkMessage(owner.Id);
+            PokemonCard selectedPokemon = null;
+            EnergyCard selectedEnergyCard = null;
 
-            var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-
-            var selectedEnergy = availablePokemons.SelectMany(pokemon => pokemon.AttachedEnergy).First(x => x.Id.Equals(selectedEnergyId));
-
-            owner.AttachEnergyToPokemon(selectedEnergy, PokemonOwner, null);
-
-            foreach (var pokemon in allPokemons)
+            while(selectedEnergyCard == null)
             {
-                if (pokemon.AttachedEnergy.Contains(selectedEnergy))
-                {
-                    pokemon.AttachedEnergy.Remove(selectedEnergy);
-                    break;
-                }
+                var message = new SelectFromYourPokemonMessage("Select pokemon to move energy from").ToNetworkMessage(owner.Id);
+
+                var selectedPokemonId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
+
+                selectedPokemon = allPokemons.First(x => x.Id.Equals(selectedPokemonId));
+
+                selectedEnergyCard = selectedPokemon.AttachedEnergy.FirstOrDefault(e => e.EnergyType == EnergyTypes.Fire);
             }
+
+            selectedPokemon.AttachedEnergy.Remove(selectedEnergyCard);
+            PokemonOwner.AttachedEnergy.Add(selectedEnergyCard);
         }
     }
 }

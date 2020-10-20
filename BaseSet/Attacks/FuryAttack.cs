@@ -17,7 +17,7 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             return 10 * CoinFlipper.FlipCoins(2);
         }

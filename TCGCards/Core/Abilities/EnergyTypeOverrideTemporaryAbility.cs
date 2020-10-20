@@ -27,7 +27,7 @@ namespace TCGCards.Core.Abilities
             
         }
 
-        public EnergyTypes[] SourceTypes { get; }
-        public EnergyTypes NewType { get; }
+        public EnergyTypes[] SourceTypes { get; set; }
+        public EnergyTypes NewType { get; set; }
     }
 }

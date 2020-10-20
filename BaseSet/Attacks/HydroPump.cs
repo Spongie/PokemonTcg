@@ -20,7 +20,7 @@ namespace BaseSet.Attacks
             };
         }
 
-        public override Damage GetDamage(Player owner, Player opponent)
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             var unusedWaterEnergy = owner.ActivePokemonCard.AttachedEnergy.OfType<WaterEnergy>().Count() - 3;
 
