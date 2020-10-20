@@ -304,3 +304,6 @@ PokemonTCGClient/Unity.TextMeshPro.csproj
 PokemonTCGClient/Unity.TextMeshPro.Editor.csproj
 PokemonTCGClient/Assets/StreamingAssets/
 dotnet.tar.gz
+PokemonTCGClient/Assets/Dependencies/Entities.dll
+PokemonTCGClient/Assets/Dependencies/ServerProxy.dll
+PokemonTCGClient/Assets/Dependencies/TCGCards.dll

@@ -1,15 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CardEditor.Views
 {
@@ -43,9 +36,32 @@ namespace CardEditor.Views
                 }
 
                 var panel = new DockPanel();
+                panel.MaxHeight = 30;
                 panel.Children.Add(new Label { Content = dynamicInput.DisplayName });
-                var input = new TextBox();
-                input.SetBinding(TextBox.TextProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                Control input;
+
+                switch (dynamicInput.InputType)
+                {
+                    case InputControl.Text:
+                        input = new TextBox();
+                        input.SetBinding(TextBox.TextProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                        break;
+                    case InputControl.Boolean:
+                        input = new CheckBox();
+                        input.SetBinding(CheckBox.IsCheckedProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                        break;
+                    case InputControl.Dropdown:
+                        var comboBox = new ComboBox();
+                        foreach (var value in Enum.GetValues(dynamicInput.EnumType))
+                        {
+                            comboBox.Items.Add(value);
+                        }
+                        comboBox.SetBinding(ComboBox.SelectedItemProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                        input = comboBox;
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
 
                 panel.Children.Add(input);
 
