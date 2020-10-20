@@ -138,47 +138,7 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*"/>
-                                    <ColumnDefinition Width="70*"/>
-                                </Grid.ColumnDefinitions>
-                                <DockPanel>
-                                    <Button Content="Add Effect" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddEffectCommand}"/>
-                                    <Button Content="Delete Effect" DockPanel.Dock="Bottom" Margin="5" Command="{Binding RemoveEffectCommand}"/>
-                                    <Label Content="Effects" DockPanel.Dock="Top" />
-                                    <ListBox Margin="5" DockPanel.Dock="Top" ItemsSource="{Binding SelectedAttack.Effects}" SelectedItem="{Binding SelectedEffect}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <Label Content="{Binding Name}" />
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </DockPanel>
-                                <DockPanel Grid.Column="1">
-                                    <Label Content="{Binding SelectedEffect.Name}" DockPanel.Dock="Top"/>
-                                    <ListBox Margin="5" ItemsSource="{Binding SelectedEffect.Parameters}" DockPanel.Dock="Top">
-                                        <ListBox.ItemContainerStyle>
-                                            <Style TargetType="ListBoxItem">
-                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            </Style>
-                                        </ListBox.ItemContainerStyle>
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <DockPanel LastChildFill="true">
-                                                    <Label Content="{Binding Name}" Width="100" DockPanel.Dock="Left"/>
-                                                    <ComboBox Visibility="{Binding ShowStatusInput, Converter={StaticResource boolToVisibility}}" ItemsSource="{Binding Source={StaticResource statusEffects}}" SelectedItem="{Binding Value}" DockPanel.Dock="Left" />
-                                                    <ComboBox Visibility="{Binding ShowTypeInput, Converter={StaticResource boolToVisibility}}" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Value}" DockPanel.Dock="Left" />
-                                                    <TextBox Visibility="{Binding ShowTextInput, Converter={StaticResource boolToVisibility}}" Text="{Binding Value}" DockPanel.Dock="Left"/>
-                                                </DockPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </DockPanel>
-                            </Grid>
-                        </DockPanel>
-                     </DockPanel>
+                    </DockPanel>
                 </Grid>
             </DockPanel>
         </DockPanel>

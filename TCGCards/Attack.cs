@@ -5,31 +5,80 @@ using NetworkingCore;
 using TCGCards.Core.Abilities;
 using Entities;
 using Entities.Effects;
+using Entities.Models;
+using System.Collections.ObjectModel;
 
 namespace TCGCards
 {
-    public abstract class Attack
+    public class Attack : DataModel
     {
+        private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
+        private string name = "New Attack";
+        private string description;
+        private string damageText;
+
         public Attack()
         {
             Description = string.Empty;
             Id = NetworkId.Generate();
         }
 
-        public string DamageText { get; set; }
+        public ObservableCollection<Energy> Cost
+        {
+            get { return cost; }
+            set
+            {
+                cost = value;
+                FirePropertyChanged();
+            }
+        }
 
-        public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string DamageText
+        {
+            get { return damageText; }
+            set
+            {
+                damageText = value;
+                FirePropertyChanged();
+            }
+        }
 
-        public List<Energy> Cost { get; set; }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                FirePropertyChanged();
+            }
+        }
+
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                FirePropertyChanged();
+            }
+        }
 
         public NetworkId Id { get; set; }
         public bool Disabled { get; set; }
 
         public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) { }
 
-        public abstract Damage GetDamage(Player owner, Player opponent, GameField game);
+        public virtual Damage GetDamage(Player owner, Player opponent, GameField game)
+        {
+            if (int.TryParse(damageText, out int amount))
+            {
+                return amount;
+            }
+
+            return 0;
+        }
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }
 
@@ -91,28 +140,9 @@ namespace TCGCards
             var hashCode = 927195835;
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<Energy>>.Default.GetHashCode(Cost);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ObservableCollection<Energy>>.Default.GetHashCode(Cost);
             hashCode = hashCode * -1521134295 + EqualityComparer<NetworkId>.Default.GetHashCode(Id);
             return hashCode;
-        }
-
-        public List<Effect> Effects { get; set; }
-
-        public Damage Process(Player player, Player opponent, GameField game)
-        {
-            var effectData = new Dictionary<EffectValues, object>
-            {
-                { EffectValues.Player, player },
-                { EffectValues.Opponent, opponent },
-                { EffectValues.Game, game }
-            };
-
-            foreach (var effect in Effects)
-            {
-                effect.Process(effectData);
-            }
-
-            return (Damage)effectData[EffectValues.Damage];
         }
     }
 }

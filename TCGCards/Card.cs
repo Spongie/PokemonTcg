@@ -2,14 +2,18 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Entities.Models;
 using NetworkingCore;
 using TCGCards.Core;
 
 namespace TCGCards
 {
-    public abstract class Card
+    public abstract class Card : DataModel
     {
-        protected string _Name;
+        private string setCode;
+        private string name;
+        private string imageUrl;
+        private bool completed;
 
         protected Card(Player owner)
         {
@@ -21,7 +25,45 @@ namespace TCGCards
 
         public NetworkId Id { get; set; }
 
-        public IPokemonSet Set { get; set; }
+        public string SetCode
+        {
+            get { return setCode; }
+            set
+            {
+                setCode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set
+            {
+                imageUrl = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool Completed
+        {
+            get { return completed; }
+            set
+            {
+                completed = value;
+                FirePropertyChanged();
+            }
+        }
 
         public Player Owner { get; set; }
 

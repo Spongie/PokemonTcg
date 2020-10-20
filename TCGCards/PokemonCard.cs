@@ -1,5 +1,6 @@
 ﻿using Entities;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.SpecialAbilities;
@@ -8,6 +9,31 @@ namespace TCGCards
 {
     public class PokemonCard : Card
     {
+        private int hp;
+        private EnergyTypes type;
+        private int retreatCost;
+        private EnergyTypes weakness;
+        private EnergyTypes resistance;
+        private string evolvesFrom;
+        private int stage;
+        private ObservableCollection<Attack> attacks = new ObservableCollection<Attack>();
+        private Attack selectedAttack;
+
+        public Attack SelectedAttack
+        {
+            get { return selectedAttack; }
+            set
+            {
+                selectedAttack = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public PokemonCard() :base(null)
+        {
+            Attacks = new ObservableCollection<Attack>();
+        }
+
         public PokemonCard(Player owner) : base(owner)
         {
             AttachedEnergy = new List<EnergyCard>();
@@ -16,17 +42,90 @@ namespace TCGCards
             AttackStoppers = new List<AttackStopper>();
         }
 
-        public int Hp { get; set; }
+        public int Hp
+        {
+            get { return hp; }
+            set
+            {
+                hp = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public EnergyTypes Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int RetreatCost
+        {
+            get { return retreatCost; }
+            set
+            {
+                retreatCost = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public EnergyTypes Weakness
+        {
+            get { return weakness; }
+            set
+            {
+                weakness = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public EnergyTypes Resistance
+        {
+            get { return resistance; }
+            set
+            {
+                resistance = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public string EvolvesFrom
+        {
+            get { return evolvesFrom; }
+            set
+            {
+                evolvesFrom = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int Stage
+        {
+            get { return stage; }
+            set
+            {
+                stage = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Attack> Attacks
+        {
+            get { return attacks; }
+            set
+            {
+                attacks = value;
+                FirePropertyChanged();
+            }
+        }
+
         public int DamageCounters { get; set; }
-        public int Stage { get; set; }
-        public string EvolvesFrom { get; set; }
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; }
         public EnergyTypes PokemonType { get; set; }
-        public EnergyTypes Resistance { get; set; }
-        public EnergyTypes Weakness { get; set; }
-        public List<Attack> Attacks { get; set; }
-        public int RetreatCost { get; set; }
         public bool PlayedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
         public bool IsBurned { get; set; }

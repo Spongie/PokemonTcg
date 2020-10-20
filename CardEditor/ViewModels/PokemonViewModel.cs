@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using TCGCards;
 
 namespace CardEditor.ViewModels
 {
@@ -23,38 +24,10 @@ namespace CardEditor.ViewModels
 		{
 			Card = pokemon;
 			AddAttackCommand = new RelayCommand(CanAddAttack, AddAttack);
-			AddEffectCommand = new RelayCommand(CanAddEffect, AddEffect);
-			RemoveEffectCommand = new RelayCommand(HasEffectSelected, DeleteEffect);
 		}
 
-		private void DeleteEffect(object obj)
-		{
-			SelectedAttack.Effects.Remove(SelectedEffect);
-			SelectedEffect = null;
-		}
-
-		private void AddEffect(object obj)
-		{
-			//Select effect
-			var dialog = new AddEffectWindow();
-
-			if (dialog.ShowDialog().Value)
-			{
-				SelectedAttack.Effects.Add(dialog.SelectedEffect);
-			}
-		}
-
-		private bool HasEffectSelected(object obj)
-		{
-			return SelectedEffect != null;
-		}
 
 		private bool CanAddAttack(object obj) => true;
-
-		private bool CanAddEffect(object obj)
-		{
-			return SelectedAttack != null;
-		}
 
 		private void AddAttack(object obj)
 		{
@@ -98,7 +71,5 @@ namespace CardEditor.ViewModels
 		}
 
 		public ICommand AddAttackCommand { get; set; }
-		public ICommand AddEffectCommand { get; set; }
-		public ICommand RemoveEffectCommand { get; set; }
 	}
 }

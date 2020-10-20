@@ -12,26 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace CardEditor.Views
 {
     /// <summary>
     /// Interaction logic for AddEffectWindow.xaml
     /// </summary>
-    public partial class AddEffectWindow : Window
+    public partial class AddAttackWindow : Window
     {
-        public AddEffectWindow()
+        public AddAttackWindow()
         {
             InitializeComponent();
 
-            var availableEffects = TypeLoader.GetLoadedTypesAssignableFrom<Effect>();
-
-            DataContext = availableEffects;
+            //var availableEffects = TypeLoader.GetLoadedTypesAssignableFrom<Attack>();
+            
+            //DataContext = availableEffects;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            SelectedEffect = (Effect)Activator.CreateInstance((Type)((Button)sender).DataContext);
+            //SelectedAttack = (Attack)Activator.CreateInstance((Type)((Button)sender).DataContext);
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -39,6 +40,6 @@ namespace CardEditor.Views
             DialogResult = false;
         }
 
-        public Effect SelectedEffect { get; set; }
+        //public Attack SelectedAttack { get; set; }
     }
 }

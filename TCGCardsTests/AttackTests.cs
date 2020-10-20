@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.EnergyCards;
@@ -32,11 +33,11 @@ namespace TCGCards.Tests
             var game = createTestGame();
 
             var pokemon = game.ActivePlayer.ActivePokemonCard;
-            pokemon.Attacks = new List<Attack>
+            pokemon.Attacks = new ObservableCollection<Attack>
             {
                 new TestAttack
                 {
-                    Cost = new List<Energy>
+                    Cost = new ObservableCollection<Energy>
                     {
                         new Energy(EnergyTypes.Colorless, 1),
                         new Energy(EnergyTypes.Fire, 1)
@@ -53,11 +54,11 @@ namespace TCGCards.Tests
             var game = createTestGame();
 
             var pokemon = game.ActivePlayer.ActivePokemonCard;
-            pokemon.Attacks = new List<Attack>
+            pokemon.Attacks = new ObservableCollection<Attack>
             {
                 new TestAttack
                 {
-                    Cost = new List<Energy>
+                    Cost = new ObservableCollection<Energy>
                     {
                         new Energy(EnergyTypes.Colorless, 1),
                         new Energy(EnergyTypes.Fire, 1)
@@ -80,11 +81,11 @@ namespace TCGCards.Tests
             game.FirstTurn = true;
 
             var pokemon = game.ActivePlayer.ActivePokemonCard;
-            pokemon.Attacks = new List<Attack>
+            pokemon.Attacks = new ObservableCollection<Attack>
             {
                 new TestAttack
                 {
-                    Cost = new List<Energy>
+                    Cost = new ObservableCollection<Energy>
                     {
                         new Energy(EnergyTypes.Colorless, 1),
                         new Energy(EnergyTypes.Fire, 1)
@@ -106,11 +107,11 @@ namespace TCGCards.Tests
             var game = createTestGame();
 
             var pokemon = game.ActivePlayer.ActivePokemonCard;
-            pokemon.Attacks = new List<Attack>
+            pokemon.Attacks = new ObservableCollection<Attack>
             {
                 new TestAttack
                 {
-                    Cost = new List<Energy>
+                    Cost = new ObservableCollection<Energy>
                     {
                         new Energy(EnergyTypes.Colorless, 2),
                         new Energy(EnergyTypes.Fire, 1)
@@ -132,11 +133,11 @@ namespace TCGCards.Tests
             var game = createTestGame();
 
             var pokemon = game.ActivePlayer.ActivePokemonCard;
-            pokemon.Attacks = new List<Attack>
+            pokemon.Attacks = new ObservableCollection<Attack>
             {
                 new TestAttack
                 {
-                    Cost = new List<Energy>
+                    Cost = new ObservableCollection<Energy>
                     {
                         new Energy(EnergyTypes.Colorless, 1),
                         new Energy(EnergyTypes.Fire, 1)

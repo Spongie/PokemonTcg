@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using TCGCards;
 
 namespace CardEditor.Util
 {
@@ -64,12 +65,11 @@ namespace CardEditor.Util
 				{
 					isComplete = false;
 				}
-				else
-				{
-					attack.Effects.Add(new DamageEffect(int.Parse(attack.DamageText)));
+                else
+                {
+					pokemon.Attacks.Add(attack);
 				}
 
-				pokemon.Attacks.Add(attack);
 			}
 
 			pokemon.Completed = isComplete;

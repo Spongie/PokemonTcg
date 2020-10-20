@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCGCards;
 
 namespace CardEditor.Views
 {
@@ -21,6 +22,12 @@ namespace CardEditor.Views
         public PokemonsView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //var atk = asd.SelectedItem as Attack;
+            //MessageBox.Show(atk.Name);
         }
     }
 }
