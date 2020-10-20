@@ -116,7 +116,7 @@ namespace Assets.Code
                 { SpecialGameState.SelectingOpponentsPokemon, SelectedOpponentPokemon },
                 { SpecialGameState.SelectingOpponentsBenchedPokemon, SelectedOpponentBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToBenchedPokemon, SelectedBenchedPokemonForEnergy },
-                { SpecialGameState.DiscardingCards, ToggleCardSelected },
+                { SpecialGameState.DiscardingCards, OnDiscardCardSelected },
                 { SpecialGameState.SelectingAttack, DoNothing },
                 { SpecialGameState.SelectingYourBenchedPokemon, SelectedPlayerBenchedPokemon },
                 { SpecialGameState.AttachingEnergyToPokemon, OnTryAttachEnergy },
@@ -124,6 +124,16 @@ namespace Assets.Code
                 { SpecialGameState.SelectPokemonMatchingFilter, OnSelectPokemonWithFilter },
                 { SpecialGameState.SelectingRetreatTarget, OnRetreatTargetSelected },
             };
+        }
+
+        private void OnDiscardCardSelected(CardRenderer card)
+        {
+            ToggleCardSelected(card);
+
+            if (minSelectedCardCount == 1)
+            {
+                DoneButtonClicked();
+            }
         }
 
         private void DoNothing(CardRenderer obj)
@@ -391,9 +401,14 @@ namespace Assets.Code
             SpecialState = SpecialGameState.DiscardingCards;
             minSelectedCardCount = ((DiscardCardsMessage)message).Count;
 
-            doneButton.SetActive(true);
+            if (minSelectedCardCount > 1)
+            {
+                doneButton.SetActive(true);
+            }
 
-            infoText.text = $"Discard {minSelectedCardCount} cards";
+            string cardsText = minSelectedCardCount > 1 ? "cards" : "card";
+
+            infoText.text = $"Discard {minSelectedCardCount} {cardsText} from your hand";
         }
 
         private void OnGameEventReceived(object arg1, NetworkId arg2)
