@@ -126,8 +126,8 @@
                             <TextBox Text="{Binding SelectedAttack.Description}"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="DamageText" MinWidth="80"/>
-                            <TextBox Text="{Binding SelectedAttack.DamageText}"/>
+                            <Label Content="Damage" MinWidth="80"/>
+                            <TextBox Text="{Binding SelectedAttack.Damage}"/>
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Cost" DockPanel.Dock="Top" />

@@ -4,6 +4,8 @@ using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using TCGCards;
 
@@ -40,7 +42,15 @@ namespace CardEditor.ViewModels
 
 			if (attackDialog.ShowDialog().Value)
             {
-				card.Attacks.Add(attackDialog.SelectedAttack);
+                try
+                {
+					card.Attacks.Add(attackDialog.SelectedAttack);
+					SelectedAttack = card.Attacks.Last();
+				}
+				catch (Exception e)
+                {
+					MessageBox.Show("Some error when adding attack lol");
+                }
             }
 		}
 
