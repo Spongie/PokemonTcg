@@ -57,9 +57,17 @@ namespace CardEditor.Util
 				{
 					Name = atk.Name,
 					Description = atk.Text,
-					DamageText = atk.Damage,
 					Cost = new ObservableCollection<Energy>(GenerateCost(atk.Cost)),
 				};
+
+				if (int.TryParse(atk.Damage, out int dmg))
+                {
+					attack.Damage = dmg;
+                }
+                else
+                {
+					isComplete = false;
+                }
 
 				if (!string.IsNullOrEmpty(attack.Description) || pokemonSdk.Ability != null)
 				{

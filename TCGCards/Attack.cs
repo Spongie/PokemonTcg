@@ -15,7 +15,7 @@ namespace TCGCards
         private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
         private string name = "New Attack";
         private string description;
-        private string damageText;
+        private int damage;
 
         public Attack()
         {
@@ -34,12 +34,12 @@ namespace TCGCards
         }
 
 
-        public string DamageText
+        public int Damage
         {
-            get { return damageText; }
+            get { return damage; }
             set
             {
-                damageText = value;
+                damage = value;
                 FirePropertyChanged();
             }
         }
@@ -72,12 +72,7 @@ namespace TCGCards
 
         public virtual Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            if (int.TryParse(damageText, out int amount))
-            {
-                return amount;
-            }
-
-            return 0;
+            return damage;
         }
 
         public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }

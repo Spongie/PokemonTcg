@@ -1,4 +1,6 @@
 ﻿using CardEditor.Views;
+using Entities;
+using TCGCards.Core;
 
 namespace TCGCards.Attacks
 {
@@ -20,6 +22,13 @@ namespace TCGCards.Attacks
                 coins = value;
                 FirePropertyChanged();
             }
+        }
+
+        public override Damage GetDamage(Player owner, Player opponent, GameField game)
+        {
+            int heads = game.FlipCoins(Coins);
+
+            return heads * Damage;
         }
     }
 }
