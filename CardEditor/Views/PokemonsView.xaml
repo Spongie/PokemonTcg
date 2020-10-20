@@ -138,6 +138,9 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </DockPanel>
+                        <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
+
+                        </local:DynamicInputControl>
                     </DockPanel>
                 </Grid>
             </DockPanel>

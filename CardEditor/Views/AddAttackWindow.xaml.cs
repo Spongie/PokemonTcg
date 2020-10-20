@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using TCGCards;
 
 namespace CardEditor.Views
 {
@@ -24,15 +24,15 @@ namespace CardEditor.Views
         {
             InitializeComponent();
 
-            //var availableEffects = TypeLoader.GetLoadedTypesAssignableFrom<Attack>();
+            var availableEffects = TypeLoader.GetLoadedTypesAssignableFrom<Attack>();
             
-            //DataContext = availableEffects;
+            DataContext = availableEffects;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            //SelectedAttack = (Attack)Activator.CreateInstance((Type)((Button)sender).DataContext);
+            SelectedAttack = (Attack)Activator.CreateInstance((Type)((Button)sender).DataContext);
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -40,6 +40,6 @@ namespace CardEditor.Views
             DialogResult = false;
         }
 
-        //public Attack SelectedAttack { get; set; }
+        public Attack SelectedAttack { get; set; }
     }
 }

@@ -36,7 +36,12 @@ namespace CardEditor.ViewModels
 				card.Attacks = new ObservableCollection<Attack>();
 			}
 
-			card.Attacks.Add(new Attack() { Name = "New attack" });
+			var attackDialog = new AddAttackWindow();
+
+			if (attackDialog.ShowDialog().Value)
+            {
+				card.Attacks.Add(attackDialog.SelectedAttack);
+            }
 		}
 
 		public PokemonCard Card
