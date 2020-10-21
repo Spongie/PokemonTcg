@@ -374,6 +374,8 @@ namespace TCGCards.Core
 
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates attack {attack.Name}");
 
+            attack.PayExtraCosts(this, ActivePlayer, NonActivePlayer);
+
             if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
             {
                 HitItselfInConfusion();

@@ -7,12 +7,14 @@ using Entities;
 using Entities.Effects;
 using Entities.Models;
 using System.Collections.ObjectModel;
+using TCGCards.Core.Messages;
 
 namespace TCGCards
 {
     public class Attack : DataModel
     {
         private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
+        private ObservableCollection<Energy> extraDiscardCost = new ObservableCollection<Energy>();
         private string name = "New Attack";
         private string description;
         private int damage;
@@ -33,6 +35,15 @@ namespace TCGCards
             }
         }
 
+        public ObservableCollection<Energy> ExtraDiscardCost
+        {
+            get { return extraDiscardCost; }
+            set 
+            {
+                extraDiscardCost = value;
+                FirePropertyChanged();
+            }
+        }
 
         public int Damage
         {
@@ -54,7 +65,6 @@ namespace TCGCards
             }
         }
 
-
         public string Name
         {
             get { return name; }
@@ -68,7 +78,21 @@ namespace TCGCards
         public NetworkId Id { get; set; }
         public bool Disabled { get; set; }
 
-        public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) { }
+        public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) 
+        {
+            foreach (var energy in ExtraDiscardCost)
+            {
+                var choices = owner.ActivePokemonCard.AttachedEnergy.Where(x => x.EnergyType == energy.EnergyType).ToList();
+
+                var message = new PickFromListMessage(choices, energy.Amount);
+                var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(Id));
+
+                foreach (var card in response.Cards)
+                {
+                    owner.ActivePokemonCard.AttachedEnergy.Remove((EnergyCard)game.FindCardById(card));
+                }
+            }
+        }
 
         public virtual Damage GetDamage(Player owner, Player opponent, GameField game)
         {
