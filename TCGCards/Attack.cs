@@ -75,6 +75,7 @@ namespace TCGCards
             }
         }
 
+        public string AttackType { get => GetType().Name; }
         public NetworkId Id { get; set; }
         public bool Disabled { get; set; }
 

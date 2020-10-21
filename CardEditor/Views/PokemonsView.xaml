@@ -115,7 +115,8 @@
                     </DockPanel>
                     <DockPanel Grid.Column="1" LastChildFill="True">
                         <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Selected Attack" MinWidth="80"/>
+                            <Label Content="Selected Attack:" MinWidth="80"/>
+                            <Label Content="{Binding SelectedAttack.AttackType}" />
                         </DockPanel>
                         <DockPanel DockPanel.Dock="Top">
                             <Label Content="Name" MinWidth="80"/>
