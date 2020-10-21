@@ -17,5 +17,6 @@ namespace TCGCards.Core.SpecialAbilities
         }
 
         public bool IsDamageIgnored() => action.Invoke();
+        public int Amount { get; set; }
     }
 }

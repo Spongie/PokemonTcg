@@ -183,13 +183,25 @@ namespace TCGCards
 
         public int DealDamage(Damage damage, GameLog log)
         {
-            if (DamageStoppers.Any(x => x.IsDamageIgnored()))
-            {
-                log.AddMessage(GetName() + "Takes no damage");
-                return 0;
-            }
-
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
+
+            foreach (var damageStopper in DamageStoppers)
+            {
+                if (damageStopper.IsDamageIgnored())
+                {
+                    totalDamage -= damageStopper.Amount;
+
+                    if (totalDamage <= 0)
+                    {
+                        log.AddMessage(GetName() + " Takes no damage");
+                        return 0;
+                    }
+                    else
+                    {
+                        log.AddMessage(GetName() + $" Takes {damageStopper.Amount} less damage");
+                    }
+                }
+            }
 
             DamageCounters += totalDamage;
 
