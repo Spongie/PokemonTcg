@@ -84,6 +84,11 @@ namespace TCGCards
             {
                 var choices = owner.ActivePokemonCard.AttachedEnergy.Where(x => x.EnergyType == energy.EnergyType).ToList();
 
+                if (energy.EnergyType == EnergyTypes.All)
+                {
+                    choices = owner.ActivePokemonCard.AttachedEnergy.ToList();
+                }
+
                 var message = new PickFromListMessage(choices, energy.Amount);
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(Id));
 

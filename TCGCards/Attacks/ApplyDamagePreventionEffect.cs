@@ -12,7 +12,6 @@ namespace TCGCards.Attacks
     public class ApplyDamagePreventionEffect : Attack
     {
         private int amount;
-
         private bool coinFlip;
 
         [DynamicInput("Coin flipped", InputControl.Boolean)]
