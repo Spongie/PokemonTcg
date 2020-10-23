@@ -399,7 +399,7 @@ namespace TCGCards.Core
             }
 
             DealDamageWithAttack(attack);
-
+            
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
             if (!IgnorePostAttack)
