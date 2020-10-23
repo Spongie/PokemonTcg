@@ -10,6 +10,7 @@ namespace TCGCards.Attacks
     {
         private EnergyTypes energyType;
         private int amountPerEnergy;
+        private int maxExtraDamage;
 
         [DynamicInput("Extra Damage per energy")]
         public int AmountPerEnergy
@@ -18,6 +19,17 @@ namespace TCGCards.Attacks
             set 
             { 
                 amountPerEnergy = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Maximum Extra Damage")]
+        public int MaxExtraDamage
+        {
+            get { return maxExtraDamage; }
+            set 
+            { 
+                maxExtraDamage = value;
                 FirePropertyChanged();
             }
         }
@@ -36,14 +48,14 @@ namespace TCGCards.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            int energyAmount = owner.ActivePokemonCard.AttachedEnergy.Count(energy => energy.EnergyType == EnergyType) - 1;
+            int energyAmount = owner.ActivePokemonCard.AttachedEnergy.Count(energy => energy.EnergyType == EnergyType) - Cost.Sum(x => x.Amount);
 
             if (!owner.ActivePokemonCard.AttachedEnergy.Any(energy => energy.EnergyType != EnergyType))
             {
                 energyAmount--;
             }
 
-            return Damage + Math.Min(Damage, energyAmount * AmountPerEnergy);
+            return Damage + Math.Min(MaxExtraDamage, energyAmount * AmountPerEnergy);
         }
     }
 }
