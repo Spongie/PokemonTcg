@@ -4,7 +4,6 @@ using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Attacks
 {
-
     public class ApplyAttackFailOnTails : Attack
     {
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
