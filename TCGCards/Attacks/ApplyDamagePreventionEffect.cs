@@ -13,6 +13,18 @@ namespace TCGCards.Attacks
     {
         private int amount;
         private bool coinFlip;
+        private int maxDamage;
+
+        [DynamicInput("Prevention Limit")]
+        public int MaxDamage
+        {
+            get { return maxDamage; }
+            set 
+            { 
+                maxDamage = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Coin flipped", InputControl.Boolean)]
         public bool CoinFlip
@@ -46,7 +58,14 @@ namespace TCGCards.Attacks
                 }
             }
 
-            owner.ActivePokemonCard.DamageStoppers.Add(new DamageStopper(() => true) { Amount = amount });
+            if (maxDamage > 0)
+            {
+                owner.ActivePokemonCard.DamageStoppers.Add(new DamageStopper((x) => x <= maxDamage) { Amount = amount });
+            }
+            else
+            {
+                owner.ActivePokemonCard.DamageStoppers.Add(new DamageStopper((x) => true) { Amount = amount });
+            }
         }
     }
 }

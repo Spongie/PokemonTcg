@@ -398,16 +398,6 @@ namespace TCGCards.Core
                 return;
             }
 
-            if (DamageStoppers.Any(x => x.IsDamageIgnored()))
-            {
-                GameLog.AddMessage("Damage ignored because of effect");
-                if (!IgnorePostAttack)
-                {
-                    PostAttack();
-                }
-                return;
-            }
-
             DealDamageWithAttack(attack);
 
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
@@ -422,6 +412,16 @@ namespace TCGCards.Core
         {
             Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer, this);
             damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
+
+            if (DamageStoppers.Any(x => x.IsDamageIgnored(damage.NormalDamage + damage.DamageWithoutResistAndWeakness)))
+            {
+                GameLog.AddMessage("Damage ignored because of effect");
+                if (!IgnorePostAttack)
+                {
+                    PostAttack();
+                }
+                return;
+            }
 
             var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
             attack.OnDamageDealt(dealtDamage, ActivePlayer);

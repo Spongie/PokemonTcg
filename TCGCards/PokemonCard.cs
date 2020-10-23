@@ -187,7 +187,7 @@ namespace TCGCards
 
             foreach (var damageStopper in DamageStoppers)
             {
-                if (damageStopper.IsDamageIgnored())
+                if (damageStopper.IsDamageIgnored(totalDamage))
                 {
                     totalDamage -= damageStopper.Amount;
 
