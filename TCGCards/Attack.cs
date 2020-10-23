@@ -85,7 +85,17 @@ namespace TCGCards
             {
                 var choices = owner.ActivePokemonCard.AttachedEnergy.Where(x => x.EnergyType == energy.EnergyType).ToList();
 
-                if (energy.EnergyType == EnergyTypes.All)
+                if (energy.EnergyType == EnergyTypes.All && energy.Amount == -1)
+                {
+                    foreach (var card in owner.ActivePokemonCard.AttachedEnergy)
+                    {
+                        owner.DiscardPile.Add(card);
+                    }
+
+                    owner.ActivePokemonCard.AttachedEnergy.Clear();
+                    return;
+                }
+                else if (energy.EnergyType == EnergyTypes.All)
                 {
                     choices = owner.ActivePokemonCard.AttachedEnergy.ToList();
                 }
