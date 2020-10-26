@@ -24,7 +24,7 @@ namespace NetworkingCore
 
         public void Log(string info)
         {
-            //Console.WriteLine(info);
+            Console.WriteLine(info);
         }
     }
 }

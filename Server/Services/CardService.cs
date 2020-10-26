@@ -1,10 +1,7 @@
-﻿using NetworkingCore;
-using System;
+﻿using Entities.Models;
+using NetworkingCore;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Loader;
 using TCGCards;
 
 namespace Server.Services
@@ -12,32 +9,28 @@ namespace Server.Services
     public class CardService : IService
     {
         private List<Card> cards;
+        private List<Set> sets;
 
         public void InitTypes()
         {
-            //Logger.Instance.Log("Loading cards cache");
+            Logger.Instance.Log("Loading sets cache");
 
-            //cards = new List<Card>();
+            sets = Serializer.Deserialize<List<Set>>(File.ReadAllText("sets.json"));
 
+            Logger.Instance.Log($"Loaded {sets.Count} sets to cache");
+            Logger.Instance.Log("Loading cards cache");
 
-            //foreach (var cardFile in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.dll"))
-            //{
-            //    try
-            //    {
-            //        var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(new FileInfo(cardFile).FullName);
+            string json = File.ReadAllText("pokemon.json");
 
-            //        foreach (var typeInfo in assembly.DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
-            //        {
-            //            cards.Add(Card.CreateFromTypeInfo(typeInfo));
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine("Failed to load " + cardFile);
-            //    }
-            //}
+            var pokemonCards = Serializer.Deserialize<List<PokemonCard>>(json);
 
-            //Logger.Instance.Log($"Loaded {cards.Count} to cache");
+            cards = new List<Card>();
+            cards.AddRange(pokemonCards);
+
+            Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
         }
+
+        public List<Card> GetAllCards() => cards;
+        public List<Set> GetAllSets() => sets;
     }
 }

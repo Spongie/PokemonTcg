@@ -38,11 +38,6 @@ namespace Server
             Console.CursorTop = defaultConsoleTop;
 
             Console.WriteLine("Active Connections: " + Clients.Count.ToString().PadLeft(5));
-            using (var process = Process.GetCurrentProcess())
-            {
-                var memory = (process.PrivateMemorySize64 / 1000000).ToString().PadLeft(8);
-                Console.WriteLine($"Memory Usage: {memory} MB");
-            }
             Console.WriteLine("Active Games: " + ((GameService)services[typeof(GameService).Name]).ActiveGames.Count);
         }
 
@@ -67,7 +62,6 @@ namespace Server
 
             Id = NetworkId.Generate();
             listener = new TcpListener(IPAddress.Parse("0.0.0.0"), port);
-            //listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             listener.Start();
 
             Console.WriteLine("Listening for connections...");
