@@ -1,18 +1,36 @@
-﻿namespace TCGCards.Core.Abilities
+﻿using CardEditor.Views;
+
+namespace TCGCards.Core.Abilities
 {
     public class TakesDamagesOnAttacked : Ability
     {
-        private readonly int damageReturned;
+        private int damageReturned;
 
-        public TakesDamagesOnAttacked(PokemonCard pokemonOwner, int damageReturned) : base(pokemonOwner)
+        public TakesDamagesOnAttacked() :base(null)
+        {
+
+        }
+
+        public TakesDamagesOnAttacked(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.TakesDamage;
-            this.damageReturned = damageReturned;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
         {
-            opponent.ActivePokemonCard.DamageCounters += damageReturned;
+            opponent.ActivePokemonCard.DamageCounters += DamageReturned;
         }
+
+        [DynamicInput("Damage returned")]
+        public int DamageReturned
+        {
+            get { return damageReturned; }
+            set
+            {
+                damageReturned = value;
+                FirePropertyChanged();
+            }
+        }
+
     }
 }

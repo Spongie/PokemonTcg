@@ -1,25 +1,21 @@
-﻿using Entities;
-using System;
-using System.Linq;
+﻿using CardEditor.Views;
+using Entities;
 
 namespace TCGCards.Core.Abilities
 {
     public class EnergyTypeOverrideTemporaryAbility : TemporaryAbility
     {
-        public EnergyTypeOverrideTemporaryAbility(PokemonCard owner, EnergyTypes[] sourceTypes, EnergyTypes newType) : base(owner, 1)
+        private EnergyTypes sourceType;
+        private EnergyTypes newType;
+
+        public EnergyTypeOverrideTemporaryAbility() :base(null)
         {
-            TriggerType = TriggerType.EnergyUsage;
 
-            if (sourceTypes.Contains(EnergyTypes.All))
-            {
-                SourceTypes = Enum.GetValues(typeof(EnergyTypes)).OfType<EnergyTypes>().ToArray();
-            }
-            else
-            {
-                SourceTypes = sourceTypes;
-            }
+        }
 
-            NewType = newType;
+        public EnergyTypeOverrideTemporaryAbility(PokemonCard owner) : base(owner)
+        {
+
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
@@ -27,7 +23,31 @@ namespace TCGCards.Core.Abilities
             
         }
 
-        public EnergyTypes[] SourceTypes { get; set; }
-        public EnergyTypes NewType { get; set; }
+        [DynamicInput("Old Type", InputControl.Dropdown, typeof(EnergyTypes))]
+        public EnergyTypes SourceType
+        {
+            get { return sourceType; }
+            set
+            {
+                sourceType = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("New Type", InputControl.Dropdown, typeof(EnergyTypes))]
+        public EnergyTypes NewType
+        {
+            get { return newType; }
+            set
+            {
+                newType = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool CoversType(EnergyTypes type)
+        {
+            return SourceType == EnergyTypes.All || SourceType == type;
+        }
     }
 }

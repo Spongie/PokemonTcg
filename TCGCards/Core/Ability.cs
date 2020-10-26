@@ -1,10 +1,15 @@
-﻿using NetworkingCore;
+﻿using Entities.Models;
+using NetworkingCore;
 
 namespace TCGCards.Core
 {
-    public abstract class Ability
+    public abstract class Ability : DataModel
     {
         protected Card target;
+        private string name;
+        private string description;
+        private int usages = 1;
+        private TriggerType triggerType;
 
         protected Ability(PokemonCard pokemonOwner)
         {
@@ -14,14 +19,50 @@ namespace TCGCards.Core
 
         protected abstract void Activate(Player owner, Player opponent, int damageTaken, GameLog log);
 
-        public TriggerType TriggerType { get; set; }
+        public TriggerType TriggerType
+        {
+            get { return triggerType; }
+            set
+            {
+                triggerType = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public PokemonCard PokemonOwner { get; set; }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int Usages
+        {
+            get { return usages; }
+            set
+            {
+                usages = value;
+                FirePropertyChanged();
+            }
+        }
+
         public NetworkId Id { get; set; }
-        public int Usages { get; set; } = 1;
         public int UsedTimes { get; set; }
 
         public void Trigger(Player owner, Player opponent, int damageTaken, GameLog log)

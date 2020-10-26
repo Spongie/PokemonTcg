@@ -37,15 +37,16 @@ namespace CardEditor.Views
                         continue;
                     }
 
-                    var panel = new DockPanel();
+                    var panel = new StackPanel();
+                    panel.Orientation = Orientation.Horizontal;
                     panel.MaxHeight = 30;
-                    panel.Children.Add(new Label { Content = dynamicInput.DisplayName });
+                    panel.Children.Add(new Label { Content = dynamicInput.DisplayName, MinWidth = 200 });
                     Control input;
 
                     switch (dynamicInput.InputType)
                     {
                         case InputControl.Text:
-                            input = new TextBox();
+                            input = new TextBox() { MinWidth = 100 };
                             input.SetBinding(TextBox.TextProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
                             break;
                         case InputControl.Boolean:
@@ -53,7 +54,7 @@ namespace CardEditor.Views
                             input.SetBinding(CheckBox.IsCheckedProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
                             break;
                         case InputControl.Dropdown:
-                            var comboBox = new ComboBox();
+                            var comboBox = new ComboBox() { MinWidth = 100 };
                             foreach (var value in Enum.GetValues(dynamicInput.EnumType))
                             {
                                 comboBox.Items.Add(value);

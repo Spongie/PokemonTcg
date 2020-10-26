@@ -18,6 +18,17 @@ namespace TCGCards
         private int stage;
         private ObservableCollection<Attack> attacks = new ObservableCollection<Attack>();
         private Attack selectedAttack;
+        private Ability ablity;
+
+        public Ability Ability
+        {
+            get { return ablity; }
+            set
+            {
+                ablity = value;
+                FirePropertyChanged();
+            }
+        }
 
         public Attack SelectedAttack
         {
@@ -133,7 +144,6 @@ namespace TCGCards
         public bool IsAsleep { get; set; }
         public bool IsConfused { get; set; }
         public PokemonCard KnockedOutBy { get; set; }
-        public Ability Ability { get; set; }
         public List<TemporaryAbility> TemporaryAbilities { get; set; }
         public string PokemonName { get; protected set; }
         public List<DamageStopper> DamageStoppers { get; set; }

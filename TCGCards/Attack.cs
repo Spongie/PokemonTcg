@@ -135,7 +135,7 @@ namespace TCGCards
                 {
                     var actualType = energy.EnergyType;
 
-                    if (energyOverride != null && energyOverride.SourceTypes.Contains(energy.EnergyType))
+                    if (energyOverride != null && energyOverride.CoversType(energy.EnergyType))
                     {
                         actualType = energyOverride.NewType;
                     }

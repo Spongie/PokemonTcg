@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using CardEditor.Views;
+using Entities;
 using NetworkingCore;
 using System;
 using System.Linq;
@@ -8,21 +9,34 @@ namespace TCGCards.Core.Abilities
 {
     public class MoveEnergyAbility : Ability
     {
-        private readonly EnergyTypes[] availableTypes;
+        private EnergyTypes energyType;
 
-        public MoveEnergyAbility(PokemonCard pokemonOwner, string abilityName, params EnergyTypes[] availableTypes) : base(pokemonOwner)
+        public MoveEnergyAbility() :base(null)
         {
-            this.availableTypes = availableTypes;
-            Name = abilityName;
-            string types = string.Join(" or ", availableTypes.Select(type => Enum.GetName(typeof(EnergyTypes), type)));
-            Description = $"As often as you like during your turn (before your attack), you may take 1 {types} card attached to 1 of your Pokémon and attach it to a different one. " +
-                $"This power can't be used if Venusaur is Asleep, Confused, or Paralyzed.";
+
         }
+
+        public MoveEnergyAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
+        {
+            
+        }
+
+        [DynamicInput("Valid energy type", InputControl.Dropdown, typeof(EnergyTypes))]
+        public EnergyTypes EnergyType
+        {
+            get { return energyType; }
+            set
+            {
+                energyType = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public override bool CanActivate()
         {
             var pokemons = PokemonOwner.Owner.GetAllPokemonCards().ToList();
-            return base.CanActivate() && pokemons.Count >= 2 && pokemons.Any(p => p.AttachedEnergy.Any(e => availableTypes.Contains(e.EnergyType)));
+            return base.CanActivate() && pokemons.Count >= 2 && pokemons.Any(p => p.AttachedEnergy.Any(e => EnergyType == EnergyTypes.All || e.EnergyType == EnergyType));
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
@@ -42,7 +56,7 @@ namespace TCGCards.Core.Abilities
                     }
                 }
 
-            } while (selectedPokemon == null || selectedPokemon.AttachedEnergy.Count(energy => availableTypes.Contains(energy.EnergyType)) == 0);
+            } while (selectedPokemon == null || selectedPokemon.AttachedEnergy.Count(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType) == 0);
             
             var newPokemonId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourPokemonMessage("Select pokemon to receive the energy").ToNetworkMessage(NetworkId.Generate()));
             PokemonCard newPokemon = null;
@@ -70,7 +84,7 @@ namespace TCGCards.Core.Abilities
             }
             else
             {
-                var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(selectedPokemon.AttachedEnergy.Where(energy => availableTypes.Contains(energy.EnergyType)), 1).ToNetworkMessage(owner.Id));
+                var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(selectedPokemon.AttachedEnergy.Where(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType), 1).ToNetworkMessage(owner.Id));
                 var energyCard = selectedPokemon.AttachedEnergy.FirstOrDefault(card => card.Id.Equals(selectedEnergyId.Cards.First()));
 
                 selectedPokemon.AttachedEnergy.Remove(energyCard);

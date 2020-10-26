@@ -26,6 +26,7 @@ namespace CardEditor.ViewModels
 		{
 			Card = pokemon;
 			AddAttackCommand = new RelayCommand(CanAddAttack, AddAttack);
+			SetAbilityCommand = new RelayCommand(CanAddAttack, SetAbility);
 		}
 
 
@@ -52,6 +53,23 @@ namespace CardEditor.ViewModels
 					MessageBox.Show("Some error when adding attack lol");
                 }
             }
+		}
+
+		private void SetAbility(object obj)
+        {
+			var avilityDialog = new AddAbilityWindow();
+
+			if (avilityDialog.ShowDialog().Value)
+			{
+				try
+				{
+					card.Ability = avilityDialog.SelectedAbility;
+				}
+				catch (Exception e)
+				{
+					MessageBox.Show("Some error when adding ability lol");
+				}
+			}
 		}
 
 		public PokemonCard Card
@@ -86,5 +104,6 @@ namespace CardEditor.ViewModels
 		}
 
 		public ICommand AddAttackCommand { get; set; }
-	}
+        public ICommand SetAbilityCommand { get; set; }
+    }
 }

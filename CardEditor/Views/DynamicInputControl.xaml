@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CardEditor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel LastChildFill="True" Margin="0,0,5,0" x:Name="targetControl">
+    <StackPanel Margin="0,0,5,0" x:Name="targetControl">
         
-    </DockPanel>
+    </StackPanel>
 </UserControl>
