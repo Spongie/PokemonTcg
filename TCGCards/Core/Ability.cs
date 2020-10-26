@@ -8,7 +8,7 @@ namespace TCGCards.Core
         protected Card target;
         private string name;
         private string description;
-        private int usages = 1;
+        private int usages = 9999;
         private TriggerType triggerType;
 
         protected Ability(PokemonCard pokemonOwner)

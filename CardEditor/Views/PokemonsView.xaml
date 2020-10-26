@@ -171,6 +171,10 @@
                                 <Label Content="Description" MinWidth="80"/>
                                 <TextBox Text="{Binding Card.Ability.Description}"/>
                             </DockPanel>
+                            <DockPanel DockPanel.Dock="Top">
+                                <Label Content="Usage limit" MinWidth="80"/>
+                                <TextBox Text="{Binding Card.Ability.Usages}"/>
+                            </DockPanel>
                             <local:DynamicInputControl DataContext="{Binding Card.Ability}">
 
                             </local:DynamicInputControl>
