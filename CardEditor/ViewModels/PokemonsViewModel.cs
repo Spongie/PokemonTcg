@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using TCGCards;
 
 namespace CardEditor.ViewModels
@@ -214,10 +215,21 @@ namespace CardEditor.ViewModels
 			{
 				pokemonCard = value;
 				FirePropertyChanged();
+				FirePropertyChanged(nameof(ImageSrc));
 			}
 		}
 
-		public ICommand ImportPokemonCommand { get; set; }
+        public BitmapImage ImageSrc
+        {
+            get
+            {
+				if (SelectedCard == null)
+					return null;
+                return new BitmapImage(new Uri(SelectedCard.Card.ImageUrl, UriKind.Absolute));
+            }
+        }
+
+        public ICommand ImportPokemonCommand { get; set; }
 		public ICommand AddPokemonCommand { get; set; }
 		public ICommand ImportPokemonSetCommand { get; set; }
 	}
