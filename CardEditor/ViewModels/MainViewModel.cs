@@ -15,11 +15,13 @@ namespace CardEditor.ViewModels
     {
 		private SetsViewModel setViewModel;
 		private PokemonsViewModel pokemonsViewModel;
+		private EnergyCardsViewModel energyCardsViewModel;
 
 		public MainViewModel()
 		{
 			SetViewModel = new SetsViewModel();
 			PokemonsViewModel = new PokemonsViewModel(SetViewModel.Sets);
+			energyCardsViewModel = new EnergyCardsViewModel(SetViewModel.Sets);
 		}
 
 		public async Task Save()
@@ -27,6 +29,7 @@ namespace CardEditor.ViewModels
 			Directory.CreateDirectory("Data");
 			await SetViewModel.Save();
 			await PokemonsViewModel.Save();
+			await energyCardsViewModel.Save();
 		}
 
 		public async Task Load()
@@ -36,6 +39,7 @@ namespace CardEditor.ViewModels
 
 			await SetViewModel.LoadSets();
 			await PokemonsViewModel.Load();
+			await energyCardsViewModel.Load();
 		}
 
 		public PokemonsViewModel PokemonsViewModel
@@ -59,5 +63,15 @@ namespace CardEditor.ViewModels
 			}
 		}
 
-	}
+        public EnergyCardsViewModel EnergyCardsViewModel
+        {
+            get { return energyCardsViewModel; }
+            set
+            {
+                energyCardsViewModel = value;
+                FirePropertyChanged();
+            }
+        }
+
+    }
 }

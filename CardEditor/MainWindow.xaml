@@ -22,8 +22,8 @@
             <TabItem Header="Trainer" Name="tabTrainer">
                 <Label Content="Trainer"/>
             </TabItem>
-            <TabItem Header="Energy" Name="tabEnergy">
-                <Label Content="Energy"/>
+            <TabItem Header="Energy" Name="tabEnergy" DataContext="{Binding EnergyCardsViewModel}">
+                <views:EnergyCardsView/>
             </TabItem>
             <TabItem Header="Sets" DataContext="{Binding SetViewModel}">
                 <views:SetsView/>
