@@ -26,6 +26,7 @@ namespace Server.Services
 
             cards = new List<Card>();
             cards.AddRange(pokemonCards);
+            cards.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")));
 
             Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
         }
