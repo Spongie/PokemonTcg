@@ -20,7 +20,9 @@
                 <views:PokemonsView />
             </TabItem>
             <TabItem Header="Trainer" Name="tabTrainer">
-                <Label Content="Trainer"/>
+                <views:TrainerCardsView DataContext="{Binding TrainerCardViewModel}">
+                    
+                </views:TrainerCardsView>
             </TabItem>
             <TabItem Header="Energy" Name="tabEnergy" DataContext="{Binding EnergyCardsViewModel}">
                 <views:EnergyCardsView/>

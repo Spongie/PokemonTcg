@@ -2,6 +2,7 @@
 using NetworkingCore;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TCGCards;
 
 namespace Server.Services
@@ -25,8 +26,9 @@ namespace Server.Services
             var pokemonCards = Serializer.Deserialize<List<PokemonCard>>(json);
 
             cards = new List<Card>();
-            cards.AddRange(pokemonCards);
-            cards.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")));
+            cards.AddRange(pokemonCards.Where(card => card.Completed));
+            cards.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")).Where(card => card.Completed));
+            cards.AddRange(Serializer.Deserialize<List<TrainerCard>>(File.ReadAllText("trainer.json")).Where(card => card.Completed));
 
             Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
         }

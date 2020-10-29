@@ -1,13 +1,6 @@
-﻿using CardEditor.Views;
-using Entities.Models;
-using PokemonTcgSdk;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using Entities.Models;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 
 namespace CardEditor.ViewModels
 {
@@ -16,12 +9,14 @@ namespace CardEditor.ViewModels
 		private SetsViewModel setViewModel;
 		private PokemonsViewModel pokemonsViewModel;
 		private EnergyCardsViewModel energyCardsViewModel;
+		private TrainerCardsViewModel trainerCardsViewModel;
 
 		public MainViewModel()
 		{
 			SetViewModel = new SetsViewModel();
 			PokemonsViewModel = new PokemonsViewModel(SetViewModel.Sets);
 			energyCardsViewModel = new EnergyCardsViewModel(SetViewModel.Sets);
+			trainerCardsViewModel = new TrainerCardsViewModel(SetViewModel.Sets);
 		}
 
 		public async Task Save()
@@ -30,6 +25,7 @@ namespace CardEditor.ViewModels
 			await SetViewModel.Save();
 			await PokemonsViewModel.Save();
 			await energyCardsViewModel.Save();
+			await trainerCardsViewModel.Save();
 		}
 
 		public async Task Load()
@@ -40,9 +36,20 @@ namespace CardEditor.ViewModels
 			await SetViewModel.LoadSets();
 			await PokemonsViewModel.Load();
 			await energyCardsViewModel.Load();
+			await trainerCardsViewModel.Load();
 		}
 
-		public PokemonsViewModel PokemonsViewModel
+        public TrainerCardsViewModel TrainerCardViewModel
+        {
+            get { return trainerCardsViewModel; }
+            set
+            {
+                trainerCardsViewModel = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public PokemonsViewModel PokemonsViewModel
 		{
 			get { return pokemonsViewModel; }
 			set
@@ -51,7 +58,6 @@ namespace CardEditor.ViewModels
 				FirePropertyChanged();
 			}
 		}
-
 
 		public SetsViewModel SetViewModel
 		{
@@ -72,6 +78,5 @@ namespace CardEditor.ViewModels
                 FirePropertyChanged();
             }
         }
-
     }
 }

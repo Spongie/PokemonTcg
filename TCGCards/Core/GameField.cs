@@ -513,6 +513,8 @@ namespace TCGCards.Core
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
                 return;
 
+
+            //TODO Remove card from hand as it is played
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
             PushGameLogUpdatesToPlayers();
 
