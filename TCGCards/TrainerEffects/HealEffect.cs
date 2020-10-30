@@ -10,7 +10,7 @@ using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
 {
-    public class HealEffect : DataModel, ITrainerEffect
+    public class HealEffect : DataModel, IEffect
     {
         private TargetingMode targetingMode;
         private int amount;

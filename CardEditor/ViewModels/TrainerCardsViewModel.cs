@@ -24,7 +24,7 @@ namespace CardEditor.ViewModels
         private List<TrainerCard> filteredCards = new List<TrainerCard>();
         private Set selectedSet;
         private TrainerCard selectedEnergyCard;
-        private ITrainerEffect selectedEffect;
+        private IEffect selectedEffect;
 
         public TrainerCardsViewModel()
         {
@@ -179,7 +179,7 @@ namespace CardEditor.ViewModels
             }
         }
 
-        public ITrainerEffect SelectedEffect
+        public IEffect SelectedEffect
         {
             get { return selectedEffect; }
             set

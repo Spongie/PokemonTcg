@@ -5,7 +5,7 @@ using TCGCards.Core;
 
 namespace TCGCards.TrainerEffects
 {
-    public class DiscardCardEffect : DataModel, ITrainerEffect
+    public class DiscardCardEffect : DataModel, IEffect
     {
         private int amount;
         private bool onlyOnCoinflip;

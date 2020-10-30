@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TCGCards.TrainerEffects
 {
-    public class CardDrawEffect : DataModel, ITrainerEffect
+    public class CardDrawEffect : DataModel, IEffect
     {
         private int amount;
         private bool onlyOnCoinflip;

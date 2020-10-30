@@ -7,7 +7,7 @@ using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
 {
-    public class SwapActivePokemonEffect : DataModel, ITrainerEffect
+    public class SwapActivePokemonEffect : DataModel, IEffect
     {
         public string EffectType
         {

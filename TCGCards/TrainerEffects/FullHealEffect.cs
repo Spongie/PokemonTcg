@@ -8,7 +8,7 @@ using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
 {
-    public class FullHealEffect : DataModel, ITrainerEffect
+    public class FullHealEffect : DataModel, IEffect
     {
         private TargetingMode targetingMode;
 

@@ -8,7 +8,7 @@ using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
 {
-    public class SearchDiscardPileEffect : DataModel, ITrainerEffect
+    public class SearchDiscardPileEffect : DataModel, IEffect
     {
         private CardType cardType;
         private int amount = 1;

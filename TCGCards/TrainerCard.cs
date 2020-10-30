@@ -7,7 +7,7 @@ namespace TCGCards
 {
     public class TrainerCard : Card
     {
-        private ObservableCollection<ITrainerEffect> effects = new ObservableCollection<ITrainerEffect>();
+        private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
 
         public TrainerCard() : base(null)
         {
@@ -33,7 +33,7 @@ namespace TCGCards
 
         public override string GetName() => Name;
 
-        public ObservableCollection<ITrainerEffect> Effects
+        public ObservableCollection<IEffect> Effects
         {
             get { return effects; }
             set

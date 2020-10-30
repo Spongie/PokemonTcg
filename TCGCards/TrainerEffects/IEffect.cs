@@ -2,7 +2,7 @@
 
 namespace TCGCards.TrainerEffects
 {
-    public interface ITrainerEffect
+    public interface IEffect
     {
         void Process(GameField game, Player caster, Player opponent);
         bool CanCast(GameField game, Player caster, Player opponent);

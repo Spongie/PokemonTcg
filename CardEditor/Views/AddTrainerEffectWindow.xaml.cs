@@ -14,7 +14,7 @@ namespace CardEditor.Views
         public AddTrainerEffectWindow()
         {
             InitializeComponent();
-            var availableEffects = TypeLoader.GetLoadedTypesAssignableFrom<ITrainerEffect>();
+            var availableEffects = TypeLoader.GetLoadedTypesAssignableFrom<IEffect>();
 
             DataContext = availableEffects;
         }
@@ -22,7 +22,7 @@ namespace CardEditor.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
-            SelectedEffect = (ITrainerEffect)Activator.CreateInstance((Type)((Button)sender).DataContext);
+            SelectedEffect = (IEffect)Activator.CreateInstance((Type)((Button)sender).DataContext);
         }
 
         private void Button_Cancel_Click(object sender, RoutedEventArgs e)
@@ -30,6 +30,6 @@ namespace CardEditor.Views
             DialogResult = false;
         }
 
-        public ITrainerEffect SelectedEffect { get; set; }
+        public IEffect SelectedEffect { get; set; }
     }
 }

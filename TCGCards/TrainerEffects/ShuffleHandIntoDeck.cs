@@ -4,7 +4,7 @@ using TCGCards.Core;
 
 namespace TCGCards.TrainerEffects
 {
-    public class ShuffleHandIntoDeck : DataModel, ITrainerEffect
+    public class ShuffleHandIntoDeck : DataModel, IEffect
     {
         private bool opponents;
 
