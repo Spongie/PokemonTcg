@@ -8,7 +8,6 @@ using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
 {
-
     public class SearchDeckForCardEffect : DataModel, ITrainerEffect
     {
         private CardType cardType;
