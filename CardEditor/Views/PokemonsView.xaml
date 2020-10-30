@@ -125,48 +125,79 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </DockPanel>
-                        <DockPanel Grid.Column="1" LastChildFill="True">
-                            <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Selected Attack:" MinWidth="80"/>
-                                <Label Content="{Binding SelectedAttack.AttackType}" />
-                            </DockPanel>
-                            <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Name" MinWidth="80"/>
-                                <TextBox Text="{Binding SelectedAttack.Name}"/>
-                            </DockPanel>
-                            <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Description" MinWidth="80"/>
-                                <TextBox Text="{Binding SelectedAttack.Description}"/>
-                            </DockPanel>
-                            <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Damage" MinWidth="80"/>
-                                <TextBox Text="{Binding SelectedAttack.Damage}"/>
-                            </DockPanel>
-                            <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Cost" DockPanel.Dock="Top" />
-                                <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.Cost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
-                                    <DataGrid.Columns>
-                                        <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
-                                        <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </DockPanel>
-                            <DockPanel DockPanel.Dock="Top">
-                                <Label Content="Discard for using attack" DockPanel.Dock="Top" />
-                                <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.ExtraDiscardCost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
-                                    <DataGrid.Columns>
-                                        <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
-                                        <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </DockPanel>
-                            <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
+                        <TabControl Grid.Column="2">
+                            <TabItem Header="Attack Basic">
+                                <DockPanel Grid.Column="1" LastChildFill="True" >
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Selected Attack:" MinWidth="80"/>
+                                        <Label Content="{Binding SelectedAttack.AttackType}" />
+                                    </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Name" MinWidth="80"/>
+                                        <TextBox Text="{Binding SelectedAttack.Name}"/>
+                                    </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Description" MinWidth="80"/>
+                                        <TextBox Text="{Binding SelectedAttack.Description}"/>
+                                    </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Damage" MinWidth="80"/>
+                                        <TextBox Text="{Binding SelectedAttack.Damage}"/>
+                                    </DockPanel>
+                                    <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
 
-                            </local:DynamicInputControl>
-                        </DockPanel>
+                                    </local:DynamicInputControl>
+                                </DockPanel>
+                            </TabItem>
+                            <TabItem Header="Attack Effects">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30*" />
+                                        <ColumnDefinition Width="70*" />
+                                    </Grid.ColumnDefinitions>
+                                    <DockPanel LastChildFill="True">
+                                        <Button Content="Add Effect" DockPanel.Dock="Bottom" Command="{Binding AddEffectCommand}"/>
+                                        <ListBox ItemsSource="{Binding SelectedAttack.Effects}" SelectedItem="{Binding SelectedEffect}" DockPanel.Dock="Top">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding EffectType}" />
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </DockPanel>
+                                    <DockPanel Grid.Column="1">
+                                        <local:DynamicInputControl DataContext="{Binding SelectedEffect}">
+
+                                        </local:DynamicInputControl>
+                                    </DockPanel>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Abilities">
+                <TabItem Header="Costs">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Cost" DockPanel.Dock="Top" />
+                            <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.Cost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label Content="Discard for using attack" DockPanel.Dock="Top" />
+                            <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.ExtraDiscardCost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="Ability">
                     <DockPanel Grid.Column="1" LastChildFill="True">
                         <Button Content="Set Ability" DockPanel.Dock="Top" Command="{Binding SetAbilityCommand}"/>
                         <DockPanel DockPanel.Dock="Top">

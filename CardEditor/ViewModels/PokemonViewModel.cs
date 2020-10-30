@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using TCGCards;
+using TCGCards.TrainerEffects;
 
 namespace CardEditor.ViewModels
 {
@@ -17,7 +18,7 @@ namespace CardEditor.ViewModels
     {
 		private PokemonCard card;
 		private Attack selectedAttack;
-		private Effect selectedEffect;
+		private IEffect selectedEffect;
 
 		public PokemonViewModel() :this(new PokemonCard())
 		{
@@ -29,10 +30,26 @@ namespace CardEditor.ViewModels
 			Card = pokemon;
 			AddAttackCommand = new RelayCommand(CanAddAttack, AddAttack);
 			SetAbilityCommand = new RelayCommand(CanAddAttack, SetAbility);
+			AddEffectCommand = new RelayCommand(CanAddEffect, AddEffect);
 		}
 
+        private void AddEffect(object obj)
+        {
+			var window = new AddTrainerEffectWindow();
 
-		private bool CanAddAttack(object obj) => true;
+			if (window.ShowDialog().Value)
+			{
+				SelectedAttack.Effects.Add(window.SelectedEffect);
+				SelectedEffect = SelectedAttack.Effects.Last();
+			}
+		}
+
+        private bool CanAddEffect(object obj)
+        {
+			return SelectedAttack != null;
+        }
+
+        private bool CanAddAttack(object obj) => true;
 
 		private void AddAttack(object obj)
 		{
@@ -84,7 +101,7 @@ namespace CardEditor.ViewModels
 			}
 		}
 
-		public Effect SelectedEffect
+		public IEffect SelectedEffect
 		{
 			get { return selectedEffect; }
 			set
@@ -107,5 +124,6 @@ namespace CardEditor.ViewModels
 
 		public ICommand AddAttackCommand { get; set; }
         public ICommand SetAbilityCommand { get; set; }
+        public ICommand AddEffectCommand { get; set; }
     }
 }

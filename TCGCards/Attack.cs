@@ -8,6 +8,7 @@ using Entities.Effects;
 using Entities.Models;
 using System.Collections.ObjectModel;
 using TCGCards.Core.Messages;
+using TCGCards.TrainerEffects;
 
 namespace TCGCards
 {
@@ -18,12 +19,24 @@ namespace TCGCards
         private string name = "New Attack";
         private string description;
         private int damage;
+        private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
 
         public Attack()
         {
             Description = string.Empty;
             Id = NetworkId.Generate();
         }
+
+        public ObservableCollection<IEffect> Effects
+        {
+            get { return effects; }
+            set
+            {
+                effects = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public ObservableCollection<Energy> Cost
         {
@@ -115,7 +128,13 @@ namespace TCGCards
             return damage;
         }
 
-        public virtual void ProcessEffects(GameField game, Player owner, Player opponent) { }
+        public virtual void ProcessEffects(GameField game, Player owner, Player opponent) 
+        {
+            foreach (var effect in Effects)
+            {
+                effect.Process(game, owner, opponent);
+            }
+        }
 
         public virtual void OnDamageDealt(int amount, Player owner) { }
 
