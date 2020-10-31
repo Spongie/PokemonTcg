@@ -18,6 +18,18 @@ namespace TCGCards.TrainerEffects
         }
 
         private bool opponents;
+        private bool opponentChooses;
+
+        [DynamicInput("Opponent choices?", InputControl.Boolean)]
+        public bool OpponentChooses
+        {
+            get { return opponentChooses; }
+            set
+            {
+                opponentChooses = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Targets opponent?", InputControl.Boolean)]
         public bool Opponents
@@ -44,7 +56,8 @@ namespace TCGCards.TrainerEffects
                 message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
             }
 
-            NetworkId selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
+            Player selectedPlayer = opponentChooses ? opponent : caster;
+            NetworkId selectedId = selectedPlayer.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
 
             var targetPlayer = opponents ? opponent : caster;
 

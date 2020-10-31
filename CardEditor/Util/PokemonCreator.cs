@@ -89,6 +89,11 @@ namespace CardEditor.Util
 							});
 							pokemon.Attacks.Add(attack);
 						}
+
+						if (pokemonSdk.Ability != null)
+                        {
+							isComplete = false;
+                        }
                     }
                     else
                     {
