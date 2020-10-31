@@ -38,14 +38,16 @@ namespace CardEditor.ViewModels
 		{
 			AddPokemonCommand = new RelayCommand(IsReady, AddNewPokemon);
 			ImportPokemonCommand = new RelayCommand(IsReady, ImportPokemon);
-			ImportPokemonSetCommand = new AsyncRelayCommand(IsReady, ImportPokemonSet);
+			ImportPokemonSetCommand = new AsyncRelayCommand(IsSetSelected, ImportPokemonSet);
 			Sets = sets;
 			pokemonCards.CollectionChanged += PokemonCards_CollectionChanged;
 			PropertyChanged += PokemonsViewModel_PropertyChanged;
 			SelectedSet = Sets.FirstOrDefault();
 		}
 
-		private async Task ImportPokemonSet(object arg)
+		private bool IsSetSelected(object obj) => SelectedSet != null;
+
+        private async Task ImportPokemonSet(object arg)
 		{
 			using (var client = new WebClient())
 			{
