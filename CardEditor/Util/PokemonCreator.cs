@@ -1,13 +1,12 @@
 ﻿using CardEditor.Models;
-using Effects;
 using Entities;
-using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using TCGCards;
+using TCGCards.Core;
+using TCGCards.TrainerEffects;
 
 namespace CardEditor.Util
 {
@@ -69,7 +68,34 @@ namespace CardEditor.Util
 					isComplete = false;
                 }
 
-				if (!string.IsNullOrEmpty(attack.Description) || pokemonSdk.Ability != null)
+				if (!string.IsNullOrEmpty(attack.Description))
+				{
+					var firstPartApplyEffect = "Flip a coin. If heads, the Defending Pokémon is now";
+
+					if (attack.Description.ToLower().StartsWith(firstPartApplyEffect.ToLower()))
+                    {
+						StatusEffect? effect = stringToStatusEffect(attack.Description.Substring(firstPartApplyEffect.Length));
+						if (effect == null)
+                        {
+							isComplete = false;
+						}
+                        else
+                        {
+							attack.Effects.Add(new ApplyStatusEffect()
+							{
+								FlipCoin = true,
+								TargetingMode = TargetingMode.OpponentActive,
+								StatusEffect = effect.Value 
+							});
+							pokemon.Attacks.Add(attack);
+						}
+                    }
+                    else
+                    {
+						isComplete = false;
+					}
+				}
+				else if (!string.IsNullOrEmpty(attack.Description) || pokemonSdk.Ability != null)
 				{
 					isComplete = false;
 				}
@@ -84,6 +110,25 @@ namespace CardEditor.Util
 
 			return pokemon;
 		}
+
+		private static StatusEffect? stringToStatusEffect(string value)
+        {
+            switch (value.ToLower().Trim().Replace(".", string.Empty))
+            {
+				case "poisoned":
+					return StatusEffect.Poison;
+				case "paralyzed":
+					return StatusEffect.Paralyze;
+				case "asleep":
+					return StatusEffect.Burn;
+				case "confused":
+					return StatusEffect.Confuse;
+				case "burned":
+					return StatusEffect.Burn;
+				default:
+					return null;
+            }
+        }
 
 		private static List<Energy> GenerateCost(List<string> cost)
 		{

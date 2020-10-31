@@ -1,8 +1,6 @@
 ﻿using CardEditor.Models;
 using CardEditor.Util;
 using CardEditor.Views;
-using Effects;
-using Entities;
 using Entities.Models;
 using NetworkingCore;
 using Newtonsoft.Json;
@@ -61,14 +59,20 @@ namespace CardEditor.ViewModels
 				{
 					//TODO
 				}
-
+				var pokemons = new List<PokemonViewModel>();
 				foreach (var card in JsonConvert.DeserializeObject<JsonPokemonList>(json).Cards)
 				{
 					var pokemon = PokemonCreator.CreateCardFromSdkCard(card);
 
-					PokemonCards.Add(new PokemonViewModel(pokemon));
-					SelectedCard = PokemonCards.Last();
+					pokemons.Add(new PokemonViewModel(pokemon));
 				}
+
+                foreach (var pokemon in pokemons.OrderBy(x => x.Card.Name))
+                {
+					PokemonCards.Add(pokemon);
+                }
+
+				SelectedCard = PokemonCards.First();
 			}
 		}
 

@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Effects\Effects.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
     <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
