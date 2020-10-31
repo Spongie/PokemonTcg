@@ -7,6 +7,18 @@ namespace TCGCards.Attacks
     public class ApplyAttackPrevention : Attack
     {
         private bool coinFlip;
+        private bool onlySelf = true;
+
+        [DynamicInput("Only prevent on self", InputControl.Boolean)]
+        public bool OnlySelf
+        {
+            get { return onlySelf; }
+            set
+            {
+                onlySelf = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Coin flipped", InputControl.Boolean)]
         public bool CoinFlip
@@ -26,7 +38,14 @@ namespace TCGCards.Attacks
                 return;
             }
 
-            owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => x == owner.ActivePokemonCard ));
+            if (onlySelf)
+            {
+                owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => x == owner.ActivePokemonCard));
+            }
+            else
+            {
+                owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => true));
+            }
         }
     }
 }
