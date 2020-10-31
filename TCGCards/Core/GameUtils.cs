@@ -21,12 +21,12 @@ namespace TCGCards.Core
 
         public static void DiscardCardsFromHand(Player player, int amount)
         {
-            DiscardCardsFromHand(player, amount, new Card[] { });
+            DiscardCardsFromHand(player, amount, new IDeckFilter[] { });
         }
 
-        public static void DiscardCardsFromHand(Player player, int amount, IEnumerable<Card> exceptions)
+        public static void DiscardCardsFromHand(Player player, int amount, IEnumerable<IDeckFilter> filters)
         {
-            var message = new PickFromListMessage(player.Hand.Except(exceptions), amount);
+            var message = new DiscardCardsMessage(amount, filters);
             var response = player.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(player.Id));
 
             foreach (var id in response.Cards)

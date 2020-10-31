@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
 
@@ -9,6 +10,7 @@ namespace TCGCards.TrainerEffects
     {
         private int amount;
         private bool onlyOnCoinflip;
+        private CardType cardType = CardType.Any;
 
         [DynamicInput("Flip coin", InputControl.Boolean)]
         public bool OnlyOnCoinFlip
@@ -28,6 +30,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 amount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Card type", InputControl.Dropdown, typeof(CardType))]
+        public CardType CardType
+        {
+            get { return cardType; }
+            set
+            {
+                cardType = value;
                 FirePropertyChanged();
             }
         }
@@ -63,7 +76,9 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            GameUtils.DiscardCardsFromHand(caster, Amount);
+            List<IDeckFilter> filters = CardUtil.GetCardFilters(CardType).ToList();
+
+            GameUtils.DiscardCardsFromHand(caster, Amount, filters);
         }
     }
 }

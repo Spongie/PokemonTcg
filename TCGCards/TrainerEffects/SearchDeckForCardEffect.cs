@@ -38,22 +38,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
-            var filter = new List<IDeckFilter>();
-
-            switch (CardType)
-            {
-                case CardType.Pokemon:
-                    filter.Add(new PokemonFilter());
-                    break;
-                case CardType.Trainer:
-                    filter.Add(new TrainerFilter());
-                    break;
-                case CardType.Energy:
-                    filter.Add(new EnergyFilter());
-                    break;
-                default:
-                    break;
-            }
+            var filter = CardUtil.GetCardFilters(CardType).ToList();
 
             var message = new DeckSearchMessage(caster.Deck, filter, 1).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();

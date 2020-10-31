@@ -5,6 +5,7 @@
         Any,
         Pokemon,
         Trainer,
-        Energy
+        Energy,
+        BasicEnergy,
     }
 }

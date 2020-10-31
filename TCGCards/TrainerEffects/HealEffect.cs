@@ -49,44 +49,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
-            PokemonCard target;
-            NetworkMessage message;
-            NetworkId selectedId;
-
-            switch (TargetingMode)
-            {
-                case TargetingMode.YourActive:
-                    target = caster.ActivePokemonCard;
-                    break;
-                case TargetingMode.YourBench:
-                    message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
-                    selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
-                    break;
-                case TargetingMode.YourPokemon:
-                    message = new SelectFromYourPokemonMessage().ToNetworkMessage(game.Id);
-                    selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
-                    break;
-                case TargetingMode.OpponentActive:
-                    target = opponent.ActivePokemonCard;
-                    break;
-                case TargetingMode.OpponentBench:
-                    message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
-                    selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
-                    break;
-                case TargetingMode.OpponentPokemon:
-                    message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
-                    selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
-                    break;
-                case TargetingMode.AnyPokemon:
-                    throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in fullheal");
-                default:
-                    target = caster.ActivePokemonCard;
-                    break;
-            }
+            PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
 
             target.DamageCounters -= Amount;
             

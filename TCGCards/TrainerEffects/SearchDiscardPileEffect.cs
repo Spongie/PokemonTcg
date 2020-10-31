@@ -55,6 +55,8 @@ namespace TCGCards.TrainerEffects
                     return caster.DiscardPile.Count(card => card is TrainerCard) >= Amount;
                 case CardType.Energy:
                     return caster.DiscardPile.Count(card => card is EnergyCard) >= Amount;
+                case CardType.BasicEnergy:
+                    return caster.DiscardPile.OfType<EnergyCard>().Count(x => x.IsBasic) >= Amount;
                 default:
                     throw new NotImplementedException();
             }
@@ -62,24 +64,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
-            IEnumerable<Card> choices;
-
-            switch (CardType)
-            {
-                case CardType.Pokemon:
-                    choices = caster.DiscardPile.OfType<PokemonCard>();
-                    break;
-                case CardType.Trainer:
-                    choices = caster.DiscardPile.OfType<TrainerCard>();
-                    break;
-                case CardType.Energy:
-                    choices = caster.DiscardPile.OfType<EnergyCard>();
-                    break;
-                case CardType.Any:
-                default:
-                    choices = caster.DiscardPile;
-                    break;
-            }
+            IEnumerable<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
 
             var message = new PickFromListMessage(choices, Amount).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;
