@@ -36,6 +36,11 @@ namespace TCGCards.TrainerEffects
             return caster.Deck.Cards.Count > 0;
         }
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             var filter = CardUtil.GetCardFilters(CardType).ToList();

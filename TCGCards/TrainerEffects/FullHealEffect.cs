@@ -33,6 +33,14 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent) => true;
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            attachedTo.IsAsleep = false;
+            attachedTo.IsConfused = false;
+            attachedTo.IsParalyzed = false;
+            attachedTo.IsPoisoned = false;
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);

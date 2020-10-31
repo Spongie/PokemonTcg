@@ -44,6 +44,11 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent) => true;
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             var target = opponents ? opponent : caster;

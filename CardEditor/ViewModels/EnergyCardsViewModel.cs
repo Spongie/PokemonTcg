@@ -1,5 +1,6 @@
 ﻿using CardEditor.Models;
 using CardEditor.Util;
+using CardEditor.Views;
 using Entities;
 using Entities.Models;
 using NetworkingCore;
@@ -14,6 +15,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using TCGCards.TrainerEffects;
 
 namespace CardEditor.ViewModels
 {
@@ -24,6 +26,7 @@ namespace CardEditor.ViewModels
         private List<EnergyCard> filteredCards = new List<EnergyCard>();
         private Set selectedSet; 
         private EnergyCard selectedEnergyCard;
+        private IEffect selectedEffect;
 
         public EnergyCardsViewModel()
         {
@@ -37,6 +40,23 @@ namespace CardEditor.ViewModels
             Sets = sets;
             AddEnergyCardCommand = new RelayCommand((x) => true, AddEnergyCard);
             ImportEnergySetCommand = new AsyncRelayCommand((x) => true, ImportEnergyCardsFromSet);
+            AddEffectCommand = new RelayCommand(CanAddEffect, AddEffect);
+        }
+
+        private void AddEffect(object obj)
+        {
+            var window = new AddTrainerEffectWindow();
+
+            if (window.ShowDialog().Value)
+            {
+                SelectedEnergyCard.Effects.Add(window.SelectedEffect);
+                SelectedEffect = SelectedEnergyCard.Effects.Last();
+            }
+        }
+
+        private bool CanAddEffect(object obj)
+        {
+            return SelectedEnergyCard != null;
         }
 
         internal async Task Save()
@@ -125,6 +145,17 @@ namespace CardEditor.ViewModels
             FilteredCards = EnergyCards.Where(card => card.SetCode == SelectedSet.SetCode).ToList();
         }
 
+        public IEffect SelectedEffect
+        {
+            get { return selectedEffect; }
+            set
+            {
+                selectedEffect = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public ObservableCollection<Set> Sets
         {
             get { return sets; }
@@ -191,5 +222,6 @@ namespace CardEditor.ViewModels
 
         public ICommand AddEnergyCardCommand { get; set; }
         public ICommand ImportEnergySetCommand { get; set; }
+        public ICommand AddEffectCommand { get; set; }
     }
 }

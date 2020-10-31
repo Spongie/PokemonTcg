@@ -59,6 +59,30 @@ namespace TCGCards.TrainerEffects
             return true;
         }
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            switch (StatusEffect)
+            {
+                case StatusEffect.Sleep:
+                    attachedTo.IsAsleep = true;
+                    break;
+                case StatusEffect.Poison:
+                    attachedTo.IsPoisoned = true;
+                    break;
+                case StatusEffect.Paralyze:
+                    attachedTo.IsParalyzed = true;
+                    break;
+                case StatusEffect.Burn:
+                    attachedTo.IsBurned = true;
+                    break;
+                case StatusEffect.Confuse:
+                    attachedTo.IsConfused = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             if (flipCoin && game.FlipCoins(1) == 0)

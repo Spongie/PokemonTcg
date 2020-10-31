@@ -47,6 +47,16 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent) => true;
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            attachedTo.DamageCounters -= Amount;
+
+            if (attachedTo.DamageCounters < 0)
+            {
+                attachedTo.DamageCounters = 0;
+            }
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);

@@ -65,5 +65,10 @@ namespace TCGCards.TrainerEffects
 
             return caster.BenchedPokemon.Any();
         }
+
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

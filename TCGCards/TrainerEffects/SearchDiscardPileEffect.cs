@@ -62,6 +62,11 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             IEnumerable<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);

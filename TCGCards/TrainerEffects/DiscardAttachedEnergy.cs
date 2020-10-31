@@ -50,6 +50,11 @@ namespace TCGCards.TrainerEffects
             return true;
         }
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             while (true)

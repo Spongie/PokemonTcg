@@ -74,9 +74,36 @@
                 <TextBox Text="{Binding Amount}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                <Label Content="Basic" MinWidth="80"/>
+                <CheckBox IsChecked="{Binding IsBasic}" VerticalAlignment="Center" />
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
                 <Label Content="Completed" MinWidth="80"/>
                 <CheckBox IsChecked="{Binding Completed}" VerticalAlignment="Center" />
             </DockPanel>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="70*" />
+                </Grid.ColumnDefinitions>
+                <DockPanel LastChildFill="True">
+                    <Button Content="Add Effect" DockPanel.Dock="Bottom" Command="{Binding AddEffectCommand}"/>
+                    <ListBox ItemsSource="{Binding SelectedEnergyCard.Effects}" SelectedItem="{Binding SelectedEffect}" DockPanel.Dock="Top">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding EffectType}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+                <DockPanel Grid.Column="1">
+                    <local:DynamicInputControl DataContext="{Binding SelectedEffect}">
+
+                    </local:DynamicInputControl>
+                </DockPanel>
+            </Grid>
         </DockPanel>
         <DockPanel Grid.Column="2">
             <Image Source="{Binding ImageSrc}" />

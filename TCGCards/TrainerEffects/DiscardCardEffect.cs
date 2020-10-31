@@ -63,6 +63,11 @@ namespace TCGCards.TrainerEffects
             return caster.Hand.Count - 1 >= amount;
         }
 
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Process(GameField game, Player caster, Player opponent)
         {
             if (onlyOnCoinflip && game.FlipCoins(1) == 0)
