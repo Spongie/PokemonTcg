@@ -16,10 +16,10 @@ namespace TCGCards
     {
         private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
         private ObservableCollection<Energy> extraDiscardCost = new ObservableCollection<Energy>();
+        private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
         private string name = "New Attack";
         private string description;
         private int damage;
-        private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
 
         public Attack()
         {
@@ -195,6 +195,7 @@ namespace TCGCards
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Description);
             hashCode = hashCode * -1521134295 + EqualityComparer<ObservableCollection<Energy>>.Default.GetHashCode(Cost);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ObservableCollection<IEffect>>.Default.GetHashCode(Effects);
             hashCode = hashCode * -1521134295 + EqualityComparer<NetworkId>.Default.GetHashCode(Id);
             return hashCode;
         }
