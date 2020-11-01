@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using NetworkingCore;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Entities.Models

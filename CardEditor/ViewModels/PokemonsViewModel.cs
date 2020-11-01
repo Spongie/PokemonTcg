@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -39,13 +40,45 @@ namespace CardEditor.ViewModels
 			AddPokemonCommand = new RelayCommand(IsReady, AddNewPokemon);
 			ImportPokemonCommand = new RelayCommand(IsReady, ImportPokemon);
 			ImportPokemonSetCommand = new AsyncRelayCommand(IsSetSelected, ImportPokemonSet);
+			CopyExistingAttackCommand = new RelayCommand(IsPokemonSelected, CopyAttack);
 			Sets = sets;
 			pokemonCards.CollectionChanged += PokemonCards_CollectionChanged;
 			PropertyChanged += PokemonsViewModel_PropertyChanged;
 			SelectedSet = Sets.FirstOrDefault();
 		}
 
-		private bool IsSetSelected(object obj) => SelectedSet != null;
+        private bool IsPokemonSelected(object obj)
+        {
+			return SelectedCard != null;
+        }
+
+        private void CopyAttack(object obj)
+        {
+			var attacks = new CopyAttackViewModel();
+
+            foreach (var pokemon in PokemonCards)
+            {
+                foreach (var attack in pokemon.Card.Attacks)
+                {
+					attacks.PokemonAttacks.Add(new PokemonAttack
+					{
+						Pokemon = pokemon.Card,
+						Attack = attack
+					});
+                }
+            }
+
+			var dialog = new CopyAttackWindow(attacks);
+
+			if (dialog.ShowDialog().Value)
+            {
+				var selectedAttack = dialog.SelectedPokemonAttack.Attack;
+
+				SelectedCard.Card.Attacks.Add(new Attack(selectedAttack));
+            }
+        }
+
+        private bool IsSetSelected(object obj) => SelectedSet != null;
 
         private async Task ImportPokemonSet(object arg)
 		{
@@ -238,5 +271,6 @@ namespace CardEditor.ViewModels
         public ICommand ImportPokemonCommand { get; set; }
 		public ICommand AddPokemonCommand { get; set; }
 		public ICommand ImportPokemonSetCommand { get; set; }
-	}
+        public ICommand CopyExistingAttackCommand { get; set; }
+    }
 }

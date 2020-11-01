@@ -5,4 +5,8 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
+  </ItemGroup>
+
 </Project>

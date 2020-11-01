@@ -110,6 +110,7 @@
                         <DockPanel>
                             <Label Content="Attacks" DockPanel.Dock="Top" />
                             <Button Content="Add Attack" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddAttackCommand}" />
+                            <Button Content="Copy Existing Attack" DockPanel.Dock="Bottom" Margin="5" Command="{Binding DataContext.CopyExistingAttackCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
                             <ListBox Margin="5" ItemsSource="{Binding Card.Attacks}" SelectedItem="{Binding SelectedAttack}" DockPanel.Dock="Top" SelectionMode="Single">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>

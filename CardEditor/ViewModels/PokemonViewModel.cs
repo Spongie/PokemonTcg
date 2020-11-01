@@ -33,7 +33,7 @@ namespace CardEditor.ViewModels
 			AddEffectCommand = new RelayCommand(CanAddEffect, AddEffect);
 		}
 
-        private void AddEffect(object obj)
+		private void AddEffect(object obj)
         {
 			var window = new AddTrainerEffectWindow();
 
@@ -125,5 +125,5 @@ namespace CardEditor.ViewModels
 		public ICommand AddAttackCommand { get; set; }
         public ICommand SetAbilityCommand { get; set; }
         public ICommand AddEffectCommand { get; set; }
-    }
+	}
 }

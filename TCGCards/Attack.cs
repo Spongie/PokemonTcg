@@ -27,6 +27,16 @@ namespace TCGCards
             Id = NetworkId.Generate();
         }
 
+        public Attack(Attack selectedAttack) :this()
+        {
+            Description = selectedAttack.Description;
+            Name = selectedAttack.Name;
+            Effects = new ObservableCollection<IEffect>(selectedAttack.Effects);
+            Cost = new ObservableCollection<Energy>(selectedAttack.Cost);
+            ExtraDiscardCost = new ObservableCollection<Energy>(selectedAttack.ExtraDiscardCost);
+            Damage = selectedAttack.Damage;
+        }
+
         public ObservableCollection<IEffect> Effects
         {
             get { return effects; }
