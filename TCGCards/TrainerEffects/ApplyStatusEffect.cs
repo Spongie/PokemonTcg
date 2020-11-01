@@ -9,7 +9,7 @@ namespace TCGCards.TrainerEffects
     {
         private StatusEffect statusEffect;
         private bool flipCoin;
-        private TargetingMode targetingMode;
+        private TargetingMode targetingMode = TargetingMode.OpponentActive;
 
         [DynamicInput("Flip Coin?", InputControl.Boolean)]
         public bool FlipCoin
@@ -33,6 +33,7 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Target", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
         {
             get { return targetingMode; }

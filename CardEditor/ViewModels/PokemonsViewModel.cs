@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TCGCards;
+using TCGCards.Core;
 
 namespace CardEditor.ViewModels
 {
@@ -71,7 +72,7 @@ namespace CardEditor.ViewModels
             {
 				var selectedAttack = dialog.SelectedPokemonAttack.Attack;
 
-				SelectedCard.Card.Attacks.Add(new Attack(selectedAttack));
+				SelectedCard.Card.Attacks.Add(selectedAttack.Clone());
             }
         }
 

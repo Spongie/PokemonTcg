@@ -9,6 +9,19 @@ namespace TCGCards.Attacks
         private int amount;
         private bool coinFlip;
         private int maxDamage;
+        private bool onlyProtectSelf = true;
+
+        [DynamicInput("Only protect self", InputControl.Boolean)]
+        public bool OnlyProtectSelf
+        {
+            get { return onlyProtectSelf; }
+            set
+            {
+                onlyProtectSelf = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Prevention Limit")]
         public int MaxDamage
@@ -53,13 +66,24 @@ namespace TCGCards.Attacks
                 }
             }
 
+            DamageStopper damageStopper;
+
             if (maxDamage > 0)
             {
-                owner.ActivePokemonCard.DamageStoppers.Add(new DamageStopper((x) => x <= maxDamage) { Amount = amount });
+                damageStopper = new DamageStopper((x) => x <= maxDamage) { Amount = amount };
             }
             else
             {
-                owner.ActivePokemonCard.DamageStoppers.Add(new DamageStopper((x) => true) { Amount = amount });
+                damageStopper = new DamageStopper((x) => true) { Amount = amount };
+            }
+
+            if (onlyProtectSelf)
+            {
+                owner.ActivePokemonCard.DamageStoppers.Add(damageStopper);
+            }
+            else
+            {
+                game.DamageStoppers.Add(damageStopper);
             }
         }
     }
