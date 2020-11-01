@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using TCGCards;
 using TCGCards.Core;
-using TCGCards.EnergyCards;
 using TCGCards.TrainerEffects;
 
 public class EnergyCard : Card

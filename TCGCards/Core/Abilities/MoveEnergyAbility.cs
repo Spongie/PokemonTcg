@@ -1,7 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities;
 using NetworkingCore;
-using System;
 using System.Linq;
 using TCGCards.Core.Messages;
 

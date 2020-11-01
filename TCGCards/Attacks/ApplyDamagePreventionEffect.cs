@@ -1,9 +1,4 @@
 ﻿using CardEditor.Views;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
 using TCGCards.Core;
 using TCGCards.Core.SpecialAbilities;
 

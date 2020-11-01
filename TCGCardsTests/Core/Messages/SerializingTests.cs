@@ -1,9 +1,7 @@
 ﻿using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;

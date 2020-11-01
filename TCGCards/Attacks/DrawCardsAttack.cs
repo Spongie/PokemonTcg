@@ -1,5 +1,4 @@
 ﻿using CardEditor.Views;
-using Entities;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks

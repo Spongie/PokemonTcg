@@ -9,7 +9,6 @@ using System.Threading;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
-using TCGCards.EnergyCards;
 
 namespace TestClient
 {

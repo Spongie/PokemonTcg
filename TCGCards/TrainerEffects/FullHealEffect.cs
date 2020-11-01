@@ -1,10 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
-using NetworkingCore;
-using System;
-using System.Linq;
 using TCGCards.Core;
-using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
 {

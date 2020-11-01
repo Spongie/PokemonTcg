@@ -1,17 +1,15 @@
 ﻿using Entities.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace CardEditor.ViewModels
 {
-	public class SetsViewModel : DataModel
+    public class SetsViewModel : DataModel
     {
 		private ObservableCollection<Set> sets = new ObservableCollection<Set>();
 

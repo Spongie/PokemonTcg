@@ -1,9 +1,7 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
-using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
-using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects

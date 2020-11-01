@@ -1,5 +1,4 @@
 using NetworkingCore;
-using NetworkingCore.Messages;
 
 /// <summary>
 /// Auto-generated code - DO NOT EDIT

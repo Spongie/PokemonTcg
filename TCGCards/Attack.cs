@@ -4,7 +4,6 @@ using System.Linq;
 using NetworkingCore;
 using TCGCards.Core.Abilities;
 using Entities;
-using Entities.Effects;
 using Entities.Models;
 using System.Collections.ObjectModel;
 using TCGCards.Core.Messages;

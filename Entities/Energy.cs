@@ -1,5 +1,4 @@
-﻿using Entities;
-using Entities.Models;
+﻿using Entities.Models;
 
 namespace Entities
 {
