@@ -31,10 +31,7 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
         {
-            attachedTo.IsAsleep = false;
-            attachedTo.IsConfused = false;
-            attachedTo.IsParalyzed = false;
-            attachedTo.IsPoisoned = false;
+            FullHealPokemon(attachedTo);
         }
 
         public void Process(GameField game, Player caster, Player opponent)
@@ -50,6 +47,7 @@ namespace TCGCards.TrainerEffects
             pokemon.IsConfused = false;
             pokemon.IsParalyzed = false;
             pokemon.IsPoisoned = false;
+            pokemon.IsBurned = false;
         }
     }
 }

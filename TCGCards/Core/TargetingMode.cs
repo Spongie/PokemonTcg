@@ -8,6 +8,7 @@
         OpponentActive,
         OpponentBench,
         OpponentPokemon,
-        AnyPokemon
+        AnyPokemon,
+        AttachedTo
     }
 }

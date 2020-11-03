@@ -34,7 +34,7 @@ namespace TCGCards.Core
         {
             var heads = CoinFlipper.FlipCoins(coins);
 
-            GameLog.AddMessage($"Flips {coins} coins and gets {heads} heads");
+            GameLog?.AddMessage($"Flips {coins} coins and gets {heads} heads");
 
             return heads;
         }

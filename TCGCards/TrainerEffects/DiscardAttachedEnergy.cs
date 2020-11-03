@@ -82,6 +82,8 @@ namespace TCGCards.TrainerEffects
                         target.Owner.DiscardPile.Add(card);
                     }
                 }
+
+                break;
             }
         }
     }
