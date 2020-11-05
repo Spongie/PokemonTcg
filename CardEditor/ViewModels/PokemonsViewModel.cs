@@ -97,7 +97,9 @@ namespace CardEditor.ViewModels
 				{
 					var pokemon = PokemonCreator.CreateCardFromSdkCard(card);
 
-					pokemons.Add(new PokemonViewModel(pokemon));
+					var model = new PokemonViewModel(pokemon);
+					model.Card.CardId = NetworkId.Generate();
+					pokemons.Add(model);
 				}
 
                 foreach (var pokemon in pokemons.OrderBy(x => x.Card.Name))
@@ -125,6 +127,7 @@ namespace CardEditor.ViewModels
 
 						PokemonCards.Add(new PokemonViewModel(pokemon));
 						SelectedCard = PokemonCards.Last();
+						SelectedCard.Card.CardId = NetworkId.Generate();
 					}
 					catch
 					{
@@ -138,6 +141,7 @@ namespace CardEditor.ViewModels
 		{
 			PokemonCards.Add(new PokemonViewModel());
 			SelectedCard = PokemonCards.Last();
+			SelectedCard.Card.CardId = NetworkId.Generate();
 		}
 
 		private bool IsReady(object obj)
@@ -165,6 +169,10 @@ namespace CardEditor.ViewModels
 
 			foreach (var pokemon in Serializer.Deserialize<List<PokemonCard>>(json))
 			{
+				if (pokemon.CardId == null)
+                {
+					pokemon.CardId = NetworkId.Generate();
+                }
 				PokemonCards.Add(new PokemonViewModel(pokemon));
 			}
 		}
@@ -260,7 +268,7 @@ namespace CardEditor.ViewModels
         {
             get
             {
-				if (SelectedCard == null)
+				if (SelectedCard == null || SelectedCard.Card == null || SelectedCard.Card.ImageUrl == null)
 					return null;
                 return new BitmapImage(new Uri(SelectedCard.Card.ImageUrl, UriKind.Absolute));
             }

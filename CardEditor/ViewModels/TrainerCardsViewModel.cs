@@ -71,13 +71,17 @@ namespace CardEditor.ViewModels
 
             foreach (var trainer in Serializer.Deserialize<List<TrainerCard>>(json))
             {
+                if (trainer.CardId == null)
+                {
+                    trainer.CardId = NetworkId.Generate();
+                }
                 TrainerCards.Add(trainer);
             }
         }
 
         private void AddTrainerCard(object obj)
         {
-            TrainerCards.Add(new TrainerCard() { Name = "New Trainer" });
+            TrainerCards.Add(new TrainerCard() { Name = "New Trainer", CardId = NetworkId.Generate() });
             SelectedTrainerCard = TrainerCards.Last();
         }
 
@@ -116,7 +120,8 @@ namespace CardEditor.ViewModels
                         Name = card.Name,
                         ImageUrl = card.ImageUrlHiRes,
                         Completed = false,
-                        SetCode = card.SetCode
+                        SetCode = card.SetCode,
+                        CardId = NetworkId.Generate()
                     });
                 }
 

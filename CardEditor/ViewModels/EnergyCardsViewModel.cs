@@ -76,13 +76,18 @@ namespace CardEditor.ViewModels
 
             foreach (var energy in Serializer.Deserialize<List<EnergyCard>>(json))
             {
+                if (energy.CardId == null)
+                {
+                    energy.CardId = NetworkId.Generate();
+                }
+
                 EnergyCards.Add(energy);
             }
         }
 
         private void AddEnergyCard(object obj)
         {
-            EnergyCards.Add(new EnergyCard() { Name = "New Energy" });
+            EnergyCards.Add(new EnergyCard() { Name = "New Energy", CardId = NetworkId.Generate() });
             SelectedEnergyCard = EnergyCards.Last();
         }
 
@@ -123,7 +128,8 @@ namespace CardEditor.ViewModels
                         SetCode = card.SetCode,
                         IsBasic = card.SubType.ToLower() == "basic",
                         Amount = 1,
-                        EnergyType = EnergyTypes.Colorless
+                        EnergyType = EnergyTypes.Colorless,
+                        CardId = NetworkId.Generate()
                     });
                 }
 
@@ -211,7 +217,7 @@ namespace CardEditor.ViewModels
         {
             get
             {
-                if (SelectedEnergyCard == null)
+                if (SelectedEnergyCard == null || SelectedEnergyCard.ImageUrl == null)
                     return null;
                 return new BitmapImage(new Uri(SelectedEnergyCard.ImageUrl, UriKind.Absolute));
             }

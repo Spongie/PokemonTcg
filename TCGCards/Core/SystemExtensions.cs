@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using NetworkingCore;
+using Newtonsoft.Json;
 
 namespace TCGCards.Core
 {
@@ -13,10 +14,13 @@ namespace TCGCards.Core
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize
         };
 
-        public static T Clone<T>(this T source)
+        public static T Clone<T>(this T source) where T : IEntity
         {
             var serialized = JsonConvert.SerializeObject(source, JsonSettings);
-            return JsonConvert.DeserializeObject<T>(serialized, JsonSettings);
+            T entity = JsonConvert.DeserializeObject<T>(serialized, JsonSettings);
+            entity.Id = NetworkId.Generate();
+
+            return entity;
         }
     }
 }

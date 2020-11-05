@@ -11,7 +11,7 @@ using TCGCards.TrainerEffects;
 
 namespace TCGCards
 {
-    public class Attack : DataModel
+    public class Attack : DataModel, IEntity
     {
         private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
         private ObservableCollection<Energy> extraDiscardCost = new ObservableCollection<Energy>();

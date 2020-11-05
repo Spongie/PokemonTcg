@@ -3,7 +3,7 @@ using NetworkingCore;
 
 namespace TCGCards.Core
 {
-    public abstract class Ability : DataModel
+    public abstract class Ability : DataModel, IEntity
     {
         protected Card target;
         private string name;

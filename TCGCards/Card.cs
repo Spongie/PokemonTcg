@@ -8,12 +8,13 @@ using TCGCards.Core;
 
 namespace TCGCards
 {
-    public abstract class Card : DataModel
+    public abstract class Card : DataModel, IEntity
     {
         private string setCode;
         private string name;
         private string imageUrl;
         private bool completed;
+        private NetworkId cardId;
 
         protected Card(Player owner)
         {
@@ -22,6 +23,16 @@ namespace TCGCards
         }
 
         public abstract string GetName();
+
+        public NetworkId CardId
+        {
+            get { return cardId; }
+            set
+            {
+                cardId = value;
+                FirePropertyChanged();
+            }
+        }
 
         public NetworkId Id { get; set; }
 

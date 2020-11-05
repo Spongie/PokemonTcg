@@ -14,6 +14,7 @@ namespace Assets.Code.UI.DeckBuilder
 {
     public class DeckBuilder : MonoBehaviour
     {
+        private const string deckExtension = ".deck";
         public static string CurrentDeck;
         public InputField deckName;
         public GameObject cardPrefab;
@@ -28,7 +29,7 @@ namespace Assets.Code.UI.DeckBuilder
         {
             if (!string.IsNullOrWhiteSpace(CurrentDeck))
             {
-                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", CurrentDeck + ".dck");
+                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", CurrentDeck + deckExtension);
                 var deck = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(fullPath));
 
                 foreach (var type in deck)
@@ -53,7 +54,7 @@ namespace Assets.Code.UI.DeckBuilder
 
         public void OnSaveClick()
         {
-            var filename = deckName.text + ".dck";
+            var filename = deckName.text + deckExtension;
 
             foreach (var character in Path.GetInvalidFileNameChars())
             {
