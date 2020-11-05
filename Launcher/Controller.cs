@@ -72,7 +72,7 @@ namespace Launcher
 			MaximumProgress = 3;
 			AddMessage("Downloading client archive...");
 
-			var clientBytes = infoService.GetClientDownloadLink();
+			var clientBytes = infoService.GetClientBytes();
 
 			Progress++;
 

@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,5 +36,19 @@ namespace Server.Services
 
         public List<Card> GetAllCards() => cards;
         public List<Set> GetAllSets() => sets;
+
+        public bool UpdateCards(string pokemonCards, string energyCards, string tainerCards, string sets)
+        {
+            File.WriteAllText("pokemon.json", pokemonCards);
+            File.WriteAllText("energy.json", energyCards);
+            File.WriteAllText("trainer.json", tainerCards);
+            File.WriteAllText("sets.json", sets);
+
+            Logger.Instance.Log("Received card updates, reloading caches...");
+            InitTypes();
+            Logger.Instance.Log("Update complete");
+
+            return true;
+        }
     }
 }

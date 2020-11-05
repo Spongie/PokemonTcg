@@ -25,11 +25,11 @@ public class AsyncInfoService
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId GetClientDownloadLink()
+public NetworkingCore.NetworkId GetClientBytes()
 	{
 		var message = new GenericMessageData
 		{
-			TargetMethod = "GetClientDownloadLink",
+			TargetMethod = "GetClientBytes",
 			TargetClass = "InfoService",
 			Parameters = new object[] {  }
 		}.ToNetworkMessage(networkPlayer.Id);

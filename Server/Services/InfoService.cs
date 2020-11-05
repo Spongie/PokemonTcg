@@ -12,6 +12,6 @@ namespace Server.Services
 
         public VersionNumber GetVersion() => new VersionNumber(File.ReadAllText("version"));
 
-        public byte[] GetClientDownloadLink() => File.ReadAllBytes("Client.zip");
+        public byte[] GetClientBytes() => File.ReadAllBytes("Client.zip");
     }
 }

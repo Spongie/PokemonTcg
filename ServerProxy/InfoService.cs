@@ -24,11 +24,11 @@ public class InfoService
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.VersionNumber>(message);
 	}
-public System.Byte[] GetClientDownloadLink()
+public System.Byte[] GetClientBytes()
 	{
 		var message = new GenericMessageData
 		{
-			TargetMethod = "GetClientDownloadLink",
+			TargetMethod = "GetClientBytes",
 			TargetClass = "InfoService",
 			Parameters = new object[] {  }
 		}.ToNetworkMessage(networkPlayer.Id);
