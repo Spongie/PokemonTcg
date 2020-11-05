@@ -37,7 +37,7 @@ public NetworkingCore.NetworkId GetAvailableGames()
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId HostGame(NetworkingCore.NetworkId hostPlayer,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
+public NetworkingCore.NetworkId HostGame(NetworkingCore.NetworkId hostPlayer,TCGCards.Core.Deck deckInfo)
 	{
 		var message = new GenericMessageData
 		{
@@ -49,7 +49,7 @@ public NetworkingCore.NetworkId HostGame(NetworkingCore.NetworkId hostPlayer,Sys
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
+public NetworkingCore.NetworkId JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin,TCGCards.Core.Deck deckInfo)
 	{
 		var message = new GenericMessageData
 		{

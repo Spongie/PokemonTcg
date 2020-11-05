@@ -35,7 +35,7 @@ public System.Collections.Generic.List<TCGCards.Core.GameInfo> GetAvailableGames
 		
 		return networkPlayer.SendAndWaitForResponse<System.Collections.Generic.List<TCGCards.Core.GameInfo>>(message);
 	}
-public TCGCards.Core.GameField HostGame(NetworkingCore.NetworkId hostPlayer,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
+public TCGCards.Core.GameField HostGame(NetworkingCore.NetworkId hostPlayer,TCGCards.Core.Deck deckInfo)
 	{
 		var message = new GenericMessageData
 		{
@@ -46,7 +46,7 @@ public TCGCards.Core.GameField HostGame(NetworkingCore.NetworkId hostPlayer,Syst
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
-public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin,System.Collections.Generic.List<System.Reflection.TypeInfo> deckInfo)
+public TCGCards.Core.GameField JoinTheActiveGame(NetworkingCore.NetworkId playerToJoin,NetworkingCore.NetworkId gameToJoin,TCGCards.Core.Deck deckInfo)
 	{
 		var message = new GenericMessageData
 		{

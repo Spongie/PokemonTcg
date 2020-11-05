@@ -70,11 +70,11 @@ namespace Assets.Code.UI.MainMenu
             SceneManager.LoadScene("UI_2D");
         }
 
-        public List<TypeInfo> LoadDeckSelectedDeck()
+        public TCGCards.Core.Deck LoadDeckSelectedDeck()
         {
             var deck = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + Deck.deckExtension);
 
-            return Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(deck));
+            return Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(deck));
         }
 
         public void ExitClick()

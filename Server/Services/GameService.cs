@@ -31,16 +31,14 @@ namespace Server.Services
             }).ToList();
         }
 
-        public GameField HostGame(NetworkId hostPlayer, List<TypeInfo> deckInfo)
+        public GameField HostGame(NetworkId hostPlayer, Deck deckInfo)
         {
             RemoveCompletedGames();
             var player = new Player(MasterServer.Instance.Clients[hostPlayer]);
             var game = new GameField();
             
-            foreach (var type in deckInfo)
+            foreach (var card in deckInfo.Cards)
             {
-                var card = Card.CreateFromTypeInfo(type);
-                card.Owner = player;
                 player.Deck.Cards.Push(card);
             }
 
@@ -50,7 +48,7 @@ namespace Server.Services
             return game;
         }
 
-        public GameField JoinTheActiveGame(NetworkId playerToJoin, NetworkId gameToJoin, List<TypeInfo> deckInfo)
+        public GameField JoinTheActiveGame(NetworkId playerToJoin, NetworkId gameToJoin, Deck deckInfo)
         {
             RemoveCompletedGames();
             GameField game;
@@ -62,10 +60,8 @@ namespace Server.Services
 
             var player = new Player(MasterServer.Instance.Clients[playerToJoin]);
 
-            foreach (var type in deckInfo)
+            foreach (var card in deckInfo.Cards)
             {
-                var card = Card.CreateFromTypeInfo(type);
-                card.Owner = player;
                 player.Deck.Cards.Push(card);
             }
 

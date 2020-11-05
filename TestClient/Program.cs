@@ -63,7 +63,7 @@ namespace TestClient
 
                     for (int i = 1; i <= 1000; i++)
                     {
-                        var xxxx  = new GameService(networkPlayer).HostGame(networkPlayer.Id, new System.Collections.Generic.List<System.Reflection.TypeInfo>());
+                        var xxxx  = new GameService(networkPlayer).HostGame(networkPlayer.Id, new Deck());
                         Console.SetCursorPosition(0, 0);
                         Console.WriteLine($"{i} / 1000");
                         Thread.Sleep(25);
@@ -81,7 +81,7 @@ namespace TestClient
         {
             var gameId = gameService.GetAvailableGames().First().Id;
             Console.WriteLine("Joining the game");
-            var deck = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText("Karpen.dck"));
+            var deck = Serializer.Deserialize<Deck>(File.ReadAllText("Karpen.dck"));
             gameField = gameService.JoinTheActiveGame(networkPlayer.Id, gameId, deck);
 
             Player me = gameField.Players.First(p => p.Id.Equals(networkPlayer.Id));
