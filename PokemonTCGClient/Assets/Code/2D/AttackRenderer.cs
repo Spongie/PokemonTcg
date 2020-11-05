@@ -26,7 +26,7 @@ public class AttackRenderer : MonoBehaviour
         this.attack = attack;
         description.SetActive(!string.IsNullOrEmpty(attack.Description));
         attackName.text = attack.Name;
-        damage.text = attack.DamageText;
+        damage.text = attack.Damage.ToString();
 
         foreach (var cost in attack.Cost)
         {

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Assets.Code._2D;
 using Assets.Code.UI.Game;
+using Entities;
 using NetworkingCore;
 using NetworkingCore.Messages;
 using TCGCards;

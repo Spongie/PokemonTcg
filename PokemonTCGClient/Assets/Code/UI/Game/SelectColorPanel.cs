@@ -1,4 +1,5 @@
 ﻿using Assets.Code._2D;
+using Entities;
 using TCGCards;
 using TCGCards.Core.Messages;
 using UnityEngine;

@@ -155,7 +155,7 @@ namespace Launcher
         {
             AddMessage("Updating energy-cards...");
             var energyJson = infoService.GetEnergyJson();
-            File.WriteAllText(Path.Combine(dataFolder, "pokemon.json"), energyJson);
+            File.WriteAllText(Path.Combine(dataFolder, "energy.json"), energyJson);
             var energyCards = Serializer.Deserialize<List<EnergyCard>>(energyJson).Where(x => x.Completed).ToList();
             progress = 0;
             MaximumProgress = energyCards.Count;

@@ -1,4 +1,5 @@
-﻿using TCGCards;
+﻿using Entities;
+using TCGCards;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

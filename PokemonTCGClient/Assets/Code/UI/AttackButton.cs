@@ -23,7 +23,7 @@ namespace Assets.Code.UI
 
             this.attack = attack;
             nameText.text = attack.Name;
-            damageText.text = attack.DamageText;
+            damageText.text = attack.Damage.ToString();
 
             foreach (var cost in attack.Cost)
             {
