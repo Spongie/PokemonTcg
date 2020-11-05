@@ -1,4 +1,5 @@
-﻿using NetworkingCore;
+﻿using Entities.Models;
+using NetworkingCore;
 using PokemonTcgSdk;
 using System;
 using System.Collections.Generic;
@@ -24,15 +25,19 @@ namespace Launcher
     {
 		private string info;
 		private string versionNumber;
+		private string cardsVersionNumber;
 		private int minimumProgress;
 		private long maximumProgress;
 		private long progress;
 		private bool updateEnabled;
 		private bool launchEnabled;
+		private bool updateClient = false;
+		private bool updateCards = false;
 		private ObservableCollection<string> logs;
 		private NetworkPlayer networkConnection;
 		private InfoService infoService;
 		private VersionNumber newVersion;
+		private VersionNumber newCardVersion;
 		private Thread workerThread;
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,70 +71,171 @@ namespace Launcher
 		}
 
 		private void Update()
-		{
-			Thread.Sleep(100);
-			Directory.CreateDirectory("Client");
-			MaximumProgress = 3;
-			AddMessage("Downloading client archive...");
+        {
+            if (updateClient)
+            {
+                DownloadClientUpdate();
+            }
 
-			var clientBytes = infoService.GetClientBytes();
-
-			Progress++;
-
-			File.WriteAllBytes("tmpClient.zip", clientBytes);
-
-			Progress++;
-
-			AddMessage("Extracting client archive...");
-
-			ZipFile.ExtractToDirectory("tmpClient.zip", "Client", true);
-			File.Delete("tmpClient.zip");
-
-			Progress++;
-
-			Logs.Add("Cliented Extraced!");
-
-
-			AddMessage("Verifying image-files...");
-
-			var streamingAssetsFolder = Directory.GetDirectories("Client", "", SearchOption.AllDirectories).FirstOrDefault(x => x.Contains("StreamingAssets"));
-			var assembliesFolder = Path.Combine(streamingAssetsFolder, "Assemblies");
-			var sets = new List<IPokemonSet>();
-
-			Directory.CreateDirectory(Path.Combine(streamingAssetsFolder, "Decks"));
-
-			foreach (var cardFile in Directory.GetFiles(assembliesFolder))
-			{
-				var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(new FileInfo(cardFile).FullName);
-
-				var types = assembly.GetExportedTypes();
-				foreach (var typeInfo in types.Where(type => typeof(IPokemonSet).IsAssignableFrom(type) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
-				{
-					sets.Add((IPokemonSet)Activator.CreateInstance(typeInfo));
-				}
+			if (updateCards)
+            {
+				UpdateCards();
 			}
+        }
 
-			Progress = 0;
-			MaximumProgress = sets.Count;
+        private void UpdateCards()
+        {
+            AddMessage("Updating card-files...");
 
-			AddMessage($"Loaded {MaximumProgress} sets, checking images...");
+            var streamingAssetsFolder = Directory.GetDirectories("Client", "", SearchOption.AllDirectories).FirstOrDefault(x => x.Contains("StreamingAssets"));
+            var dataFolder = Path.Combine(streamingAssetsFolder, "Data");
 
-			foreach (var set in sets)
-			{
-				AddMessage("Checking " + set.GetBaseFolder());
-				DownloadSet(set, Path.Combine(streamingAssetsFolder, "Cards", set.GetBaseFolder()));
-			}
+            Directory.CreateDirectory(dataFolder);
 
-			AddMessage("Version updated! Press Launch to start the game");
+            UpdateSets(streamingAssetsFolder, dataFolder);
+            UpdatePokemonCards(streamingAssetsFolder, dataFolder);
+            UpdateEnergyCards(streamingAssetsFolder, dataFolder);
+            UpdateTrainerCards(streamingAssetsFolder, dataFolder);
 
-			UpdateEnabled = false;
-			LaunchEnabled = true;
+            Directory.CreateDirectory(Path.Combine(streamingAssetsFolder, "Decks"));
+
+            AddMessage("Version updated! Press Launch to start the game");
+
+            UpdateEnabled = false;
+            LaunchEnabled = true;
+            CardsVersionNumber = newCardVersion.ToString();
+
+            File.WriteAllText("cards.version", CardsVersionNumber.ToString());
+        }
+
+        private void UpdateSets(string streamingAssetsFolder, string dataFolder)
+        {
+            var setsJson = infoService.GetSetsJson();
+            File.WriteAllText(Path.Combine(dataFolder, "sets.json"), setsJson);
+
+            foreach (var set in Serializer.Deserialize<List<Entities.Models.Set>>(setsJson))
+            {
+                var folder = Path.Combine(streamingAssetsFolder, "Cards", set.SetCode);
+
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+            }
+        }
+
+        private void UpdateTrainerCards(string streamingAssetsFolder, string dataFolder)
+        {
+            AddMessage("Updating trainer-cards...");
+            var trainerJson = infoService.GetTrainerJson();
+            File.WriteAllText(Path.Combine(dataFolder, "trainers.json"), trainerJson);
+            var trainerCards = Serializer.Deserialize<List<EnergyCard>>(trainerJson).Where(x => x.Completed).ToList();
+            progress = 0;
+            MaximumProgress = trainerCards.Count;
+
+            Parallel.For(0, trainerCards.Count, (i) =>
+            {
+                var card = trainerCards[i];
+
+                var imageFile = Path.Combine(streamingAssetsFolder, "Cards", card.SetCode, card.GetImageName());
+
+                if (File.Exists(imageFile))
+                {
+                    Interlocked.Increment(ref progress);
+                    return;
+                }
+
+                DownloadCard(card.ImageUrl, card.ImageUrl, imageFile);
+                Interlocked.Increment(ref progress);
+                FirePropertyChanged(nameof(Progress));
+            });
+        }
+
+        private void UpdateEnergyCards(string streamingAssetsFolder, string dataFolder)
+        {
+            AddMessage("Updating energy-cards...");
+            var energyJson = infoService.GetEnergyJson();
+            File.WriteAllText(Path.Combine(dataFolder, "pokemon.json"), energyJson);
+            var energyCards = Serializer.Deserialize<List<EnergyCard>>(energyJson).Where(x => x.Completed).ToList();
+            progress = 0;
+            MaximumProgress = energyCards.Count;
+
+            Parallel.For(0, energyCards.Count, (i) =>
+            {
+                var card = energyCards[i];
+
+                var imageFile = Path.Combine(streamingAssetsFolder, "Cards", card.SetCode, card.GetImageName());
+
+                if (File.Exists(imageFile))
+                {
+                    Interlocked.Increment(ref progress);
+                    return;
+                }
+
+                DownloadCard(card.ImageUrl, card.ImageUrl, imageFile);
+                Interlocked.Increment(ref progress);
+                FirePropertyChanged(nameof(Progress));
+            });
+        }
+
+        private void UpdatePokemonCards(string streamingAssetsFolder, string dataFolder)
+        {
+            AddMessage("Updating pokemon-cards...");
+            var pokemonJson = infoService.GetPokemonJson();
+            File.WriteAllText(Path.Combine(dataFolder, "pokemon.json"), pokemonJson);
+            var pokemonCards = Serializer.Deserialize<List<PokemonCard>>(pokemonJson).Where(x => x.Completed).ToList();
+            progress = 0;
+            MaximumProgress = pokemonCards.Count;
+
+            Parallel.For(0, pokemonCards.Count, (i) =>
+            {
+                var card = pokemonCards[i];
+
+                var imageFile = Path.Combine(streamingAssetsFolder, "Cards", card.SetCode, card.GetImageName());
+
+                if (File.Exists(imageFile))
+                {
+                    Interlocked.Increment(ref progress);
+                    return;
+                }
+
+                DownloadCard(card.ImageUrl, card.ImageUrl, imageFile);
+                Interlocked.Increment(ref progress);
+                FirePropertyChanged(nameof(Progress));
+            });
+        }
+
+        private void DownloadClientUpdate()
+        {
+            Thread.Sleep(100);
+            Directory.CreateDirectory("Client");
+            MaximumProgress = 3;
+            AddMessage("Downloading client archive...");
+
+            var clientBytes = infoService.GetClientBytes();
+
+            Progress++;
+
+            File.WriteAllBytes("tmpClient.zip", clientBytes);
+
+            Progress++;
+
+            AddMessage("Extracting client archive...");
+
+            ZipFile.ExtractToDirectory("tmpClient.zip", "Client", true);
+            File.Delete("tmpClient.zip");
+
+            Progress++;
+
+            Logs.Add("Cliented Extraced!");
+
+
 			VersionNumber = newVersion.ToString();
 
-			File.WriteAllText("version", newVersion.ToString());
+			File.WriteAllText("client.version", newVersion.ToString());
 		}
 
-		private void DownloadSet(IPokemonSet set, string baseFolder)
+        private void DownloadSet(IPokemonSet set, string baseFolder)
 		{
 			AddMessage("Verifying cards...");
 
@@ -230,8 +336,8 @@ namespace Launcher
 				
 				var tcp = new TcpClient(AddressFamily.InterNetwork);
 
-				tcp.Connect("85.90.244.171", 80);
-				//tcp.Connect("127.0.0.1", 80);
+				//tcp.Connect("85.90.244.171", 8080);
+				tcp.Connect("127.0.0.1", 8080);
 				networkConnection = new NetworkPlayer(tcp);
 				networkConnection.DataReceived += NetworkPlayer_DataReceived;
 
@@ -246,16 +352,17 @@ namespace Launcher
 
 				newVersion = infoService.GetVersion();
 
-				if (!File.Exists("version"))
+				if (!File.Exists("client.version"))
 				{
-					File.WriteAllText("version", "0.0.000");
+					File.WriteAllText("client.version", "0.0.000");
 				}
 
-				var localVersion = new VersionNumber(File.ReadAllText("version"));
+				var localVersion = new VersionNumber(File.ReadAllText("client.version"));
 
 				if (localVersion < newVersion)
 				{
 					AddMessage($"Version {newVersion} available, click update to download the update");
+					updateClient = true;
 					UpdateEnabled = true;
 				}
 				else
@@ -266,6 +373,30 @@ namespace Launcher
 
 				VersionNumber = localVersion.ToString();
 
+				newCardVersion = infoService.GetCardsVersion();
+
+				AddMessage("Checking card versions...");
+
+				if (!File.Exists("cards.version"))
+				{
+					File.WriteAllText("cards.version", "0.0.000");
+				}
+
+				var localCardsVersion = new VersionNumber(File.ReadAllText("cards.version"));
+
+				if (localCardsVersion < newCardVersion)
+				{
+					AddMessage($"Card version {newCardVersion} available, click update to download the update");
+					updateCards = true;
+					UpdateEnabled = true;
+				}
+				else
+				{
+					Info = "Version up to date, press Launch to start the game";
+					LaunchEnabled = true;
+				}
+
+				CardsVersionNumber = localCardsVersion.ToString();
 			}
 			catch (Exception e)
 			{
@@ -323,6 +454,15 @@ namespace Launcher
 			}
 		}
 
+		public string CardsVersionNumber
+		{
+			get { return cardsVersionNumber; }
+			set
+			{
+				cardsVersionNumber = value;
+				FirePropertyChanged();
+			}
+		}
 
 		public string VersionNumber
 		{

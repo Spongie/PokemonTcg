@@ -28,7 +28,7 @@ namespace Server
         private static void RunServer(object obj)
         {
             server = new MasterServer();
-            server.Start(80);
+            server.Start(8080);
         }
     }
 }

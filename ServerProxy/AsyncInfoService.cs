@@ -25,11 +25,71 @@ public class AsyncInfoService
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId GetCardsVersion()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetCardsVersion",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 public NetworkingCore.NetworkId GetClientBytes()
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "GetClientBytes",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId GetPokemonJson()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetPokemonJson",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId GetEnergyJson()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetEnergyJson",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId GetTrainerJson()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetTrainerJson",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
+public NetworkingCore.NetworkId GetSetsJson()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetSetsJson",
 			TargetClass = "InfoService",
 			Parameters = new object[] {  }
 		}.ToNetworkMessage(networkPlayer.Id);

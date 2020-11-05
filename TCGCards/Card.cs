@@ -85,6 +85,11 @@ namespace TCGCards
             return otherCard.Id.Equals(Id);
         }
 
+        public string GetImageName()
+        {
+            return ImageUrl.Split('/').Last();
+        }
+
         public virtual string GetLogicalName()
         {
             var type = GetType();

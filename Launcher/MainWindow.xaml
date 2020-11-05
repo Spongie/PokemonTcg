@@ -29,8 +29,14 @@
             </StackPanel>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
-            <Label Content="{Binding VersionNumber}" DockPanel.Dock="Right" />
-            <Label Content="Version" DockPanel.Dock="Right" />
+            <DockPanel DockPanel.Dock="Bottom">
+                <Label Content="{Binding VersionNumber}" DockPanel.Dock="Right" />
+                <Label Content="Client Version" DockPanel.Dock="Right" />
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom">
+                <Label Content="{Binding CardsVersionNumber}" DockPanel.Dock="Right" />
+                <Label Content="Card Version" DockPanel.Dock="Right" />
+            </DockPanel>
         </DockPanel>
     </Grid>
 </Window>

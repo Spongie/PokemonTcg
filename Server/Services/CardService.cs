@@ -29,7 +29,7 @@ namespace Server.Services
             cards = new List<Card>();
             cards.AddRange(pokemonCards.Where(card => card.Completed));
             cards.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")).Where(card => card.Completed));
-            cards.AddRange(Serializer.Deserialize<List<TrainerCard>>(File.ReadAllText("trainer.json")).Where(card => card.Completed));
+            cards.AddRange(Serializer.Deserialize<List<TrainerCard>>(File.ReadAllText("trainers.json")).Where(card => card.Completed));
 
             Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
         }
@@ -41,7 +41,7 @@ namespace Server.Services
         {
             File.WriteAllText("pokemon.json", pokemonCards);
             File.WriteAllText("energy.json", energyCards);
-            File.WriteAllText("trainer.json", tainerCards);
+            File.WriteAllText("trainers.json", tainerCards);
             File.WriteAllText("sets.json", sets);
 
             Logger.Instance.Log("Received card updates, reloading caches...");
