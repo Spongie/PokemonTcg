@@ -1,5 +1,4 @@
-﻿using BaseSet.TrainerCards;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TCGCards;
 using UnityEngine;

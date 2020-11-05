@@ -1,5 +1,4 @@
 ﻿using Assets.Code._2D;
-using BaseSet.TrainerCards;
 using System.Collections;
 using System.IO;
 using TCGCards;

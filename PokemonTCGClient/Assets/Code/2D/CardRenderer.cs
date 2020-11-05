@@ -10,7 +10,6 @@ using Assets.Code.UI.Game;
 using Assets.Code.UI.Gameplay;
 using TMPro;
 using Assets.Code._2D;
-using BaseSet.PokemonCards;
 using Entities;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler

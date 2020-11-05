@@ -20,8 +20,7 @@ namespace Assets.Code.UI.MainMenu
 
         private void Awake()
         {
-            new TeamRocket.Set();
-            new BaseSet.Set();
+
         }
 
         private void Start()
