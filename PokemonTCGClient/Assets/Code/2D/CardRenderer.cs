@@ -156,7 +156,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
+            string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
             string finalPath = "file:///" + fullCardPath;
 
             if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))

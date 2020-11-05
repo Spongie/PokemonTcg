@@ -14,10 +14,10 @@ namespace Assets.Code.UI.MainMenu
         {
             var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
 
-            foreach (var file in Directory.GetFiles(directory).Where(f => !f.EndsWith(".meta")))
+            foreach (var file in Directory.GetFiles(directory).Where(f => f.EndsWith(Deck.deckExtension)))
             {
                 var spawned = Instantiate(deckPrefab, content.transform);
-                spawned.GetComponent<Deck>().Init(new FileInfo(file).Name.Replace(".dck", string.Empty));
+                spawned.GetComponent<Deck>().Init(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty));
             }
         }
 

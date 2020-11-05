@@ -1,10 +1,7 @@
 ﻿using NetworkingCore;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using TCGCards;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,7 +11,6 @@ namespace Assets.Code.UI.DeckBuilder
 {
     public class DeckBuilder : MonoBehaviour
     {
-        private const string deckExtension = ".deck";
         public static string CurrentDeck;
         public InputField deckName;
         public GameObject cardPrefab;
@@ -29,17 +25,12 @@ namespace Assets.Code.UI.DeckBuilder
         {
             if (!string.IsNullOrWhiteSpace(CurrentDeck))
             {
-                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", CurrentDeck + deckExtension);
-                var deck = Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(fullPath));
+                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", CurrentDeck + MainMenu.Deck.deckExtension);
+                var deck = Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(fullPath));
 
-                foreach (var type in deck)
+                foreach (var card in deck.Cards)
                 {
-                    var card = Card.CreateFromTypeInfo(type);
-
-                    if (card != null)
-                    {
-                        AddToDeck(card);
-                    }
+                    AddToDeck(card);
                 }
 
                 deckName.text = CurrentDeck;
@@ -54,7 +45,7 @@ namespace Assets.Code.UI.DeckBuilder
 
         public void OnSaveClick()
         {
-            var filename = deckName.text + deckExtension;
+            var filename = deckName.text + MainMenu.Deck.deckExtension;
 
             foreach (var character in Path.GetInvalidFileNameChars())
             {
@@ -70,9 +61,12 @@ namespace Assets.Code.UI.DeckBuilder
 
             var fullPath = Path.Combine(directory, filename);
 
-            var cards = deckContent.GetComponentsInChildren<DeckCard>().Select(deckCard => deckCard.card.GetType().GetTypeInfo()).ToList();
+            var deck = new TCGCards.Core.Deck
+            {
+                Cards = new Stack<Card>(deckContent.GetComponentsInChildren<DeckCard>().Select(deckCard => deckCard.card))
+            };
 
-            var data = Serializer.Serialize(cards);
+            var data = Serializer.Serialize(deck);
 
             File.WriteAllText(fullPath, data);        
         }

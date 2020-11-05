@@ -7,6 +7,7 @@ namespace Assets.Code.UI.MainMenu
 {
     public class Deck : MonoBehaviour
     {
+        public const string deckExtension = ".deck";
         private string deckName;
         public Text deckNameText;
 

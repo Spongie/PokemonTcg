@@ -32,7 +32,7 @@ namespace Assets.Code.UI.MainMenu
 
             foreach (var file in Directory.GetFiles(directory).Where(f => !f.EndsWith(".meta")))
             {
-                deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(".dck", string.Empty)));
+                deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty)));
             }
 
             if (deckDropDown.options.Count > 0)
@@ -72,7 +72,7 @@ namespace Assets.Code.UI.MainMenu
 
         public List<TypeInfo> LoadDeckSelectedDeck()
         {
-            var deck = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + ".dck");
+            var deck = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + Deck.deckExtension);
 
             return Serializer.Deserialize<List<TypeInfo>>(File.ReadAllText(deck));
         }

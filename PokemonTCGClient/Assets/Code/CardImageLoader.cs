@@ -22,7 +22,7 @@ namespace Assets.Code
 
         public IEnumerator LoadSpriteRoutine(Card card, Image targetImage)
         {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
+            string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
             string finalPath = "file:///" + fullCardPath;
 
             if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))

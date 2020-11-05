@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkingCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace Assets.Code.UI.DeckBuilder
         public Toggle trainerToggle;
         public Toggle energyToggle;
 
-        private List<Card> cards = new List<Card>();
+        private Dictionary<NetworkId, Card> cards = new Dictionary<NetworkId, Card>();
         private string lastFrameSearch;
 
         private void Start()
@@ -111,32 +112,25 @@ namespace Assets.Code.UI.DeckBuilder
             loading = true;
             int counter = 0;
 
-            foreach (var assembly in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+            foreach (var card in CardLoader.LoadAllCards())
             {
-                foreach (var type in Assembly.Load(assembly).DefinedTypes.Where(type => typeof(Card).GetTypeInfo().IsAssignableFrom(type.AsType()) && !type.IsAbstract && type.Name != nameof(PokemonCard)))
+                if (card.IgnoreInBuilder)
                 {
-                    var card = Card.CreateFromTypeInfo(type);
-
-                    if (card == null || card.IgnoreInBuilder)
-                    {
-                        continue;   
-                    }
-
-                    cards.Add(card);
-
-                    text.text = cards.Count.ToString();
-                    var spawnedObject = Instantiate(CardPrefab, Content.transform);
-                    spawnedObject.GetComponent<DeckCard>().Init(card);
-
-                    counter++;
-
-                    if (counter >= 30)
-                    {
-                        yield return new WaitForEndOfFrame();
-                    }
+                    continue;
                 }
 
-                yield return new WaitForEndOfFrame();
+                cards.Add(card.CardId, card);
+
+                text.text = cards.Count.ToString();
+                var spawnedObject = Instantiate(CardPrefab, Content.transform);
+                spawnedObject.GetComponent<DeckCard>().Init(card);
+
+                counter++;
+
+                if (counter >= 50)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
             }
 
             loading = false;

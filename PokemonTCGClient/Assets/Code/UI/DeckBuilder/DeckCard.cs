@@ -1,7 +1,9 @@
 ﻿using Assets.Code._2D;
+using System;
 using System.Collections;
 using System.IO;
 using TCGCards;
+using TCGCards.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
@@ -30,7 +32,7 @@ namespace Assets.Code.UI.DeckBuilder
 
             if (!isInDeck)
             {
-                deckBuilder.AddToDeck(card);
+                deckBuilder.AddToDeck(card.Clone());
             }
             else
             {
@@ -49,7 +51,7 @@ namespace Assets.Code.UI.DeckBuilder
         {
             while (true)
             {
-                var imagePath = Path.Combine(Application.streamingAssetsPath, card.GetLogicalName()) + ".png";
+                var imagePath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
 
                 if (SpriteCache.Instance.cache.ContainsKey(imagePath))
                 {
@@ -63,17 +65,24 @@ namespace Assets.Code.UI.DeckBuilder
                 }
 
                 yield return new WaitForSeconds(0.05f);
-
-                var imageBytes = File.ReadAllBytes(imagePath);
-                var texture = new Texture2D(256, 256);
-                texture.LoadImage(imageBytes);
-
-                var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100);
-                art.sprite = sprite;
-
-                if (!SpriteCache.Instance.cache.ContainsKey(imagePath))
+                try
                 {
-                    SpriteCache.Instance.cache.Add(imagePath, sprite);
+
+                    var imageBytes = File.ReadAllBytes(imagePath);
+                    var texture = new Texture2D(256, 256);
+                    texture.LoadImage(imageBytes);
+
+                    var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100);
+                    art.sprite = sprite;
+
+                    if (!SpriteCache.Instance.cache.ContainsKey(imagePath))
+                    {
+                        SpriteCache.Instance.cache.Add(imagePath, sprite);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
                 }
 
                 break;
