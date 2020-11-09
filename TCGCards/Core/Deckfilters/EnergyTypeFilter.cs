@@ -6,6 +6,11 @@ namespace TCGCards.Core.Deckfilters
     {
         private readonly EnergyTypes energyType;
 
+        public EnergyTypeFilter()
+        {
+
+        }
+
         public EnergyTypeFilter(EnergyTypes energyType)
         {
             this.energyType = energyType;

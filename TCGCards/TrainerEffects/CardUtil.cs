@@ -1,4 +1,5 @@
-﻿using NetworkingCore;
+﻿using Entities;
+using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        public static IEnumerable<IDeckFilter> GetCardFilters(CardType cardType)
+        public static IEnumerable<IDeckFilter> GetCardFilters(CardType cardType, EnergyTypes energyType = EnergyTypes.None)
         {
             var filter = new List<IDeckFilter>();
 
@@ -44,7 +45,14 @@ namespace TCGCards.TrainerEffects
                     filter.Add(new EnergyFilter());
                     break;
                 case CardType.BasicEnergy:
-                    filter.Add(new BasicEnergyFilter());
+                    if (energyType == EnergyTypes.All || energyType == EnergyTypes.None)
+                    {
+                        filter.Add(new BasicEnergyFilter());
+                    }
+                    else
+                    {
+                        filter.Add(new EnergyTypeFilter(energyType));
+                    }
                     break;
                 default:
                     break;

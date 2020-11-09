@@ -129,6 +129,11 @@ namespace Assets.Code
 
         private void OnDiscardCardSelected(CardRenderer card)
         {
+            if (currentDeckFilter != null && !currentDeckFilter.IsCardValid(card.card))
+            {
+                return;
+            }
+
             ToggleCardSelected(card);
 
             if (minSelectedCardCount == 1)
@@ -401,6 +406,7 @@ namespace Assets.Code
             selectedCards.Clear();
             SpecialState = SpecialGameState.DiscardingCards;
             minSelectedCardCount = ((DiscardCardsMessage)message).Count;
+            currentDeckFilter = ((DiscardCardsMessage)message).Filters.FirstOrDefault();
 
             if (minSelectedCardCount > 1)
             {
@@ -674,6 +680,7 @@ namespace Assets.Code
 
             NetworkManager.Instance.RespondingTo = null;
             doneButton.SetActive(true);
+            currentDeckFilter = null;
         }
 
         private void OnGameUpdated(object message)
