@@ -19,6 +19,7 @@ namespace TCGCards
         private string name = "New Attack";
         private string description;
         private int damage;
+        protected bool foreverDisabled = false;
 
         public Attack()
         {
@@ -149,7 +150,7 @@ namespace TCGCards
 
         public virtual bool CanBeUsed(GameField game, Player owner, Player opponent)
         {
-            if (game.FirstTurn)
+            if (game.FirstTurn || foreverDisabled)
             {
                 return false;
             }

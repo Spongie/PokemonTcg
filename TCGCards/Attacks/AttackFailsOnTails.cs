@@ -23,6 +23,11 @@ namespace TCGCards.Attacks
         {
             if (game.FlipCoins(1) == 0)
             {
+                if (isOneTime)
+                {
+                    foreverDisabled = true;
+                }
+
                 game.GameLog.AddMessage("The attack did nothing");
                 return 0;
             }

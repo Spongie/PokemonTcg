@@ -58,12 +58,9 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            if (CoinFlip)
+            if (CoinFlip && game.FlipCoins(1) == 0)
             {
-                if (game.FlipCoins(1) == 0)
-                {
-                    return;
-                }
+                return;
             }
 
             DamageStopper damageStopper;

@@ -135,7 +135,7 @@ namespace TCGCards
 
         public int DamageCounters { get; set; }
         public PokemonCard EvolvedFrom { get; set; }
-        public List<EnergyCard> AttachedEnergy { get; set; }
+        public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
         public EnergyTypes PokemonType { get; set; }
         public bool PlayedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
@@ -144,10 +144,10 @@ namespace TCGCards
         public bool IsAsleep { get; set; }
         public bool IsConfused { get; set; }
         public PokemonCard KnockedOutBy { get; set; }
-        public List<TemporaryAbility> TemporaryAbilities { get; set; }
+        public List<TemporaryAbility> TemporaryAbilities { get; set; } = new List<TemporaryAbility>();
         public string PokemonName { get; protected set; }
-        public List<DamageStopper> DamageStoppers { get; set; }
-        public List<AttackStopper> AttackStoppers { get; set; }
+        public List<DamageStopper> DamageStoppers { get; set; } = new List<DamageStopper>();
+        public List<AttackStopper> AttackStoppers { get; set; } = new List<AttackStopper>();
         public int DamageTakenLastTurn { get; set; }
         public bool DoublePoison { get; set; }
         public bool EvolvedThisTurn { get; set; }

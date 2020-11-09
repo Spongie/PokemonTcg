@@ -40,7 +40,7 @@ namespace TCGCards.Attacks
 
             if (onlySelf)
             {
-                owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => x == owner.ActivePokemonCard));
+                owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => x.Equals(owner.ActivePokemonCard)));
             }
             else
             {
