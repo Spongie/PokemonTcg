@@ -20,6 +20,7 @@ namespace TCGCards
         private string description;
         private int damage;
         protected bool foreverDisabled = false;
+        private bool applyWeaknessResistance = true;
 
         public Attack()
         {
@@ -36,6 +37,17 @@ namespace TCGCards
             ExtraDiscardCost = new ObservableCollection<Energy>(selectedAttack.ExtraDiscardCost);
             Damage = selectedAttack.Damage;
         }
+
+        public bool ApplyWeaknessResistance
+        {
+            get { return applyWeaknessResistance; }
+            set
+            {
+                applyWeaknessResistance = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public ObservableCollection<IEffect> Effects
         {

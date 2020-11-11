@@ -149,6 +149,10 @@
                                         <Label Content="Damage" MinWidth="80"/>
                                         <TextBox Text="{Binding SelectedAttack.Damage}"/>
                                     </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Apply Weakness/Resistance" MinWidth="80"/>
+                                        <CheckBox IsChecked="{Binding SelectedAttack.ApplyWeaknessResistance}" VerticalAlignment="Center"/>
+                                    </DockPanel>
                                     <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
 
                                     </local:DynamicInputControl>

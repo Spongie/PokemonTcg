@@ -411,7 +411,7 @@ namespace TCGCards.Core
         private void DealDamageWithAttack(Attack attack)
         {
             Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer, this);
-            damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard);
+            damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard, attack);
 
             if (DamageStoppers.Any(x => x.IsDamageIgnored(damage.NormalDamage + damage.DamageWithoutResistAndWeakness)))
             {
@@ -458,9 +458,14 @@ namespace TCGCards.Core
             }
         }
 
-        private int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender)
+        private int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender, Attack attack)
         {
             var realDamage = damage;
+
+            if (!attack.ApplyWeaknessResistance)
+            {
+                return realDamage;
+            }
 
             if (defender.Resistance == attacker.PokemonType)
             {
