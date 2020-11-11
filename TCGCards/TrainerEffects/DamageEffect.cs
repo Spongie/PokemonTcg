@@ -7,6 +7,7 @@ namespace TCGCards.TrainerEffects
     public class DamageEffect : DataModel, IEffect
     {
         private int amount;
+        private TargetingMode targetingMode = TargetingMode.OpponentActive;
 
         [DynamicInput("Damage amount")]
         public int Amount
@@ -18,6 +19,18 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
+
+        [DynamicInput("Target?", InputControl.Dropdown, typeof(TargetingMode))]
+        public TargetingMode TargetingMode
+        {
+            get { return targetingMode; }
+            set
+            {
+                targetingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EffectType
         {
@@ -36,7 +49,9 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
-            
+            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
+
+            target.DamageCounters += Amount;
         }
     }
 }

@@ -32,6 +32,7 @@ namespace CardEditor.Views
     {
         Text,
         Boolean,
-        Dropdown
+        Dropdown,
+        Grid
     }
 }

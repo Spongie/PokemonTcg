@@ -62,6 +62,18 @@ namespace CardEditor.Views
                             comboBox.SetBinding(ComboBox.SelectedItemProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
                             input = comboBox;
                             break;
+                        case InputControl.Grid:
+                            var grid = new DataGrid
+                            {
+                                CanUserAddRows = true,
+                                CanUserDeleteRows = true,
+                                AutoGenerateColumns = true,
+                                MinHeight = 100,
+                                MinWidth = 200
+                            };
+                            grid.SetBinding(DataGrid.ItemsSourceProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                            input = grid;
+                            break;
                         default:
                             throw new NotImplementedException();
                     }

@@ -196,7 +196,7 @@ namespace TCGCards
                 }
             }
 
-            return true;
+            return Effects.All(x => x.CanCast(game, owner, opponent));
         }
 
         public override bool Equals(object obj)
