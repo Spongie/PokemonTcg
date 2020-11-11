@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TCGCards.Core.Abilities
 {
-    public class RetreatCostModifierAbility : CostModifierAbility
+    public class RetreatCostModifierAbility : Core.RetreatCostModifierAbility
     {
     }
 }

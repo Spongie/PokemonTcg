@@ -1,4 +1,5 @@
 ﻿using CardEditor.Views;
+using Entities;
 using Entities.Models;
 using System;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace TCGCards.TrainerEffects
     {
         private int amount;
         private TargetingMode targetingMode;
+        private EnergyTypes energyType;
+        private bool coinFlip;
 
         [DynamicInput("Targeting type", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -31,6 +34,28 @@ namespace TCGCards.TrainerEffects
             set
             {
                 amount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Energy type", InputControl.Dropdown, typeof(EnergyTypes))]
+        public EnergyTypes EnergyType
+        {
+            get { return energyType; }
+            set
+            {
+                energyType = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Flips Coin?", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
                 FirePropertyChanged();
             }
         }

@@ -131,13 +131,13 @@ namespace TCGCards.Core
 
         public bool CanRetreat(PokemonCard card)
         {
-            IEnumerable<CostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
-                .OfType<CostModifierAbility>()
+            IEnumerable<RetreatCostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
+                .OfType<RetreatCostModifierAbility>()
                 .Where(ability => ability.IsActive()
                     && ability.ModifierType == PassiveModifierType.RetreatCost
                     && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id));
 
-            var retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.ExtraCost.Sum(x => x.Amount));
+            var retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.Amount);
 
             return card.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= retreatCost;
         }

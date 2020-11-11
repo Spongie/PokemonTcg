@@ -19,8 +19,21 @@ namespace TCGCards.TrainerEffects
 
         private bool opponents;
         private bool opponentChooses;
+        private bool isChoice; 
+        private bool onlyOnCoinflip;
 
-        [DynamicInput("Opponent choices?", InputControl.Boolean)]
+        [DynamicInput("Is Choice?", InputControl.Boolean)]
+        public bool IsChoice
+        {
+            get { return isChoice; }
+            set
+            {
+                isChoice = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Opponent chooces?", InputControl.Boolean)]
         public bool OpponentChooses
         {
             get { return opponentChooses; }
@@ -42,9 +55,25 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Only on coinflip", InputControl.Boolean)]
+        public bool OnlyOnCoinFlip
+        {
+            get { return onlyOnCoinflip; }
+            set
+            {
+                onlyOnCoinflip = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public void Process(GameField game, Player caster, Player opponent)
         {
+            if (OnlyOnCoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             NetworkMessage message;
 
             if (opponents)

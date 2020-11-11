@@ -6,18 +6,18 @@ using NetworkingCore;
 
 namespace TCGCards.Core
 {
-    public class CostModifierAbility : PassiveAbility
+    public class RetreatCostModifierAbility : PassiveAbility
     {
-        private ObservableCollection<Energy> extraCost;
+        private int amount;
         private bool onlyWhenActive;
         private bool worksOnSelf;
 
-        public CostModifierAbility() :base(null)
+        public RetreatCostModifierAbility() :base(null)
         {
             ModifierType = PassiveModifierType.RetreatCost;
         }
 
-        public CostModifierAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
+        public RetreatCostModifierAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             ModifierType = PassiveModifierType.RetreatCost;
         }
@@ -44,13 +44,13 @@ namespace TCGCards.Core
             }
         }
 
-        [DynamicInput("Extra", InputControl.Grid, typeof(Energy))]
-        public ObservableCollection<Energy> ExtraCost
+        [DynamicInput("Amount Extra")]
+        public int Amount
         {
-            get { return extraCost; }
+            get { return amount; }
             set
             {
-                extraCost = value;
+                amount = value;
                 FirePropertyChanged();
             }
         }
