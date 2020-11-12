@@ -159,7 +159,7 @@ namespace CardEditor.ViewModels
 
 		internal async Task Save()
 		{
-			var json = Serializer.Serialize(PokemonCards.Select(card => card.Card).ToList());
+			var json = Serializer.SerializeFormatted(PokemonCards.Select(card => card.Card).ToList());
 
 			await File.WriteAllTextAsync("Data/pokemon.json", json);
 		}

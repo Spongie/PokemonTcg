@@ -58,7 +58,7 @@ namespace CardEditor.ViewModels
 
         internal async Task Save()
         {
-            var json = Serializer.Serialize(EnergyCards);
+            var json = Serializer.SerializeFormatted(EnergyCards);
 
             await File.WriteAllTextAsync("Data/energy.json", json);
         }

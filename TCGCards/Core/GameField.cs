@@ -133,7 +133,7 @@ namespace TCGCards.Core
         {
             IEnumerable<RetreatCostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
                 .OfType<RetreatCostModifierAbility>()
-                .Where(ability => ability.IsActive()
+                .Where(ability => ability.IsActive(this)
                     && ability.ModifierType == PassiveModifierType.RetreatCost
                     && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id));
 

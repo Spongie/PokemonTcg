@@ -11,6 +11,8 @@ namespace TCGCards.Core
         private int amount;
         private bool onlyWhenActive;
         private bool worksOnSelf;
+        private bool onlyWhenBenched;
+        private bool onlyForYou;
 
         public RetreatCostModifierAbility() :base(null)
         {
@@ -29,6 +31,28 @@ namespace TCGCards.Core
             set
             {
                 worksOnSelf = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Only for you", InputControl.Boolean)]
+        public bool OnlyForYou
+        {
+            get { return onlyForYou; }
+            set
+            {
+                onlyForYou = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Only when benched", InputControl.Boolean)]
+        public bool OnlyWhenBenched
+        {
+            get { return onlyWhenBenched; }
+            set
+            {
+                onlyWhenBenched = value;
                 FirePropertyChanged();
             }
         }
@@ -55,12 +79,20 @@ namespace TCGCards.Core
             }
         }
 
-
-        public virtual bool IsActive()
+        public virtual bool IsActive(GameField game)
         {
+            if (onlyForYou && !game.ActivePlayer.Id.Equals(PokemonOwner.Owner.Id))
+            {
+                return false;
+            }
+
             if (onlyWhenActive)
             {
                 return PokemonOwner.Owner.ActivePokemonCard.Id.Equals(PokemonOwner.Id);
+            }
+            else if (onlyWhenBenched)
+            {
+                return PokemonOwner.Owner.BenchedPokemon.Contains(PokemonOwner);
             }
 
             return true;

@@ -11,9 +11,10 @@
         Loaded="Window_Loaded"
         Title="Card Editor" Height="850" Width="1300">
     <DockPanel Margin="5">
-        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" VerticalAlignment="Bottom" MinHeight="32" Margin="5">
-            <Button Content="Save" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" Width="64" Click="Button_Save_Click"/>
-            <Button Content="Push" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" Width="64"/>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False" VerticalAlignment="Bottom" MinHeight="32" Margin="5">
+            <Button Content="Save" FontSize="16" FontFamily="{StaticResource FontAwesome}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Save" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" Click="Button_Save_Click"/>
+            <Button Content="&#xf126;" FontSize="16" FontFamily="{StaticResource FontAwesome}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Add to Git" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" Click="Button_Commit_Click"/>
+            <Button Content="Upload" FontSize="16" FontFamily="{StaticResource FontAwesome}" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" ToolTip="Upload to Server" DockPanel.Dock="Left" VerticalAlignment="Stretch" Margin="0,0,5,0" />
         </DockPanel>
         <TabControl DockPanel.Dock="Top" >
             <TabItem Header="Pokemon" DataContext="{Binding PokemonsViewModel}">

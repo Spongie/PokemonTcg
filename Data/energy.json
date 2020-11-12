@@ -1,1 +1,255 @@
-[{"$id":"1","Effects":[],"Amount":1,"EnergyType":3,"IsBasic":true,"CardId":{"$id":"2","Value":"0ca4e5e2-dcac-428b-982d-634befff08e1"},"Id":{"$id":"3","Value":"c275956f-1c37-4f56-a1e6-427af5a438fe"},"SetCode":"base1","Name":"Water Energy","ImageUrl":"https://images.pokemontcg.io/base1/102_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"4","Effects":[],"Amount":2,"EnergyType":2,"IsBasic":false,"CardId":{"$id":"5","Value":"3f95fe31-48b5-43f7-abf9-81e35b34a776"},"Id":{"$id":"6","Value":"e744cbbf-b35c-4a5e-8d8f-cdae1bf9da0d"},"SetCode":"base1","Name":"Double Colorless Energy","ImageUrl":"https://images.pokemontcg.io/base1/96_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"7","Effects":[],"Amount":1,"EnergyType":4,"IsBasic":true,"CardId":{"$id":"8","Value":"c0f3f3f6-f3e6-4a3f-9fda-7d9033acc976"},"Id":{"$id":"9","Value":"4591e29b-681c-4032-bc96-c93c0c87e7cb"},"SetCode":"base1","Name":"Fire Energy","ImageUrl":"https://images.pokemontcg.io/base1/98_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"10","Effects":[],"Amount":1,"EnergyType":5,"IsBasic":true,"CardId":{"$id":"11","Value":"8023f056-1975-404d-ae67-bedf0c8f43fb"},"Id":{"$id":"12","Value":"a810843b-387a-470f-9708-31da0bb981c5"},"SetCode":"base1","Name":"Grass Energy","ImageUrl":"https://images.pokemontcg.io/base1/99_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"13","Effects":[],"Amount":1,"EnergyType":6,"IsBasic":true,"CardId":{"$id":"14","Value":"95a34672-5e8c-4989-8c98-444fa8623bae"},"Id":{"$id":"15","Value":"45502737-393e-46c8-9980-03f87187566e"},"SetCode":"base1","Name":"Lightning Energy","ImageUrl":"https://images.pokemontcg.io/base1/100_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"16","Effects":[],"Amount":1,"EnergyType":8,"IsBasic":true,"CardId":{"$id":"17","Value":"e18ebed5-6f2f-4c39-b43b-519e6c554434"},"Id":{"$id":"18","Value":"bee8c17d-1c19-4b5e-8187-fe21c69d7063"},"SetCode":"base1","Name":"Fighting Energy","ImageUrl":"https://images.pokemontcg.io/base1/97_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"19","Effects":[],"Amount":1,"EnergyType":7,"IsBasic":true,"CardId":{"$id":"20","Value":"9f2b11a6-268b-46b5-bad3-81c9081a5cf1"},"Id":{"$id":"21","Value":"7903f2f0-23be-4005-bce5-54b248336e3f"},"SetCode":"base1","Name":"Psychic Energy","ImageUrl":"https://images.pokemontcg.io/base1/101_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"22","Effects":[{"$id":"23","$type":"TCGCards.TrainerEffects.HealEffect, TCGCards","Amount":10,"TargetingMode":0,"EffectType":"Heal"}],"Amount":1,"EnergyType":2,"IsBasic":false,"CardId":{"$id":"24","Value":"7e38af7a-be21-4b06-9a9a-00b6895f039f"},"Id":{"$id":"25","Value":"b4a4cde6-369b-4df5-adbf-e16ff9b03deb"},"SetCode":"base5","Name":"Potion Energy","ImageUrl":"https://images.pokemontcg.io/base5/82_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"26","Effects":[{"$id":"27","$type":"TCGCards.TrainerEffects.FullHealEffect, TCGCards","TargetingMode":0,"EffectType":"Full Heal"}],"Amount":1,"EnergyType":2,"IsBasic":false,"CardId":{"$id":"28","Value":"8998b708-d5cc-4f1f-a208-a673a444fb14"},"Id":{"$id":"29","Value":"6102b86a-9e43-4d54-84fa-221336396f29"},"SetCode":"base5","Name":"Full Heal Energy","ImageUrl":"https://images.pokemontcg.io/base5/81_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"30","Effects":[{"$id":"31","$type":"TCGCards.TrainerEffects.DamageEffect, TCGCards","Amount":10,"TargetingMode":3,"EffectType":"Damage"}],"Amount":1,"EnergyType":1,"IsBasic":false,"CardId":{"$id":"32","Value":"7b4a66ae-15a5-451d-8e52-ff0f65415c0e"},"Id":{"$id":"33","Value":"c19d2e0c-b186-4f76-8d6d-c2e0f823ef79"},"SetCode":"base5","Name":"Rainbow Energy","ImageUrl":"https://images.pokemontcg.io/base5/80_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false}]
+[
+  {
+    "$id": "1",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 3,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "2",
+      "Value": "0ca4e5e2-dcac-428b-982d-634befff08e1"
+    },
+    "Id": {
+      "$id": "3",
+      "Value": "c275956f-1c37-4f56-a1e6-427af5a438fe"
+    },
+    "SetCode": "base1",
+    "Name": "Water Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/102_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "4",
+    "Effects": [],
+    "Amount": 2,
+    "EnergyType": 2,
+    "IsBasic": false,
+    "CardId": {
+      "$id": "5",
+      "Value": "3f95fe31-48b5-43f7-abf9-81e35b34a776"
+    },
+    "Id": {
+      "$id": "6",
+      "Value": "e744cbbf-b35c-4a5e-8d8f-cdae1bf9da0d"
+    },
+    "SetCode": "base1",
+    "Name": "Double Colorless Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/96_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "7",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 4,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "8",
+      "Value": "c0f3f3f6-f3e6-4a3f-9fda-7d9033acc976"
+    },
+    "Id": {
+      "$id": "9",
+      "Value": "4591e29b-681c-4032-bc96-c93c0c87e7cb"
+    },
+    "SetCode": "base1",
+    "Name": "Fire Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/98_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "10",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 5,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "11",
+      "Value": "8023f056-1975-404d-ae67-bedf0c8f43fb"
+    },
+    "Id": {
+      "$id": "12",
+      "Value": "a810843b-387a-470f-9708-31da0bb981c5"
+    },
+    "SetCode": "base1",
+    "Name": "Grass Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/99_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "13",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 6,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "14",
+      "Value": "95a34672-5e8c-4989-8c98-444fa8623bae"
+    },
+    "Id": {
+      "$id": "15",
+      "Value": "45502737-393e-46c8-9980-03f87187566e"
+    },
+    "SetCode": "base1",
+    "Name": "Lightning Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/100_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "16",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 8,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "17",
+      "Value": "e18ebed5-6f2f-4c39-b43b-519e6c554434"
+    },
+    "Id": {
+      "$id": "18",
+      "Value": "bee8c17d-1c19-4b5e-8187-fe21c69d7063"
+    },
+    "SetCode": "base1",
+    "Name": "Fighting Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/97_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "19",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 7,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "20",
+      "Value": "9f2b11a6-268b-46b5-bad3-81c9081a5cf1"
+    },
+    "Id": {
+      "$id": "21",
+      "Value": "7903f2f0-23be-4005-bce5-54b248336e3f"
+    },
+    "SetCode": "base1",
+    "Name": "Psychic Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base1/101_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "22",
+    "Effects": [
+      {
+        "$id": "23",
+        "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+        "Amount": 10,
+        "TargetingMode": 0,
+        "EffectType": "Heal"
+      }
+    ],
+    "Amount": 1,
+    "EnergyType": 2,
+    "IsBasic": false,
+    "CardId": {
+      "$id": "24",
+      "Value": "7e38af7a-be21-4b06-9a9a-00b6895f039f"
+    },
+    "Id": {
+      "$id": "25",
+      "Value": "b4a4cde6-369b-4df5-adbf-e16ff9b03deb"
+    },
+    "SetCode": "base5",
+    "Name": "Potion Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base5/82_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "26",
+    "Effects": [
+      {
+        "$id": "27",
+        "$type": "TCGCards.TrainerEffects.FullHealEffect, TCGCards",
+        "TargetingMode": 0,
+        "EffectType": "Full Heal"
+      }
+    ],
+    "Amount": 1,
+    "EnergyType": 2,
+    "IsBasic": false,
+    "CardId": {
+      "$id": "28",
+      "Value": "8998b708-d5cc-4f1f-a208-a673a444fb14"
+    },
+    "Id": {
+      "$id": "29",
+      "Value": "6102b86a-9e43-4d54-84fa-221336396f29"
+    },
+    "SetCode": "base5",
+    "Name": "Full Heal Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base5/81_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "30",
+    "Effects": [
+      {
+        "$id": "31",
+        "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+        "Amount": 10,
+        "TargetingMode": 3,
+        "EffectType": "Damage"
+      }
+    ],
+    "Amount": 1,
+    "EnergyType": 1,
+    "IsBasic": false,
+    "CardId": {
+      "$id": "32",
+      "Value": "7b4a66ae-15a5-451d-8e52-ff0f65415c0e"
+    },
+    "Id": {
+      "$id": "33",
+      "Value": "c19d2e0c-b186-4f76-8d6d-c2e0f823ef79"
+    },
+    "SetCode": "base5",
+    "Name": "Rainbow Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base5/80_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  }
+]

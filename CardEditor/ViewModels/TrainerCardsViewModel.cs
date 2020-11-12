@@ -53,7 +53,7 @@ namespace CardEditor.ViewModels
 
         internal async Task Save()
         {
-            var json = Serializer.Serialize(TrainerCards);
+            var json = Serializer.SerializeFormatted(TrainerCards);
 
             await File.WriteAllTextAsync("Data/trainers.json", json);
         }

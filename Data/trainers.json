@@ -1,1 +1,992 @@
-[{"$id":"1","Effects":[],"CardId":{"$id":"2","Value":"c509a9f9-da98-4ede-b616-536ca2549193"},"Id":{"$id":"3","Value":"9f9f450c-44af-41e2-97fe-a4a0b874f654"},"SetCode":"base1","Name":"Defender","ImageUrl":"https://images.pokemontcg.io/base1/80_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"4","Effects":[{"$id":"5","$type":"TCGCards.TrainerEffects.DiscardCardEffect, TCGCards","OnlyOnCoinFlip":false,"Amount":1,"CardType":1,"EffectType":"Discard cards"},{"$id":"6","$type":"TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards","CardType":1,"EnergyType":0,"EffectType":"Search your deck for a card"}],"CardId":{"$id":"7","Value":"4e6e276f-0e80-49f4-b7e7-a0daa3e23564"},"Id":{"$id":"8","Value":"246846e2-b352-44d6-9263-fcacc647a4ea"},"SetCode":"base1","Name":"Pokémon Trader","ImageUrl":"https://images.pokemontcg.io/base1/77_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"9","Effects":[],"CardId":{"$id":"10","Value":"77499784-9104-44ab-a5c5-6be0940050b9"},"Id":{"$id":"11","Value":"bad48795-891f-4388-b136-7db959a5eca3"},"SetCode":"base1","Name":"Lass","ImageUrl":"https://images.pokemontcg.io/base1/75_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"12","Effects":[],"CardId":{"$id":"13","Value":"f6a23b62-a663-4001-b615-a164236150ea"},"Id":{"$id":"14","Value":"3e6c1ece-feb9-4307-b4a7-86cd785de514"},"SetCode":"base1","Name":"Scoop Up","ImageUrl":"https://images.pokemontcg.io/base1/78_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"15","Effects":[{"$id":"16","$type":"TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards","Opponents":true,"Amount":-1,"EffectType":"Shuffle hand into deck"},{"$id":"17","$type":"TCGCards.TrainerEffects.CardDrawEffect, TCGCards","Opponents":true,"OnlyOnCoinFlip":false,"Amount":7,"EffectType":"Draw cards"}],"CardId":{"$id":"18","Value":"b879bd3c-d1c8-43c5-b3d0-48129965ad0b"},"Id":{"$id":"19","Value":"0d951db3-9d99-4e55-9c10-ed1664645717"},"SetCode":"base1","Name":"Impostor Professor Oak","ImageUrl":"https://images.pokemontcg.io/base1/73_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"20","Effects":[{"$id":"21","$type":"TCGCards.TrainerEffects.DiscardCardEffect, TCGCards","OnlyOnCoinFlip":false,"Amount":1,"CardType":0,"EffectType":"Discard cards"},{"$id":"22","$type":"TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards","Amount":2,"CardType":4,"EffectType":"Pick from discard"}],"CardId":{"$id":"23","Value":"8babc8ba-1f98-44ce-b4b9-6d5921b28221"},"Id":{"$id":"24","Value":"7198d1ad-3fbb-4226-a34d-2cb6007d001f"},"SetCode":"base1","Name":"Energy Retrieval","ImageUrl":"https://images.pokemontcg.io/base1/81_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"25","Effects":[],"CardId":{"$id":"26","Value":"e80bbef7-833c-4d94-92bf-c4a3205e321d"},"Id":{"$id":"27","Value":"fb8d02f1-d05c-4207-8277-5af6b0e8e03d"},"SetCode":"base1","Name":"Pokémon Flute","ImageUrl":"https://images.pokemontcg.io/base1/86_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"28","Effects":[{"$id":"29","$type":"TCGCards.TrainerEffects.FullHealEffect, TCGCards","TargetingMode":0,"EffectType":"Full Heal"}],"CardId":{"$id":"30","Value":"e3b89ccc-551e-4f50-9a81-69ad41a75c51"},"Id":{"$id":"31","Value":"5c19c0d6-3071-4955-aa13-9e378d171b64"},"SetCode":"base1","Name":"Full Heal","ImageUrl":"https://images.pokemontcg.io/base1/82_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"32","Effects":[],"CardId":{"$id":"33","Value":"42a5d388-a7b5-447b-a284-a03a947689ed"},"Id":{"$id":"34","Value":"69d18371-4b2d-4d7a-ac18-a69207fe2866"},"SetCode":"base1","Name":"Clefairy Doll","ImageUrl":"https://images.pokemontcg.io/base1/70_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"35","Effects":[{"$id":"36","$type":"TCGCards.TrainerEffects.HealEffect, TCGCards","Amount":20,"TargetingMode":2,"EffectType":"Heal"}],"CardId":{"$id":"37","Value":"20207451-8b75-4a2f-806d-9284c2705ea9"},"Id":{"$id":"38","Value":"a7df174a-08df-406b-8f77-25f734210882"},"SetCode":"base1","Name":"Potion","ImageUrl":"https://images.pokemontcg.io/base1/94_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"39","Effects":[{"$id":"40","$type":"TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards","EffectType":"Swap Active Pokemon","IsChoice":false,"OpponentChooses":false,"Opponents":true,"OnlyOnCoinFlip":false}],"CardId":{"$id":"41","Value":"417e39e7-e818-4af2-892b-653164b3f15c"},"Id":{"$id":"42","Value":"fa39a7e1-92f1-406a-adc3-e4f45d0d13e5"},"SetCode":"base1","Name":"Gust of Wind","ImageUrl":"https://images.pokemontcg.io/base1/93_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"43","Effects":[{"$id":"44","$type":"TCGCards.TrainerEffects.DiscardCardEffect, TCGCards","OnlyOnCoinFlip":false,"Amount":2,"CardType":0,"EffectType":"Discard cards"},{"$id":"45","$type":"TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards","Amount":1,"CardType":2,"EffectType":"Pick from discard"}],"CardId":{"$id":"46","Value":"5a40d709-893a-4e47-87de-6762481e4f4a"},"Id":{"$id":"47","Value":"d47372b4-1a27-47b8-91da-2f660f226513"},"SetCode":"base1","Name":"Item Finder","ImageUrl":"https://images.pokemontcg.io/base1/74_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"48","Effects":[{"$id":"49","$type":"TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards","Opponents":false,"Amount":2,"EffectType":"Shuffle hand into deck"},{"$id":"50","$type":"TCGCards.TrainerEffects.CardDrawEffect, TCGCards","Opponents":false,"OnlyOnCoinFlip":false,"Amount":1,"EffectType":"Draw cards"}],"CardId":{"$id":"51","Value":"b148f0e9-e7f8-4546-9ff3-efbb360d56ba"},"Id":{"$id":"52","Value":"8b954cfb-09d2-4d31-b92a-a06ad760700f"},"SetCode":"base1","Name":"Maintenance","ImageUrl":"https://images.pokemontcg.io/base1/83_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"53","Effects":[{"$id":"54","$type":"TCGCards.TrainerEffects.CardDrawEffect, TCGCards","Opponents":false,"OnlyOnCoinFlip":false,"Amount":2,"EffectType":"Draw cards"}],"CardId":{"$id":"55","Value":"724d7079-50f2-4d83-94bc-bf5a3108b831"},"Id":{"$id":"56","Value":"e8940d05-9317-481d-b5d3-d29ee0cb14b1"},"SetCode":"base1","Name":"Bill","ImageUrl":"https://images.pokemontcg.io/base1/91_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"57","Effects":[{"$id":"58","$type":"TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards","EffectType":"Swap Active Pokemon","IsChoice":false,"OpponentChooses":false,"Opponents":false,"OnlyOnCoinFlip":false}],"CardId":{"$id":"59","Value":"a121dd82-a7af-4463-9959-07c047e0869f"},"Id":{"$id":"60","Value":"30f999cb-34b7-453e-9554-859c419e475e"},"SetCode":"base1","Name":"Switch","ImageUrl":"https://images.pokemontcg.io/base1/95_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"61","Effects":[],"CardId":{"$id":"62","Value":"d8f9f268-f45a-4688-9f6a-c2ac9b82653f"},"Id":{"$id":"63","Value":"9e38319f-2a9c-4d6b-a5d4-8daa0cdaabf8"},"SetCode":"base1","Name":"Pokédex","ImageUrl":"https://images.pokemontcg.io/base1/87_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"64","Effects":[{"$id":"65","$type":"TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards","TargetingMode":5,"Amount":1,"EnergyType":0,"CoinFlip":false,"EffectType":"Discard attached energy"}],"CardId":{"$id":"66","Value":"a3c3b3e5-b42b-4d59-9c33-2f26337ac9e0"},"Id":{"$id":"67","Value":"f1ec8acb-e0c0-4a6a-a6b3-8e7ce2cbf444"},"SetCode":"base1","Name":"Energy Removal","ImageUrl":"https://images.pokemontcg.io/base1/92_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"68","Effects":[{"$id":"69","$type":"TCGCards.TrainerEffects.DiscardCardEffect, TCGCards","OnlyOnCoinFlip":false,"Amount":2,"CardType":0,"EffectType":"Discard cards"},{"$id":"70","$type":"TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards","CardType":0,"EnergyType":0,"EffectType":"Search your deck for a card"}],"CardId":{"$id":"71","Value":"5bed935c-8086-408e-83fb-06eab740dc4c"},"Id":{"$id":"72","Value":"7827c8a5-b685-4ff3-97bf-1aa5ed2fa4cb"},"SetCode":"base1","Name":"Computer Search","ImageUrl":"https://images.pokemontcg.io/base1/71_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"73","Effects":[{"$id":"74","$type":"TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards","TargetingMode":2,"Amount":1,"EnergyType":0,"CoinFlip":false,"EffectType":"Discard attached energy"},{"$id":"75","$type":"TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards","TargetingMode":5,"Amount":2,"EnergyType":0,"CoinFlip":false,"EffectType":"Discard attached energy"}],"CardId":{"$id":"76","Value":"8608e8f2-8c53-495e-9683-642cee011348"},"Id":{"$id":"77","Value":"993329c6-c985-4fc6-9700-1d4aa4fbca36"},"SetCode":"base1","Name":"Super Energy Removal","ImageUrl":"https://images.pokemontcg.io/base1/79_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"78","Effects":[{"$id":"79","$type":"TCGCards.TrainerEffects.DiscardCardEffect, TCGCards","OnlyOnCoinFlip":false,"Amount":-1,"CardType":0,"EffectType":"Discard cards"},{"$id":"80","$type":"TCGCards.TrainerEffects.CardDrawEffect, TCGCards","Opponents":false,"OnlyOnCoinFlip":false,"Amount":7,"EffectType":"Draw cards"}],"CardId":{"$id":"81","Value":"62e41fa0-4923-4533-bbf3-7687971ab878"},"Id":{"$id":"82","Value":"f07fb62d-e07e-434a-a84c-a3f21fa24255"},"SetCode":"base1","Name":"Professor Oak","ImageUrl":"https://images.pokemontcg.io/base1/88_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"83","Effects":[],"CardId":{"$id":"84","Value":"e51266fc-a4a1-4ffa-a09c-2145ced358d0"},"Id":{"$id":"85","Value":"d0e2a035-8cf9-4c1c-81dc-f5eb3be6da32"},"SetCode":"base1","Name":"Devolution Spray","ImageUrl":"https://images.pokemontcg.io/base1/72_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"86","Effects":[],"CardId":{"$id":"87","Value":"8eb7e901-fcba-4140-b3f4-a2076e5ebae9"},"Id":{"$id":"88","Value":"120b515d-d614-4f6d-a204-d9351044656a"},"SetCode":"base1","Name":"PlusPower","ImageUrl":"https://images.pokemontcg.io/base1/84_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"89","Effects":[],"CardId":{"$id":"90","Value":"8bffc978-e29b-4c4c-8ebc-a477d42f2664"},"Id":{"$id":"91","Value":"eabbdc84-eb08-4ea2-802b-36a428ccf96a"},"SetCode":"base1","Name":"Super Potion","ImageUrl":"https://images.pokemontcg.io/base1/90_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"92","Effects":[],"CardId":{"$id":"93","Value":"33d0e4f6-42f7-4a07-8832-033a0a4ea1e1"},"Id":{"$id":"94","Value":"fa16a9a8-62f0-404b-927a-c771c4fcc1dc"},"SetCode":"base1","Name":"Pokémon Center","ImageUrl":"https://images.pokemontcg.io/base1/85_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"95","Effects":[],"CardId":{"$id":"96","Value":"ebc7402d-389d-41d8-a74a-d787b4ddaf2d"},"Id":{"$id":"97","Value":"244666bc-f9a8-4f69-bd9a-7866c66886be"},"SetCode":"base1","Name":"Revive","ImageUrl":"https://images.pokemontcg.io/base1/89_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"98","Effects":[],"CardId":{"$id":"99","Value":"8f5f210f-9c68-4652-9dc6-cec313235527"},"Id":{"$id":"100","Value":"f464f3f2-fc49-4815-81f5-25ddc08b8820"},"SetCode":"base1","Name":"Pokémon Breeder","ImageUrl":"https://images.pokemontcg.io/base1/76_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"101","Effects":[],"CardId":{"$id":"102","Value":"c0807c37-bed3-4803-9b75-5546e1f4cd2a"},"Id":{"$id":"103","Value":"39b28f25-4341-470d-8230-b7b1f43adfd8"},"SetCode":"base5","Name":"Digger","ImageUrl":"https://images.pokemontcg.io/base5/75_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"104","Effects":[{"$id":"105","$type":"TCGCards.TrainerEffects.DiscardCardEffect, TCGCards","OnlyOnCoinFlip":false,"Amount":1,"CardType":0,"EffectType":"Discard cards"},{"$id":"106","$type":"TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards","Opponents":true,"Amount":-1,"EffectType":"Shuffle hand into deck"},{"$id":"107","$type":"TCGCards.TrainerEffects.CardDrawEffect, TCGCards","Opponents":true,"OnlyOnCoinFlip":false,"Amount":4,"EffectType":"Draw cards"}],"CardId":{"$id":"108","Value":"8af2df5c-069a-4c70-a998-c7e8fa55eb64"},"Id":{"$id":"109","Value":"8b94a75c-91da-4cc3-bf05-3d6c01dd50d5"},"SetCode":"base5","Name":"Imposter Oak's Revenge","ImageUrl":"https://images.pokemontcg.io/base5/76_hires.png","Completed":true,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"110","Effects":[],"CardId":{"$id":"111","Value":"696726da-0872-4ada-9ddf-fb3137df229b"},"Id":{"$id":"112","Value":"189fb50a-d3dc-46ef-9262-17b8f1c2fa01"},"SetCode":"base5","Name":"Sleep!","ImageUrl":"https://images.pokemontcg.io/base5/79_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"113","Effects":[],"CardId":{"$id":"114","Value":"f3996d29-ab4b-4f75-8d65-328310f6b9bd"},"Id":{"$id":"115","Value":"5e8532a5-a8d9-4afd-a8fc-886b13273f46"},"SetCode":"base5","Name":"Here Comes Team Rocket!","ImageUrl":"https://images.pokemontcg.io/base5/71_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"116","Effects":[],"CardId":{"$id":"117","Value":"6d6da40d-2b8a-484c-b1df-01953d64eb67"},"Id":{"$id":"118","Value":"c381342b-b03f-4490-9ed4-f174f66a02f8"},"SetCode":"base5","Name":"Nightly Garbage Run","ImageUrl":"https://images.pokemontcg.io/base5/77_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"119","Effects":[],"CardId":{"$id":"120","Value":"aec0e37f-561e-4cee-b126-28908f38f7bb"},"Id":{"$id":"121","Value":"90c549f8-98ab-4892-ba93-273286b8d9e4"},"SetCode":"base5","Name":"Here Comes Team Rocket!","ImageUrl":"https://images.pokemontcg.io/base5/15_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"122","Effects":[],"CardId":{"$id":"123","Value":"0dba5be9-092d-4be1-8644-a7dea6ec41f9"},"Id":{"$id":"124","Value":"56885af9-6f75-4042-bc5b-081403f87f49"},"SetCode":"base5","Name":"Rocket's Sneak Attack","ImageUrl":"https://images.pokemontcg.io/base5/16_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"125","Effects":[],"CardId":{"$id":"126","Value":"94171457-01d1-4c1a-993a-bab8759142ce"},"Id":{"$id":"127","Value":"357071c9-a7ee-4ac5-8361-f4483676c171"},"SetCode":"base5","Name":"Rainbow Energy","ImageUrl":"https://images.pokemontcg.io/base5/17_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"128","Effects":[],"CardId":{"$id":"129","Value":"f06f8f0f-9f4a-4653-a55f-e903ad711349"},"Id":{"$id":"130","Value":"5ef94ad2-bc33-4a2a-95de-a9113a4da462"},"SetCode":"base5","Name":"Goop Gas Attack","ImageUrl":"https://images.pokemontcg.io/base5/78_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"131","Effects":[],"CardId":{"$id":"132","Value":"2b16d607-2557-4418-b18d-89c6f34612aa"},"Id":{"$id":"133","Value":"623ae613-6ec6-4173-be54-24be64ec1699"},"SetCode":"base5","Name":"Rocket's Sneak Attack","ImageUrl":"https://images.pokemontcg.io/base5/72_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"134","Effects":[],"CardId":{"$id":"135","Value":"f12c8049-2cc8-4d4e-acbe-abb680466aa8"},"Id":{"$id":"136","Value":"d372651b-d34f-4c32-9581-6f7e3026f971"},"SetCode":"base5","Name":"The Boss's Way","ImageUrl":"https://images.pokemontcg.io/base5/73_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"137","Effects":[],"CardId":{"$id":"138","Value":"d4b069e3-2d2a-4a76-afab-6381cc024417"},"Id":{"$id":"139","Value":"fe591130-646f-461d-970c-e953377442d5"},"SetCode":"base5","Name":"Challenge!","ImageUrl":"https://images.pokemontcg.io/base5/74_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false},{"$id":"140","Effects":[],"CardId":{"$id":"141","Value":"90a98997-2f24-428a-b52d-62db3b29ddff"},"Id":{"$id":"142","Value":"de8ad004-8d7d-43e1-a72d-660243606683"},"SetCode":"base2","Name":"Poké Ball","ImageUrl":"https://images.pokemontcg.io/base2/64_hires.png","Completed":false,"Owner":null,"IsRevealed":true,"IsTestCard":false,"IgnoreInBuilder":false}]
+[
+  {
+    "$id": "1",
+    "Effects": [],
+    "CardId": {
+      "$id": "2",
+      "Value": "c509a9f9-da98-4ede-b616-536ca2549193"
+    },
+    "Id": {
+      "$id": "3",
+      "Value": "9f9f450c-44af-41e2-97fe-a4a0b874f654"
+    },
+    "SetCode": "base1",
+    "Name": "Defender",
+    "ImageUrl": "https://images.pokemontcg.io/base1/80_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "4",
+    "Effects": [
+      {
+        "$id": "5",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "OnlyOnCoinFlip": false,
+        "Amount": 1,
+        "CardType": 1,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "6",
+        "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
+        "CardType": 1,
+        "EnergyType": 0,
+        "EffectType": "Search your deck for a card"
+      }
+    ],
+    "CardId": {
+      "$id": "7",
+      "Value": "4e6e276f-0e80-49f4-b7e7-a0daa3e23564"
+    },
+    "Id": {
+      "$id": "8",
+      "Value": "246846e2-b352-44d6-9263-fcacc647a4ea"
+    },
+    "SetCode": "base1",
+    "Name": "Pokémon Trader",
+    "ImageUrl": "https://images.pokemontcg.io/base1/77_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "9",
+    "Effects": [],
+    "CardId": {
+      "$id": "10",
+      "Value": "77499784-9104-44ab-a5c5-6be0940050b9"
+    },
+    "Id": {
+      "$id": "11",
+      "Value": "bad48795-891f-4388-b136-7db959a5eca3"
+    },
+    "SetCode": "base1",
+    "Name": "Lass",
+    "ImageUrl": "https://images.pokemontcg.io/base1/75_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "12",
+    "Effects": [],
+    "CardId": {
+      "$id": "13",
+      "Value": "f6a23b62-a663-4001-b615-a164236150ea"
+    },
+    "Id": {
+      "$id": "14",
+      "Value": "3e6c1ece-feb9-4307-b4a7-86cd785de514"
+    },
+    "SetCode": "base1",
+    "Name": "Scoop Up",
+    "ImageUrl": "https://images.pokemontcg.io/base1/78_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "15",
+    "Effects": [
+      {
+        "$id": "16",
+        "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
+        "Opponents": true,
+        "Amount": -1,
+        "EffectType": "Shuffle hand into deck"
+      },
+      {
+        "$id": "17",
+        "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
+        "Opponents": true,
+        "OnlyOnCoinFlip": false,
+        "Amount": 7,
+        "EffectType": "Draw cards"
+      }
+    ],
+    "CardId": {
+      "$id": "18",
+      "Value": "b879bd3c-d1c8-43c5-b3d0-48129965ad0b"
+    },
+    "Id": {
+      "$id": "19",
+      "Value": "0d951db3-9d99-4e55-9c10-ed1664645717"
+    },
+    "SetCode": "base1",
+    "Name": "Impostor Professor Oak",
+    "ImageUrl": "https://images.pokemontcg.io/base1/73_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "20",
+    "Effects": [
+      {
+        "$id": "21",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "OnlyOnCoinFlip": false,
+        "Amount": 1,
+        "CardType": 0,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "22",
+        "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
+        "Amount": 2,
+        "CardType": 4,
+        "EffectType": "Pick from discard"
+      }
+    ],
+    "CardId": {
+      "$id": "23",
+      "Value": "8babc8ba-1f98-44ce-b4b9-6d5921b28221"
+    },
+    "Id": {
+      "$id": "24",
+      "Value": "7198d1ad-3fbb-4226-a34d-2cb6007d001f"
+    },
+    "SetCode": "base1",
+    "Name": "Energy Retrieval",
+    "ImageUrl": "https://images.pokemontcg.io/base1/81_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "25",
+    "Effects": [],
+    "CardId": {
+      "$id": "26",
+      "Value": "e80bbef7-833c-4d94-92bf-c4a3205e321d"
+    },
+    "Id": {
+      "$id": "27",
+      "Value": "fb8d02f1-d05c-4207-8277-5af6b0e8e03d"
+    },
+    "SetCode": "base1",
+    "Name": "Pokémon Flute",
+    "ImageUrl": "https://images.pokemontcg.io/base1/86_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "28",
+    "Effects": [
+      {
+        "$id": "29",
+        "$type": "TCGCards.TrainerEffects.FullHealEffect, TCGCards",
+        "TargetingMode": 0,
+        "EffectType": "Full Heal"
+      }
+    ],
+    "CardId": {
+      "$id": "30",
+      "Value": "e3b89ccc-551e-4f50-9a81-69ad41a75c51"
+    },
+    "Id": {
+      "$id": "31",
+      "Value": "5c19c0d6-3071-4955-aa13-9e378d171b64"
+    },
+    "SetCode": "base1",
+    "Name": "Full Heal",
+    "ImageUrl": "https://images.pokemontcg.io/base1/82_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "32",
+    "Effects": [],
+    "CardId": {
+      "$id": "33",
+      "Value": "42a5d388-a7b5-447b-a284-a03a947689ed"
+    },
+    "Id": {
+      "$id": "34",
+      "Value": "69d18371-4b2d-4d7a-ac18-a69207fe2866"
+    },
+    "SetCode": "base1",
+    "Name": "Clefairy Doll",
+    "ImageUrl": "https://images.pokemontcg.io/base1/70_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "35",
+    "Effects": [
+      {
+        "$id": "36",
+        "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+        "Amount": 20,
+        "TargetingMode": 2,
+        "EffectType": "Heal"
+      }
+    ],
+    "CardId": {
+      "$id": "37",
+      "Value": "20207451-8b75-4a2f-806d-9284c2705ea9"
+    },
+    "Id": {
+      "$id": "38",
+      "Value": "a7df174a-08df-406b-8f77-25f734210882"
+    },
+    "SetCode": "base1",
+    "Name": "Potion",
+    "ImageUrl": "https://images.pokemontcg.io/base1/94_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "39",
+    "Effects": [
+      {
+        "$id": "40",
+        "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
+        "EffectType": "Swap Active Pokemon",
+        "IsChoice": false,
+        "OpponentChooses": false,
+        "Opponents": true,
+        "OnlyOnCoinFlip": false
+      }
+    ],
+    "CardId": {
+      "$id": "41",
+      "Value": "417e39e7-e818-4af2-892b-653164b3f15c"
+    },
+    "Id": {
+      "$id": "42",
+      "Value": "fa39a7e1-92f1-406a-adc3-e4f45d0d13e5"
+    },
+    "SetCode": "base1",
+    "Name": "Gust of Wind",
+    "ImageUrl": "https://images.pokemontcg.io/base1/93_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "43",
+    "Effects": [
+      {
+        "$id": "44",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "OnlyOnCoinFlip": false,
+        "Amount": 2,
+        "CardType": 0,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "45",
+        "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
+        "Amount": 1,
+        "CardType": 2,
+        "EffectType": "Pick from discard"
+      }
+    ],
+    "CardId": {
+      "$id": "46",
+      "Value": "5a40d709-893a-4e47-87de-6762481e4f4a"
+    },
+    "Id": {
+      "$id": "47",
+      "Value": "d47372b4-1a27-47b8-91da-2f660f226513"
+    },
+    "SetCode": "base1",
+    "Name": "Item Finder",
+    "ImageUrl": "https://images.pokemontcg.io/base1/74_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "48",
+    "Effects": [
+      {
+        "$id": "49",
+        "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
+        "Opponents": false,
+        "Amount": 2,
+        "EffectType": "Shuffle hand into deck"
+      },
+      {
+        "$id": "50",
+        "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
+        "Opponents": false,
+        "OnlyOnCoinFlip": false,
+        "Amount": 1,
+        "EffectType": "Draw cards"
+      }
+    ],
+    "CardId": {
+      "$id": "51",
+      "Value": "b148f0e9-e7f8-4546-9ff3-efbb360d56ba"
+    },
+    "Id": {
+      "$id": "52",
+      "Value": "8b954cfb-09d2-4d31-b92a-a06ad760700f"
+    },
+    "SetCode": "base1",
+    "Name": "Maintenance",
+    "ImageUrl": "https://images.pokemontcg.io/base1/83_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "53",
+    "Effects": [
+      {
+        "$id": "54",
+        "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
+        "Opponents": false,
+        "OnlyOnCoinFlip": false,
+        "Amount": 2,
+        "EffectType": "Draw cards"
+      }
+    ],
+    "CardId": {
+      "$id": "55",
+      "Value": "724d7079-50f2-4d83-94bc-bf5a3108b831"
+    },
+    "Id": {
+      "$id": "56",
+      "Value": "e8940d05-9317-481d-b5d3-d29ee0cb14b1"
+    },
+    "SetCode": "base1",
+    "Name": "Bill",
+    "ImageUrl": "https://images.pokemontcg.io/base1/91_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "57",
+    "Effects": [
+      {
+        "$id": "58",
+        "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
+        "EffectType": "Swap Active Pokemon",
+        "IsChoice": false,
+        "OpponentChooses": false,
+        "Opponents": false,
+        "OnlyOnCoinFlip": false
+      }
+    ],
+    "CardId": {
+      "$id": "59",
+      "Value": "a121dd82-a7af-4463-9959-07c047e0869f"
+    },
+    "Id": {
+      "$id": "60",
+      "Value": "30f999cb-34b7-453e-9554-859c419e475e"
+    },
+    "SetCode": "base1",
+    "Name": "Switch",
+    "ImageUrl": "https://images.pokemontcg.io/base1/95_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "61",
+    "Effects": [],
+    "CardId": {
+      "$id": "62",
+      "Value": "d8f9f268-f45a-4688-9f6a-c2ac9b82653f"
+    },
+    "Id": {
+      "$id": "63",
+      "Value": "9e38319f-2a9c-4d6b-a5d4-8daa0cdaabf8"
+    },
+    "SetCode": "base1",
+    "Name": "Pokédex",
+    "ImageUrl": "https://images.pokemontcg.io/base1/87_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "64",
+    "Effects": [
+      {
+        "$id": "65",
+        "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+        "TargetingMode": 5,
+        "Amount": 1,
+        "EnergyType": 0,
+        "CoinFlip": false,
+        "EffectType": "Discard attached energy"
+      }
+    ],
+    "CardId": {
+      "$id": "66",
+      "Value": "a3c3b3e5-b42b-4d59-9c33-2f26337ac9e0"
+    },
+    "Id": {
+      "$id": "67",
+      "Value": "f1ec8acb-e0c0-4a6a-a6b3-8e7ce2cbf444"
+    },
+    "SetCode": "base1",
+    "Name": "Energy Removal",
+    "ImageUrl": "https://images.pokemontcg.io/base1/92_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "68",
+    "Effects": [
+      {
+        "$id": "69",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "OnlyOnCoinFlip": false,
+        "Amount": 2,
+        "CardType": 0,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "70",
+        "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
+        "CardType": 0,
+        "EnergyType": 0,
+        "EffectType": "Search your deck for a card"
+      }
+    ],
+    "CardId": {
+      "$id": "71",
+      "Value": "5bed935c-8086-408e-83fb-06eab740dc4c"
+    },
+    "Id": {
+      "$id": "72",
+      "Value": "7827c8a5-b685-4ff3-97bf-1aa5ed2fa4cb"
+    },
+    "SetCode": "base1",
+    "Name": "Computer Search",
+    "ImageUrl": "https://images.pokemontcg.io/base1/71_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "73",
+    "Effects": [
+      {
+        "$id": "74",
+        "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+        "TargetingMode": 2,
+        "Amount": 1,
+        "EnergyType": 0,
+        "CoinFlip": false,
+        "EffectType": "Discard attached energy"
+      },
+      {
+        "$id": "75",
+        "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+        "TargetingMode": 5,
+        "Amount": 2,
+        "EnergyType": 0,
+        "CoinFlip": false,
+        "EffectType": "Discard attached energy"
+      }
+    ],
+    "CardId": {
+      "$id": "76",
+      "Value": "8608e8f2-8c53-495e-9683-642cee011348"
+    },
+    "Id": {
+      "$id": "77",
+      "Value": "993329c6-c985-4fc6-9700-1d4aa4fbca36"
+    },
+    "SetCode": "base1",
+    "Name": "Super Energy Removal",
+    "ImageUrl": "https://images.pokemontcg.io/base1/79_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "78",
+    "Effects": [
+      {
+        "$id": "79",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "OnlyOnCoinFlip": false,
+        "Amount": -1,
+        "CardType": 0,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "80",
+        "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
+        "Opponents": false,
+        "OnlyOnCoinFlip": false,
+        "Amount": 7,
+        "EffectType": "Draw cards"
+      }
+    ],
+    "CardId": {
+      "$id": "81",
+      "Value": "62e41fa0-4923-4533-bbf3-7687971ab878"
+    },
+    "Id": {
+      "$id": "82",
+      "Value": "f07fb62d-e07e-434a-a84c-a3f21fa24255"
+    },
+    "SetCode": "base1",
+    "Name": "Professor Oak",
+    "ImageUrl": "https://images.pokemontcg.io/base1/88_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "83",
+    "Effects": [],
+    "CardId": {
+      "$id": "84",
+      "Value": "e51266fc-a4a1-4ffa-a09c-2145ced358d0"
+    },
+    "Id": {
+      "$id": "85",
+      "Value": "d0e2a035-8cf9-4c1c-81dc-f5eb3be6da32"
+    },
+    "SetCode": "base1",
+    "Name": "Devolution Spray",
+    "ImageUrl": "https://images.pokemontcg.io/base1/72_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "86",
+    "Effects": [],
+    "CardId": {
+      "$id": "87",
+      "Value": "8eb7e901-fcba-4140-b3f4-a2076e5ebae9"
+    },
+    "Id": {
+      "$id": "88",
+      "Value": "120b515d-d614-4f6d-a204-d9351044656a"
+    },
+    "SetCode": "base1",
+    "Name": "PlusPower",
+    "ImageUrl": "https://images.pokemontcg.io/base1/84_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "89",
+    "Effects": [],
+    "CardId": {
+      "$id": "90",
+      "Value": "8bffc978-e29b-4c4c-8ebc-a477d42f2664"
+    },
+    "Id": {
+      "$id": "91",
+      "Value": "eabbdc84-eb08-4ea2-802b-36a428ccf96a"
+    },
+    "SetCode": "base1",
+    "Name": "Super Potion",
+    "ImageUrl": "https://images.pokemontcg.io/base1/90_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "92",
+    "Effects": [],
+    "CardId": {
+      "$id": "93",
+      "Value": "33d0e4f6-42f7-4a07-8832-033a0a4ea1e1"
+    },
+    "Id": {
+      "$id": "94",
+      "Value": "fa16a9a8-62f0-404b-927a-c771c4fcc1dc"
+    },
+    "SetCode": "base1",
+    "Name": "Pokémon Center",
+    "ImageUrl": "https://images.pokemontcg.io/base1/85_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "95",
+    "Effects": [],
+    "CardId": {
+      "$id": "96",
+      "Value": "ebc7402d-389d-41d8-a74a-d787b4ddaf2d"
+    },
+    "Id": {
+      "$id": "97",
+      "Value": "244666bc-f9a8-4f69-bd9a-7866c66886be"
+    },
+    "SetCode": "base1",
+    "Name": "Revive",
+    "ImageUrl": "https://images.pokemontcg.io/base1/89_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "98",
+    "Effects": [],
+    "CardId": {
+      "$id": "99",
+      "Value": "8f5f210f-9c68-4652-9dc6-cec313235527"
+    },
+    "Id": {
+      "$id": "100",
+      "Value": "f464f3f2-fc49-4815-81f5-25ddc08b8820"
+    },
+    "SetCode": "base1",
+    "Name": "Pokémon Breeder",
+    "ImageUrl": "https://images.pokemontcg.io/base1/76_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "101",
+    "Effects": [],
+    "CardId": {
+      "$id": "102",
+      "Value": "c0807c37-bed3-4803-9b75-5546e1f4cd2a"
+    },
+    "Id": {
+      "$id": "103",
+      "Value": "39b28f25-4341-470d-8230-b7b1f43adfd8"
+    },
+    "SetCode": "base5",
+    "Name": "Digger",
+    "ImageUrl": "https://images.pokemontcg.io/base5/75_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "104",
+    "Effects": [
+      {
+        "$id": "105",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "OnlyOnCoinFlip": false,
+        "Amount": 1,
+        "CardType": 0,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "106",
+        "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
+        "Opponents": true,
+        "Amount": -1,
+        "EffectType": "Shuffle hand into deck"
+      },
+      {
+        "$id": "107",
+        "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
+        "Opponents": true,
+        "OnlyOnCoinFlip": false,
+        "Amount": 4,
+        "EffectType": "Draw cards"
+      }
+    ],
+    "CardId": {
+      "$id": "108",
+      "Value": "8af2df5c-069a-4c70-a998-c7e8fa55eb64"
+    },
+    "Id": {
+      "$id": "109",
+      "Value": "8b94a75c-91da-4cc3-bf05-3d6c01dd50d5"
+    },
+    "SetCode": "base5",
+    "Name": "Imposter Oak's Revenge",
+    "ImageUrl": "https://images.pokemontcg.io/base5/76_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "110",
+    "Effects": [],
+    "CardId": {
+      "$id": "111",
+      "Value": "696726da-0872-4ada-9ddf-fb3137df229b"
+    },
+    "Id": {
+      "$id": "112",
+      "Value": "189fb50a-d3dc-46ef-9262-17b8f1c2fa01"
+    },
+    "SetCode": "base5",
+    "Name": "Sleep!",
+    "ImageUrl": "https://images.pokemontcg.io/base5/79_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "113",
+    "Effects": [],
+    "CardId": {
+      "$id": "114",
+      "Value": "f3996d29-ab4b-4f75-8d65-328310f6b9bd"
+    },
+    "Id": {
+      "$id": "115",
+      "Value": "5e8532a5-a8d9-4afd-a8fc-886b13273f46"
+    },
+    "SetCode": "base5",
+    "Name": "Here Comes Team Rocket!",
+    "ImageUrl": "https://images.pokemontcg.io/base5/71_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "116",
+    "Effects": [],
+    "CardId": {
+      "$id": "117",
+      "Value": "6d6da40d-2b8a-484c-b1df-01953d64eb67"
+    },
+    "Id": {
+      "$id": "118",
+      "Value": "c381342b-b03f-4490-9ed4-f174f66a02f8"
+    },
+    "SetCode": "base5",
+    "Name": "Nightly Garbage Run",
+    "ImageUrl": "https://images.pokemontcg.io/base5/77_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "119",
+    "Effects": [],
+    "CardId": {
+      "$id": "120",
+      "Value": "aec0e37f-561e-4cee-b126-28908f38f7bb"
+    },
+    "Id": {
+      "$id": "121",
+      "Value": "90c549f8-98ab-4892-ba93-273286b8d9e4"
+    },
+    "SetCode": "base5",
+    "Name": "Here Comes Team Rocket!",
+    "ImageUrl": "https://images.pokemontcg.io/base5/15_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "122",
+    "Effects": [],
+    "CardId": {
+      "$id": "123",
+      "Value": "0dba5be9-092d-4be1-8644-a7dea6ec41f9"
+    },
+    "Id": {
+      "$id": "124",
+      "Value": "56885af9-6f75-4042-bc5b-081403f87f49"
+    },
+    "SetCode": "base5",
+    "Name": "Rocket's Sneak Attack",
+    "ImageUrl": "https://images.pokemontcg.io/base5/16_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "125",
+    "Effects": [],
+    "CardId": {
+      "$id": "126",
+      "Value": "94171457-01d1-4c1a-993a-bab8759142ce"
+    },
+    "Id": {
+      "$id": "127",
+      "Value": "357071c9-a7ee-4ac5-8361-f4483676c171"
+    },
+    "SetCode": "base5",
+    "Name": "Rainbow Energy",
+    "ImageUrl": "https://images.pokemontcg.io/base5/17_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "128",
+    "Effects": [],
+    "CardId": {
+      "$id": "129",
+      "Value": "f06f8f0f-9f4a-4653-a55f-e903ad711349"
+    },
+    "Id": {
+      "$id": "130",
+      "Value": "5ef94ad2-bc33-4a2a-95de-a9113a4da462"
+    },
+    "SetCode": "base5",
+    "Name": "Goop Gas Attack",
+    "ImageUrl": "https://images.pokemontcg.io/base5/78_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "131",
+    "Effects": [],
+    "CardId": {
+      "$id": "132",
+      "Value": "2b16d607-2557-4418-b18d-89c6f34612aa"
+    },
+    "Id": {
+      "$id": "133",
+      "Value": "623ae613-6ec6-4173-be54-24be64ec1699"
+    },
+    "SetCode": "base5",
+    "Name": "Rocket's Sneak Attack",
+    "ImageUrl": "https://images.pokemontcg.io/base5/72_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "134",
+    "Effects": [],
+    "CardId": {
+      "$id": "135",
+      "Value": "f12c8049-2cc8-4d4e-acbe-abb680466aa8"
+    },
+    "Id": {
+      "$id": "136",
+      "Value": "d372651b-d34f-4c32-9581-6f7e3026f971"
+    },
+    "SetCode": "base5",
+    "Name": "The Boss's Way",
+    "ImageUrl": "https://images.pokemontcg.io/base5/73_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "137",
+    "Effects": [],
+    "CardId": {
+      "$id": "138",
+      "Value": "d4b069e3-2d2a-4a76-afab-6381cc024417"
+    },
+    "Id": {
+      "$id": "139",
+      "Value": "fe591130-646f-461d-970c-e953377442d5"
+    },
+    "SetCode": "base5",
+    "Name": "Challenge!",
+    "ImageUrl": "https://images.pokemontcg.io/base5/74_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "140",
+    "Effects": [],
+    "CardId": {
+      "$id": "141",
+      "Value": "90a98997-2f24-428a-b52d-62db3b29ddff"
+    },
+    "Id": {
+      "$id": "142",
+      "Value": "de8ad004-8d7d-43e1-a72d-660243606683"
+    },
+    "SetCode": "base2",
+    "Name": "Poké Ball",
+    "ImageUrl": "https://images.pokemontcg.io/base2/64_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  }
+]

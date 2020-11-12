@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -19,7 +20,17 @@ namespace CardEditor.ViewModels
 			trainerCardsViewModel = new TrainerCardsViewModel(SetViewModel.Sets);
 		}
 
-		public async Task Save()
+        internal async Task Commit()
+        {
+			await Save();
+
+			File.Copy("Data/sets.json", @"E:\Programming\PokemonTcg\Data\sets.json", true);
+			File.Copy("Data/pokemon.json", @"E:\Programming\PokemonTcg\Data\pokemon.json", true);
+			File.Copy("Data/energy.json", @"E:\Programming\PokemonTcg\Data\energy.json", true);
+			File.Copy("Data/trainers.json", @"E:\Programming\PokemonTcg\Data\trainers.json", true);
+		}
+
+        public async Task Save()
 		{
 			Directory.CreateDirectory("Data");
 			await SetViewModel.Save();

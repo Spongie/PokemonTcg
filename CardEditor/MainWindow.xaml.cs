@@ -16,6 +16,11 @@ namespace CardEditor
             DataContext = viewModel;
         }
 
+        private async void Button_Commit_Click(object sender, RoutedEventArgs e)
+        {
+            await viewModel.Commit();
+        }
+
         private async void Button_Save_Click(object sender, RoutedEventArgs e)
         {
             await viewModel.Save();
