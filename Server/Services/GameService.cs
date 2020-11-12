@@ -39,6 +39,7 @@ namespace Server.Services
             
             foreach (var card in deckInfo.Cards)
             {
+                card.Owner = player;
                 player.Deck.Cards.Push(card);
             }
 
@@ -62,6 +63,7 @@ namespace Server.Services
 
             foreach (var card in deckInfo.Cards)
             {
+                card.Owner = player;
                 player.Deck.Cards.Push(card);
             }
 
