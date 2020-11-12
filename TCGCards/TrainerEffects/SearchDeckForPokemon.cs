@@ -61,7 +61,7 @@ namespace TCGCards.TrainerEffects
         }
 
 
-        [DynamicInput("Add to bench")]
+        [DynamicInput("Add to bench", InputControl.Boolean)]
         public bool AddToBench
         {
             get { return addToBench; }
