@@ -35,7 +35,7 @@
             <RowDefinition Height="50*" />
             <RowDefinition Height="50*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.RowSpan="2">
+        <DockPanel Grid.RowSpan="2" x:Name="groupPanel">
             <Button Content="Add Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddPokemonCommand}"/>
             <Button Content="Import Pokemon" DockPanel.Dock="Bottom" Margin="5" Command="{Binding ImportPokemonCommand}"/>
             <Button Content="Import From set" DockPanel.Dock="Bottom" Margin="5" Command="{Binding ImportPokemonSetCommand}"/>
@@ -49,10 +49,13 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </DockPanel>
-            <ListBox Margin="2" DockPanel.Dock="Top" ItemsSource="{Binding FilteredPokemonCards}" SelectedItem="{Binding SelectedCard}" SelectionMode="Single">
+            <ListBox Margin="2" DockPanel.Dock="Top" ItemsSource="{Binding FilteredPokemonCards}" SelectedItem="{Binding SelectedCard}" SelectionMode="Single" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Label FontSize="18" FontWeight="Bold" Content="{Binding Card.Name}" Foreground="{Binding Card.Completed, Converter={StaticResource boolToColor}, Mode=TwoWay}" />
+                        <DockPanel>
+                            <Label FontSize="18" FontWeight="Bold" Content="{Binding Card.Name}" Foreground="{Binding Card.Completed, Converter={StaticResource boolToColor}, Mode=TwoWay}" />
+                            <Button HorizontalAlignment="Right" Content="&#xf1f8;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=groupPanel, Path=DataContext.DeleteSelectedPokemon}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                        </DockPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -174,7 +177,7 @@
                                             </ListBox.ItemTemplate>
                                         </ListBox>
                                     </DockPanel>
-                                    <DockPanel Grid.Column="1">
+                                    <DockPanel Grid.Column="1" LastChildFill="True">
                                         <local:DynamicInputControl DataContext="{Binding SelectedEffect}">
 
                                         </local:DynamicInputControl>

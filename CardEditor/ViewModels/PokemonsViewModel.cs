@@ -39,10 +39,18 @@ namespace CardEditor.ViewModels
 			ImportPokemonCommand = new RelayCommand(IsReady, ImportPokemon);
 			ImportPokemonSetCommand = new AsyncRelayCommand(IsSetSelected, ImportPokemonSet);
 			CopyExistingAttackCommand = new RelayCommand(IsPokemonSelected, CopyAttack);
+			DeleteSelectedPokemon = new RelayCommand(IsReady, DeletePokemon);
 			Sets = sets;
 			pokemonCards.CollectionChanged += PokemonCards_CollectionChanged;
 			PropertyChanged += PokemonsViewModel_PropertyChanged;
 			SelectedSet = Sets.FirstOrDefault();
+		}
+
+        private void DeletePokemon(object obj)
+        {
+			PokemonCards.Remove((PokemonViewModel)obj);
+			UpdatePokemonFilter();
+			SelectedCard = PokemonCards.First();
 		}
 
         private bool IsPokemonSelected(object obj)
@@ -278,5 +286,6 @@ namespace CardEditor.ViewModels
 		public ICommand AddPokemonCommand { get; set; }
 		public ICommand ImportPokemonSetCommand { get; set; }
         public ICommand CopyExistingAttackCommand { get; set; }
+        public ICommand DeleteSelectedPokemon { get; set; }
     }
 }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:CardEditor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="FontAwesome">/Fonts/fa-solid-900.ttf#Font Awesome 5 Free Solid</FontFamily>
     </Application.Resources>
 </Application>

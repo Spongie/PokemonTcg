@@ -70,33 +70,9 @@ namespace CardEditor.Util
 
 				if (!string.IsNullOrEmpty(attack.Description))
 				{
-					var firstPartApplyEffect = "Flip a coin. If heads, the Defending Pokémon is now";
-
-					if (attack.Description.ToLower().StartsWith(firstPartApplyEffect.ToLower()))
-                    {
-						StatusEffect? effect = stringToStatusEffect(attack.Description.Substring(firstPartApplyEffect.Length));
-						if (effect == null)
-                        {
-							isComplete = false;
-						}
-                        else
-                        {
-							attack.Effects.Add(new ApplyStatusEffect()
-							{
-								FlipCoin = true,
-								TargetingMode = TargetingMode.OpponentActive,
-								StatusEffect = effect.Value 
-							});
-							pokemon.Attacks.Add(attack);
-						}
-
-						if (pokemonSdk.Ability != null)
-                        {
-							isComplete = false;
-                        }
-                    }
-                    else
-                    {
+					isComplete = AttackCreator.TryAddEffects(ref attack, atk);
+					if (pokemonSdk.Ability != null)
+					{
 						isComplete = false;
 					}
 				}

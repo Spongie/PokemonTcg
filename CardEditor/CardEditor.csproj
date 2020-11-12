@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\fa-solid-900.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="PokemonTcgSdk" Version="1.1.0" />
   </ItemGroup>
 
@@ -14,6 +18,10 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
     <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\fa-solid-900.ttf" />
   </ItemGroup>
 
 </Project>
