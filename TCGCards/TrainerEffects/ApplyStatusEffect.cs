@@ -10,6 +10,7 @@ namespace TCGCards.TrainerEffects
         private StatusEffect statusEffect;
         private bool flipCoin;
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
+        private StatusEffect secondaryEffect = StatusEffect.None;
 
         [DynamicInput("Flip Coin?", InputControl.Boolean)]
         public bool FlipCoin
@@ -29,6 +30,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 statusEffect = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Secondary Effect", InputControl.Dropdown, typeof(StatusEffect))]
+        public StatusEffect SecondaryEffect
+        {
+            get { return secondaryEffect; }
+            set
+            {
+                secondaryEffect = value;
                 FirePropertyChanged();
             }
         }
@@ -59,7 +71,18 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
         {
-            switch (StatusEffect)
+            ApplyEffectTo(attachedTo, StatusEffect);
+            ApplyEffectTo(attachedTo, SecondaryEffect);
+        }
+
+        private void ApplyEffectTo(PokemonCard attachedTo, StatusEffect effect)
+        {
+            if (effect == StatusEffect.None)
+            {
+                return;
+            }
+
+            switch (effect)
             {
                 case StatusEffect.Sleep:
                     attachedTo.IsAsleep = true;
@@ -90,26 +113,8 @@ namespace TCGCards.TrainerEffects
 
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
 
-            switch (StatusEffect)
-            {
-                case StatusEffect.Sleep:
-                    target.IsAsleep = true;
-                    break;
-                case StatusEffect.Poison:
-                    target.IsPoisoned = true;
-                    break;
-                case StatusEffect.Paralyze:
-                    target.IsParalyzed = true;
-                    break;
-                case StatusEffect.Burn:
-                    target.IsBurned = true;
-                    break;
-                case StatusEffect.Confuse:
-                    target.IsConfused = true;
-                    break;
-                default:
-                    break;
-            }
+            ApplyEffectTo(target, StatusEffect);
+            ApplyEffectTo(target, SecondaryEffect);
         }
     }
 }

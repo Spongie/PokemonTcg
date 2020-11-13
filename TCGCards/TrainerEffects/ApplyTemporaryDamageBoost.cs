@@ -12,7 +12,7 @@ namespace TCGCards.TrainerEffects
         private int newDamage;
         private int turns = 2;
 
-        [DynamicInput("How maby turns")]
+        [DynamicInput("How many turns")]
         public int Turns
         {
             get { return turns; }

@@ -6,6 +6,7 @@
         Poison,
         Paralyze,
         Burn,
-        Confuse
+        Confuse,
+        None
     }
 }
