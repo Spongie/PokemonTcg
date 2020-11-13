@@ -2,20 +2,20 @@
 using CardEditor.Views;
 using NetworkingCore;
 
-namespace TCGCards.Core
+namespace TCGCards.Core.Abilities
 {
-    public class StopPokemonPowersAbility : PassiveAbility
+    public class StopTrainerCastsAbility : PassiveAbility
     {
         private bool onlyWhenActive;
 
-        public StopPokemonPowersAbility() : base(null)
+        public StopTrainerCastsAbility() : base(null)
         {
-            ModifierType = PassiveModifierType.NoPokemonPowers;
+            ModifierType = PassiveModifierType.StopTrainerCast;
         }
 
-        public StopPokemonPowersAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
+        public StopTrainerCastsAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            ModifierType = PassiveModifierType.NoPokemonPowers;
+            ModifierType = PassiveModifierType.RetreatCost;
         }
 
         [DynamicInput("Only when active", InputControl.Boolean)]
