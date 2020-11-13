@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core.Messages;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Core
 {
@@ -108,7 +109,9 @@ namespace TCGCards.Core
 
         public void RetreatActivePokemon(PokemonCard replacementPokemon, IEnumerable<EnergyCard> payedEnergy)
         {
-            if(!ActivePokemonCard.CanReatreat())
+            var retreatStoppers = GetAllPokemonCards().SelectMany(pokemon => pokemon.TemporaryAbilities.OfType<RetreatStopper>());
+
+            if(!ActivePokemonCard.CanReatreat() || retreatStoppers.Any())
                 return;
 
             foreach (var energyCard in payedEnergy)
