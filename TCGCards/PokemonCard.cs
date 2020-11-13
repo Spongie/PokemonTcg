@@ -159,6 +159,15 @@ namespace TCGCards
         {
             TemporaryAbilities.ForEach(x => x.TurnsLeft--);
             TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnsLeft > 0).ToList();
+            foreach (var attack in Attacks)
+            {
+                attack.DamageModifier?.ReduceTurnCount();
+
+                if (attack.DamageModifier != null && attack.DamageModifier.TurnsLeft <= 0)
+                {
+                    attack.DamageModifier = null;
+                }
+            }
 
             PlayedThisTurn = false;
             EvolvedThisTurn = false;

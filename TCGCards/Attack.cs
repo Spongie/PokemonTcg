@@ -8,6 +8,7 @@ using Entities.Models;
 using System.Collections.ObjectModel;
 using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects;
+using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards
 {
@@ -82,7 +83,15 @@ namespace TCGCards
 
         public int Damage
         {
-            get { return damage; }
+            get 
+            { 
+                if (DamageModifier != null)
+                {
+                    return DamageModifier.NewDamage;
+                }
+
+                return damage; 
+            }
             set
             {
                 damage = value;
@@ -113,6 +122,7 @@ namespace TCGCards
         public string AttackType { get => GetType().Name; }
         public NetworkId Id { get; set; }
         public bool Disabled { get; set; }
+        public DamageModifier DamageModifier { get; set; }
 
         public virtual void PayExtraCosts(GameField game, Player owner, Player opponent) 
         {
