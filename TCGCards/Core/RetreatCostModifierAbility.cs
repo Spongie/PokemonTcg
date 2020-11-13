@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using CardEditor.Views;
-using Entities;
 using NetworkingCore;
 
 namespace TCGCards.Core
