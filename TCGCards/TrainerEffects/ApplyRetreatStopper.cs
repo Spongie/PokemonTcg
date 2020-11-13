@@ -9,6 +9,18 @@ namespace TCGCards.TrainerEffects
     {
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
         private int turns = 2;
+        private bool flipCoin;
+
+        [DynamicInput("Flip Coin?", InputControl.Boolean)]
+        public bool FlipCoin
+        {
+            get { return flipCoin; }
+            set
+            {
+                flipCoin = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("How many turns")]
         public int Turns
@@ -52,6 +64,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
+            if (FlipCoin && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
             target.TemporaryAbilities.Add(new RetreatStopper(target, Turns));
         }
