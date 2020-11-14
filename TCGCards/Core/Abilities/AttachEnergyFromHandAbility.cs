@@ -11,14 +11,14 @@ namespace TCGCards.Core.Abilities
         private EnergyTypes energyType;
         private EnergyTypes pokemonType;
 
-        public AttachEnergyFromHandAbility() :base(null)
+        public AttachEnergyFromHandAbility() :this(null)
         {
 
         }
 
         public AttachEnergyFromHandAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-
+            TriggerType = TriggerType.Activation;
         }
 
         [DynamicInput("Valid pokemon type", InputControl.Dropdown, typeof(EnergyTypes))]

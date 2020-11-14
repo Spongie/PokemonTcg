@@ -49,6 +49,7 @@ namespace TCGCards.Core.Abilities
 
         public HealPokemonAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
+            TriggerType = TriggerType.Activation;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

@@ -17,7 +17,7 @@ namespace TCGCards.Core.Abilities
 
         public MoveEnergyAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            
+            TriggerType = TriggerType.Activation;
         }
 
         [DynamicInput("Valid energy type", InputControl.Dropdown, typeof(EnergyTypes))]

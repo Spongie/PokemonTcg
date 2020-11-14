@@ -17,6 +17,7 @@ namespace TCGCards.Core.Abilities
 
         public ChangeTypeAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
+            TriggerType = TriggerType.Activation;
         }
 
         [DynamicInput("Only to colors already in game", InputControl.Boolean)]

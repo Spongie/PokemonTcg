@@ -15,7 +15,7 @@ namespace TCGCards.Core.Abilities
 
         public EnergyTypeOverrideTemporaryAbility(PokemonCard owner) : base(owner)
         {
-
+            TriggerType = TriggerType.Passive;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
