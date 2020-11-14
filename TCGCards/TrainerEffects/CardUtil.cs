@@ -61,7 +61,7 @@ namespace TCGCards.TrainerEffects
             return filter;
         }
 
-        public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent)
+        public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner)
         {
             PokemonCard target;
             NetworkMessage message;
@@ -69,6 +69,9 @@ namespace TCGCards.TrainerEffects
 
             switch (targetingMode)
             {
+                case TargetingMode.Self:
+                    target = pokemonOwner;
+                    break;
                 case TargetingMode.YourActive:
                     target = caster.ActivePokemonCard;
                     break;

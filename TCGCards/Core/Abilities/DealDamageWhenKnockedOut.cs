@@ -64,7 +64,7 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.KilledByAttack;
         }
 
-        protected override void Activate(Player player, Player opponent, int damageTake, GameLog log)
+        protected override void Activate(Player player, Player opponent, int damageTake, GameField game)
         {
             if (coinFlip && CoinFlipper.FlipCoin())
                 return;
@@ -76,7 +76,7 @@ namespace TCGCards.Core.Abilities
                 damage *= PokemonOwner.AttachedEnergy.Count(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType);
             }
 
-            PokemonOwner.KnockedOutBy.DealDamage(new Damage(damage), log);
+            PokemonOwner.KnockedOutBy.DealDamage(new Damage(damage), game.GameLog);
 
             if (PokemonOwner.KnockedOutBy.IsDead())
                 PokemonOwner.KnockedOutBy.KnockedOutBy = PokemonOwner;

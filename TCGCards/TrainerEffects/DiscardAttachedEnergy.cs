@@ -82,7 +82,7 @@ namespace TCGCards.TrainerEffects
         {
             while (true)
             {
-                PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
+                PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
                 if (target.AttachedEnergy.Count < Amount)
                 {

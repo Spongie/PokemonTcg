@@ -29,7 +29,7 @@ namespace TCGCards.Core.Abilities
         {
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             var message = new DeckSearchMessage(owner.Deck, new List<IDeckFilter> { new EvolutionPokemonFilter() }, amount).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);

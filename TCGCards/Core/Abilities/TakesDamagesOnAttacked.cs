@@ -16,7 +16,7 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.TakesDamage;
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             opponent.ActivePokemonCard.DamageCounters += DamageReturned;
         }

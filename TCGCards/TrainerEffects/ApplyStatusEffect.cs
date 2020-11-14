@@ -111,7 +111,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
+            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             ApplyEffectTo(target, StatusEffect);
             ApplyEffectTo(target, SecondaryEffect);

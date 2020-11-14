@@ -44,7 +44,7 @@ namespace TCGCards.Core.Abilities
         }
 
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             IEnumerable<EnergyCard> energyCards;
 

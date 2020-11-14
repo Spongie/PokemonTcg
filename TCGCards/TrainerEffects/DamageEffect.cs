@@ -49,7 +49,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
-            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
+            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             target.DamageCounters += Amount;
         }

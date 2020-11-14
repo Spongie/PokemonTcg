@@ -38,7 +38,7 @@ namespace TCGCards.Core.Abilities
             return base.CanActivate() && pokemons.Count >= 2 && pokemons.Any(p => p.AttachedEnergy.Any(e => EnergyType == EnergyTypes.All || e.EnergyType == EnergyType));
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             PokemonCard selectedPokemon = null;
             do

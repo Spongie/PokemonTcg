@@ -41,9 +41,9 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.DealsDamage;
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            ((PokemonCard)target).DealDamage(new Damage(Amount), log);
+            ((PokemonCard)target).DealDamage(new Damage(Amount), game.GameLog);
         }
 
         public override bool CanActivate()

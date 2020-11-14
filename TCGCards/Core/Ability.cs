@@ -17,7 +17,7 @@ namespace TCGCards.Core
             Id = NetworkId.Generate();
         }
 
-        protected abstract void Activate(Player owner, Player opponent, int damageTaken, GameLog log);
+        protected abstract void Activate(Player owner, Player opponent, int damageTaken, GameField game);
 
         public TriggerType TriggerType
         {
@@ -65,16 +65,16 @@ namespace TCGCards.Core
         public NetworkId Id { get; set; }
         public int UsedTimes { get; set; }
 
-        public void Trigger(Player owner, Player opponent, int damageTaken, GameLog log)
+        public void Trigger(Player owner, Player opponent, int damageTaken, GameField game)
         {
             if (CanActivate())
             {
                 UsedTimes++;
-                Activate(owner, opponent, damageTaken, log);
+                Activate(owner, opponent, damageTaken, game);
             }
             else
             {
-                log.AddMessage(Name + " did not activate because of something");
+                game.GameLog.AddMessage(Name + " did not activate because of something");
             }
         }
 

@@ -10,7 +10,7 @@ namespace TCGCards.Core.Abilities
     {
         private bool onlyToColorsInGame;
 
-        public ChangeTypeAbility()
+        public ChangeTypeAbility() :this(null)
         {
 
         }
@@ -30,7 +30,7 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             var message = new SelectColorMessage("Select a new type for " + PokemonOwner.Name)
             {

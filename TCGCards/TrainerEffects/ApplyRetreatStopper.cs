@@ -69,7 +69,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent);
+            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
             target.TemporaryAbilities.Add(new RetreatStopper(target, Turns));
         }
     }

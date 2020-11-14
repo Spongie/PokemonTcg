@@ -9,6 +9,7 @@
         OpponentBench,
         OpponentPokemon,
         AnyPokemon,
-        AttachedTo
+        AttachedTo,
+        Self
     }
 }

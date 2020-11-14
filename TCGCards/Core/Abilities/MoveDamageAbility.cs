@@ -32,7 +32,7 @@ namespace TCGCards.Core.Abilities
         }
 
 
-        protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+        protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             var availablePokemons = new List<PokemonCard>(owner.BenchedPokemon);
             availablePokemons.Add(owner.ActivePokemonCard);

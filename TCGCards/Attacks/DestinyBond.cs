@@ -21,9 +21,9 @@ namespace TCGCards.Attacks
                 TriggerType = TriggerType.Dies;
             }
 
-            protected override void Activate(Player owner, Player opponent, int damageTaken, GameLog log)
+            protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
             {
-                log.AddMessage($"{PokemonOwner.KnockedOutBy.GetName()} knocked out {PokemonOwner.Name} and dies itself");
+                game.GameLog?.AddMessage($"{PokemonOwner.KnockedOutBy.GetName()} knocked out {PokemonOwner.Name} and dies itself");
                 PokemonOwner.KnockedOutBy.DamageCounters = 9000;
             }
         }
