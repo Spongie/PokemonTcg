@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
+using System;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
@@ -9,10 +10,10 @@ namespace TCGCards.TrainerEffects
     public class PutPokemonFromDiscardOnBench : DataModel, IEffect
     {
         private bool targetsOpponent;
-        private int withRemainingHealth;
+        private float withRemainingHealth;
 
-        [DynamicInput("Health to come back to (0 = full)")]
-        public int WithRemainingHealth
+        [DynamicInput("Health to come back to (0 = full, 0.X for X%)")]
+        public float WithRemainingHealth
         {
             get { return withRemainingHealth; }
             set
@@ -72,18 +73,29 @@ namespace TCGCards.TrainerEffects
 
             var card = game.FindCardById(response);
 
-            var pokemon = (PokemonCard)card;
+            var pokemonCard = (PokemonCard)card;
 
-            target.BenchedPokemon.Add(pokemon);
+            target.BenchedPokemon.Add(pokemonCard);
             target.DiscardPile.Remove(card);
 
-            if (WithRemainingHealth > 0)
+            if (WithRemainingHealth > 0 && WithRemainingHealth < 1)
             {
-                pokemon.DamageCounters = pokemon.Hp - WithRemainingHealth;
+                var health = (int)Math.Ceiling(pokemonCard.Hp * WithRemainingHealth);
+
+                if (health.ToString().Last() == '5')
+                {
+                    health += 5;
+                }
+
+                pokemonCard.DamageCounters = health;
+            }
+            else if (WithRemainingHealth > 1)
+            {
+                pokemonCard.DamageCounters = pokemonCard.Hp - (int)WithRemainingHealth;
             }
             else
             {
-                pokemon.DamageCounters = 0;
+                pokepokemonCardmon.DamageCounters = 0;
             }
         }
     }
