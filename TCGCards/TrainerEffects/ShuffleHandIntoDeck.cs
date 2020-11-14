@@ -10,6 +10,18 @@ namespace TCGCards.TrainerEffects
     {
         private bool opponents;
         private int amount = -1;
+        private CardType cardType = CardType.Any;
+
+        [DynamicInput("Only shuffle card of type", InputControl.Dropdown, typeof(CardType))]
+        public CardType CardType
+        {
+            get { return cardType; }
+            set
+            {
+                cardType = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Targets opponent?", InputControl.Boolean)]
         public bool Opponents
@@ -55,13 +67,13 @@ namespace TCGCards.TrainerEffects
 
             if (amount == -1)
             {
-                target.Deck.ShuffleInCards(opponent.Hand);
+                target.Deck.ShuffleInCards(CardUtil.GetCardsOfType(target.Hand, CardType));
                 target.Hand.Clear();
             }
             else
             {
                 var message = new DiscardCardsMessage(Amount);
-                var choices = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(game.Id)).Cards;
+                var choices = target.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(game.Id)).Cards;
 
                 var cards = choices.Select(id => game.FindCardById(id)).ToList();
 

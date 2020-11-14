@@ -29,6 +29,12 @@ namespace TCGCards.Core
             NetworkPlayer.Send(message);
         }
 
+        internal void RevealCards(List<Card> hand)
+        {
+            var message = new RevealCardsMessage(hand).ToNetworkMessage(Id);
+            NetworkPlayer.Send(message);
+        }
+
         public Player(INetworkPlayer networkPlayer) :this()
         {
             SetNetworkPlayer(networkPlayer);
