@@ -14765,6 +14765,7 @@
           {
             "$id": "1319",
             "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
+            "OnlyBasic": false,
             "TargetingMode": 3,
             "ShuffleIntoDeck": false,
             "ReturnAttachedToHand": true,
@@ -14869,6 +14870,7 @@
           {
             "$id": "1329",
             "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
+            "OnlyBasic": false,
             "TargetingMode": 3,
             "ShuffleIntoDeck": false,
             "ReturnAttachedToHand": true,

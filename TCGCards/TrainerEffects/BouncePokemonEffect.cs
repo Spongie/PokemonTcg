@@ -12,7 +12,7 @@ namespace TCGCards.TrainerEffects
         private bool returnAttachedToHand;
         private bool onlyBasic;
 
-        [DynamicInput("Only return basic version")]
+        [DynamicInput("Only return basic version", InputControl.Boolean)]
         public bool OnlyBasic
         {
             get { return onlyBasic; }
