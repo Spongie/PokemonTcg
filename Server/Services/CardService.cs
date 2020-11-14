@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TCGCards;
+using TCGCards.Core;
 
 namespace Server.Services
 {
@@ -39,13 +40,20 @@ namespace Server.Services
 
         public bool UpdateCards(string pokemonCards, string energyCards, string tainerCards, string sets)
         {
+            Logger.Instance.Log("Received card updates, updating cards...");
+
             File.WriteAllText("pokemon.json", pokemonCards);
             File.WriteAllText("energy.json", energyCards);
             File.WriteAllText("trainers.json", tainerCards);
             File.WriteAllText("sets.json", sets);
 
-            Logger.Instance.Log("Received card updates, reloading caches...");
+            Logger.Instance.Log("reloading caches...");
             InitTypes();
+
+            var version = new VersionNumber(File.ReadAllText("cards.version"));
+            version.Minor++;
+            File.WriteAllText("cards.version", version.ToString());
+
             Logger.Instance.Log("Update complete");
 
             return true;

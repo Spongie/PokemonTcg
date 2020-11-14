@@ -34,10 +34,10 @@ namespace Server
                 client.Disconnect(false);
             }
 
-            Console.CursorTop = defaultConsoleTop;
+            //Console.CursorTop = defaultConsoleTop;
 
-            Console.WriteLine("Active Connections: " + Clients.Count.ToString().PadLeft(5));
-            Console.WriteLine("Active Games: " + ((GameService)services[typeof(GameService).Name]).ActiveGames.Count);
+            //Console.WriteLine("Active Connections: " + Clients.Count.ToString().PadLeft(5));
+            //Console.WriteLine("Active Games: " + ((GameService)services[typeof(GameService).Name]).ActiveGames.Count);
         }
 
         public void Start(int port)
