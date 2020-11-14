@@ -9,6 +9,18 @@ namespace TCGCards.TrainerEffects
     public class PutPokemonFromDiscardOnBench : DataModel, IEffect
     {
         private bool targetsOpponent;
+        private int withRemainingHealth;
+
+        [DynamicInput("Health to come back to (0 = full)")]
+        public int WithRemainingHealth
+        {
+            get { return withRemainingHealth; }
+            set
+            {
+                withRemainingHealth = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Targets opponent", InputControl.Boolean)]
         public bool TargetsOpponent
@@ -60,8 +72,19 @@ namespace TCGCards.TrainerEffects
 
             var card = game.FindCardById(response);
 
-            target.BenchedPokemon.Add((PokemonCard)card);
+            var pokemon = (PokemonCard)card;
+
+            target.BenchedPokemon.Add(pokemon);
             target.DiscardPile.Remove(card);
+
+            if (WithRemainingHealth > 0)
+            {
+                pokemon.DamageCounters = pokemon.Hp - WithRemainingHealth;
+            }
+            else
+            {
+                pokemon.DamageCounters = 0;
+            }
         }
     }
 }
