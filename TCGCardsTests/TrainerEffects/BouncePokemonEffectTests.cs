@@ -89,7 +89,7 @@ namespace TCGCards.TrainerEffects.Tests
                 Cards = new List<NetworkId> { other.Id }
             });
             opponent.SetNetworkPlayer(sub);
-            
+
             effect.Process(new GameField(), new Player(), opponent);
 
             Assert.AreEqual(2, opponent.Deck.Cards.Count);
@@ -130,6 +130,75 @@ namespace TCGCards.TrainerEffects.Tests
 
             Assert.AreEqual(2, opponent.Hand.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);
+        }
+
+        [TestMethod()]
+        public void Bounce_EvolvedPokemon()
+        {
+            var effect = new BouncePokemonEffect()
+            {
+                ShuffleIntoDeck = false,
+                ReturnAttachedToHand = true,
+                TargetingMode = TargetingMode.OpponentActive
+            };
+
+            var opponent = new Player();
+
+            var pokemon = new PokemonCard(opponent) { Name = "Pokemon1", Stage = 0 };
+            var evolution = new PokemonCard(opponent) { Name = "Evo", Stage = 1, EvolvesFrom = "Pokemon1" };
+            opponent.ActivePokemonCard = evolution;
+
+            pokemon.Evolve(evolution);
+            var other = new PokemonCard(opponent);
+            opponent.BenchedPokemon.Add(other);
+
+            var sub = Substitute.For<INetworkPlayer>();
+            sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage
+            {
+                Cards = new List<NetworkId> { other.Id }
+            });
+            opponent.SetNetworkPlayer(sub);
+
+            effect.Process(new GameField(), new Player(), opponent);
+
+            Assert.AreEqual(2, opponent.Hand.Count);
+        }
+
+        [TestMethod()]
+        public void Bounce_EvolvedPokemon_OnlyBasic()
+        {
+            var effect = new BouncePokemonEffect()
+            {
+                OnlyBasic = true,
+                ShuffleIntoDeck = false,
+                ReturnAttachedToHand = true,
+                TargetingMode = TargetingMode.OpponentActive
+            };
+
+            var opponent = new Player();
+
+            var pokemon = new PokemonCard(opponent) { Name = "Pokemon1", Stage = 0 };
+            var evolution = new PokemonCard(opponent) { Name = "Evo", Stage = 1, EvolvesFrom = "Pokemon1" };
+            opponent.ActivePokemonCard = evolution;
+
+            pokemon.Evolve(evolution);
+            var other = new PokemonCard(opponent);
+            opponent.BenchedPokemon.Add(other);
+
+            var sub = Substitute.For<INetworkPlayer>();
+            sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage
+            {
+                Cards = new List<NetworkId> { other.Id }
+            });
+            opponent.SetNetworkPlayer(sub);
+
+            effect.Process(new GameField(), new Player(), opponent);
+
+            Assert.AreEqual(1, opponent.Hand.Count);
+            Assert.AreEqual(pokemon.Id, opponent.Hand[0].Id);
+
+            Assert.AreEqual(1, opponent.DiscardPile.Count);
+            Assert.AreEqual(evolution.Id, opponent.DiscardPile[0].Id);
         }
     }
 }

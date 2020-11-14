@@ -10,6 +10,18 @@ namespace TCGCards.TrainerEffects
         private TargetingMode targetingMode; 
         private bool shuffleIntoDeck;
         private bool returnAttachedToHand;
+        private bool onlyBasic;
+
+        [DynamicInput("Only return basic version")]
+        public bool OnlyBasic
+        {
+            get { return onlyBasic; }
+            set
+            {
+                onlyBasic = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Target", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -71,31 +83,157 @@ namespace TCGCards.TrainerEffects
         {
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            if (shuffleIntoDeck)
+            if (onlyBasic)
             {
-                foreach (var card in target.AttachedEnergy)
+                ReturnOnlyBasic(target, shuffleIntoDeck);
+            }
+            else if (shuffleIntoDeck)
+            {
+                ShuffleCardsIntoDeck(target);
+            }
+            else
+            {
+                ReturnCardsToHand(target);
+            }
+        }
+
+        private void ReturnOnlyBasic(PokemonCard target, bool shuffleIntoDeck)
+        {
+            foreach (var card in target.AttachedEnergy)
+            {
+                if (shuffleIntoDeck)
                 {
                     target.Owner.Deck.Cards.Push(card);
                 }
-                target.AttachedEnergy.Clear();
-                target.Owner.Deck.Cards.Push(target);
-                target.Owner.Deck.Shuffle();
-
-                if (target == target.Owner.ActivePokemonCard)
+                else if (ReturnAttachedToHand)
                 {
-                    target.Owner.ActivePokemonCard = null;
-                    target.Owner.SelectActiveFromBench();
+                    target.Owner.Hand.Add(card);
+                }
+                else
+                {
+                    target.Owner.DiscardPile.Add(card);
+                }
+            }
+            target.AttachedEnergy.Clear();
+
+            if (target.Stage == 0)
+            {
+                if (shuffleIntoDeck)
+                {
+                    target.Owner.Deck.Cards.Push(target);
+                }
+                else
+                {
+                    target.Owner.DiscardPile.Add(target);
                 }
 
                 return;
             }
 
+            var pokemon = target;
+
+            if (pokemon.Stage == 0)
+            {
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
+            }
+            else if (pokemon.Stage == 1)
+            {
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
+                pokemon.EvolvedFrom = null;
+            }
+            else
+            {
+                target.Owner.DiscardPile.Add(pokemon.EvolvedFrom.EvolvedFrom);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom.EvolvedFrom);
+                pokemon.EvolvedFrom.EvolvedFrom = null;
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom);
+                pokemon.EvolvedFrom = null;
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
+            }
+        }
+
+        private void DiscardOrBounceBasic(PokemonCard target, bool shuffleIntoDeck, PokemonCard pokemon)
+        {
+            if (pokemon.Stage > 0)
+            {
+                target.Owner.DiscardPile.Add(pokemon);
+            }
+            else if (shuffleIntoDeck)
+            {
+                target.Owner.Deck.Cards.Push(pokemon);
+            }
+            else if (returnAttachedToHand)
+            {
+                target.Owner.Hand.Add(pokemon);
+            }
+            else
+            {
+                target.Owner.DiscardPile.Add(pokemon);
+            }
+        }
+
+        private void ReturnCardsToHand(PokemonCard target)
+        {
             foreach (var card in target.AttachedEnergy)
             {
-                target.Owner.Hand.Add(card);
+                if (ReturnAttachedToHand)
+                {
+                    target.Owner.Hand.Add(card);
+                }
+                else
+                {
+                    target.Owner.DiscardPile.Add(card);
+                }
             }
             target.AttachedEnergy.Clear();
+
+            var evolution2 = target;
+
+            while (evolution2.EvolvedFrom != null)
+            {
+                if (ReturnAttachedToHand)
+                {
+                    target.Owner.Hand.Add(evolution2.EvolvedFrom);
+                }
+                else
+                {
+                    target.Owner.DiscardPile.Add(evolution2.EvolvedFrom);
+                }
+
+                evolution2 = evolution2.EvolvedFrom;
+                evolution2.EvolvedFrom = null;
+            }
+
             target.Owner.Hand.Add(target);
+
+            if (target == target.Owner.ActivePokemonCard)
+            {
+                target.Owner.ActivePokemonCard = null;
+                target.Owner.SelectActiveFromBench();
+            }
+        }
+
+        private static void ShuffleCardsIntoDeck(PokemonCard target)
+        {
+            foreach (var card in target.AttachedEnergy)
+            {
+                target.Owner.Deck.Cards.Push(card);
+            }
+            target.AttachedEnergy.Clear();
+
+            var evolution = target;
+
+            while (evolution.EvolvedFrom != null)
+            {
+                target.Owner.Deck.Cards.Push(evolution.EvolvedFrom);
+
+                evolution = evolution.EvolvedFrom;
+                evolution.EvolvedFrom = null;
+            }
+
+            target.Owner.Deck.Cards.Push(target);
+            target.Owner.Deck.Shuffle();
 
             if (target == target.Owner.ActivePokemonCard)
             {
