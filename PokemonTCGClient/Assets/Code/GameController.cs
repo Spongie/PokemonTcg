@@ -274,6 +274,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.PickFromList, OnStartPickFromList);
             NetworkManager.Instance.RegisterCallback(MessageTypes.AttachEnergyToBench, OnStartAttachingEnergyBench);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DeckSearch, OnDeckSearch);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.RevealCardsMessage, OnCardsRevealed);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectAttack, OnStartSelectAttack);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickPrize);
@@ -284,6 +285,21 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
             NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameEvent, OnGameEventReceived);
+        }
+
+        private void OnCardsRevealed(object message, NetworkId arg2)
+        {
+            var revealMessage = (RevealCardsMessage)message;
+
+            if (revealMessage.Cards.Count == 1)
+            {
+                eventViewer?.QueueEvent(revealMessage.Cards.First());
+            }
+            else
+            {
+                selectFromListPanel.SetActive(true);
+                selectFromListPanel.GetComponent<SelectFromListPanel>().InitView(revealMessage.Cards);
+            }
         }
 
         private void OnStartSelectAttack(object message, NetworkId messageId)

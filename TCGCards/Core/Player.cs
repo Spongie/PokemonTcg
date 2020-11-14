@@ -23,6 +23,12 @@ namespace TCGCards.Core
             DiscardPile = new List<Card>();
         }
 
+        internal void RevealCard(Card card)
+        {
+            var message = new RevealCardsMessage(new List<Card> { card }).ToNetworkMessage(Id);
+            NetworkPlayer.Send(message);
+        }
+
         public Player(INetworkPlayer networkPlayer) :this()
         {
             SetNetworkPlayer(networkPlayer);

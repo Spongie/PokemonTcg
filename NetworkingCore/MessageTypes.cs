@@ -27,5 +27,6 @@
         GameEvent,
         SelectAttack,
         SelectedAttack,
+        RevealCardsMessage,
     }
 }
