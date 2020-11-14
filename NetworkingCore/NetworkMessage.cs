@@ -6,6 +6,9 @@ namespace NetworkingCore
 {
     public class NetworkMessage
     {
+        public const int KEY = 13;
+        public const int EXTRA = 37;
+
         public NetworkMessage()
         {
 
@@ -40,6 +43,11 @@ namespace NetworkingCore
             var jsonBytes = Encoding.UTF8.GetBytes(message);
 
             var prefixBytes = BitConverter.GetBytes(jsonBytes.Length);
+            var key = BitConverter.GetBytes(KEY);
+            var extra = BitConverter.GetBytes(EXTRA);
+
+            stream.Write(key, 0, key.Length);
+            stream.Write(extra, 0, extra.Length);
             stream.Write(prefixBytes, 0, prefixBytes.Length);
             
             stream.Write(jsonBytes, 0, jsonBytes.Length);

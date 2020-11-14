@@ -95,11 +95,33 @@ namespace NetworkingCore
                 byte[] data;
                 using(var inputStream = new MemoryStream())
                 {
+                    byte[] key = new byte[sizeof(int)];
+                    byte[] extra = new byte[sizeof(int)];
                     byte[] dataPrefix = new byte[sizeof(int)];
                     int receivedPrefixBytes;
 
                     try
                     {
+                        var received = stream.Read(key, 0, sizeof(int));
+                        if (received != 4)
+                        {
+                            Disconnect(false);
+                            return;
+                        }
+                        received = stream.Read(extra, 0, sizeof(int));
+                        if (received != 4)
+                        {
+                            Disconnect(false);
+                            return;
+                        }
+
+                        if (BitConverter.ToInt32(key, 0) != NetworkMessage.KEY 
+                            || BitConverter.ToInt32(extra, 0) != NetworkMessage.EXTRA)
+                        {
+                            Disconnect(false);
+                            return;
+                        }
+
                         receivedPrefixBytes = stream.Read(dataPrefix, 0, sizeof(int));
                     }
                     catch
