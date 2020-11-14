@@ -23,7 +23,6 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-
         [DynamicInput("Prevent Poison", InputControl.Boolean)]
         public bool PreventPoison
         {

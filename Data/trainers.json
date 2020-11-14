@@ -971,19 +971,30 @@
   },
   {
     "$id": "140",
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "141",
+        "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
+        "EffectType": "Search your deck for Pokémon",
+        "CoinFlip": true,
+        "Amount": 1,
+        "Names": null,
+        "EnergyType": 0,
+        "AddToBench": false
+      }
+    ],
     "CardId": {
-      "$id": "141",
+      "$id": "142",
       "Value": "90a98997-2f24-428a-b52d-62db3b29ddff"
     },
     "Id": {
-      "$id": "142",
+      "$id": "143",
       "Value": "de8ad004-8d7d-43e1-a72d-660243606683"
     },
     "SetCode": "base2",
     "Name": "Poké Ball",
     "ImageUrl": "https://images.pokemontcg.io/base2/64_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,

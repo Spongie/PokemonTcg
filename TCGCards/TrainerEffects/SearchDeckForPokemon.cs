@@ -25,6 +25,18 @@ namespace TCGCards.TrainerEffects
         private EnergyTypes energyType = EnergyTypes.None;
         private string names;
         private int amount;
+        private bool coinFlip;
+
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Amount")]
         public int Amount
@@ -90,6 +102,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             var message = new DeckSearchMessage(caster.Deck, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) }, Amount);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(caster.Id));
 
