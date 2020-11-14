@@ -95,7 +95,7 @@ namespace TCGCards.TrainerEffects
             }
             else
             {
-                pokepokemonCardmon.DamageCounters = 0;
+                pokemonCard.DamageCounters = 0;
             }
         }
     }
