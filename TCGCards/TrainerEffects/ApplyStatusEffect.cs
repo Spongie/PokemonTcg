@@ -82,26 +82,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            switch (effect)
-            {
-                case StatusEffect.Sleep:
-                    attachedTo.IsAsleep = true;
-                    break;
-                case StatusEffect.Poison:
-                    attachedTo.IsPoisoned = true;
-                    break;
-                case StatusEffect.Paralyze:
-                    attachedTo.IsParalyzed = true;
-                    break;
-                case StatusEffect.Burn:
-                    attachedTo.IsBurned = true;
-                    break;
-                case StatusEffect.Confuse:
-                    attachedTo.IsConfused = true;
-                    break;
-                default:
-                    break;
-            }
+            attachedTo.ApplyStatusEffect(effect);
         }
 
         public void Process(GameField game, Player caster, Player opponent)

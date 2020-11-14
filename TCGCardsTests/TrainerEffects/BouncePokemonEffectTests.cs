@@ -90,7 +90,7 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
             
-            effect.Process(new GameField(), null, opponent);
+            effect.Process(new GameField(), new Player(), opponent);
 
             Assert.AreEqual(2, opponent.Deck.Cards.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);
@@ -126,7 +126,7 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), null, opponent);
+            effect.Process(new GameField(), new Player(), opponent);
 
             Assert.AreEqual(2, opponent.Hand.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);

@@ -4,6 +4,7 @@
     {
         RetreatCost,
         StopTrainerCast,
-        NoPokemonPowers
+        NoPokemonPowers,
+        StopStatusEffects
     }
 }

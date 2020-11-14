@@ -11,7 +11,7 @@ namespace TCGCards.Core
             if (CoinFlipper.FlipCoin())
             {
                 log.AddMessage("Coin flipped heads defending pokemon is now Paralyzed");
-                target.IsParalyzed = true;
+                target.ApplyStatusEffect(StatusEffect.Paralyze);
             }
             else
             {
@@ -24,7 +24,7 @@ namespace TCGCards.Core
             if (CoinFlipper.FlipCoin())
             {
                 log.AddMessage("Coin flipped heads defending pokemon is now Confused");
-                target.IsParalyzed = true;
+                target.ApplyStatusEffect(StatusEffect.Confuse);
             }
             else
             {
@@ -37,7 +37,7 @@ namespace TCGCards.Core
             if (CoinFlipper.FlipCoin())
             {
                 log.AddMessage("Coin flipped heads defending pokemon is now Burned");
-                target.IsBurned = true;
+                target.ApplyStatusEffect(StatusEffect.Burn);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace TCGCards.Core
             if (CoinFlipper.FlipCoin())
             {
                 log.AddMessage("Coin flipped heads defending pokemon is now Asleep");
-                target.IsAsleep = true;
+                target.ApplyStatusEffect(StatusEffect.Sleep);
             }
             else
             {
@@ -63,7 +63,7 @@ namespace TCGCards.Core
             if (CoinFlipper.FlipCoin())
             {
                 log.AddMessage("Coin flipped heads defending pokemon is now Poisoned");
-                target.IsPoisoned = true;
+                target.ApplyStatusEffect(StatusEffect.Poison);
             }
             else
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.Abilities;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards
@@ -292,6 +293,39 @@ namespace TCGCards
         public bool CanEvolveTo(PokemonCard evolution)
         {
             return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
+        }
+
+        public void ApplyStatusEffect(StatusEffect statusEffect)
+        {
+            var statusPreventer = Ability as PreventStatusEffects;
+
+            if (statusPreventer != null && statusPreventer.PreventsEffect(statusEffect))
+            {
+                return;
+            }
+
+            switch (statusEffect)
+            {
+                case StatusEffect.Sleep:
+                    IsAsleep = true;
+                    break;
+                case StatusEffect.Poison:
+                    IsPoisoned = true;
+                    break;
+                case StatusEffect.Paralyze:
+                    IsParalyzed = true;
+                    break;
+                case StatusEffect.Burn:
+                    IsBurned = true;
+                    break;
+                case StatusEffect.Confuse:
+                    IsConfused = true;
+                    break;
+                case StatusEffect.None:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TCGCards.Core;
+﻿using Entities;
+using TCGCards.Core;
 
 namespace TCGCards.Attacks
 {
@@ -6,7 +7,7 @@ namespace TCGCards.Attacks
     {
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            opponent.ActivePokemonCard.IsPoisoned = true;
+            opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect.Poison);
             opponent.ActivePokemonCard.DoublePoison = true;
         }
     }
