@@ -75,9 +75,11 @@ namespace CardEditor.Util
 
 				if (!string.IsNullOrEmpty(attack.Description))
 				{
-					isComplete = AttackCreator.TryAddEffects(ref attack, atk);
+					var attackOk = AttackCreator.TryAddEffects(ref attack, atk);
 
-					if (isComplete)
+					isComplete = isComplete && attackOk;
+
+					if (attackOk)
                     {
 						pokemon.Attacks.Add(attack);
 					}

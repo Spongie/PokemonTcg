@@ -1,4 +1,5 @@
 ﻿using CardEditor.Views;
+using Entities;
 using Entities.Models;
 using TCGCards.Core;
 
@@ -8,6 +9,18 @@ namespace TCGCards.TrainerEffects
     {
         private TargetingMode targetingMode;
         private int amount;
+        private bool coinFlip;
+
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Heal amount")]
         public int Amount
@@ -43,6 +56,11 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
         {
+            if (CoinFlip && CoinFlipper.FlipCoin())
+            {
+                return;
+            }
+
             attachedTo.DamageCounters -= Amount;
 
             if (attachedTo.DamageCounters < 0)
@@ -53,6 +71,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             target.DamageCounters -= Amount;
