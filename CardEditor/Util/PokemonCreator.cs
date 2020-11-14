@@ -50,6 +50,11 @@ namespace CardEditor.Util
 
 			bool isComplete = true;
 
+			if (pokemonSdk.Attacks == null)
+            {
+				pokemonSdk.Attacks = new List<PokemonTcgSdk.Models.Attack>();
+			}
+
 			foreach (var atk in pokemonSdk.Attacks)
 			{
 				var attack = new Attack
@@ -71,45 +76,27 @@ namespace CardEditor.Util
 				if (!string.IsNullOrEmpty(attack.Description))
 				{
 					isComplete = AttackCreator.TryAddEffects(ref attack, atk);
-					if (pokemonSdk.Ability != null)
-					{
-						isComplete = false;
+
+					if (isComplete)
+                    {
+						pokemon.Attacks.Add(attack);
 					}
 				}
-				else if (!string.IsNullOrEmpty(attack.Description) || pokemonSdk.Ability != null)
+				else
 				{
-					isComplete = false;
-				}
-                else
-                {
 					pokemon.Attacks.Add(attack);
 				}
+			}
 
+			if (pokemonSdk.Ability != null)
+			{
+				isComplete = false;
 			}
 
 			pokemon.Completed = isComplete;
 
 			return pokemon;
 		}
-
-		private static StatusEffect? stringToStatusEffect(string value)
-        {
-            switch (value.ToLower().Trim().Replace(".", string.Empty))
-            {
-				case "poisoned":
-					return StatusEffect.Poison;
-				case "paralyzed":
-					return StatusEffect.Paralyze;
-				case "asleep":
-					return StatusEffect.Burn;
-				case "confused":
-					return StatusEffect.Confuse;
-				case "burned":
-					return StatusEffect.Burn;
-				default:
-					return null;
-            }
-        }
 
 		private static List<Energy> GenerateCost(List<string> cost)
 		{
