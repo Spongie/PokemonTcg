@@ -1,5 +1,6 @@
 ﻿using Assets.Code._2D;
 using Entities;
+using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core.Messages;
 using UnityEngine;
@@ -11,18 +12,45 @@ namespace Assets.Code.UI.Game
     {
         private EnergyResourceManager energyResources;
         public GameObject buttonHolder;
+        private bool onlyColorsInGame;
 
-        public void Init(string message)
+        public void Init(string message, bool onlyInGame)
         {
             GetComponent<Text>().text = message;
+            onlyColorsInGame = onlyInGame;
+        }
+
+        private HashSet<EnergyTypes> GetEnergyTypesInGame()
+        {
+            var set = new HashSet<EnergyTypes>();
+
+            set.Add(GameController.Instance.Player.ActivePokemonCard.PokemonType);
+            set.Add(GameController.Instance.OpponentPlayer.ActivePokemonCard.PokemonType);
+
+            foreach (var pokemon in GameController.Instance.Player.BenchedPokemon)
+            {
+                set.Add(pokemon.PokemonType);
+            }
+            foreach (var pokemon in GameController.Instance.OpponentPlayer.BenchedPokemon)
+            {
+                set.Add(pokemon.PokemonType);
+            }
+
+            return set;
         }
 
         private void Start()
         {
             energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
+            HashSet<EnergyTypes> typesInGame = GetEnergyTypesInGame();
 
             foreach (var key in energyResources.Icons.Keys)
             {
+                if (onlyColorsInGame && !typesInGame.Contains(key))
+                {
+                    continue;
+                }
+
                 var child = new GameObject();
                 child.transform.SetParent(buttonHolder.transform);
                 Button button = child.AddComponent<Button>();

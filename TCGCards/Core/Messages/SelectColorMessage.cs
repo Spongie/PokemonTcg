@@ -24,5 +24,6 @@ namespace TCGCards.Core.Messages
         public string Message { get; set; }
 
         public EnergyTypes Color { get; set; }
+        public bool OnlyColorsInGame { get; set; }
     }
 }
