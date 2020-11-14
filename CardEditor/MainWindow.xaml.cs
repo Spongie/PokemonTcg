@@ -37,12 +37,7 @@ namespace CardEditor
 
         private async void Upload_Click(object sender, RoutedEventArgs e)
         {
-            var tcp = new TcpClient();
-            //tcp.Connect("85.90.244.171", 8080);
-            tcp.Connect("127.0.0.1", 8080);
-            var player = new NetworkPlayer(tcp);
-
-            while (player.Id == null) { }
+            NetworkPlayer player = CreateConnection();
 
             var cardService = new CardService(player);
 
@@ -54,6 +49,40 @@ namespace CardEditor
             cardService.UpdateCards(pokemons, energy, trainers, sets);
 
             MessageBox.Show("Data uploaded!");
+        }
+
+        private static NetworkPlayer CreateConnection()
+        {
+            var tcp = new TcpClient();
+            //tcp.Connect("85.90.244.171", 8080);
+            tcp.Connect("127.0.0.1", 8080);
+            var player = new NetworkPlayer(tcp);
+
+            while (player.Id == null) { }
+
+            return player;
+        }
+
+        private async void Download_Click(object sender, RoutedEventArgs e)
+        {
+            var player = CreateConnection();
+            var service = new InfoService(player);
+
+            var pokemons = service.GetPokemonJson();
+            await File.WriteAllTextAsync("Data/pokemon.json", pokemons);
+
+            var sets = service.GetSetsJson();
+            await File.WriteAllTextAsync("Data/sets.json", sets);
+
+            var trainers = service.GetTrainerJson();
+            await File.WriteAllTextAsync("Data/trainers.json", trainers);
+
+            var energy = service.GetEnergyJson();
+            await File.WriteAllTextAsync("Data/energy.json", energy);
+
+            await viewModel.Load();
+
+            MessageBox.Show("Data refreshed!");
         }
     }
 }
