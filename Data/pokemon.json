@@ -17597,5 +17597,4853 @@
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1585",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 2,
+    "Weakness": 5,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1586",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1587",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Wing Attack",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1588",
+          "Value": "3df0be66-8d26-4a35-b90d-853b32e897c6"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1589",
+      "Value": "d5149490-4b7a-4d13-be05-3e7ce4df9010"
+    },
+    "Id": {
+      "$id": "1590",
+      "Value": "e06b3f7e-e3d8-431a-9f64-f8949e166d9e"
+    },
+    "SetCode": "base3",
+    "Name": "Aerodactyl",
+    "ImageUrl": "https://images.pokemontcg.io/base3/1_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1591",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 2,
+    "Weakness": 5,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1592",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1593",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Wing Attack",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1594",
+          "Value": "d53e8019-a3a4-48bc-8501-144383075e3f"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1595",
+      "Value": "900d1026-645a-4e7e-86d7-398878eafc52"
+    },
+    "Id": {
+      "$id": "1596",
+      "Value": "7c4962b5-6246-4129-ac12-11115c879980"
+    },
+    "SetCode": "base3",
+    "Name": "Aerodactyl",
+    "ImageUrl": "https://images.pokemontcg.io/base3/16_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1597",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 5,
+    "RetreatCost": 2,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Ekans",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1598",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1599",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": false,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1600",
+            "EnergyType": 5,
+            "Amount": 2
+          },
+          {
+            "$id": "1601",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "The Defending Pokémon is now Poisoned.",
+        "Name": "Poison Fang",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1602",
+          "Value": "fd8453da-a7cf-4855-acaa-a1a6e43f4c1b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1603",
+      "Value": "99b26a26-277f-4510-bedc-7af15e8f2a0a"
+    },
+    "Id": {
+      "$id": "1604",
+      "Value": "c1e414f9-0c5c-4acf-8376-8ffd61fa9d77"
+    },
+    "SetCode": "base3",
+    "Name": "Arbok",
+    "ImageUrl": "https://images.pokemontcg.io/base3/31_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1605",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 3,
+    "RetreatCost": 2,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1606",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1607",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1608",
+            "EnergyType": 3,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Freeze Dry",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1609",
+          "Value": "2c159342-3d32-4a6e-90e1-7d1ecb61221b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1610",
+      "Value": "f03c1f95-335b-453d-a5a6-f12c823edf57"
+    },
+    "Id": {
+      "$id": "1611",
+      "Value": "ba83d46b-2c30-4f53-83b5-5aacea10b975"
+    },
+    "SetCode": "base3",
+    "Name": "Articuno",
+    "ImageUrl": "https://images.pokemontcg.io/base3/17_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1612",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 3,
+    "RetreatCost": 2,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1613",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1614",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1615",
+            "EnergyType": 3,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Freeze Dry",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1616",
+          "Value": "dde7feef-6ab4-4b73-aabe-60e8a617925b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1617",
+      "Value": "3b2954e5-c925-4513-afca-ebc2b4842595"
+    },
+    "Id": {
+      "$id": "1618",
+      "Value": "43c7f907-abd0-41da-b8bc-ce702624d13b"
+    },
+    "SetCode": "base3",
+    "Name": "Articuno",
+    "ImageUrl": "https://images.pokemontcg.io/base3/2_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1619",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 3,
+    "RetreatCost": 2,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "Shellder",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1620",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 2,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1621",
+            "EnergyType": 3,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "Flip 2 coins. This attack does 30 damage times the number of heads.",
+        "Name": "Spike Cannon",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1622",
+          "Value": "f64c26a7-899f-4712-ade1-c56b3107a82f"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1623",
+      "Value": "e18a3196-c595-4d10-8468-88d3ed56e52c"
+    },
+    "Id": {
+      "$id": "1624",
+      "Value": "4a8c0ff1-0f0b-4277-97c8-f6c9a48a8464"
+    },
+    "SetCode": "base3",
+    "Name": "Cloyster",
+    "ImageUrl": "https://images.pokemontcg.io/base3/32_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1625",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 2,
+    "RetreatCost": 1,
+    "Weakness": 8,
+    "Resistance": 7,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1626",
+      "Value": "b792bf47-d990-4e6d-b1ca-b327c487d50e"
+    },
+    "Id": {
+      "$id": "1627",
+      "Value": "9385999c-bd1f-427c-a975-4991bc031924"
+    },
+    "SetCode": "base3",
+    "Name": "Ditto",
+    "ImageUrl": "https://images.pokemontcg.io/base3/3_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1628",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 2,
+    "RetreatCost": 1,
+    "Weakness": 8,
+    "Resistance": 7,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1629",
+      "Value": "cfc7d8ca-ef20-4c60-85d8-dc61a2add064"
+    },
+    "Id": {
+      "$id": "1630",
+      "Value": "59ece64c-d4eb-4fb3-90fe-8e9c601ba3e1"
+    },
+    "SetCode": "base3",
+    "Name": "Ditto",
+    "ImageUrl": "https://images.pokemontcg.io/base3/18_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1631",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 100,
+    "Type": 2,
+    "RetreatCost": 1,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "Dragonair",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1632",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 2,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1633",
+            "EnergyType": 2,
+            "Amount": 4
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "Flip 2 coins. This attack does 40 damage times the number of heads.",
+        "Name": "Slam",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1634",
+          "Value": "5605ab8a-2ff3-4de2-b76c-014c2efeeb97"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1635",
+      "Value": "cdbb0d4f-f7c0-457c-b059-9795bdad9c05"
+    },
+    "Id": {
+      "$id": "1636",
+      "Value": "9af36fd2-9759-492d-90cc-abf62559a22f"
+    },
+    "SetCode": "base3",
+    "Name": "Dragonite",
+    "ImageUrl": "https://images.pokemontcg.io/base3/4_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1637",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 100,
+    "Type": 2,
+    "RetreatCost": 1,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "Dragonair",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1638",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 2,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1639",
+            "EnergyType": 2,
+            "Amount": 4
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "Flip 2 coins. This attack does 40 damage times the number of heads.",
+        "Name": "Slam",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1640",
+          "Value": "78a2dcb0-a003-4534-a52d-e3af8b15a6c1"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1641",
+      "Value": "a434faf3-d54f-4fd4-b380-ff028f69dd12"
+    },
+    "Id": {
+      "$id": "1642",
+      "Value": "ef07cfa3-be5b-4dcd-bcae-8746a10215c0"
+    },
+    "SetCode": "base3",
+    "Name": "Dragonite",
+    "ImageUrl": "https://images.pokemontcg.io/base3/19_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1643",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 40,
+    "Type": 5,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1644",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1645",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1646",
+            "EnergyType": 5,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
+        "Name": "Spit Poison",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1647",
+          "Value": "6a61bffd-e837-4821-b5e7-e71f7c95a6c4"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1648",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1649",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1650",
+            "EnergyType": 5,
+            "Amount": 1
+          },
+          {
+            "$id": "1651",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Wrap",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1652",
+          "Value": "333a3247-3941-4e3e-8587-40da4fe2dbc1"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1653",
+      "Value": "5356d60d-133c-4784-b085-6dadc6fa0877"
+    },
+    "Id": {
+      "$id": "1654",
+      "Value": "d1816c6f-1965-4d71-b4d8-ef72ef100f92"
+    },
+    "SetCode": "base3",
+    "Name": "Ekans",
+    "ImageUrl": "https://images.pokemontcg.io/base3/46_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1655",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 7,
+    "RetreatCost": 0,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1656",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1657",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1658",
+            "EnergyType": 7,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Lick",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1659",
+          "Value": "ca1de62e-d27c-4938-902a-627547b94feb"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1660",
+        "$type": "TCGCards.Attacks.SelfDamageAttack, TCGCards",
+        "CoinFlip": false,
+        "Amount": 10,
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1661",
+            "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
+            "Amount": 2,
+            "CardType": 3,
+            "EffectType": "Pick from discard"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1662",
+            "EnergyType": 7,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Put up to 2 energy cards from your discard pile into your hand. Gastly does 10 damage to itself",
+        "Name": "Energy Conversion",
+        "AttackType": "SelfDamageAttack",
+        "Id": {
+          "$id": "1663",
+          "Value": "28021b70-f2ff-4468-a04a-ea4747643eb8"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1664",
+      "Value": "b46c0ba8-44f6-4c70-9f51-7160e4b82cbc"
+    },
+    "Id": {
+      "$id": "1665",
+      "Value": "26caf373-8a8b-43ce-a5e3-72fd55631ffc"
+    },
+    "SetCode": "base3",
+    "Name": "Gastly",
+    "ImageUrl": "https://images.pokemontcg.io/base3/33_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1666",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 7,
+    "RetreatCost": 1,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "Haunter",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1667",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1668",
+            "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+            "Amount": 10,
+            "TargetingMode": 5,
+            "EffectType": "Damage"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1669",
+            "EnergyType": 6,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 10 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)",
+        "Name": "Dark Mind",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1670",
+          "Value": "18c49b6b-6f4a-499c-8031-bc1419691bd5"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1671",
+      "Value": "8de4fc8f-2e42-45df-a3ab-a31e9f44a979"
+    },
+    "Id": {
+      "$id": "1672",
+      "Value": "dee89a56-ac9c-4b91-a04f-96af4f5b3817"
+    },
+    "SetCode": "base3",
+    "Name": "Gengar",
+    "ImageUrl": "https://images.pokemontcg.io/base3/5_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1673",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 7,
+    "RetreatCost": 1,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "Haunter",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1674",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1675",
+            "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+            "Amount": 10,
+            "TargetingMode": 5,
+            "EffectType": "Damage"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1676",
+            "EnergyType": 6,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 10 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)",
+        "Name": "Dark Mind",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1677",
+          "Value": "a2ff1671-da8e-4cf8-b49f-1929404174c3"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1678",
+      "Value": "adc538f6-c934-4a03-aa4a-806705661232"
+    },
+    "Id": {
+      "$id": "1679",
+      "Value": "e9c7759f-153d-4409-b325-d5c0d143da87"
+    },
+    "SetCode": "base3",
+    "Name": "Gengar",
+    "ImageUrl": "https://images.pokemontcg.io/base3/20_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1680",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1681",
+      "Value": "684903f5-7272-41aa-9ee3-2bc4eee4a4d2"
+    },
+    "Id": {
+      "$id": "1682",
+      "Value": "9cdee025-f092-410a-924a-6799a32e041a"
+    },
+    "SetCode": "base3",
+    "Name": "Geodude",
+    "ImageUrl": "https://images.pokemontcg.io/base3/47_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1683",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 5,
+    "RetreatCost": 0,
+    "Weakness": 7,
+    "Resistance": 8,
+    "EvolvesFrom": "Zubat",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1684",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1685",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Wing Attack",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1686",
+          "Value": "73383624-7b2b-406e-9b5d-9861b0e0eabb"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1687",
+        "$type": "TCGCards.Attacks.DrainAttack, TCGCards",
+        "HealingMultiplier": 1.0,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1688",
+            "EnergyType": 5,
+            "Amount": 2
+          },
+          {
+            "$id": "1689",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "Remove a number of damage counters from Golbat equal to the damage done to the Defending Pokemon",
+        "Name": "Leech Life",
+        "AttackType": "DrainAttack",
+        "Id": {
+          "$id": "1690",
+          "Value": "a0959b6f-4d7d-49b6-a31c-18481f04115f"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1691",
+      "Value": "8df93f56-9707-4c60-b69a-462b264514d5"
+    },
+    "Id": {
+      "$id": "1692",
+      "Value": "bcc42ea4-2b8d-4c11-ac99-585f21c3f63d"
+    },
+    "SetCode": "base3",
+    "Name": "Golbat",
+    "ImageUrl": "https://images.pokemontcg.io/base3/34_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1693",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 3,
+    "RetreatCost": 1,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "Psyduck",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1694",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1695",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1696",
+            "EnergyType": 7,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Psyshock",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1697",
+          "Value": "46feec1c-3a9c-4052-a1c8-50f583c8fd98"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1698",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1699",
+            "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+            "TargetingMode": 3,
+            "Amount": 1,
+            "EnergyType": 0,
+            "CoinFlip": false,
+            "EffectType": "Discard attached energy"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1700",
+            "EnergyType": 3,
+            "Amount": 2
+          },
+          {
+            "$id": "1701",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "If the Defending Pokémon has any Energy attached to it, choose 1 and discard it",
+        "Name": "Hyper Beam",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1702",
+          "Value": "696c88c8-0b00-49d9-bdc6-fe00405f97b9"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1703",
+      "Value": "993b9423-70a4-4ef8-8f32-cdf5c7d8bdf8"
+    },
+    "Id": {
+      "$id": "1704",
+      "Value": "1f5d3f09-3b12-4456-acaa-73a37730a9b8"
+    },
+    "SetCode": "base3",
+    "Name": "Golduck",
+    "ImageUrl": "https://images.pokemontcg.io/base3/35_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1705",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 8,
+    "RetreatCost": 4,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "Graveler",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1706",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1707",
+            "EnergyType": 8,
+            "Amount": 3
+          },
+          {
+            "$id": "1708",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 60,
+        "Description": "",
+        "Name": "Avalanche",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1709",
+          "Value": "b58fd452-7bff-43e0-8629-469a5a1276c4"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1710",
+        "$type": "TCGCards.Attacks.DamageManyAttack, TCGCards",
+        "TeamBenchDamage": 20,
+        "EnemyBenchDamage": 20,
+        "SelfDamage": 100,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1711",
+            "EnergyType": 8,
+            "Amount": 4
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 100,
+        "Description": "Does 20 damage to each Pokémon on each player's Bench. (Don't apply Weakness and Resistance for Benched Pokémon.) Golem does 100 damage to itself.",
+        "Name": "Selfdestruct",
+        "AttackType": "DamageManyAttack",
+        "Id": {
+          "$id": "1712",
+          "Value": "d7a2399f-d613-4462-a872-be18606855bf"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1713",
+      "Value": "c1ca50ac-aac7-4954-a656-e12f854a97a8"
+    },
+    "Id": {
+      "$id": "1714",
+      "Value": "e750e501-322f-4025-ab43-2d1e63db34e1"
+    },
+    "SetCode": "base3",
+    "Name": "Golem",
+    "ImageUrl": "https://images.pokemontcg.io/base3/36_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1715",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 2,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "Geodude",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1716",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1717",
+            "EnergyType": 8,
+            "Amount": 2
+          },
+          {
+            "$id": "1718",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "",
+        "Name": "Rock Throw",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1719",
+          "Value": "b7e75043-a99b-4427-9298-0df7c4c3dcc8"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1720",
+        "$type": "TCGCards.Attacks.ApplyDamagePreventionEffect, TCGCards",
+        "OnlyProtectSelf": true,
+        "MaxDamage": 30,
+        "CoinFlip": false,
+        "Amount": 30,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1721",
+            "EnergyType": 8,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "During your opponent's next turn, whenever 30 or less damage is done to Graveler (after applying Weakness and Resistance), prevent that damage. (Any other effects of attacks still happen.)",
+        "Name": "Harden",
+        "AttackType": "ApplyDamagePreventionEffect",
+        "Id": {
+          "$id": "1722",
+          "Value": "79f7ec95-dfde-4d32-be3c-d6e4cafa867b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1723",
+      "Value": "983d6d0b-1892-4af7-811d-ec2fb043f741"
+    },
+    "Id": {
+      "$id": "1724",
+      "Value": "6b365bf9-cf59-498e-a896-9f5cb5a1ce98"
+    },
+    "SetCode": "base3",
+    "Name": "Graveler",
+    "ImageUrl": "https://images.pokemontcg.io/base3/37_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1725",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 5,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1726",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1727",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1728",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Nasty Goo",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1729",
+          "Value": "55777269-08a7-416b-9f83-f08a364fac34"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1730",
+        "$type": "TCGCards.Attacks.ApplyDamagePreventionEffect, TCGCards",
+        "OnlyProtectSelf": true,
+        "MaxDamage": 0,
+        "CoinFlip": false,
+        "Amount": 20,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1731",
+            "EnergyType": 5,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "All damage done by attacks to Grimer during your opponents next turn is reduced by 20",
+        "Name": "Minimize",
+        "AttackType": "ApplyDamagePreventionEffect",
+        "Id": {
+          "$id": "1732",
+          "Value": "4b342207-3601-4a5f-a3ec-912fd98f1085"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1733",
+      "Value": "e53c0bb9-80cb-4475-b559-811ed2eb32c9"
+    },
+    "Id": {
+      "$id": "1734",
+      "Value": "4b9e7a82-1b80-4fcb-b0eb-c6084fdaaf46"
+    },
+    "SetCode": "base3",
+    "Name": "Grimer",
+    "ImageUrl": "https://images.pokemontcg.io/base3/48_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1735",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 7,
+    "RetreatCost": 0,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "Gastly",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1736",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1737",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": false,
+            "StatusEffect": 3,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1738",
+            "EnergyType": 7,
+            "Amount": 1
+          },
+          {
+            "$id": "1739",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "The Defending Pokémon is now Asleep.",
+        "Name": "Nightmare",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1740",
+          "Value": "01b8b56e-1714-4185-91a5-38a4e74fe662"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1741",
+      "Value": "a748c494-4d8f-4d5c-892f-37079eef8d82"
+    },
+    "Id": {
+      "$id": "1742",
+      "Value": "3a48e131-7409-4285-9ca2-0b0837ad1912"
+    },
+    "SetCode": "base3",
+    "Name": "Haunter",
+    "ImageUrl": "https://images.pokemontcg.io/base3/6_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1743",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 7,
+    "RetreatCost": 0,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "Gastly",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1744",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1745",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": false,
+            "StatusEffect": 3,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1746",
+            "EnergyType": 7,
+            "Amount": 1
+          },
+          {
+            "$id": "1747",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "The Defending Pokémon is now Asleep.",
+        "Name": "Nightmare",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1748",
+          "Value": "78579344-f92c-4264-96df-40178a9039f0"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1749",
+      "Value": "e77d4ff9-e614-4777-8b63-7b0b7aa1e35e"
+    },
+    "Id": {
+      "$id": "1750",
+      "Value": "832a61a7-c2bf-48fc-b7e8-6e14ca377633"
+    },
+    "SetCode": "base3",
+    "Name": "Haunter",
+    "ImageUrl": "https://images.pokemontcg.io/base3/21_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1751",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1752",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1753",
+            "EnergyType": 8,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "",
+        "Name": "High Jump Kick",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1754",
+          "Value": "62087b33-603d-48b4-870f-6475d1fc1b3b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1755",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1756",
+            "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+            "Amount": 20,
+            "TargetingMode": 4,
+            "EffectType": "Damage"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1757",
+            "EnergyType": 8,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 20 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)",
+        "Name": "Stretch Kick",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1758",
+          "Value": "2daccce7-0497-4f6f-a4ae-406066130f35"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1759",
+      "Value": "18b99507-3a6b-47ce-a466-140ee6215215"
+    },
+    "Id": {
+      "$id": "1760",
+      "Value": "61e11b29-586e-47f6-aebe-564fe19cf08d"
+    },
+    "SetCode": "base3",
+    "Name": "Hitmonlee",
+    "ImageUrl": "https://images.pokemontcg.io/base3/22_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1761",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1762",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1763",
+            "EnergyType": 8,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "",
+        "Name": "High Jump Kick",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1764",
+          "Value": "b3049b4a-df74-41f7-b2c1-dced220ca03e"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1765",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1766",
+            "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+            "Amount": 20,
+            "TargetingMode": 4,
+            "EffectType": "Damage"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1767",
+            "EnergyType": 8,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 20 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)",
+        "Name": "Stretch Kick",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1768",
+          "Value": "0c90708d-a6d3-4d73-a4d3-a2f3e3c36fa3"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1769",
+      "Value": "d49f18dd-7e15-4e50-8bd4-17307205a71e"
+    },
+    "Id": {
+      "$id": "1770",
+      "Value": "d7e417b5-3c3a-46f3-9a52-d6623bd939ef"
+    },
+    "SetCode": "base3",
+    "Name": "Hitmonlee",
+    "ImageUrl": "https://images.pokemontcg.io/base3/7_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1771",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 40,
+    "Type": 3,
+    "RetreatCost": 0,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1772",
+        "$type": "TCGCards.Attacks.ApplyAttackFailOnTails, TCGCards",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1773",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.",
+        "Name": "Smokescreen",
+        "AttackType": "ApplyAttackFailOnTails",
+        "Id": {
+          "$id": "1774",
+          "Value": "5baea047-4571-49cb-a596-31155acfabd0"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1775",
+      "Value": "da256650-e38b-4293-beda-86de1c8de31a"
+    },
+    "Id": {
+      "$id": "1776",
+      "Value": "20c59715-c8dd-4c41-8cee-3c993d9c15bf"
+    },
+    "SetCode": "base3",
+    "Name": "Horsea",
+    "ImageUrl": "https://images.pokemontcg.io/base3/49_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1777",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 90,
+    "Type": 7,
+    "RetreatCost": 2,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Drowzee",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1778",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1779",
+            "$type": "TCGCards.TrainerEffects.ReArrangeCardsInDeck, TCGCards",
+            "TargetsOpponent": true,
+            "Amount": 3,
+            "EffectType": "ReArrange cards on the top of deck"
+          },
+          {
+            "$id": "1780",
+            "$type": "TCGCards.TrainerEffects.ReArrangeCardsInDeck, TCGCards",
+            "TargetsOpponent": false,
+            "Amount": 3,
+            "EffectType": "ReArrange cards on the top of deck"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1781",
+            "EnergyType": 7,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Look at up to 3 cards from the top of either player's deck and rearrange them as you like.",
+        "Name": "Prophecy",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1782",
+          "Value": "12607001-8ccd-4bd3-b875-2488a8bf3d68"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1783",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1784",
+            "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+            "Amount": 10,
+            "TargetingMode": 4,
+            "EffectType": "Damage"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1785",
+            "EnergyType": 7,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 10 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)",
+        "Name": "Dark Mind",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1786",
+          "Value": "8f9a0864-19cc-439b-b3ff-ce3f35769b1c"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1787",
+      "Value": "ecd964ae-7e56-439f-a698-890cb27e18cc"
+    },
+    "Id": {
+      "$id": "1788",
+      "Value": "42f2d630-842c-43e9-9051-a4ea985188ca"
+    },
+    "SetCode": "base3",
+    "Name": "Hypno",
+    "ImageUrl": "https://images.pokemontcg.io/base3/8_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1789",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 90,
+    "Type": 7,
+    "RetreatCost": 2,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Drowzee",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1790",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1791",
+            "$type": "TCGCards.TrainerEffects.ReArrangeCardsInDeck, TCGCards",
+            "TargetsOpponent": true,
+            "Amount": 3,
+            "EffectType": "ReArrange cards on the top of deck"
+          },
+          {
+            "$id": "1792",
+            "$type": "TCGCards.TrainerEffects.ReArrangeCardsInDeck, TCGCards",
+            "TargetsOpponent": false,
+            "Amount": 3,
+            "EffectType": "ReArrange cards on the top of deck"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1793",
+            "EnergyType": 7,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Look at up to 3 cards from the top of either player's deck and rearrange them as you like.",
+        "Name": "Prophecy",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1794",
+          "Value": "d4fb256d-5a50-4585-a463-b2c36a7077d4"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1795",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1796",
+            "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+            "Amount": 10,
+            "TargetingMode": 4,
+            "EffectType": "Damage"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1797",
+            "EnergyType": 7,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "If your opponent has any Benched Pokémon, choose 1 of them and this attack does 10 damage to it. (Don't apply Weakness and Resistance for Benched Pokémon.)",
+        "Name": "Dark Mind",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1798",
+          "Value": "aa605d12-839d-4b71-b221-13a73f4902e1"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1799",
+      "Value": "369a27ce-8743-42ed-9e97-8b0e633f19b0"
+    },
+    "Id": {
+      "$id": "1800",
+      "Value": "ab808ca7-898f-442f-b34c-e663983a7214"
+    },
+    "SetCode": "base3",
+    "Name": "Hypno",
+    "ImageUrl": "https://images.pokemontcg.io/base3/23_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1801",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 30,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1802",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1803",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "",
+        "Name": "Scratch",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1804",
+          "Value": "ce898f9d-6467-41d6-b3ac-9a39f826719a"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1805",
+      "Value": "fd1063cc-c6dc-4b4e-9206-e9628dcafa9b"
+    },
+    "Id": {
+      "$id": "1806",
+      "Value": "e1fac7ff-fcf4-442b-ae5d-742a4df51a06"
+    },
+    "SetCode": "base3",
+    "Name": "Kabuto",
+    "ImageUrl": "https://images.pokemontcg.io/base3/50_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1807",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "Kabuto",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1808",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1809",
+            "EnergyType": 8,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Sharp Sickle",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1810",
+          "Value": "dd1c01be-4b7a-419b-b120-bb66892e5a39"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1811",
+      "Value": "7b3349a2-df73-4de1-9cf5-3260be475bc8"
+    },
+    "Id": {
+      "$id": "1812",
+      "Value": "fa215fe2-5f79-48b5-bfb5-5fc10742359d"
+    },
+    "SetCode": "base3",
+    "Name": "Kabutops",
+    "ImageUrl": "https://images.pokemontcg.io/base3/9_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1813",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "Kabuto",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1814",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1815",
+            "EnergyType": 8,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Sharp Sickle",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1816",
+          "Value": "15cf0edb-6a60-4371-84de-13683cf18726"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1817",
+      "Value": "41cb0755-56b7-4848-bfaf-0ffae640d530"
+    },
+    "Id": {
+      "$id": "1818",
+      "Value": "77616f94-5632-4fb5-8732-1a4a976b52a7"
+    },
+    "SetCode": "base3",
+    "Name": "Kabutops",
+    "ImageUrl": "https://images.pokemontcg.io/base3/24_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1819",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 3,
+    "RetreatCost": 3,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "Krabby",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1820",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1821",
+            "EnergyType": 3,
+            "Amount": 2
+          },
+          {
+            "$id": "1822",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "",
+        "Name": "Crabhammer",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1823",
+          "Value": "cc59ca1b-36d1-4c3a-acc6-84bf57f707be"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1824",
+        "$type": "TCGCards.Attacks.DamageMultipliedByDamage, TCGCards",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1825",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Does 10 damage times the number of damage counters on Kingler.",
+        "Name": "Flail",
+        "AttackType": "DamageMultipliedByDamage",
+        "Id": {
+          "$id": "1826",
+          "Value": "8972f491-2cba-4ce6-90f0-e7d6c56aa5b8"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1827",
+      "Value": "1077858a-e403-4e61-845d-abf155ba34d8"
+    },
+    "Id": {
+      "$id": "1828",
+      "Value": "7d27bb75-8a17-49e5-b21f-0b973e2a9496"
+    },
+    "SetCode": "base3",
+    "Name": "Kingler",
+    "ImageUrl": "https://images.pokemontcg.io/base3/38_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1829",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 3,
+    "RetreatCost": 2,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1830",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1831",
+            "EnergyType": 3,
+            "Amount": 1
+          },
+          {
+            "$id": "1832",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "",
+        "Name": "Irongrip",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1833",
+          "Value": "4cfef2f8-4cf1-47b6-8c0a-493cd6392cc7"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1834",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1835",
+            "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
+            "EffectType": "Search your deck for Pokémon",
+            "CoinFlip": false,
+            "Amount": 1,
+            "Names": "Krabby",
+            "EnergyType": 0,
+            "AddToBench": true
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1836",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Search your deck for a basic Pokémon named Krabby and put it onto your bench.",
+        "Name": "Call for Family",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1837",
+          "Value": "94510589-1e49-49af-94ad-413bcca6cef7"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1838",
+      "Value": "8ae8471e-e021-48a5-9eda-edb75373cec1"
+    },
+    "Id": {
+      "$id": "1839",
+      "Value": "d002791d-5831-4fd0-a1a2-4168947e74d1"
+    },
+    "SetCode": "base3",
+    "Name": "Krabby",
+    "ImageUrl": "https://images.pokemontcg.io/base3/51_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1840",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 3,
+    "RetreatCost": 2,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1841",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1842",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 4,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1843",
+            "EnergyType": 3,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Confused.",
+        "Name": "Confuse Ray",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1844",
+          "Value": "18783ae8-cbc5-4ee0-8734-0982eb0c0516"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1845",
+        "$type": "TCGCards.Attacks.ExtraForUnusedEnergy, TCGCards",
+        "AmountPerEnergy": 10,
+        "MaxExtraDamage": 20,
+        "EnergyType": 3,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1846",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Does 10 damage plus 10 more damage for each Water Energy attached to Lapras but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count.",
+        "Name": "Water Gun",
+        "AttackType": "ExtraForUnusedEnergy",
+        "Id": {
+          "$id": "1847",
+          "Value": "43e72b90-bb2f-4911-aec9-137416a1aec5"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1848",
+      "Value": "41f1d7c5-2d42-4730-bae6-c4f5ebb3f0c7"
+    },
+    "Id": {
+      "$id": "1849",
+      "Value": "f80b2754-b45a-43df-b8d4-5126e8e4a0d7"
+    },
+    "SetCode": "base3",
+    "Name": "Lapras",
+    "ImageUrl": "https://images.pokemontcg.io/base3/25_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1850",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 3,
+    "RetreatCost": 2,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1851",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1852",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 4,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1853",
+            "EnergyType": 3,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Confused.",
+        "Name": "Confuse Ray",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1854",
+          "Value": "bf4f0104-a696-493a-938c-9f7308b096e7"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1855",
+        "$type": "TCGCards.Attacks.ExtraForUnusedEnergy, TCGCards",
+        "AmountPerEnergy": 10,
+        "MaxExtraDamage": 20,
+        "EnergyType": 3,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1856",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Does 10 damage plus 10 more damage for each Water Energy attached to Lapras but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count.",
+        "Name": "Water Gun",
+        "AttackType": "ExtraForUnusedEnergy",
+        "Id": {
+          "$id": "1857",
+          "Value": "74481bde-c7d2-4f02-ae16-ee2adc3e338a"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1858",
+      "Value": "c3f77e77-2f2b-4cfd-91cf-07d73ba3f09e"
+    },
+    "Id": {
+      "$id": "1859",
+      "Value": "a6208ab5-ff5b-475a-b0da-de657434c8f1"
+    },
+    "SetCode": "base3",
+    "Name": "Lapras",
+    "ImageUrl": "https://images.pokemontcg.io/base3/10_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1860",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 4,
+    "RetreatCost": 1,
+    "Weakness": 3,
+    "Resistance": 0,
+    "EvolvesFrom": "Magby",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1861",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1862",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1863",
+            "EnergyType": 4,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
+        "Name": "Smog",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1864",
+          "Value": "3021ba5a-5b91-461b-af01-2b010e807600"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1865",
+        "$type": "TCGCards.Attacks.ApplyAttackFailOnTails, TCGCards",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1866",
+            "EnergyType": 4,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.",
+        "Name": "Smokescreen",
+        "AttackType": "ApplyAttackFailOnTails",
+        "Id": {
+          "$id": "1867",
+          "Value": "8d223197-7583-4da1-83a5-fee92818cbae"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1868",
+      "Value": "5ad2847e-f9c7-49db-9eb1-6fc9c7a524ef"
+    },
+    "Id": {
+      "$id": "1869",
+      "Value": "d004ab5d-1abf-4f10-a398-8286a0bad316"
+    },
+    "SetCode": "base3",
+    "Name": "Magmar",
+    "ImageUrl": "https://images.pokemontcg.io/base3/39_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1870",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 6,
+    "RetreatCost": 2,
+    "Weakness": 8,
+    "Resistance": 0,
+    "EvolvesFrom": "Magnemite",
+    "Stage": 1,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1871",
+      "Value": "5182faf7-1674-4499-8885-09f378bd5f22"
+    },
+    "Id": {
+      "$id": "1872",
+      "Value": "74d08aac-8a4a-4a0b-bdd7-5e3f5352f7f6"
+    },
+    "SetCode": "base3",
+    "Name": "Magneton",
+    "ImageUrl": "https://images.pokemontcg.io/base3/11_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1873",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 6,
+    "RetreatCost": 2,
+    "Weakness": 8,
+    "Resistance": 0,
+    "EvolvesFrom": "Magnemite",
+    "Stage": 1,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1874",
+      "Value": "3069a2bc-f473-4640-9438-eb07520b094b"
+    },
+    "Id": {
+      "$id": "1875",
+      "Value": "a2adb793-e378-47f6-915f-87c30e7e7150"
+    },
+    "SetCode": "base3",
+    "Name": "Magneton",
+    "ImageUrl": "https://images.pokemontcg.io/base3/26_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1876",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 4,
+    "RetreatCost": 2,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1877",
+      "Value": "eec4d624-888f-4ee4-bc18-266f5d7f05b6"
+    },
+    "Id": {
+      "$id": "1878",
+      "Value": "9be5be5c-aa69-400b-b045-83d4343fccc0"
+    },
+    "SetCode": "base3",
+    "Name": "Moltres",
+    "ImageUrl": "https://images.pokemontcg.io/base3/12_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1879",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 4,
+    "RetreatCost": 2,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1880",
+      "Value": "28d3bd1c-9c48-459f-9c67-dd248ef2051e"
+    },
+    "Id": {
+      "$id": "1881",
+      "Value": "8a631874-b792-47b8-b180-5ac8dd53579d"
+    },
+    "SetCode": "base3",
+    "Name": "Moltres",
+    "ImageUrl": "https://images.pokemontcg.io/base3/27_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1882",
+    "Ability": {
+      "$id": "1883",
+      "$type": "TCGCards.Core.Abilities.StopPokemonPowersAbility, TCGCards",
+      "OnlyWhenActive": false,
+      "ModifierType": 2,
+      "TriggerType": 10,
+      "PokemonOwner": null,
+      "Name": "Toxic Gas",
+      "Description": "Ignore all Pokémon Powers other than Toxic Gases. This power stops working while Muk is Asleep, Confused, or Paralyzed.",
+      "Usages": 9999,
+      "Id": {
+        "$id": "1884",
+        "Value": "3d83b457-64e8-45f3-8ebf-7133241fb877"
+      },
+      "UsedTimes": 0
+    },
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 5,
+    "RetreatCost": 2,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Grimer",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1885",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1886",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1887",
+            "EnergyType": 5,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
+        "Name": "Sludge",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1888",
+          "Value": "cc30c849-0847-4093-8c60-7e5a8927c67c"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1889",
+      "Value": "673e82ee-eade-452b-bd3f-32efd7623503"
+    },
+    "Id": {
+      "$id": "1890",
+      "Value": "6b712330-e915-4c95-9794-9c33f56752e5"
+    },
+    "SetCode": "base3",
+    "Name": "Muk",
+    "ImageUrl": "https://images.pokemontcg.io/base3/13_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1891",
+    "Ability": {
+      "$id": "1892",
+      "$type": "TCGCards.Core.Abilities.StopPokemonPowersAbility, TCGCards",
+      "OnlyWhenActive": false,
+      "ModifierType": 2,
+      "TriggerType": 10,
+      "PokemonOwner": null,
+      "Name": "Toxic Gas",
+      "Description": "Ignore all Pokémon Powers other than Toxic Gases. This power stops working while Muk is Asleep, Confused, or Paralyzed.",
+      "Usages": 9999,
+      "Id": {
+        "$id": "1893",
+        "Value": "be826817-3bed-4a38-9b29-10a7de153637"
+      },
+      "UsedTimes": 0
+    },
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 5,
+    "RetreatCost": 2,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Grimer",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1894",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1895",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1896",
+            "EnergyType": 5,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
+        "Name": "Sludge",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1897",
+          "Value": "51daf539-9b25-406c-8997-c29726123f1f"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1898",
+      "Value": "0b13c514-6b75-4b9b-a909-f1f9c94fb9dd"
+    },
+    "Id": {
+      "$id": "1899",
+      "Value": "59d991c2-f53e-49fb-b0fe-c68c86b77046"
+    },
+    "SetCode": "base3",
+    "Name": "Muk",
+    "ImageUrl": "https://images.pokemontcg.io/base3/28_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1900",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 40,
+    "Type": 3,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 1,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1901",
+      "Value": "aff585ae-21ad-4741-a127-93ef0d604b0b"
+    },
+    "Id": {
+      "$id": "1902",
+      "Value": "f1f1581f-54c0-438b-9f2d-03a713198ffd"
+    },
+    "SetCode": "base3",
+    "Name": "Omanyte",
+    "ImageUrl": "https://images.pokemontcg.io/base3/52_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1903",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 3,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 0,
+    "EvolvesFrom": "Omanyte",
+    "Stage": 2,
+    "Attacks": [
+      {
+        "$id": "1904",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 2,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1905",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "Flip 2 coins. This attack does 30 damage times the number of heads.",
+        "Name": "Spike Cannon",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1906",
+          "Value": "bc9b4603-c120-436f-b9ec-bb67e0e864ef"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1907",
+      "Value": "ed740172-81a2-4431-ba41-f2aea19ba90b"
+    },
+    "Id": {
+      "$id": "1908",
+      "Value": "c50aa68d-1cc2-47aa-8e11-6837c7c9819e"
+    },
+    "SetCode": "base3",
+    "Name": "Omastar",
+    "ImageUrl": "https://images.pokemontcg.io/base3/40_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1909",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 3,
+    "RetreatCost": 1,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1910",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 3,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1911",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip 3 coins. This attack does 10 damage times the number of heads.",
+        "Name": "Fury Swipes",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1912",
+          "Value": "593715ff-cb17-4690-a712-e6df472eb906"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1913",
+      "Value": "daa33b35-4373-49bc-924e-66b2ce9e69b6"
+    },
+    "Id": {
+      "$id": "1914",
+      "Value": "38be0fd1-2c8e-4b50-87d8-a6eafdecb98f"
+    },
+    "SetCode": "base3",
+    "Name": "Psyduck",
+    "ImageUrl": "https://images.pokemontcg.io/base3/53_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1915",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 90,
+    "Type": 6,
+    "RetreatCost": 1,
+    "Weakness": 8,
+    "Resistance": 0,
+    "EvolvesFrom": "Pikachu",
+    "Stage": 1,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1916",
+      "Value": "c13a0bca-f953-45c8-8bba-bd008026c418"
+    },
+    "Id": {
+      "$id": "1917",
+      "Value": "f74e35b3-2897-41a2-93ca-4ba69706c414"
+    },
+    "SetCode": "base3",
+    "Name": "Raichu",
+    "ImageUrl": "https://images.pokemontcg.io/base3/14_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1918",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 90,
+    "Type": 6,
+    "RetreatCost": 1,
+    "Weakness": 8,
+    "Resistance": 0,
+    "EvolvesFrom": "Pikachu",
+    "Stage": 1,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1919",
+      "Value": "04bd7844-c1a6-4254-9aea-96049d543930"
+    },
+    "Id": {
+      "$id": "1920",
+      "Value": "b16dc0a0-eda4-4d87-bc5d-b567fa3f2154"
+    },
+    "SetCode": "base3",
+    "Name": "Raichu",
+    "ImageUrl": "https://images.pokemontcg.io/base3/29_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1921",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 70,
+    "Type": 8,
+    "RetreatCost": 1,
+    "Weakness": 5,
+    "Resistance": 6,
+    "EvolvesFrom": "Sandshrew",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1922",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1923",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "",
+        "Name": "Slash",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1924",
+          "Value": "36540efb-bd76-40b5-8e53-b59425561685"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1925",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 3,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1926",
+            "EnergyType": 8,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "Flip 3 coins. This attack does 20 damage times the number of heads.",
+        "Name": "Fury Swipes",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1927",
+          "Value": "58ed64b5-19a5-46d3-ade7-55efcb74b2b4"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1928",
+      "Value": "5d3981fb-838f-4b50-b952-3b7c27d1593c"
+    },
+    "Id": {
+      "$id": "1929",
+      "Value": "e4fc5d63-454d-4c77-aa34-5d845bbce758"
+    },
+    "SetCode": "base3",
+    "Name": "Sandslash",
+    "ImageUrl": "https://images.pokemontcg.io/base3/41_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1930",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 3,
+    "RetreatCost": 1,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "Horsea",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1931",
+        "$type": "TCGCards.Attacks.ExtraForUnusedEnergy, TCGCards",
+        "AmountPerEnergy": 10,
+        "MaxExtraDamage": 20,
+        "EnergyType": 3,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1932",
+            "EnergyType": 3,
+            "Amount": 1
+          },
+          {
+            "$id": "1933",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Does 20 damage plus 10 more damage for each Water Energy attached to Seadra but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count.",
+        "Name": "Water Gun",
+        "AttackType": "ExtraForUnusedEnergy",
+        "Id": {
+          "$id": "1934",
+          "Value": "3f6de3b8-b1b5-40f7-8fb7-f9df77d88816"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1935",
+        "$type": "TCGCards.Attacks.ApplyAttackPrevention, TCGCards",
+        "OnlySelf": true,
+        "CoinFlip": true,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1936",
+            "EnergyType": 3,
+            "Amount": 1
+          },
+          {
+            "$id": "1937",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "Flip a coin. If heads, during your opponent's next turn, prevent all effects of attacks, including damage, done to Seadra.",
+        "Name": "Agility",
+        "AttackType": "ApplyAttackPrevention",
+        "Id": {
+          "$id": "1938",
+          "Value": "00ea7dd2-aa65-4227-a712-19b7593dcf97"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1939",
+      "Value": "366d8465-6799-4b24-b424-0a31eea8d179"
+    },
+    "Id": {
+      "$id": "1940",
+      "Value": "3cfbb61b-e34f-4630-8f09-e6a2a9549dc7"
+    },
+    "SetCode": "base3",
+    "Name": "Seadra",
+    "ImageUrl": "https://images.pokemontcg.io/base3/42_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1941",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 30,
+    "Type": 3,
+    "RetreatCost": 1,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1942",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1943",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 4,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1944",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Confused.",
+        "Name": "Supersonic",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1945",
+          "Value": "02f39adb-3c4e-424c-9e2f-9f6cc08ae155"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1946",
+        "$type": "TCGCards.Attacks.ApplyDamagePreventionEffect, TCGCards",
+        "OnlyProtectSelf": true,
+        "MaxDamage": 0,
+        "CoinFlip": true,
+        "Amount": 999999,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1947",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, prevent all damage done to Shellder during your opponent's next turn. (Any other effects of attacks still happen.)",
+        "Name": "Hide in Shell",
+        "AttackType": "ApplyDamagePreventionEffect",
+        "Id": {
+          "$id": "1948",
+          "Value": "bbe51375-32f8-4056-af7c-80d240ad154d"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1949",
+      "Value": "0707016f-3cbb-4b23-849a-0ac96bdf6438"
+    },
+    "Id": {
+      "$id": "1950",
+      "Value": "aad39706-c87e-458e-b7ad-355b19c4b669"
+    },
+    "SetCode": "base3",
+    "Name": "Shellder",
+    "ImageUrl": "https://images.pokemontcg.io/base3/54_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1951",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 7,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Slowpoke",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1952",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1953",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 2,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1954",
+            "EnergyType": 7,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed.",
+        "Name": "Psyshock",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1955",
+          "Value": "7c6a4e28-fc81-48b8-8bd0-57cdbb475550"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1956",
+      "Value": "00f89153-ffd3-4ab8-b72e-a5b5a4d7bb31"
+    },
+    "Id": {
+      "$id": "1957",
+      "Value": "4f4fc674-3c14-4d53-a5b7-f9b5e8a0f46e"
+    },
+    "SetCode": "base3",
+    "Name": "Slowbro",
+    "ImageUrl": "https://images.pokemontcg.io/base3/43_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1958",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 50,
+    "Type": 7,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1959",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1960",
+            "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+            "CoinFlip": true,
+            "Amount": 10,
+            "TargetingMode": 0,
+            "EffectType": "Heal"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1961",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, remove a damage counter from Slowpoke. This attack can't be used if Slowpoke has no damage counters on it.",
+        "Name": "Spacing Out",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1962",
+          "Value": "788a387a-0cc9-4d18-87e8-6dd5b1560c13"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1963",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1964",
+            "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+            "TargetingMode": 0,
+            "Amount": 1,
+            "EnergyType": 7,
+            "CoinFlip": false,
+            "EffectType": "Discard attached energy"
+          },
+          {
+            "$id": "1965",
+            "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
+            "Amount": 1,
+            "CardType": 2,
+            "EffectType": "Pick from discard"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1966",
+            "EnergyType": 7,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Discard 1 Psychic Energy card attached to Slowpoke in order to use this attack. Put a Trainer card from your discard pile into your hand.",
+        "Name": "Scavenge",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1967",
+          "Value": "97da3d57-8a53-4598-a31c-83a5560e9294"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1968",
+      "Value": "e39d6741-c4a5-4d1d-b87b-fb41c44d7f2f"
+    },
+    "Id": {
+      "$id": "1969",
+      "Value": "1cfee10c-2ecf-4566-9bbe-f4438b677300"
+    },
+    "SetCode": "base3",
+    "Name": "Slowpoke",
+    "ImageUrl": "https://images.pokemontcg.io/base3/55_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1970",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 30,
+    "Type": 3,
+    "RetreatCost": 0,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "1971",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1972",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "",
+        "Name": "Acid",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1973",
+          "Value": "ff32ee31-ac73-492c-922a-76b49510570e"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1974",
+      "Value": "51e14f50-e2ab-4ed2-8c52-67a4fdc53fbb"
+    },
+    "Id": {
+      "$id": "1975",
+      "Value": "ebdcc8f2-b301-44fc-8441-05eae57d376c"
+    },
+    "SetCode": "base3",
+    "Name": "Tentacool",
+    "ImageUrl": "https://images.pokemontcg.io/base3/56_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1976",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 3,
+    "RetreatCost": 0,
+    "Weakness": 6,
+    "Resistance": 0,
+    "EvolvesFrom": "Tentacool",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1977",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1978",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 4,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1979",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Confused.",
+        "Name": "Supersonic",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1980",
+          "Value": "32ae646b-c04a-4064-af23-ae3036c129af"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1981",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1982",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": false,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1983",
+            "EnergyType": 3,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "The Defending Pokémon is now Poisoned.",
+        "Name": "Jellyfish Sting",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1984",
+          "Value": "2ae5190b-8dfd-4335-b9b8-5480c5f39736"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1985",
+      "Value": "f024adcb-c0bb-4591-93a5-0ca4d829e673"
+    },
+    "Id": {
+      "$id": "1986",
+      "Value": "58fc975c-4a31-4259-9a85-a46147b14b65"
+    },
+    "SetCode": "base3",
+    "Name": "Tentacruel",
+    "ImageUrl": "https://images.pokemontcg.io/base3/44_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1987",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 60,
+    "Type": 5,
+    "RetreatCost": 1,
+    "Weakness": 7,
+    "Resistance": 0,
+    "EvolvesFrom": "Koffing",
+    "Stage": 1,
+    "Attacks": [
+      {
+        "$id": "1988",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "1989",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "1990",
+            "EnergyType": 5,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
+        "Name": "Smog",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1991",
+          "Value": "64eeb8c0-b57a-434e-b4cd-3ba1bc804edb"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1992",
+        "$type": "TCGCards.Attacks.DamageManyAttack, TCGCards",
+        "TeamBenchDamage": 10,
+        "EnemyBenchDamage": 10,
+        "SelfDamage": 60,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1993",
+            "EnergyType": 5,
+            "Amount": 2
+          },
+          {
+            "$id": "1994",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 60,
+        "Description": "Does 10 damage to each Pokémon on each player's Bench. (Don't apply Weakness and Resistance for Benched Pokémon.) Weezing does 60 damage to itself.",
+        "Name": "Selfdestruct",
+        "AttackType": "DamageManyAttack",
+        "Id": {
+          "$id": "1995",
+          "Value": "7446d273-c4cb-4567-b2d6-3dfe49c1b92f"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1996",
+      "Value": "9e05485c-81bb-43fd-b4af-d689e2fe643e"
+    },
+    "Id": {
+      "$id": "1997",
+      "Value": "4198cc92-54a5-45ea-8d41-2cbe108771f3"
+    },
+    "SetCode": "base3",
+    "Name": "Weezing",
+    "ImageUrl": "https://images.pokemontcg.io/base3/45_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "1998",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 6,
+    "RetreatCost": 2,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "1999",
+      "Value": "7b25fe35-33aa-4a8d-bd08-59333fc422b5"
+    },
+    "Id": {
+      "$id": "2000",
+      "Value": "599a9cca-4707-4726-af2d-79f3531bcc88"
+    },
+    "SetCode": "base3",
+    "Name": "Zapdos",
+    "ImageUrl": "https://images.pokemontcg.io/base3/15_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "2001",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 80,
+    "Type": 6,
+    "RetreatCost": 2,
+    "Weakness": 0,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "2002",
+      "Value": "2a987918-7dcc-46d6-9148-723f656ac1dc"
+    },
+    "Id": {
+      "$id": "2003",
+      "Value": "b25a4ed0-1d1e-43ab-b08c-fc655b25491f"
+    },
+    "SetCode": "base3",
+    "Name": "Zapdos",
+    "ImageUrl": "https://images.pokemontcg.io/base3/30_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "2004",
+    "Ability": null,
+    "SelectedAttack": null,
+    "Hp": 40,
+    "Type": 5,
+    "RetreatCost": 0,
+    "Weakness": 7,
+    "Resistance": 8,
+    "EvolvesFrom": "",
+    "Stage": 0,
+    "Attacks": [
+      {
+        "$id": "2005",
+        "ApplyWeaknessResistance": true,
+        "Effects": [
+          {
+            "$id": "2006",
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "FlipCoin": true,
+            "StatusEffect": 4,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "2007",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, the Defending Pokémon is now Confused.",
+        "Name": "Supersonic",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "2008",
+          "Value": "1befb83c-79f2-4c5b-a759-ae145c83dc9d"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2009",
+        "$type": "TCGCards.Attacks.DrainAttack, TCGCards",
+        "HealingMultiplier": 1.0,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2010",
+            "EnergyType": 5,
+            "Amount": 1
+          },
+          {
+            "$id": "2011",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Remove a number of damage counters from Zubat equal to the damage done to the Defending Pokemon",
+        "Name": "Leech Life",
+        "AttackType": "DrainAttack",
+        "Id": {
+          "$id": "2012",
+          "Value": "44bea41c-6db8-4311-80e3-e58c42688279"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
+    "DamageCounters": 0,
+    "EvolvedFrom": null,
+    "AttachedEnergy": [],
+    "PokemonType": 0,
+    "PlayedThisTurn": false,
+    "IsParalyzed": false,
+    "IsBurned": false,
+    "IsPoisoned": false,
+    "IsAsleep": false,
+    "IsConfused": false,
+    "KnockedOutBy": null,
+    "TemporaryAbilities": [],
+    "PokemonName": null,
+    "DamageStoppers": [],
+    "AttackStoppers": [],
+    "DamageTakenLastTurn": 0,
+    "DoublePoison": false,
+    "EvolvedThisTurn": false,
+    "AbilityDisabled": false,
+    "CardId": {
+      "$id": "2013",
+      "Value": "8c6d1e04-6bfb-49a2-8815-5c0fe9f5aab5"
+    },
+    "Id": {
+      "$id": "2014",
+      "Value": "67cd54d8-eb51-411c-883c-00d7621f3e04"
+    },
+    "SetCode": "base3",
+    "Name": "Zubat",
+    "ImageUrl": "https://images.pokemontcg.io/base3/57_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
   }
 ]

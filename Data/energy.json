@@ -166,6 +166,7 @@
       {
         "$id": "23",
         "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+        "CoinFlip": false,
         "Amount": 10,
         "TargetingMode": 0,
         "EffectType": "Heal"

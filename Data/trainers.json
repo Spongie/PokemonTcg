@@ -206,9 +206,9 @@
       {
         "$id": "30",
         "$type": "TCGCards.TrainerEffects.PutPokemonFromDiscardOnBench, TCGCards",
-        "EffectType": "PutPokemon From Discard On Bench",
         "WithRemainingHealth": 0.0,
-        "TargetsOpponent": true
+        "TargetsOpponent": true,
+        "EffectType": "PutPokemon From Discard On Bench"
       }
     ],
     "CardId": {
@@ -281,6 +281,7 @@
       {
         "$id": "41",
         "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+        "CoinFlip": false,
         "Amount": 20,
         "TargetingMode": 2,
         "EffectType": "Heal"
@@ -471,9 +472,9 @@
       {
         "$id": "67",
         "$type": "TCGCards.TrainerEffects.ReArrangeCardsInDeck, TCGCards",
-        "EffectType": "ReArrange cards on the top of deck",
         "TargetsOpponent": false,
-        "Amount": 5
+        "Amount": 5,
+        "EffectType": "ReArrange cards on the top of deck"
       }
     ],
     "CardId": {
@@ -681,10 +682,10 @@
       {
         "$id": "96",
         "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergyAndHeal, TCGCards",
-        "EffectType": "Discard attached energy and heal",
         "TargetingMode": 2,
         "AmountToHeal": 40,
-        "AmountToDiscard": 1
+        "AmountToDiscard": 1,
+        "EffectType": "Discard attached energy and heal"
       }
     ],
     "CardId": {
@@ -736,9 +737,9 @@
       {
         "$id": "104",
         "$type": "TCGCards.TrainerEffects.PutPokemonFromDiscardOnBench, TCGCards",
-        "EffectType": "PutPokemon From Discard On Bench",
         "WithRemainingHealth": 0.5,
-        "TargetsOpponent": false
+        "TargetsOpponent": false,
+        "EffectType": "PutPokemon From Discard On Bench"
       }
     ],
     "CardId": {
@@ -1069,6 +1070,124 @@
     "Name": "Poké Ball",
     "ImageUrl": "https://images.pokemontcg.io/base2/64_hires.png",
     "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "153",
+    "Effects": [
+      {
+        "$id": "154",
+        "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
+        "CardType": 4,
+        "EnergyType": 1,
+        "EffectType": "Search your deck for a card"
+      }
+    ],
+    "CardId": {
+      "$id": "155",
+      "Value": "276bc34d-87eb-48f0-b896-9278fc7ea23a"
+    },
+    "Id": {
+      "$id": "156",
+      "Value": "6307b243-9936-460c-87d7-24ed8dd9c174"
+    },
+    "SetCode": "base3",
+    "Name": "Energy Search",
+    "ImageUrl": "https://images.pokemontcg.io/base3/59_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "157",
+    "Effects": [
+      {
+        "$id": "158",
+        "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
+        "OnlyBasic": false,
+        "TargetingMode": 1,
+        "ShuffleIntoDeck": true,
+        "ReturnAttachedToHand": false,
+        "EffectType": "Bounce pokemon"
+      }
+    ],
+    "CardId": {
+      "$id": "159",
+      "Value": "eb354064-fcb5-4597-adc5-c5d92879160d"
+    },
+    "Id": {
+      "$id": "160",
+      "Value": "b010955b-c0a7-4d86-a733-df8217dbac93"
+    },
+    "SetCode": "base3",
+    "Name": "Mr. Fuji",
+    "ImageUrl": "https://images.pokemontcg.io/base3/58_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "161",
+    "Effects": [],
+    "CardId": {
+      "$id": "162",
+      "Value": "3e857d2a-37fa-4700-b769-d425cbc94bd8"
+    },
+    "Id": {
+      "$id": "163",
+      "Value": "fa8398a5-57f0-4407-8ffd-4c738146e716"
+    },
+    "SetCode": "base3",
+    "Name": "Recycle",
+    "ImageUrl": "https://images.pokemontcg.io/base3/61_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "164",
+    "Effects": [],
+    "CardId": {
+      "$id": "165",
+      "Value": "e59204e9-c2d7-47b4-b5cd-75fd6fabc689"
+    },
+    "Id": {
+      "$id": "166",
+      "Value": "648abd7c-3289-454e-8052-00280a149715"
+    },
+    "SetCode": "base3",
+    "Name": "Gambler",
+    "ImageUrl": "https://images.pokemontcg.io/base3/60_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "167",
+    "Effects": [],
+    "CardId": {
+      "$id": "168",
+      "Value": "52c0f6ba-7482-4858-92b3-f3b06e4f3805"
+    },
+    "Id": {
+      "$id": "169",
+      "Value": "03438986-4438-471c-9f85-8d30b3ed308b"
+    },
+    "SetCode": "base3",
+    "Name": "Mysterious Fossil",
+    "ImageUrl": "https://images.pokemontcg.io/base3/62_hires.png",
+    "Completed": false,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
