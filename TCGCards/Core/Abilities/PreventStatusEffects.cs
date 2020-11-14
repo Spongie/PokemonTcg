@@ -11,7 +11,7 @@ namespace TCGCards.Core.Abilities
         private bool preventParalyze;
         private bool preventPoison;
 
-        [DynamicInput("Prevent Poison")]
+        [DynamicInput("Prevent Poison", InputControl.Boolean)]
         public bool PreventPoison
         {
             get { return preventPoison; }
@@ -22,7 +22,7 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        [DynamicInput("Prevent Paralyze")]
+        [DynamicInput("Prevent Paralyze", InputControl.Boolean)]
         public bool PreventParalyze
         {
             get { return preventParalyze; }
@@ -33,7 +33,7 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        [DynamicInput("Prevent Sleep")]
+        [DynamicInput("Prevent Sleep", InputControl.Boolean)]
         public bool PreventSleep
         {
             get { return preventSleep; }
@@ -45,7 +45,7 @@ namespace TCGCards.Core.Abilities
         }
 
 
-        [DynamicInput("Prevent Confuse")]
+        [DynamicInput("Prevent Confuse", InputControl.Boolean)]
         public bool PreventConfuse
         {
             get { return preventConfuse; }
@@ -56,7 +56,7 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        [DynamicInput("Prevent Burn")]
+        [DynamicInput("Prevent Burn", InputControl.Boolean)]
         public bool PreventBurn
         {
             get { return preventBurn; }
