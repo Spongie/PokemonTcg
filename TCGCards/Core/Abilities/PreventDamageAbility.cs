@@ -7,6 +7,16 @@ namespace TCGCards.Core.Abilities
         private int minimumBeforePrevention;
         private int damageToPrevent;
 
+        public PreventDamageAbility() :this(null)
+        {
+
+        }
+
+        public PreventDamageAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
+        {
+            TriggerType = TriggerType.TakesDamage;
+        }
+
         [DynamicInput("How much to prevent")]
         public int DamageToPrevent
         {
@@ -27,11 +37,6 @@ namespace TCGCards.Core.Abilities
                 minimumBeforePrevention = value;
                 FirePropertyChanged();
             }
-        }
-
-        public PreventDamageAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
-        {
-            TriggerType = TriggerType.TakesDamage;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

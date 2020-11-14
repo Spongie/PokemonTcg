@@ -10,6 +10,19 @@ namespace TCGCards.Core.Abilities
         private bool preventSleep;
         private bool preventParalyze;
         private bool preventPoison;
+        private bool coinFlip;
+
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Prevent Poison", InputControl.Boolean)]
         public bool PreventPoison
@@ -79,6 +92,11 @@ namespace TCGCards.Core.Abilities
 
         public bool PreventsEffect(StatusEffect statusEffect)
         {
+            if (CoinFlip && CoinFlipper.FlipCoin())
+            {
+                return false;
+            }
+
             switch (statusEffect)
             {
                 case StatusEffect.Sleep:
