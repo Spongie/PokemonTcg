@@ -147,7 +147,7 @@ namespace NetworkingCore
                     {
                         try
                         {
-                            if (!reading || readTimer.ElapsedMilliseconds > 10000)
+                            if (!reading)
                             {
                                 return;
                             }

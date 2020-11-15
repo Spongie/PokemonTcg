@@ -336,8 +336,8 @@ namespace Launcher
 				
 				var tcp = new TcpClient(AddressFamily.InterNetwork);
 
-				//tcp.Connect("85.90.244.171", 8080);
-				tcp.Connect("127.0.0.1", 8080);
+				tcp.Connect("85.90.244.171", 8080);
+				//tcp.Connect("127.0.0.1", 8080);
 				networkConnection = new NetworkPlayer(tcp);
 				networkConnection.DataReceived += NetworkPlayer_DataReceived;
 
