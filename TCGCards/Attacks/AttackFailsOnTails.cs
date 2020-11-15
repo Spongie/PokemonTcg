@@ -7,6 +7,19 @@ namespace TCGCards.Attacks
     public class AttackFailsOnTails : Attack
     {
         private bool isOneTime;
+        private StatusEffect effect = StatusEffect.None;
+
+        [DynamicInput("Applies status effect?", InputControl.Dropdown, typeof(StatusEffect))]
+        public StatusEffect StatusEffect
+        {
+            get { return effect; }
+            set
+            {
+                effect = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Fails forever?", InputControl.Boolean)]
         public bool IsOneTimeUse
@@ -30,6 +43,11 @@ namespace TCGCards.Attacks
 
                 game.GameLog.AddMessage("The attack did nothing");
                 return 0;
+            }
+
+            if (StatusEffect != StatusEffect.None)
+            {
+                opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect);
             }
 
             return base.GetDamage(owner, opponent, game);

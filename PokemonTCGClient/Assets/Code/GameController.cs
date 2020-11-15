@@ -499,43 +499,65 @@ namespace Assets.Code
         private void OnStartSelectingYourBench(object message, NetworkId messageId)
         {
             selectedCards.Clear();
-
-            var maxCount = ((SelectFromYourBenchMessage)message).MaxCount;
-            var minCount = ((SelectFromYourBenchMessage)message).MinCount;
+            var selectYourPokemon = ((SelectFromYourBenchMessage)message);
+            var maxCount = selectYourPokemon.MaxCount;
+            var minCount = selectYourPokemon.MinCount;
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
             doneButton.SetActive(true);
 
-            var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-            infoText.text = $"Select {countString} of your benched pokemon";
+            if (!string.IsNullOrEmpty(selectYourPokemon.Info))
+            {
+                infoText.text = selectYourPokemon.Info;
+            }
+            else
+            {
+                var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
+                infoText.text = $"Select {countString} of your benched pokemon";
+            }
         }
 
         private void OnStartSelectingOpponentBench(object message, NetworkId messageId)
         {
             selectedCards.Clear();
-            var maxCount = ((SelectFromOpponentBenchMessage)message).MaxCount;
-            var minCount = ((SelectFromOpponentBenchMessage)message).MinCount;
+            var selectOpponentsMessage = ((SelectFromOpponentBenchMessage)message);
+            var maxCount = selectOpponentsMessage.MaxCount;
+            var minCount = selectOpponentsMessage.MinCount;
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
             doneButton.SetActive(true);
 
-            var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-            infoText.text = $"Select {countString} of your oppoents benched pokemon";
+            if (!string.IsNullOrEmpty(selectOpponentsMessage.Info))
+            {
+                infoText.text = selectOpponentsMessage.Info;
+            }
+            else
+            {
+                var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
+                infoText.text = $"Select {countString} of your oppoents benched pokemon";
+            }
         }
 
         private void OnStartSelectingOpponentPokemon(object message, NetworkId messageId)
         {
             selectedCards.Clear();
-
-            var maxCount = ((SelectOpponentPokemonMessage)message).MaxCount;
-            var minCount = ((SelectOpponentPokemonMessage)message).MinCount;
+            var selectOpponentMessage = ((SelectOpponentPokemonMessage)message);
+            var maxCount = selectOpponentMessage.MaxCount;
+            var minCount = selectOpponentMessage.MinCount;
             minSelectedCardCount = minCount;
 
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             doneButton.SetActive(true);
-
-            var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-            infoText.text = $"Select {countString} of your opponents pokemon";
+            
+            if (!string.IsNullOrEmpty(selectOpponentMessage.Info))
+            {
+                infoText.text = selectOpponentMessage.Info;
+            }
+            else
+            {
+                var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
+                infoText.text = $"Select {countString} of your opponents pokemon";
+            }
         }
 
         public void OnCardClicked(CardRenderer cardController)

@@ -188,6 +188,15 @@ namespace TCGCards.Core
             pokemon.IsRevealed = true;
         }
 
+        public void SwapActivePokemon(PokemonCard pokemon)
+        {
+            BenchedPokemon.Add(ActivePokemonCard);
+            BenchedPokemon.Remove(pokemon);
+
+            ActivePokemonCard = pokemon;
+            pokemon.IsRevealed = true;
+        }
+
         public void AttachEnergyToPokemon(EnergyCard energyCard, PokemonCard targetPokemonCard, GameField game = null)
         {
             if(HasPlayedEnergy)
@@ -219,6 +228,11 @@ namespace TCGCards.Core
 
         public void DrawCards(int amount)
         {
+            if (amount <= 0)
+            {
+                return;
+            }
+
             if (amount > Deck.Cards.Count)
             {
                 IsDead = true;

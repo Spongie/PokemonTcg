@@ -23,5 +23,6 @@ namespace TCGCards.Core.Messages
 
         public int MaxCount { get; set; }
         public int MinCount { get; set; }
+        public string Info { get; set; }
     }
 }

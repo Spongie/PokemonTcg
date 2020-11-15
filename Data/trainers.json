@@ -1135,59 +1135,90 @@
   },
   {
     "$id": "161",
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "162",
+        "$type": "TCGCards.TrainerEffects.PutCardFromDiscardOnDeck, TCGCards",
+        "CoinFlip": true,
+        "Amount": 1,
+        "CardType": 0,
+        "EffectType": "Put card from discard onto deck"
+      }
+    ],
     "CardId": {
-      "$id": "162",
+      "$id": "163",
       "Value": "3e857d2a-37fa-4700-b769-d425cbc94bd8"
     },
     "Id": {
-      "$id": "163",
+      "$id": "164",
       "Value": "fa8398a5-57f0-4407-8ffd-4c738146e716"
     },
     "SetCode": "base3",
     "Name": "Recycle",
     "ImageUrl": "https://images.pokemontcg.io/base3/61_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "164",
-    "Effects": [],
+    "$id": "165",
+    "Effects": [
+      {
+        "$id": "166",
+        "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
+        "CardType": 0,
+        "Opponents": false,
+        "Amount": -1,
+        "EffectType": "Shuffle hand into deck"
+      },
+      {
+        "$id": "167",
+        "$type": "TCGCards.TrainerEffects.DrawCardsDependingOnFlip, TCGCards",
+        "EffectType": "Draw cards depending on flip",
+        "AmountIfTails": 1,
+        "AmountIfHeads": 8
+      }
+    ],
     "CardId": {
-      "$id": "165",
+      "$id": "168",
       "Value": "e59204e9-c2d7-47b4-b5cd-75fd6fabc689"
     },
     "Id": {
-      "$id": "166",
+      "$id": "169",
       "Value": "648abd7c-3289-454e-8052-00280a149715"
     },
     "SetCode": "base3",
     "Name": "Gambler",
     "ImageUrl": "https://images.pokemontcg.io/base3/60_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "167",
-    "Effects": [],
+    "$id": "170",
+    "Effects": [
+      {
+        "$id": "171",
+        "$type": "TCGCards.TrainerEffects.CreateFossilePokemon, TCGCards",
+        "EffectType": "Create fossile Pokémon"
+      }
+    ],
     "CardId": {
-      "$id": "168",
+      "$id": "172",
       "Value": "52c0f6ba-7482-4858-92b3-f3b06e4f3805"
     },
     "Id": {
-      "$id": "169",
+      "$id": "173",
       "Value": "03438986-4438-471c-9f85-8d30b3ed308b"
     },
     "SetCode": "base3",
     "Name": "Mysterious Fossil",
     "ImageUrl": "https://images.pokemontcg.io/base3/62_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,

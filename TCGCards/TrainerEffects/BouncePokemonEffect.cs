@@ -151,6 +151,16 @@ namespace TCGCards.TrainerEffects
                 pokemon.EvolvedFrom = null;
                 DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
             }
+
+            if (target == target.Owner.ActivePokemonCard)
+            {
+                target.Owner.ActivePokemonCard = null;
+                target.Owner.SelectActiveFromBench();
+            }
+            else
+            {
+                target.Owner.BenchedPokemon.Remove(target);
+            }
         }
 
         private void DiscardOrBounceBasic(PokemonCard target, bool shuffleIntoDeck, PokemonCard pokemon)
@@ -212,6 +222,10 @@ namespace TCGCards.TrainerEffects
                 target.Owner.ActivePokemonCard = null;
                 target.Owner.SelectActiveFromBench();
             }
+            else
+            {
+                target.Owner.BenchedPokemon.Remove(target);
+            }
         }
 
         private static void ShuffleCardsIntoDeck(PokemonCard target)
@@ -239,6 +253,10 @@ namespace TCGCards.TrainerEffects
             {
                 target.Owner.ActivePokemonCard = null;
                 target.Owner.SelectActiveFromBench();
+            }
+            else
+            {
+                target.Owner.BenchedPokemon.Remove(target);
             }
         }
     }

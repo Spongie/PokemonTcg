@@ -51,6 +51,12 @@ namespace TCGCards.Core
 
         public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution)
         {
+            if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopEvolutions))
+            {
+                GameLog.AddMessage("Evolution stopped by ability");
+                return;
+            }
+
             if (!basePokemon.CanEvolve() || !basePokemon.CanEvolveTo(evolution))
             {
                 return;
@@ -388,6 +394,13 @@ namespace TCGCards.Core
                 GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.Ability.Name} is triggered by the attack");
                 ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
             }
+            else if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacked)
+            {
+                if (NonActivePlayer.ActivePokemonCard.Ability.CanActivate() && NonActivePlayer.ActivePokemonCard.Ability is AttackStopperAbility && FlipCoins(1) == 1)
+                {
+                    return;
+                }
+            }
 
             if (AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) || ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
             {
@@ -517,7 +530,9 @@ namespace TCGCards.Core
         public void PlayTrainerCard(TrainerCard trainerCard)
         {
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
+            {
                 return;
+            }
 
             CurrentTrainerCard = trainerCard;
 

@@ -5,6 +5,8 @@
         RetreatCost,
         StopTrainerCast,
         NoPokemonPowers,
-        StopStatusEffects
+        StopStatusEffects,
+        StopEvolutions,
+        LookAtOpponentHand
     }
 }

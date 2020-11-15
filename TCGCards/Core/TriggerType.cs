@@ -12,6 +12,7 @@
         Kills,
         OpponentRetreats,
         EnergyUsage,
-        Passive
+        Passive,
+        Attacked
     }
 }

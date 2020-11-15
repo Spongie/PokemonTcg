@@ -61,7 +61,7 @@ namespace TCGCards.TrainerEffects
             return filter;
         }
 
-        public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner)
+        public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner, string info = "")
         {
             PokemonCard target;
             NetworkMessage message;
@@ -76,12 +76,12 @@ namespace TCGCards.TrainerEffects
                     target = caster.ActivePokemonCard;
                     break;
                 case TargetingMode.YourBench:
-                    message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
+                    message = new SelectFromYourBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.FindCardById(selectedId);
                     break;
                 case TargetingMode.YourPokemon:
-                    message = new SelectFromYourPokemonMessage().ToNetworkMessage(game.Id);
+                    message = new SelectFromYourPokemonMessage() { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.FindCardById(selectedId);
                     break;
@@ -89,17 +89,17 @@ namespace TCGCards.TrainerEffects
                     target = opponent.ActivePokemonCard;
                     break;
                 case TargetingMode.OpponentBench:
-                    message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                    message = new SelectFromOpponentBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.FindCardById(selectedId);
                     break;
                 case TargetingMode.OpponentPokemon:
-                    message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                    message = new SelectOpponentPokemonMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.FindCardById(selectedId);
                     break;
                 case TargetingMode.AnyPokemon:
-                    throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in fullheal");
+                    throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in CardUtil");
                 default:
                     target = caster.ActivePokemonCard;
                     break;
