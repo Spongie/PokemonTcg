@@ -8635,6 +8635,51 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896868, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896870, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_Name
+      value: Event Image
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -656.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 482
+      objectReference: {fileID: 0}
+    - target: {fileID: 198513461420896871, guid: 92a31ccd58aabe64cad41393712e674a,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 698
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92a31ccd58aabe64cad41393712e674a, type: 3}
 --- !u!114 &198513460257372795 stripped
