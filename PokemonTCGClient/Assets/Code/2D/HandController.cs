@@ -35,7 +35,6 @@ namespace Assets.Code._2D
                 var cardRenderer = cardZone.transform.GetChild(i).GetComponentInChildren<CardRenderer>();
                 CanvasGroup cardCanvas = cardRenderer.GetComponent<CanvasGroup>();
                 cardCanvas.alpha = cards.Any(card => card.Id.Equals(cardRenderer.card.Id)) ? 0.2f : 1f;
-
             }
         }
     }
