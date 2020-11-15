@@ -20,6 +20,17 @@ namespace TCGCards
         private ObservableCollection<Attack> attacks = new ObservableCollection<Attack>();
         private Attack selectedAttack;
         private Ability ablity;
+        private int prizeCards = 1;
+
+        public int PrizeCards
+        {
+            get { return prizeCards; }
+            set
+            {
+                prizeCards = value;
+                FirePropertyChanged();
+            }
+        }
 
         public Ability Ability
         {
@@ -271,7 +282,7 @@ namespace TCGCards
             IsConfused = false;
         }
 
-        public bool CanReatreat()
+        public virtual bool CanReatreat()
         {
             if(!Owner.BenchedPokemon.Any())
                 return false;
@@ -295,7 +306,7 @@ namespace TCGCards
             return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
         }
 
-        public void ApplyStatusEffect(StatusEffect statusEffect)
+        public virtual void ApplyStatusEffect(StatusEffect statusEffect)
         {
             var statusPreventer = Ability as PreventStatusEffects;
 

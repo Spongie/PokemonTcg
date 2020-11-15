@@ -283,6 +283,11 @@ namespace TCGCards.Core
 
         public void SelectPriceCard(int amount)
         {
+            if (amount <= 0)
+            {
+                return;
+            }
+
             var message = new SelectPriceCardsMessage(amount).ToNetworkMessage(NetworkId.Generate());
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);

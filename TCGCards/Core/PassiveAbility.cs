@@ -12,5 +12,8 @@
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
         }
+
+        public bool LimitedByTime { get; set; }
+        public int TurnsLeft { get; set; }
     }
 }

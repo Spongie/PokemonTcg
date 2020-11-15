@@ -58,12 +58,14 @@ namespace CardEditor.Util
             else if (sdkAttack.Text.ToLower().Trim() == "Flip a coin. If tails, this attack does nothing.")
             {
                 var cost = baseAttack.Cost.ToList();
+                var damage = baseAttack.Damage;
 
                 baseAttack = new AttackFailsOnTails
                 {
                     Name = sdkAttack.Name,
                     Description = sdkAttack.Text,
-                    Cost = new ObservableCollection<Energy>(cost)
+                    Cost = new ObservableCollection<Energy>(cost),
+                    Damage = damage
                 };
             }
             else if (Regex.IsMatch(sdkAttack.Text, @"Flip \d+ coins[.] This attack does \d+ damage times the number of heads[.]"))
@@ -80,6 +82,21 @@ namespace CardEditor.Util
                     Damage = damage,
                     Cost = new ObservableCollection<Energy>(cost)
                 };
+                return true;
+            }
+            else if (sdkAttack.Text == "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.")
+            {
+                var cost = baseAttack.Cost.ToList();
+                var damage = baseAttack.Damage;
+
+                baseAttack = new ApplyAttackFailOnTails
+                {
+                    Name = sdkAttack.Name,
+                    Description = sdkAttack.Text,
+                    Cost = new ObservableCollection<Energy>(cost),
+                    Damage = damage
+                };
+
                 return true;
             }
 

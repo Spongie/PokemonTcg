@@ -101,6 +101,10 @@
                 <Label Content="Evolves From" MinWidth="80"/>
                 <ComboBox ItemsSource="{Binding DataContext.AllPokemonNames, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" SelectedItem="{Binding Card.EvolvesFrom}"/>
             </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Evolves From" MinWidth="80"/>
+                <TextBox Text="{Binding Card.EvolvesFrom}"/>
+            </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="False">
                 <Label Content="Completed" MinWidth="80"/>
                 <CheckBox IsChecked="{Binding Card.Completed}" VerticalAlignment="Center" />

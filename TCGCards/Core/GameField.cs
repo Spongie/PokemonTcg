@@ -26,7 +26,7 @@ namespace TCGCards.Core
             playersSetStartBench = new HashSet<NetworkId>();
             AttackStoppers = new List<AttackStopper>();
             DamageStoppers = new List<DamageStopper>();
-            TemporaryPassiveAbilities = new List<TemporaryPassiveAbility>();
+            TemporaryPassiveAbilities = new List<PassiveAbility>();
             GameState = GameFieldState.WaitingForConnection;
             GameLog = new GameLog();
         }
@@ -519,6 +519,7 @@ namespace TCGCards.Core
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
                 return;
 
+            CurrentTrainerCard = trainerCard;
 
             //TODO Remove card from hand as it is played
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
@@ -543,6 +544,8 @@ namespace TCGCards.Core
                 GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
                 EndGame(NonActivePlayer.Id);
             }
+
+            CurrentTrainerCard = null;
         }
 
         private void SendEventMessage(Event playEvent, Player target)
@@ -617,7 +620,7 @@ namespace TCGCards.Core
 
                 PushGameLogUpdatesToPlayers();
 
-                if (ActivePlayer.PrizeCards.Count == 1)
+                if (ActivePlayer.PrizeCards.Count == 1 && NonActivePlayer.ActivePokemonCard.PrizeCards > 0)
                 {
                     GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + $" has no pokémon left, {ActivePlayer.NetworkPlayer?.Name} wins the game");
                     EndGame(ActivePlayer.Id);
@@ -632,7 +635,7 @@ namespace TCGCards.Core
                 else
                 {
                     SendUpdateToPlayers();
-                    ActivePlayer.SelectPriceCard(1);
+                    ActivePlayer.SelectPriceCard(NonActivePlayer.ActivePokemonCard.PrizeCards);
                 }
 
                 NonActivePlayer.KillActivePokemon();
@@ -651,15 +654,15 @@ namespace TCGCards.Core
 
             PushGameLogUpdatesToPlayers();
 
-            if (ActivePlayer.ActivePokemonCard != null &&ActivePlayer.ActivePokemonCard.IsDead())
+            if (ActivePlayer.ActivePokemonCard != null && ActivePlayer.ActivePokemonCard.IsDead())
             {
                 GameLog.AddMessage(ActivePlayer.ActivePokemonCard.GetName() + "Dies");
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 ActivePlayer.KillActivePokemon();
-                NonActivePlayer.SelectPriceCard(1);
                 
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
+                    NonActivePlayer.SelectPriceCard(ActivePlayer.ActivePokemonCard.PrizeCards);
                     ActivePlayer.SelectActiveFromBench();
                 }
                 else
@@ -677,7 +680,7 @@ namespace TCGCards.Core
                     continue;
                 }
 
-                if (ActivePlayer.PrizeCards.Count <= 1)
+                if (ActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
                 {
                     GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
                     EndGame(ActivePlayer.Id);
@@ -687,7 +690,7 @@ namespace TCGCards.Core
                 {
                     PushStateToPlayer(NonActivePlayer);
                     PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
-                    ActivePlayer.SelectPriceCard(1);
+                    ActivePlayer.SelectPriceCard(pokemon.PrizeCards);
                 }
             }
 
@@ -698,7 +701,7 @@ namespace TCGCards.Core
                     continue;
                 }
 
-                if (NonActivePlayer.PrizeCards.Count <= 1)
+                if (NonActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
                 {
                     GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + " wins the game");
                     EndGame(NonActivePlayer.Id);
@@ -708,7 +711,7 @@ namespace TCGCards.Core
                 {
                     PushStateToPlayer(ActivePlayer);
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPriceCard(1);
+                    NonActivePlayer.SelectPriceCard(pokemon.PrizeCards);
                 }
             }
 
@@ -727,7 +730,7 @@ namespace TCGCards.Core
         public void EndTurn()
         {
             TemporaryPassiveAbilities.ForEach(x => x.TurnsLeft--);
-            TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0).ToList();
+            TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0 || !x.LimitedByTime).ToList();
 
             ActivePlayer.EndTurn();
 
@@ -834,9 +837,10 @@ namespace TCGCards.Core
         public GameLog GameLog { get; set; } = new GameLog();
         public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
-        public List<TemporaryPassiveAbility> TemporaryPassiveAbilities { get; set; }
+        public List<PassiveAbility> TemporaryPassiveAbilities { get; set; }
         public bool PrizeCardsFaceUp { get; set; }
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
+        public TrainerCard CurrentTrainerCard { get; set; }
     }
 }
