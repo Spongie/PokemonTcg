@@ -9,6 +9,7 @@ namespace Assets.Code.UI.Gameplay
         public int maxCards = 0;
         public int width = 200;
         public int height = 200;
+        public int yOffset = 2;
         public bool overrideHeight = true;
         public bool adjustZoneWidth;
 
@@ -52,7 +53,7 @@ namespace Assets.Code.UI.Gameplay
 
                 var actualHeight = overrideHeight ? height - 5 : rect.sizeDelta.y;
                 rect.sizeDelta = new Vector2(width, actualHeight);
-                rect.anchoredPosition = new Vector3(offset, 2);
+                rect.anchoredPosition = new Vector3(offset, yOffset);
                 
                 offset += width + 3;
             }

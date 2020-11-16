@@ -29,6 +29,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject ParalyzedIcon;
     public GameObject AsleepIcon;
     public GameObject ConfusedIcon;
+
+    public TextMeshProUGUI damageTakenText;
     
     [Header("Attached Energy")]
     public GameObject AttachedEnergyList;
@@ -185,6 +187,38 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
+    }
+
+    public void StartOnDamageTaken(int damage)
+    {
+        StartCoroutine(DisplayDamageRoutine(damage));
+    }
+
+    IEnumerator DisplayDamageRoutine(int damage)
+    {
+        GetComponentInChildren<Animator>().SetTrigger("DamageTaken");
+
+        damageTakenText.text = damage.ToString();
+        damageTakenText.fontSize = 50;
+        damageTakenText.gameObject.SetActive(true);
+
+        while (damageTakenText.fontSize < 75)
+        {
+            damageTakenText.fontSize += 1.25f;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        damageTakenText.gameObject.SetActive(false);
+        damageTakenText.fontSize = 30;
+    }
+
+    private void Update()
+    {
+       //if (Input.GetKeyDown(KeyCode.Space))
+       //{
+       //    var numbers = new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+       //    StartOnDamageTaken(numbers[Random.Range(0, numbers.Length)]);
+       //}
     }
 
     internal void FadeOut()
