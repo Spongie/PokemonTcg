@@ -25,18 +25,18 @@ namespace Assets.Code.UI.Events
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartCoroutine(CoinFlipEnumerator(new List<bool> { false }));
-            }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                StartCoroutine(CoinFlipEnumerator(new List<bool> { true }));
-            }
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                StartCoroutine(CoinFlipEnumerator(new List<bool> { UnityEngine.Random.Range(0, 2) > 0, UnityEngine.Random.Range(0, 2) > 0, UnityEngine.Random.Range(0, 2) > 0 }));
-            }
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    StartCoroutine(CoinFlipEnumerator(new List<bool> { false }));
+            //}
+            //if (Input.GetKeyDown(KeyCode.F))
+            //{
+            //    StartCoroutine(CoinFlipEnumerator(new List<bool> { true }));
+            //}
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    StartCoroutine(CoinFlipEnumerator(new List<bool> { UnityEngine.Random.Range(0, 2) > 0, UnityEngine.Random.Range(0, 2) > 0, UnityEngine.Random.Range(0, 2) > 0 }));
+            //}
         }
 
         IEnumerator CoinFlipEnumerator(List<bool> results)
@@ -103,6 +103,10 @@ namespace Assets.Code.UI.Events
                     yield return new WaitForSeconds(0.5f);
                 }
             }
+
+            yield return new WaitForSeconds(1.5f);
+
+            GameEventHandler.Instance.EventCompleted();
         }
     }
 }
