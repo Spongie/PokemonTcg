@@ -7,6 +7,7 @@ namespace TCGCards.Core.GameEvents
     {
         public CardsDiscardedEvent(GameFieldInfo gameField) : base(gameField)
         {
+            GameEvent = GameEventType.DiscardsCard;
         }
 
         public NetworkId Player { get; set; }

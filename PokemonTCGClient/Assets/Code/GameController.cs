@@ -436,7 +436,7 @@ namespace Assets.Code
 
         private void OnGameEventReceived(object arg1, NetworkId arg2)
         {
-            var card = ((EventMessage)arg1).GameEvent.GetCardToDisplay();
+            Card card = null;// ((EventMessage)arg1).GameEvent.GetCardToDisplay();
 
             if (card == null)
             {

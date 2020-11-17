@@ -7,6 +7,7 @@ namespace TCGCards.Core.GameEvents
     {
         public DrawCardsEvent(GameFieldInfo gameField) : base(gameField)
         {
+            GameEvent = GameEventType.DrawsCard;
         }
 
         public NetworkId Player { get; set; }

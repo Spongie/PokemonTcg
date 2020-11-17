@@ -6,11 +6,7 @@ namespace TCGCards.Core.GameEvents
     {
         public TrainerCardPlayed(GameFieldInfo gameField) : base(gameField)
         {
-        }
-
-        public override Card GetCardToDisplay()
-        {
-            return Card;
+            GameEvent = GameEventType.TrainerCardPlayed;
         }
 
         public NetworkId Player { get; set; }
