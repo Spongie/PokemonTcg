@@ -16,6 +16,7 @@ namespace Assets.Code.UI.Events
         public TrainerCardPlayerEventHandler TrainerCardPlayedEventHandler;
         public EnergyCardsAttachedEventHandler EnergyCardsAttachedEventHandler;
         public CardDrawEventHandler CardDrawEventHandler;
+        public PokemonAttackedEventHandler PokemonAttackedEventHandler;
 
         private void Awake()
         {
@@ -62,8 +63,9 @@ namespace Assets.Code.UI.Events
                 TriggerEvent(gameEvent);
             }
         }
+        //TODO: Add queue for events
 
-        public void TriggerEvent(TCGCards.Core.GameEvents.Event gameEvent)
+        private void TriggerEvent(TCGCards.Core.GameEvents.Event gameEvent)
         {
             switch (gameEvent.GameEvent)
             {
@@ -72,6 +74,8 @@ namespace Assets.Code.UI.Events
                     TrainerCardPlayedEventHandler.TriggerCardPlayer(((TrainerCardPlayed)gameEvent).Card);
                     break;
                 case GameEventType.PokemonAttacks:
+                    PokemonAttackedEventHandler.gameObject.SetActive(true);
+                    PokemonAttackedEventHandler.TriggerEvent(((PokemonAttackedEvent)gameEvent).Player);
                     break;
                 case GameEventType.PokemonActivatesAbility:
                     break;
@@ -107,6 +111,7 @@ namespace Assets.Code.UI.Events
             TrainerCardPlayedEventHandler.gameObject.SetActive(false);
             EnergyCardsAttachedEventHandler.gameObject.SetActive(false);
             CardDrawEventHandler.gameObject.SetActive(false);
+            PokemonAttackedEventHandler.gameObject.SetActive(false);
         }
     }
 }
