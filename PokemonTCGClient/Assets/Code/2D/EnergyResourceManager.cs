@@ -8,10 +8,14 @@ namespace Assets.Code._2D
 {
     public class EnergyResourceManager : MonoBehaviour
     {
+        public static EnergyResourceManager Instance;
         public Texture2D icon_atlas;
+        public Sprite DoubleColorless;
+        public Sprite Special;
 
         private void Awake()
         {
+            Instance = this;
             Icons = new Dictionary<EnergyTypes, Sprite>();
 
             foreach (var sprite in Resources.LoadAll<Sprite>(icon_atlas.name))
@@ -19,6 +23,20 @@ namespace Assets.Code._2D
                 var type = (EnergyTypes)Enum.Parse(typeof(EnergyTypes), sprite.name);
                 Icons.Add(type, sprite);
             }
+        }
+
+        public Sprite GetSpriteForEnergyCard(EnergyCard energyCard)
+        {
+            if (energyCard.Amount == 2 && energyCard.EnergyType == EnergyTypes.Colorless)
+            {
+                return DoubleColorless;
+            }
+            if (!energyCard.IsBasic)
+            {
+                return Special;
+            }
+
+            return Icons[energyCard.EnergyType];
         }
 
         public Dictionary<EnergyTypes, Sprite> Icons { get; private set; }

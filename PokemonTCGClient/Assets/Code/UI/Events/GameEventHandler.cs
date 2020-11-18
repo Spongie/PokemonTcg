@@ -14,7 +14,8 @@ namespace Assets.Code.UI.Events
         public static GameEventHandler Instance;
         public CoinflipEventHandler CoinFlipHandler;
         public TrainerCardPlayerEventHandler TrainerCardPlayedEventHandler;
-
+        public EnergyCardsAttachedEventHandler EnergyCardsAttachedEventHandler;
+        
         private void Awake()
         {
             Instance = this;
@@ -31,6 +32,17 @@ namespace Assets.Code.UI.Events
             //
             //    var gameEvent = new CoinsFlippedEvent(new List<bool> { true, true }, null);
             //
+            //    TriggerEvent(gameEvent);
+            //}
+
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    var gameEvent = new TCGCards.Core.GameEvents.EnergyCardsAttachedEvent(null)
+            //    {
+            //        EnergyCard = new EnergyCard { EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" },
+            //        AttachedTo = (PokemonCard)CardRenderer.pokemon
+            //    };
+
             //    TriggerEvent(gameEvent);
             //}
         }
@@ -58,6 +70,9 @@ namespace Assets.Code.UI.Events
                     CoinFlipHandler.TriggerCoinFlips(((CoinsFlippedEvent)gameEvent).Results);
                     break;
                 case GameEventType.AttachesEnergy:
+                    var energyEvent = (EnergyCardsAttachedEvent)gameEvent;
+                    EnergyCardsAttachedEventHandler.gameObject.SetActive(true);
+                    EnergyCardsAttachedEventHandler.TriggerCardPlayer(energyEvent.EnergyCard, energyEvent.AttachedTo);
                     break;
                 default:
                     break;
@@ -68,6 +83,7 @@ namespace Assets.Code.UI.Events
         {
             CoinFlipHandler.gameObject.SetActive(false);
             TrainerCardPlayedEventHandler.gameObject.SetActive(false);
+            EnergyCardsAttachedEventHandler.gameObject.SetActive(false);
         }
     }
 }

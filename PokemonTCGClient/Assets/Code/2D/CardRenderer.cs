@@ -11,9 +11,12 @@ using Assets.Code.UI.Gameplay;
 using TMPro;
 using Assets.Code._2D;
 using Entities;
+using System;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
+    public static PokemonCard pokemon;
+
     public GameObject AttachedCardPrefab;
     public Image art;
     public Card card;
@@ -46,11 +49,18 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
+        SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png" }, ZoomMode.Center);
+        GameController.Instance.AddCard(this);
         //SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
     }
 
     public void SetCard(Card card, ZoomMode zoomMode)
     {
+        if (card is PokemonCard)
+        {
+            pokemon = (PokemonCard)card;
+        }
+
         this.card = card;
         var zoomer = GetComponentInChildren<CardZoomer>();
 
@@ -92,6 +102,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     private void SpawnAttachedEnergy(Card card, ZoomMode zoomMode, RectTransform myRect, int sortOrder, float offsetSize, float attachedOffset)
     {
+        return;
         var activePokemonCard = GameController.Instance.Player.ActivePokemonCard;
         var otherActtive = GameController.Instance.OpponentPlayer.ActivePokemonCard;
 
@@ -114,40 +125,16 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             foreach (var attachedEnergy in ((PokemonCard)card).AttachedEnergy)
             {
                 var attachedObject = Instantiate(AttachedEnergyPrefab, AttachedEnergyList.transform);
-                attachedObject.GetComponent<Image>().sprite = GetSpriteFromEnergyType(attachedEnergy.EnergyType);
+                attachedObject.GetComponent<Image>().sprite = EnergyResourceManager.Instance.GetSpriteForEnergyCard(attachedEnergy);
             }
         }
     }
 
-    private Sprite GetSpriteFromEnergyType(EnergyTypes energyType)
+    internal void insertAttachedEnergy(EnergyCard attachedEnergy)
     {
-        switch (energyType)
-        {
-            case EnergyTypes.Colorless:
-                return DoubleColorlessIcon;
-            case EnergyTypes.Water:
-                return WaterIcon;
-            case EnergyTypes.Fire:
-                return FireIcon;
-            case EnergyTypes.Grass:
-                return GrassIcon;
-            case EnergyTypes.Electric:
-                return ElectricIcon;
-            case EnergyTypes.Psychic:
-                return PsychicIcon;
-            case EnergyTypes.Fighting:
-                return FightingIcon;
-            case EnergyTypes.Darkness:
-                return null;
-            case EnergyTypes.Steel:
-                return null;
-            case EnergyTypes.Fairy:
-                return null;
-            case EnergyTypes.Dragon:
-                return null;
-            default:
-                return SpecialIcon;
-        }
+        var attachedObject = Instantiate(AttachedEnergyPrefab, AttachedEnergyList.transform);
+        attachedObject.transform.SetAsFirstSibling();
+        attachedObject.GetComponent<Image>().sprite = EnergyResourceManager.Instance.GetSpriteForEnergyCard(attachedEnergy);
     }
 
     IEnumerator LoadSprite(Card card)

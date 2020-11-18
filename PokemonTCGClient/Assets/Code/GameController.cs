@@ -44,6 +44,12 @@ namespace Assets.Code
         public GameObject EscapeMenu;
         public GameObject WinMenu;
         public Text winnerText;
+
+        internal void AddCard(CardRenderer card)
+        {
+            cardRenderers.Add(card.card.Id, card);
+        }
+
         public EventLogViewer eventViewer;
 
         public Sprite CardBack;
@@ -57,6 +63,7 @@ namespace Assets.Code
         private Dictionary<GameFieldState, string> gameStateInfo;
         private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
         private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
+        private Dictionary<NetworkId, CardRenderer> cardRenderers;
         private Queue<EnergyCard> energyCardsToAttach;
         private Dictionary<NetworkId, NetworkId> energyPokemonMap;
         private EnergyCard currentEnergyCard;
@@ -76,6 +83,7 @@ namespace Assets.Code
             selectedCards = new List<Card>();
             energyCardsToAttach = new Queue<EnergyCard>();
             energyPokemonMap = new Dictionary<NetworkId, NetworkId>();
+            cardRenderers = new Dictionary<NetworkId, CardRenderer>();
 
             InitGamestateInfo();
             RegisterClickHandlers();
@@ -873,6 +881,11 @@ namespace Assets.Code
         {
             NetworkManager.Instance.gameService.LeaveGame(myId, gameField.Id);
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public CardRenderer GetCardRendererById(NetworkId cardId)
+        {
+            return cardRenderers[cardId];
         }
 
         public Player Player
