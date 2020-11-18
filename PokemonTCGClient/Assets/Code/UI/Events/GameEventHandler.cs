@@ -15,7 +15,8 @@ namespace Assets.Code.UI.Events
         public CoinflipEventHandler CoinFlipHandler;
         public TrainerCardPlayerEventHandler TrainerCardPlayedEventHandler;
         public EnergyCardsAttachedEventHandler EnergyCardsAttachedEventHandler;
-        
+        public CardDrawEventHandler CardDrawEventHandler;
+
         private void Awake()
         {
             Instance = this;
@@ -45,6 +46,21 @@ namespace Assets.Code.UI.Events
 
             //    TriggerEvent(gameEvent);
             //}
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                var gameEvent = new DrawCardsEvent(null)
+                {
+                    Cards = new List<Card>
+                    {
+                        new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" },
+                        new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" },
+                        new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" }
+                    }
+                };
+
+                TriggerEvent(gameEvent);
+            }
         }
 
         public void TriggerEvent(TCGCards.Core.GameEvents.Event gameEvent)
@@ -62,6 +78,8 @@ namespace Assets.Code.UI.Events
                 case GameEventType.PokemonTakesDamage:
                     break;
                 case GameEventType.DrawsCard:
+                    CardDrawEventHandler.gameObject.SetActive(true);
+                    CardDrawEventHandler.TriggerCardsDrawn(((DrawCardsEvent)gameEvent).Cards);
                     break;
                 case GameEventType.DiscardsCard:
                     break;
@@ -84,6 +102,7 @@ namespace Assets.Code.UI.Events
             CoinFlipHandler.gameObject.SetActive(false);
             TrainerCardPlayedEventHandler.gameObject.SetActive(false);
             EnergyCardsAttachedEventHandler.gameObject.SetActive(false);
+            CardDrawEventHandler.gameObject.SetActive(false);
         }
     }
 }

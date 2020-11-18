@@ -10,6 +10,8 @@ namespace Assets.Code
 {
     public class CardImageLoader : MonoBehaviour
     {
+        public Sprite cardBack;
+
         private void Awake()
         {
             Instance = this;    
@@ -25,7 +27,11 @@ namespace Assets.Code
             string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
             string finalPath = "file:///" + fullCardPath;
 
-            if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))
+            if (!card.IsRevealed)
+            {
+                targetImage.sprite = cardBack;
+            }
+            else if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))
             {
                 targetImage.sprite = SpriteCache.Instance.cache[fullCardPath];
             }

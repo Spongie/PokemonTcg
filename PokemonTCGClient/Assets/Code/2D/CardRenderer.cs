@@ -49,8 +49,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png" }, ZoomMode.Center);
-        GameController.Instance.AddCard(this);
+        //SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png" }, ZoomMode.Center);
+        //GameController.Instance.AddCard(this);
         //SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
     }
 

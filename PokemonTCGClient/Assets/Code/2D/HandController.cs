@@ -28,6 +28,13 @@ namespace Assets.Code._2D
             }
         }
 
+        public void AddCardToHand(Card card)
+        {
+            card.IsRevealed = isPlayerHand;
+            var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
+            spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom);
+        }
+
         public void FadeOutCards(IEnumerable<Card> cards)
         {
             for (int i = 0; i < cardZone.transform.childCount; i++)
