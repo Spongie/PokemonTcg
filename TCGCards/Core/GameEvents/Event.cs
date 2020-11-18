@@ -21,5 +21,7 @@
         DiscardsCard,
         Flipscoin,
         AttachesEnergy,
+        PokemonBecameActive,
+        PokemonAddedToBench
     }
 }

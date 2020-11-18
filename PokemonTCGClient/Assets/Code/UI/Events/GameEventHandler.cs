@@ -92,6 +92,10 @@ namespace Assets.Code.UI.Events
                     EnergyCardsAttachedEventHandler.gameObject.SetActive(true);
                     EnergyCardsAttachedEventHandler.TriggerCardPlayer(energyEvent.EnergyCard, energyEvent.AttachedTo);
                     break;
+                case GameEventType.PokemonBecameActive:
+                    break;
+                case GameEventType.PokemonAddedToBench:
+                    break;
                 default:
                     break;
             }
