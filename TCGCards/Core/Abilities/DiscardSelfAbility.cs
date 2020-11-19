@@ -4,12 +4,17 @@
     {
         public DiscardSelfAbility() :this(null)
         {
-
+            
         }
 
         public DiscardSelfAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.Activation;
+        }
+
+        public override bool CanActivate()
+        {
+            return PokemonOwner.Owner.BenchedPokemon.Contains(PokemonOwner) && base.CanActivate();
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

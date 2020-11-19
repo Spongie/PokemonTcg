@@ -130,7 +130,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
             var pokemon = new PokemonCard() { Owner = player };
-            effect.OnAttachedTo(pokemon, true);
+            effect.OnAttachedTo(pokemon, true, null);
             Assert.AreEqual(1, player.Hand.Count);
         }
     }

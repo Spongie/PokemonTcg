@@ -23,7 +23,7 @@ namespace TCGCardsTests.Core.Messages
         [TestMethod]
         public void AttachEnergyCardsToBench()
         {
-            var message = new AttachEnergyCardsToBenchMessage(new List<EnergyCard>() { new WaterEnergy() });
+            var message = new AttachEnergyCardsToBenchMessage(new List<EnergyCard>() { new EnergyCard() { EnergyType = EnergyTypes.Water, Amount = 1 } });
 
             Assert.IsNotNull(SerializeAndBack(message));
         }
@@ -95,7 +95,7 @@ namespace TCGCardsTests.Core.Messages
         [TestMethod]
         public void PickFromListMessage()
         {
-            var message = new PickFromListMessage(new List<Card> { new WaterEnergy() }, 1);
+            var message = new PickFromListMessage(new List<Card> { new EnergyCard() { EnergyType = EnergyTypes.Water, Amount = 1 } }, 1);
 
             Assert.IsNotNull(SerializeAndBack(message));
         }
@@ -104,7 +104,7 @@ namespace TCGCardsTests.Core.Messages
         public void PickFromListMessageDeserialize()
         {
             var player = new Player();
-            var message = new PickFromListMessage(new List<Card> { new WaterEnergy(), new WaterEnergy()}, 1, 1);
+            var message = new PickFromListMessage(new List<Card> { new EnergyCard() { EnergyType = EnergyTypes.Water, Amount = 1 }, new EnergyCard() { EnergyType = EnergyTypes.Water, Amount = 1 } }, 1, 1);
 
             var result = SerializeAndBack(message);
 

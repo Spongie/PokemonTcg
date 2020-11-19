@@ -19,7 +19,7 @@ namespace TCGCards.EnergyCards
 
         public override string GetName() => PokemonNames.Electrode;
 
-        public override void OnAttached(PokemonCard attachedTo, bool fromHand)
+        public override void OnAttached(PokemonCard attachedTo, bool fromHand, GameField game)
         {
 
         }

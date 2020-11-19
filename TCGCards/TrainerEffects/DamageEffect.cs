@@ -42,16 +42,16 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent) => true;
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            attachedTo.DamageCounters += Amount;
+            attachedTo.DealDamage(Amount, game);
         }
 
         public void Process(GameField game, Player caster, Player opponent)
         {
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            target.DamageCounters += Amount;
+            target.DealDamage(Amount, game);
         }
     }
 }

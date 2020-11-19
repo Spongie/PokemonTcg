@@ -24,5 +24,6 @@ namespace TCGCards.Core.Messages
         }
 
         public Event GameEvent { get; set; }
+        public GameFieldInfo GameInfo { get; set; }
     }
 }

@@ -44,14 +44,14 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            owner.ActivePokemonCard.DamageCounters += SelfDamage;
+            owner.ActivePokemonCard.DealDamage(SelfDamage, game, false);
             foreach (var pokemon in opponent.BenchedPokemon)
             {
-                pokemon.DamageCounters += EnemyBenchDamage;
+                pokemon.DealDamage(EnemyBenchDamage, game);
             }
             foreach (var pokemon in owner.BenchedPokemon)
             {
-                pokemon.DamageCounters += TeamBenchDamage;
+                pokemon.DealDamage(TeamBenchDamage, game);
             }
         }
     }

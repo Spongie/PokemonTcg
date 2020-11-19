@@ -17,11 +17,11 @@ public class EnergyCard : Card
 
     public virtual Energy GetEnergry() { return new Energy(EnergyType, amount); }
 
-    public virtual void OnAttached(PokemonCard attachedTo, bool fromHand) 
+    public virtual void OnAttached(PokemonCard attachedTo, bool fromHand, GameField game) 
     {
         foreach (var effect in Effects)
         {
-            effect.OnAttachedTo(attachedTo, fromHand);
+            effect.OnAttachedTo(attachedTo, fromHand, game);
         }
     }
 

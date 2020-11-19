@@ -78,7 +78,7 @@ namespace TCGCards.Core.Abilities
 
             if (selectedPokemon.AttachedEnergy.Count == 1)
             {
-                newPokemon.AttachedEnergy.Add(selectedPokemon.AttachedEnergy.First());
+                newPokemon.AttachEnergy(selectedPokemon.AttachedEnergy.First(), game);
                 selectedPokemon.AttachedEnergy.Clear();
             }
             else
@@ -87,7 +87,7 @@ namespace TCGCards.Core.Abilities
                 var energyCard = selectedPokemon.AttachedEnergy.FirstOrDefault(card => card.Id.Equals(selectedEnergyId.Cards.First()));
 
                 selectedPokemon.AttachedEnergy.Remove(energyCard);
-                newPokemon.AttachedEnergy.Add(energyCard);
+                newPokemon.AttachEnergy(energyCard, game);
             }
         }
     }

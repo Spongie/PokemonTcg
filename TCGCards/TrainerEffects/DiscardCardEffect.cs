@@ -63,7 +63,7 @@ namespace TCGCards.TrainerEffects
             return caster.Hand.Count - 1 >= amount;
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
             throw new System.NotImplementedException();
         }

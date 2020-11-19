@@ -88,7 +88,7 @@ namespace TCGCardsTests.Effects
                 TargetingMode = TargetingMode.AttachedTo
             };
 
-            effect.OnAttachedTo(pokemon, true);
+            effect.OnAttachedTo(pokemon, true, null);
             Assert.IsTrue(pokemon.IsBurned);
         }
     }

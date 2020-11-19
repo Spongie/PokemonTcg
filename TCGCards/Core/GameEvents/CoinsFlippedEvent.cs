@@ -4,12 +4,12 @@ namespace TCGCards.Core.GameEvents
 {
     public class CoinsFlippedEvent : Event
     {
-        public CoinsFlippedEvent() :this(null, null)
+        public CoinsFlippedEvent() :this(new List<bool>())
         {
 
         }
 
-        public CoinsFlippedEvent(List<bool> results, GameFieldInfo gameFieldInfo) :base(gameFieldInfo)
+        public CoinsFlippedEvent(List<bool> results)
         {
             Results = results;
             GameEvent = GameEventType.Flipscoin;

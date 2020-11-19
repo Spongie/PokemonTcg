@@ -74,7 +74,7 @@ namespace TCGCards.TrainerEffects
             return caster.BenchedPokemon.Any();
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
             
         }
@@ -85,19 +85,19 @@ namespace TCGCards.TrainerEffects
 
             if (onlyBasic)
             {
-                ReturnOnlyBasic(target, shuffleIntoDeck);
+                ReturnOnlyBasic(target, shuffleIntoDeck, game);
             }
             else if (shuffleIntoDeck)
             {
-                ShuffleCardsIntoDeck(target);
+                ShuffleCardsIntoDeck(target, game);
             }
             else
             {
-                ReturnCardsToHand(target);
+                ReturnCardsToHand(target, game);
             }
         }
 
-        private void ReturnOnlyBasic(PokemonCard target, bool shuffleIntoDeck)
+        private void ReturnOnlyBasic(PokemonCard target, bool shuffleIntoDeck, GameField game)
         {
             foreach (var card in target.AttachedEnergy)
             {
@@ -155,7 +155,7 @@ namespace TCGCards.TrainerEffects
             if (target == target.Owner.ActivePokemonCard)
             {
                 target.Owner.ActivePokemonCard = null;
-                target.Owner.SelectActiveFromBench();
+                target.Owner.SelectActiveFromBench(game);
             }
             else
             {
@@ -183,7 +183,7 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        private void ReturnCardsToHand(PokemonCard target)
+        private void ReturnCardsToHand(PokemonCard target, GameField game)
         {
             foreach (var card in target.AttachedEnergy)
             {
@@ -220,7 +220,7 @@ namespace TCGCards.TrainerEffects
             if (target == target.Owner.ActivePokemonCard)
             {
                 target.Owner.ActivePokemonCard = null;
-                target.Owner.SelectActiveFromBench();
+                target.Owner.SelectActiveFromBench(game);
             }
             else
             {
@@ -228,7 +228,7 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        private static void ShuffleCardsIntoDeck(PokemonCard target)
+        private static void ShuffleCardsIntoDeck(PokemonCard target, GameField game)
         {
             foreach (var card in target.AttachedEnergy)
             {
@@ -252,7 +252,7 @@ namespace TCGCards.TrainerEffects
             if (target == target.Owner.ActivePokemonCard)
             {
                 target.Owner.ActivePokemonCard = null;
-                target.Owner.SelectActiveFromBench();
+                target.Owner.SelectActiveFromBench(game);
             }
             else
             {

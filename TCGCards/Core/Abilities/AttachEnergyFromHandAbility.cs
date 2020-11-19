@@ -68,8 +68,7 @@ namespace TCGCards.Core.Abilities
 
             var pokemon = owner.ActivePokemonCard.Id.Equals(selectedId) ? owner.ActivePokemonCard : owner.BenchedPokemon.First(x => x.Id.Equals(selectedId));
 
-            pokemon.AttachedEnergy.Add((EnergyCard)energyCard);
-            owner.Hand.Remove(energyCard);
+            pokemon.AttachEnergy((EnergyCard)energyCard, game);
         }
 
         public override bool CanActivate()

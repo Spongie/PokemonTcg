@@ -45,7 +45,7 @@ namespace TCGCards.TrainerEffects
             return true;
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
             
         }
@@ -58,7 +58,7 @@ namespace TCGCards.TrainerEffects
             {
                 if (game.FlipCoins(1) == 1)
                 {
-                    pokemon.DamageCounters += DamageToOpponents;
+                    pokemon.DealDamage(DamageToOpponents, game);
                 }
                 else
                 {
@@ -66,7 +66,7 @@ namespace TCGCards.TrainerEffects
                 }
             }
 
-            caster.ActivePokemonCard.DamageCounters += tails * damagePerTails;
+            caster.ActivePokemonCard.DealDamage(tails * damagePerTails, game, false);
         }
     }
 }

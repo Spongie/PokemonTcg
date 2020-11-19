@@ -4,7 +4,7 @@ namespace TCGCards.Core.GameEvents
 {
     public class TrainerCardPlayed : Event
     {
-        public TrainerCardPlayed(GameFieldInfo gameField) : base(gameField)
+        public TrainerCardPlayed()
         {
             GameEvent = GameEventType.TrainerCardPlayed;
         }

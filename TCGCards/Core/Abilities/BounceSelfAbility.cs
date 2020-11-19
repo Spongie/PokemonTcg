@@ -54,6 +54,7 @@ namespace TCGCards.Core.Abilities
             if (owner.ActivePokemonCard.Id.Equals(PokemonOwner.Id))
             {
                 owner.ActivePokemonCard = null;
+                owner.SelectActiveFromBench(game);
             }
             else
             {

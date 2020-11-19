@@ -40,6 +40,13 @@ namespace Server.Services
             foreach (var card in deckInfo.Cards)
             {
                 card.Owner = player;
+                
+                var pokemonCard = card as PokemonCard;
+                if (pokemonCard != null && pokemonCard.Ability != null)
+                {
+                    pokemonCard.Ability.PokemonOwner = pokemonCard;
+                }
+
                 player.Deck.Cards.Push(card);
             }
 
@@ -64,6 +71,12 @@ namespace Server.Services
             foreach (var card in deckInfo.Cards)
             {
                 card.Owner = player;
+                var pokemonCard = card as PokemonCard;
+                if (pokemonCard != null && pokemonCard.Ability != null)
+                {
+                    pokemonCard.Ability.PokemonOwner = pokemonCard;
+                }
+
                 player.Deck.Cards.Push(card);
             }
 
@@ -156,7 +169,7 @@ namespace Server.Services
             var energyCard = (EnergyCard)game.FindCardById(energyCardId);
             var target = (PokemonCard)game.FindCardById(targetId);
 
-            game.ActivePlayer.AttachEnergyToPokemon(energyCard, target, game);
+            game.ActivePlayer.PlayEnergyCard(energyCard, target, game);
 
             SendUpdateToPlayers(game.Players, game);
 

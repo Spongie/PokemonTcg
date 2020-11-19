@@ -2,12 +2,7 @@
 {
     public class EnergyCardsAttachedEvent : Event
     {
-        public EnergyCardsAttachedEvent() :this(null)
-        {
-
-        }
-
-        public EnergyCardsAttachedEvent(GameFieldInfo gameFieldInfo) :base(gameFieldInfo)
+        public EnergyCardsAttachedEvent()
         {
             GameEvent = GameEventType.AttachesEnergy;
         }

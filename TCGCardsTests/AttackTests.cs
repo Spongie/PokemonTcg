@@ -67,8 +67,8 @@ namespace TCGCards.Tests
             };
             pokemon.AttachedEnergy = new List<EnergyCard>
             {
-                new FireEnergy(),
-                new FireEnergy()
+                new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 },
+                new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 }
             };
 
             Assert.IsTrue(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
@@ -94,8 +94,8 @@ namespace TCGCards.Tests
             };
             pokemon.AttachedEnergy = new List<EnergyCard>
             {
-                new FireEnergy(),
-                new FireEnergy()
+                new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 },
+                new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 }
             };
 
             Assert.IsFalse(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
@@ -120,8 +120,8 @@ namespace TCGCards.Tests
             };
             pokemon.AttachedEnergy = new List<EnergyCard>
             {
-                new FireEnergy(),
-                new DoubleColorlessEnergy()
+                new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 },
+                new EnergyCard() { EnergyType = EnergyTypes.Colorless, Amount = 2 }
             };
 
             Assert.IsTrue(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
@@ -146,8 +146,8 @@ namespace TCGCards.Tests
             };
             pokemon.AttachedEnergy = new List<EnergyCard>
             {
-                new FireEnergy(),
-                new WaterEnergy()
+                new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 },
+                new EnergyCard() { EnergyType = EnergyTypes.Water, Amount = 1 }
             };
 
             Assert.IsTrue(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));

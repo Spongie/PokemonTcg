@@ -46,7 +46,7 @@ namespace TCGCards.TrainerEffects
             return true;
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
             
         }
@@ -57,7 +57,7 @@ namespace TCGCards.TrainerEffects
             {
                 foreach (var pokemon in opponent.BenchedPokemon)
                 {
-                    pokemon.DamageCounters += Damage;
+                    pokemon.DealDamage(Damage, game);
                 }
 
                 return;
@@ -68,7 +68,7 @@ namespace TCGCards.TrainerEffects
 
             foreach (var pokemon in response.Cards.Select(id => game.FindCardById(id)).OfType<PokemonCard>())
             {
-                pokemon.DamageCounters += Damage;
+                pokemon.DealDamage(Damage, game);
             }
         }
     }

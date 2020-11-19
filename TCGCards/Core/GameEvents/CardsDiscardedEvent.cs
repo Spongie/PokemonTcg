@@ -5,7 +5,7 @@ namespace TCGCards.Core.GameEvents
 {
     public class CardsDiscardedEvent : Event
     {
-        public CardsDiscardedEvent(GameFieldInfo gameField) : base(gameField)
+        public CardsDiscardedEvent()
         {
             GameEvent = GameEventType.DiscardsCard;
         }

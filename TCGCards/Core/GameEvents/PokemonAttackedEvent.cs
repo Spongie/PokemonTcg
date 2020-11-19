@@ -4,12 +4,7 @@ namespace TCGCards.Core.GameEvents
 {
     public class PokemonAttackedEvent : Event
     {
-        public PokemonAttackedEvent() :this(null)
-        {
-
-        }
-
-        public PokemonAttackedEvent(GameFieldInfo gameFieldInfo) :base(gameFieldInfo)
+        public PokemonAttackedEvent()
         {
             GameEvent = GameEventType.PokemonAttacks;
         }

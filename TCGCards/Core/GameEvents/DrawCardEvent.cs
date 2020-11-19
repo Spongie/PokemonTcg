@@ -5,7 +5,7 @@ namespace TCGCards.Core.GameEvents
 {
     public class DrawCardsEvent : Event
     {
-        public DrawCardsEvent(GameFieldInfo gameField) : base(gameField)
+        public DrawCardsEvent()
         {
             GameEvent = GameEventType.DrawsCard;
         }

@@ -37,7 +37,26 @@ namespace TCGCards.Core
 
             GameLog?.AddMessage($"Flips {coins} coins and gets {heads} heads");
 
+            var results = new List<bool>();
+
+            for (int i = 0; i < heads; i++)
+            {
+                results.Add(true);
+            }
+            for (int i = 0; i < coins - heads; i++)
+            {
+                results.Add(false);
+            }
+
+            SendEventToPlayers(new CoinsFlippedEvent(results));
+
             return heads;
+        }
+
+        public void SendEventToPlayers(Event gameEvent)
+        {
+            SendEventMessage(gameEvent, ActivePlayer);
+            SendEventMessage(gameEvent, NonActivePlayer);
         }
 
         public void RevealCardsTo(List<NetworkId> pickedCards, Player nonActivePlayer)
@@ -112,6 +131,10 @@ namespace TCGCards.Core
             {
                 GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
                 owner.SetActivePokemon(activePokemon);
+                SendEventToPlayers(new PokemonBecameActiveEvent
+                {
+                    NewActivePokemon = activePokemon
+                });
             }
             else
             {
@@ -163,14 +186,23 @@ namespace TCGCards.Core
                 ability.Trigger(NonActivePlayer, ActivePlayer, 0, this);
             }
             
-            ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy);
+            ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy, this);
         }
 
         public void OnBenchPokemonSelected(Player owner, IEnumerable<PokemonCard> selectedPokemons)
         {
             foreach (PokemonCard pokemon in selectedPokemons)
             {
-                owner.SetBenchedPokemon(pokemon);
+                if (owner.BenchedPokemon.Count < BenchMaxSize && pokemon.Stage == 0)
+                {
+                    owner.SetBenchedPokemon(pokemon);
+                    pokemon.IsRevealed = true;
+                    SendEventToPlayers(new PokemonAddedToBenchEvent()
+                    {
+                        Pokemon = pokemon,
+                        Player = owner.Id
+                    });
+                }
             }
 
             if (GameState == GameFieldState.BothSelectingBench)
@@ -317,7 +349,9 @@ namespace TCGCards.Core
             NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
 
             ActivePlayer.OnCardsDrawn += PlayerDrewCards;
+            ActivePlayer.OnCardsDiscarded += PlayerDiscardedCards;
             NonActivePlayer.OnCardsDrawn += PlayerDrewCards;
+            NonActivePlayer.OnCardsDiscarded += PlayerDiscardedCards;
 
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
@@ -342,27 +376,33 @@ namespace TCGCards.Core
             PushGameLogUpdatesToPlayers();
         }
 
+        private void PlayerDiscardedCards(object sender, PlayerCardDraw e)
+        {
+            SendEventToPlayers(new CardsDiscardedEvent()
+            {
+                Cards = e.Cards,
+                Player = ((Player)sender).Id,
+            });
+        }
+
         private void PlayerDrewCards(object sender, PlayerCardDraw e)
         {
-            var gameEvent = new DrawCardsEvent(CreateGameInfo(true))
+            var gameEvent = new DrawCardsEvent()
             {
                 Amount = e.Amount,
                 Player = ActivePlayer.Id,
                 Cards = e.Cards
             };
 
-            SendEventMessage(gameEvent, ActivePlayer);
-
-            gameEvent.GameField = CreateGameInfo(false);
-            gameEvent.Cards = new List<Card>();
-
-            SendEventMessage(gameEvent, NonActivePlayer);
+            SendEventToPlayers(gameEvent);
         }
 
         public void ActivateAbility(Ability ability)
         {
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates ability {ability.Name}");
 
+            SendEventToPlayers(new AbilityActivatedEvent() { PokemonId = ability.PokemonOwner.Id });
+            
             ability.Trigger(ActivePlayer, NonActivePlayer, 0, this);
 
             CheckDeadPokemon();
@@ -372,7 +412,7 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
-            if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer))
+            if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer) || !ActivePlayer.ActivePokemonCard.CanAttack())
             {
                 GameLog.AddMessage($"Attack not used becasue GameFirst: {FirstTurn} Disabled: {attack.Disabled} or CanBeUsed:{attack.CanBeUsed(this, ActivePlayer, NonActivePlayer)}");
                 PushGameLogUpdatesToPlayers();
@@ -383,11 +423,13 @@ namespace TCGCards.Core
 
             attack.PayExtraCosts(this, ActivePlayer, NonActivePlayer);
 
-            if (ActivePlayer.ActivePokemonCard.IsConfused && CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
+            if (ActivePlayer.ActivePokemonCard.IsConfused && FlipCoins(1) == 0)
             {
                 HitItselfInConfusion();
                 return;
             }
+
+            SendEventToPlayers(new PokemonAttackedEvent() { Player = ActivePlayer.Id });
 
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
             {
@@ -437,7 +479,7 @@ namespace TCGCards.Core
                 return;
             }
 
-            var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, GameLog);
+            var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, this, true);
             attack.OnDamageDealt(dealtDamage, ActivePlayer);
 
             if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
@@ -457,7 +499,7 @@ namespace TCGCards.Core
         private void HitItselfInConfusion()
         {
             GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.GetName()} hurt itself in its confusion");
-            ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), GameLog);
+            ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), this, false);
 
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage)
             {
@@ -536,42 +578,46 @@ namespace TCGCards.Core
 
             CurrentTrainerCard = trainerCard;
 
-            //TODO Remove card from hand as it is played
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
             PushGameLogUpdatesToPlayers();
 
-            var trainerEvent = new TrainerCardPlayed(CreateGameInfo(true))
+            ActivePlayer.Hand.Remove(trainerCard);
+
+            var trainerEvent = new TrainerCardPlayed()
             {
                 Card = trainerCard,
                 Player = ActivePlayer.Id
             };
 
-            SendEventMessage(trainerEvent, ActivePlayer);
-
-            trainerEvent.GameField = CreateGameInfo(false);
-            SendEventMessage(trainerEvent, NonActivePlayer);
+            SendEventToPlayers(trainerEvent);
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
-            ActivePlayer.DiscardCard(trainerCard);
+            
+            ActivePlayer.DiscardPile.Add(trainerCard);
+
+            CurrentTrainerCard = null;
 
             if (ActivePlayer.IsDead)
             {
                 GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
                 EndGame(NonActivePlayer.Id);
             }
-
-            CurrentTrainerCard = null;
         }
 
         private void SendEventMessage(Event playEvent, Player target)
         {
-            var message = new EventMessage(playEvent).ToNetworkMessage(Id);
+            var message = new EventMessage(playEvent) { GameInfo = CreateGameInfo(target == ActivePlayer) }.ToNetworkMessage(Id);
 
-            target.NetworkPlayer?.Send(message);
+            target?.NetworkPlayer?.Send(message);
         }
 
         public GameFieldInfo CreateGameInfo(bool forActive)
         {
+            if (ActivePlayer == null || NonActivePlayer == null)
+            {
+                return new GameFieldInfo();
+            }
+
             var activePlayer = new PlayerInfo
             {
                 Id = ActivePlayer.Id,
@@ -657,7 +703,7 @@ namespace TCGCards.Core
                 if (NonActivePlayer.BenchedPokemon.Any())
                 {
                     SendUpdateToPlayers();
-                    NonActivePlayer.SelectActiveFromBench();
+                    NonActivePlayer.SelectActiveFromBench(this);
                 }
                 else
                 {
@@ -678,7 +724,7 @@ namespace TCGCards.Core
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
                     NonActivePlayer.SelectPriceCard(ActivePlayer.ActivePokemonCard.PrizeCards);
-                    ActivePlayer.SelectActiveFromBench();
+                    ActivePlayer.SelectActiveFromBench(this);
                 }
                 else
                 {
@@ -747,7 +793,7 @@ namespace TCGCards.Core
             TemporaryPassiveAbilities.ForEach(x => x.TurnsLeft--);
             TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0 || !x.LimitedByTime).ToList();
 
-            ActivePlayer.EndTurn();
+            ActivePlayer.EndTurn(this);
 
             foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
             {
@@ -762,7 +808,7 @@ namespace TCGCards.Core
                 pokemon.AbilityDisabled = false;
             }
 
-            NonActivePlayer.EndTurn();
+            NonActivePlayer.EndTurn(this);
             CheckDeadPokemon();
             SwapActivePlayer();
             FirstTurn = false;
@@ -857,5 +903,6 @@ namespace TCGCards.Core
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
         public TrainerCard CurrentTrainerCard { get; set; }
+        public List<Event> Events { get; set; } = new List<Event>();
     }
 }

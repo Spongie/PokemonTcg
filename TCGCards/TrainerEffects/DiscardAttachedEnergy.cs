@@ -73,7 +73,7 @@ namespace TCGCards.TrainerEffects
             return true;
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
             throw new NotImplementedException();
         }

@@ -16,7 +16,7 @@ namespace TCGCardsTests.Effects
             };
 
             var pokemon = new PokemonCard();
-            effect.OnAttachedTo(pokemon, true);
+            effect.OnAttachedTo(pokemon, true, null);
 
             Assert.AreEqual(10, pokemon.DamageCounters);
         }

@@ -54,20 +54,20 @@ namespace TCGCards.Attacks
 
             if (HitsOpponentBench)
             {
-                DealDamageToPlayersBench(opponent, opponent.ActivePokemonCard.Type);
+                DealDamageToPlayersBench(opponent, opponent.ActivePokemonCard.Type, game);
             }
 
             if (hitsYourBench)
             {
-                DealDamageToPlayersBench(owner, opponent.ActivePokemonCard.Type);
+                DealDamageToPlayersBench(owner, opponent.ActivePokemonCard.Type, game);
             }
         }
 
-        private void DealDamageToPlayersBench(Player target, EnergyTypes targetType)
+        private void DealDamageToPlayersBench(Player target, EnergyTypes targetType, GameField game)
         {
             foreach (var pokemon in target.BenchedPokemon.Where(x => x.Type == targetType))
             {
-                pokemon.DamageCounters += DamageToBench;
+                pokemon.DealDamage(damageToBench, game);
             }
         }
     }

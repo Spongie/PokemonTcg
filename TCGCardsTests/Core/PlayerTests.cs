@@ -56,7 +56,7 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>());
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(), null);
 
             Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
         }
@@ -71,9 +71,9 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.AttachEnergyToPokemon(new WaterEnergy(), p.ActivePokemonCard);
+            p.PlayEnergyCard(new EnergyCard(), p.ActivePokemonCard, null);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>());
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(), null);
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
         }
@@ -88,9 +88,9 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.AttachEnergyToPokemon(new WaterEnergy(), p.ActivePokemonCard);
+            p.PlayEnergyCard(new EnergyCard(), p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy));
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
             Assert.IsFalse(card.AttachedEnergy.Any());
@@ -110,9 +110,9 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.AttachEnergyToPokemon(new WaterEnergy(), p.ActivePokemonCard);
+            p.PlayEnergyCard(new EnergyCard(), p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy));
+            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
             Assert.IsFalse(card.IsBurned);
@@ -159,8 +159,8 @@ namespace TCGCards.Core.Tests
         {
             var player = new Player();
             player.ActivePokemonCard = new TestPokemonCard(player);
-            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
-            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+            player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
+            player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
 
             player.KillActivePokemon();
 
@@ -178,8 +178,8 @@ namespace TCGCards.Core.Tests
             abra.Evolve(kadabra);
 
             player.ActivePokemonCard = kadabra;
-            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
-            player.ActivePokemonCard.AttachedEnergy.Add(new PsychicEnergy());
+            player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
+            player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
 
             player.KillActivePokemon();
 

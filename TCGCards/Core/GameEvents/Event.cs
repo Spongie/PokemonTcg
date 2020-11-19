@@ -2,11 +2,6 @@
 {
     public class Event
     {
-        public Event(GameFieldInfo gameField)
-        {
-            GameField = gameField;
-        }
-
         public GameEventType GameEvent { get; set; }
         public GameFieldInfo GameField { get; set; }
     }
@@ -22,6 +17,9 @@
         Flipscoin,
         AttachesEnergy,
         PokemonBecameActive,
-        PokemonAddedToBench
+        PokemonAddedToBench,
+        PokemonEvolved,
+        EnergyCardDiscarded,
+        PokemonDied
     }
 }

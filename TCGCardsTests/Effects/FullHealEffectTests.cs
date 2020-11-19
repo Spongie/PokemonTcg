@@ -57,7 +57,7 @@ namespace TCGCardsTests.Effects
             pokemon.IsPoisoned = true;
             pokemon.IsConfused = true;
 
-            effect.OnAttachedTo(pokemon, true);
+            effect.OnAttachedTo(pokemon, true, null);
 
             Assert.IsFalse(pokemon.IsBurned);
             Assert.IsFalse(pokemon.IsAsleep);

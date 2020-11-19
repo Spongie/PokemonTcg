@@ -23,7 +23,7 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            owner.SwapActivePokemon(PokemonOwner);
+            owner.SwapActivePokemon(PokemonOwner, game);
         }
     }
 }

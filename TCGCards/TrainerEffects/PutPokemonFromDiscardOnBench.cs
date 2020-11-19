@@ -52,7 +52,7 @@ namespace TCGCards.TrainerEffects
             return GameField.BenchMaxSize - caster.BenchedPokemon.Count > 0;
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
             
         }

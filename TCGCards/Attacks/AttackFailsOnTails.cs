@@ -41,7 +41,7 @@ namespace TCGCards.Attacks
                     foreverDisabled = true;
                 }
 
-                game.GameLog.AddMessage("The attack did nothing");
+                game?.GameLog.AddMessage("The attack did nothing");
                 return 0;
             }
 

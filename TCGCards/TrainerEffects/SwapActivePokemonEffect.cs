@@ -90,12 +90,7 @@ namespace TCGCards.TrainerEffects
 
             var targetPlayer = opponents ? opponent : caster;
 
-            var currentActive = targetPlayer.ActivePokemonCard;
-            targetPlayer.ActivePokemonCard = null;
-
-            targetPlayer.SetActivePokemon(targetPlayer.BenchedPokemon.First(x => x.Id.Equals(selectedId)));
-
-            targetPlayer.BenchedPokemon.Add(currentActive);
+            targetPlayer.ForceRetreatActivePokemon(targetPlayer.BenchedPokemon.First(x => x.Id.Equals(selectedId)), game);
         }
 
         public bool CanCast(GameField game, Player caster, Player opponent)
@@ -108,9 +103,9 @@ namespace TCGCards.TrainerEffects
             return caster.BenchedPokemon.Any();
         }
 
-        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand)
+        public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

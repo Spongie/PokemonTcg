@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Abilities;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards
@@ -167,7 +168,7 @@ namespace TCGCards
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 
-        public virtual void EndTurn()
+        public virtual void EndTurn(GameField game)
         {
             TemporaryAbilities.ForEach(x => x.TurnsLeft--);
             TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnsLeft > 0).ToList();
@@ -184,20 +185,22 @@ namespace TCGCards
             PlayedThisTurn = false;
             EvolvedThisTurn = false;
 
+            IsParalyzed = false;
+
             if (IsBurned)
             {
-                DamageCounters += 20;
-                IsBurned = CoinFlipper.FlipCoin();
+                DealDamage(20, game, false);
+                IsBurned = game.FlipCoins(1) == 0;
             }
 
             if (IsPoisoned)
             {
-                DamageCounters += DoublePoison ? 20 : 10;
+                DealDamage(DoublePoison ? 20 : 10, game, false);
             }
 
             if(IsAsleep)
             {
-                IsAsleep = CoinFlipper.FlipCoin();
+                IsAsleep = game.FlipCoins(1) == 0;
             }
 
             if (Ability != null)
@@ -212,35 +215,61 @@ namespace TCGCards
             AttackStoppers = AttackStoppers.Where(x => x.TurnsLeft > 0).ToList();
         }
 
-        public int DealDamage(Damage damage, GameLog log)
+        public int DealDamage(Damage damage, GameField game, bool preventable = true)
         {
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
 
             foreach (var damageStopper in DamageStoppers)
             {
-                if (damageStopper.IsDamageIgnored(totalDamage))
+                if (preventable && damageStopper.IsDamageIgnored(totalDamage))
                 {
                     totalDamage -= damageStopper.Amount;
 
                     if (totalDamage <= 0)
                     {
-                        log.AddMessage(GetName() + " Takes no damage");
+                        game.GameLog.AddMessage(GetName() + " Takes no damage");
                         return 0;
                     }
                     else
                     {
-                        log.AddMessage(GetName() + $" Takes {damageStopper.Amount} less damage");
+                        game.GameLog.AddMessage(GetName() + $" Takes {damageStopper.Amount} less damage");
                     }
                 }
+            }
+
+            if (totalDamage > 0)
+            {
+                game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id });
             }
 
             DamageCounters += totalDamage;
 
             DamageTakenLastTurn = totalDamage;
 
-            log.AddMessage(GetName() + $"Takes {totalDamage} damage");
+            game?.GameLog.AddMessage(GetName() + $"Takes {totalDamage} damage");
 
             return totalDamage;
+        }
+
+        public void AttachEnergy(EnergyCard energyCard, GameField game)
+        {
+            energyCard.IsRevealed = true;
+            AttachedEnergy.Add(energyCard);
+            bool fromHand = false;
+
+            if (Owner.Hand.Contains(energyCard))
+            {
+                Owner.Hand.Remove(energyCard);
+                fromHand = true;
+            }
+
+            game.SendEventToPlayers(new EnergyCardsAttachedEvent()
+            {
+                AttachedTo = this,
+                EnergyCard = energyCard
+            });
+
+            energyCard.OnAttached(this, fromHand, game);
         }
 
         public void DiscardEnergyCard(EnergyCard energyCard)

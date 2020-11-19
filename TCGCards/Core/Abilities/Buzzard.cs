@@ -34,7 +34,7 @@ namespace TCGCards.Core.Abilities
             var buzzardEnergy = new BuzzardEnergy(PokemonOwner, colorResponse.Color);
 
             PokemonCard selectedPokemon = owner.GetAllPokemonCards().First(x => x.Id.Equals(selectedId));
-            selectedPokemon.AttachedEnergy.Add(buzzardEnergy);
+            selectedPokemon.AttachEnergy(buzzardEnergy, game);
 
             foreach (var energy in new List<EnergyCard>(PokemonOwner.AttachedEnergy))
             {
