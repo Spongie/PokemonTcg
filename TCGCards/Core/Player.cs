@@ -15,6 +15,7 @@ namespace TCGCards.Core
         public event EventHandler<PlayerCardDraw> OnCardsDrawn;
         public event EventHandler<PlayerCardDraw> OnCardsDiscarded;
 
+
         public Player()
         {
             Hand = new List<Card>();
@@ -320,6 +321,7 @@ namespace TCGCards.Core
         public bool HasPlayedEnergy { get; protected set; }
         public NetworkId Id { get; set; }
         public bool IsDead { get; set; }
+        public int TurnsTaken { get; set; }
 
         [JsonIgnore]
         public INetworkPlayer NetworkPlayer { get; private set; }

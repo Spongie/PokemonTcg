@@ -61,9 +61,9 @@ namespace TCGCards.Core
 
         public void RevealCardsTo(List<NetworkId> pickedCards, Player nonActivePlayer)
         {
-            foreach (var card in pickedCards)
+            foreach (var card in pickedCards.Select(id => FindCardById(id)))
             {
-                //card.IsRevealed = true;
+                card.IsRevealed = true;
             }
             //TODO: Complete this
         }
@@ -96,6 +96,7 @@ namespace TCGCards.Core
                 {
                     basePokemon.Evolve(evolution);
                     ActivePlayer.BenchedPokemon[i] = evolution;
+                    evolution.EvolvedThisTurn = true;
                 }
             }
 
@@ -105,6 +106,12 @@ namespace TCGCards.Core
             }
 
             evolution.IsRevealed = true;
+
+            SendEventToPlayers(new PokemonEvolvedEvent
+            {
+                TargetPokemonId = basePokemon.Id,
+                NewPokemonCard = evolution
+            });
 
             PushGameLogUpdatesToPlayers();
         }
@@ -794,6 +801,7 @@ namespace TCGCards.Core
             TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0 || !x.LimitedByTime).ToList();
 
             ActivePlayer.EndTurn(this);
+            ActivePlayer.TurnsTaken++;
 
             foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
             {
