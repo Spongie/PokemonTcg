@@ -272,21 +272,6 @@ namespace TCGCards
             energyCard.OnAttached(this, fromHand, game);
         }
 
-        public void DiscardEnergyCard(EnergyCard energyCard)
-        {
-            if (energyCard != null)
-            {
-                AttachedEnergy.Remove(energyCard);
-                Owner.DiscardPile.Add(energyCard);
-                energyCard.OnPutInDiscard(Owner);
-            }
-        }
-
-        public void DiscardEnergyCardOfType(EnergyTypes energyType)
-        {
-            DiscardEnergyCard(AttachedEnergy.FirstOrDefault(e => e.EnergyType == energyType));
-        }
-
         public override string GetName()
         {
             return PokemonName;
@@ -318,6 +303,20 @@ namespace TCGCards
                 return false;
 
             return !IsParalyzed && !IsAsleep && AttachedEnergy.Count >= RetreatCost;
+        }
+
+        public void DiscardEnergyCard(EnergyCard energyCard, GameField game)
+        {
+            AttachedEnergy.Remove(energyCard);
+            Owner.DiscardPile.Add(energyCard);
+            
+            game?.SendEventToPlayers(new AttachedEnergyDiscardedEvent
+            {
+                FromPokemonId = Id,
+                DiscardedCard = energyCard
+            });
+
+            energyCard.OnPutInDiscard(Owner);
         }
 
         public bool IsDead() => DamageCounters >= Hp;

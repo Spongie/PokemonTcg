@@ -88,7 +88,7 @@ namespace TCGCards.TrainerEffects
                     {
                         var card = target.AttachedEnergy.First(x => x.Id.Equals(id));
 
-                        target.AttachedEnergy.Remove(card);
+                        target.DiscardEnergyCard(card, game);
                         target.Owner.DiscardPile.Add(card);
                     }
                 }

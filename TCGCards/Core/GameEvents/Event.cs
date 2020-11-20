@@ -18,7 +18,7 @@
         AttachesEnergy,
         PokemonBecameActive,
         PokemonAddedToBench,
-        PokemonEvolved, //Continue on this one
+        PokemonEvolved,
         EnergyCardDiscarded,
         PokemonDied
     }

@@ -137,7 +137,7 @@ namespace TCGCards.Core
 
             foreach (var energyCard in payedEnergy)
             {
-                ActivePokemonCard.DiscardEnergyCard(energyCard);
+                ActivePokemonCard.DiscardEnergyCard(energyCard, game);
             }
 
             var oldActivePokemon = ActivePokemonCard;

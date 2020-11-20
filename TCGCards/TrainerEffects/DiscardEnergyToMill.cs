@@ -60,7 +60,7 @@ namespace TCGCards.TrainerEffects
 
             foreach (var card in resoponse.Cards.Select(id => game.FindCardById(id)))
             {
-                caster.ActivePokemonCard.AttachedEnergy.Remove((EnergyCard)card);
+                caster.ActivePokemonCard.DiscardEnergyCard((EnergyCard)card, game);
             }
 
             for (int i = 0; i < resoponse.Cards.Count; i++)

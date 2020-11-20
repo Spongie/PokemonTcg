@@ -15,13 +15,13 @@ namespace TCGCards.Attacks
             else if (opponent.ActivePokemonCard.AttachedEnergy.Count == 1)
             {
                 var energyCard = opponent.ActivePokemonCard.AttachedEnergy[0];
-                opponent.ActivePokemonCard.DiscardEnergyCard(energyCard);
+                opponent.ActivePokemonCard.DiscardEnergyCard(energyCard, game);
                 return;
             }
 
             var message = new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy, 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
-            opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.FindCardById(response.Cards.First()));
+            opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.FindCardById(response.Cards.First()), game);
         }
     }
 }

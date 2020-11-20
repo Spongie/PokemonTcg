@@ -71,7 +71,7 @@ namespace TCGCards.Core
             }
         }
 
-        public static void DiscardAttachedEnergy(PokemonCard pokemon, int amount)
+        public static void DiscardAttachedEnergy(PokemonCard pokemon, int amount, GameField game)
         {
             var message = new PickFromListMessage(pokemon.AttachedEnergy, amount);
             var response = pokemon.Owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(pokemon.Owner.Id));
@@ -79,7 +79,7 @@ namespace TCGCards.Core
             foreach (var id in response.Cards)
             {
                 var energyCard = pokemon.AttachedEnergy.First(x => x.Id.Equals(id));
-                pokemon.DiscardEnergyCard(energyCard);
+                pokemon.DiscardEnergyCard(energyCard, game);
             }
         }
     }

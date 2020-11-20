@@ -38,7 +38,7 @@ namespace TCGCards.Core.Abilities
 
             foreach (var energy in new List<EnergyCard>(PokemonOwner.AttachedEnergy))
             {
-                PokemonOwner.DiscardEnergyCard(energy);
+                PokemonOwner.DiscardEnergyCard(energy, game);
             }
 
             PokemonOwner.DamageCounters = 999;
