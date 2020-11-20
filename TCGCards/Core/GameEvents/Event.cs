@@ -20,6 +20,7 @@
         PokemonAddedToBench,
         PokemonEvolved,
         EnergyCardDiscarded,
-        PokemonDied
+        PokemonDied,
+        SyncGame
     }
 }

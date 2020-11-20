@@ -853,6 +853,7 @@ namespace TCGCards.Core
             StartNextTurn();
 
             PushGameLogUpdatesToPlayers();
+            SendEventToPlayers(new GameSyncEvent { Game = this });
         }
 
         private void StartNextTurn()

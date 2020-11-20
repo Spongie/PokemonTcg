@@ -105,8 +105,6 @@ namespace Server.Services
             var pokemons = pokemonIds.Distinct().Select(id => (PokemonCard)game.FindCardById(id));
             game.OnBenchPokemonSelected(game.Players.First(p => p.Id.Equals(playerId)), pokemons);
 
-            SendUpdateToPlayers(game.Players, game);
-
             return game;
         }
 
@@ -126,8 +124,6 @@ namespace Server.Services
 
             game.EndTurn();
 
-            SendUpdateToPlayers(game.Players, game);
-
             return game;
         }
 
@@ -146,8 +142,6 @@ namespace Server.Services
             }
 
             game.OnActivePokemonSelected(playerId, (PokemonCard)game.FindCardById(pokemonId));
-
-            SendUpdateToPlayers(game.Players, game);
 
             return game;
         }
@@ -171,8 +165,6 @@ namespace Server.Services
 
             game.ActivePlayer.PlayEnergyCard(energyCard, target, game);
 
-            SendUpdateToPlayers(game.Players, game);
-
             return game;
         }
 
@@ -193,7 +185,6 @@ namespace Server.Services
             var ability = game.FindAbilityById(abilityId);
             game.ActivateAbility(ability);
 
-            SendUpdateToPlayers(game.Players, game);
             return game;
         }
 
@@ -215,7 +206,6 @@ namespace Server.Services
 
             game.Attack(attack);
 
-            SendUpdateToPlayers(game.Players, game);
             return game;
         }
 
@@ -244,7 +234,6 @@ namespace Server.Services
                 game.PlayPokemon((PokemonCard)card);
             }
 
-            SendUpdateToPlayers(game.Players, game);
             return game;
         }
 
@@ -267,7 +256,6 @@ namespace Server.Services
 
             game.EvolvePokemon(card, target);
 
-            SendUpdateToPlayers(game.Players, game);
             return game;
         }
 
@@ -288,8 +276,6 @@ namespace Server.Services
             var energyCards = energyCardIds.Select(cardId => (EnergyCard)game.FindCardById(cardId)).ToList();
 
             game.OnPokemonRetreated((PokemonCard)game.FindCardById(targetPokemon), energyCards);
-
-            SendUpdateToPlayers(game.Players, game);
 
             return game;
         }
