@@ -679,6 +679,11 @@ namespace TCGCards.Core
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = NonActivePlayer.ActivePokemonCard
+                });
+
                 if(NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
                     NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, this);
                 if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Kills)
@@ -725,6 +730,15 @@ namespace TCGCards.Core
             if (ActivePlayer.ActivePokemonCard != null && ActivePlayer.ActivePokemonCard.IsDead())
             {
                 GameLog.AddMessage(ActivePlayer.ActivePokemonCard.GetName() + "Dies");
+
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = ActivePlayer.ActivePokemonCard
+                });
+
+                if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
+                    ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
+
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 ActivePlayer.KillActivePokemon();
                 
@@ -748,6 +762,14 @@ namespace TCGCards.Core
                     continue;
                 }
 
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = pokemon
+                });
+
+                if (pokemon.Ability?.TriggerType == TriggerType.Dies)
+                    pokemon.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, this);
+                
                 if (ActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
                 {
                     GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
@@ -768,6 +790,14 @@ namespace TCGCards.Core
                 {
                     continue;
                 }
+
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = pokemon
+                });
+
+                if (pokemon.Ability?.TriggerType == TriggerType.Dies)
+                    pokemon.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, this);
 
                 if (NonActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
                 {

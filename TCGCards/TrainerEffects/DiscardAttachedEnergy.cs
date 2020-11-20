@@ -104,7 +104,6 @@ namespace TCGCards.TrainerEffects
                     foreach (var card in cards)
                     {
                         target.DiscardEnergyCard(card, game);
-                        target.Owner.DiscardPile.Add(card);
                     }
                 }
 
