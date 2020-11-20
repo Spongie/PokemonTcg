@@ -298,6 +298,7 @@ namespace TCGCards
             evolution.SetBase(this);
             evolution.EvolvedFrom = this;
             evolution.AttachedEnergy = AttachedEnergy;
+            AttachedEnergy.Clear();
 
             return evolution;
         }
@@ -316,12 +317,12 @@ namespace TCGCards
             if(!Owner.BenchedPokemon.Any())
                 return false;
 
-            return !IsParalyzed && AttachedEnergy.Count >= RetreatCost;
+            return !IsParalyzed && !IsAsleep && AttachedEnergy.Count >= RetreatCost;
         }
 
         public bool IsDead() => DamageCounters >= Hp;
 
-        public bool CanEvolve() => !PlayedThisTurn && !EvolvedThisTurn;
+        public bool CanEvolve() => !PlayedThisTurn && !EvolvedThisTurn && Owner.TurnsTaken > 0;
 
         public bool CanAttack() => !IsParalyzed && !IsAsleep;
 
