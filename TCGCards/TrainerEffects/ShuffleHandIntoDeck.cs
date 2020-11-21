@@ -61,7 +61,7 @@ namespace TCGCards.TrainerEffects
             throw new System.NotImplementedException();
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var target = opponents ? opponent : caster;
 

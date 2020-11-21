@@ -33,7 +33,7 @@ namespace TCGCardsTests.Effects
 
             var game = new GameField();
             game.Players.Add(player);
-            effect.Process(game, player, null);
+            effect.Process(game, player, null, null);
 
             Assert.AreEqual(1, player.Hand.Count);
             Assert.AreEqual(4, player.Deck.Cards.Count);

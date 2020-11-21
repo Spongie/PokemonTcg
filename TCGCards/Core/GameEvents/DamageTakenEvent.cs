@@ -1,4 +1,5 @@
-﻿using NetworkingCore;
+﻿using Entities;
+using NetworkingCore;
 
 namespace TCGCards.Core.GameEvents
 {
@@ -11,5 +12,6 @@ namespace TCGCards.Core.GameEvents
 
         public NetworkId PokemonId { get; set; }
         public int Damage { get; set; }
+        public EnergyTypes DamageType { get; set; }
     }
 }

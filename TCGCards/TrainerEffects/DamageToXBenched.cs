@@ -51,13 +51,13 @@ namespace TCGCards.TrainerEffects
             
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             if (opponent.BenchedPokemon.Count <= AmountOfTargets)
             {
                 foreach (var pokemon in opponent.BenchedPokemon)
                 {
-                    pokemon.DealDamage(Damage, game);
+                    pokemon.DealDamage(Damage, game, pokemonSource);
                 }
 
                 return;
@@ -68,7 +68,7 @@ namespace TCGCards.TrainerEffects
 
             foreach (var pokemon in response.Cards.Select(id => game.FindCardById(id)).OfType<PokemonCard>())
             {
-                pokemon.DealDamage(Damage, game);
+                pokemon.DealDamage(Damage, game, pokemonSource);
             }
         }
     }

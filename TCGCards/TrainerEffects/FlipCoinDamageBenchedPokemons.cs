@@ -37,20 +37,20 @@ namespace TCGCards.TrainerEffects
             
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             if (game.FlipCoins(1) == 1)
             {
                 foreach (var pokemon in opponent.BenchedPokemon)
                 {
-                    pokemon.DealDamage(Damage, game);
+                    pokemon.DealDamage(Damage, game, pokemonSource);
                 }
             }
             else
             {
                 foreach (var pokemon in caster.BenchedPokemon)
                 {
-                    pokemon.DealDamage(Damage, game);
+                    pokemon.DealDamage(Damage, game, pokemonSource);
                 }
             }
         }

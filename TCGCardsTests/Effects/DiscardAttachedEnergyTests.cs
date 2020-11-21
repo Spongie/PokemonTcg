@@ -26,7 +26,7 @@ namespace TCGCardsTests.Effects
             opponent.ActivePokemonCard = new PokemonCard(opponent);
             opponent.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
 
-            effect.Process(new GameField(), player, opponent);
+            effect.Process(new GameField(), player, opponent, null);
 
             Assert.AreEqual(0, opponent.ActivePokemonCard.AttachedEnergy.Count);
             Assert.AreEqual(1, opponent.DiscardPile.Count);
@@ -55,7 +55,7 @@ namespace TCGCardsTests.Effects
             opponent.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
             opponent.ActivePokemonCard.AttachedEnergy.Add(goodCard);
 
-            effect.Process(new GameField(), player, opponent);
+            effect.Process(new GameField(), player, opponent, null);
 
             Assert.AreEqual(1, opponent.ActivePokemonCard.AttachedEnergy.Count);
             Assert.AreEqual(goodCard.Id, opponent.DiscardPile[0].Id);

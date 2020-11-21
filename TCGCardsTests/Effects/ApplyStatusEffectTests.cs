@@ -21,27 +21,27 @@ namespace TCGCardsTests.Effects
             };
 
 
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsTrue(pokemon.IsBurned);
 
             pokemon.IsBurned = false;
             effect.StatusEffect = StatusEffect.Confuse;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsTrue(pokemon.IsConfused);
 
             pokemon.IsConfused = false;
             effect.StatusEffect = StatusEffect.Paralyze;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsTrue(pokemon.IsParalyzed);
 
             pokemon.IsParalyzed = false;
             effect.StatusEffect = StatusEffect.Poison;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsTrue(pokemon.IsPoisoned);
 
             pokemon.IsPoisoned = false;
             effect.StatusEffect = StatusEffect.Sleep;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsTrue(pokemon.IsAsleep);
         }
 
@@ -57,7 +57,7 @@ namespace TCGCardsTests.Effects
             };
 
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsTrue(pokemon.IsBurned);
         }
 
@@ -73,7 +73,7 @@ namespace TCGCardsTests.Effects
             };
 
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon });
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.IsFalse(pokemon.IsBurned);
         }
 

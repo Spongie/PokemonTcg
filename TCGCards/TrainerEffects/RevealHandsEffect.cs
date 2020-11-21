@@ -23,7 +23,7 @@ namespace TCGCards.TrainerEffects
             
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             opponent.RevealCards(caster.Hand);
             caster.RevealCards(opponent.Hand);

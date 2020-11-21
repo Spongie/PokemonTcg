@@ -164,7 +164,7 @@ namespace TCGCards
         {
             foreach (var effect in Effects)
             {
-                effect.Process(game, owner, opponent);
+                effect.Process(game, owner, opponent, owner.ActivePokemonCard);
             }
         }
 

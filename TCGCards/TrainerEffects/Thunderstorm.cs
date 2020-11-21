@@ -50,7 +50,7 @@ namespace TCGCards.TrainerEffects
             
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var tails = 0;
 
@@ -58,7 +58,7 @@ namespace TCGCards.TrainerEffects
             {
                 if (game.FlipCoins(1) == 1)
                 {
-                    pokemon.DealDamage(DamageToOpponents, game);
+                    pokemon.DealDamage(DamageToOpponents, game, pokemonSource);
                 }
                 else
                 {
@@ -66,7 +66,7 @@ namespace TCGCards.TrainerEffects
                 }
             }
 
-            caster.ActivePokemonCard.DealDamage(tails * damagePerTails, game, false);
+            caster.ActivePokemonCard.DealDamage(tails * damagePerTails, game, pokemonSource, false);
         }
     }
 }

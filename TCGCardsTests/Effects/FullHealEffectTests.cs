@@ -28,7 +28,7 @@ namespace TCGCardsTests.Effects
             pokemon.IsPoisoned = true;
             pokemon.IsConfused = true;
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.IsFalse(pokemon.IsBurned);
             Assert.IsFalse(pokemon.IsAsleep);

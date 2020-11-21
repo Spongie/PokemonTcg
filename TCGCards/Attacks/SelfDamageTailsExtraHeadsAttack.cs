@@ -35,7 +35,7 @@ namespace TCGCards.Attacks
         {
             if (game.FlipCoins(1) == 0)
             {
-                owner.ActivePokemonCard.DealDamage(SelfDamage, game);
+                owner.ActivePokemonCard.DealDamage(SelfDamage, game, owner.ActivePokemonCard);
                 return Damage;
             }
             else

@@ -18,7 +18,7 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            opponent.ActivePokemonCard.DealDamage(DamageReturned, game);
+            opponent.ActivePokemonCard.DealDamage(DamageReturned, game, PokemonOwner);
         }
 
         [DynamicInput("Damage returned")]

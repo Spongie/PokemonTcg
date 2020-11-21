@@ -13,6 +13,7 @@ TagManager:
   - Ignore
   - deckBuilder
   - mainMenu
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - 
   - PostProcessing
   - UI2
-  - 
+  - SuperUI
   - 
   - 
   - 
@@ -52,4 +53,7 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 2739052949
+    locked: 0
+  - name: More Front
+    uniqueID: 3568010181
     locked: 0

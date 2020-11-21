@@ -44,14 +44,14 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            attachedTo.DealDamage(Amount, game);
+            attachedTo.DealDamage(Amount, game, attachedTo);
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            target.DealDamage(Amount, game);
+            target.DealDamage(Amount, game, pokemonSource);
         }
     }
 }

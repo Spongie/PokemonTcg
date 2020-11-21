@@ -90,7 +90,7 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent);
+            effect.Process(new GameField(), new Player(), opponent, null);
 
             Assert.AreEqual(2, opponent.Deck.Cards.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);
@@ -126,7 +126,7 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent);
+            effect.Process(new GameField(), new Player(), opponent, null);
 
             Assert.AreEqual(2, opponent.Hand.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);
@@ -159,7 +159,7 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent);
+            effect.Process(new GameField(), new Player(), opponent, null);
 
             Assert.AreEqual(2, opponent.Hand.Count);
         }
@@ -192,7 +192,7 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent);
+            effect.Process(new GameField(), new Player(), opponent, null);
 
             Assert.AreEqual(1, opponent.Hand.Count);
             Assert.AreEqual(pokemon.Id, opponent.Hand[0].Id);

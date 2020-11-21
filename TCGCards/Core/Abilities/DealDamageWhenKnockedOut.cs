@@ -76,7 +76,7 @@ namespace TCGCards.Core.Abilities
                 damage *= PokemonOwner.AttachedEnergy.Count(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType);
             }
 
-            PokemonOwner.KnockedOutBy.DealDamage(new Damage(damage), game);
+            PokemonOwner.KnockedOutBy.DealDamage(new Damage(damage), game, PokemonOwner);
 
             if (PokemonOwner.KnockedOutBy.IsDead())
                 PokemonOwner.KnockedOutBy.KnockedOutBy = PokemonOwner;

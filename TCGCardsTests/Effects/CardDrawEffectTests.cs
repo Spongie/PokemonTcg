@@ -22,7 +22,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
             Assert.AreEqual(0, player.Deck.Cards.Count);
             Assert.AreEqual(1, player.Hand.Count);
         }
@@ -40,7 +40,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
             Assert.AreEqual(1, player.Deck.Cards.Count);
             Assert.AreEqual(0, player.Hand.Count);
         }
@@ -58,7 +58,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
             Assert.AreEqual(0, player.Deck.Cards.Count);
             Assert.AreEqual(1, player.Hand.Count);
         }
@@ -76,7 +76,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
 
-            effect.Process(new GameField(), null, player);
+            effect.Process(new GameField(), null, player, null);
             Assert.AreEqual(0, player.Deck.Cards.Count);
             Assert.AreEqual(1, player.Hand.Count);
         }
@@ -94,7 +94,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), null, player);
+            effect.Process(new GameField(), null, player, null);
             Assert.AreEqual(1, player.Deck.Cards.Count);
             Assert.AreEqual(0, player.Hand.Count);
         }
@@ -112,7 +112,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), null, player);
+            effect.Process(new GameField(), null, player, null);
             Assert.AreEqual(0, player.Deck.Cards.Count);
             Assert.AreEqual(1, player.Hand.Count);
         }

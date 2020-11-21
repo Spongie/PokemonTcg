@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4456225418079505043}
   - component: {fileID: 6291696268973933151}
   - component: {fileID: 8156636404337919163}
+  - component: {fileID: 2541283175626643832}
   m_Layer: 5
   m_Name: Attached Energy Icon
   m_TagString: Untagged
@@ -73,3 +74,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2541283175626643832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8286258613568136924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19ede6b6e9bbb84295a55d4eda969b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

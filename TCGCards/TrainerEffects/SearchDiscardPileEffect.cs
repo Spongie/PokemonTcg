@@ -67,7 +67,7 @@ namespace TCGCards.TrainerEffects
             throw new NotImplementedException();
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             IEnumerable<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
 

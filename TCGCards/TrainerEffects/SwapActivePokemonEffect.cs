@@ -67,7 +67,7 @@ namespace TCGCards.TrainerEffects
         }
 
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             if (OnlyOnCoinFlip && game.FlipCoins(1) == 0)
             {

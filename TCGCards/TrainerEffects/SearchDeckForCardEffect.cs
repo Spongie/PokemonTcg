@@ -53,7 +53,7 @@ namespace TCGCards.TrainerEffects
             throw new System.NotImplementedException();
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var filter = CardUtil.GetCardFilters(CardType, EnergyType).ToList();
 

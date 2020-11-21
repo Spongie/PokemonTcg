@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NetworkingCore;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
 using UnityEngine;
@@ -10,9 +11,17 @@ namespace Assets.Code._2D
         public GameObject cardPrefab;
         public GameObject cardZone;
         public bool isPlayerHand;
+        private Dictionary<NetworkId, GameObject> idObjectCache;
+
+        private void Awake()
+        {
+            idObjectCache = new Dictionary<NetworkId, GameObject>();
+        }
 
         public void SetHand(IEnumerable<Card> cards)
         {
+            idObjectCache.Clear();
+
             for (int i = 0; i < cardZone.transform.childCount; i++)
             {
                 Destroy(cardZone.transform.GetChild(i).gameObject);
@@ -23,8 +32,9 @@ namespace Assets.Code._2D
             {
                 card.IsRevealed = isPlayerHand;
                 var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
-                spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom);
+                spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom, false);
                 index++;
+                idObjectCache.Add(card.Id, spawnedCard);
             }
         }
 
@@ -32,7 +42,8 @@ namespace Assets.Code._2D
         {
             card.IsRevealed = isPlayerHand;
             var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
-            spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom);
+            spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom, false);
+            idObjectCache.Add(card.Id, spawnedCard);
         }
 
         public void FadeOutCards(IEnumerable<Card> cards)
@@ -43,6 +54,17 @@ namespace Assets.Code._2D
                 CanvasGroup cardCanvas = cardRenderer.GetComponent<CanvasGroup>();
                 cardCanvas.alpha = cards.Any(card => card.Id.Equals(cardRenderer.card.Id)) ? 0.2f : 1f;
             }
+        }
+
+        internal void RemoveCard(Card card)
+        {
+            if (!idObjectCache.ContainsKey(card.Id))
+            {
+                return;
+            }
+
+            Destroy(idObjectCache[card.Id]);
+            idObjectCache.Remove(card.Id);
         }
     }
 }

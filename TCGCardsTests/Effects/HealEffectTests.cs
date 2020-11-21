@@ -20,7 +20,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.ActivePokemonCard = new PokemonCard() { DamageCounters = 30, Hp = 100 };
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(20, player.ActivePokemonCard.DamageCounters);
         }
@@ -37,7 +37,7 @@ namespace TCGCardsTests.Effects
             var player = new Player();
             player.ActivePokemonCard = new PokemonCard() { DamageCounters = 30, Hp = 100 };
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(0, player.ActivePokemonCard.DamageCounters);
         }

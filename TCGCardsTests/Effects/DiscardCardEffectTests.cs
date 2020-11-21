@@ -31,7 +31,7 @@ namespace TCGCardsTests.Effects
             sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage { Cards = new List<NetworkId> { player.Hand[0].Id } });
             player.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(1, player.DiscardPile.Count);
             Assert.AreEqual(2, player.Hand.Count);
@@ -56,7 +56,7 @@ namespace TCGCardsTests.Effects
             sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage { Cards = new List<NetworkId> { player.Hand[0].Id } });
             player.SetNetworkPlayer(sub);
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(0, player.DiscardPile.Count);
             Assert.AreEqual(3, player.Hand.Count);
@@ -81,7 +81,7 @@ namespace TCGCardsTests.Effects
             sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage { Cards = new List<NetworkId> { player.Hand[0].Id } });
             player.SetNetworkPlayer(sub);
             CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(1, player.DiscardPile.Count);
             Assert.AreEqual(2, player.Hand.Count);
@@ -102,7 +102,7 @@ namespace TCGCardsTests.Effects
             player.Hand.Add(new PokemonCard());
             player.Hand.Add(new TrainerCard());
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(3, player.DiscardPile.Count);
             Assert.AreEqual(0, player.Hand.Count);
@@ -128,7 +128,7 @@ namespace TCGCardsTests.Effects
             sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage { Cards = new List<NetworkId> { target.Id } });
             player.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), player, null);
+            effect.Process(new GameField(), player, null, null);
 
             Assert.AreEqual(1, player.DiscardPile.Count);
             Assert.AreEqual(2, player.Hand.Count);

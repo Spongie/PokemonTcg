@@ -42,7 +42,7 @@ namespace TCGCards.Attacks
                 return;
             }
 
-            owner.ActivePokemonCard.DealDamage(amount, game);
+            owner.ActivePokemonCard.DealDamage(amount, game, owner.ActivePokemonCard);
         }
     }
 }

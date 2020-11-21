@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TCGCards.Core.GameEvents
+﻿namespace TCGCards.Core.GameEvents
 {
-    class GameSyncEvent
+    public class GameSyncEvent : Event
     {
+        public GameSyncEvent()
+        {
+            GameEvent = GameEventType.SyncGame;
+        }
+
+        public GameField Game { get; set; }
     }
 }

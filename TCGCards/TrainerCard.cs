@@ -22,7 +22,7 @@ namespace TCGCards
         {
             foreach (var effect in Effects)
             {
-                effect.Process(game, caster, opponent);
+                effect.Process(game, caster, opponent, null);
             }
         }
 

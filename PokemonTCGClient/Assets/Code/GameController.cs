@@ -734,7 +734,7 @@ namespace Assets.Code
             OnGameUpdated(message, null);
         }
 
-        private void OnGameUpdated(object message, NetworkId messageId)
+        public void OnGameUpdated(object message, NetworkId messageId)
         {
             var gameMessage = message is GameFieldMessage ? ((GameFieldMessage)message).Game : (GameField)message;
             Debug.Log("Game updated, handling message");
@@ -803,11 +803,10 @@ namespace Assets.Code
                 var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
                 var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-                controller.SetCard(pokemon, zoomMode);
+                controller.SetCard(pokemon, zoomMode, true);
                 controller.SetIsBenched();
             }
         }
-
 
         private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard, ZoomMode zoomMode)
         {
@@ -821,13 +820,8 @@ namespace Assets.Code
             var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
             var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-            controller.SetCard(pokemonCard, zoomMode);
+            controller.SetCard(pokemonCard, zoomMode, true);
             controller.SetIsActivePokemon();
-        }
-
-        private void OnGameHosted(object param1)
-        {
-            gameField = (GameField)param1;
         }
 
         private void Update()

@@ -52,7 +52,7 @@ namespace TCGCards.TrainerEffects
             
         }
 
-        public void Process(GameField game, Player caster, Player opponent)
+        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var choices = caster.ActivePokemonCard.AttachedEnergy.Where(x => x.EnergyType == EnergyType).ToList();
             var message = new PickFromListMessage(choices, 0, choices.Count).ToNetworkMessage(game.Id);

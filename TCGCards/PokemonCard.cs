@@ -189,13 +189,13 @@ namespace TCGCards
 
             if (IsBurned)
             {
-                DealDamage(20, game, false);
+                DealDamage(20, game, this, false);
                 IsBurned = game.FlipCoins(1) == 0;
             }
 
             if (IsPoisoned)
             {
-                DealDamage(DoublePoison ? 20 : 10, game, false);
+                DealDamage(DoublePoison ? 20 : 10, game, this, false);
             }
 
             if(IsAsleep)
@@ -215,7 +215,7 @@ namespace TCGCards
             AttackStoppers = AttackStoppers.Where(x => x.TurnsLeft > 0).ToList();
         }
 
-        public int DealDamage(Damage damage, GameField game, bool preventable = true)
+        public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable = true)
         {
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
 
@@ -239,7 +239,7 @@ namespace TCGCards
 
             if (totalDamage > 0)
             {
-                game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id });
+                game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id, DamageType = source != null ? source.PokemonType : EnergyTypes.Colorless });
             }
 
             DamageCounters += totalDamage;
