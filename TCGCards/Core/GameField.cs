@@ -615,7 +615,6 @@ namespace TCGCards.Core
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             
-            //SEND UPDATE ON THIS
             ActivePlayer.DiscardPile.Add(trainerCard);
 
             CurrentTrainerCard = null;
@@ -931,7 +930,6 @@ namespace TCGCards.Core
         public List<Player> Players { get; set; }
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get; set; }
-        public int Mode { get; set; }
         public GameLog GameLog { get; set; } = new GameLog();
         public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
@@ -940,6 +938,5 @@ namespace TCGCards.Core
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
         public TrainerCard CurrentTrainerCard { get; set; }
-        public List<Event> Events { get; set; } = new List<Event>();
     }
 }
