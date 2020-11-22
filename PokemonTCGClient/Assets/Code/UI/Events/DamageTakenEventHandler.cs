@@ -24,9 +24,8 @@ namespace Assets.Code.UI.Events
             cardRenderer.SpawnDamageEffect(damageType);
             cardRenderer.StartOnDamageTaken(damage);
 
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(1f);
 
-            cardRenderer.damageTakenText.text = (int.Parse(cardRenderer.damageTakenText.text) + damage).ToString();
             GameEventHandler.Instance.EventCompleted();
         }
     }

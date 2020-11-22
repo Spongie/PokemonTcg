@@ -14,6 +14,7 @@ namespace Assets.Code.UI.Events
 {
     public class PokemonBecameActiveEventHandler : MonoBehaviour
     {
+        public GameObject CardPrefab;
         public Transform PlayerActivePokemonTransform;
         public CardZone PlayerBenchedPokemonZone;
         public Transform OpponentActivePokemonTransform;
@@ -29,12 +30,34 @@ namespace Assets.Code.UI.Events
             }
         }
 
+        private void SetActiveOngameStart(PokemonCard pokemonCard)
+        {
+            NetworkId myId = GameController.Instance.myId;
+            var isMySwitch = pokemonCard.Owner.Id.Equals(myId);
+            var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
+
+            var gameObject = Instantiate(CardPrefab, activeParent);
+            var renderer = gameObject.GetComponent<CardRenderer>();
+            renderer.SetCard(pokemonCard, ZoomMode.Center, true);
+            GameController.Instance.AddCard(renderer);
+
+            gameObject.GetComponent<RectTransform>().LeanSize(new Vector2(200, 270), 1.5f);
+            gameObject.GetComponent<RectTransform>().LeanMove(Vector3.zero, 1.5f).setEaseInCubic();
+            GameEventHandler.Instance.EventCompleted();
+        }
+
         public void Trigger(PokemonBecameActiveEvent activeEvent)
         {
+            if (activeEvent.NewActivePokemon != null)
+            {
+                SetActiveOngameStart(activeEvent.NewActivePokemon);
+                return;
+            }
+
             var newActive = GameController.Instance.GetCardRendererById(activeEvent.NewActivePokemonId);
             ZoomMode oldZoom = newActive.GetZoomMode();
             NetworkId myId = GameController.Instance.myId;
-            var isMySwitch = newActive.card.Id.Equals(myId) || GameController.Instance.Player.BenchedPokemon.Any(x => x.Owner.Id.Equals(myId));
+            var isMySwitch = newActive.card.Owner.Id.Equals(myId) || GameController.Instance.Player.BenchedPokemon.Any(x => x.Owner.Id.Equals(myId));
             var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
             var benchParent = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
 

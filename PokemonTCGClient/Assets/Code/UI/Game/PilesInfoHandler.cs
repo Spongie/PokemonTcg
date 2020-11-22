@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TCGCards.Core.GameEvents;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Code.UI.Game
@@ -21,10 +22,14 @@ namespace Assets.Code.UI.Game
                 return;
             }
 
-            cardsInHandText.text = player.Hand.Count.ToString();
             cardsInDiscardText.text = player.DiscardPile.Count.ToString();
-            cardsInDeckText.text = player.Deck.Cards.Count.ToString();
             cardsInPrizeText.text = player.PrizeCards.Count.ToString();
+        }
+
+        public void UpdateWithInfo(PlayerInfo playerInfo)
+        {
+            cardsInHandText.text = playerInfo.CardsInHand.ToString();
+            cardsInDeckText.text = playerInfo.CardsInDeck.ToString();
         }
 
         public void OnDisplayDiscardPileClick()

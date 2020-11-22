@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Code._2D;
+using Assets.Code.UI.Events;
 using Assets.Code.UI.Game;
 using Entities;
 using NetworkingCore;
@@ -44,13 +45,19 @@ namespace Assets.Code
         public GameObject EscapeMenu;
         public GameObject WinMenu;
         public Text winnerText;
+        public PilesInfoHandler playerInfoHandler;
+        public PilesInfoHandler opponentInfoHandler;
 
         internal void AddCard(CardRenderer card)
         {
+            if (cardRenderers.ContainsKey(card.card.Id))
+            {
+                cardRenderers[card.card.Id] = card;
+                return;
+            }
+
             cardRenderers.Add(card.card.Id, card);
         }
-
-        public EventLogViewer eventViewer;
 
         public Sprite CardBack;
 
@@ -84,7 +91,6 @@ namespace Assets.Code
             energyCardsToAttach = new Queue<EnergyCard>();
             energyPokemonMap = new Dictionary<NetworkId, NetworkId>();
             cardRenderers = new Dictionary<NetworkId, CardRenderer>();
-
             InitGamestateInfo();
             RegisterClickHandlers();
         }
@@ -273,7 +279,6 @@ namespace Assets.Code
             myId = NetworkManager.Instance.Me.Id;
             gameField = NetworkManager.Instance.CurrentGame;
 
-            //TODO Send more info messages
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameUpdate, OnGameUpdated);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectOpponentPokemon, OnStartSelectingOpponentPokemon);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectFromOpponentBench, OnStartSelectingOpponentBench);
@@ -293,21 +298,16 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
             NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameEvent, OnGameEventReceived);
+
+            OnGameUpdated(gameField);
         }
 
         private void OnCardsRevealed(object message, NetworkId arg2)
         {
             var revealMessage = (RevealCardsMessage)message;
 
-            if (revealMessage.Cards.Count == 1)
-            {
-                eventViewer?.QueueEvent(revealMessage.Cards.First());
-            }
-            else
-            {
-                selectFromListPanel.SetActive(true);
-                selectFromListPanel.GetComponent<SelectFromListPanel>().InitView(revealMessage.Cards);
-            }
+            selectFromListPanel.SetActive(true);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().InitView(revealMessage.Cards);
         }
 
         private void OnStartSelectAttack(object message, NetworkId messageId)
@@ -444,14 +444,8 @@ namespace Assets.Code
 
         private void OnGameEventReceived(object arg1, NetworkId arg2)
         {
-            Card card = null;// ((EventMessage)arg1).GameEvent.GetCardToDisplay();
-
-            if (card == null)
-            {
-                return;
-            }
-
-            eventViewer?.QueueEvent(card);
+            var gameEvent = ((EventMessage)arg1).GameEvent;
+            GameEventHandler.Instance.EnqueueEvent(gameEvent);
         }
 
         private void OnDeckSearch(object message, NetworkId messageId)
@@ -653,8 +647,8 @@ namespace Assets.Code
 
         private void SetActiveStateClicked(CardRenderer cardController)
         {
-            var id = NetworkManager.Instance.gameService.SetActivePokemon(gameField.Id, myId, cardController.card.Id);
-            NetworkManager.Instance.RegisterCallbackById(id, OnGameUpdated);
+            NetworkManager.Instance.gameService.SetActivePokemon(gameField.Id, myId, cardController.card.Id);
+            //NetworkManager.Instance.RegisterCallbackById(id, OnGameUpdated);
         }
 
         public void ActivateAbility(Ability ability)
@@ -742,12 +736,35 @@ namespace Assets.Code
             GameFieldState oldState = gameField.GameState;
 
             gameField = gameMessage;
+
+            if (gameField.GameState == GameFieldState.WaitingForConnection)
+            {
+                return;
+            }
+
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
             SpecialState = SpecialGameState.None;
             selectColorPanel.SetActive(false);
             selectedCards.Clear();
             selectFromListPanel.SetActive(false);
 
+            SetInfoAndEnableButtons();
+
+            Player me = gameField.Players.First(p => p.Id.Equals(myId));
+            Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
+
+            playerHand.SetHand(me.Hand);
+            cardRenderers.Clear();
+
+            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard, ZoomMode.Center);
+            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard, ZoomMode.FromTop);
+
+            SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
+            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
+        }
+
+        private void SetInfoAndEnableButtons()
+        {
             switch (gameField.GameState)
             {
                 case GameFieldState.WaitingForConnection:
@@ -776,22 +793,37 @@ namespace Assets.Code
             }
 
             endTurnButton.SetActive(IsMyTurn);
+        }
 
-            if (gameField.GameState == GameFieldState.WaitingForConnection)
+        public void OnInfoUpdated(GameFieldInfo gameInfo)
+        {
+            OpponentPlayer.DiscardPile = gameInfo.Opponent.CardsInDiscard;
+            OpponentPlayer.PrizeCards = gameInfo.Opponent.PrizeCards;
+            OpponentPlayer.ActivePokemonCard = (PokemonCard)gameInfo.Opponent.ActivePokemon;
+            OpponentPlayer.BenchedPokemon = gameInfo.Opponent.BenchedPokemon.OfType<PokemonCard>().ToList();
+            opponentInfoHandler.UpdateWithInfo(gameInfo.Opponent);
+
+            if (OpponentPlayer != null && OpponentPlayer.ActivePokemonCard != null)
             {
-                return;
+                SetActivePokemon(opponentActivePokemon, OpponentPlayer.ActivePokemonCard, ZoomMode.Center);
             }
 
-            Player me = gameField.Players.First(p => p.Id.Equals(myId));
-            Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
+            Player.DiscardPile = gameInfo.Me.CardsInDiscard;
+            Player.PrizeCards = gameInfo.Me.PrizeCards;
+            Player.ActivePokemonCard = (PokemonCard)gameInfo.Me.ActivePokemon;
+            Player.BenchedPokemon = gameInfo.Me.BenchedPokemon.OfType<PokemonCard>().ToList();
+            playerInfoHandler.UpdateWithInfo(gameInfo.Me);
 
-            playerHand.SetHand(me.Hand);
+            if (Player != null && Player.ActivePokemonCard != null)
+            {
+                SetActivePokemon(playerActivePokemon, Player.ActivePokemonCard, ZoomMode.Center);
+            }
 
-            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard, ZoomMode.Center);
-            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard, ZoomMode.FromTop);
+            IsMyTurn = gameInfo.ActivePlayer.Equals(myId);
+            CurrentGameState = gameInfo.CurrentState;
+            gameField.GameState = CurrentGameState;
 
-            SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
-            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
+            SetInfoAndEnableButtons();
         }
 
         private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons, ZoomMode zoomMode)
@@ -805,6 +837,7 @@ namespace Assets.Code
                 var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
                 controller.SetCard(pokemon, zoomMode, true);
                 controller.SetIsBenched();
+                AddCard(controller);
             }
         }
 
@@ -822,6 +855,7 @@ namespace Assets.Code
             var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
             controller.SetCard(pokemonCard, zoomMode, true);
             controller.SetIsActivePokemon();
+            AddCard(controller);
         }
 
         private void Update()

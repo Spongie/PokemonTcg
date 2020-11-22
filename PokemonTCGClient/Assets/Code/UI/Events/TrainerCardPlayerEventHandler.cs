@@ -17,6 +17,7 @@ namespace Assets.Code.UI.Events
 
         public void TriggerCardPlayer(TrainerCard card)
         {
+            GameController.Instance.playerHand.RemoveCard(card);
             StartCoroutine(DisplayCardEnumerator(card));
         }
 

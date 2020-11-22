@@ -24,16 +24,16 @@ namespace Assets.Code.UI.Game
         {
             var set = new HashSet<EnergyTypes>();
 
-            set.Add(GameController.Instance.Player.ActivePokemonCard.PokemonType);
-            set.Add(GameController.Instance.OpponentPlayer.ActivePokemonCard.PokemonType);
+            set.Add(GameController.Instance.Player.ActivePokemonCard.Type);
+            set.Add(GameController.Instance.OpponentPlayer.ActivePokemonCard.Type);
 
             foreach (var pokemon in GameController.Instance.Player.BenchedPokemon)
             {
-                set.Add(pokemon.PokemonType);
+                set.Add(pokemon.Type);
             }
             foreach (var pokemon in GameController.Instance.OpponentPlayer.BenchedPokemon)
             {
-                set.Add(pokemon.PokemonType);
+                set.Add(pokemon.Type);
             }
 
             return set;

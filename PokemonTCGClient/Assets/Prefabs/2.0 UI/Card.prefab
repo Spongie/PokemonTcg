@@ -734,6 +734,7 @@ MonoBehaviour:
   overlay: {fileID: 6359761912672574090}
   popupHandler: {fileID: 1087402829030343683}
   DamageDisplay: {fileID: 2993829654467737209}
+  idText: {fileID: 0}
   PoisonIcon: {fileID: 143023299924287704}
   BurnedIcon: {fileID: 1641618577027453034}
   ParalyzedIcon: {fileID: 5052349586321178321}
@@ -768,6 +769,10 @@ MonoBehaviour:
   DarknessEffect: {fileID: 0}
   DragonEffect: {fileID: 0}
   SteelEffect: {fileID: 0}
+  Abilityeffect: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e,
+    type: 3}
+  EvolveEffect: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+  DeathEffect: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
 --- !u!1 &4089488601737517948
 GameObject:
   m_ObjectHideFlags: 0

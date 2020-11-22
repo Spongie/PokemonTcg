@@ -72,9 +72,16 @@ namespace Assets.Code.UI.MainMenu
 
         public TCGCards.Core.Deck LoadDeckSelectedDeck()
         {
-            var deck = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + Deck.deckExtension);
+            var deckFile = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + Deck.deckExtension);
 
-            return Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(deck));
+            var deck = Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(deckFile));
+
+            foreach (var card in deck.Cards)
+            {
+                card.Id = NetworkId.Generate();
+            }
+
+            return deck;
         }
 
         public void ExitClick()

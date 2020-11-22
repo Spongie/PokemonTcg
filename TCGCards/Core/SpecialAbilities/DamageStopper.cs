@@ -6,6 +6,11 @@ namespace TCGCards.Core.SpecialAbilities
     {
         private Func<int, bool> action;
 
+        public DamageStopper()
+        {
+
+        }
+
         public DamageStopper(Func<int, bool> action) : this(action, 2)
         {
 

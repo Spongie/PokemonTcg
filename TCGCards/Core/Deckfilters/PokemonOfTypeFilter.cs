@@ -16,7 +16,7 @@ namespace TCGCards.Core.Deckfilters
         {
             var pokemon = card as PokemonCard;
 
-            return pokemon != null && Types.Contains(pokemon.PokemonType);
+            return pokemon != null && Types.Contains(pokemon.Type);
         }
     }
 }

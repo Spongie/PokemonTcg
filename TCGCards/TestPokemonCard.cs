@@ -11,7 +11,7 @@ namespace TCGCards
             IsTestCard = true;
             Stage = 0;
             Hp = 50;
-            PokemonType = EnergyTypes.Grass;
+            Type = EnergyTypes.Grass;
             RetreatCost = 1;
             Weakness = EnergyTypes.Psychic;
             Resistance = EnergyTypes.None;

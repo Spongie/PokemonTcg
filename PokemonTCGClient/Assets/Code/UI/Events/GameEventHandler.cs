@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TCGCards;
 using TCGCards.Core.GameEvents;
 using UnityEngine;
@@ -22,62 +23,40 @@ namespace Assets.Code.UI.Events
         public AttachedEnergyDiscardedEventHandler AttachedEnergyDiscardedEventHandler;
         public PokemonDiedEventHandler PokemonDiedEventHandler;
 
+        private Queue<TCGCards.Core.GameEvents.Event> eventQueue;
+        private TCGCards.Core.GameEvents.Event currentEvent;
+
         //public CardRenderer tempTarget;
         //private EnergyCard energyCard;
+        //private PokemonCard pokemon;
 
         private void Awake()
         {
+            eventQueue = new Queue<TCGCards.Core.GameEvents.Event>();
             Instance = this;
         }
 
         private void Start()
         {
-            //energyCard = new EnergyCard { EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" };
+            //pokemon = new PokemonCard { IsRevealed = true, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/29_hires.png" };
+            //energyCard = new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Fire, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" };
+            //tempTarget.SetCard(pokemon, ZoomMode.Center, true);
+            //GameController.Instance.AddCard(tempTarget);
             //tempTarget.insertAttachedEnergy(new EnergyCard { EnergyType = Entities.EnergyTypes.Fire, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" });
             //tempTarget.insertAttachedEnergy(energyCard);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (currentEvent != null || eventQueue.Count == 0)
             {
-                //var gameEvent = new TCGCards.Core.GameEvents.AttachedEnergyDiscardedEvent()
-                //{
-                //    DiscardedCard = energyCard,
-                //    FromPokemonId = tempTarget.card.Id
-                //};
-
-                //var gameEvent = new CoinsFlippedEvent(new List<bool> { true, true }, null);
-
-               //TriggerEvent(gameEvent);
+                return;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                var gameEvent = new TCGCards.Core.GameEvents.PokemonDiedEvent()
-                {
-                    Pokemon = null
-                };
-
-                TriggerEvent(gameEvent);
-            }
-
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    var gameEvent = new CardsDiscardedEvent()
-            //    {
-            //        Cards = new List<Card>
-            //        {
-            //            new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" },
-            //            new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" },
-            //            new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Psychic, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" }
-            //        }
-            //    };
-
-            //    TriggerEvent(gameEvent);
-            //}
+            var nextInQueue = eventQueue.Dequeue();
+            currentEvent = nextInQueue;
+            TriggerEvent(nextInQueue);
         }
-        //TODO: Add queue for events
 
         private void TriggerEvent(TCGCards.Core.GameEvents.Event gameEvent)
         {
@@ -138,6 +117,7 @@ namespace Assets.Code.UI.Events
                     break;
                 case GameEventType.SyncGame:
                     GameController.Instance.OnGameUpdated(((GameSyncEvent)gameEvent).Game, null);
+                    EventCompleted();
                     break;
                 default:
                     break;
@@ -159,7 +139,14 @@ namespace Assets.Code.UI.Events
             PokemonEvolvedEventHandler.gameObject.SetActive(false);
             AttachedEnergyDiscardedEventHandler.gameObject.SetActive(false);
             PokemonDiedEventHandler.gameObject.SetActive(false);
-            //TODO: Go to next in queue
+
+            GameController.Instance.OnInfoUpdated(currentEvent.GameField);
+            currentEvent = null;
+        }
+
+        internal void EnqueueEvent(TCGCards.Core.GameEvents.Event gameEvent)
+        {
+            eventQueue.Enqueue(gameEvent);
         }
     }
 }

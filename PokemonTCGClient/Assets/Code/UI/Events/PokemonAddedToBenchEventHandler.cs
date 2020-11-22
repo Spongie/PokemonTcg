@@ -11,13 +11,21 @@ namespace Assets.Code.UI.Events
 
         public void Trigger(PokemonAddedToBenchEvent addedToBenchEvent)
         {
+            GameController.Instance.playerHand.RemoveCard(addedToBenchEvent.Pokemon);
             bool isMyPokemon = addedToBenchEvent.Player.Equals(GameController.Instance.myId);
             GameObject targetParent = isMyPokemon ? PlayerBench : OpponentBench;
             ZoomMode zoomMode = isMyPokemon ? ZoomMode.FromBottom : ZoomMode.FromTop;
 
             var spawnedObject = Instantiate(CardPrefab, transform);
             var rectTransform = spawnedObject.GetComponent<RectTransform>();
-            spawnedObject.GetComponent<CardRenderer>().SetCard(addedToBenchEvent.Pokemon, zoomMode, true);
+            var renderer = spawnedObject.GetComponent<CardRenderer>();
+            renderer.SetCard(addedToBenchEvent.Pokemon, zoomMode, true);
+            
+            GameController.Instance.AddCard(renderer);
+
+            var canvas = renderer.GetComponent<Canvas>();
+            var oldSortorder = canvas.sortingOrder;
+            canvas.sortingOrder = 9999;
 
             rectTransform.localScale = new Vector3(2, 2, 1);
             rectTransform.localPosition = new Vector3(-50, 270, 0);
@@ -28,6 +36,7 @@ namespace Assets.Code.UI.Events
             rectTransform.LeanScale(new Vector3(1, 1, 1), 0.25f).setDelay(0.5f).setOnComplete(() =>
             {
                 spawnedObject.tag = "Untagged";
+                canvas.sortingOrder = oldSortorder;
                 GameEventHandler.Instance.EventCompleted();
             });
         }

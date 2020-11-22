@@ -78,7 +78,7 @@ namespace TCGCards
 
         public Player Owner { get; set; }
 
-        public bool IsRevealed { get; set; } = true;
+        public bool IsRevealed { get; set; } = false;
 
         public bool IsTestCard { get; set; }
 

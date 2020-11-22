@@ -66,7 +66,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     void Awake()
     {
-        SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png" }, ZoomMode.Center, true);
+        //SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png" }, ZoomMode.Center, true);
         //GameController.Instance.AddCard(this);
         //SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
     }
@@ -110,12 +110,12 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             float offsetSize = myRect.sizeDelta.x / 5;
             float attachedOffset = offsetSize;
 
+            var pokemon = (PokemonCard)card;
+
             if (spawnAttachedEnergy)
             {
-                SpawnAttachedEnergy(card, zoomMode, myRect, sortOrder, offsetSize, attachedOffset);
+                SpawnAttachedEnergy(pokemon, zoomMode, myRect, sortOrder, offsetSize, attachedOffset);
             }
-
-            var pokemon = (PokemonCard)card;
 
             if (pokemon.DamageCounters > 0)
             {
@@ -137,13 +137,14 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         StartCoroutine(LoadSprite(card));
     }
 
-    private void SpawnAttachedEnergy(Card card, ZoomMode zoomMode, RectTransform myRect, int sortOrder, float offsetSize, float attachedOffset)
+    private void SpawnAttachedEnergy(PokemonCard card, ZoomMode zoomMode, RectTransform myRect, int sortOrder, float offsetSize, float attachedOffset)
     {
-        return;
-        var activePokemonCard = GameController.Instance.Player.ActivePokemonCard;
-        var otherActtive = GameController.Instance.OpponentPlayer.ActivePokemonCard;
+        if (card.AttachedEnergy == null)
+        {
+            return;
+        }
 
-        foreach (var attachedEnergy in ((PokemonCard)card).AttachedEnergy)
+        foreach (var attachedEnergy in card.AttachedEnergy)
         {
             var attachedObject = Instantiate(AttachedEnergyPrefab, AttachedEnergyList.transform);
             attachedObject.GetComponent<AttachedEnergy>().energyCard = attachedEnergy;

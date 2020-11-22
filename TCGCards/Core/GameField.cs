@@ -138,10 +138,13 @@ namespace TCGCards.Core
             {
                 GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
                 owner.SetActivePokemon(activePokemon);
-                SendEventToPlayers(new PokemonBecameActiveEvent
+                if (GameState != GameFieldState.BothSelectingActive)
                 {
-                    NewActivePokemon = activePokemon
-                });
+                    SendEventToPlayers(new PokemonBecameActiveEvent
+                    {
+                        NewActivePokemon = activePokemon
+                    });
+                }
             }
             else
             {
@@ -159,7 +162,10 @@ namespace TCGCards.Core
                     if (Players.All(p => p.ActivePokemonCard != null))
                     {
                         GameState = GameFieldState.BothSelectingBench;
+                        SendEventToPlayers(new GameSyncEvent { Game = this });
                     }
+
+                    SendEventMessage(new GameSyncEvent { Game = this }, Players.First(x => x.Id.Equals(ownerId)));
                 }
             }
 
@@ -221,6 +227,7 @@ namespace TCGCards.Core
                     {
                         Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
                         GameState = GameFieldState.InTurn;
+                        SendEventToPlayers(new GameSyncEvent { Game = this });
                     }
                 }
             }
@@ -243,6 +250,11 @@ namespace TCGCards.Core
                     if (pokemon.Id.Equals(id))
                     {
                         return pokemon;
+                    }
+
+                    if (pokemon.AttachedEnergy == null)
+                    {
+                        continue;
                     }
 
                     foreach (EnergyCard energy in pokemon.AttachedEnergy)
@@ -355,11 +367,6 @@ namespace TCGCards.Core
             ActivePlayer = Players[new Random().Next(2)];
             NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
 
-            ActivePlayer.OnCardsDrawn += PlayerDrewCards;
-            ActivePlayer.OnCardsDiscarded += PlayerDiscardedCards;
-            NonActivePlayer.OnCardsDrawn += PlayerDrewCards;
-            NonActivePlayer.OnCardsDiscarded += PlayerDiscardedCards;
-
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
             foreach (Player player in Players)
@@ -380,6 +387,12 @@ namespace TCGCards.Core
             }
 
             GameState = GameFieldState.BothSelectingActive;
+
+            ActivePlayer.OnCardsDrawn += PlayerDrewCards;
+            ActivePlayer.OnCardsDiscarded += PlayerDiscardedCards;
+            NonActivePlayer.OnCardsDrawn += PlayerDrewCards;
+            NonActivePlayer.OnCardsDiscarded += PlayerDiscardedCards;
+
             PushGameLogUpdatesToPlayers();
         }
 
@@ -530,11 +543,11 @@ namespace TCGCards.Core
                 return realDamage;
             }
 
-            if (defender.Resistance == attacker.PokemonType)
+            if (defender.Resistance == attacker.Type)
             {
                 realDamage -= 30;
             }
-            if (defender.Weakness == attacker.PokemonType)
+            if (defender.Weakness == attacker.Type)
             {
                 realDamage *= 2;
             }
@@ -573,7 +586,9 @@ namespace TCGCards.Core
             ActivePlayer.PlayCard(pokemon);
 
             if(pokemon.Ability?.TriggerType == TriggerType.EnterPlay)
+            {
                 pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
+            }
         }
 
         public void PlayTrainerCard(TrainerCard trainerCard)
@@ -600,6 +615,7 @@ namespace TCGCards.Core
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             
+            //SEND UPDATE ON THIS
             ActivePlayer.DiscardPile.Add(trainerCard);
 
             CurrentTrainerCard = null;
@@ -613,9 +629,10 @@ namespace TCGCards.Core
 
         private void SendEventMessage(Event playEvent, Player target)
         {
-            var message = new EventMessage(playEvent) { GameInfo = CreateGameInfo(target == ActivePlayer) }.ToNetworkMessage(Id);
+            var message = new EventMessage(playEvent.Copy());
+            message.GameEvent.GameField = CreateGameInfo(target == ActivePlayer);
 
-            target?.NetworkPlayer?.Send(message);
+            target?.NetworkPlayer?.Send(message.ToNetworkMessage(Id));
         }
 
         public GameFieldInfo CreateGameInfo(bool forActive)
@@ -638,7 +655,7 @@ namespace TCGCards.Core
 
             var nonActivePlayer = new PlayerInfo
             {
-                Id = ActivePlayer.Id,
+                Id = NonActivePlayer.Id,
                 ActivePokemon = NonActivePlayer.ActivePokemonCard,
                 BenchedPokemon = NonActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
                 CardsInDeck = NonActivePlayer.Deck.Cards.Count,
@@ -707,14 +724,12 @@ namespace TCGCards.Core
                 }
                 else
                 {
-                    SendUpdateToPlayers();
                     ActivePlayer.SelectPriceCard(NonActivePlayer.ActivePokemonCard.PrizeCards);
                 }
 
                 NonActivePlayer.KillActivePokemon();
                 if (NonActivePlayer.BenchedPokemon.Any())
                 {
-                    SendUpdateToPlayers();
                     NonActivePlayer.SelectActiveFromBench(this);
                 }
                 else
@@ -778,7 +793,6 @@ namespace TCGCards.Core
                 }
                 else
                 {
-                    PushStateToPlayer(NonActivePlayer);
                     PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
                     ActivePlayer.SelectPriceCard(pokemon.PrizeCards);
                 }
@@ -807,7 +821,6 @@ namespace TCGCards.Core
                 }
                 else
                 {
-                    PushStateToPlayer(ActivePlayer);
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
                     NonActivePlayer.SelectPriceCard(pokemon.PrizeCards);
                 }
@@ -907,25 +920,10 @@ namespace TCGCards.Core
             GameLog.CommitMessages();
         }
 
-        private void PushStateToPlayer(Player player)
-        {
-            var gameMessage = new GameFieldMessage(this);
-            player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
-        }
-
         private void PushInfoToPlayer(string info, Player player)
         {
             var message = new InfoMessage(info);
             player.NetworkPlayer.Send(message.ToNetworkMessage(Id));
-        }
-
-        private void SendUpdateToPlayers()
-        {
-            foreach (var player in Players)
-            {
-                var gameMessage = new GameFieldMessage(this);
-                player.NetworkPlayer.Send(gameMessage.ToNetworkMessage(Id));
-            }
         }
 
         public GameFieldState GameState { get; set; }

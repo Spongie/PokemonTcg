@@ -15,7 +15,6 @@ namespace TCGCards.Core
         public event EventHandler<PlayerCardDraw> OnCardsDrawn;
         public event EventHandler<PlayerCardDraw> OnCardsDiscarded;
 
-
         public Player()
         {
             Hand = new List<Card>();

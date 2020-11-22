@@ -2,6 +2,11 @@
 {
     public class RetreatStopper : TemporaryAbility
     {
+        public RetreatStopper() :this(null, 2)
+        {
+
+        }
+
         public RetreatStopper(PokemonCard owner, int turnCount) : base(owner, turnCount)
         {
             TriggerType = TriggerType.Passive;

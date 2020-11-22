@@ -13,6 +13,7 @@ namespace Assets.Code.UI.Events
     public class CardDrawEventHandler : MonoBehaviour
     {
         public GameObject cardPrefab;
+        public Sprite CardBack;
 
         public void TriggerCardsDrawn(List<Card> cards)
         {
@@ -27,7 +28,16 @@ namespace Assets.Code.UI.Events
                 var rectTransform = gameObject.GetComponent<RectTransform>();
                 var image = gameObject.GetComponent<Image>();
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
-                yield return CardImageLoader.Instance.LoadSpriteRoutine(card, image);
+                bool isMyCards = card.Owner.Id.Equals(GameController.Instance.Player.Id);
+
+                if (isMyCards)
+                {
+                    yield return CardImageLoader.Instance.LoadSpriteRoutine(card, image);
+                }
+                else
+                {
+                    image.sprite = CardBack;
+                }
 
                 rectTransform.localPosition = new Vector2(800, 0);
                 rectTransform.localScale = new Vector2(0.05f, 0.05f);
@@ -55,8 +65,6 @@ namespace Assets.Code.UI.Events
 
                     yield return new WaitForEndOfFrame();
                 }
-
-                bool isMyCards = true;// card.Owner.Id.Equals(GameController.Instance.Player.Id);
 
                 yield return new WaitForSeconds(0.5f);
 

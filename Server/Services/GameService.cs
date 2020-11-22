@@ -36,15 +36,28 @@ namespace Server.Services
             RemoveCompletedGames();
             var player = new Player(MasterServer.Instance.Clients[hostPlayer]);
             var game = new GameField();
-            
+
+            var cardsById = deckInfo.Cards.GroupBy(x => x.Id);
+            var distinctIds = deckInfo.Cards.Select(x => x.Id).Distinct();
+            var addedIds = new HashSet<NetworkId>();
+
             foreach (var card in deckInfo.Cards)
             {
+                if (addedIds.Contains(card.Id))
+                {
+
+                }
+                addedIds.Add(card.Id);
                 card.Owner = player;
                 
                 var pokemonCard = card as PokemonCard;
                 if (pokemonCard != null && pokemonCard.Ability != null)
                 {
                     pokemonCard.Ability.PokemonOwner = pokemonCard;
+                }
+                if (pokemonCard != null)
+                {
+                    pokemonCard.ReInitLists();
                 }
 
                 player.Deck.Cards.Push(card);
@@ -68,13 +81,26 @@ namespace Server.Services
 
             var player = new Player(MasterServer.Instance.Clients[playerToJoin]);
 
+            var cardsById = deckInfo.Cards.GroupBy(x => x.Id);
+            var distinctIds = deckInfo.Cards.Select(x => x.Id).Distinct();
+            var addedIds = new HashSet<NetworkId>();
+
             foreach (var card in deckInfo.Cards)
             {
+                if (addedIds.Contains(card.Id))
+                {
+
+                }
+                addedIds.Add(card.Id);
                 card.Owner = player;
                 var pokemonCard = card as PokemonCard;
                 if (pokemonCard != null && pokemonCard.Ability != null)
                 {
                     pokemonCard.Ability.PokemonOwner = pokemonCard;
+                }
+                if (pokemonCard != null)
+                {
+                    pokemonCard.ReInitLists();
                 }
 
                 player.Deck.Cards.Push(card);

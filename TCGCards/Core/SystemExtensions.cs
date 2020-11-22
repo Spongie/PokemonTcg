@@ -1,5 +1,6 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
+using System;
 
 namespace TCGCards.Core
 {
@@ -13,6 +14,14 @@ namespace TCGCards.Core
             ObjectCreationHandling = ObjectCreationHandling.Replace,
             ReferenceLoopHandling = ReferenceLoopHandling.Serialize
         };
+        
+        public static T Copy<T>(this T source)
+        {
+            var serialized = JsonConvert.SerializeObject(source, JsonSettings);
+            T entity = JsonConvert.DeserializeObject<T>(serialized, JsonSettings);
+
+            return entity;
+        }
 
         public static T Clone<T>(this T source) where T : IEntity
         {

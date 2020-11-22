@@ -1,10 +1,5 @@
 ﻿using Assets.Code._2D;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCGCards;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +16,7 @@ namespace Assets.Code.UI.Events
 
         public void TriggerCardPlayer(EnergyCard card, PokemonCard attachedTo)
         {
+            GameController.Instance.playerHand.RemoveCard(card);
             StartCoroutine(DisplayCardEnumerator(card, attachedTo));
         }
 
@@ -65,36 +61,19 @@ namespace Assets.Code.UI.Events
 
             var target = GameController.Instance.GetCardRendererById(attachedTo.Id);
             var targetTransform = target.GetComponent<RectTransform>();
-            cardImage.sprite = null;// energyResourceManager.GetSpriteForEnergyCard(card);
+            cardImage.sprite = energyResourceManager.GetSpriteForEnergyCard(card);
             cardImage.color = new Color(cardImage.color.r, cardImage.color.g, cardImage.color.b, 0);
             var attachedEnergy = Instantiate(attachedEnergyPrefab, attachedParent.transform);
-            //attachedEnergy.GetComponent<Canvas>().sortingOrder = 2786316;
-
-            var corners = new Vector3[4];
-            targetTransform.GetWorldCorners(corners);
-
-            var x = corners.Average(corner => corner.x);
-            var y = corners.Average(corner => corner.y);
-
-            var startPos = new Vector3(x, y, 0);
-            attachedEnergy.GetComponent<RectTransform>().position = startPos;
-            var targetPos = new Vector3(corners[0].x + 7, corners[0].y + 25, corners[0].z);
-
-            var points = new Vector3[]
-            {
-                startPos,
-                new Vector3(x - 60, y + 5, 0),
-                new Vector3(x - 40, y + 10, 0),
-                targetPos
-            };
-
-            attachedEnergy.LeanMove(new LTBezierPath(points), 1f).setEaseOutCirc().destroyOnComplete = true;
             
-            yield return new WaitForSeconds(1f);
+            attachedEnergy.GetComponent<RectTransform>().localPosition = new Vector3(400, 0);
+            attachedEnergy.transform.SetParent(targetTransform.transform);
+            attachedEnergy.GetComponent<Image>().sprite = EnergyResourceManager.Instance.GetSpriteForEnergyCard(card);
 
-            target.insertAttachedEnergy(card);
-
-            GameEventHandler.Instance.EventCompleted();
+            attachedEnergy.LeanMoveLocal(new Vector3(20, -targetTransform.rect.height + 30, 0), 0.75f).setEaseOutCirc().setDestroyOnComplete(true).setOnComplete(() =>
+            {
+                target.insertAttachedEnergy(card);
+                GameEventHandler.Instance.EventCompleted();
+            });
         }
     }
 }

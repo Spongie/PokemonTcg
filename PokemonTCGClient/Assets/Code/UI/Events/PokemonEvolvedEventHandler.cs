@@ -7,6 +7,7 @@ namespace Assets.Code.UI.Events
     {
         public void Trigger(PokemonEvolvedEvent pokemonEvolvedEvent)
         {
+            GameController.Instance.playerHand.RemoveCard(pokemonEvolvedEvent.NewPokemonCard);
             var targetPokemon = GameController.Instance.GetCardRendererById(pokemonEvolvedEvent.TargetPokemonId);
             targetPokemon.SetCard(pokemonEvolvedEvent.NewPokemonCard, ZoomMode.Center, false);
             targetPokemon.SpawnEvolveEffect();

@@ -6,6 +6,11 @@ namespace TCGCards.Core.SpecialAbilities
     {
         private Func<PokemonCard, bool> action;
 
+        public AttackStopper()
+        {
+
+        }
+
         public AttackStopper(Func<PokemonCard, bool> action) :this(action, 2)
         {
 

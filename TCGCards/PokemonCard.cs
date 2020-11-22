@@ -66,6 +66,16 @@ namespace TCGCards
             AttackStoppers = new List<AttackStopper>();
         }
 
+        public void ReInitLists()
+        {
+            AttachedEnergy = new List<EnergyCard>();
+            TemporaryAbilities = new List<TemporaryAbility>();
+            DamageStoppers = new List<DamageStopper>();
+            AttackStoppers = new List<AttackStopper>();
+            AttachedEnergy = new List<EnergyCard>();
+            TemporaryAbilities = new List<TemporaryAbility>();
+        }
+
         public int Hp
         {
             get { return hp; }
@@ -149,7 +159,6 @@ namespace TCGCards
         public int DamageCounters { get; set; }
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
-        public EnergyTypes PokemonType { get; set; }
         public bool PlayedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
         public bool IsBurned { get; set; }
@@ -170,6 +179,11 @@ namespace TCGCards
 
         public virtual void EndTurn(GameField game)
         {
+            if (TemporaryAbilities == null)
+            {
+                TemporaryAbilities = new List<TemporaryAbility>();
+            }
+
             TemporaryAbilities.ForEach(x => x.TurnsLeft--);
             TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnsLeft > 0).ToList();
             foreach (var attack in Attacks)
@@ -237,10 +251,7 @@ namespace TCGCards
                 }
             }
 
-            if (totalDamage > 0)
-            {
-                game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id, DamageType = source != null ? source.PokemonType : EnergyTypes.Colorless });
-            }
+            game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id, DamageType = source != null ? source.Type : EnergyTypes.Colorless });
 
             DamageCounters += totalDamage;
 
