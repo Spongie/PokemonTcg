@@ -21,6 +21,7 @@
         PokemonEvolved,
         EnergyCardDiscarded,
         PokemonDied,
-        SyncGame
+        SyncGame,
+        GameInfo
     }
 }

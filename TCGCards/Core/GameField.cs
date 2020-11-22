@@ -619,6 +619,8 @@ namespace TCGCards.Core
 
             CurrentTrainerCard = null;
 
+            SendEventToPlayers(new GameInfoEvent());
+
             if (ActivePlayer.IsDead)
             {
                 GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");

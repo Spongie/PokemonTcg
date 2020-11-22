@@ -119,6 +119,9 @@ namespace Assets.Code.UI.Events
                     GameController.Instance.OnGameUpdated(((GameSyncEvent)gameEvent).Game, null);
                     EventCompleted();
                     break;
+                case GameEventType.GameInfo:
+                    EventCompleted();
+                    break;
                 default:
                     break;
             }
