@@ -25,7 +25,20 @@ namespace Assets.Code.UI.DeckBuilder
         public Toggle energyToggle;
 
         private Dictionary<NetworkId, Card> cards = new Dictionary<NetworkId, Card>();
-        private string lastFrameSearch;
+        private string lastFrameSearch = string.Empty;
+
+        [Header("Energy Toggles")]
+        public Toggle FightingToggle;
+        public Toggle WaterToggle;
+        public Toggle FireToggle;
+        public Toggle GrassToggle;
+        public Toggle PsychicToggle;
+        public Toggle ElectricToggle;
+        public Toggle ColorlessToggle;
+        public Toggle DarknessToggle;
+        public Toggle FairyToggle;
+        public Toggle DragonToggle;
+        public Toggle SteelToggle;
 
         private void Start()
         {
@@ -42,7 +55,47 @@ namespace Assets.Code.UI.DeckBuilder
                 }
                 else if (deckCard.card is PokemonCard)
                 {
-                    deckCard.gameObject.SetActive(pokemonToggle.isOn);
+                    bool shouldShow = pokemonToggle.isOn;
+
+                    switch (((PokemonCard)deckCard.card).Type)
+                    {
+                        case Entities.EnergyTypes.Colorless:
+                            shouldShow = ColorlessToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Water:
+                            shouldShow = WaterToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Fire:
+                            shouldShow = FireToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Grass:
+                            shouldShow = GrassToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Electric:
+                            shouldShow = ElectricToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Psychic:
+                            shouldShow = PsychicToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Fighting:
+                            shouldShow = FightingToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Darkness:
+                            shouldShow = DarknessToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Steel:
+                            shouldShow = SteelToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Fairy:
+                            shouldShow = FairyToggle.isOn;
+                            break;
+                        case Entities.EnergyTypes.Dragon:
+                            shouldShow = DragonToggle.isOn;
+                            break;
+                        default:
+                            break;
+                    }
+                    deckCard.gameObject.SetActive(shouldShow);
                 }
                 else if (deckCard.card is TrainerCard)
                 {
