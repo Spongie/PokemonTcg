@@ -8,5 +8,6 @@
         }
 
         public GameField Game { get; set; }
+        public string Info { get; set; }
     }
 }

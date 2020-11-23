@@ -711,11 +711,17 @@ namespace Assets.Code
                     return;
                 }
 
+                foreach (var selectedCard in selectedCards)
+                {
+                    GetCardRendererById(selectedCard.Id).SetSelected(false);
+                }
+
                 var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(myId);
                 message.ResponseTo = NetworkManager.Instance.RespondingTo;
                 NetworkManager.Instance.Me.Send(message);
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
+                selectedCards.Clear();
             }
 
             NetworkManager.Instance.RespondingTo = null;
@@ -765,28 +771,6 @@ namespace Assets.Code
 
         private void SetInfoAndEnableButtons()
         {
-            switch (gameField.GameState)
-            {
-                case GameFieldState.WaitingForConnection:
-                    infoText.text = "Waiting for opponent to connect";
-                    break;
-                case GameFieldState.WaitingForRegistration:
-                    infoText.text = "Waiting for opponent to register";
-                    break;
-                case GameFieldState.BothSelectingActive:
-                    infoText.text = "Select your active pokemon";
-                    break;
-                case GameFieldState.BothSelectingBench:
-                    infoText.text = "Select pokemon to add to your bench";
-                    break;
-                case GameFieldState.InTurn:
-                    infoText.text = IsMyTurn ? "Your turn!" : "Opponents turn!";
-                    break;
-                default:
-                    infoText.text = string.Empty;
-                    break;
-            }
-
             if (gameField.GameState == GameFieldState.BothSelectingBench)
             {
                 doneButton.SetActive(true);
@@ -795,7 +779,7 @@ namespace Assets.Code
             endTurnButton.SetActive(IsMyTurn);
         }
 
-        public void OnInfoUpdated(GameFieldInfo gameInfo)
+        public void OnInfoUpdated(GameFieldInfo gameInfo, string textInfo)
         {
             OpponentPlayer.DiscardPile = gameInfo.Opponent.CardsInDiscard;
             OpponentPlayer.PrizeCards = gameInfo.Opponent.PrizeCards;
@@ -822,6 +806,15 @@ namespace Assets.Code
             IsMyTurn = gameInfo.ActivePlayer.Equals(myId);
             CurrentGameState = gameInfo.CurrentState;
             gameField.GameState = CurrentGameState;
+
+            if (!string.IsNullOrWhiteSpace(textInfo))
+            {
+                infoText.text = textInfo;
+            }
+            else
+            {
+                infoText.text = IsMyTurn ? "Your Turn!" : "Opponents turn";
+            }
 
             SetInfoAndEnableButtons();
         }

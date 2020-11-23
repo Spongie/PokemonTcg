@@ -162,7 +162,12 @@ namespace TCGCards.Core
                     if (Players.All(p => p.ActivePokemonCard != null))
                     {
                         GameState = GameFieldState.BothSelectingBench;
-                        SendEventToPlayers(new GameSyncEvent { Game = this });
+                        SendEventToPlayers(new GameSyncEvent { Game = this, Info = "Select Pokémons to add to your starting bench" });
+                        return;
+                    }
+                    else
+                    {
+                        PushInfoToPlayer("Opponent is selecting active...", owner);
                     }
 
                     SendEventMessage(new GameSyncEvent { Game = this }, Players.First(x => x.Id.Equals(ownerId)));
@@ -228,6 +233,10 @@ namespace TCGCards.Core
                         Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
                         GameState = GameFieldState.InTurn;
                         SendEventToPlayers(new GameSyncEvent { Game = this });
+                    }
+                    else
+                    {
+                        SendEventMessage(new GameSyncEvent { Game = this, Info = "Opponent is still selecting Pokémons" }, Players.First(x => x.Id.Equals(owner.Id)));
                     }
                 }
             }
@@ -725,12 +734,14 @@ namespace TCGCards.Core
                 }
                 else
                 {
-                    ActivePlayer.SelectPriceCard(NonActivePlayer.ActivePokemonCard.PrizeCards);
+                    PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
+                    ActivePlayer.SelectPriceCard(NonActivePlayer.ActivePokemonCard.PrizeCards, this);
                 }
 
                 NonActivePlayer.KillActivePokemon();
                 if (NonActivePlayer.BenchedPokemon.Any())
                 {
+                    PushInfoToPlayer("Opponent is selecting a new active Pokémon", ActivePlayer);
                     NonActivePlayer.SelectActiveFromBench(this);
                 }
                 else
@@ -760,7 +771,9 @@ namespace TCGCards.Core
                 
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
-                    NonActivePlayer.SelectPriceCard(ActivePlayer.ActivePokemonCard.PrizeCards);
+                    PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
+                    NonActivePlayer.SelectPriceCard(ActivePlayer.ActivePokemonCard.PrizeCards, this);
+                    PushInfoToPlayer("Opponent is selecting a new active Pokémon", NonActivePlayer);
                     ActivePlayer.SelectActiveFromBench(this);
                 }
                 else
@@ -795,7 +808,7 @@ namespace TCGCards.Core
                 else
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
-                    ActivePlayer.SelectPriceCard(pokemon.PrizeCards);
+                    ActivePlayer.SelectPriceCard(pokemon.PrizeCards, this);
                 }
             }
 
@@ -823,7 +836,7 @@ namespace TCGCards.Core
                 else
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPriceCard(pokemon.PrizeCards);
+                    NonActivePlayer.SelectPriceCard(pokemon.PrizeCards, this);
                 }
             }
 
@@ -841,6 +854,11 @@ namespace TCGCards.Core
 
         public void EndTurn()
         {
+            if (GameState == GameFieldState.GameOver)
+            {
+                return;
+            }
+
             TemporaryPassiveAbilities.ForEach(x => x.TurnsLeft--);
             TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0 || !x.LimitedByTime).ToList();
 

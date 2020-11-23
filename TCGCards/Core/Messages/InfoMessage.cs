@@ -15,5 +15,13 @@ namespace TCGCards.Core.Messages
         }
 
         public string Info { get; set; }
+
+        public override NetworkMessage ToNetworkMessage(NetworkId senderId)
+        {
+            var message = base.ToNetworkMessage(senderId);
+            message.RequiresResponse = false;
+
+            return message;
+        }
     }
 }

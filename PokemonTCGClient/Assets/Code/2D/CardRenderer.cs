@@ -100,9 +100,12 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             pokemon = (PokemonCard)card;
         }
 
+
         this.card = card;
         SetZoomMode(zoomMode);
         
+        GameController.Instance.AddCard(this);
+
         if (card is PokemonCard)
         {
             var myRect = GetComponent<RectTransform>();
@@ -239,7 +242,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
                 effectPrefab = PsychicEffect;
                 break;
             case EnergyTypes.Fighting:
-                effectPrefab = FightingEffect;
+                effectPrefab = RockEffect;
                 break;
             case EnergyTypes.Darkness:
                 effectPrefab = DarknessEffect;
@@ -285,10 +288,18 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Instantiate(DeathEffect, EffectParent);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    Instantiate(RockEffect, EffectParent);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    Instantiate(FightingEffect, EffectParent);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    Instantiate(DeathEffect, EffectParent);
+        //}
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
         //    var numbers = new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };

@@ -24,11 +24,11 @@ namespace Assets.Code.UI.Events
         public PokemonDiedEventHandler PokemonDiedEventHandler;
 
         private Queue<TCGCards.Core.GameEvents.Event> eventQueue;
-        private TCGCards.Core.GameEvents.Event currentEvent;
+        public TCGCards.Core.GameEvents.Event currentEvent;
 
-        //public CardRenderer tempTarget;
-        //private EnergyCard energyCard;
-        //private PokemonCard pokemon;
+        public CardRenderer tempTarget;
+        private EnergyCard energyCard;
+        private PokemonCard pokemon;
 
         private void Awake()
         {
@@ -39,7 +39,7 @@ namespace Assets.Code.UI.Events
         private void Start()
         {
             //pokemon = new PokemonCard { IsRevealed = true, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/29_hires.png" };
-            //energyCard = new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Fire, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" };
+            ////energyCard = new EnergyCard { IsRevealed = true, EnergyType = Entities.EnergyTypes.Fire, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" };
             //tempTarget.SetCard(pokemon, ZoomMode.Center, true);
             //GameController.Instance.AddCard(tempTarget);
             //tempTarget.insertAttachedEnergy(new EnergyCard { EnergyType = Entities.EnergyTypes.Fire, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/98_hires.png" });
@@ -48,6 +48,12 @@ namespace Assets.Code.UI.Events
 
         private void Update()
         {
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    var x = new PokemonDiedEvent() { Pokemon = pokemon };
+            //    TriggerEvent(x);
+            //}
+
             if (currentEvent != null || eventQueue.Count == 0)
             {
                 return;
@@ -58,8 +64,15 @@ namespace Assets.Code.UI.Events
             TriggerEvent(nextInQueue);
         }
 
+        internal bool AnyEventPending()
+        {
+            return currentEvent != null || eventQueue.Count > 0;
+        }
+
         private void TriggerEvent(TCGCards.Core.GameEvents.Event gameEvent)
         {
+            currentEvent = gameEvent;
+
             switch (gameEvent.GameEvent)
             {
                 case GameEventType.TrainerCardPlayed:
@@ -143,7 +156,8 @@ namespace Assets.Code.UI.Events
             AttachedEnergyDiscardedEventHandler.gameObject.SetActive(false);
             PokemonDiedEventHandler.gameObject.SetActive(false);
 
-            GameController.Instance.OnInfoUpdated(currentEvent.GameField);
+            string info = currentEvent is GameSyncEvent ? ((GameSyncEvent)currentEvent).Info : "";
+            GameController.Instance.OnInfoUpdated(currentEvent.GameField, info);
             currentEvent = null;
         }
 

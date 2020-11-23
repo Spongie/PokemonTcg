@@ -23,7 +23,6 @@ namespace NetworkingCore
 
         public NetworkPlayer(TcpClient tcpClient)
         {
-            LastMessage = DateTime.Now;
             messageQueue = new ConcurrentQueue<NetworkMessage>();
             SpecificResponses = new ConcurrentDictionary<NetworkId, NetworkMessage>();
             SetTcpClient(tcpClient);
@@ -50,13 +49,6 @@ namespace NetworkingCore
         {
             while(writing)
             {
-                var minutesSinceLastMessage = (DateTime.Now - LastMessage).TotalMinutes;
-
-                if (minutesSinceLastMessage > 5)
-                {
-                    messageQueue.Enqueue(new NetworkMessage(MessageTypes.Ping, "", Id, NetworkId.Generate()));
-                }
-
                 if (!messageQueue.Any())
                 {
                     Thread.Sleep(50);
@@ -68,7 +60,6 @@ namespace NetworkingCore
                     if (messageQueue.TryDequeue(out NetworkMessage message))
                     {
                         message.Send(stream);
-                        LastMessage = DateTime.Now;
                     }
                 }
                 catch
@@ -83,15 +74,6 @@ namespace NetworkingCore
         {
             while(reading)
             {
-                var minutesSinceLastMessage = (DateTime.Now - LastMessage).TotalMinutes;
-
-                if (minutesSinceLastMessage > 15)
-                {
-                    Console.WriteLine("Disconnecting due to inactivity");
-                    Disconnect(false);
-                    return;
-                }
-
                 byte[] data;
                 using(var inputStream = new MemoryStream())
                 {
@@ -163,7 +145,6 @@ namespace NetworkingCore
                         }
                     }
 
-                    LastMessage = DateTime.Now;
                     inputStream.Write(data, 0, dataSize);
 
                     string input = Encoding.UTF8.GetString(inputStream.ToArray(), 0, (int)inputStream.Length);
@@ -240,6 +221,5 @@ namespace NetworkingCore
         public NetworkId Id { get; set; }
         public string Name { get; set; }
         public ConcurrentDictionary<NetworkId, NetworkMessage> SpecificResponses { get; private set; }
-        public DateTime LastMessage { get; set; }
     }
 }

@@ -160,6 +160,7 @@ namespace TCGCards
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
         public bool PlayedThisTurn { get; set; }
+        public bool ParalyzedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
         public bool IsBurned { get; set; }
         public bool IsPoisoned { get; set; }
@@ -199,7 +200,10 @@ namespace TCGCards
             PlayedThisTurn = false;
             EvolvedThisTurn = false;
 
-            IsParalyzed = false;
+            if (!ParalyzedThisTurn)
+            {
+                IsParalyzed = false;
+            }
 
             if (IsBurned)
             {
@@ -221,6 +225,8 @@ namespace TCGCards
             {
                 Ability.UsedTimes = 0;
             }
+            
+            ParalyzedThisTurn = false;
 
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
@@ -285,7 +291,7 @@ namespace TCGCards
 
         public override string GetName()
         {
-            return PokemonName;
+            return Name;
         }
 
         public PokemonCard Evolve(PokemonCard evolution)
@@ -293,7 +299,7 @@ namespace TCGCards
             ClearStatusEffects();
             evolution.SetBase(this);
             evolution.EvolvedFrom = this;
-            evolution.AttachedEnergy = AttachedEnergy;
+            evolution.AttachedEnergy = new List<EnergyCard>(AttachedEnergy);
             AttachedEnergy.Clear();
 
             return evolution;
@@ -343,7 +349,7 @@ namespace TCGCards
         
         public bool CanEvolveTo(PokemonCard evolution)
         {
-            return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
+            return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == Name;
         }
 
         public virtual void ApplyStatusEffect(StatusEffect statusEffect)
@@ -364,6 +370,7 @@ namespace TCGCards
                     IsPoisoned = true;
                     break;
                 case StatusEffect.Paralyze:
+                    ParalyzedThisTurn = true;
                     IsParalyzed = true;
                     break;
                 case StatusEffect.Burn:

@@ -84,6 +84,7 @@ namespace Assets.Code.UI.Events
 
                 if (isMyCards)
                 {
+                    GameController.Instance.Player.Hand.Add(card);
                     GameController.Instance.playerHand.AddCardToHand(card);
                 }
 

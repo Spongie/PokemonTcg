@@ -27,13 +27,6 @@ namespace Server
                 return;
             }
 
-            var clientsToDisconnect = Clients.Values.Where(x => (DateTime.Now - x.LastMessage).TotalMinutes > 15);
-
-            foreach (var client in clientsToDisconnect)
-            {
-                client.Disconnect(false);
-            }
-
             //Console.CursorTop = defaultConsoleTop;
 
             //Console.WriteLine("Active Connections: " + Clients.Count.ToString().PadLeft(5));

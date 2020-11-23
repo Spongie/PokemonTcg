@@ -330,7 +330,7 @@ namespace TCGCards.Core
             return Id != null && Deck != null;
         }
 
-        public void SelectPriceCard(int amount)
+        public void SelectPriceCard(int amount, GameField game)
         {
             if (amount <= 0)
             {
@@ -340,13 +340,17 @@ namespace TCGCards.Core
             var message = new SelectPriceCardsMessage(amount).ToNetworkMessage(NetworkId.Generate());
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
+            var cardsDrawn = new List<Card>();
 
             foreach (var cardId in response.Cards)
             {
                 var card = PrizeCards.First(x => x.Id.Equals(cardId));
                 PrizeCards.Remove(card);
                 Hand.Add(card);
+                cardsDrawn.Add(card);
             }
+
+            game.SendEventToPlayers(new DrawCardsEvent() { Cards = cardsDrawn, Amount = cardsDrawn.Count, Player = Id });
         }
 
         public void SelectActiveFromBench(GameField game)

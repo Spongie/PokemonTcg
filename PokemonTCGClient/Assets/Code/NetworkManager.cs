@@ -1,4 +1,5 @@
-﻿using NetworkingCore;
+﻿using Assets.Code.UI.Events;
+using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -72,7 +73,7 @@ namespace Assets.Code
             {
                 while (messagesToPrint.Count > 0)
                 {
-                    if (RespondingTo != null)
+                    if (RespondingTo != null || (GameEventHandler.Instance != null && GameEventHandler.Instance.AnyEventPending()))
                     {
                         break;
                     }

@@ -31,7 +31,7 @@ namespace Assets.Code.UI.Gameplay
 
                 if (GameController.Instance.Player?.ActivePokemonCard != null && GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
                 {
-                    foreach (var attack in ((PokemonCard)card).Attacks.Reverse<Attack>())
+                    foreach (var attack in pokemonCard.Attacks.Reverse())
                     {
                         var attackButton = Instantiate(AttackButtonPrefab, transform);
                         attackButton.GetComponent<AttackButton>().Init(attack);
@@ -48,11 +48,11 @@ namespace Assets.Code.UI.Gameplay
 
                 EvolveButton.SetActive(pokemonCard.Stage >= 1 && GameController.Instance.Player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
 
-                var ability = ((PokemonCard)card).Ability;
+                var ability = pokemonCard.Ability;
 
                 if (ability != null)
                 {
-                    ability.PokemonOwner = (PokemonCard)card; //Stupid fix because of serialize not assigning it?!
+                    ability.PokemonOwner = (PokemonCard)card; //maybe its fixed dont care...Stupid fix because of serialize not assigning it?!
                 }
 
                 if (ability != null && ability.TriggerType == TriggerType.Activation && ability.CanActivate())
@@ -80,6 +80,7 @@ namespace Assets.Code.UI.Gameplay
             gameObject.SetActive(false);
 
             ClearAttackButtons();
+            gameObject.SetActive(false);
         }
 
         public void CancelClick()

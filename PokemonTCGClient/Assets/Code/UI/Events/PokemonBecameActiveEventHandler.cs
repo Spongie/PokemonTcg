@@ -57,7 +57,7 @@ namespace Assets.Code.UI.Events
             var newActive = GameController.Instance.GetCardRendererById(activeEvent.NewActivePokemonId);
             ZoomMode oldZoom = newActive.GetZoomMode();
             NetworkId myId = GameController.Instance.myId;
-            var isMySwitch = newActive.card.Owner.Id.Equals(myId) || GameController.Instance.Player.BenchedPokemon.Any(x => x.Owner.Id.Equals(myId));
+            var isMySwitch = newActive.card.Owner.Id.Equals(myId);
             var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
             var benchParent = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
 
@@ -83,6 +83,10 @@ namespace Assets.Code.UI.Events
                     oldActive.tag = "Untagged";
                     GameEventHandler.Instance.EventCompleted();
                 });
+            }
+            else
+            {
+                GameEventHandler.Instance.EventCompleted();
             }
 
             Player switchingPlayer = isMySwitch ? GameController.Instance.Player : GameController.Instance.OpponentPlayer;
