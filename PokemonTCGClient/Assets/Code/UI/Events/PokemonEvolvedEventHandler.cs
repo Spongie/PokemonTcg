@@ -1,4 +1,5 @@
-﻿using TCGCards.Core.GameEvents;
+﻿using System.Collections;
+using TCGCards.Core.GameEvents;
 using UnityEngine;
 
 namespace Assets.Code.UI.Events
@@ -11,6 +12,12 @@ namespace Assets.Code.UI.Events
             var targetPokemon = GameController.Instance.GetCardRendererById(pokemonEvolvedEvent.TargetPokemonId);
             targetPokemon.SetCard(pokemonEvolvedEvent.NewPokemonCard, ZoomMode.Center, false);
             targetPokemon.SpawnEvolveEffect();
+            StartCoroutine(JustWaitForComplete());
+        }
+
+        IEnumerator JustWaitForComplete()
+        {
+            yield return new WaitForSeconds(1f);
             GameEventHandler.Instance.EventCompleted();
         }
     } 
