@@ -76,7 +76,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
         }
 
         var canvas = transform.parent.gameObject.GetComponent<Canvas>();
-        canvas.sortingOrder = 100;
+        canvas.sortingOrder = 500;
     }
 
     public void OnPointerExit(PointerEventData eventData)
