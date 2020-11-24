@@ -1,4 +1,5 @@
-﻿using TCGCards.Core.GameEvents;
+﻿using Assets.Code.UI.Gameplay;
+using TCGCards.Core.GameEvents;
 using UnityEngine;
 
 namespace Assets.Code.UI.Events
@@ -27,12 +28,14 @@ namespace Assets.Code.UI.Events
             var oldSortorder = canvas.sortingOrder;
             canvas.sortingOrder = 9999;
 
+            var targetPosition = targetParent.GetComponent<CardZone>().GetNextChildPosition();
+
             rectTransform.localScale = new Vector3(2, 2, 1);
             rectTransform.localPosition = new Vector3(-50, 270, 0);
             spawnedObject.tag = "Ignore";
             rectTransform.transform.SetParent(targetParent.transform);
 
-            rectTransform.LeanMoveLocal(new Vector3(900, 0, 0), 0.5f).setDelay(0.5f);
+            rectTransform.LeanMoveLocal(targetPosition, 0.5f).setDelay(0.5f);
             rectTransform.LeanScale(new Vector3(1, 1, 1), 0.25f).setDelay(0.5f).setOnComplete(() =>
             {
                 spawnedObject.tag = "Untagged";

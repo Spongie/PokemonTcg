@@ -55,15 +55,18 @@ namespace NetworkingCore
                     continue;
                 }
 
+                NetworkMessage message;
+
                 try
                 {
-                    if (messageQueue.TryDequeue(out NetworkMessage message))
+                    if (messageQueue.TryDequeue(out message))
                     {
                         message.Send(stream);
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    Logger.Instance.Log(e.Message);
                     Disconnect(false);
                     return;
                 }
@@ -106,8 +109,9 @@ namespace NetworkingCore
 
                         receivedPrefixBytes = stream.Read(dataPrefix, 0, sizeof(int));
                     }
-                    catch
+                    catch (Exception e)
                     {
+                        Logger.Instance.Log(e.Message);
                         Disconnect(false);
                         return;
                     }
@@ -138,8 +142,9 @@ namespace NetworkingCore
                             bytesRemaining -= readBytes;
                             offset += readBytes;
                         }
-                        catch
+                        catch (Exception e)
                         {
+                            Logger.Instance.Log(e.Message);
                             Disconnect(false);
                             return;
                         }

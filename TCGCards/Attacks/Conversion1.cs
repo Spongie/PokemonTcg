@@ -11,6 +11,8 @@ namespace TCGCards.Attacks
             var response = owner.NetworkPlayer.SendAndWaitForResponse<SelectColorMessage>(message);
 
             opponent.ActivePokemonCard.Weakness = response.Color;
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

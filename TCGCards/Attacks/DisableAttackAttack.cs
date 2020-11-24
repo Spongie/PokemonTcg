@@ -20,6 +20,8 @@ namespace TCGCards.Attacks
 
             game.GameLog.AddMessage($"{owner.NetworkPlayer?.Name} disables attack {chosenAttack.Name}");
             opponent.ActivePokemonCard.Attacks.First(x => x.Id.Equals(chosenAttack.Id)).Disabled = true;
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

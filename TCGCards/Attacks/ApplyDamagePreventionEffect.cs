@@ -82,6 +82,8 @@ namespace TCGCards.Attacks
             {
                 game.DamageStoppers.Add(damageStopper);
             }
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

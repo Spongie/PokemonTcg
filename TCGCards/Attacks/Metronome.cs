@@ -29,6 +29,8 @@ namespace TCGCards.Attacks
         {
             chosenAttack.ProcessEffects(game, owner, opponent);
             chosenAttack = null;
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

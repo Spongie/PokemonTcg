@@ -67,7 +67,7 @@ namespace TCGCards.TrainerEffects
 
             if (amount == -1)
             {
-                target.Deck.ShuffleInCards(CardUtil.GetCardsOfType(target.Hand, CardType));
+                target.Deck.ShuffleInCards(CardUtil.GetCardsOfType(target.Hand, CardType).ToList());
                 target.Hand.Clear();
             }
             else

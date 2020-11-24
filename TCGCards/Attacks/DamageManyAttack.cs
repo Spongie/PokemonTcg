@@ -55,6 +55,8 @@ namespace TCGCards.Attacks
             {
                 pokemon.DealDamage(TeamBenchDamage, game, source);
             }
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

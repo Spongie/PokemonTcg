@@ -31,7 +31,7 @@ namespace TCGCards.Core
             Shuffle();
         }
 
-        public void ShuffleInCards(IEnumerable<Card> cards)
+        public void ShuffleInCards(List<Card> cards)
         {
             foreach (var card in cards)
             {

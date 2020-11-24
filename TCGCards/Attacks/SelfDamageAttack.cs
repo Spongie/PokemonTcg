@@ -43,6 +43,7 @@ namespace TCGCards.Attacks
             }
 
             owner.ActivePokemonCard.DealDamage(amount, game, owner.ActivePokemonCard);
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

@@ -26,6 +26,8 @@ namespace TCGCards.Attacks
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
             owner.DrawCards(Amount);
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

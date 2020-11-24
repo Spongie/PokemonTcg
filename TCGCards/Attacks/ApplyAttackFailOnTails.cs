@@ -12,6 +12,8 @@ namespace TCGCards.Attacks
             {
                 return CoinFlipper.FlipCoin() == CoinFlipper.TAILS;
             }));
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

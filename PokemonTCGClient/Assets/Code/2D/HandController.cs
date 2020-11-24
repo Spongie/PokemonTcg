@@ -35,6 +35,7 @@ namespace Assets.Code._2D
                 spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom, false);
                 index++;
                 idObjectCache.Add(card.Id, spawnedCard);
+                GameController.Instance.AddCard(spawnedCard.GetComponent<CardRenderer>());
             }
         }
 

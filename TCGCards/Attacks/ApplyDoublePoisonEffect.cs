@@ -9,6 +9,8 @@ namespace TCGCards.Attacks
         {
             opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect.Poison);
             opponent.ActivePokemonCard.DoublePoison = true;
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

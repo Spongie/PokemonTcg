@@ -26,6 +26,8 @@ namespace TCGCards.Attacks
             {
                 owner.ActivePokemonCard.DamageCounters = 0;
             }
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

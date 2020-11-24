@@ -61,6 +61,8 @@ namespace TCGCards.Attacks
             {
                 DealDamageToPlayersBench(owner, opponent.ActivePokemonCard.Type, game);
             }
+
+            base.ProcessEffects(game, owner, opponent);
         }
 
         private void DealDamageToPlayersBench(Player target, EnergyTypes targetType, GameField game)

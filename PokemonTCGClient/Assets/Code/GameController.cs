@@ -253,6 +253,15 @@ namespace Assets.Code
         private void ToggleCardSelected(CardRenderer clickedCard)
         {
             clickedCard.SetSelected(!clickedCard.isSelected);
+
+            if (clickedCard.isSelected)
+            {
+                selectedCards.Add(clickedCard.card);
+            }
+            else
+            {
+                selectedCards.Remove(clickedCard.card);
+            }
         }
 
         private void SelectedBenchedPokemonForEnergy(CardRenderer selectedCard)
@@ -716,9 +725,8 @@ namespace Assets.Code
                     GetCardRendererById(selectedCard.Id).SetSelected(false);
                 }
 
-                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList()).ToNetworkMessage(myId);
-                message.ResponseTo = NetworkManager.Instance.RespondingTo;
-                NetworkManager.Instance.Me.Send(message);
+                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList());
+                NetworkManager.Instance.SendToServer(message, true);
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
                 selectedCards.Clear();

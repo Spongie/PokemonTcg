@@ -12,6 +12,8 @@ namespace TCGCards.Attacks
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
             owner.ActivePokemonCard.TemporaryAbilities.Add(new DestinyBondAbilty(owner.ActivePokemonCard));
+
+            base.ProcessEffects(game, owner, opponent);
         }
 
         private class DestinyBondAbilty : TemporaryAbility

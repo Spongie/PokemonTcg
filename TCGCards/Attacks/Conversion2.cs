@@ -11,6 +11,8 @@ namespace TCGCards.Attacks
             var response = owner.NetworkPlayer.SendAndWaitForResponse<SelectColorMessage>(message);
 
             owner.ActivePokemonCard.Resistance = response.Color;
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

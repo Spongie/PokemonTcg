@@ -30,6 +30,8 @@ namespace TCGCards.Attacks
             {
                 opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect);
             }
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }

@@ -57,6 +57,12 @@ namespace Assets.Code
             playerService = new AsyncPlayerService(networkPlayer);
 
             networkPlayer.DataReceived += NetworkPlayer_DataReceived;
+            networkPlayer.OnDisconnected += NetworkPlayer_OnDisconnected;
+        }
+
+        private void NetworkPlayer_OnDisconnected(object sender, NetworkId e)
+        {
+            Debug.LogError("Disconnected");
         }
 
         private void NetworkPlayer_DataReceived(object sender, NetworkDataRecievedEventArgs e)

@@ -46,6 +46,8 @@ namespace TCGCards.Attacks
             {
                 owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => true));
             }
+
+            base.ProcessEffects(game, owner, opponent);
         }
     }
 }
