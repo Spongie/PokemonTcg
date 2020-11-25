@@ -1176,9 +1176,9 @@
       {
         "$id": "167",
         "$type": "TCGCards.TrainerEffects.DrawCardsDependingOnFlip, TCGCards",
-        "EffectType": "Draw cards depending on flip",
         "AmountIfTails": 1,
-        "AmountIfHeads": 8
+        "AmountIfHeads": 8,
+        "EffectType": "Draw cards depending on flip"
       }
     ],
     "CardId": {
