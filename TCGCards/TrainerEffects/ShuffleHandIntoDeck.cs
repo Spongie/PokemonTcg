@@ -1,7 +1,9 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
@@ -67,6 +69,12 @@ namespace TCGCards.TrainerEffects
 
             if (amount == -1)
             {
+                game.SendEventToPlayers(new CardsDiscardedEvent()
+                {
+                    Cards = new List<Card>(target.Hand),
+                    Player = target.Id
+                });
+
                 target.Deck.ShuffleInCards(CardUtil.GetCardsOfType(target.Hand, CardType).ToList());
                 target.Hand.Clear();
             }
@@ -83,6 +91,12 @@ namespace TCGCards.TrainerEffects
                 }
 
                 target.Deck.ShuffleInCards(cards);
+
+                game.SendEventToPlayers(new CardsDiscardedEvent()
+                {
+                    Cards = new List<Card>(cards),
+                    Player = target.Id
+                });
             }
         }
     }

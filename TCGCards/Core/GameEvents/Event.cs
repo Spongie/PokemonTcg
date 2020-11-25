@@ -22,6 +22,7 @@
         EnergyCardDiscarded,
         PokemonDied,
         SyncGame,
-        GameInfo
+        GameInfo,
+        PokemonBounced
     }
 }

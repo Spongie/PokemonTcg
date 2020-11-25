@@ -18,6 +18,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public static PokemonCard pokemon;
 
     public GameObject AttachedCardPrefab;
+
     public Image art;
     public Card card;
     public bool isActivePokemon;
@@ -63,6 +64,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject Abilityeffect;
     public GameObject EvolveEffect;
     public GameObject DeathEffect;
+    public GameObject BounceEffect;
 
     void Awake()
     {
@@ -217,6 +219,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         Instantiate(DeathEffect, EffectParent);
     }
 
+    internal void SpawnBounceEffect()
+    {
+        Instantiate(BounceEffect, EffectParent);
+    }
+
     internal void SpawnDamageEffect(EnergyTypes damageType)
     {
         GameObject effectPrefab;
@@ -290,7 +297,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         //if (Input.GetKeyDown(KeyCode.Alpha1))
         //{
-        //    Instantiate(RockEffect, EffectParent);
+        //    Instantiate(BounceEffect, EffectParent);
         //}
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //{

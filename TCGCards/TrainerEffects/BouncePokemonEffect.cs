@@ -1,7 +1,9 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.GameEvents;
 
 namespace TCGCards.TrainerEffects
 {
@@ -185,30 +187,37 @@ namespace TCGCards.TrainerEffects
 
         private void ReturnCardsToHand(PokemonCard target, GameField game)
         {
+            var cardsDiscarded = new List<Card>();
+            var cardsDrawn = new List<Card>();
+
             foreach (var card in target.AttachedEnergy)
             {
                 if (ReturnAttachedToHand)
                 {
                     target.Owner.Hand.Add(card);
+                    cardsDrawn.Add(card);
                 }
                 else
                 {
                     target.Owner.DiscardPile.Add(card);
+                    cardsDiscarded.Add(card);
                 }
             }
             target.AttachedEnergy.Clear();
 
             var evolution2 = target;
-
+            
             while (evolution2.EvolvedFrom != null)
             {
                 if (ReturnAttachedToHand)
                 {
                     target.Owner.Hand.Add(evolution2.EvolvedFrom);
+                    cardsDrawn.Add(evolution2.EvolvedFrom);
                 }
                 else
                 {
                     target.Owner.DiscardPile.Add(evolution2.EvolvedFrom);
+                    cardsDiscarded.Add(evolution2.EvolvedFrom);
                 }
 
                 evolution2 = evolution2.EvolvedFrom;
@@ -216,16 +225,23 @@ namespace TCGCards.TrainerEffects
             }
 
             target.Owner.Hand.Add(target);
+            cardsDrawn.Add(target);
 
+            game?.SendEventToPlayers(new CardsDiscardedEvent() { Player = target.Owner.Id, Cards = cardsDrawn });
+            
             if (target == target.Owner.ActivePokemonCard)
             {
                 target.Owner.ActivePokemonCard = null;
+                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.SelectActiveFromBench(game);
             }
             else
             {
+                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.BenchedPokemon.Remove(target);
             }
+
+            game?.SendEventToPlayers(new DrawCardsEvent() { Player = target.Owner.Id, Amount = cardsDrawn.Count, Cards = cardsDrawn });
         }
 
         private static void ShuffleCardsIntoDeck(PokemonCard target, GameField game)
@@ -252,10 +268,12 @@ namespace TCGCards.TrainerEffects
             if (target == target.Owner.ActivePokemonCard)
             {
                 target.Owner.ActivePokemonCard = null;
+                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.SelectActiveFromBench(game);
             }
             else
             {
+                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.BenchedPokemon.Remove(target);
             }
         }

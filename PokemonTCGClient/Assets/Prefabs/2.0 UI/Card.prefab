@@ -815,6 +815,7 @@ MonoBehaviour:
     type: 3}
   EvolveEffect: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
   DeathEffect: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  BounceEffect: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
 --- !u!1 &4089488601737517948
 GameObject:
   m_ObjectHideFlags: 0

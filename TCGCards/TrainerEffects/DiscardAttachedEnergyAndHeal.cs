@@ -76,7 +76,10 @@ namespace TCGCards.TrainerEffects
 
                 if (target.AttachedEnergy.Count == AmountToDiscard)
                 {
-                    target.Owner.DiscardPile.AddRange(target.AttachedEnergy);
+                    for (int i = 0; i < AmountToDiscard; i++)
+                    {
+                        target.DiscardEnergyCard(target.AttachedEnergy[0], game);
+                    }
                     target.AttachedEnergy.Clear();
                 }
                 else
