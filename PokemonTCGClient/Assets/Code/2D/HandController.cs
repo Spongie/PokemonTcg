@@ -45,6 +45,7 @@ namespace Assets.Code._2D
             var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
             spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom, false);
             idObjectCache.Add(card.Id, spawnedCard);
+            GameController.Instance.AddCard(spawnedCard.GetComponent<CardRenderer>());
         }
 
         public void FadeOutCards(IEnumerable<Card> cards)

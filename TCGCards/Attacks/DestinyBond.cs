@@ -26,7 +26,7 @@ namespace TCGCards.Attacks
             protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
             {
                 game.GameLog?.AddMessage($"{PokemonOwner.KnockedOutBy.GetName()} knocked out {PokemonOwner.Name} and dies itself");
-                PokemonOwner.KnockedOutBy.DamageCounters = 9000;
+                PokemonOwner.KnockedOutBy.DealDamage(9000, game, PokemonOwner, false);
             }
         }
     }

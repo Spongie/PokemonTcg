@@ -44,7 +44,7 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            var source = game.ActivePlayer.ActivePokemonCard;
+            var source = game?.ActivePlayer.ActivePokemonCard;
 
             owner.ActivePokemonCard.DealDamage(SelfDamage, game, source, false);
             foreach (var pokemon in opponent.BenchedPokemon)

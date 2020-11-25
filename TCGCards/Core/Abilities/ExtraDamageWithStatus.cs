@@ -43,7 +43,14 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            ((PokemonCard)target).DealDamage(new Damage(Amount), game, PokemonOwner);
+            if (target != null)
+            {
+                ((PokemonCard)target).DealDamage(new Damage(Amount), game, PokemonOwner);
+            }
+            else
+            {
+                opponent.ActivePokemonCard.DealDamage(new Damage(Amount), game, PokemonOwner);
+            }
         }
 
         public override bool CanActivate()

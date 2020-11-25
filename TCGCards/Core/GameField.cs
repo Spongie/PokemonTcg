@@ -198,10 +198,9 @@ namespace TCGCards.Core
                 return;
             }
 
-            foreach (Ability ability in NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).Where(ability => ability?.TriggerType == TriggerType.OpponentRetreats))
+            foreach (var pokemon in NonActivePlayer.GetAllPokemonCards())
             {
-                GameLog.AddMessage($"Ability {ability.Name} triggers becasue of retreat");
-                ability.Trigger(NonActivePlayer, ActivePlayer, 0, this);
+                TriggerAbilityOfType(TriggerType.OpponentRetreats, pokemon);
             }
             
             ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy, this);
@@ -460,14 +459,20 @@ namespace TCGCards.Core
 
             SendEventToPlayers(new PokemonAttackedEvent() { Player = ActivePlayer.Id });
 
-            if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacks)
+            TriggerAbilityOfType(TriggerType.Attacks, ActivePlayer.ActivePokemonCard);
+            TriggerAbilityOfType(TriggerType.Attacked, NonActivePlayer.ActivePokemonCard);
+
+            var abilities = new List<Ability>();
+            abilities.AddRange(NonActivePlayer.ActivePokemonCard.TemporaryAbilities);
+
+            if (NonActivePlayer.ActivePokemonCard.Ability != null)
             {
-                GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.Ability.Name} is triggered by the attack");
-                ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
+                abilities.Add(NonActivePlayer.ActivePokemonCard.Ability);
             }
-            else if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Attacked)
+
+            foreach (var ability in abilities.OfType<AttackStopperAbility>())
             {
-                if (NonActivePlayer.ActivePokemonCard.Ability.CanActivate() && NonActivePlayer.ActivePokemonCard.Ability is AttackStopperAbility && FlipCoins(1) == 1)
+                if (ability.IsStopped(this))
                 {
                     return;
                 }
@@ -484,7 +489,7 @@ namespace TCGCards.Core
             }
 
             DealDamageWithAttack(attack);
-            
+
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
             if (!IgnorePostAttack)
@@ -511,17 +516,10 @@ namespace TCGCards.Core
             var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, this, ActivePlayer.ActivePokemonCard, true);
             attack.OnDamageDealt(dealtDamage, ActivePlayer);
 
-            if (NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.TakesDamage && !damage.IsZero())
+            if (!damage.IsZero()) 
             {
-                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by taking damage");
-                NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, this);
-            }
-            if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage && !damage.IsZero())
-            {
-                GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by dealing damage");
-                ActivePlayer.ActivePokemonCard.Ability.SetTarget(NonActivePlayer.ActivePokemonCard);
-                ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, damage.NormalDamage + damage.DamageWithoutResistAndWeakness, this);
-                ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
+                TriggerAbilityOfType(TriggerType.TakesDamage, NonActivePlayer.ActivePokemonCard, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
+                TriggerAbilityOfType(TriggerType.DealsDamage, ActivePlayer.ActivePokemonCard, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
             }
         }
 
@@ -594,10 +592,7 @@ namespace TCGCards.Core
         {
             ActivePlayer.PlayCard(pokemon);
 
-            if(pokemon.Ability?.TriggerType == TriggerType.EnterPlay)
-            {
-                pokemon.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
-            }
+            TriggerAbilityOfType(TriggerType.EnterPlay, pokemon);
         }
 
         public void PlayTrainerCard(TrainerCard trainerCard)
@@ -711,10 +706,8 @@ namespace TCGCards.Core
                     Pokemon = NonActivePlayer.ActivePokemonCard
                 });
 
-                if(NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
-                    NonActivePlayer.ActivePokemonCard.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, this);
-                if(ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Kills)
-                    ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
+                TriggerAbilityOfType(TriggerType.Dies, NonActivePlayer.ActivePokemonCard);
+                TriggerAbilityOfType(TriggerType.Kills, ActivePlayer.ActivePokemonCard);
 
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
 
@@ -763,8 +756,7 @@ namespace TCGCards.Core
                     Pokemon = ActivePlayer.ActivePokemonCard
                 });
 
-                if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.Dies)
-                    ActivePlayer.ActivePokemonCard.Ability?.Trigger(ActivePlayer, NonActivePlayer, 0, this);
+                TriggerAbilityOfType(TriggerType.Dies, ActivePlayer.ActivePokemonCard);
 
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 ActivePlayer.KillActivePokemon();
@@ -796,8 +788,7 @@ namespace TCGCards.Core
                     Pokemon = pokemon
                 });
 
-                if (pokemon.Ability?.TriggerType == TriggerType.Dies)
-                    pokemon.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, this);
+                TriggerAbilityOfType(TriggerType.Dies, pokemon);
                 
                 if (ActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
                 {
@@ -824,8 +815,7 @@ namespace TCGCards.Core
                     Pokemon = pokemon
                 });
 
-                if (pokemon.Ability?.TriggerType == TriggerType.Dies)
-                    pokemon.Ability?.Trigger(NonActivePlayer, ActivePlayer, 0, this);
+                TriggerAbilityOfType(TriggerType.Dies, pokemon);
 
                 if (NonActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
                 {
@@ -841,6 +831,31 @@ namespace TCGCards.Core
             }
 
             PushGameLogUpdatesToPlayers();
+        }
+
+        public void TriggerAbilityOfType(TriggerType triggerType, PokemonCard pokemon, int damage = 0)
+        {
+            var abilities = new List<Ability>();
+            abilities.AddRange(pokemon.TemporaryAbilities);
+
+            if (pokemon.Ability != null)
+            {
+                abilities.Add(pokemon.Ability);
+            }
+
+            foreach (var ability in abilities)
+            {
+                if (ability is AttackStopperAbility)
+                {
+                    continue;
+                }
+
+                if (ability.TriggerType == triggerType && ability.CanActivate())
+                {
+                    GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers..."); ;
+                    ability.Trigger(pokemon.Owner, Players.First(x => !x.Id.Equals(pokemon.Owner.Id)), damage, this);
+                }
+            }
         }
 
         private void EndGame(NetworkId winner)

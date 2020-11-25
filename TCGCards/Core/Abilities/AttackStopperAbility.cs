@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardEditor.Views;
+using System;
 
 namespace TCGCards.Core.Abilities
 {
@@ -14,9 +15,28 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.Attacked;
         }
 
+        private bool coinFlip;
+
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             
+        }
+
+        public bool IsStopped(GameField game)
+        {
+            return CoinFlip && game.FlipCoins(1) == 1;
         }
     }
 }
