@@ -74,18 +74,34 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
+            Player selectedPlayer = opponentChooses ? opponent : caster;
             NetworkMessage message;
 
-            if (opponents)
+            if (selectedPlayer == caster)
             {
-                message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                if (opponents)
+                {
+                    message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                }
+                else
+                {
+                    message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
+                }
             }
             else
             {
-                message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
+                if (opponents)
+                {
+                    message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
+                }
+                else
+                {
+                    message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                }
             }
+            
 
-            Player selectedPlayer = opponentChooses ? opponent : caster;
+            
             NetworkId selectedId = selectedPlayer.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
 
             var targetPlayer = opponents ? opponent : caster;
