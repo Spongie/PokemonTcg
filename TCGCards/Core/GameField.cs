@@ -161,9 +161,17 @@ namespace TCGCards.Core
                     }
                     if (Players.All(p => p.ActivePokemonCard != null))
                     {
-                        GameState = GameFieldState.BothSelectingBench;
-                        SendEventToPlayers(new GameSyncEvent { Game = this, Info = "Select Pokémons to add to your starting bench" });
-                        return;
+                        if (playersSetStartBench.Count == 2)
+                        {
+                            Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
+                            GameState = GameFieldState.InTurn;
+                            SendEventToPlayers(new GameSyncEvent { Game = this });
+                        }
+                        {
+                            GameState = GameFieldState.BothSelectingBench;
+                            SendEventToPlayers(new GameSyncEvent { Game = this, Info = "Select Pokémons to add to your starting bench" });
+                            return;
+                        }
                     }
                     else
                     {
@@ -758,13 +766,14 @@ namespace TCGCards.Core
 
                 TriggerAbilityOfType(TriggerType.Dies, ActivePlayer.ActivePokemonCard);
 
+                var prizeCardValue = ActivePlayer.ActivePokemonCard.PrizeCards;
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 ActivePlayer.KillActivePokemon();
                 
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPriceCard(ActivePlayer.ActivePokemonCard.PrizeCards, this);
+                    NonActivePlayer.SelectPriceCard(prizeCardValue, this);
                     PushInfoToPlayer("Opponent is selecting a new active Pokémon", NonActivePlayer);
                     ActivePlayer.SelectActiveFromBench(this);
                 }
