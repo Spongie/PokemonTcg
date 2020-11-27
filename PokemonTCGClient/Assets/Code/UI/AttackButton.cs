@@ -39,7 +39,7 @@ namespace Assets.Code.UI
         {
             NetworkManager.Instance.gameService.Attack(GameController.Instance.gameField.Id, attack.Id);
             transform.parent.gameObject.GetComponent<CardPopupHandler>().ClearAttackButtons();
-            transform.gameObject.SetActive(false);
+            transform.parent.gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

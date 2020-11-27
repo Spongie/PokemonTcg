@@ -12,6 +12,7 @@ using TMPro;
 using Assets.Code._2D;
 using Entities;
 using System;
+using System.Collections.ObjectModel;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -66,9 +67,9 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject DeathEffect;
     public GameObject BounceEffect;
 
-    void Awake()
+    void Start()
     {
-        //SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png" }, ZoomMode.Center, true);
+        //SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png", Attacks = new ObservableCollection<Attack> { new Attack() { Name = "Attacken"} } }, ZoomMode.Center, true);
         //GameController.Instance.AddCard(this);
         //SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
     }

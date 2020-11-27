@@ -489,6 +489,7 @@ namespace Assets.Code
 
         private void OnStartPickPrize(object message, NetworkId messageId)
         {
+            infoText.text = "Select 1 prize card";
             SpecialState = SpecialGameState.SelectingPrize;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init((SelectPriceCardsMessage)message, Player.PrizeCards);
