@@ -18998,7 +18998,7 @@
         "Cost": [
           {
             "$id": "1694",
-            "EnergyType": 6,
+            "EnergyType": 7,
             "Amount": 3
           }
         ],
@@ -19096,7 +19096,7 @@
         "Cost": [
           {
             "$id": "1703",
-            "EnergyType": 6,
+            "EnergyType": 7,
             "Amount": 3
           }
         ],
