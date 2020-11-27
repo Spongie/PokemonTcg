@@ -707,6 +707,11 @@ namespace Assets.Code
                     return;
                 }
 
+                foreach (var selectedCard in selectedCards)
+                {
+                    GetCardRendererById(selectedCard.Id).SetSelected(false);
+                }
+
                 var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList());
                 NetworkManager.Instance.SendToServer(message, true);
                 SpecialState = SpecialGameState.None;

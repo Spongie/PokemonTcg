@@ -54,8 +54,8 @@ namespace CardEditor
         private static NetworkPlayer CreateConnection()
         {
             var tcp = new TcpClient();
-            //tcp.Connect("85.90.244.171", 8080);
-            tcp.Connect("127.0.0.1", 8080);
+            tcp.Connect("85.90.244.171", 8080);
+            //tcp.Connect("127.0.0.1", 8080);
             var player = new NetworkPlayer(tcp);
 
             while (player.Id == null) { }

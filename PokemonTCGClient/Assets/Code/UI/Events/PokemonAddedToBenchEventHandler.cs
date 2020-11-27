@@ -39,7 +39,7 @@ namespace Assets.Code.UI.Events
             rectTransform.LeanScale(new Vector3(1, 1, 1), 0.25f).setDelay(0.5f).setOnComplete(() =>
             {
                 spawnedObject.tag = "Untagged";
-                canvas.sortingOrder = oldSortorder;
+                canvas.sortingOrder = 10;
                 GameEventHandler.Instance.EventCompleted();
             });
         }

@@ -30,7 +30,7 @@ namespace Assets.Code.UI.MainMenu
             deckDropDown.options.Clear();
             var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
 
-            foreach (var file in Directory.GetFiles(directory).Where(f => !f.EndsWith(".meta")))
+            foreach (var file in Directory.GetFiles(directory).Where(f => f.EndsWith(Deck.deckExtension)))
             {
                 deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty)));
             }
