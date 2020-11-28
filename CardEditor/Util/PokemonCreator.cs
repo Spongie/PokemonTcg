@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards;
-using TCGCards.Core;
-using TCGCards.TrainerEffects;
 
 namespace CardEditor.Util
 {
@@ -133,7 +131,7 @@ namespace CardEditor.Util
 					return EnergyTypes.Fighting;
 				case "Lightning":
 					return EnergyTypes.Electric;
-				case "":
+				case string.Empty:
 				case "none":
 				case null:
 					return EnergyTypes.None;
