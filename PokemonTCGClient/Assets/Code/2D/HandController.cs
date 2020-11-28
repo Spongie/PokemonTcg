@@ -1,4 +1,5 @@
 ﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
@@ -37,6 +38,16 @@ namespace Assets.Code._2D
                 idObjectCache.Add(card.Id, spawnedCard);
                 GameController.Instance.AddCard(spawnedCard.GetComponent<CardRenderer>());
             }
+        }
+
+        internal void RemoveCardById(NetworkId pokemonId)
+        {
+            if (!idObjectCache.ContainsKey(pokemonId))
+            {
+                return;
+            }
+
+            Destroy(idObjectCache[pokemonId]);
         }
 
         public void AddCardToHand(Card card)

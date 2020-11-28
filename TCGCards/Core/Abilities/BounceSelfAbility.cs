@@ -1,4 +1,6 @@
 ﻿using CardEditor.Views;
+using System.Collections.Generic;
+using TCGCards.Core.GameEvents;
 
 namespace TCGCards.Core.Abilities
 {
@@ -41,9 +43,12 @@ namespace TCGCards.Core.Abilities
                 if (BounceAttachedCards)
                 {
                     owner.Hand.Add(PokemonOwner);
+                    game.SendEventToPlayers(new AttachedEnergyDiscardedEvent { DiscardedCard = card, FromPokemonId = PokemonOwner.Id });
+                    game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = owner.Id, Cards = new List<Card> { card } });
                 }
                 else
                 {
+                    game.SendEventToPlayers(new AttachedEnergyDiscardedEvent { DiscardedCard = card, FromPokemonId = PokemonOwner.Id });
                     owner.DiscardPile.Add(card);
                 }
             }
@@ -59,6 +64,7 @@ namespace TCGCards.Core.Abilities
             else
             {
                 owner.BenchedPokemon.Remove(PokemonOwner);
+                game?.SendEventToPlayers(new PokemonRemovedFromBench { PokemonId = target.Id });
             }
         }
     }

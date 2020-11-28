@@ -55,7 +55,7 @@ namespace TCGCards.Core.Abilities
                 }
                 else if (pokemon.Id.Equals(target))
                 {
-                    pokemon.DamageCounters += Amount;
+                    pokemon.DealDamage(Amount, game, PokemonOwner, false);
                 }
             }
         }

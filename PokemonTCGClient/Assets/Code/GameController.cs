@@ -459,8 +459,11 @@ namespace Assets.Code
 
         private void OnDeckSearch(object message, NetworkId messageId)
         {
+            var deckSearch = (DeckSearchMessage)message;
+            minSelectedCardCount = deckSearch.CardCount;
+            SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
-            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((DeckSearchMessage)message);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init(deckSearch);
         }
 
         private void OnStartAttachingEnergyBench(object message, NetworkId messageId)
@@ -699,6 +702,13 @@ namespace Assets.Code
                 NetworkManager.Instance.gameService.AddToBench(gameField.Id, myId, selectedCards.OfType<PokemonCard>().Select(card => card.Id).ToList());
                 selectedCards.Clear();
             }
+            else if (SpecialState == SpecialGameState.SelectingFromList)
+            {
+                var message = new CardListMessage(selectedCards.Select(card => card.Id).ToList());
+                NetworkManager.Instance.SendToServer(message, true);
+                SpecialState = SpecialGameState.None;
+                infoText.text = string.Empty;
+            }
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon || 
                 SpecialState == SpecialGameState.SelectPokemonMatchingFilter)
             {
@@ -774,7 +784,6 @@ namespace Assets.Code
             Player opponent = gameField.Players.First(p => !p.Id.Equals(myId));
 
             playerHand.SetHand(me.Hand);
-            cardRenderers.Clear();
 
             SetActivePokemon(playerActivePokemon, me.ActivePokemonCard, ZoomMode.Center);
             SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard, ZoomMode.FromTop);

@@ -36,7 +36,7 @@ namespace Assets.Code.UI.Events
             rectTransform.transform.SetParent(targetParent.transform);
 
             rectTransform.LeanMoveLocal(targetPosition, 0.5f).setDelay(0.5f);
-            rectTransform.LeanScale(new Vector3(1, 1, 1), 0.25f).setDelay(0.5f).setOnComplete(() =>
+            rectTransform.LeanScale(new Vector3(1, 1, 1), 0.25f).setDelay(0.55f).setOnComplete(() =>
             {
                 spawnedObject.tag = "Untagged";
                 canvas.sortingOrder = 10;

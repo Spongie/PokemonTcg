@@ -21,7 +21,7 @@ namespace TCGCards.Core.Deckfilters
 
         public bool IsCardValid(Card card)
         {
-            bool valid = false;
+            bool valid = true;
             var pokemon = card as PokemonCard;
 
             if (pokemon == null)

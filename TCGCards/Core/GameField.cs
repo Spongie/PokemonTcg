@@ -167,6 +167,7 @@ namespace TCGCards.Core
                             GameState = GameFieldState.InTurn;
                             SendEventToPlayers(new GameSyncEvent { Game = this });
                         }
+                        else
                         {
                             GameState = GameFieldState.BothSelectingBench;
                             SendEventToPlayers(new GameSyncEvent { Game = this, Info = "Select Pokémons to add to your starting bench" });
@@ -211,7 +212,7 @@ namespace TCGCards.Core
                 TriggerAbilityOfType(TriggerType.OpponentRetreats, pokemon);
             }
             
-            ActivePlayer.RetreatActivePokemon(replacementCard, payedEnergy, this);
+            ActivePlayer.RetreatActivePokemon(replacementCard, new List<EnergyCard>(payedEnergy), this);
         }
 
         public void OnBenchPokemonSelected(Player owner, IEnumerable<PokemonCard> selectedPokemons)
@@ -416,7 +417,7 @@ namespace TCGCards.Core
         {
             SendEventToPlayers(new CardsDiscardedEvent()
             {
-                Cards = e.Cards,
+                Cards = new List<Card>(e.Cards),
                 Player = ((Player)sender).Id,
             });
         }
@@ -427,7 +428,7 @@ namespace TCGCards.Core
             {
                 Amount = e.Amount,
                 Player = ActivePlayer.Id,
-                Cards = e.Cards
+                Cards = new List<Card>(e.Cards)
             };
 
             SendEventToPlayers(gameEvent);
@@ -486,6 +487,7 @@ namespace TCGCards.Core
                 }
             }
 
+            //PRobably want to refactor this so it can work properly
             if (AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) || ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
             {
                 GameLog.AddMessage("Attack fully ignored because of effect");

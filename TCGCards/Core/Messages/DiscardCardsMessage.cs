@@ -20,7 +20,7 @@ namespace TCGCards.Core.Messages
         {
             MessageType = MessageTypes.DiscardCards;
             Count = count;
-            Filters = filters.ToList();
+            Filters = new List<IDeckFilter>(filters);
         }
 
         public int Count { get; set; }

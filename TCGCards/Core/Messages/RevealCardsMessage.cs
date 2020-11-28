@@ -13,7 +13,7 @@ namespace TCGCards.Core.Messages
         public RevealCardsMessage(List<Card> cards)
         {
             MessageType = MessageTypes.RevealCardsMessage;
-            Cards = cards;
+            Cards = new List<Card>(cards);
         }
 
         public List<Card> Cards { get; set; }

@@ -19,7 +19,7 @@ namespace TCGCards.Core.Messages
         public PickFromListMessage(IEnumerable<Card> possibleChoices, int minCount, int maxCount)
         {
             MessageType = MessageTypes.PickFromList;
-            PossibleChoices = possibleChoices.ToList();
+            PossibleChoices = new List<Card>(possibleChoices);
             MaxCount = maxCount;
             MinCount = minCount;
         }

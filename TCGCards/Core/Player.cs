@@ -287,7 +287,7 @@ namespace TCGCards.Core
             OnCardsDrawn?.Invoke(this, new PlayerCardDraw()
             {
                 Amount = drawnCards.Count(),
-                Cards = drawnCards.ToList(),
+                Cards = drawnCards.ToList(), //TODO: Does this do anything?
                 Player = this
             });
         }
@@ -350,7 +350,7 @@ namespace TCGCards.Core
                 cardsDrawn.Add(card);
             }
 
-            game.SendEventToPlayers(new DrawCardsEvent() { Cards = cardsDrawn, Amount = cardsDrawn.Count, Player = Id });
+            game.SendEventToPlayers(new DrawCardsEvent() { Cards = new List<Card>(cardsDrawn), Amount = cardsDrawn.Count, Player = Id });
         }
 
         public void SelectActiveFromBench(GameField game)

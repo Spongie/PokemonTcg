@@ -106,52 +106,42 @@ namespace TCGCards.TrainerEffects
                 if (shuffleIntoDeck)
                 {
                     target.Owner.Deck.Cards.Push(card);
+                    game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { card } });
                 }
                 else if (ReturnAttachedToHand)
                 {
                     target.Owner.Hand.Add(card);
+                    game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { card } });
                 }
                 else
                 {
                     target.Owner.DiscardPile.Add(card);
+                    game.SendEventToPlayers(new AttachedEnergyDiscardedEvent() { DiscardedCard = card, FromPokemonId = target.Id });
                 }
             }
             target.AttachedEnergy.Clear();
-
-            if (target.Stage == 0)
-            {
-                if (shuffleIntoDeck)
-                {
-                    target.Owner.Deck.Cards.Push(target);
-                }
-                else
-                {
-                    target.Owner.DiscardPile.Add(target);
-                }
-
-                return;
-            }
 
             var pokemon = target;
 
             if (pokemon.Stage == 0)
             {
-                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon, game);
             }
             else if (pokemon.Stage == 1)
             {
-                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom);
-                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom, game);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon, game);
                 pokemon.EvolvedFrom = null;
             }
             else
             {
                 target.Owner.DiscardPile.Add(pokemon.EvolvedFrom.EvolvedFrom);
-                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom.EvolvedFrom);
+                game.SendEventToPlayers(new CardsDiscardedEvent { Player = target.Owner.Id, Cards = new List<Card> { pokemon.EvolvedFrom.EvolvedFrom } });
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom.EvolvedFrom, game);
                 pokemon.EvolvedFrom.EvolvedFrom = null;
-                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon.EvolvedFrom, game);
                 pokemon.EvolvedFrom = null;
-                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon);
+                DiscardOrBounceBasic(target, shuffleIntoDeck, pokemon, game);
             }
 
             if (target == target.Owner.ActivePokemonCard)
@@ -162,26 +152,31 @@ namespace TCGCards.TrainerEffects
             else
             {
                 target.Owner.BenchedPokemon.Remove(target);
+                game.SendEventToPlayers(new PokemonRemovedFromBench { PokemonId = target.Id });
             }
         }
 
-        private void DiscardOrBounceBasic(PokemonCard target, bool shuffleIntoDeck, PokemonCard pokemon)
+        private void DiscardOrBounceBasic(PokemonCard target, bool shuffleIntoDeck, PokemonCard pokemon, GameField game)
         {
             if (pokemon.Stage > 0)
             {
                 target.Owner.DiscardPile.Add(pokemon);
+                game.SendEventToPlayers(new CardsDiscardedEvent { Player = target.Owner.Id, Cards = new List<Card> { pokemon} });
             }
             else if (shuffleIntoDeck)
             {
                 target.Owner.Deck.Cards.Push(pokemon);
+                game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
             }
             else if (returnAttachedToHand)
             {
                 target.Owner.Hand.Add(pokemon);
+                game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
             }
             else
             {
                 target.Owner.DiscardPile.Add(pokemon);
+                game.SendEventToPlayers(new CardsDiscardedEvent { Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
             }
         }
 
@@ -227,7 +222,7 @@ namespace TCGCards.TrainerEffects
             target.Owner.Hand.Add(target);
             cardsDrawn.Add(target);
 
-            game?.SendEventToPlayers(new CardsDiscardedEvent() { Player = target.Owner.Id, Cards = cardsDrawn });
+            game?.SendEventToPlayers(new CardsDiscardedEvent() { Player = target.Owner.Id, Cards = new List<Card>(cardsDrawn) });
             
             if (target == target.Owner.ActivePokemonCard)
             {
@@ -239,9 +234,10 @@ namespace TCGCards.TrainerEffects
             {
                 game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.BenchedPokemon.Remove(target);
+                game?.SendEventToPlayers(new PokemonRemovedFromBench { PokemonId = target.Id });
             }
 
-            game?.SendEventToPlayers(new DrawCardsEvent() { Player = target.Owner.Id, Amount = cardsDrawn.Count, Cards = cardsDrawn });
+            game?.SendEventToPlayers(new DrawCardsEvent() { Player = target.Owner.Id, Amount = cardsDrawn.Count, Cards = new List<Card>(cardsDrawn) });
         }
 
         private static void ShuffleCardsIntoDeck(PokemonCard target, GameField game)
@@ -275,6 +271,7 @@ namespace TCGCards.TrainerEffects
             {
                 game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.BenchedPokemon.Remove(target);
+                game?.SendEventToPlayers(new PokemonRemovedFromBench { PokemonId = target.Id });
             }
         }
     }
