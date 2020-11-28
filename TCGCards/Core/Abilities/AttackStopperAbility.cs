@@ -1,9 +1,8 @@
 ﻿using CardEditor.Views;
-using System;
 
 namespace TCGCards.Core.Abilities
 {
-    public class AttackStopperAbility : Ability
+    public class AttackStopperAbility : Ability, IAttackStoppingAbility
     {
         public AttackStopperAbility() : this(null)
         {
@@ -34,7 +33,7 @@ namespace TCGCards.Core.Abilities
             
         }
 
-        public bool IsStopped(GameField game)
+        public bool IsStopped(GameField game, PokemonCard attacker, PokemonCard defender)
         {
             return CoinFlip && game.FlipCoins(1) == 1;
         }

@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using TCGCards.Core;
+using TCGCards.Core.Abilities;
 using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Attacks
@@ -8,6 +9,7 @@ namespace TCGCards.Attacks
     {
         private bool coinFlip;
         private bool onlySelf = true;
+        private bool onlyCurrentTarget;
 
         [DynamicInput("Only prevent on self", InputControl.Boolean)]
         public bool OnlySelf
@@ -19,6 +21,18 @@ namespace TCGCards.Attacks
                 FirePropertyChanged();
             }
         }
+
+        [DynamicInput("Only prevent from current target", InputControl.Boolean)]
+        public bool OnlyCurrentTarget
+        {
+            get { return onlyCurrentTarget; }
+            set
+            {
+                onlyCurrentTarget = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Coin flipped", InputControl.Boolean)]
         public bool CoinFlip
@@ -38,13 +52,23 @@ namespace TCGCards.Attacks
                 return;
             }
 
-            if (onlySelf)
+            if (onlySelf || onlyCurrentTarget)
             {
-                owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => x.Equals(owner.ActivePokemonCard)));
+                owner.ActivePokemonCard.TemporaryAbilities.Add(new AttackStopperSpecificAbility(owner.ActivePokemonCard)
+                {
+                    OnlyCurrentTarget = onlyCurrentTarget,
+                    OnlySelf = onlySelf,
+                    CurrentTarget = opponent.ActivePokemonCard
+                });
             }
             else
             {
-                owner.ActivePokemonCard.AttackStoppers.Add(new AttackStopper((x) => true));
+                owner.ActivePokemonCard.TemporaryAbilities.Add(new AttackStopperSpecificAbility(owner.ActivePokemonCard)
+                {
+                    CoinFlip = false,
+                    OnlyCurrentTarget = false,
+                    OnlySelf = false
+                });
             }
 
             base.ProcessEffects(game, owner, opponent);

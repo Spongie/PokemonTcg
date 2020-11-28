@@ -63,7 +63,6 @@ namespace TCGCards
             AttachedEnergy = new List<EnergyCard>();
             TemporaryAbilities = new List<TemporaryAbility>();
             DamageStoppers = new List<DamageStopper>();
-            AttackStoppers = new List<AttackStopper>();
         }
 
         public void ReInitLists()
@@ -71,7 +70,6 @@ namespace TCGCards
             AttachedEnergy = new List<EnergyCard>();
             TemporaryAbilities = new List<TemporaryAbility>();
             DamageStoppers = new List<DamageStopper>();
-            AttackStoppers = new List<AttackStopper>();
             AttachedEnergy = new List<EnergyCard>();
             TemporaryAbilities = new List<TemporaryAbility>();
         }
@@ -170,7 +168,6 @@ namespace TCGCards
         public List<TemporaryAbility> TemporaryAbilities { get; set; } = new List<TemporaryAbility>();
         public string PokemonName { get; protected set; }
         public List<DamageStopper> DamageStoppers { get; set; } = new List<DamageStopper>();
-        public List<AttackStopper> AttackStoppers { get; set; } = new List<AttackStopper>();
         public int DamageTakenLastTurn { get; set; }
         public bool DoublePoison { get; set; }
         public bool EvolvedThisTurn { get; set; }
@@ -230,9 +227,6 @@ namespace TCGCards
 
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
-
-            AttackStoppers.ForEach(x => x.TurnsLeft--);
-            AttackStoppers = AttackStoppers.Where(x => x.TurnsLeft > 0).ToList();
         }
 
         public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable = true)
@@ -334,6 +328,20 @@ namespace TCGCards
             });
 
             energyCard.OnPutInDiscard(Owner);
+        }
+
+        public List<Ability> GetAllAbilities()
+        {
+            var abilities = new List<Ability>();
+            
+            if (Ability != null)
+            {
+                abilities.Add(Ability);
+            }
+
+            abilities.AddRange(TemporaryAbilities);
+
+            return abilities;
         }
 
         public bool IsDead() => DamageCounters >= Hp;

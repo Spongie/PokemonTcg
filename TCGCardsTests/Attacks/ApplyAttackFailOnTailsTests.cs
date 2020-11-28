@@ -29,7 +29,7 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, opponent.ActivePokemonCard.AttackStoppers.Count);
+            Assert.AreEqual(1, opponent.ActivePokemonCard.TemporaryAbilities.Count);
         }
     }
 }

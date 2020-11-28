@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using TCGCards.Core;
 using Entities;
+using TCGCards.Core.Abilities;
 
 namespace TCGCards.Attacks.Tests
 {
@@ -34,7 +36,7 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, player.ActivePokemonCard.AttackStoppers.Count);
+            Assert.AreEqual(1, player.ActivePokemonCard.TemporaryAbilities.Count);
         }
 
         [TestMethod()]
@@ -64,7 +66,7 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(0, player.ActivePokemonCard.AttackStoppers.Count);
+            Assert.AreEqual(0, player.ActivePokemonCard.TemporaryAbilities.Count);
         }
 
         [TestMethod()]
@@ -92,8 +94,8 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, player.ActivePokemonCard.AttackStoppers.Count);
-            Assert.IsTrue(player.ActivePokemonCard.AttackStoppers[0].IsAttackIgnored(new PokemonCard()));
+            Assert.AreEqual(1, player.ActivePokemonCard.TemporaryAbilities.Count);
+            Assert.IsTrue(player.ActivePokemonCard.TemporaryAbilities.OfType<IAttackStoppingAbility>().First().IsStopped(game, opponent.ActivePokemonCard, new PokemonCard()));
         }
 
         [TestMethod()]
@@ -121,8 +123,8 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, player.ActivePokemonCard.AttackStoppers.Count);
-            Assert.IsFalse(player.ActivePokemonCard.AttackStoppers[0].IsAttackIgnored(new PokemonCard()));
+            Assert.AreEqual(1, player.ActivePokemonCard.TemporaryAbilities.Count);
+            Assert.IsFalse(player.ActivePokemonCard.TemporaryAbilities.OfType<IAttackStoppingAbility>().First().IsStopped(game,  opponent.ActivePokemonCard, new PokemonCard()));
         }
 
         [TestMethod()]
@@ -150,9 +152,9 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, player.ActivePokemonCard.AttackStoppers.Count);
-            Assert.IsTrue(player.ActivePokemonCard.AttackStoppers[0].IsAttackIgnored(pokemon));
-            Assert.IsFalse(player.ActivePokemonCard.AttackStoppers[0].IsAttackIgnored(new PokemonCard()));
+            Assert.AreEqual(1, player.ActivePokemonCard.TemporaryAbilities.Count);
+            Assert.IsFalse(player.ActivePokemonCard.TemporaryAbilities.OfType<IAttackStoppingAbility>().First().IsStopped(game, player.ActivePokemonCard, opponent.ActivePokemonCard));
+            Assert.IsTrue(player.ActivePokemonCard.TemporaryAbilities.OfType<IAttackStoppingAbility>().First().IsStopped(game, opponent.ActivePokemonCard, player.ActivePokemonCard));
         }
     }
 }

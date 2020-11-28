@@ -24,7 +24,6 @@ namespace TCGCards.Core
             Id = NetworkId.Generate();
             Players = new List<Player>();
             playersSetStartBench = new HashSet<NetworkId>();
-            AttackStoppers = new List<AttackStopper>();
             DamageStoppers = new List<DamageStopper>();
             TemporaryPassiveAbilities = new List<PassiveAbility>();
             GameState = GameFieldState.WaitingForConnection;
@@ -472,30 +471,19 @@ namespace TCGCards.Core
             TriggerAbilityOfType(TriggerType.Attacked, NonActivePlayer.ActivePokemonCard);
 
             var abilities = new List<Ability>();
-            abilities.AddRange(NonActivePlayer.ActivePokemonCard.TemporaryAbilities);
+            abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllAbilities());
+            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllAbilities());
 
-            if (NonActivePlayer.ActivePokemonCard.Ability != null)
+            foreach (var ability in abilities.OfType<IAttackStoppingAbility>())
             {
-                abilities.Add(NonActivePlayer.ActivePokemonCard.Ability);
-            }
-
-            foreach (var ability in abilities.OfType<AttackStopperAbility>())
-            {
-                if (ability.IsStopped(this))
+                if (ability.IsStopped(this, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard))
                 {
+                    if (!IgnorePostAttack)
+                    {
+                        PostAttack();
+                    }
                     return;
                 }
-            }
-
-            //PRobably want to refactor this so it can work properly
-            if (AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)) || ActivePlayer.ActivePokemonCard.AttackStoppers.Any(x => x.IsAttackIgnored(NonActivePlayer.ActivePokemonCard)))
-            {
-                GameLog.AddMessage("Attack fully ignored because of effect");
-                if (!IgnorePostAttack)
-                {
-                    PostAttack();
-                }
-                return;
             }
 
             DealDamageWithAttack(attack);
@@ -581,10 +569,7 @@ namespace TCGCards.Core
                 NonActivePlayer.ActivePokemonCard.Ability.Trigger(NonActivePlayer, ActivePlayer, 0, this);
             }
 
-            AttackStoppers.ForEach(attackStopper => attackStopper.TurnsLeft--);
             DamageStoppers.ForEach(damageStopper => damageStopper.TurnsLeft--);
-
-            AttackStoppers = AttackStoppers.Where(attackStopper => attackStopper.TurnsLeft > 0).ToList();
             DamageStoppers = DamageStoppers.Where(damageStopper => damageStopper.TurnsLeft > 0).ToList();
 
             CheckDeadPokemon();
@@ -977,7 +962,6 @@ namespace TCGCards.Core
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get; set; }
         public GameLog GameLog { get; set; } = new GameLog();
-        public List<AttackStopper> AttackStoppers { get; set; }
         public List<DamageStopper> DamageStoppers { get; set; }
         public List<PassiveAbility> TemporaryPassiveAbilities { get; set; }
         public bool PrizeCardsFaceUp { get; set; }
