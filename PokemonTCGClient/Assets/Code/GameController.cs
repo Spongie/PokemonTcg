@@ -812,7 +812,7 @@ namespace Assets.Code
 
             if (OpponentPlayer != null && OpponentPlayer.ActivePokemonCard != null)
             {
-                SetActivePokemon(opponentActivePokemon, OpponentPlayer.ActivePokemonCard, ZoomMode.Center);
+                SetActivePokemon(opponentActivePokemon, OpponentPlayer.ActivePokemonCard, ZoomMode.FromTop);
             }
 
             Player.DiscardPile = gameInfo.Me.CardsInDiscard;
