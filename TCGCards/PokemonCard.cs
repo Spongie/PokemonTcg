@@ -330,16 +330,16 @@ namespace TCGCards
             energyCard.OnPutInDiscard(Owner);
         }
 
-        public List<Ability> GetAllAbilities()
+        public List<Ability> GetAllActiveAbilities()
         {
             var abilities = new List<Ability>();
             
-            if (Ability != null)
+            if (Ability != null && Ability.CanActivate())
             {
                 abilities.Add(Ability);
             }
 
-            abilities.AddRange(TemporaryAbilities);
+            abilities.AddRange(TemporaryAbilities.Where(x => x.CanActivate()).ToList());
 
             return abilities;
         }

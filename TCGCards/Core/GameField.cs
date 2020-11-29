@@ -471,8 +471,8 @@ namespace TCGCards.Core
             TriggerAbilityOfType(TriggerType.Attacked, NonActivePlayer.ActivePokemonCard);
 
             var abilities = new List<Ability>();
-            abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllAbilities());
-            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllAbilities());
+            abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllActiveAbilities());
+            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllActiveAbilities());
 
             foreach (var ability in abilities.OfType<IAttackStoppingAbility>())
             {
