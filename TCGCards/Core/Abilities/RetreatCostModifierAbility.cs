@@ -12,7 +12,7 @@ namespace TCGCards.Core.Abilities
         private bool onlyWhenBenched;
         private bool onlyForYou;
 
-        public RetreatCostModifierAbility() :base(null)
+        public RetreatCostModifierAbility() : this(null)
         {
             ModifierType = PassiveModifierType.RetreatCost;
         }

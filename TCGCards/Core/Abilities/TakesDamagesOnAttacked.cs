@@ -6,7 +6,7 @@ namespace TCGCards.Core.Abilities
     {
         private int damageReturned;
 
-        public TakesDamagesOnAttacked() :base(null)
+        public TakesDamagesOnAttacked() :this(null)
         {
 
         }

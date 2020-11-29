@@ -19,7 +19,7 @@ namespace TCGCards.Core.Abilities
                 FirePropertyChanged();
             }
         }
-        public SearchDeckForEvolutionCard():base(null)
+        public SearchDeckForEvolutionCard(): this(null)
         {
 
         }

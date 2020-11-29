@@ -8,7 +8,7 @@ namespace TCGCards.Core.Abilities
     {
         private bool onlyWhenActive;
 
-        public StopPokemonPowersAbility() : base(null)
+        public StopPokemonPowersAbility() : this(null)
         {
             ModifierType = PassiveModifierType.NoPokemonPowers;
         }

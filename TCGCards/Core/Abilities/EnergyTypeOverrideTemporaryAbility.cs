@@ -8,7 +8,7 @@ namespace TCGCards.Core.Abilities
         private EnergyTypes sourceType;
         private EnergyTypes newType;
 
-        public EnergyTypeOverrideTemporaryAbility() :base(null)
+        public EnergyTypeOverrideTemporaryAbility() : this(null)
         {
 
         }

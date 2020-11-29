@@ -10,7 +10,7 @@ namespace TCGCards.Core.Abilities
     {
         private EnergyTypes energyType;
 
-        public MoveEnergyAbility() :base(null)
+        public MoveEnergyAbility() : this(null)
         {
 
         }
