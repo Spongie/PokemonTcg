@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TCGCards.Core.GameEvents;
+using UnityEngine;
 
 namespace Assets.Code.UI.Events
 {
-    class PokemonRemovedFromBenchEventHandler
+    public class PokemonRemovedFromBenchEventHandler : MonoBehaviour
     {
+        public void Trigger(PokemonRemovedFromBench removedFromBenchEvent)
+        {
+            var pokemon = GameController.Instance.GetCardRendererById(removedFromBenchEvent.PokemonId);
+
+            pokemon.GetComponent<RectTransform>().LeanAlpha(0, 0.75f).setOnComplete(() =>
+            {
+                GameController.Instance.playerHand.RemoveCardById(removedFromBenchEvent.PokemonId);
+                GameEventHandler.Instance.EventCompleted();
+            });
+        }
     }
 }

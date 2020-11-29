@@ -1,7 +1,6 @@
 ﻿using CardEditor.Views;
 using TCGCards.Core;
 using TCGCards.Core.Abilities;
-using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Attacks
 {

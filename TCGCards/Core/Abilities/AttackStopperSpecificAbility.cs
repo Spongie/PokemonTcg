@@ -1,5 +1,4 @@
 ﻿using CardEditor.Views;
-using System;
 
 namespace TCGCards.Core.Abilities
 {

@@ -1,7 +1,5 @@
-﻿using Entities;
-using TCGCards.Core;
+﻿using TCGCards.Core;
 using TCGCards.Core.Abilities;
-using TCGCards.Core.SpecialAbilities;
 
 namespace TCGCards.Attacks
 {

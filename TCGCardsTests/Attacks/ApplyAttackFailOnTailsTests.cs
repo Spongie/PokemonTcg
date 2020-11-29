@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TCGCards.Core;
-using Entities;
 
 namespace TCGCards.Attacks.Tests
 {

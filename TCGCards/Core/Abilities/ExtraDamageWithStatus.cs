@@ -1,6 +1,5 @@
 ﻿using CardEditor.Views;
 using Entities;
-using System.Runtime.CompilerServices;
 
 namespace TCGCards.Core.Abilities
 {

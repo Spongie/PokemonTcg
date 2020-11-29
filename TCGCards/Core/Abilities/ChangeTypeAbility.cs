@@ -1,7 +1,4 @@
 ﻿using CardEditor.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.Core.Abilities

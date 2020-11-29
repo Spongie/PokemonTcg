@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards.Core;
-using TCGCards.EnergyCards;
 
 namespace TCGCards.Tests
 {

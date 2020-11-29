@@ -1,5 +1,4 @@
-﻿using Entities.Models;
-using NetworkingCore;
+﻿using NetworkingCore;
 using PokemonTcgSdk;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
-using System.Runtime.Loader;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -21,7 +19,7 @@ using TCGCards.Core;
 
 namespace Launcher
 {
-	public partial class Controller : INotifyPropertyChanged
+    public partial class Controller : INotifyPropertyChanged
     {
 		private string info;
 		private string versionNumber;

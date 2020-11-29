@@ -2,7 +2,6 @@
 using NetworkingCore;
 using System.IO;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CardEditor

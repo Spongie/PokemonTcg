@@ -1,10 +1,6 @@
 ﻿using CardEditor.Views;
-using Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks

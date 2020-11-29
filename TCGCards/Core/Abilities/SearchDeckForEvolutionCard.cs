@@ -1,7 +1,5 @@
 ﻿using CardEditor.Views;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 

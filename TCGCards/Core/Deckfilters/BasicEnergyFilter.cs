@@ -1,6 +1,4 @@
-﻿using Entities;
-
-namespace TCGCards.Core.Deckfilters
+﻿namespace TCGCards.Core.Deckfilters
 {
     public class BasicEnergyFilter : IDeckFilter
     {

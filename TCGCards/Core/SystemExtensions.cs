@@ -1,6 +1,5 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
-using System;
 
 namespace TCGCards.Core
 {
