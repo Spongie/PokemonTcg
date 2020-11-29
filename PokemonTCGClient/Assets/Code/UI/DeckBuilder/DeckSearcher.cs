@@ -55,7 +55,7 @@ namespace Assets.Code.UI.DeckBuilder
                 }
                 else if (deckCard.card is PokemonCard)
                 {
-                    bool shouldShow = pokemonToggle.isOn;
+                    bool shouldShow = true;
 
                     switch (((PokemonCard)deckCard.card).Type)
                     {
@@ -95,6 +95,9 @@ namespace Assets.Code.UI.DeckBuilder
                         default:
                             break;
                     }
+
+                    shouldShow = shouldShow && pokemonToggle.isOn;
+
                     deckCard.gameObject.SetActive(shouldShow);
                 }
                 else if (deckCard.card is TrainerCard)
