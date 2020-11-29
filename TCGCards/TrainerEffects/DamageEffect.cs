@@ -8,6 +8,7 @@ namespace TCGCards.TrainerEffects
     {
         private int amount;
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
+        private bool coinFlip;
 
         [DynamicInput("Damage amount")]
         public int Amount
@@ -31,6 +32,17 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EffectType
         {
@@ -49,6 +61,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             target.DealDamage(Amount, game, pokemonSource);
