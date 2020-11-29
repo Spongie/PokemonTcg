@@ -358,7 +358,10 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     public void DisplayPopup()
     {
-        popupHandler.gameObject.SetActive(true);
-        popupHandler.Init(card);
+        if (!popupHandler.gameObject.activeSelf)
+        {
+            popupHandler.gameObject.SetActive(true);
+            popupHandler.Init(card);
+        }
     }
 }
