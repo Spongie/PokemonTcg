@@ -162,9 +162,9 @@ namespace TCGCardsTests.Core.Messages
         }
 
         [TestMethod]
-        public void SelectPriceCardsMessage()
+        public void SelectPrizeCardsMessage()
         {
-            var message = new SelectPriceCardsMessage(1);
+            var message = new SelectPrizeCardsMessage(1);
 
             var data = SerializeAndBack(message);
             Assert.AreEqual(1, data.Amount);

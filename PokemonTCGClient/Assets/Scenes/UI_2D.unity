@@ -2256,7 +2256,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: View price cards
+  m_Text: View prize cards
 --- !u!222 &509309370
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3981,7 +3981,7 @@ GameObject:
   - component: {fileID: 835550998}
   - component: {fileID: 835550997}
   m_Layer: 5
-  m_Name: OP Price Button
+  m_Name: OP Prize Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4772,7 +4772,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: View price cards
+  m_Text: View prize cards
 --- !u!222 &995508178
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5450,7 +5450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1.1100003}
+  m_AnchoredPosition: {x: 0, y: -1.1100006}
   m_SizeDelta: {x: 0, y: -2.2199998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183627914
@@ -6845,7 +6845,7 @@ GameObject:
   - component: {fileID: 1546077714}
   - component: {fileID: 1546077713}
   m_Layer: 5
-  m_Name: Player Price Button
+  m_Name: Player Prize Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7598,7 +7598,7 @@ GameObject:
   - component: {fileID: 1648471402}
   - component: {fileID: 1648471401}
   m_Layer: 5
-  m_Name: Player Price
+  m_Name: Player Prize
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7654,7 +7654,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Price: '
+  m_Text: 'Prize: '
 --- !u!222 &1648471402
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10259,7 +10259,7 @@ GameObject:
   - component: {fileID: 2116075340}
   - component: {fileID: 2116075339}
   m_Layer: 5
-  m_Name: OP Price
+  m_Name: OP Prize
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10315,7 +10315,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Price: '
+  m_Text: 'Prize: '
 --- !u!222 &2116075340
 CanvasRenderer:
   m_ObjectHideFlags: 0

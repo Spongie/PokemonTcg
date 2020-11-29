@@ -18,7 +18,7 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            var message = new SelectPriceCardsMessage(1).ToNetworkMessage(NetworkId.Generate());
+            var message = new SelectPrizeCardsMessage(1).ToNetworkMessage(NetworkId.Generate());
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             var selectedCard = game.FindCardById(response.Cards.First());

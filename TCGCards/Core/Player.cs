@@ -334,14 +334,14 @@ namespace TCGCards.Core
             return Id != null && Deck != null;
         }
 
-        public void SelectPriceCard(int amount, GameField game)
+        public void SelectPrizeCard(int amount, GameField game)
         {
             if (amount <= 0)
             {
                 return;
             }
 
-            var message = new SelectPriceCardsMessage(amount).ToNetworkMessage(NetworkId.Generate());
+            var message = new SelectPrizeCardsMessage(amount).ToNetworkMessage(NetworkId.Generate());
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
             var cardsDrawn = new List<Card>();

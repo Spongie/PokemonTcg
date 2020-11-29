@@ -299,7 +299,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.RevealCardsMessage, OnCardsRevealed);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectAttack, OnStartSelectAttack);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
-            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPriceCards, OnStartPickPrize);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPrizeCards, OnStartPickPrize);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
             NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
@@ -495,7 +495,7 @@ namespace Assets.Code
             infoText.text = "Select 1 prize card";
             SpecialState = SpecialGameState.SelectingPrize;
             selectFromListPanel.SetActive(true);
-            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((SelectPriceCardsMessage)message, Player.PrizeCards);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((SelectPrizeCardsMessage)message, Player.PrizeCards);
         }
 
         private void OnStartPickFromList(object message, NetworkId messageId)

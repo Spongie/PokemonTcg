@@ -172,7 +172,7 @@ namespace Assets.Code.UI.Game
             gameObject.SetActive(false);
         }
 
-        internal void Init(SelectPriceCardsMessage message, IEnumerable<Card> cards)
+        internal void Init(SelectPrizeCardsMessage message, IEnumerable<Card> cards)
         {
             minCount = 1;
             limit = 1;

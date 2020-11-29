@@ -723,7 +723,7 @@ namespace TCGCards.Core
                 else
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
-                    ActivePlayer.SelectPriceCard(NonActivePlayer.ActivePokemonCard.PrizeCards, this);
+                    ActivePlayer.SelectPrizeCard(NonActivePlayer.ActivePokemonCard.PrizeCards, this);
                 }
 
                 NonActivePlayer.KillActivePokemon();
@@ -760,7 +760,7 @@ namespace TCGCards.Core
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPriceCard(prizeCardValue, this);
+                    NonActivePlayer.SelectPrizeCard(prizeCardValue, this);
                     PushInfoToPlayer("Opponent is selecting a new active Pokémon", NonActivePlayer);
                     ActivePlayer.SelectActiveFromBench(this);
                 }
@@ -795,7 +795,7 @@ namespace TCGCards.Core
                 else
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
-                    ActivePlayer.SelectPriceCard(pokemon.PrizeCards, this);
+                    ActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
                 }
             }
 
@@ -822,7 +822,7 @@ namespace TCGCards.Core
                 else
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPriceCard(pokemon.PrizeCards, this);
+                    NonActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
                 }
             }
 
