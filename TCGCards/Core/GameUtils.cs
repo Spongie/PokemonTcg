@@ -20,10 +20,10 @@ namespace TCGCards.Core
 
         public static void DiscardCardsFromHand(Player player, int amount)
         {
-            DiscardCardsFromHand(player, amount, new IDeckFilter[] { });
+            DiscardCardsFromHand(player, amount, new List<IDeckFilter>());
         }
 
-        public static void DiscardCardsFromHand(Player player, int amount, IEnumerable<IDeckFilter> filters)
+        public static void DiscardCardsFromHand(Player player, int amount, List<IDeckFilter> filters)
         {
             var message = new DiscardCardsMessage(amount, filters);
             var response = player.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(player.Id));

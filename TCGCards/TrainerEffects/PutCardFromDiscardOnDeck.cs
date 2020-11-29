@@ -86,7 +86,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            IEnumerable<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
+            List<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
 
             var message = new PickFromListMessage(choices, Amount).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;

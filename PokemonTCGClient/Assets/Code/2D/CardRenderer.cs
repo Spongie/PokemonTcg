@@ -96,7 +96,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void SetCard(Card card, ZoomMode zoomMode, bool spawnAttachedEnergy)
+    public void SetCard(Card card, ZoomMode zoomMode, bool spawnAttachedEnergy, bool isPreview = false)
     {
         if (card is PokemonCard)
         {
@@ -107,7 +107,10 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         this.card = card;
         SetZoomMode(zoomMode);
         
-        GameController.Instance.AddCard(this);
+        if (!isPreview)
+        {
+            GameController.Instance.AddCard(this);
+        }
 
         if (card is PokemonCard)
         {

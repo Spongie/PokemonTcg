@@ -6,7 +6,7 @@ namespace NetworkingCore
 {
     public static class TypeLoader
     {
-        public static IEnumerable<Type> GetLoadedTypesAssignableFrom<T>()
+        public static List<Type> GetLoadedTypesAssignableFrom<T>()
         {
             var types = new List<Type>();
 

@@ -128,7 +128,7 @@ namespace Server.Services
             }
 
             var pokemons = pokemonIds.Distinct().Select(id => (PokemonCard)game.FindCardById(id));
-            game.OnBenchPokemonSelected(game.Players.First(p => p.Id.Equals(playerId)), pokemons);
+            game.OnBenchPokemonSelected(game.Players.First(p => p.Id.Equals(playerId)), pokemons.ToList());
 
             return game;
         }
@@ -325,7 +325,7 @@ namespace Server.Services
             return game;
         }
 
-        private void SendUpdateToPlayers(IEnumerable<Player> players, GameField game)
+        private void SendUpdateToPlayers(List<Player> players, GameField game)
         {
             foreach (var player in players)
             {

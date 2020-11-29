@@ -1,4 +1,5 @@
 ﻿using Entities;
+using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 
@@ -18,7 +19,7 @@ namespace TCGCards.Attacks
             }
             else
             {
-                var attackMessage = new SelectAttackMessage(opponent.ActivePokemonCard.Attacks).ToNetworkMessage(owner.Id);
+                var attackMessage = new SelectAttackMessage(opponent.ActivePokemonCard.Attacks.ToList()).ToNetworkMessage(owner.Id);
                 chosenAttack = owner.NetworkPlayer.SendAndWaitForResponse<AttackMessage>(attackMessage).Attack;
             }
 

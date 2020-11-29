@@ -11,9 +11,9 @@ namespace TCGCards.Core.Messages
             MessageType = MessageTypes.SelectAttack;
         }
 
-        public SelectAttackMessage(IEnumerable<Attack> availableChoices) :this()
+        public SelectAttackMessage(List<Attack> availableChoices) :this()
         {
-            AvailableAttacks = availableChoices.ToList();
+            AvailableAttacks = new List<Attack>(availableChoices);
         }
 
         public List<Attack> AvailableAttacks { get; set; }

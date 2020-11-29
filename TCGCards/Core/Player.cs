@@ -51,14 +51,14 @@ namespace TCGCards.Core
             }
         }
 
-        public void DiscardCards(IEnumerable<NetworkId> cardIds)
+        public void DiscardCards(List<NetworkId> cardIds)
         {
             var cards = Hand.Where(card => cardIds.Contains(card.Id)).ToList();
 
             DiscardCards(cards);
         }
 
-        public void DiscardCards(IEnumerable<Card> cards)
+        public void DiscardCards(List<Card> cards)
         {
             DiscardPile.AddRange(cards);
             foreach (var card in cards)
@@ -67,7 +67,7 @@ namespace TCGCards.Core
                 card.IsRevealed = true;
             }
 
-            OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = cards.ToList(), Amount = cards.Count(), Player = this });
+            OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = new List<Card>(cards), Amount = cards.Count(), Player = this });
         }
 
         public void DiscardCard(Card card)
@@ -79,14 +79,14 @@ namespace TCGCards.Core
             OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = new List<Card> { card }, Amount = 1, Player = this });
         }
 
-        public void DrawCardsFromDeck(IEnumerable<NetworkId> selectedCards)
+        public void DrawCardsFromDeck(List<NetworkId> selectedCards)
         {
             var cards = Deck.Cards.Where(card => selectedCards.Contains(card.Id)).ToList();
 
             DrawCardsFromDeck(cards);
         }
 
-        public void DrawCardsFromDeck(IEnumerable<Card> selectedCards)
+        public void DrawCardsFromDeck(List<Card> selectedCards)
         {
             Deck.Cards = new Stack<Card>(Deck.Cards.Except(selectedCards));
             Hand.AddRange(selectedCards);
@@ -95,7 +95,7 @@ namespace TCGCards.Core
             OnCardsDrawn?.Invoke(this, new PlayerCardDraw()
             {
                 Amount = selectedCards.Count(),
-                Cards = selectedCards.ToList(),
+                Cards = new List<Card>(selectedCards),
                 Player = this
             });
         }
@@ -127,7 +127,7 @@ namespace TCGCards.Core
             });
         }
 
-        public void RetreatActivePokemon(PokemonCard replacementPokemon, IEnumerable<EnergyCard> payedEnergy, GameField game)
+        public void RetreatActivePokemon(PokemonCard replacementPokemon, List<EnergyCard> payedEnergy, GameField game)
         {
             var retreatStoppers = GetAllPokemonCards().SelectMany(pokemon => pokemon.TemporaryAbilities.OfType<RetreatStopper>());
 
@@ -287,7 +287,7 @@ namespace TCGCards.Core
             OnCardsDrawn?.Invoke(this, new PlayerCardDraw()
             {
                 Amount = drawnCards.Count(),
-                Cards = drawnCards.ToList(), //TODO: Does this do anything?
+                Cards = new List<Card>(drawnCards),
                 Player = this
             });
         }
@@ -298,17 +298,21 @@ namespace TCGCards.Core
             NetworkPlayer = networkPlayer;
         }
 
-        public IEnumerable<PokemonCard> GetAllPokemonCards()
+        public List<PokemonCard> GetAllPokemonCards()
         {
+            var pokemonCards = new List<PokemonCard>();
+
             if (ActivePokemonCard != null)
             {
-                yield return ActivePokemonCard;
+                pokemonCards.Add(ActivePokemonCard);
             }
 
             foreach (var pokemon in BenchedPokemon)
             {
-                yield return pokemon;
+                pokemonCards.Add(pokemon);
             }
+
+            return pokemonCards;
         }
 
         public List<PokemonCard> BenchedPokemon { get; set; }

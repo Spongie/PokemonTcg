@@ -69,7 +69,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            IEnumerable<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
+            List<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
 
             var message = new PickFromListMessage(choices, Amount).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;

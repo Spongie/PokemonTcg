@@ -145,7 +145,7 @@ namespace TCGCards
                     choices = owner.ActivePokemonCard.AttachedEnergy.ToList();
                 }
 
-                var message = new PickFromListMessage(choices, energy.Amount);
+                var message = new PickFromListMessage(choices.OfType<Card>().ToList(), energy.Amount);
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(Id));
 
                 foreach (var card in response.Cards)

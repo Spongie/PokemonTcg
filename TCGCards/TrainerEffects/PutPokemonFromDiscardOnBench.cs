@@ -61,7 +61,7 @@ namespace TCGCards.TrainerEffects
         {
             var target = TargetsOpponent ? opponent : caster;
 
-            var pokemons = target.DiscardPile.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).ToList();
+            var pokemons = target.DiscardPile.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList();
 
             if (pokemons.Count == 0)
             {

@@ -187,18 +187,18 @@ namespace TCGCards.Core
 
         public bool CanRetreat(PokemonCard card)
         {
-            IEnumerable<RetreatCostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
+            List<RetreatCostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
                 .OfType<RetreatCostModifierAbility>()
                 .Where(ability => ability.IsActive(this)
                     && ability.ModifierType == PassiveModifierType.RetreatCost
-                    && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id));
+                    && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id)).ToList();
 
             var retreatCost = ActivePlayer.ActivePokemonCard.RetreatCost + costModifierAbilities.Sum(ability => ability.Amount);
 
             return card.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= retreatCost;
         }
 
-        public void OnPokemonRetreated(PokemonCard replacementCard, IEnumerable<EnergyCard> payedEnergy)
+        public void OnPokemonRetreated(PokemonCard replacementCard, List<EnergyCard> payedEnergy)
         {
             if (!CanRetreat(ActivePlayer.ActivePokemonCard))
             {
@@ -214,7 +214,7 @@ namespace TCGCards.Core
             ActivePlayer.RetreatActivePokemon(replacementCard, new List<EnergyCard>(payedEnergy), this);
         }
 
-        public void OnBenchPokemonSelected(Player owner, IEnumerable<PokemonCard> selectedPokemons)
+        public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
         {
             foreach (PokemonCard pokemon in selectedPokemons)
             {

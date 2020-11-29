@@ -15,7 +15,7 @@ namespace TCGCards.Attacks
                 return;
             }
 
-            var attackMessage = new SelectAttackMessage(opponent.ActivePokemonCard.Attacks).ToNetworkMessage(owner.Id);
+            var attackMessage = new SelectAttackMessage(opponent.ActivePokemonCard.Attacks.ToList()).ToNetworkMessage(owner.Id);
             var chosenAttack = owner.NetworkPlayer.SendAndWaitForResponse<AttackMessage>(attackMessage).Attack;
 
             game.GameLog.AddMessage($"{owner.NetworkPlayer?.Name} disables attack {chosenAttack.Name}");

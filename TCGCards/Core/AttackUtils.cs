@@ -73,7 +73,7 @@ namespace TCGCards.Core
 
         public static void DiscardAttachedEnergy(PokemonCard pokemon, int amount, GameField game)
         {
-            var message = new PickFromListMessage(pokemon.AttachedEnergy, amount);
+            var message = new PickFromListMessage(pokemon.AttachedEnergy.OfType<Card>().ToList(), amount);
             var response = pokemon.Owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(pokemon.Owner.Id));
 
             foreach (var id in response.Cards)

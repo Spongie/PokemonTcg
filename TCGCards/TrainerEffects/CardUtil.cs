@@ -11,25 +11,25 @@ namespace TCGCards.TrainerEffects
 {
     public static class CardUtil
     {
-        public static IEnumerable<Card> GetCardsOfType(IEnumerable<Card> cards, CardType cardType)
+        public static List<Card> GetCardsOfType(List<Card> cards, CardType cardType)
         {
             switch (cardType)
             {
                 case CardType.Pokemon:
-                    return cards.OfType<PokemonCard>();
+                    return cards.OfType<PokemonCard>().OfType<Card>().ToList();
                 case CardType.Trainer:
-                    return cards.OfType<TrainerCard>();
+                    return cards.OfType<TrainerCard>().OfType<Card>().ToList();
                 case CardType.Energy:
-                    return cards.OfType<EnergyCard>();
+                    return cards.OfType<EnergyCard>().OfType<Card>().ToList();
                 case CardType.BasicEnergy:
-                    return cards.OfType<EnergyCard>().Where(energy => energy.IsBasic);
+                    return cards.OfType<EnergyCard>().Where(energy => energy.IsBasic).OfType<Card>().ToList();
                 case CardType.Any:
                 default:
                     return cards;
             }
         }
 
-        public static IEnumerable<IDeckFilter> GetCardFilters(CardType cardType, EnergyTypes energyType = EnergyTypes.None)
+        public static List<IDeckFilter> GetCardFilters(CardType cardType, EnergyTypes energyType = EnergyTypes.None)
         {
             var filter = new List<IDeckFilter>();
 

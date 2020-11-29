@@ -46,7 +46,7 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            IEnumerable<EnergyCard> energyCards;
+            IEnumerable<Card> energyCards;
 
             if (energyType != EnergyTypes.All)
             {
@@ -57,7 +57,7 @@ namespace TCGCards.Core.Abilities
                 energyCards = PokemonOwner.Owner.Hand.OfType<EnergyCard>();
             }
 
-            var message = new PickFromListMessage(energyCards, 1).ToNetworkMessage(owner.Id);
+            var message = new PickFromListMessage(energyCards.ToList(), 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             var energyCard = owner.Hand.First(x => x.Id.Equals(response.Cards.First()));

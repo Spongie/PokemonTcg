@@ -1,6 +1,7 @@
 ﻿using CardEditor.Views;
 using Entities;
 using Entities.Models;
+using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
@@ -61,7 +62,7 @@ namespace TCGCards.TrainerEffects
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
 
             var card = game.FindCardById(response);
-            caster.DrawCardsFromDeck(new[] { card });
+            caster.DrawCardsFromDeck(new List<Card> { card });
 
             caster.Deck.Shuffle();
         }

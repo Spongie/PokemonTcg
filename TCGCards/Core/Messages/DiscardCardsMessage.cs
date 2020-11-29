@@ -10,12 +10,12 @@ namespace TCGCards.Core.Messages
 
         }
 
-        public DiscardCardsMessage(int count) :this(count, new IDeckFilter[] { })
+        public DiscardCardsMessage(int count) :this(count, new List<IDeckFilter>())
         {
 
         }
 
-        public DiscardCardsMessage(int count, IEnumerable<IDeckFilter> filters)
+        public DiscardCardsMessage(int count, List<IDeckFilter> filters)
         {
             MessageType = MessageTypes.DiscardCards;
             Count = count;

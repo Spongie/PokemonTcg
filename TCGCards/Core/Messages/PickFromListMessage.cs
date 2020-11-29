@@ -1,22 +1,21 @@
 ﻿using NetworkingCore;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace TCGCards.Core.Messages
 {
     public class PickFromListMessage : AbstractNetworkMessage
     {
-        public PickFromListMessage() :this(Enumerable.Empty<Card>(), 1)
+        public PickFromListMessage() :this(new List<Card>(), 1)
         {
 
         }
 
-        public PickFromListMessage(IEnumerable<Card> possibleChoices, int count) : this(possibleChoices, count, count)
+        public PickFromListMessage(List<Card> possibleChoices, int count) : this(possibleChoices, count, count)
         {
 
         }
 
-        public PickFromListMessage(IEnumerable<Card> possibleChoices, int minCount, int maxCount)
+        public PickFromListMessage(List<Card> possibleChoices, int minCount, int maxCount)
         {
             MessageType = MessageTypes.PickFromList;
             PossibleChoices = new List<Card>(possibleChoices);

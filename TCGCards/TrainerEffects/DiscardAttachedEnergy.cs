@@ -100,7 +100,7 @@ namespace TCGCards.TrainerEffects
                 }
                 else
                 {
-                    var message = new PickFromListMessage(target.AttachedEnergy, Amount);
+                    var message = new PickFromListMessage(target.AttachedEnergy.OfType<Card>().ToList(), Amount);
                     var ids = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(game.Id)).Cards;
 
                     var cards = target.AttachedEnergy.Where(x => ids.Contains(x.Id)).ToList();

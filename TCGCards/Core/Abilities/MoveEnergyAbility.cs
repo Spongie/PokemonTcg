@@ -83,7 +83,7 @@ namespace TCGCards.Core.Abilities
             }
             else
             {
-                var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(selectedPokemon.AttachedEnergy.Where(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType), 1).ToNetworkMessage(owner.Id));
+                var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(selectedPokemon.AttachedEnergy.Where(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType).OfType<Card>().ToList(), 1).ToNetworkMessage(owner.Id));
                 var energyCard = selectedPokemon.AttachedEnergy.FirstOrDefault(card => card.Id.Equals(selectedEnergyId.Cards.First()));
 
                 selectedPokemon.AttachedEnergy.Remove(energyCard);

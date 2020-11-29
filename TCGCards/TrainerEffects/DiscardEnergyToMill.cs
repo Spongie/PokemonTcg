@@ -54,7 +54,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            var choices = caster.ActivePokemonCard.AttachedEnergy.Where(x => x.EnergyType == EnergyType).ToList();
+            var choices = caster.ActivePokemonCard.AttachedEnergy.Where(x => x.EnergyType == EnergyType).OfType<Card>().ToList();
             var message = new PickFromListMessage(choices, 0, choices.Count).ToNetworkMessage(game.Id);
             var resoponse = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
