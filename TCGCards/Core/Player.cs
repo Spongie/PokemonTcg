@@ -221,7 +221,7 @@ namespace TCGCards.Core
 
         public void PlayEnergyCard(EnergyCard energyCard, PokemonCard targetPokemonCard, GameField game = null)
         {
-            if(HasPlayedEnergy || !Hand.Contains(energyCard))
+            if(HasPlayedEnergy || !Hand.Contains(energyCard) || Hand.Contains(targetPokemonCard))
                 return;
 
             game?.GameLog.AddMessage($"Attaching {energyCard.GetName()} to {targetPokemonCard.GetName()}");
