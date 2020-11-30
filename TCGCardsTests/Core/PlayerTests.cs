@@ -66,11 +66,13 @@ namespace TCGCards.Core.Tests
             var p = new Player();
             var card = new TestPokemonCard(p);
             var card2 = new TestPokemonCard(p);
+            var energyCard = new EnergyCard();
+            p.Hand.Add(energyCard);
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.PlayEnergyCard(new EnergyCard(), p.ActivePokemonCard, null);
+            p.PlayEnergyCard(energyCard, p.ActivePokemonCard, null);
 
             p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(), null);
 
@@ -83,11 +85,13 @@ namespace TCGCards.Core.Tests
             var p = new Player();
             var card = new TestPokemonCard(p);
             var card2 = new TestPokemonCard(p);
+            var energyCard = new EnergyCard();
+            p.Hand.Add(energyCard);
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.PlayEnergyCard(new EnergyCard(), p.ActivePokemonCard);
+            p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
 
@@ -105,11 +109,13 @@ namespace TCGCards.Core.Tests
             };
 
             var card2 = new TestPokemonCard(p);
+            var energyCard = new EnergyCard();
+            p.Hand.Add(energyCard);
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.PlayEnergyCard(new EnergyCard(), p.ActivePokemonCard);
+            p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
 
