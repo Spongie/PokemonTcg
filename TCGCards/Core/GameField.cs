@@ -458,12 +458,14 @@ namespace TCGCards.Core
 
         public void Attack(Attack attack)
         {
-            if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer) || !ActivePlayer.ActivePokemonCard.CanAttack())
+            if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer) || !ActivePlayer.ActivePokemonCard.CanAttack() || !ActivePlayer.ActivePokemonCard.Attacks.Contains(attack))
             {
-                GameLog.AddMessage($"Attack not used becasue GameFirst: {FirstTurn} Disabled: {attack.Disabled} or CanBeUsed:{attack.CanBeUsed(this, ActivePlayer, NonActivePlayer)}");
+                GameLog.AddMessage($"Attack not used because FirstTurn: {FirstTurn} or Disabled: {attack.Disabled} or CanBeUsed:{attack.CanBeUsed(this, ActivePlayer, NonActivePlayer)}");
                 PushGameLogUpdatesToPlayers();
                 return;
             }
+
+            GameState = GameFieldState.Attacking;
 
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates attack {attack.Name}");
 
@@ -472,6 +474,11 @@ namespace TCGCards.Core
             if (ActivePlayer.ActivePokemonCard.IsConfused && FlipCoins(1) == 0)
             {
                 HitItselfInConfusion();
+
+                if (!IgnorePostAttack)
+                {
+                    PostAttack();
+                }
                 return;
             }
 
@@ -541,11 +548,6 @@ namespace TCGCards.Core
                 ActivePlayer.ActivePokemonCard.Ability.SetTarget(ActivePlayer.ActivePokemonCard);
                 ActivePlayer.ActivePokemonCard.Ability.Trigger(ActivePlayer, NonActivePlayer, ConfusedDamage, this);
                 ActivePlayer.ActivePokemonCard.Ability.SetTarget(null);
-            }
-
-            if (!IgnorePostAttack)
-            {
-                PostAttack();
             }
         }
 

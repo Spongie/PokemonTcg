@@ -7,6 +7,7 @@
         BothSelectingActive,
         BothSelectingBench,
         InTurn,
-        GameOver
+        GameOver,
+        Attacking
     }
 }

@@ -210,7 +210,7 @@ namespace Server.Services
                 return null;
             }
 
-            if (game.GameState == GameFieldState.GameOver)
+            if (game.GameState == GameFieldState.GameOver || game.GameState == GameFieldState.Attacking)
             {
                 return game;
             }
