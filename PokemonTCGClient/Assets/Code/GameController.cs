@@ -39,6 +39,7 @@ namespace Assets.Code
         public GameObject cardPrefab;
         public NetworkId myId;
         public GameObject doneButton;
+        public GameObject cancelButton;
         public GameObject endTurnButton;
         public GameObject YesButton;
         public GameObject NoButton;
@@ -187,6 +188,8 @@ namespace Assets.Code
                 selectFromListPanel.SetActive(true);
                 selectFromListPanel.GetComponent<SelectFromListPanel>().InitEnergyCountSelect(pokemonCard.AttachedEnergy, pokemonCard.RetreatCost);
             }
+
+            EnableButtons();
         }
 
         internal void OnCardPicked()
@@ -248,6 +251,21 @@ namespace Assets.Code
             currentEnergyCard = null;
             SpecialState = SpecialGameState.None;
             infoText.text = string.Empty;
+        }
+
+        public void OnCancelClick()
+        {
+            SpecialState = SpecialGameState.None;
+            selectFromListPanel.SetActive(false);
+
+            if (IsMyTurn)
+            {
+                infoText.text = "Your turn!";
+            }
+            else
+            {
+                infoText.text = "Opponent's turn!";
+            }
         }
 
         private void ToggleCardSelected(CardRenderer clickedCard)
@@ -317,6 +335,7 @@ namespace Assets.Code
 
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().InitView(revealMessage.Cards);
+            EnableButtons();
         }
 
         private void OnStartSelectAttack(object message, NetworkId messageId)
@@ -326,7 +345,7 @@ namespace Assets.Code
 
             selectAttackPanel.SetActive(true);
             var parent = selectAttackPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject;
-
+            EnableButtons();
             foreach (var attack in selectAttackMessage.AvailableAttacks)
             {
                 var buttonObject = Instantiate(attackButtonPrefab, parent.transform);
@@ -368,7 +387,7 @@ namespace Assets.Code
             bool iWon = gameOverMessage.WinnerId.Equals(myId);
             gameField.GameState = GameFieldState.GameOver;
             infoText.text = iWon ? "You have won" : "You have lost";
-            doneButton.SetActive(true);
+            EnableButtons();
 
             WinMenu.SetActive(true);
             winnerText.text = infoText.text;
@@ -378,7 +397,7 @@ namespace Assets.Code
         {
             var selectMessage = (SelectFromYourPokemonMessage)message;
             SpecialState = SpecialGameState.SelectPokemonMatchingFilter;
-            doneButton.SetActive(true);
+            EnableButtons();
             minSelectedCardCount = 1;
 
             if (!string.IsNullOrWhiteSpace(selectMessage.Info))
@@ -441,6 +460,8 @@ namespace Assets.Code
             minSelectedCardCount = ((DiscardCardsMessage)message).Count;
             currentDeckFilter = ((DiscardCardsMessage)message).Filters.FirstOrDefault();
 
+            EnableButtons();
+
             if (minSelectedCardCount > 1)
             {
                 doneButton.SetActive(true);
@@ -464,13 +485,14 @@ namespace Assets.Code
             SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init(deckSearch);
+            EnableButtons();
         }
 
         private void OnStartAttachingEnergyBench(object message, NetworkId messageId)
         {
             energyCardsToAttach.Clear();
-            doneButton.SetActive(true);
             SpecialState = SpecialGameState.AttachingEnergyToBenchedPokemon;
+            EnableButtons();
 
             var realMessage = (AttachEnergyCardsToBenchMessage)message;
 
@@ -480,6 +502,81 @@ namespace Assets.Code
             }
 
             infoText.text = $"Select one of your benched pokemon to attach {realMessage.EnergyCards.First().GetName()} to";
+        }
+
+        private void EnableButtons()
+        {
+            endTurnButton.SetActive(IsMyTurn);
+
+            switch (SpecialState)
+            {
+                case SpecialGameState.SelectingOpponentsPokemon:
+                    doneButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingOpponentsBenchedPokemon:
+                    doneButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingYourBenchedPokemon:
+                    doneButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.DiscardingCards:
+                    doneButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingColor:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.AttachingEnergyToBenchedPokemon:
+                    doneButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectPokemonMatchingFilter:
+                    doneButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.AttachingEnergyToPokemon:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(true);
+                    break;
+                case SpecialGameState.SelectPokemonToEvolveOn:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(true);
+                    break;
+                case SpecialGameState.SelectingYesNo:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingRetreatTarget:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(true);
+                    break;
+                case SpecialGameState.SelectEnergyToRetreat:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(true);
+                    break;
+                case SpecialGameState.SelectingPrize:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingFromList:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingAttack:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.None:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnStartSelectAttachedEnergy(object message, NetworkId messageId)
@@ -496,6 +593,7 @@ namespace Assets.Code
             SpecialState = SpecialGameState.SelectingPrize;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init((SelectPrizeCardsMessage)message, Player.PrizeCards);
+            EnableButtons();
         }
 
         private void OnStartPickFromList(object message, NetworkId messageId)
@@ -503,6 +601,7 @@ namespace Assets.Code
             SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
+            EnableButtons();
         }
 
         private void OnStartSelectColor(object message, NetworkId messageId)
@@ -519,7 +618,7 @@ namespace Assets.Code
             var minCount = selectYourPokemon.MinCount;
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
-            doneButton.SetActive(true);
+            EnableButtons();
 
             if (!string.IsNullOrEmpty(selectYourPokemon.Info))
             {
@@ -540,7 +639,7 @@ namespace Assets.Code
             var minCount = selectOpponentsMessage.MinCount;
             minSelectedCardCount = minCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
-            doneButton.SetActive(true);
+            EnableButtons();
 
             if (!string.IsNullOrEmpty(selectOpponentsMessage.Info))
             {
@@ -562,8 +661,8 @@ namespace Assets.Code
             minSelectedCardCount = minCount;
 
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
-            doneButton.SetActive(true);
-            
+            EnableButtons();
+
             if (!string.IsNullOrEmpty(selectOpponentMessage.Info))
             {
                 infoText.text = selectOpponentMessage.Info;
@@ -693,7 +792,7 @@ namespace Assets.Code
         {
             if (gameField.GameState == GameFieldState.GameOver)
             {
-                doneButton.SetActive(true);
+                EnableButtons();
                 SceneManager.LoadScene("MainMenu");
                 return;
             }
@@ -749,7 +848,7 @@ namespace Assets.Code
             }
 
             NetworkManager.Instance.RespondingTo = null;
-            doneButton.SetActive(true);
+            EnableButtons();
             currentDeckFilter = null;
         }
 
