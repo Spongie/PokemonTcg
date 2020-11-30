@@ -144,7 +144,7 @@ namespace Assets.Code
 
         private void OnDiscardCardSelected(CardRenderer card)
         {
-            if (currentDeckFilter != null && !currentDeckFilter.IsCardValid(card.card))
+            if (currentDeckFilter != null && !currentDeckFilter.IsCardValid(card.card) || !Player.Hand.Contains(card.card))
             {
                 return;
             }
@@ -271,6 +271,17 @@ namespace Assets.Code
             {
                 infoText.text = "Opponent's turn!";
             }
+
+            foreach (var card in selectedCards)
+            {
+                ToggleCardSelected(GetCardRendererById(card.Id));
+            }
+
+            selectedCards.Clear();
+            currentDeckFilter = null;
+            currentEnergyCard = null;
+            currentEvolvingCard = null;
+            
         }
 
         private void ToggleCardSelected(CardRenderer clickedCard)
@@ -413,11 +424,12 @@ namespace Assets.Code
             {
                 var typeText = string.Join(" ", selectMessage.TargetTypes.Select(type => Enum.GetName(typeof(EnergyTypes), type)));
                 infoText.text = $"Select one of your {typeText} pokemon";
-                currentDeckFilter = new PokemonOfTypeFilter(selectMessage.TargetTypes);
+                currentDeckFilter = new PokemonOwnerAndTypeFilter(myId, selectMessage.TargetTypes[0]);
             }
             else
             {
                 infoText.text = "Select one of your pokemon";
+                currentDeckFilter = new PokemonOwnerAndTypeFilter(myId);
             }
         }
 
@@ -739,7 +751,7 @@ namespace Assets.Code
 
         private void SelectedPlayerBenchedPokemon(CardRenderer cardController)
         {
-            if (!playerBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)))
+            if (!playerBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) || !(cardController.card is PokemonCard))
             {
                 return;
             }
@@ -765,7 +777,6 @@ namespace Assets.Code
         private void SetActiveStateClicked(CardRenderer cardController)
         {
             NetworkManager.Instance.gameService.SetActivePokemon(gameField.Id, myId, cardController.card.Id);
-            //NetworkManager.Instance.RegisterCallbackById(id, OnGameUpdated);
         }
 
         public void ActivateAbility(Ability ability)
