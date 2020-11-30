@@ -10,7 +10,7 @@ namespace Server.Services
 {
     public class CardService : IService
     {
-        private List<Card> cards;
+        private Dictionary<NetworkId, Card> cards;
         private List<Set> sets;
 
         public void InitTypes()
@@ -26,15 +26,17 @@ namespace Server.Services
 
             var pokemonCards = Serializer.Deserialize<List<PokemonCard>>(json);
 
-            cards = new List<Card>();
-            cards.AddRange(pokemonCards.Where(card => card.Completed));
-            cards.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")).Where(card => card.Completed));
-            cards.AddRange(Serializer.Deserialize<List<TrainerCard>>(File.ReadAllText("trainers.json")).Where(card => card.Completed));
+            var cardList = new List<Card>();
+            cardList.AddRange(pokemonCards.Where(card => card.Completed));
+            cardList.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")).Where(card => card.Completed));
+            cardList.AddRange(Serializer.Deserialize<List<TrainerCard>>(File.ReadAllText("trainers.json")).Where(card => card.Completed));
+
+            cards = cardList.ToDictionary(card => card.Id);
 
             Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
         }
 
-        public List<Card> GetAllCards() => cards;
+        public List<Card> GetAllCards() => cards.Values.ToList();
         public List<Set> GetAllSets() => sets;
 
         public bool UpdateCards(string pokemonCards, string energyCards, string tainerCards, string sets)
@@ -56,6 +58,17 @@ namespace Server.Services
             Logger.Instance.Log("Update complete");
 
             return true;
+        }
+
+        public Card CreateCardById(NetworkId id)
+        {
+            if (!cards.ContainsKey(id))
+            {
+                Logger.Instance.Log($"Card with id {id} not found");
+                return null;
+            }
+
+            return cards[id].Clone();
         }
     }
 }

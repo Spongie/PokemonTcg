@@ -17,7 +17,6 @@ namespace Server
     {
         private Thread serverThread;
         private TcpListener listener;
-        private Dictionary<string, IService> services;
         private int defaultConsoleTop;
 
         internal void PrintInfo()
@@ -38,7 +37,7 @@ namespace Server
             Instance = this;
             Clients = new ConcurrentDictionary<NetworkId, NetworkPlayer>();
 
-            services = new Dictionary<string, IService>
+            Services = new Dictionary<string, IService>
             {
                 { typeof(GameService).Name, new GameService() },
                 { typeof(ImageService).Name, new ImageService() },
@@ -47,7 +46,7 @@ namespace Server
                 { typeof(InfoService).Name, new InfoService() },
             };
 
-            foreach (var service in services.Values)
+            foreach (var service in Services.Values)
             {
                 service.InitTypes();
             }
@@ -98,7 +97,7 @@ namespace Server
             if (messageReceivedEvent.Message.MessageType == MessageTypes.Generic)
             {
                 var messageData = (GenericMessageData)messageReceivedEvent.Message.Data;
-                IService service = services[messageData.TargetClass];
+                IService service = Services[messageData.TargetClass];
                 var target = Assembly.GetExecutingAssembly().GetTypes().First(type => type.Name == messageData.TargetClass);
 
                 Task.Run(() => 
@@ -143,5 +142,7 @@ namespace Server
 
         public ConcurrentDictionary<NetworkId, NetworkPlayer> Clients { get; private set; }
         public NetworkId Id { get; set; }
+
+        public Dictionary<string, IService> Services { get; private set; }
     }
 }

@@ -36,17 +36,11 @@ namespace Server.Services
             var player = new Player(MasterServer.Instance.Clients[hostPlayer]);
             var game = new GameField();
 
-            var cardsById = deckInfo.Cards.GroupBy(x => x.Id);
-            var distinctIds = deckInfo.Cards.Select(x => x.Id).Distinct();
-            var addedIds = new HashSet<NetworkId>();
+            var cardService = (CardService)MasterServer.Instance.Services[typeof(CardService).Name];
 
-            foreach (var card in deckInfo.Cards)
+            foreach (var id in deckInfo.Cards.Select(x => x.CardId))
             {
-                if (addedIds.Contains(card.Id))
-                {
-
-                }
-                addedIds.Add(card.Id);
+                var card = cardService.CreateCardById(id);
                 card.Owner = player;
                 
                 var pokemonCard = card as PokemonCard;
@@ -80,17 +74,11 @@ namespace Server.Services
 
             var player = new Player(MasterServer.Instance.Clients[playerToJoin]);
 
-            var cardsById = deckInfo.Cards.GroupBy(x => x.Id);
-            var distinctIds = deckInfo.Cards.Select(x => x.Id).Distinct();
-            var addedIds = new HashSet<NetworkId>();
+            var cardService = (CardService)MasterServer.Instance.Services[typeof(CardService).Name];
 
-            foreach (var card in deckInfo.Cards)
+            foreach (var id in deckInfo.Cards.Select(x => x.CardId))
             {
-                if (addedIds.Contains(card.Id))
-                {
-
-                }
-                addedIds.Add(card.Id);
+                var card = cardService.CreateCardById(id);
                 card.Owner = player;
                 var pokemonCard = card as PokemonCard;
                 if (pokemonCard != null && pokemonCard.Ability != null)
