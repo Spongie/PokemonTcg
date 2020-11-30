@@ -13,17 +13,13 @@ namespace NetworkingCore
     {
         private TcpClient client;
         private NetworkStream stream;
-        private Thread writingThread;
         private Thread readerThread;
-        private ConcurrentQueue<NetworkMessage> messageQueue;
         public event EventHandler<NetworkDataRecievedEventArgs> DataReceived;
         public event EventHandler<NetworkId> OnDisconnected;
-        private bool writing = true;
         private bool reading = true;
 
         public NetworkPlayer(TcpClient tcpClient)
         {
-            messageQueue = new ConcurrentQueue<NetworkMessage>();
             SpecificResponses = new ConcurrentDictionary<NetworkId, NetworkMessage>();
             SetTcpClient(tcpClient);
         }
@@ -35,50 +31,28 @@ namespace NetworkingCore
             stream = client.GetStream();
 
             readerThread = new Thread(ReadingThread);
-            writingThread = new Thread(WritingThread);
             readerThread.Start();
-            writingThread.Start();
         }
 
         public void Send(NetworkMessage networkMessage)
         {
-            //TODO send immediatly
-            messageQueue.Enqueue(networkMessage);
-        }
-
-        void WritingThread()
-        {
-            while(writing)
+            try
             {
-                if (messageQueue.Count == 0)
+                networkMessage.Send(stream);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Log(e.Message);
+
+                if (e.InnerException != null)
                 {
-                    Thread.Sleep(50);
-                    continue;
+                    Logger.Instance.Log(e.InnerException.Message);
                 }
 
-                NetworkMessage message;
+                Logger.Instance.Log(e.StackTrace);
 
-                try
-                {
-                    if (messageQueue.TryDequeue(out message))
-                    {
-                        message.Send(stream);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Logger.Instance.Log(e.Message);
-
-                    if (e.InnerException != null)
-                    {
-                        Logger.Instance.Log(e.InnerException.Message);
-                    }
-
-                    Logger.Instance.Log(e.StackTrace);
-
-                    Disconnect(false);
-                    return;
-                }
+                Disconnect(false);
+                return;
             }
         }
 
@@ -211,26 +185,15 @@ namespace NetworkingCore
         {
             if (sendDisconnectMessage)
             {
-                SendAndWaitForDisconnect();
+                new NetworkMessage(MessageTypes.Disconnect, null, Id, NetworkId.Generate()).Send(stream);
             }
 
             reading = false;
-            writing = false;
             Thread.Sleep(16);
             stream.Close();
             client.Close();
 
             OnDisconnected?.Invoke(this, Id);
-        }
-
-        private void SendAndWaitForDisconnect()
-        {
-            messageQueue.Enqueue(new NetworkMessage(MessageTypes.Disconnect, null, Id, NetworkId.Generate()));
-            
-            while (messageQueue.Any())
-            {
-                Thread.Sleep(50);
-            }
         }
 
         public T SendAndWaitForResponse<T>(NetworkMessage message)
