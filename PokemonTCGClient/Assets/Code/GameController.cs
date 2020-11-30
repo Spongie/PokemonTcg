@@ -164,6 +164,11 @@ namespace Assets.Code
 
         private void OnRetreatTargetSelected(CardRenderer clickedCard)
         {
+            if (clickedCard.card.Id.Equals(Player.ActivePokemonCard.Id))
+            {
+                return;
+            }
+
             SpecialState = SpecialGameState.None;
             NetworkManager.Instance.gameService.RetreatPokemon(gameField.Id, clickedCard.card.Id, selectedCards.Select(card => card.Id).ToList());
             selectedCards.Clear();
