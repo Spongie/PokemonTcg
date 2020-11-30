@@ -124,6 +124,8 @@ namespace Server
                             Logger.Instance.Log(e.InnerException.Message);
                         }
 
+                        Logger.Instance.Log(e.StackTrace);
+
                         if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))
                         {
                             errorPlayer.Send(new ExceptionMessage(e).ToNetworkMessage(Id));

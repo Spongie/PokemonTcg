@@ -5888,6 +5888,7 @@ GameObject:
   - component: {fileID: 1323709029}
   - component: {fileID: 1323709028}
   - component: {fileID: 1323709027}
+  - component: {fileID: 1323709031}
   - component: {fileID: 1323709030}
   m_Layer: 5
   m_Name: Escape Menu
@@ -5977,7 +5978,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323709025}
   m_CullTransparentMesh: 0
---- !u!223 &1323709030
+--- !u!114 &1323709030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323709025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1323709031
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5996,7 +6014,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1260
+  m_SortingOrder: 1900
   m_TargetDisplay: 0
 --- !u!1 &1348529819
 GameObject:

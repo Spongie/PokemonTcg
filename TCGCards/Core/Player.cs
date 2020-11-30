@@ -286,7 +286,7 @@ namespace TCGCards.Core
 
             OnCardsDrawn?.Invoke(this, new PlayerCardDraw()
             {
-                Amount = drawnCards.Count(),
+                Amount = drawnCards.Count,
                 Cards = new List<Card>(drawnCards),
                 Player = this
             });

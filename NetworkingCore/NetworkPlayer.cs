@@ -42,6 +42,7 @@ namespace NetworkingCore
 
         public void Send(NetworkMessage networkMessage)
         {
+            //TODO send immediatly
             messageQueue.Enqueue(networkMessage);
         }
 
@@ -49,7 +50,7 @@ namespace NetworkingCore
         {
             while(writing)
             {
-                if (!messageQueue.Any())
+                if (messageQueue.Count == 0)
                 {
                     Thread.Sleep(50);
                     continue;
@@ -67,6 +68,14 @@ namespace NetworkingCore
                 catch (Exception e)
                 {
                     Logger.Instance.Log(e.Message);
+
+                    if (e.InnerException != null)
+                    {
+                        Logger.Instance.Log(e.InnerException.Message);
+                    }
+
+                    Logger.Instance.Log(e.StackTrace);
+
                     Disconnect(false);
                     return;
                 }
@@ -112,6 +121,14 @@ namespace NetworkingCore
                     catch (Exception e)
                     {
                         Logger.Instance.Log(e.Message);
+
+                        if (e.InnerException != null)
+                        {
+                            Logger.Instance.Log(e.InnerException.Message);
+                        }
+
+                        Logger.Instance.Log(e.StackTrace);
+
                         Disconnect(false);
                         return;
                     }
@@ -145,6 +162,14 @@ namespace NetworkingCore
                         catch (Exception e)
                         {
                             Logger.Instance.Log(e.Message);
+
+                            if (e.InnerException != null)
+                            {
+                                Logger.Instance.Log(e.InnerException.Message);
+                            }
+
+                            Logger.Instance.Log(e.StackTrace);
+
                             Disconnect(false);
                             return;
                         }

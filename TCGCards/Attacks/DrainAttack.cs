@@ -30,6 +30,11 @@ namespace TCGCards.Attacks
             }
 
             owner.ActivePokemonCard.DamageCounters -= healing;
+
+            if (owner.ActivePokemonCard.DamageCounters < 0)
+            {
+                owner.ActivePokemonCard.DamageCounters = 0;
+            }
         }
     }
 }

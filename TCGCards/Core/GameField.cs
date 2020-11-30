@@ -597,6 +597,7 @@ namespace TCGCards.Core
                 return;
             }
 
+            trainerCard.IsRevealed = true;
             CurrentTrainerCard = trainerCard;
 
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
@@ -617,8 +618,6 @@ namespace TCGCards.Core
             ActivePlayer.DiscardPile.Add(trainerCard);
 
             CurrentTrainerCard = null;
-
-            SendEventToPlayers(new GameInfoEvent());
 
             if (ActivePlayer.IsDead)
             {

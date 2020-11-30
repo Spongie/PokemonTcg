@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace NetworkingCore
 {
@@ -25,6 +26,8 @@ namespace NetworkingCore
         public void Log(string info)
         {
             Console.WriteLine(info);
+
+            File.AppendAllText("error.log", info + Environment.NewLine + Environment.NewLine);
         }
     }
 }

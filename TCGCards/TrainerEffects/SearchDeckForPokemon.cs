@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
@@ -116,10 +117,12 @@ namespace TCGCards.TrainerEffects
                 if (addToBench)
                 {
                     caster.BenchedPokemon.Add((PokemonCard)card);
+                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = (PokemonCard)card });
                 }
                 else
                 {
                     caster.Hand.Add(card);
+                    game.SendEventToPlayers(new DrawCardsEvent() { Amount = 1, Player = caster.Id, Cards = new List<Card>() { card } });
                 }
             }
         }
