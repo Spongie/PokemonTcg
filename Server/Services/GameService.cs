@@ -187,7 +187,7 @@ namespace Server.Services
 
             var energyCard = (EnergyCard)game.FindCardById(energyCardId);
             var target = (PokemonCard)game.FindCardById(targetId);
-            //Check if not in hand
+            
             game.ActivePlayer.PlayEnergyCard(energyCard, target, game);
 
             return game;
@@ -321,6 +321,7 @@ namespace Server.Services
 
             game.GameState = GameFieldState.GameOver;
             SendUpdateToPlayers(game.Players, game);
+            RemoveCompletedGames();
 
             return game;
         }

@@ -58,7 +58,7 @@ namespace TCGCards.Core
             SendEventMessage(gameEvent, NonActivePlayer);
         }
 
-        public void RevealCardsTo(List<NetworkId> pickedCards, Player nonActivePlayer)
+        public void RevealCardsTo(List<NetworkId> pickedCards, Player player)
         {
             foreach (var card in pickedCards.Select(id => FindCardById(id)))
             {
@@ -69,6 +69,11 @@ namespace TCGCards.Core
 
         public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution)
         {
+            if (!ActivePlayer.Id.Equals(basePokemon.Id) || !ActivePlayer.Id.Equals(evolution.Id))
+            {
+                return;
+            }
+
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopEvolutions))
             {
                 GameLog.AddMessage("Evolution stopped by ability");
@@ -200,6 +205,11 @@ namespace TCGCards.Core
 
         public void OnPokemonRetreated(PokemonCard replacementCard, List<EnergyCard> payedEnergy)
         {
+            if (!ActivePlayer.Id.Equals(replacementCard.Owner.Id))
+            {
+                return;
+            }
+
             if (!CanRetreat(ActivePlayer.ActivePokemonCard))
             {
                 GameLog.AddMessage("Tried to retreat but did not have enough energy");
@@ -585,6 +595,12 @@ namespace TCGCards.Core
 
         public void PlayPokemon(PokemonCard pokemon)
         {
+            if (!pokemon.Owner.Id.Equals(ActivePlayer.Id))
+            {
+                GameLog.AddMessage($"{NonActivePlayer?.NetworkPlayer?.Name} Tried to play a pokemon on his opponents turn");
+                return;
+            }
+
             ActivePlayer.PlayCard(pokemon);
 
             TriggerAbilityOfType(TriggerType.EnterPlay, pokemon);
@@ -592,6 +608,12 @@ namespace TCGCards.Core
 
         public void PlayTrainerCard(TrainerCard trainerCard)
         {
+            if (!ActivePlayer.Hand.Contains(trainerCard))
+            {
+                GameLog.AddMessage($"{ActivePlayer?.NetworkPlayer?.Name} Tried to play a trainer ({trainerCard.Name}) card not in his hand");
+                return;
+            }
+
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
             {
                 return;
