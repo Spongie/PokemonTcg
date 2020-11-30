@@ -239,7 +239,7 @@ namespace Assets.Code
         {
             PokemonCard pokemon = cardRenderer.card as PokemonCard;
 
-            if (pokemon == null)
+            if (pokemon == null || Player.Hand.Contains(pokemon))
             {
                 return;
             }
