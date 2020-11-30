@@ -31,7 +31,7 @@ namespace Server.Services
             cardList.AddRange(Serializer.Deserialize<List<EnergyCard>>(File.ReadAllText("energy.json")).Where(card => card.Completed));
             cardList.AddRange(Serializer.Deserialize<List<TrainerCard>>(File.ReadAllText("trainers.json")).Where(card => card.Completed));
 
-            cards = cardList.ToDictionary(card => card.Id);
+            cards = cardList.ToDictionary(card => card.CardId);
 
             Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
         }
@@ -52,7 +52,7 @@ namespace Server.Services
             InitTypes();
 
             var version = new VersionNumber(File.ReadAllText("cards.version"));
-            version.Minor++;
+            version.Build++;
             File.WriteAllText("cards.version", version.ToString());
 
             Logger.Instance.Log("Update complete");
