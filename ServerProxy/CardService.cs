@@ -46,4 +46,15 @@ public System.Boolean UpdateCards(System.String pokemonCards,System.String energ
 		
 		return networkPlayer.SendAndWaitForResponse<System.Boolean>(message);
 	}
+public TCGCards.Card CreateCardById(NetworkingCore.NetworkId id)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "CreateCardById",
+			TargetClass = "CardService",
+			Parameters = new object[] { id }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Card>(message);
+	}
 }

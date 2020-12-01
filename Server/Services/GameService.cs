@@ -121,7 +121,7 @@ namespace Server.Services
             return game;
         }
 
-        public GameField EndTurn(NetworkId gameId)
+        public GameField EndTurn(NetworkId gameId, [IgnoreInService] NetworkId senderId)
         {
             GameField game;
 
@@ -130,7 +130,7 @@ namespace Server.Services
                 return null;
             }
 
-            if (game.GameState == GameFieldState.GameOver)
+            if (game.GameState == GameFieldState.GameOver || !game.ActivePlayer.Id.Equals(senderId))
             {
                 return game;
             }

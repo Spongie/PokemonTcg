@@ -104,7 +104,15 @@ namespace Server
                 {
                     try
                     {
-                        object result = target.GetMethod(messageData.TargetMethod).Invoke(service, messageData.Parameters);
+                        var method = target.GetMethod(messageData.TargetMethod);
+                        var parameters = new List<object>(messageData.Parameters);
+
+                        if (method.GetParameters().Length == messageData.Parameters.Length + 1)
+                        {
+                            parameters.Add(((INetworkPlayer)sender).Id);
+                        }
+
+                        object result = method.Invoke(service, parameters.ToArray());
 
                         if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer networkPlayer))
                         {

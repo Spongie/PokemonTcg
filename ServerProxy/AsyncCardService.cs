@@ -49,4 +49,16 @@ public NetworkingCore.NetworkId UpdateCards(System.String pokemonCards,System.St
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId CreateCardById(NetworkingCore.NetworkId id)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "CreateCardById",
+			TargetClass = "CardService",
+			Parameters = new object[] { id }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 }

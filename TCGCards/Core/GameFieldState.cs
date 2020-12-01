@@ -8,6 +8,7 @@
         BothSelectingBench,
         InTurn,
         GameOver,
-        Attacking
+        Attacking,
+        TurnEnding
     }
 }

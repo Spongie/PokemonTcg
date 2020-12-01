@@ -138,6 +138,15 @@ namespace TCGCards.Core
         {
             Player owner = Players.First(p => p.Id.Equals(ownerId));
 
+            if (GameState != GameFieldState.BothSelectingActive)
+            {
+                if (!ActivePlayer.Id.Equals(ownerId))
+                {
+                    GameLog.AddMessage($"{owner?.NetworkPlayer?.Name} tried to play a pokemon when not allowed");
+                    return;
+                }
+            }
+
             if (activePokemon.Stage == 0)
             {
                 GameLog.AddMessage($"{owner.NetworkPlayer?.Name} is setting {activePokemon.GetName()} as active");
@@ -226,6 +235,15 @@ namespace TCGCards.Core
 
         public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
         {
+            if (GameState != GameFieldState.BothSelectingBench)
+            {
+                if (!ActivePlayer.Id.Equals(owner.Id))
+                {
+                    GameLog.AddMessage($"{owner?.NetworkPlayer?.Name} tried to play a pokemon when not allowed");
+                    return;
+                }
+            }
+            
             foreach (PokemonCard pokemon in selectedPokemons)
             {
                 if (owner.BenchedPokemon.Count < BenchMaxSize && pokemon.Stage == 0)
@@ -888,11 +906,12 @@ namespace TCGCards.Core
 
         public void EndTurn()
         {
-            if (GameState == GameFieldState.GameOver)
+            if (GameState == GameFieldState.GameOver || GameState == GameFieldState.TurnEnding)
             {
                 return;
             }
 
+            GameState = GameFieldState.TurnEnding;
             TemporaryPassiveAbilities.ForEach(x => x.TurnsLeft--);
             TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0 || !x.LimitedByTime).ToList();
 

@@ -15,6 +15,10 @@ namespace ProxyGenerator
                 string generics = $"<{string.Join(',', Type.GenericTypeArguments.Select(t => t.FullName))}>";
                 return $"System.Collections.Generic.List{generics} {Name}";
             }
+            if (Type.FullName.ToLower() == "system.void")
+            {
+                return $"void {Name}";
+            }
 
             return $"{Type.FullName} {Name}";
         }

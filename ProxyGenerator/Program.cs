@@ -1,4 +1,5 @@
-﻿using Server.Services;
+﻿using NetworkingCore;
+using Server.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,7 +54,9 @@ namespace ProxyGenerator
                     continue;
                 }
 
-                var parameters = method.GetParameters().Select(p => new Parameter
+                var parameters = method.GetParameters()
+                    .Where(p => p.GetCustomAttribute<IgnoreInServiceAttribute>() == null)
+                    .Select(p => new Parameter
                 {
                     Name = p.Name,
                     Type = p.ParameterType
