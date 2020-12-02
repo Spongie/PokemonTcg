@@ -121,6 +121,18 @@ namespace Server.Services
             return game;
         }
 
+        public GameField GetGameField(NetworkId gameId, [IgnoreInService] NetworkId senderId)
+        {
+            GameField game;
+
+            if (!ActiveGames.TryGetValue(gameId, out game))
+            {
+                return null;
+            }
+
+            return game;
+        }
+
         public GameField EndTurn(NetworkId gameId, [IgnoreInService] NetworkId senderId)
         {
             GameField game;

@@ -68,6 +68,17 @@ public TCGCards.Core.GameField AddToBench(NetworkingCore.NetworkId gameId,Networ
 		
 		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
 	}
+public TCGCards.Core.GameField GetGameField(NetworkingCore.NetworkId gameId)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetGameField",
+			TargetClass = "GameService",
+			Parameters = new object[] { gameId }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<TCGCards.Core.GameField>(message);
+	}
 public TCGCards.Core.GameField EndTurn(NetworkingCore.NetworkId gameId)
 	{
 		var message = new GenericMessageData

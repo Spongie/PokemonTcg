@@ -73,6 +73,18 @@ public NetworkingCore.NetworkId AddToBench(NetworkingCore.NetworkId gameId,Netwo
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId GetGameField(NetworkingCore.NetworkId gameId)
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetGameField",
+			TargetClass = "GameService",
+			Parameters = new object[] { gameId }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 public NetworkingCore.NetworkId EndTurn(NetworkingCore.NetworkId gameId)
 	{
 		var message = new GenericMessageData

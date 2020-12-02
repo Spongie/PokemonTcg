@@ -6,6 +6,7 @@ using System.Linq;
 using Assets.Code._2D;
 using Assets.Code.UI.Events;
 using Assets.Code.UI.Game;
+using Assets.Code.UI.Game.SpecialStateHandlers;
 using Entities;
 using NetworkingCore;
 using NetworkingCore.Messages;
@@ -68,7 +69,6 @@ namespace Assets.Code
 
         private int minSelectedCardCount;
         private List<Card> selectedCards;
-        private Dictionary<GameFieldState, string> gameStateInfo;
         private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
         private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
         private Dictionary<NetworkId, CardRenderer> cardRenderers;
@@ -77,13 +77,8 @@ namespace Assets.Code
         private EnergyCard currentEnergyCard;
         private PokemonCard currentEvolvingCard;
         private IDeckFilter currentDeckFilter;
-
         public List<string> gameLog = new List<string>();
-
-        private static GameFieldState[] statesWithDoneAction = new[]
-        {
-            GameFieldState.BothSelectingBench
-        };
+        public ISpecialStateHandler currentClickHandler;
 
         private void Awake()
         {
@@ -92,7 +87,6 @@ namespace Assets.Code
             energyCardsToAttach = new Queue<EnergyCard>();
             energyPokemonMap = new Dictionary<NetworkId, NetworkId>();
             cardRenderers = new Dictionary<NetworkId, CardRenderer>();
-            InitGamestateInfo();
             RegisterClickHandlers();
         }
 
@@ -108,15 +102,6 @@ namespace Assets.Code
             SpecialState = SpecialGameState.SelectPokemonToEvolveOn;
             currentEvolvingCard = card;
             infoText.text = "Select a pokemon to evolve";
-        }
-
-        private void InitGamestateInfo()
-        {
-            gameStateInfo = new Dictionary<GameFieldState, string>
-            {
-                { GameFieldState.BothSelectingActive, "Select your active Pokémon" },
-                { GameFieldState.BothSelectingBench, "Select your benched Pokémon" },
-            };
         }
 
         private void RegisterClickHandlers()
