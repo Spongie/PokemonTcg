@@ -23,6 +23,7 @@ namespace Assets.Code.UI.Events
             renderer.SetCard(addedToBenchEvent.Pokemon, zoomMode, true);
             
             GameController.Instance.AddCard(renderer);
+            GameController.Instance.Player.Hand.Remove(addedToBenchEvent.Pokemon);
 
             var canvas = renderer.GetComponent<Canvas>();
             var oldSortorder = canvas.sortingOrder;
