@@ -163,7 +163,13 @@ namespace Assets.Code
         {
             var totalAttachedEnergy = pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount);
 
-            if (totalAttachedEnergy == pokemonCard.RetreatCost)
+            if (pokemonCard.RetreatCost == 0)
+            {
+                infoText.text = "Select new active pokemon";
+                SpecialState = SpecialGameState.SelectingRetreatTarget;
+                selectedCards.Clear();
+            }
+            else if (totalAttachedEnergy == pokemonCard.RetreatCost)
             {
                 infoText.text = "Select new active pokemon";
                 SpecialState = SpecialGameState.SelectingRetreatTarget;
@@ -577,6 +583,8 @@ namespace Assets.Code
                     cancelButton.SetActive(false);
                     break;
                 default:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
                     break;
             }
         }
