@@ -48,9 +48,16 @@ function BuildClient {
 
 Write-Output "Building server..."
 
-dotnet publish .\Server\Server.csproj -r linux-x64 -c Release
+if ($args[0] -eq '-debug') {
+    Write-Output "Building debug server..."
+    dotnet publish .\Server\Server.csproj -r linux-x64 -c Debug
+    Copy-Item -Path ".\Server\bin\Debug\netcoreapp3.1\linux-x64\publish\*" -Destination "E:\PokemonBuild\Server" -Recurse
+}
+else {
+    dotnet publish .\Server\Server.csproj -r linux-x64 -c Release
+    Copy-Item -Path ".\Server\bin\Release\netcoreapp3.1\linux-x64\publish\*" -Destination "E:\PokemonBuild\Server" -Recurse
+}
 
-Copy-Item -Path ".\Server\bin\Release\netcoreapp3.1\linux-x64\publish\*" -Destination "E:\PokemonBuild\Server" -Recurse
 Copy-Item -Path ".\Data\*" -Destination "E:\PokemonBuild\Server" -Recurse
 
 Write-Output "Building launcher..."
