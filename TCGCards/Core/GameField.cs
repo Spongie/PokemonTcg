@@ -69,8 +69,9 @@ namespace TCGCards.Core
 
         public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution)
         {
-            if (!ActivePlayer.Id.Equals(basePokemon.Id) || !ActivePlayer.Id.Equals(evolution.Id))
+            if (!ActivePlayer.Id.Equals(basePokemon.Owner.Id) || !ActivePlayer.Id.Equals(evolution.Owner.Id))
             {
+                GameLog.AddMessage("Evolution stopped by epic 1337 anti-cheat");
                 return;
             }
 
@@ -636,6 +637,12 @@ namespace TCGCards.Core
 
             if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopTrainerCast))
             {
+                GameLog.AddMessage($"{trainerCard.Name} stopped by ability");
+                return;
+            }
+            else if (!trainerCard.CanCast(this, ActivePlayer, NonActivePlayer))
+            {
+                GameLog.AddMessage($"{trainerCard.Name} could not be cast because something is missing");
                 return;
             }
 

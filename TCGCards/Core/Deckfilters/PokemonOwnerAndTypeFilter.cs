@@ -35,7 +35,7 @@ namespace TCGCards.Core.Deckfilters
 
             bool validType = true;
 
-            if (EnergyType != EnergyTypes.All || EnergyType != EnergyTypes.None)
+            if (EnergyType != EnergyTypes.All && EnergyType != EnergyTypes.None)
             {
                 validType = pokemon.Type == EnergyType;
             }
