@@ -61,6 +61,35 @@ namespace TCGCards.TrainerEffects
             return filter;
         }
 
+        public static List<PokemonCard> GetPossibleTargetsFromMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner)
+        {
+            switch (targetingMode)
+            {
+                case TargetingMode.YourActive:
+                    return new List<PokemonCard> { caster.ActivePokemonCard };
+                case TargetingMode.YourBench:
+                    return caster.BenchedPokemon;
+                case TargetingMode.YourPokemon:
+                    return caster.GetAllPokemonCards();
+                case TargetingMode.OpponentActive:
+                    return new List<PokemonCard> { opponent.ActivePokemonCard };
+                case TargetingMode.OpponentBench:
+                    return opponent.BenchedPokemon;
+                case TargetingMode.OpponentPokemon:
+                    return opponent.GetAllPokemonCards();
+                case TargetingMode.AnyPokemon:
+                    var pokemons = caster.GetAllPokemonCards();
+                    pokemons.AddRange(opponent.GetAllPokemonCards());
+                    return pokemons;
+                case TargetingMode.AttachedTo:
+                    return new List<PokemonCard> { pokemonOwner };
+                case TargetingMode.Self:
+                    return new List<PokemonCard> { pokemonOwner };
+                default:
+                    return new List<PokemonCard> { pokemonOwner };
+            }
+        }
+
         public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner, string info = "")
         {
             PokemonCard target;
