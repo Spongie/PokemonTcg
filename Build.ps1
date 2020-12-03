@@ -77,6 +77,8 @@ if ($client.IsPresent) {
 }
 
 if ($deploy.IsPresent) {
+    Write-Output "Uploading to server..."
+    
     $sessionOptions = New-Object WinSCP.SessionOptions -Property @{
         Protocol = [WinSCP.Protocol]::Sftp
         HostName = "sftp://root@85.90.244.171"
@@ -105,5 +107,9 @@ if ($deploy.IsPresent) {
     }
     finally {
         $session.Dispose();
+        Write-Output "Restarting server...";
+        Invoke-WebRequest -Uri "http://85.90.244.171:80/restart"
     }
 }
+
+Write-Output "Done!"
