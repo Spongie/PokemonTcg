@@ -1,4 +1,8 @@
-﻿function UpdateClientVersion {
+﻿param([Switch]$client, [Switch]$debug, [Switch]$deploy, [String]$username, [String]$password)
+
+Add-Type -Path "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
+
+function UpdateClientVersion {
     $raw = Get-Content -Path "E:\PokemonBuild\Server\client.version"
     $versionNumbers = $raw.Split(".");
     
@@ -27,7 +31,8 @@ function UpdateCardsVersion {
 function BuildClient {
     Write-Output "Building client..."
     
-    $p = Start-Process Unity.exe -ArgumentList '-quit', '-batchmode', '-projectPath PokemonTCGClient', '-executeMethod Builder.PerformBuild', '-logfile editor.log' -Wait
+    $p = Start-Process Unity.exe -ArgumentList '-quit', '-batchmode', '-projectPath PokemonTCGClient', '-executeMethod Builder.PerformBuild', '-logfile editor.log' -PassThru
+    $p | Wait-Process
 
     Get-ChildItem -Path  'E:\PokemonBuild\Client\PokemonTCGClient_Data\StreamingAssets\Cards\' -Recurse -exclude somefile.txt |
     Select -ExpandProperty FullName |
@@ -48,7 +53,7 @@ function BuildClient {
 
 Write-Output "Building server..."
 
-if ($args[0] -eq '-debug') {
+if ($debug.IsPresent) {
     Write-Output "Building debug server..."
     dotnet publish .\Server\Server.csproj -r linux-x64 -c Debug
     Copy-Item -Path ".\Server\bin\Debug\netcoreapp3.1\linux-x64\publish\*" -Destination "E:\PokemonBuild\Server" -Recurse
@@ -66,7 +71,39 @@ Copy-Item -Path ".\Launcher\bin\Debug\netcoreapp3.1\publish\*" -Destination "E:\
 
 UpdateCardsVersion
 
-if ($args[0] -eq '-client') {
+if ($client.IsPresent) {
     
     BuildClient
+}
+
+if ($deploy.IsPresent) {
+    $sessionOptions = New-Object WinSCP.SessionOptions -Property @{
+        Protocol = [WinSCP.Protocol]::Sftp
+        HostName = "sftp://root@85.90.244.171"
+        SshHostKeyFingerprint = 'ssh-ed25519-uvkM44haU-oObtd8haavGeKQJdFOAMcJYGfxntcu2MY'
+        UserName = $username
+        Password = $password
+    }
+
+    $session = New-Object WinSCP.Session
+    try {
+        $session.Open($sessionOptions);
+        Get-ChildItem 'E:\PokemonBuild\Server\' -File | ForEach-Object {
+         
+         if ($_.Name.StartsWith('System.')) {
+            continue;
+         }
+         if ($_.Name.StartsWith('libc')) {
+            continue;
+         }
+         if ($_.Name.StartsWith('Microsoft.')) {
+            continue;
+         }
+
+         $session.PutFiles($_.FullName, '/root/server/*');   
+        }
+    }
+    finally {
+        $session.Dispose();
+    }
 }
