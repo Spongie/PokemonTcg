@@ -38,7 +38,7 @@ namespace TCGCards.TrainerEffects
         {
             get
             {
-                return "PutPokemon From Discard On Bench";
+                return "Put Pokemon From Discard On Bench";
             }
         }
 
@@ -46,10 +46,10 @@ namespace TCGCards.TrainerEffects
         {
             if (targetsOpponent)
             {
-                return GameField.BenchMaxSize - opponent.BenchedPokemon.Count > 0;
+                return opponent.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - opponent.BenchedPokemon.Count > 0;
             }
 
-            return GameField.BenchMaxSize - caster.BenchedPokemon.Count > 0;
+            return caster.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - caster.BenchedPokemon.Count > 0;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

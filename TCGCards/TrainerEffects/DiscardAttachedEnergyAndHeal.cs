@@ -55,7 +55,16 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            return true;
+            foreach (var pokemon in CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
+            {
+                if (pokemon.AttachedEnergy.Count >= Amount)
+                {
+                    return true;
+                }
+            }
+
+            game.GameLog.AddMessage($"Cannot cast because no pokemon with atleast {Amount} energy was found");
+            return false;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
