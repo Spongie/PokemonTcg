@@ -52,7 +52,7 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        public override bool CanActivate()
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
             switch (Status)
             {

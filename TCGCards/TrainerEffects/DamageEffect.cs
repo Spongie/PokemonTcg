@@ -9,6 +9,7 @@ namespace TCGCards.TrainerEffects
         private int amount;
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
         private bool coinFlip;
+        private bool applyWeaknessResistance;
 
         [DynamicInput("Damage amount")]
         public int Amount
@@ -43,6 +44,17 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Apply weakness resistance", InputControl.Boolean)]
+        public bool ApplyWeaknessResistance
+        {
+            get { return applyWeaknessResistance; }
+            set
+            {
+                applyWeaknessResistance = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EffectType
         {
@@ -68,7 +80,9 @@ namespace TCGCards.TrainerEffects
 
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            target.DealDamage(Amount, game, pokemonSource);
+            var damage = game.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null);
+
+            target.DealDamage(damage, game, pokemonSource);
         }
     }
 }

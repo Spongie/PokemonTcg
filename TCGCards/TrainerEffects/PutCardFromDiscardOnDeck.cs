@@ -63,6 +63,8 @@ namespace TCGCards.TrainerEffects
                     return caster.DiscardPile.Count() >= Amount;
                 case CardType.Pokemon:
                     return caster.DiscardPile.Count(card => card is PokemonCard) >= Amount;
+                case CardType.BasicPokemon:
+                    return caster.DiscardPile.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).Count() >= Amount;
                 case CardType.Trainer:
                     return caster.DiscardPile.Count(card => card is TrainerCard) >= Amount;
                 case CardType.Energy:

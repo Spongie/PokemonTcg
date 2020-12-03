@@ -14,6 +14,8 @@ namespace TCGCards.TrainerEffects
         private TargetingMode targetingMode;
         private EnergyTypes energyType;
         private bool coinFlip;
+        private bool useLastCoin;
+        private bool checkTails;
 
         [DynamicInput("Targeting type", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -60,6 +62,28 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Use last coin flip?", InputControl.Boolean)]
+        public bool UseLastCoin
+        {
+            get { return useLastCoin; }
+            set
+            {
+                useLastCoin = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Trigger on tails instead?", InputControl.Boolean)]
+        public bool CheckTails
+        {
+            get { return checkTails; }
+            set
+            {
+                checkTails = value;
+                FirePropertyChanged();
+            }
+        }
+
         public string EffectType
         {
             get
@@ -89,6 +113,18 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            var targetValue = CheckTails ? 0 : 1;
+            var lastValue = game.LastCoinFlipResult ? 1 : 0;
+
+            if (UseLastCoin && lastValue != targetValue)
+            {
+                return;
+            }
+            else if (CoinFlip && game.FlipCoins(1) != targetValue)
+            {
+                return;
+            }
+
             while (true)
             {
                 PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);

@@ -2,10 +2,11 @@
 {
     public enum CardType
     {
-        Any,
-        Pokemon,
-        Trainer,
-        Energy,
-        BasicEnergy,
+        Any = 0,
+        Pokemon = 1,
+        Trainer = 2,
+        Energy = 3,
+        BasicEnergy = 4,
+        BasicPokemon = 5
     }
 }

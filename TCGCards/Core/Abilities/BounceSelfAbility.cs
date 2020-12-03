@@ -29,9 +29,9 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.Activation;
         }
 
-        public override bool CanActivate()
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
-            return !PokemonOwner.PlayedThisTurn;
+            return !PokemonOwner.PlayedThisTurn && caster.ActivePokemonCard != PokemonOwner && base.CanActivate(game, caster, opponent);
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

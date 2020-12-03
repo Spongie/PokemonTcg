@@ -18,6 +18,7 @@ namespace TCGCards.Core.Deckfilters
 
         public string Names { get; set; }
         public EnergyTypes Type { get; set; }
+        public bool OnlyBasic { get; set; }
 
         public bool IsCardValid(Card card)
         {

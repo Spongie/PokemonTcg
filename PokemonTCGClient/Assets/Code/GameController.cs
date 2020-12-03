@@ -774,7 +774,7 @@ namespace Assets.Code
 
         public void ActivateAbility(Ability ability)
         {
-            if (!gameField.ActivePlayer.Id.Equals(myId) || !ability.CanActivate() || ability.PokemonOwner.Owner.Hand.Contains(ability.PokemonOwner))
+            if (!gameField.ActivePlayer.Id.Equals(myId) || ability.PokemonOwner.Owner.Hand.Contains(ability.PokemonOwner))
             {
                 return;
             }

@@ -40,7 +40,7 @@ namespace Assets.Code.UI.Game
             onlyView = false;
             availableCards = new HashSet<NetworkId>();
             limit = deckSearchMessage.CardCount;
-            minCount = deckSearchMessage.CardCount;
+            minCount = 0;
 
             foreach (var card in deckSearchMessage.Deck.Cards)
             {

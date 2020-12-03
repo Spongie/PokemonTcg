@@ -71,7 +71,7 @@ namespace TCGCards.Core.Abilities
             pokemon.AttachEnergy((EnergyCard)energyCard, game);
         }
 
-        public override bool CanActivate()
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
             bool hasEnergyType;
 
@@ -84,7 +84,7 @@ namespace TCGCards.Core.Abilities
                 hasEnergyType = PokemonOwner.Owner.Hand.OfType<EnergyCard>().Any();
             }
 
-            return hasEnergyType && base.CanActivate();
+            return hasEnergyType && base.CanActivate(game, caster, opponent);
         }
     }
 }

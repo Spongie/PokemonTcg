@@ -64,14 +64,14 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        public override bool CanActivate()
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
             if (!AllowKnockout && TargetingMode == TargetingMode.Self && PokemonOwner.DamageCounters + amount >= PokemonOwner.Hp)
             {
                 return false;
             }
 
-            return base.CanActivate();
+            return base.CanActivate(game, caster, opponent);
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

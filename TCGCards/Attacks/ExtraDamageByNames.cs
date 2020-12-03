@@ -9,6 +9,18 @@ namespace TCGCards.Attacks
     {
         private string names;
         private int extra;
+        private bool alsoCheckOpponent;
+
+        [DynamicInput("Count opponents pokemon also", InputControl.Boolean)]
+        public bool AlsoCountOpponents
+        {
+            get { return alsoCheckOpponent; }
+            set
+            {
+                alsoCheckOpponent = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Extra Damage")]
         public int ExtraDamage
@@ -38,13 +50,25 @@ namespace TCGCards.Attacks
             var names = Names.ToLower().Split(';');
             var damage = Damage;
 
-            foreach (var pokemon in owner.BenchedPokemon)
+            foreach (var pokemon in owner.GetAllPokemonCards())
             {
                 if (names.Contains(pokemon.Name.ToLower()))
                 {
                     damage += ExtraDamage;
                 }
             }
+
+            if (alsoCheckOpponent)
+            {
+                foreach (var pokemon in opponent.GetAllPokemonCards())
+                {
+                    if (names.Contains(pokemon.Name.ToLower()))
+                    {
+                        damage += ExtraDamage;
+                    }
+                }
+            }
+
             return damage;
         }
     }

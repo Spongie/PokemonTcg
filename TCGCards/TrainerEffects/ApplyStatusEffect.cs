@@ -11,6 +11,30 @@ namespace TCGCards.TrainerEffects
         private bool flipCoin;
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
         private StatusEffect secondaryEffect = StatusEffect.None;
+        private bool useLastCoin;
+        private bool checkTails;
+
+        [DynamicInput("Use last coin flip?", InputControl.Boolean)]
+        public bool UseLastCoin
+        {
+            get { return useLastCoin; }
+            set
+            {
+                useLastCoin = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Trigger on tails instead?", InputControl.Boolean)]
+        public bool CheckTails
+        {
+            get { return checkTails; }
+            set
+            {
+                checkTails = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Flip Coin?", InputControl.Boolean)]
         public bool FlipCoin
@@ -87,7 +111,14 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (flipCoin && game.FlipCoins(1) == 0)
+            var targetValue = CheckTails ? 0 : 1;
+            var lastValue = game != null && game.LastCoinFlipResult ? 1 : 0;
+
+            if (UseLastCoin && lastValue != targetValue)
+            {
+                return;
+            }
+            else if (flipCoin && game.FlipCoins(1) != targetValue)
             {
                 return;
             }

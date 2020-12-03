@@ -16,7 +16,7 @@ public class AbilityRenderer : MonoBehaviour
         abilityName.text = ability.Name;
         abilityDescription.text = ability.Description;
 
-        if (ability.TriggerType != TriggerType.Activation || !ability.CanActivate())
+        if (ability.TriggerType != TriggerType.Activation)
         {
             GetComponent<Button>().interactable = false;
         }

@@ -1,13 +1,28 @@
-﻿using Entities;
+﻿using CardEditor.Views;
+using Entities;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks
 {
     public class FlipCoinForeachBenched : Attack
     {
+        private bool opponentsBench;
+
+        [DynamicInput("Look at opponent bench?", InputControl.Boolean)]
+        public bool OpponentsBench
+        {
+            get { return opponentsBench; }
+            set
+            {
+                opponentsBench = value;
+                FirePropertyChanged();
+            }
+        }
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            return game.FlipCoins(owner.BenchedPokemon.Count) * Damage;
+            int count = OpponentsBench ? opponent.BenchedPokemon.Count : owner.BenchedPokemon.Count;
+            return game.FlipCoins(count) * Damage;
         }
     }
 }

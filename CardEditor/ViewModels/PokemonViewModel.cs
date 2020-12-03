@@ -15,6 +15,7 @@ namespace CardEditor.ViewModels
 		private PokemonCard card;
 		private Attack selectedAttack;
 		private IEffect selectedEffect;
+		private IEffect selectedAbilityEffect;
 
 		public PokemonViewModel() :this(new PokemonCard())
 		{
@@ -27,9 +28,26 @@ namespace CardEditor.ViewModels
 			AddAttackCommand = new RelayCommand(CanAddAttack, AddAttack);
 			SetAbilityCommand = new RelayCommand(CanAddAttack, SetAbility);
 			AddEffectCommand = new RelayCommand(CanAddEffect, AddEffect);
+			AddAbilityEffectCommand = new RelayCommand(CanAddAbilityEffect, AddAbilityEffect);
 		}
 
-		private void AddEffect(object obj)
+        private void AddAbilityEffect(object obj)
+        {
+			var window = new AddTrainerEffectWindow();
+
+			if (window.ShowDialog().Value)
+			{
+				card.Ability.Effects.Add(window.SelectedEffect);
+				SelectedAbilityEffect = card.Ability.Effects.Last();
+			}
+		}
+
+        private bool CanAddAbilityEffect(object obj)
+        {
+			return card.Ability != null;
+        }
+
+        private void AddEffect(object obj)
         {
 			var window = new AddTrainerEffectWindow();
 
@@ -118,8 +136,20 @@ namespace CardEditor.ViewModels
 			}
 		}
 
-		public ICommand AddAttackCommand { get; set; }
+        public IEffect SelectedAbilityEffect
+		{
+            get { return selectedAbilityEffect; }
+            set
+            {
+                selectedAbilityEffect = value;
+                FirePropertyChanged();
+            }
+        }
+
+
+        public ICommand AddAttackCommand { get; set; }
         public ICommand SetAbilityCommand { get; set; }
+        public ICommand AddAbilityEffectCommand { get; set; }
         public ICommand AddEffectCommand { get; set; }
 	}
 }

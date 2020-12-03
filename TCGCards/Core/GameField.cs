@@ -30,6 +30,23 @@ namespace TCGCards.Core
             GameLog = new GameLog();
         }
 
+        public bool IsSuccessfulFlip(bool flipCoin, bool checkLastFlip, bool checkTails)
+        {
+            var targetValue = checkTails ? 0 : 1;
+            var lastValue = LastCoinFlipResult ? 1 : 0;
+
+            if (checkLastFlip && lastValue != targetValue)
+            {
+                return false;
+            }
+            else if (flipCoin && FlipCoins(1) != targetValue)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public int FlipCoins(int coins)
         {
             var heads = CoinFlipper.FlipCoins(coins);
@@ -48,6 +65,9 @@ namespace TCGCards.Core
             }
 
             SendEventToPlayers(new CoinsFlippedEvent(results));
+
+            LastCoinFlipResult = heads > 0;
+            LastCoinFlipHeadCount = heads;
 
             return heads;
         }
@@ -507,8 +527,8 @@ namespace TCGCards.Core
             TriggerAbilityOfType(TriggerType.Attacked, NonActivePlayer.ActivePokemonCard);
 
             var abilities = new List<Ability>();
-            abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllActiveAbilities());
-            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllActiveAbilities());
+            abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllActiveAbilities(this, NonActivePlayer, ActivePlayer));
+            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllActiveAbilities(this, ActivePlayer, NonActivePlayer));
 
             foreach (var ability in abilities.OfType<IAttackStoppingAbility>())
             {
@@ -570,11 +590,11 @@ namespace TCGCards.Core
             }
         }
 
-        private int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender, Attack attack)
+        public int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender, Attack attack)
         {
             var realDamage = damage;
 
-            if (!attack.ApplyWeaknessResistance)
+            if (attack != null && !attack.ApplyWeaknessResistance)
             {
                 return realDamage;
             }
@@ -611,7 +631,7 @@ namespace TCGCards.Core
         {
             return NonActivePlayer.ActivePokemonCard.IsDead()
                             && NonActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.KilledByAttack
-                            && NonActivePlayer.ActivePokemonCard.Ability.CanActivate();
+                            && NonActivePlayer.ActivePokemonCard.Ability.CanActivate(this, NonActivePlayer, ActivePlayer);
         }
 
         public void PlayPokemon(PokemonCard pokemon)
@@ -894,7 +914,8 @@ namespace TCGCards.Core
                     continue;
                 }
 
-                if (ability.TriggerType == triggerType && ability.CanActivate())
+                var other = Players.First(player => !player.Id.Equals(ability.PokemonOwner.Owner));
+                if (ability.TriggerType == triggerType && ability.CanActivate(this, ability.PokemonOwner.Owner, other))
                 {
                     GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers..."); ;
                     ability.Trigger(pokemon.Owner, Players.First(x => !x.Id.Equals(pokemon.Owner.Id)), damage, this);
@@ -1017,5 +1038,7 @@ namespace TCGCards.Core
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
         public TrainerCard CurrentTrainerCard { get; set; }
+        public bool LastCoinFlipResult { get; set; }
+        public int LastCoinFlipHeadCount { get; set; }
     }
 }

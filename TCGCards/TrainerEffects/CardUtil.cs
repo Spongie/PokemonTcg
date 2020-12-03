@@ -17,6 +17,8 @@ namespace TCGCards.TrainerEffects
             {
                 case CardType.Pokemon:
                     return cards.OfType<PokemonCard>().OfType<Card>().ToList();
+                case CardType.BasicPokemon:
+                    return cards.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList();
                 case CardType.Trainer:
                     return cards.OfType<TrainerCard>().OfType<Card>().ToList();
                 case CardType.Energy:
@@ -37,6 +39,9 @@ namespace TCGCards.TrainerEffects
             {
                 case CardType.Pokemon:
                     filter.Add(new PokemonFilter());
+                    break;
+                case CardType.BasicPokemon:
+                    filter.Add(new BasicPokemonFilter());
                     break;
                 case CardType.Trainer:
                     filter.Add(new TrainerFilter());

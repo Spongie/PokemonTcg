@@ -214,28 +214,55 @@
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Ability">
-                    <DockPanel Grid.Column="1" LastChildFill="True">
-                        <Button Content="Set Ability" DockPanel.Dock="Top" Command="{Binding SetAbilityCommand}"/>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Selected Attack:" MinWidth="80"/>
-                            <Label Content="{Binding Card.Ability.AbilityType}" />
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Name" MinWidth="80"/>
-                            <TextBox Text="{Binding Card.Ability.Name}"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Description" MinWidth="80"/>
-                            <TextBox Text="{Binding Card.Ability.Description}"/>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Usage limit" MinWidth="80"/>
-                            <TextBox Text="{Binding Card.Ability.Usages}"/>
-                        </DockPanel>
-                        <local:DynamicInputControl DataContext="{Binding Card.Ability}" VerticalAlignment="Stretch">
+                    <TabControl>
+                        <TabItem Header="General">
+                            <DockPanel Grid.Column="1" LastChildFill="True">
+                                <Button Content="Set Ability" DockPanel.Dock="Top" Command="{Binding SetAbilityCommand}"/>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Selected Attack:" MinWidth="80"/>
+                                    <Label Content="{Binding Card.Ability.AbilityType}" />
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Name" MinWidth="80"/>
+                                    <TextBox Text="{Binding Card.Ability.Name}"/>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Description" MinWidth="80"/>
+                                    <TextBox Text="{Binding Card.Ability.Description}"/>
+                                </DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <Label Content="Usage limit" MinWidth="80"/>
+                                    <TextBox Text="{Binding Card.Ability.Usages}"/>
+                                </DockPanel>
+                                <local:DynamicInputControl DataContext="{Binding Card.Ability}" VerticalAlignment="Stretch">
 
-                        </local:DynamicInputControl>
-                    </DockPanel>
+                                </local:DynamicInputControl>
+                            </DockPanel>
+                        </TabItem>
+                        <TabItem Header="Effects">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*" />
+                                    <ColumnDefinition Width="70*" />
+                                </Grid.ColumnDefinitions>
+                                <DockPanel LastChildFill="True">
+                                    <Button Content="Add Effect" DockPanel.Dock="Bottom" Command="{Binding AddAbilityEffectCommand}"/>
+                                    <ListBox ItemsSource="{Binding Card.Ability.Effects}" SelectedItem="{Binding SelectedAbilityEffect}" DockPanel.Dock="Top">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding EffectType}" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DockPanel>
+                                <DockPanel Grid.Column="1" LastChildFill="True">
+                                    <local:DynamicInputControl DataContext="{Binding SelectedAbilityEffect}">
+
+                                    </local:DynamicInputControl>
+                                </DockPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </TabItem>
             </TabControl>
         </DockPanel>

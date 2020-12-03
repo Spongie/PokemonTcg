@@ -32,10 +32,10 @@ namespace TCGCards.Core.Abilities
         }
 
 
-        public override bool CanActivate()
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
             var pokemons = PokemonOwner.Owner.GetAllPokemonCards().ToList();
-            return base.CanActivate() && pokemons.Count >= 2 && pokemons.Any(p => p.AttachedEnergy.Any(e => EnergyType == EnergyTypes.All || e.EnergyType == EnergyType));
+            return base.CanActivate(game, caster, opponent) && pokemons.Count >= 2 && pokemons.Any(p => p.AttachedEnergy.Any(e => EnergyType == EnergyTypes.All || e.EnergyType == EnergyType));
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

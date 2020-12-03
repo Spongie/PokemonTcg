@@ -79,7 +79,12 @@ namespace Launcher
             {
 				UpdateCards();
 			}
-        }
+
+			AddMessage("Version updated! Press Launch to start the game");
+
+			UpdateEnabled = false;
+			LaunchEnabled = true;
+		}
 
         private void UpdateCards()
         {
@@ -97,10 +102,6 @@ namespace Launcher
 
             Directory.CreateDirectory(Path.Combine(streamingAssetsFolder, "Decks"));
 
-            AddMessage("Version updated! Press Launch to start the game");
-
-            UpdateEnabled = false;
-            LaunchEnabled = true;
             CardsVersionNumber = newCardVersion.ToString();
 
             File.WriteAllText("cards.version", CardsVersionNumber.ToString());

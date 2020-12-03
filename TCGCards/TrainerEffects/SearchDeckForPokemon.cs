@@ -117,7 +117,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) }, Amount))
+            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) { OnlyBasic = addToBench } }, Amount))
             {
                 caster.Deck.Cards = new Stack<Card>(caster.Deck.Cards.Except(new[] { card }));
                 

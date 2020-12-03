@@ -7,6 +7,7 @@ namespace TCGCards.Attacks
     public class FlipCoinPlusAttack : Attack
     {
         private int extraForHeads;
+        private int extraForTails;
 
         public FlipCoinPlusAttack() : base()
         {
@@ -24,9 +25,29 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Extra damage if Tails")]
+        public int ExtraforTails
+        {
+            get { return extraForTails; }
+            set
+            {
+                extraForTails = value;
+                FirePropertyChanged();
+            }
+        }
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            int extraDamage = ExtraforHeads * game.FlipCoins(1);
+            int extraDamage = 0;
+
+            if (game.FlipCoins(1) == 1)
+            {
+                extraDamage = ExtraforHeads;
+            }
+            else
+            {
+                extraDamage = ExtraforTails;
+            }
 
             return extraDamage + Damage;
         }

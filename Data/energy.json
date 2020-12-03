@@ -230,6 +230,8 @@
         "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
         "Amount": 10,
         "TargetingMode": 3,
+        "CoinFlip": false,
+        "ApplyWeaknessResistance": false,
         "EffectType": "Damage"
       }
     ],

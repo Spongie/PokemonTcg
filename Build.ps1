@@ -90,19 +90,20 @@ if ($deploy.IsPresent) {
     $session = New-Object WinSCP.Session
     try {
         $session.Open($sessionOptions);
-        Get-ChildItem 'E:\PokemonBuild\Server\' -File | ForEach-Object {
-         
-         if ($_.Name.StartsWith('System.')) {
-            continue;
-         }
-         if ($_.Name.StartsWith('libc')) {
-            continue;
-         }
-         if ($_.Name.StartsWith('Microsoft.')) {
-            continue;
-         }
+        $files = Get-ChildItem 'E:\PokemonBuild\Server\' -File
 
-         $session.PutFiles($_.FullName, '/root/server/*');   
+        foreach ($f in $files) {
+            if ($f.Name.StartsWith('System.')) {
+                continue;
+            }
+            if ($f.Name.StartsWith('libc')) {
+                continue;
+            }
+            if ($f.Name.StartsWith('Microsoft.')) {
+                continue;
+            }
+
+            $session.PutFiles($f.FullName, '/root/server/');
         }
     }
     finally {

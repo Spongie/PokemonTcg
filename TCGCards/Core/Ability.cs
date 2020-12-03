@@ -1,24 +1,35 @@
-﻿using Entities.Models;
+﻿using CardEditor.Views;
+using Entities.Models;
 using NetworkingCore;
+using System.Collections.ObjectModel;
+using System.Linq;
+using TCGCards.TrainerEffects;
 
 namespace TCGCards.Core
 {
-    public abstract class Ability : DataModel, IEntity
+    public class Ability : DataModel, IEntity
     {
         protected Card target;
         private string name;
         private string description;
         private int usages = 9999;
         private TriggerType triggerType;
+        private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
 
-        protected Ability(PokemonCard pokemonOwner)
+        public Ability():this(null)
+        {
+
+        }
+
+        public Ability(PokemonCard pokemonOwner)
         {
             PokemonOwner = pokemonOwner;
             Id = NetworkId.Generate();
         }
 
-        protected abstract void Activate(Player owner, Player opponent, int damageTaken, GameField game);
+        protected virtual void Activate(Player owner, Player opponent, int damageTaken, GameField game) { }
 
+        [DynamicInput("Trigger type", InputControl.Dropdown, typeof(TriggerType))]
         public TriggerType TriggerType
         {
             get { return triggerType; }
@@ -28,7 +39,6 @@ namespace TCGCards.Core
                 FirePropertyChanged();
             }
         }
-
 
         public PokemonCard PokemonOwner { get; set; }
 
@@ -62,15 +72,29 @@ namespace TCGCards.Core
             }
         }
 
+        public ObservableCollection<IEffect> Effects
+        {
+            get { return effects; }
+            set
+            {
+                effects = value;
+                FirePropertyChanged();
+            }
+        }
+
         public NetworkId Id { get; set; }
         public int UsedTimes { get; set; }
 
         public void Trigger(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            if (CanActivate())
+            if (CanActivate(game, owner, opponent))
             {
                 UsedTimes++;
                 Activate(owner, opponent, damageTaken, game);
+                foreach (var effect in Effects)
+                {
+                    effect.Process(game, owner, opponent, PokemonOwner);
+                }
             }
             else
             {
@@ -78,9 +102,14 @@ namespace TCGCards.Core
             }
         }
 
-        public virtual bool CanActivate()
+        public virtual bool CanActivate(GameField game, Player caster, Player opponent)
         {
-            return !PokemonOwner.AbilityDisabled && !PokemonOwner.IsAsleep && !PokemonOwner.IsConfused && !PokemonOwner.IsParalyzed && UsedTimes < Usages;
+            return !PokemonOwner.AbilityDisabled 
+                && !PokemonOwner.IsAsleep 
+                && !PokemonOwner.IsConfused 
+                && !PokemonOwner.IsParalyzed 
+                && UsedTimes < Usages 
+                && Effects.All(effect => effect.CanCast(game, caster, opponent));
         }
 
         public virtual void SetTarget(Card target)
