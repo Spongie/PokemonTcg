@@ -25,6 +25,7 @@ namespace TCGCards.TrainerEffects
         private string names;
         private int amount;
         private bool coinFlip;
+        private bool revealCard;
 
         [DynamicInput("Coin Flip", InputControl.Boolean)]
         public bool CoinFlip
@@ -59,6 +60,16 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Reaveal searched card?", InputControl.Boolean)]
+        public bool RevealCard
+        {
+            get { return revealCard; }
+            set
+            {
+                revealCard = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Only of type", InputControl.Dropdown, typeof(EnergyTypes))]
         public EnergyTypes EnergyType
@@ -106,14 +117,15 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var message = new DeckSearchMessage(caster.Deck, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) }, Amount);
-            var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(caster.Id));
-
-
-            foreach (var card in response.Cards.Select(id => game.FindCardById(id)))
+            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) }, Amount))
             {
                 caster.Deck.Cards = new Stack<Card>(caster.Deck.Cards.Except(new[] { card }));
                 
+                if (revealCard)
+                {
+                    card.IsRevealed = true;
+                }
+
                 if (addToBench)
                 {
                     caster.BenchedPokemon.Add((PokemonCard)card);

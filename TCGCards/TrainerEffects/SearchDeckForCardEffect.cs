@@ -12,6 +12,7 @@ namespace TCGCards.TrainerEffects
     {
         private CardType cardType;
         private EnergyTypes energyType = EnergyTypes.None;
+        private bool revealCard;
 
         [DynamicInput("Card type", InputControl.Dropdown, typeof(CardType))]
         public CardType CardType
@@ -35,6 +36,16 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Reaveal searched card?", InputControl.Boolean)]
+        public bool RevealCard
+        {
+            get { return revealCard; }
+            set
+            {
+                revealCard = value;
+                FirePropertyChanged();
+            }
+        }
 
         public string EffectType
         {
@@ -58,11 +69,15 @@ namespace TCGCards.TrainerEffects
         {
             var filter = CardUtil.GetCardFilters(CardType, EnergyType).ToList();
 
-            var message = new DeckSearchMessage(caster.Deck, filter, 1).ToNetworkMessage(game.Id);
-            var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
+            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, filter, 1))
+            {
+                if (revealCard)
+                {
+                    card.IsRevealed = true;
+                }
 
-            var card = game.FindCardById(response);
-            caster.DrawCardsFromDeck(new List<Card> { card });
+                caster.DrawCardsFromDeck(new List<Card> { card });
+            }
 
             caster.Deck.Shuffle();
         }

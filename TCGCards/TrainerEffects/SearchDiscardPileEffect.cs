@@ -46,21 +46,7 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            switch (cardType)
-            {
-                case CardType.Any:
-                    return caster.DiscardPile.Count() >= Amount;
-                case CardType.Pokemon:
-                    return caster.DiscardPile.Count(card => card is PokemonCard) >= Amount;
-                case CardType.Trainer:
-                    return caster.DiscardPile.Count(card => card is TrainerCard) >= Amount;
-                case CardType.Energy:
-                    return caster.DiscardPile.Count(card => card is EnergyCard) >= Amount;
-                case CardType.BasicEnergy:
-                    return caster.DiscardPile.OfType<EnergyCard>().Count(x => x.IsBasic) >= Amount;
-                default:
-                    throw new NotImplementedException();
-            }
+            return CardUtil.GetCardsOfType(caster.DiscardPile, CardType).Any();
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

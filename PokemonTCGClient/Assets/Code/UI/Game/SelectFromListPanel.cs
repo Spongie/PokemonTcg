@@ -62,6 +62,13 @@ namespace Assets.Code.UI.Game
                     cardRenderer.SetCard(card, ZoomMode.None, false, true);
                 }
             }
+
+            if (availableCards.Count == 0)
+            {
+                limit = 0;
+                minCount = 0;
+                onlyView = true;
+            }
         }
 
         public void InitEnergyCountSelect(List<EnergyCard> cards, int energyAmountToSelect)
@@ -139,6 +146,7 @@ namespace Assets.Code.UI.Game
             {
                 selectedCards?.Clear();
                 gameObject.SetActive(false);
+                GameController.Instance.SpecialState = SpecialGameState.None;
                 return;
             }
             else if (energyAmountToSelect > 0)
