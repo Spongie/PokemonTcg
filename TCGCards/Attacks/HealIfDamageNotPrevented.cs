@@ -31,7 +31,7 @@ namespace TCGCards.Attacks
             }
         }
             
-        public override void OnDamageDealt(int amount, Player owner)
+        public override void OnDamageDealt(int amount, Player owner, GameField game)
         {
             if (amount <= 0)
             {
@@ -45,12 +45,12 @@ namespace TCGCards.Attacks
 
                 if (activateResponse.AnsweredYes)
                 {
-                    owner.ActivePokemonCard.DamageCounters -= AmountToHeal;
+                    owner.ActivePokemonCard.Heal(AmountToHeal, game);
                 }
             }
             else
             {
-                owner.ActivePokemonCard.DamageCounters -= AmountToHeal;
+                owner.ActivePokemonCard.Heal(AmountToHeal, game);
             }
         }
     }

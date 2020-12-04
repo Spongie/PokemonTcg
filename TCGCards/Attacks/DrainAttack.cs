@@ -20,7 +20,7 @@ namespace TCGCards.Attacks
             }
         }
 
-        public override void OnDamageDealt(int amount, Player owner)
+        public override void OnDamageDealt(int amount, Player owner, GameField game)
         {
             var healing = (int)Math.Ceiling(amount * healingMultiplier);
 
@@ -29,12 +29,7 @@ namespace TCGCards.Attacks
                 healing += 5;
             }
 
-            owner.ActivePokemonCard.DamageCounters -= healing;
-
-            if (owner.ActivePokemonCard.DamageCounters < 0)
-            {
-                owner.ActivePokemonCard.DamageCounters = 0;
-            }
+            owner.ActivePokemonCard.Heal(healing, game);
         }
     }
 }

@@ -568,7 +568,7 @@ namespace TCGCards.Core
             }
 
             var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, this, ActivePlayer.ActivePokemonCard, true);
-            attack.OnDamageDealt(dealtDamage, ActivePlayer);
+            attack.OnDamageDealt(dealtDamage, ActivePlayer, this);
 
             if (!damage.IsZero()) 
             {

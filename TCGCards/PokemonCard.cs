@@ -229,6 +229,16 @@ namespace TCGCards
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
         }
 
+        public void Heal(int amount, GameField game)
+        {
+            DamageCounters -= amount;
+
+            if (DamageCounters < 0)
+            {
+                DamageCounters = 0;
+            }
+        }
+
         public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable = true)
         {
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;

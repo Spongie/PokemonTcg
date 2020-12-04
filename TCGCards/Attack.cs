@@ -168,7 +168,7 @@ namespace TCGCards
             }
         }
 
-        public virtual void OnDamageDealt(int amount, Player owner) { }
+        public virtual void OnDamageDealt(int amount, Player owner, GameField game) { }
 
         public virtual bool CanBeUsed(GameField game, Player owner, Player opponent)
         {

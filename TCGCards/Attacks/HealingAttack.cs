@@ -20,12 +20,7 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            owner.ActivePokemonCard.DamageCounters -= Amount;
-
-            if (owner.ActivePokemonCard.DamageCounters < 0)
-            {
-                owner.ActivePokemonCard.DamageCounters = 0;
-            }
+            owner.ActivePokemonCard.Heal(Amount, game);
 
             base.ProcessEffects(game, owner, opponent);
         }

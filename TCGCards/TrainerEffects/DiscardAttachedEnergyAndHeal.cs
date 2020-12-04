@@ -104,12 +104,7 @@ namespace TCGCards.TrainerEffects
                     }
                 }
 
-                target.DamageCounters -= AmountToHeal;
-
-                if (target.DamageCounters < 0)
-                {
-                    target.DamageCounters = 0;
-                }
+                target.Heal(AmountToHeal, game);
 
                 break;
             }

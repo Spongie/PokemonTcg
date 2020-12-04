@@ -51,7 +51,7 @@ namespace TCGCards.Core.Abilities
             {
                 if (pokemon.Id.Equals(selectedSource))
                 {
-                    pokemon.DamageCounters -= Amount;
+                    pokemon.Heal(Amount, game);
                 }
                 else if (pokemon.Id.Equals(target))
                 {

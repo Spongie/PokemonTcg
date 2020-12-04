@@ -92,7 +92,7 @@ namespace TCGCards.Core.Abilities
                     continue;
                 }
 
-                source.DamageCounters -= Amount;
+                source.Heal(Amount, game);
                 target.DealDamage(Amount, game, null);
                 break;
             }

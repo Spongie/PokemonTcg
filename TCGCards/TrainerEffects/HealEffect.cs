@@ -61,12 +61,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            attachedTo.DamageCounters -= Amount;
-
-            if (attachedTo.DamageCounters < 0)
-            {
-                attachedTo.DamageCounters = 0;
-            }
+            attachedTo.Heal(Amount, game);
         }
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
@@ -78,12 +73,7 @@ namespace TCGCards.TrainerEffects
 
             PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            target.DamageCounters -= Amount;
-            
-            if (target.DamageCounters < 0)
-            {
-                target.DamageCounters = 0;
-            }
+            target.Heal(Amount, game);
         }
     }
 }

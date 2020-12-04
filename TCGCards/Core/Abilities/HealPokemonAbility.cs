@@ -60,12 +60,7 @@ namespace TCGCards.Core.Abilities
             }
 
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner);
-            target.DamageCounters -= amount;
-
-            if (target.DamageCounters < 0)
-            {
-                target.DamageCounters = 0;
-            }
+            target.Heal(Amount, game);
         }
     }
 }
