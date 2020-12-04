@@ -28,6 +28,7 @@
         "OnlyOnCoinFlip": false,
         "Amount": 1,
         "CardType": 1,
+        "ShuffleIntoDeck": true,
         "EffectType": "Discard cards"
       },
       {
@@ -174,6 +175,7 @@
         "OnlyOnCoinFlip": false,
         "Amount": 1,
         "CardType": 0,
+        "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
       },
       {
@@ -344,6 +346,7 @@
         "OnlyOnCoinFlip": false,
         "Amount": 2,
         "CardType": 0,
+        "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
       },
       {
@@ -536,6 +539,7 @@
         "OnlyOnCoinFlip": false,
         "Amount": 2,
         "CardType": 0,
+        "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
       },
       {
@@ -616,6 +620,7 @@
         "OnlyOnCoinFlip": false,
         "Amount": -1,
         "CardType": 0,
+        "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
       },
       {
@@ -816,6 +821,7 @@
         "OnlyOnCoinFlip": false,
         "Amount": 1,
         "CardType": 0,
+        "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
       },
       {

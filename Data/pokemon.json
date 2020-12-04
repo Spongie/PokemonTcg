@@ -11104,6 +11104,7 @@
           "OnlyOnCoinFlip": false,
           "Amount": 1,
           "CardType": 0,
+          "ShuffleIntoDeck": false,
           "EffectType": "Discard cards"
         },
         {
@@ -22616,7 +22617,7 @@
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 0,
+        "Damage": 20,
         "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
         "Name": "Smog",
         "AttackType": "Attack",

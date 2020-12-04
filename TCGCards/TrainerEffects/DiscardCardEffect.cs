@@ -11,6 +11,7 @@ namespace TCGCards.TrainerEffects
         private int amount;
         private bool onlyOnCoinflip;
         private CardType cardType = CardType.Any;
+        private bool shuffleIntoDeck;
 
         [DynamicInput("Flip coin", InputControl.Boolean)]
         public bool OnlyOnCoinFlip
@@ -45,6 +46,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Shuffle into deck instead", InputControl.Boolean)]
+        public bool ShuffleIntoDeck
+        {
+            get { return shuffleIntoDeck; }
+            set
+            {
+                shuffleIntoDeck = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -77,13 +90,24 @@ namespace TCGCards.TrainerEffects
 
             if (amount == -1)
             {
-                caster.DiscardCards(caster.Hand.Select(card => card.Id).ToList());
+                var allCards = new List<Card>(caster.Hand);
+
+                if (ShuffleIntoDeck)
+                {
+                    caster.Deck.ShuffleInCards(new List<Card>(caster.Hand));
+                    caster.Hand.Clear();
+                    caster.TriggerDiscardEvent(allCards);
+                }
+                else
+                {
+                    caster.DiscardCards(allCards);
+                }
                 return;
             }
 
             List<IDeckFilter> filters = CardUtil.GetCardFilters(CardType).ToList();
 
-            GameUtils.DiscardCardsFromHand(caster, Amount, filters);
+            GameUtils.DiscardCardsFromHand(caster, Amount, filters, ShuffleIntoDeck);
         }
     }
 }

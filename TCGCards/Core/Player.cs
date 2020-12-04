@@ -70,6 +70,11 @@ namespace TCGCards.Core
             OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = new List<Card>(cards), Amount = cards.Count(), Player = this });
         }
 
+        public void TriggerDiscardEvent(List<Card> cardsDiscarded)
+        {
+            OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = new List<Card>(cardsDiscarded), Amount = cardsDiscarded.Count(), Player = this });
+        }
+
         public void DiscardCard(Card card)
         {
             DiscardPile.Add(card);

@@ -165,8 +165,8 @@
                             <TabItem Header="Attack Effects">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30*" />
-                                        <ColumnDefinition Width="70*" />
+                                        <ColumnDefinition Width="40*" />
+                                        <ColumnDefinition Width="60*" />
                                     </Grid.ColumnDefinitions>
                                     <DockPanel LastChildFill="True">
                                         <Button Content="Add Effect" DockPanel.Dock="Bottom" Command="{Binding AddEffectCommand}"/>
@@ -176,6 +176,8 @@
                                                     <DockPanel>
                                                         <Label DockPanel.Dock="Left" Content="{Binding EffectType}" />
                                                         <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Content="&#xf1f8;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=pokemonAttackGroup, Path=DataContext.DeleteSelectedEffect}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                                        <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Content="&#xf062;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=pokemonAttackGroup, Path=DataContext.MoveEffectUpCommand}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                                        <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Content="&#xf063;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=pokemonAttackGroup, Path=DataContext.MoveEffectDownCommand}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
                                                     </DockPanel>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>

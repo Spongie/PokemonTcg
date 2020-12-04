@@ -80,7 +80,16 @@ namespace TCGCards.TrainerEffects
 
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            var damage = game.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null);
+            int damage; 
+
+            if (ApplyWeaknessResistance)
+            {
+                damage = game.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null);
+            }
+            else
+            {
+                damage = Amount;
+            }
 
             target.DealDamage(damage, game, pokemonSource);
         }
