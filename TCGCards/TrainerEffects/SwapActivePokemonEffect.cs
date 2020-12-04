@@ -82,10 +82,12 @@ namespace TCGCards.TrainerEffects
                 if (opponents)
                 {
                     message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                    opponent.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active pokemon for you").ToNetworkMessage(game.Id));
                 }
                 else
                 {
                     message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
+                    opponent.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active pokemon").ToNetworkMessage(game.Id));
                 }
             }
             else
@@ -93,10 +95,12 @@ namespace TCGCards.TrainerEffects
                 if (opponents)
                 {
                     message = new SelectFromYourBenchMessage(1).ToNetworkMessage(game.Id);
+                    caster.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active pokemon for you").ToNetworkMessage(game.Id));
                 }
                 else
                 {
                     message = new SelectFromOpponentBenchMessage(1).ToNetworkMessage(game.Id);
+                    caster.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active pokemon").ToNetworkMessage(game.Id));
                 }
             }
             

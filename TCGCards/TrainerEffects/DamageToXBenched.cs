@@ -63,7 +63,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var message = new SelectFromOpponentBenchMessage(0, 3).ToNetworkMessage(game.Id);
+            var message = new SelectFromOpponentBenchMessage(AmountOfTargets).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             foreach (var pokemon in response.Cards.Select(id => game.FindCardById(id)).OfType<PokemonCard>())

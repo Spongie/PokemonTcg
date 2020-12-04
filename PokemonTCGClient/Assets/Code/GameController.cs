@@ -68,6 +68,7 @@ namespace Assets.Code
         public Text infoText;
 
         private int minSelectedCardCount;
+        private int maxSelectedCardCount;
         private List<Card> selectedCards;
         private Dictionary<GameFieldState, Action<CardRenderer>> onClickHandlers;
         private Dictionary<SpecialGameState, Action<CardRenderer>> onSpecialClickHandlers;
@@ -94,14 +95,16 @@ namespace Assets.Code
         {
             SpecialState = SpecialGameState.AttachingEnergyToPokemon;
             currentEnergyCard = card;
-            infoText.text = "Select a pokemon to attach your energy to";
+            infoText.text = "Select a Pokémon to attach your energy to";
+            EnableButtons();
         }
 
         internal void StartEvolving(PokemonCard card)
         {
             SpecialState = SpecialGameState.SelectPokemonToEvolveOn;
             currentEvolvingCard = card;
-            infoText.text = "Select a pokemon to evolve";
+            infoText.text = "Select a Pokémon to evolve";
+            EnableButtons();
         }
 
         private void RegisterClickHandlers()
@@ -136,7 +139,7 @@ namespace Assets.Code
 
             ToggleCardSelected(card);
 
-            if (minSelectedCardCount == 1)
+            if (minSelectedCardCount == 1 && maxSelectedCardCount == 1)
             {
                 DoneButtonClicked();
             }
@@ -157,6 +160,7 @@ namespace Assets.Code
             SpecialState = SpecialGameState.None;
             NetworkManager.Instance.gameService.RetreatPokemon(gameField.Id, clickedCard.card.Id, selectedCards.Select(card => card.Id).ToList());
             selectedCards.Clear();
+            EnableButtons();
         }
 
         internal void StartRetreating(PokemonCard pokemonCard)
@@ -165,13 +169,13 @@ namespace Assets.Code
 
             if (pokemonCard.RetreatCost == 0)
             {
-                infoText.text = "Select new active pokemon";
+                infoText.text = "Select new active Pokémon";
                 SpecialState = SpecialGameState.SelectingRetreatTarget;
                 selectedCards.Clear();
             }
             else if (totalAttachedEnergy == pokemonCard.RetreatCost)
             {
-                infoText.text = "Select new active pokemon";
+                infoText.text = "Select new active Pokémon";
                 SpecialState = SpecialGameState.SelectingRetreatTarget;
                 selectedCards.Clear();
                 selectedCards.AddRange(pokemonCard.AttachedEnergy);
@@ -195,17 +199,18 @@ namespace Assets.Code
 
         internal void SelectedEnergyForRetreat(List<Card> selectedCards)
         {
-            infoText.text = "Select new active pokemon";
+            infoText.text = "Select new active Pokémon";
             SpecialState = SpecialGameState.SelectingRetreatTarget;
             selectedCards.Clear();
             selectedCards.AddRange(selectedCards);
+            EnableButtons();
         }
 
         private void OnSelectPokemonWithFilter(CardRenderer clickedCard)
         {
             if (currentDeckFilter == null || currentDeckFilter.IsCardValid(clickedCard.card))
             {
-                if (minSelectedCardCount == 1)
+                if (minSelectedCardCount == 1 && maxSelectedCardCount == 1)
                 {
                     var message = new CardListMessage(new[] { clickedCard.card.Id }.ToList());
                     NetworkManager.Instance.SendToServer(message, true);
@@ -232,6 +237,7 @@ namespace Assets.Code
             currentEvolvingCard = null;
             SpecialState = SpecialGameState.None;
             infoText.text = string.Empty;
+            EnableButtons();
         }
 
         private void OnTryAttachEnergy(CardRenderer cardRenderer)
@@ -247,6 +253,7 @@ namespace Assets.Code
             currentEnergyCard = null;
             SpecialState = SpecialGameState.None;
             infoText.text = string.Empty;
+            EnableButtons();
         }
 
         public void OnCancelClick()
@@ -272,7 +279,7 @@ namespace Assets.Code
             currentDeckFilter = null;
             currentEnergyCard = null;
             currentEvolvingCard = null;
-            
+            EnableButtons();
         }
 
         private void ToggleCardSelected(CardRenderer clickedCard)
@@ -406,20 +413,21 @@ namespace Assets.Code
             SpecialState = SpecialGameState.SelectPokemonMatchingFilter;
             EnableButtons();
             minSelectedCardCount = 1;
+            maxSelectedCardCount = 1;
 
             if (!string.IsNullOrWhiteSpace(selectMessage.Info))
             {
                 infoText.text = selectMessage.Info;
             }
-            if (selectMessage.TargetTypes.Any())
+            else if (selectMessage.TargetTypes.Any())
             {
                 var typeText = string.Join(" ", selectMessage.TargetTypes.Select(type => Enum.GetName(typeof(EnergyTypes), type)));
-                infoText.text = $"Select one of your {typeText} pokemon";
+                infoText.text = $"Select one of your {typeText} Pokémon";
                 currentDeckFilter = new PokemonOwnerAndTypeFilter(myId, selectMessage.TargetTypes[0]);
             }
             else
             {
-                infoText.text = "Select one of your pokemon";
+                infoText.text = "Select one of your Pokémon";
                 currentDeckFilter = new PokemonOwnerAndTypeFilter(myId);
             }
         }
@@ -466,6 +474,7 @@ namespace Assets.Code
             selectedCards.Clear();
             SpecialState = SpecialGameState.DiscardingCards;
             minSelectedCardCount = ((DiscardCardsMessage)message).Count;
+            maxSelectedCardCount = minSelectedCardCount;
             currentDeckFilter = ((DiscardCardsMessage)message).Filters.FirstOrDefault();
 
             EnableButtons();
@@ -490,6 +499,7 @@ namespace Assets.Code
         {
             var deckSearch = (DeckSearchMessage)message;
             minSelectedCardCount = deckSearch.CardCount;
+            maxSelectedCardCount = minSelectedCardCount;
             SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().Init(deckSearch);
@@ -509,7 +519,7 @@ namespace Assets.Code
                 energyCardsToAttach.Enqueue(card);
             }
 
-            infoText.text = $"Select one of your benched pokemon to attach {realMessage.EnergyCards.First().GetName()} to";
+            infoText.text = $"Select one of your benched Pokémon to attach {realMessage.EnergyCards.First().GetName()} to";
         }
 
         private void EnableButtons()
@@ -589,14 +599,6 @@ namespace Assets.Code
             }
         }
 
-        private void OnStartSelectAttachedEnergy(object message, NetworkId messageId)
-        {
-            infoText.text = "Select one of your pokemon to move a Fire energy from";
-
-            selectFromListPanel.SetActive(true);
-            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
-        }
-
         private void OnStartPickPrize(object message, NetworkId messageId)
         {
             infoText.text = "Select 1 prize card";
@@ -627,6 +629,7 @@ namespace Assets.Code
             var maxCount = selectYourPokemon.MaxCount;
             var minCount = selectYourPokemon.MinCount;
             minSelectedCardCount = minCount;
+            maxSelectedCardCount = maxCount;
             SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
             EnableButtons();
 
@@ -637,7 +640,7 @@ namespace Assets.Code
             else
             {
                 var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-                infoText.text = $"Select {countString} of your benched pokemon";
+                infoText.text = $"Select {countString} of your benched Pokémon";
             }
         }
 
@@ -648,6 +651,7 @@ namespace Assets.Code
             var maxCount = selectOpponentsMessage.MaxCount;
             var minCount = selectOpponentsMessage.MinCount;
             minSelectedCardCount = minCount;
+            maxSelectedCardCount = maxCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
             EnableButtons();
 
@@ -658,7 +662,7 @@ namespace Assets.Code
             else
             {
                 var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-                infoText.text = $"Select {countString} of your oppoents benched pokemon";
+                infoText.text = $"Select {countString} of your opponents benched Pokémon";
             }
         }
 
@@ -669,6 +673,7 @@ namespace Assets.Code
             var maxCount = selectOpponentMessage.MaxCount;
             var minCount = selectOpponentMessage.MinCount;
             minSelectedCardCount = minCount;
+            maxSelectedCardCount = maxCount;
 
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             EnableButtons();
@@ -680,7 +685,7 @@ namespace Assets.Code
             else
             {
                 var countString = maxCount == minCount ? maxCount.ToString() : "up to " + maxCount;
-                infoText.text = $"Select {countString} of your opponents pokemon";
+                infoText.text = $"Select {countString} of your opponents Pokémon";
             }
         }
 
@@ -726,9 +731,8 @@ namespace Assets.Code
             {
                 return;
             }
-            
-            cardController.SetSelected(true);
-            selectedCards.Add(cardController.card);
+
+            ToggleCardSelected(cardController);
         }
 
         private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
@@ -738,8 +742,7 @@ namespace Assets.Code
                 return;
             }
 
-            cardController.SetSelected(!cardController.isSelected);
-            selectedCards.Add(cardController.card);
+            ToggleCardSelected(cardController);
         }
 
         private void SelectedPlayerBenchedPokemon(CardRenderer cardController)
@@ -749,8 +752,7 @@ namespace Assets.Code
                 return;
             }
 
-            cardController.SetSelected(!cardController.isSelected);
-            selectedCards.Add(cardController.card);
+            ToggleCardSelected(cardController);
         }
 
         private void BothSelectingBenchClicked(CardRenderer cardController)
@@ -820,7 +822,7 @@ namespace Assets.Code
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon || 
                 SpecialState == SpecialGameState.SelectPokemonMatchingFilter)
             {
-                if (minSelectedCardCount < selectedCards.Count)
+                if (selectedCards.Count < minSelectedCardCount || selectedCards.Count > maxSelectedCardCount)
                 {
                     return;
                 }
@@ -839,7 +841,7 @@ namespace Assets.Code
             || SpecialState == SpecialGameState.SelectingYourBenchedPokemon
             || SpecialState == SpecialGameState.DiscardingCards)
             {
-                if (minSelectedCardCount < selectedCards.Count)
+                if (selectedCards.Count < minSelectedCardCount || selectedCards.Count > maxSelectedCardCount)
                 {
                     return;
                 }
@@ -898,6 +900,8 @@ namespace Assets.Code
 
             SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
+
+            EnableButtons();
         }
 
         private void SetInfoAndEnableButtons()
@@ -1010,10 +1014,10 @@ namespace Assets.Code
                     infoText.text = "Waiting for opponent to register";
                     break;
                 case GameFieldState.BothSelectingActive:
-                    infoText.text = "Select your active pokemon";
+                    infoText.text = "Select your active Pokémon";
                     break;
                 case GameFieldState.BothSelectingBench:
-                    infoText.text = "Select pokemon to add to your bench";
+                    infoText.text = "Select Pokémon to add to your bench";
                     break;
                 default:
                     break;

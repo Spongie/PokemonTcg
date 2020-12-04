@@ -15,7 +15,6 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     void Start()
     {
-        oldOrder = transform.parent.gameObject.GetComponent<Canvas>().sortingOrder;
         originalSize = GetComponent<RectTransform>().sizeDelta;
     }
 
@@ -47,6 +46,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
     private void OnZoomStart()
     {
         Debug.Log("Zoom start");
+        oldOrder = transform.parent.gameObject.GetComponent<Canvas>().sortingOrder;
         zooming = true;
         var rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(440, 540);
@@ -82,7 +82,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerExit(PointerEventData eventData)
     {
         hovered = false;
-        OnZoomEnd();
+        //OnZoomEnd();
     }
 
     private void OnZoomEnd()

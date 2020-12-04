@@ -758,7 +758,77 @@ namespace TCGCards.Core
 
         private void CheckDeadPokemon()
         {
-            if(NonActivePlayer.ActivePokemonCard != null && NonActivePlayer.ActivePokemonCard.IsDead())
+            var killedPokemons = new List<PokemonCard>();
+
+            foreach (PokemonCard pokemon in NonActivePlayer.BenchedPokemon)
+            {
+                if (!pokemon.IsDead())
+                {
+                    continue;
+                }
+
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = pokemon
+                });
+
+                killedPokemons.Add(pokemon);
+
+                TriggerAbilityOfType(TriggerType.Dies, pokemon);
+
+                if (ActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
+                {
+                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(ActivePlayer.Id);
+                    return;
+                }
+                else
+                {
+                    PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
+                    ActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
+                }
+            }
+
+            foreach (var pokemon in killedPokemons)
+            {
+                NonActivePlayer.KillBenchedPokemon(pokemon);
+            }
+
+            foreach (PokemonCard pokemon in ActivePlayer.BenchedPokemon)
+            {
+                if (!pokemon.IsDead())
+                {
+                    continue;
+                }
+
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = pokemon
+                });
+
+                killedPokemons.Add(pokemon);
+
+                TriggerAbilityOfType(TriggerType.Dies, pokemon);
+
+                if (NonActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
+                {
+                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(NonActivePlayer.Id);
+                    return;
+                }
+                else
+                {
+                    PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
+                    NonActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
+                }
+            }
+
+            foreach (var pokemon in killedPokemons)
+            {
+                ActivePlayer.KillBenchedPokemon(pokemon);
+            }
+
+            if (NonActivePlayer.ActivePokemonCard != null && NonActivePlayer.ActivePokemonCard.IsDead())
             {
                 GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.GetName() + " Dies");
 
@@ -837,60 +907,6 @@ namespace TCGCards.Core
                     GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + $" has no pokémon left, {NonActivePlayer.NetworkPlayer?.Name} wins the game");
                     EndGame(NonActivePlayer.Id);
                     return;
-                }
-            }
-
-            foreach (PokemonCard pokemon in NonActivePlayer.BenchedPokemon)
-            {
-                if (!pokemon.IsDead())
-                {
-                    continue;
-                }
-
-                SendEventToPlayers(new PokemonDiedEvent
-                {
-                    Pokemon = pokemon
-                });
-
-                TriggerAbilityOfType(TriggerType.Dies, pokemon);
-                
-                if (ActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
-                {
-                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
-                    EndGame(ActivePlayer.Id);
-                    return;
-                }
-                else
-                {
-                    PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
-                    ActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
-                }
-            }
-
-            foreach (PokemonCard pokemon in ActivePlayer.BenchedPokemon)
-            {
-                if (!pokemon.IsDead())
-                {
-                    continue;
-                }
-
-                SendEventToPlayers(new PokemonDiedEvent
-                {
-                    Pokemon = pokemon
-                });
-
-                TriggerAbilityOfType(TriggerType.Dies, pokemon);
-
-                if (NonActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
-                {
-                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + " wins the game");
-                    EndGame(NonActivePlayer.Id);
-                    return;
-                }
-                else
-                {
-                    PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
                 }
             }
 

@@ -136,14 +136,19 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
                 DamageDisplay.SetActive(false);
             }
 
-            PoisonIcon.SetActive(pokemon.IsPoisoned);
-            AsleepIcon.SetActive(pokemon.IsAsleep);
-            ParalyzedIcon.SetActive(pokemon.IsParalyzed);
-            ConfusedIcon.SetActive(pokemon.IsConfused);
-            BurnedIcon.SetActive(pokemon.IsBurned);
+            EnableStatusIcons();
         }
 
         StartCoroutine(LoadSprite(card));
+    }
+
+    internal void EnableStatusIcons()
+    {
+        PoisonIcon.SetActive(pokemon.IsPoisoned);
+        AsleepIcon.SetActive(pokemon.IsAsleep);
+        ParalyzedIcon.SetActive(pokemon.IsParalyzed);
+        ConfusedIcon.SetActive(pokemon.IsConfused);
+        BurnedIcon.SetActive(pokemon.IsBurned);
     }
 
     private void SpawnAttachedEnergy(PokemonCard card, ZoomMode zoomMode, RectTransform myRect, int sortOrder, float offsetSize, float attachedOffset)
@@ -295,6 +300,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(0.3f);
         damageTakenText.gameObject.SetActive(false);
         damageTakenText.fontSize = 30;
+
+        var actualDamageText = DamageDisplay.GetComponentInChildren<TextMeshProUGUI>();
+        int currentDamage = int.Parse(actualDamageText.text.Trim());
+
+        actualDamageText.text = (currentDamage + damage).ToString();
     }
 
     private void Update()

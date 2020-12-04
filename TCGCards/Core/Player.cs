@@ -375,8 +375,12 @@ namespace TCGCards.Core
 
         public void KillActivePokemon()
         {
-            var pokemon = ActivePokemonCard;
+            KillPokemon(ActivePokemonCard);
+            ActivePokemonCard = null;
+        }
 
+        private void KillPokemon(PokemonCard pokemon)
+        {
             DiscardPile.AddRange(pokemon.AttachedEnergy);
             pokemon.AttachedEnergy.Clear();
 
@@ -394,7 +398,12 @@ namespace TCGCards.Core
             }
 
             DiscardPile.Add(pokemon);
-            ActivePokemonCard = null;
+        }
+
+        internal void KillBenchedPokemon(PokemonCard pokemon)
+        {
+            KillPokemon(pokemon);
+            BenchedPokemon.Remove(pokemon);
         }
     }
 }

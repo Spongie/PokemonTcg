@@ -76,6 +76,8 @@ namespace Assets.Code._2D
                 return;
             }
 
+            GameController.Instance.Player.Hand.Remove(card);
+
             Destroy(idObjectCache[card.Id]);
             idObjectCache.Remove(card.Id);
         }

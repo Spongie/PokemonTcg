@@ -74,11 +74,13 @@ namespace Assets.Code.UI.Events
             {
                 var oldSize = new Vector2(newActive.GetComponent<RectTransform>().rect.width, newActive.GetComponent<RectTransform>().rect.height);
                 oldActive = GameController.Instance.GetCardRendererById(activeEvent.ReplacedPokemonId);
+                ((PokemonCard)oldActive.card).ClearStatusEffects();
                 oldActive.tag = "Ignore";
                 oldActive.transform.SetParent(benchParent.transform, true);
                 oldActive.GetComponent<RectTransform>().LeanSize(oldSize, 1.5f);
                 oldActive.SetIsBenched();
                 oldActive.SetZoomMode(oldZoom);
+                oldActive.EnableStatusIcons();
                 oldActive.gameObject.LeanMoveLocal(oldPosition, 1.5f).setEaseInCubic().setOnComplete(() => 
                 {
                     newActive.SetIsActivePokemon();
