@@ -29,7 +29,21 @@ namespace CardEditor.ViewModels
 			SetAbilityCommand = new RelayCommand(CanAddAttack, SetAbility);
 			AddEffectCommand = new RelayCommand(CanAddEffect, AddEffect);
 			AddAbilityEffectCommand = new RelayCommand(CanAddAbilityEffect, AddAbilityEffect);
+			DeleteSelectedAttack = new RelayCommand(CanAddAttack, DeleteAttack);
+			DeleteSelectedEffect = new RelayCommand(CanAddAttack, DeleteEffect);
 		}
+
+        private void DeleteEffect(object obj)
+        {
+			SelectedAttack.Effects.Remove((IEffect)obj);
+			SelectedEffect = null;
+        }
+
+        private void DeleteAttack(object obj)
+        {
+			Card.Attacks.Remove((Attack)obj);
+			SelectedAttack = null;
+        }
 
         private void AddAbilityEffect(object obj)
         {
@@ -151,5 +165,7 @@ namespace CardEditor.ViewModels
         public ICommand SetAbilityCommand { get; set; }
         public ICommand AddAbilityEffectCommand { get; set; }
         public ICommand AddEffectCommand { get; set; }
-	}
+        public ICommand DeleteSelectedAttack { get; set; }
+        public ICommand DeleteSelectedEffect { get; set; }
+    }
 }

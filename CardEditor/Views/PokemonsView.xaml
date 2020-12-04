@@ -110,7 +110,7 @@
                 <CheckBox IsChecked="{Binding Card.Completed}" VerticalAlignment="Center" />
             </DockPanel>
         </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" DataContext="{Binding SelectedCard}" LastChildFill="True" Margin="0,0,5,0">
+        <DockPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" x:Name="pokemonAttackGroup" DataContext="{Binding SelectedCard}" LastChildFill="True" Margin="0,0,5,0">
             <TabControl>
                 <TabItem Header="Attacks">
                     <Grid>
@@ -122,17 +122,14 @@
                             <Label Content="Attacks" DockPanel.Dock="Top" />
                             <Button Content="Add Attack" DockPanel.Dock="Bottom" Margin="5" Command="{Binding AddAttackCommand}" />
                             <Button Content="Copy Existing Attack" DockPanel.Dock="Bottom" Margin="5" Command="{Binding DataContext.CopyExistingAttackCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
-                            <ListBox Margin="5" ItemsSource="{Binding Card.Attacks}" SelectedItem="{Binding SelectedAttack}" DockPanel.Dock="Top" SelectionMode="Single">
+                            <ListBox Margin="5" ItemsSource="{Binding Card.Attacks}" SelectedItem="{Binding SelectedAttack}" x:Name="attackGroup" DockPanel.Dock="Top" SelectionMode="Single" HorizontalContentAlignment="Stretch">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="80*"/>
-                                                <ColumnDefinition Width="20*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Content="{Binding Name}" />
-                                            <Label Content="{Binding Damage}" Grid.Column="1"/>
-                                        </Grid>
+                                        <DockPanel LastChildFill="True">
+                                            <Label Content="{Binding Name}" DockPanel.Dock="Left" />
+                                            <Label Content="{Binding Damage}" DockPanel.Dock="Left"/>
+                                            <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Content="&#xf1f8;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=pokemonAttackGroup, Path=DataContext.DeleteSelectedAttack}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                        </DockPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -173,10 +170,13 @@
                                     </Grid.ColumnDefinitions>
                                     <DockPanel LastChildFill="True">
                                         <Button Content="Add Effect" DockPanel.Dock="Bottom" Command="{Binding AddEffectCommand}"/>
-                                        <ListBox ItemsSource="{Binding SelectedAttack.Effects}" SelectedItem="{Binding SelectedEffect}" DockPanel.Dock="Top">
+                                        <ListBox ItemsSource="{Binding SelectedAttack.Effects}" SelectedItem="{Binding SelectedEffect}" DockPanel.Dock="Top" HorizontalContentAlignment="Stretch">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Label Content="{Binding EffectType}" />
+                                                    <DockPanel>
+                                                        <Label DockPanel.Dock="Left" Content="{Binding EffectType}" />
+                                                        <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Content="&#xf1f8;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=pokemonAttackGroup, Path=DataContext.DeleteSelectedEffect}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                                    </DockPanel>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
