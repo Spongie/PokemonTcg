@@ -756,8 +756,21 @@ namespace TCGCards.Core
             }
         }
 
+        private bool IsDraw()
+        {
+            return ActivePlayer.ActivePokemonCard.IsDead() && ActivePlayer.BenchedPokemon.All(pokemon => pokemon.IsDead())
+                && NonActivePlayer.ActivePokemonCard.IsDead() && NonActivePlayer.BenchedPokemon.All(pokemon => pokemon.IsDead());
+        }
+
         private void CheckDeadPokemon()
         {
+            if (IsDraw())
+            {
+                GameLog.AddMessage("It's a draw!");
+                EndGame(Id);
+                return;
+            }
+
             var killedPokemons = new List<PokemonCard>();
 
             foreach (PokemonCard pokemon in NonActivePlayer.BenchedPokemon)

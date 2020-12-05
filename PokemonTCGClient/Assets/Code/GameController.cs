@@ -401,7 +401,16 @@ namespace Assets.Code
             var gameOverMessage = (GameOverMessage)message;
             bool iWon = gameOverMessage.WinnerId.Equals(myId);
             gameField.GameState = GameFieldState.GameOver;
-            infoText.text = iWon ? "You have won" : "You have lost";
+
+            if (gameOverMessage.WinnerId.Equals(gameField.Id))
+            {
+                infoText.text = "It's a draw!";
+            }
+            else
+            {
+                infoText.text = iWon ? "You have won!" : "You have lost!";
+            }
+            
             EnableButtons();
 
             WinMenu.SetActive(true);
