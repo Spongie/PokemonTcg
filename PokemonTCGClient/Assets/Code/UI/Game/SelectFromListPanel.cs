@@ -44,6 +44,8 @@ namespace Assets.Code.UI.Game
 
             foreach (var card in deckSearchMessage.Deck.Cards)
             {
+                card.IsRevealed = true;
+
                 if (deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
                     var spawnedCard = Instantiate(previewCard, contentObject.transform);

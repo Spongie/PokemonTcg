@@ -32,6 +32,7 @@ namespace Assets.Code.UI.Events
 
                 if (isMyCards)
                 {
+                    card.IsRevealed = true;
                     yield return CardImageLoader.Instance.LoadSpriteRoutine(card, image);
                 }
                 else
