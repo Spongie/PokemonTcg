@@ -21,45 +21,52 @@ namespace ServerController
 
                 while (true)
                 {
-                    HttpListenerContext context = listener.GetContext();
-
-                    HttpListenerRequest request = context.Request;
-
-                    string documentContents;
-                    using (Stream receiveStream = request.InputStream)
+                    try
                     {
-                        using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+                        HttpListenerContext context = listener.GetContext();
+
+                        HttpListenerRequest request = context.Request;
+
+                        string documentContents;
+                        using (Stream receiveStream = request.InputStream)
                         {
-                            documentContents = readStream.ReadToEnd();
+                            using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+                            {
+                                documentContents = readStream.ReadToEnd();
+                            }
                         }
+
+                        var action = request.Url.ToString().Split("/").Last();
+                        Console.WriteLine($"Received action {action} processing...");
+
+                        if (action == "start")
+                        {
+                            controller.Start();
+                        }
+                        else if (action == "stop")
+                        {
+                            controller.Stop();
+                        }
+                        else if (action == "restart")
+                        {
+                            controller.Restart();
+                        }
+
+                        Console.WriteLine("Done...");
+
+                        HttpListenerResponse response = context.Response;
+                        string responseString = "<HTML><BODY> Success!</BODY></HTML>";
+                        byte[] buffer = Encoding.UTF8.GetBytes(responseString);
+
+                        response.ContentLength64 = buffer.Length;
+                        Stream output = response.OutputStream;
+                        output.Write(buffer, 0, buffer.Length);
+                        output.Close();
                     }
-
-                    var action = request.Url.ToString().Split("/").Last();
-                    Console.WriteLine($"Received action {action} processing...");
-
-                    if (action == "start")
+                    catch
                     {
-                        controller.Start();
+                        //IGnore errors
                     }
-                    else if (action == "stop")
-                    {
-                        controller.Stop();
-                    }
-                    else if (action == "restart")
-                    {
-                        controller.Restart();
-                    }
-
-                    Console.WriteLine("Done...");
-
-                    HttpListenerResponse response = context.Response;
-                    string responseString = "<HTML><BODY> Success!</BODY></HTML>";
-                    byte[] buffer = Encoding.UTF8.GetBytes(responseString);
-                    
-                    response.ContentLength64 = buffer.Length;
-                    Stream output = response.OutputStream;
-                    output.Write(buffer, 0, buffer.Length);
-                    output.Close();
                 }
             }
         }
