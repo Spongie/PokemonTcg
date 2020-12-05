@@ -237,6 +237,12 @@ namespace TCGCards
             {
                 DamageCounters = 0;
             }
+
+            game.SendEventToPlayers(new PokemonHealedEvent
+            {
+                PokemonId = Id,
+                Healing = amount
+            });
         }
 
         public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable = true)
@@ -261,12 +267,11 @@ namespace TCGCards
                 }
             }
 
-            game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id, DamageType = source != null ? source.Type : EnergyTypes.Colorless });
 
             DamageCounters += totalDamage;
-
             DamageTakenLastTurn = totalDamage;
 
+            game?.SendEventToPlayers(new DamageTakenEvent() { Damage = totalDamage, PokemonId = Id, DamageType = source != null ? source.Type : EnergyTypes.Colorless });
             game?.GameLog.AddMessage(GetName() + $"Takes {totalDamage} damage");
 
             return totalDamage;

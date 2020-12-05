@@ -23,6 +23,7 @@ namespace Assets.Code.UI.Events
         public AttachedEnergyDiscardedEventHandler AttachedEnergyDiscardedEventHandler;
         public PokemonDiedEventHandler PokemonDiedEventHandler;
         public PokemonBouncedEventHandler PokemonBouncedEventHandler;
+        public PokemonHealedEventHandler PokemonHealedEventHandler;
 
         private Queue<TCGCards.Core.GameEvents.Event> eventQueue;
         public TCGCards.Core.GameEvents.Event currentEvent;
@@ -140,6 +141,10 @@ namespace Assets.Code.UI.Events
                     PokemonBouncedEventHandler.gameObject.SetActive(true);
                     PokemonBouncedEventHandler.Trigger((PokemonBouncedEvent)gameEvent);
                     break;
+                case GameEventType.PokemonHealed:
+                    PokemonHealedEventHandler.gameObject.SetActive(true);
+                    PokemonHealedEventHandler.Trigger((PokemonHealedEvent)gameEvent);
+                    break;
                 default:
                     break;
             }
@@ -161,6 +166,7 @@ namespace Assets.Code.UI.Events
             AttachedEnergyDiscardedEventHandler.gameObject.SetActive(false);
             PokemonDiedEventHandler.gameObject.SetActive(false);
             PokemonBouncedEventHandler.gameObject.SetActive(false);
+            PokemonHealedEventHandler.gameObject.SetActive(false);
 
             string info = currentEvent is GameSyncEvent ? ((GameSyncEvent)currentEvent).Info : "";
             GameController.Instance.OnInfoUpdated(currentEvent.GameField, info);

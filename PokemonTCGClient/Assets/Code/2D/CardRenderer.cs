@@ -66,6 +66,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject EvolveEffect;
     public GameObject DeathEffect;
     public GameObject BounceEffect;
+    public GameObject HealEffect;
 
     void Start()
     {
@@ -176,41 +177,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     IEnumerator LoadSprite(Card card)
     {
-        if (!card.IsRevealed)
-        {
-            art.sprite = GameController.Instance.CardBack;
-        }
-        else
-        {
-            string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
-            string finalPath = "file:///" + fullCardPath;
-
-            if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))
-            {
-                art.sprite = SpriteCache.Instance.cache[fullCardPath];
-            }
-            else
-            {
-                using (var request = UnityWebRequestTexture.GetTexture(finalPath))
-                {
-                    yield return request.SendWebRequest();
-
-                    if (request.isNetworkError || request.isHttpError)
-                    {
-                        Debug.LogError("Error fetching texture");
-                    }
-
-                    var texture = DownloadHandlerTexture.GetContent(request);
-                    var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                    art.sprite = sprite;
-
-                    if (!SpriteCache.Instance.cache.ContainsKey(fullCardPath))
-                    {
-                        SpriteCache.Instance.cache.Add(fullCardPath, sprite);
-                    }
-                }
-            }
-        }
+        yield return CardImageLoader.Instance.LoadSpriteRoutine(card, art);
     }
 
     public void SpawnAbilityEffect()
@@ -226,6 +193,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public void SpawnDeathEffect()
     {
         Instantiate(DeathEffect, EffectParent);
+    }
+
+    public void SpawnHealEffect()
+    {
+        Instantiate(HealEffect, EffectParent);
     }
 
     internal void SpawnBounceEffect()
@@ -311,11 +283,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     {
         //if (Input.GetKeyDown(KeyCode.Alpha1))
         //{
-        //    Instantiate(BounceEffect, EffectParent);
+        //    Instantiate(HealEffect, EffectParent);
         //}
         //if (Input.GetKeyDown(KeyCode.Alpha2))
         //{
-        //    Instantiate(FightingEffect, EffectParent);
+        //    Instantiate(Abilityeffect, EffectParent);
         //}
         //if (Input.GetKeyDown(KeyCode.Alpha3))
         //{
