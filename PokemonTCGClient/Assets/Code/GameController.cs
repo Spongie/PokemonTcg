@@ -349,6 +349,7 @@ namespace Assets.Code
 
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().InitView(revealMessage.Cards);
+            infoText.text = "Look at the revealed cards!";
             EnableButtons();
         }
 

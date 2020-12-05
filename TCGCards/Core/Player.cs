@@ -30,9 +30,14 @@ namespace TCGCards.Core
             NetworkPlayer.Send(message);
         }
 
-        internal void RevealCards(List<Card> hand)
+        internal void RevealCards(List<Card> cards)
         {
-            var message = new RevealCardsMessage(hand).ToNetworkMessage(Id);
+            foreach (var card in cards)
+            {
+                card.IsRevealed = true;
+            }
+
+            var message = new RevealCardsMessage(cards).ToNetworkMessage(Id);
             NetworkPlayer.Send(message);
         }
 

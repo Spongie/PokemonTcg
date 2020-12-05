@@ -75,12 +75,23 @@ namespace TCGCards.TrainerEffects
                     Player = target.Id
                 });
 
-                target.Deck.ShuffleInCards(CardUtil.GetCardsOfType(target.Hand, CardType).ToList());
-                target.Hand.Clear();
+                var cards = CardUtil.GetCardsOfType(target.Hand, CardType).ToList();
+                target.Deck.ShuffleInCards(cards);
+
+                foreach (var card in cards)
+                {
+                    target.Hand.Remove(card);
+                }
+
+                game.SendEventToPlayers(new CardsDiscardedEvent()
+                {
+                    Cards = new List<Card>(cards),
+                    Player = target.Id
+                });
             }
             else
             {
-                var message = new DiscardCardsMessage(Amount);
+                var message = new DiscardCardsMessage(Amount, CardUtil.GetCardFilters(CardType));
                 var choices = target.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(game.Id)).Cards;
 
                 var cards = choices.Select(id => game.FindCardById(id)).ToList();
