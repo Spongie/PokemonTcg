@@ -73,6 +73,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, pokemonSource).Count == 0)
+            {
+                return;
+            }
+
             if (CoinFlip && game.FlipCoins(1) == 0)
             {
                 return;

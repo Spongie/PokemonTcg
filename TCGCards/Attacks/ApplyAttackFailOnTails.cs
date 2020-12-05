@@ -11,7 +11,8 @@ namespace TCGCards.Attacks
             {
                 CoinFlip = true,
                 OnlyCurrentTarget = true,
-                CurrentTarget = opponent.ActivePokemonCard
+                CurrentTarget = opponent.ActivePokemonCard,
+                StopOnTails = true
             });
 
             base.ProcessEffects(game, owner, opponent);

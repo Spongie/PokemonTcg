@@ -7,6 +7,7 @@ namespace TCGCards.Core.Abilities
         private bool onlySelf = true;
         private bool onlyCurrentTarget;
         private bool coinFlip;
+        private bool stopOnTails;
 
         public AttackStopperSpecificAbility() :this(null)
         {
@@ -25,7 +26,7 @@ namespace TCGCards.Core.Abilities
 
         public bool IsStopped(GameField game, PokemonCard attacker, PokemonCard defender)
         {
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (!game.IsSuccessfulFlip(CoinFlip, false, StopOnTails))
             {
                 return false;
             }
@@ -42,6 +43,18 @@ namespace TCGCards.Core.Abilities
 
             return true;
         }
+
+        [DynamicInput("Stop on tails instead", InputControl.Boolean)]
+        public bool StopOnTails
+        {
+            get { return stopOnTails; }
+            set
+            {
+                stopOnTails = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Coin Flip", InputControl.Boolean)]
         public bool CoinFlip

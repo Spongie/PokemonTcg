@@ -79,7 +79,7 @@ namespace Assets.Code.UI.Events
             {
                 case GameEventType.TrainerCardPlayed:
                     TrainerCardPlayedEventHandler.gameObject.SetActive(true);
-                    TrainerCardPlayedEventHandler.TriggerCardPlayer(((TrainerCardPlayed)gameEvent).Card);
+                    TrainerCardPlayedEventHandler.TriggerCardPlayed(((TrainerCardPlayed)gameEvent).Card);
                     break;
                 case GameEventType.PokemonAttacks:
                     PokemonAttackedEventHandler.gameObject.SetActive(true);

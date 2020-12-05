@@ -31,6 +31,18 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
+        {
+            var availablePokemons = new List<PokemonCard>(caster.BenchedPokemon);
+            availablePokemons.Add(caster.ActivePokemonCard);
+
+            if (availablePokemons.Where(x => x.DamageCounters > 0).Count() < 2)
+            {
+                return false;
+            }
+
+            return base.CanActivate(game, caster, opponent);
+        }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
@@ -40,24 +52,26 @@ namespace TCGCards.Core.Abilities
             var sourcePokemons = availablePokemons.Where(x => x.DamageCounters > 0).OfType<Card>().ToList();
 
             var pickFirstMessage = new PickFromListMessage(sourcePokemons, 1).ToNetworkMessage(owner.Id);
-            var selectedSource = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(pickFirstMessage).Cards.First();
+            var selectedSource = (PokemonCard)game.FindCardById(owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(pickFirstMessage).Cards.First());
 
             var availableTargets = availablePokemons.Where(x => (x.Hp - x.DamageCounters) > Amount).OfType<Card>().ToList();
+            availableTargets.Remove(selectedSource);
 
-            var pickTargetMessage = new PickFromListMessage(availableTargets, 1).ToNetworkMessage(owner.Id);
-            var target = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(pickTargetMessage).Cards.First();
+            PokemonCard target;
 
-            foreach (var pokemon in availablePokemons)
+            if (availableTargets.Count == 1)
             {
-                if (pokemon.Id.Equals(selectedSource))
-                {
-                    pokemon.Heal(Amount, game);
-                }
-                else if (pokemon.Id.Equals(target))
-                {
-                    pokemon.DealDamage(Amount, game, PokemonOwner, false);
-                }
+                target = (PokemonCard)availableTargets.First();
             }
+            else
+            {
+                var pickTargetMessage = new PickFromListMessage(availableTargets, 1).ToNetworkMessage(owner.Id);
+                target = (PokemonCard)game.FindCardById(owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(pickTargetMessage).Cards.First());
+            }
+            
+
+            selectedSource.Heal(Amount, game);
+            target.DealDamage(Amount, game, PokemonOwner, false);
         }
     }
 }

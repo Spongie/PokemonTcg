@@ -15,9 +15,15 @@ namespace Assets.Code.UI.Events
         public Image cardImage;
         public CardImageLoader loader;
 
-        public void TriggerCardPlayer(TrainerCard card)
+        public void TriggerCardPlayed(TrainerCard card)
         {
             GameController.Instance.playerHand.RemoveCard(card);
+            
+            if (card.Owner.Id.Equals(GameController.Instance.myId))
+            {
+                GameController.Instance.Player.DiscardPile.Add(card);
+            }
+
             StartCoroutine(DisplayCardEnumerator(card));
         }
 

@@ -96,13 +96,13 @@ namespace TCGCards.TrainerEffects
         {
             foreach (var pokemon in CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
             {
-                if (pokemon.AttachedEnergy.Count >= Amount)
+                if (pokemon.AttachedEnergy.Count >= 1)
                 {
                     return true;
                 }
             }
 
-            game.GameLog.AddMessage($"Cannot cast because no pokemon with atleast {Amount} energy was found");
+            game.GameLog.AddMessage($"Cannot cast because no pokemon with atleast 1 energy was found");
             return false;
         }
 
@@ -129,12 +129,12 @@ namespace TCGCards.TrainerEffects
             {
                 PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-                if (target.AttachedEnergy.Count < Amount)
+                if (target.AttachedEnergy.Count == 0)
                 {
                     continue;
                 }
 
-                if (target.AttachedEnergy.Count == Amount)
+                if (target.AttachedEnergy.Count <= Amount)
                 {
                     for (int i = 0; i < Amount; i++)
                     {
