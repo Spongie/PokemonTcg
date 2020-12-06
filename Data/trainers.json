@@ -510,6 +510,7 @@
         "CoinFlip": false,
         "UseLastCoin": false,
         "CheckTails": false,
+        "AllowUseWithoutTarget": false,
         "EffectType": "Discard attached energy"
       }
     ],
@@ -580,6 +581,7 @@
         "CoinFlip": false,
         "UseLastCoin": false,
         "CheckTails": false,
+        "AllowUseWithoutTarget": false,
         "EffectType": "Discard attached energy"
       },
       {
@@ -591,6 +593,7 @@
         "CoinFlip": false,
         "UseLastCoin": false,
         "CheckTails": false,
+        "AllowUseWithoutTarget": false,
         "EffectType": "Discard attached energy"
       }
     ],

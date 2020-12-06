@@ -16,6 +16,7 @@ namespace TCGCards.TrainerEffects
         private bool coinFlip;
         private bool useLastCoin;
         private bool checkTails;
+        private bool allowUseWithoutTarget;
 
         [DynamicInput("Targeting type", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -84,6 +85,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Allow use without target", InputControl.Boolean)]
+        public bool AllowUseWithoutTarget
+        {
+            get { return allowUseWithoutTarget; }
+            set
+            {
+                allowUseWithoutTarget = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -94,6 +107,11 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
+            if (AllowUseWithoutTarget)
+            {
+                return true;
+            }
+
             foreach (var pokemon in CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
             {
                 if (pokemon.AttachedEnergy.Count >= 1)
@@ -121,6 +139,11 @@ namespace TCGCards.TrainerEffects
                 return;
             }
             else if (CoinFlip && game.FlipCoins(1) != targetValue)
+            {
+                return;
+            }
+
+            if (CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard).All(x => x.AttachedEnergy.Count == 0))
             {
                 return;
             }
