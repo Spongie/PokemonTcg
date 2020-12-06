@@ -70,6 +70,10 @@
                 <TextBox Text="{Binding Card.Name, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
+                <Label Content="Pkmn Name" MinWidth="80"/>
+                <TextBox Text="{Binding Card.PokemonName, UpdateSourceTrigger=PropertyChanged}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
                 <Label Content="ImageUrl" MinWidth="80"/>
                 <TextBox Text="{Binding Card.ImageUrl}"/>
             </DockPanel>

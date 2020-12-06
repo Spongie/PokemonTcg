@@ -22,6 +22,7 @@ namespace TCGCards
         private Attack selectedAttack;
         private Ability ablity;
         private int prizeCards = 1;
+        private string pokemonName;
 
         public int PrizeCards
         {
@@ -154,6 +155,17 @@ namespace TCGCards
             }
         }
 
+        public string PokemonName
+        {
+            get { return pokemonName; }
+            set
+            {
+                pokemonName = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public int DamageCounters { get; set; }
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
@@ -166,7 +178,6 @@ namespace TCGCards
         public bool IsConfused { get; set; }
         public PokemonCard KnockedOutBy { get; set; }
         public List<TemporaryAbility> TemporaryAbilities { get; set; } = new List<TemporaryAbility>();
-        public string PokemonName { get; protected set; }
         public List<DamageStopper> DamageStoppers { get; set; } = new List<DamageStopper>();
         public int DamageTakenLastTurn { get; set; }
         public bool DoublePoison { get; set; }
@@ -372,7 +383,7 @@ namespace TCGCards
         
         public bool CanEvolveTo(PokemonCard evolution)
         {
-            return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == Name;
+            return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
         }
 
         public virtual void ApplyStatusEffect(StatusEffect statusEffect)

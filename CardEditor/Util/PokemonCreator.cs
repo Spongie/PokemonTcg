@@ -20,6 +20,7 @@ namespace CardEditor.Util
 			var pokemon = new PokemonCard
 			{
 				Name = pokemonSdk.Name,
+				PokemonName = pokemonSdk.Name,
 				Hp = int.Parse(pokemonSdk.Hp),
 				ImageUrl = pokemonSdk.ImageUrlHiRes,
 				EvolvesFrom = pokemonSdk.EvolvesFrom.Replace("-", string.Empty),
@@ -28,6 +29,16 @@ namespace CardEditor.Util
 				RetreatCost = pokemonSdk.ConvertedRetreatCost,
 				Type = convertFullTypeToType(pokemonSdk.Types.First())
 			};
+
+			pokemon.PokemonName = pokemon.PokemonName.Replace("Brock's", string.Empty)
+				.Replace("Misty's", string.Empty)
+				.Replace("Sabrina's", string.Empty)
+				.Replace("Erika's", string.Empty)
+				.Replace("Lt. Surge's", string.Empty)
+				.Replace("Blaine's", string.Empty)
+				.Replace("Giovanni's", string.Empty)
+				.Replace("Koga's", string.Empty)
+				.Replace("Rocket's", string.Empty).Trim();
 
 			if (pokemonSdk.Weaknesses != null)
 			{
