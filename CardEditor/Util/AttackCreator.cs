@@ -81,6 +81,24 @@ namespace CardEditor.Util
                 };
                 return true;
             }
+            else if (Regex.IsMatch(sdkAttack.Text, @"Flip a coin[.] If heads[,] this attack does \d+ damage plus \d+ more damage; if tails, this attack does \d+ damage[.]"))
+            {
+                var cost = baseAttack.Cost.ToList();
+                int damage = baseAttack.Damage;
+                int extraForHeads = int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[1].Value);
+                int extraForTails = int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[2].Value);
+
+                baseAttack = new FlipCoinPlusAttack
+                {
+                    Name = sdkAttack.Name,
+                    Description = sdkAttack.Text,
+                    Damage = damage,
+                    ExtraforHeads = extraForHeads,
+                    ExtraforTails = extraForTails,
+                    Cost = new ObservableCollection<Energy>(cost)
+                };
+                return true;
+            }
             else if (sdkAttack.Text == "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.")
             {
                 var cost = baseAttack.Cost.ToList();
@@ -95,6 +113,15 @@ namespace CardEditor.Util
                 };
 
                 return true;
+            }
+            else if (sdkAttack.Text.Trim() == "The Defending Pokémon can't retreat during your opponent's next turn.")
+            {
+                baseAttack.Effects.Add(new ApplyRetreatStopper()
+                {
+                    FlipCoin = false,
+                    TargetingMode = TargetingMode.OpponentActive,
+                    Turns = 2
+                });
             }
 
             return false;

@@ -99,14 +99,14 @@ namespace TCGCards.TrainerEffects
             ApplyEffectTo(attachedTo, SecondaryEffect);
         }
 
-        private void ApplyEffectTo(PokemonCard attachedTo, StatusEffect effect)
+        private void ApplyEffectTo(PokemonCard pokemon, StatusEffect effect)
         {
             if (effect == StatusEffect.None)
             {
                 return;
             }
 
-            attachedTo.ApplyStatusEffect(effect);
+            pokemon?.ApplyStatusEffect(effect);
         }
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)

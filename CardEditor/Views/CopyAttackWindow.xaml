@@ -6,19 +6,35 @@
         xmlns:local="clr-namespace:CardEditor.Views"
         mc:Ignorable="d"
         Title="CopyAttackWindow" Height="450" Width="800">
-    <DockPanel>
-        <Button Content="Cancel" DockPanel.Dock="Bottom" Margin="5" Click="Button_Cancel_Click"/>
-        <ListView DockPanel.Dock="Top" ItemsSource="{Binding}">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Button Content="{Binding Display}" Click="Button_Click" HorizontalAlignment="Center" Height="32" Width="200"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </DockPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="75*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" LastChildFill="False">
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Pkmn Name" MinWidth="80"/>
+                <TextBox x:Name="textPokemonName" TextChanged="textPokemonName_TextChanged"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Attack Name" MinWidth="80"/>
+                <TextBox x:Name="textAttackName" TextChanged="textPokemonName_TextChanged"/>
+            </DockPanel>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Button Content="Cancel" DockPanel.Dock="Bottom" Margin="5" Click="Button_Cancel_Click"/>
+            <ListView DockPanel.Dock="Top" ItemsSource="{Binding}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Display}" Click="Button_Click" HorizontalAlignment="Center" Height="32" Width="200"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+    </Grid>
 </Window>

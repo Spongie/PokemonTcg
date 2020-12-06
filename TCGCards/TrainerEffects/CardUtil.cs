@@ -110,6 +110,14 @@ namespace TCGCards.TrainerEffects
                     target = caster.ActivePokemonCard;
                     break;
                 case TargetingMode.YourBench:
+                    if (caster.BenchedPokemon.Count == 0)
+                    {
+                        return null;
+                    }
+                    else if (caster.BenchedPokemon.Count == 1)
+                    {
+                        return caster.BenchedPokemon[0];
+                    }
                     message = new SelectFromYourBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.FindCardById(selectedId);
@@ -123,6 +131,15 @@ namespace TCGCards.TrainerEffects
                     target = opponent.ActivePokemonCard;
                     break;
                 case TargetingMode.OpponentBench:
+                    if (opponent.BenchedPokemon.Count == 0)
+                    {
+                        return null;
+                    }
+                    else if (opponent.BenchedPokemon.Count == 1)
+                    {
+                        return opponent.BenchedPokemon[0];
+                    }
+
                     message = new SelectFromOpponentBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.FindCardById(selectedId);

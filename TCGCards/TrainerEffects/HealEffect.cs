@@ -73,7 +73,7 @@ namespace TCGCards.TrainerEffects
 
             PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            target.Heal(Amount, game);
+            target?.Heal(Amount, game);
         }
     }
 }

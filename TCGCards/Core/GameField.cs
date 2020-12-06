@@ -248,10 +248,11 @@ namespace TCGCards.Core
 
             foreach (var pokemon in NonActivePlayer.GetAllPokemonCards())
             {
-                TriggerAbilityOfType(TriggerType.OpponentRetreats, pokemon);
+                TriggerAbilityOfType(TriggerType.OpponentRetreats, pokemon, 0, ActivePlayer.ActivePokemonCard);
             }
             
             ActivePlayer.RetreatActivePokemon(replacementCard, new List<EnergyCard>(payedEnergy), this);
+            CheckDeadPokemon();
         }
 
         public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
@@ -926,7 +927,7 @@ namespace TCGCards.Core
             PushGameLogUpdatesToPlayers();
         }
 
-        public void TriggerAbilityOfType(TriggerType triggerType, PokemonCard pokemon, int damage = 0)
+        public void TriggerAbilityOfType(TriggerType triggerType, PokemonCard pokemon, int damage = 0, PokemonCard target = null)
         {
             var abilities = new List<Ability>();
             abilities.AddRange(pokemon.TemporaryAbilities);
@@ -946,8 +947,10 @@ namespace TCGCards.Core
                 var other = Players.First(player => !player.Id.Equals(ability.PokemonOwner.Owner));
                 if (ability.TriggerType == triggerType && ability.CanActivate(this, ability.PokemonOwner.Owner, other))
                 {
-                    GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers..."); ;
+                    GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers...");
+                    ability.SetTarget(target);
                     ability.Trigger(pokemon.Owner, Players.First(x => !x.Id.Equals(pokemon.Owner.Id)), damage, this);
+                    ability.SetTarget(null);
                 }
             }
         }

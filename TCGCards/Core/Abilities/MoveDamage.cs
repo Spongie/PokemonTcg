@@ -80,12 +80,22 @@ namespace TCGCards.Core.Abilities
             {
                 var source = CardUtil.AskForTargetFromTargetingMode(SourceTargetingMode, game, owner, opponent, PokemonOwner, "Select target to move damage from");
 
+                if (source == null)
+                {
+                    return;
+                }
+
                 if (source.DamageCounters < Amount)
                 {
                     continue;
                 }
 
                 var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner, "Select target to move damage to");
+
+                if (target == null)
+                {
+                    return;
+                }
 
                 if (!allowKnockout && target.DamageCounters + Amount >= target.Hp)
                 {

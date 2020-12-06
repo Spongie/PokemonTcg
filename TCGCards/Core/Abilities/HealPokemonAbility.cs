@@ -60,7 +60,7 @@ namespace TCGCards.Core.Abilities
             }
 
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner);
-            target.Heal(Amount, game);
+            target?.Heal(Amount, game);
         }
     }
 }
