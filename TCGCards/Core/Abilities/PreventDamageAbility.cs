@@ -14,7 +14,7 @@ namespace TCGCards.Core.Abilities
 
         public PreventDamageAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            TriggerType = TriggerType.TakesDamage;
+            TriggerType = TriggerType.DamageTakenModifier;
         }
 
         [DynamicInput("How much to prevent")]

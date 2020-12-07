@@ -22,5 +22,10 @@ namespace Assets.Code.UI.MainMenu
             DeckBuilder.DeckBuilder.CurrentDeck = deckName;
             SceneManager.LoadScene("DeckBuilder");
         }
+
+        public void OnDeleteDeckClicked()
+        {
+            DeckList.Instance.DeleteDeck(this);
+        }
     }
 }

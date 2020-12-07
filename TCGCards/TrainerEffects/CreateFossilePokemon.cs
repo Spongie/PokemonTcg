@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using TCGCards.Core;
+using TCGCards.Core.GameEvents;
 
 namespace TCGCards.TrainerEffects
 {
@@ -27,6 +28,7 @@ namespace TCGCards.TrainerEffects
         {
             var pokemon = new FossilePokemon(game.CurrentTrainerCard);
             caster.BenchedPokemon.Add(pokemon);
+            game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = pokemon });
         }
     }
 }

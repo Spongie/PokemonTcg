@@ -20,7 +20,7 @@ namespace TCGCardsTests.Core
 
             var player = game.ActivePlayer;
             player.TurnsTaken = 32;
-            var pokemon = new PokemonCard(player) { Hp = 100, Name = "Basic", Stage = 0, PlayedThisTurn = false };
+            var pokemon = new PokemonCard(player) { Hp = 100, PokemonName = "Basic", Stage = 0, PlayedThisTurn = false };
             var evolution = new PokemonCard(player) { Hp = 100, EvolvesFrom = "Basic", Name = "Evolver", Stage = 1 };
             var energyCard = new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Colorless };
             player.ActivePokemonCard = pokemon;

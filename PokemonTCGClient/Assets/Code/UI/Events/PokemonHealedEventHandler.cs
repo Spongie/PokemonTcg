@@ -16,6 +16,7 @@ namespace Assets.Code.UI.Events
         IEnumerator JustWait()
         {
             yield return new WaitForSeconds(1.0f);
+            GameEventHandler.Instance.EventCompleted();
         }
     }
 }

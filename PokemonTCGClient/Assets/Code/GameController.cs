@@ -197,12 +197,12 @@ namespace Assets.Code
             SpecialState = SpecialGameState.None;
         }
 
-        internal void SelectedEnergyForRetreat(List<Card> selectedCards)
+        internal void SelectedEnergyForRetreat(List<Card> payedEnergy)
         {
             infoText.text = "Select new active Pokémon";
             SpecialState = SpecialGameState.SelectingRetreatTarget;
             selectedCards.Clear();
-            selectedCards.AddRange(selectedCards);
+            selectedCards.AddRange(payedEnergy);
             EnableButtons();
         }
 

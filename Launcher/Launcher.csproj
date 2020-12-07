@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
     <ProjectReference Include="..\ServerProxy\ServerProxy.csproj" />
-    <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,7 @@
         OpponentRetreats,
         EnergyUsage,
         Passive,
-        Attacked
+        Attacked,
+        DamageTakenModifier
     }
 }

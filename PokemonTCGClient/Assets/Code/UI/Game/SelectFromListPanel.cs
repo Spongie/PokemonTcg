@@ -163,6 +163,7 @@ namespace Assets.Code.UI.Game
                 GameController.Instance.SelectedEnergyForRetreat(selectedCards);
                 selectedCards?.Clear();
                 gameObject.SetActive(false);
+                energyAmountToSelect = 0;
 
                 return;
             }

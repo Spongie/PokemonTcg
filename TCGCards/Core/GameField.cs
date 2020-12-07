@@ -529,7 +529,6 @@ namespace TCGCards.Core
 
             var abilities = new List<Ability>();
             abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllActiveAbilities(this, NonActivePlayer, ActivePlayer));
-            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllActiveAbilities(this, ActivePlayer, NonActivePlayer));
 
             foreach (var ability in abilities.OfType<IAttackStoppingAbility>())
             {
@@ -694,6 +693,8 @@ namespace TCGCards.Core
                 GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
                 EndGame(NonActivePlayer.Id);
             }
+
+            SendEventToPlayers(new GameInfoEvent { });
         }
 
         private void SendEventMessage(Event playEvent, Player target)

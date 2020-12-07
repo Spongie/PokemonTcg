@@ -1,4 +1,5 @@
 ﻿using NetworkingCore;
+using Newtonsoft.Json;
 using PokemonTcgSdk;
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,7 @@ namespace Launcher
 				UpdateCards();
 			}
 
+			Progress = maximumProgress;
 			AddMessage("Version updated! Press Launch to start the game");
 
 			UpdateEnabled = false;
@@ -112,7 +114,7 @@ namespace Launcher
             var setsJson = infoService.GetSetsJson();
             File.WriteAllText(Path.Combine(dataFolder, "sets.json"), setsJson);
 
-            foreach (var set in Serializer.Deserialize<List<Entities.Models.Set>>(setsJson))
+            foreach (var set in JsonConvert.DeserializeObject<List<Entities.Models.Set>>(setsJson))
             {
                 var folder = Path.Combine(streamingAssetsFolder, "Cards", set.SetCode);
 
@@ -128,7 +130,7 @@ namespace Launcher
             AddMessage("Updating trainer-cards...");
             var trainerJson = infoService.GetTrainerJson();
             File.WriteAllText(Path.Combine(dataFolder, "trainers.json"), trainerJson);
-            var trainerCards = Serializer.Deserialize<List<EnergyCard>>(trainerJson).Where(x => x.Completed).ToList();
+            var trainerCards = JsonConvert.DeserializeObject<List<LauncherCard>>(trainerJson).Where(x => x.Completed).ToList();
             progress = 0;
             MaximumProgress = trainerCards.Count;
 
@@ -155,7 +157,7 @@ namespace Launcher
             AddMessage("Updating energy-cards...");
             var energyJson = infoService.GetEnergyJson();
             File.WriteAllText(Path.Combine(dataFolder, "energy.json"), energyJson);
-            var energyCards = Serializer.Deserialize<List<EnergyCard>>(energyJson).Where(x => x.Completed).ToList();
+            var energyCards = JsonConvert.DeserializeObject<List<LauncherCard>>(energyJson).Where(x => x.Completed).ToList();
             progress = 0;
             MaximumProgress = energyCards.Count;
 
@@ -182,7 +184,7 @@ namespace Launcher
             AddMessage("Updating pokemon-cards...");
             var pokemonJson = infoService.GetPokemonJson();
             File.WriteAllText(Path.Combine(dataFolder, "pokemon.json"), pokemonJson);
-            var pokemonCards = Serializer.Deserialize<List<PokemonCard>>(pokemonJson).Where(x => x.Completed).ToList();
+            var pokemonCards = JsonConvert.DeserializeObject<List<LauncherCard>>(pokemonJson).Where(x => x.Completed).ToList();
             progress = 0;
             MaximumProgress = pokemonCards.Count;
 
@@ -232,65 +234,6 @@ namespace Launcher
 			VersionNumber = newVersion.ToString();
 
 			File.WriteAllText("client.version", newVersion.ToString());
-		}
-
-        private void DownloadSet(IPokemonSet set, string baseFolder)
-		{
-			AddMessage("Verifying cards...");
-
-			var response = PokemonTcgSdk.Card.Get<Pokemon>(new Dictionary<string, string>
-				{
-					{ CardQueryTypes.SetCode, set.GetSetCode()},
-					{ CardQueryTypes.PageSize, "500" },
-				});
-
-			var cards = response.Cards;
-
-			Progress = 0;
-			MaximumProgress = cards.Count;
-
-			Directory.CreateDirectory(baseFolder);
-			Directory.CreateDirectory(Path.Combine(baseFolder, "PokemonCards"));
-			Directory.CreateDirectory(Path.Combine(baseFolder, "TrainerCards"));
-			Directory.CreateDirectory(Path.Combine(baseFolder, "EnergyCards"));
-
-			Parallel.ForEach(cards, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, (card) =>
-			{
-				if (card.Name == "Rainbow Energy")
-				{
-					card.SuperType = "Energy";
-				}
-
-				var typeFolder = GetTypeFolder(card.SuperType);
-				string fileName = Path.Combine(baseFolder, typeFolder, GetPokemonFileName(card.Name));
-
-				if (File.Exists(fileName))
-				{
-					Interlocked.Increment(ref progress);
-					FirePropertyChanged(nameof(Progress));
-					return;
-				}
-
-				DownloadCard(card.ImageUrlHiRes, card.ImageUrl, fileName);
-
-				Interlocked.Increment(ref progress);
-				FirePropertyChanged(nameof(Progress));
-			});
-		}
-
-		private string GetTypeFolder(string superType)
-		{
-			switch (superType)
-			{
-				case "Trainer":
-					return "TrainerCards";
-				case "Pokémon":
-					return "PokemonCards";
-				case "Energy":
-					return "EnergyCards";
-				default:
-					return "PokemonCards";
-			}
 		}
 
 		private static void DownloadCard(string hiResUrl, string lowResUrl, string fileName)

@@ -277,7 +277,10 @@ namespace TCGCards
                     }
                 }
             }
-
+            foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<DamageTakenModifier>())
+            {
+                totalDamage = ability.GetModifiedDamage(totalDamage);
+            }
 
             DamageCounters += totalDamage;
             DamageTakenLastTurn = totalDamage;
@@ -360,7 +363,7 @@ namespace TCGCards
         {
             var abilities = new List<Ability>();
             
-            if (Ability != null && Ability.CanActivate(game, caster, opponent))
+            if (Ability != null && game != null && Ability.CanActivate(game, caster, opponent))
             {
                 abilities.Add(Ability);
             }

@@ -9,6 +9,12 @@ namespace Assets.Code.UI.MainMenu
     {
         public GameObject content;
         public GameObject deckPrefab;
+        public static DeckList Instance;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
@@ -24,6 +30,14 @@ namespace Assets.Code.UI.MainMenu
         public void OnNewDeckClicked()
         {
             SceneManager.LoadScene("DeckBuilder");
+        }
+
+        public void DeleteDeck(Deck deck)
+        {
+            var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
+
+            File.Delete(Path.Combine(directory, deck.deckNameText.text + Deck.deckExtension));
+            Destroy(deck.gameObject);
         }
     }
 }

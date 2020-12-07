@@ -19855,7 +19855,7 @@
     "RetreatCost": 2,
     "Weakness": 5,
     "Resistance": 8,
-    "EvolvesFrom": "",
+    "EvolvesFrom": "Mysterious Fossil",
     "Stage": 1,
     "Attacks": [
       {
@@ -19945,7 +19945,7 @@
     "RetreatCost": 2,
     "Weakness": 5,
     "Resistance": 8,
-    "EvolvesFrom": "",
+    "EvolvesFrom": "Mysterious Fossil",
     "Stage": 1,
     "Attacks": [
       {
@@ -21843,7 +21843,7 @@
             "UseLastCoin": false,
             "CheckTails": false,
             "FlipCoin": false,
-            "StatusEffect": 3,
+            "StatusEffect": 0,
             "SecondaryEffect": 5,
             "TargetingMode": 3,
             "EffectType": "Apply Status"
@@ -21947,7 +21947,7 @@
             "UseLastCoin": false,
             "CheckTails": false,
             "FlipCoin": false,
-            "StatusEffect": 3,
+            "StatusEffect": 0,
             "SecondaryEffect": 5,
             "TargetingMode": 3,
             "EffectType": "Apply Status"
@@ -22546,7 +22546,7 @@
       "Modifer": 0.5,
       "TriggerType": 4,
       "PokemonOwner": null,
-      "Name": "Kabuto Armo",
+      "Name": "Kabuto Armor",
       "Description": "Whenever an attack (even your own) does damage to Kabuto (after applying Weakness and Resistance), that attack only does half the damage to Kabuto (rounded down to nearest 10). (Any other effects of attacks still happen.) This power stops working while Kabuto is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],

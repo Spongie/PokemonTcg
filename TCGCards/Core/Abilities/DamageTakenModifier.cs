@@ -38,31 +38,31 @@ namespace TCGCards.Core.Abilities
 
         public DamageTakenModifier(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            TriggerType = TriggerType.TakesDamage;
+            TriggerType = TriggerType.DamageTakenModifier;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            var damageToPrevent = Modifer < 1 ? Math.Ceiling(damageTaken * Modifer) : Modifer;
+            
+        }
 
-            if (damageToPrevent % 5 == 0 && damageToPrevent % 10 != 0)
+        public int GetModifiedDamage(int damageTaken)
+        {
+            var damageWithPrevention = Modifer < 1 ? Math.Ceiling(damageTaken * Modifer) : damageTaken - Modifer;
+
+            if (damageWithPrevention % 5 == 0 && damageWithPrevention % 10 != 0)
             {
                 if (RoundDown)
                 {
-                    damageToPrevent -= 5;
+                    damageWithPrevention -= 5;
                 }
                 else
                 {
-                    damageToPrevent += 5;
+                    damageWithPrevention += 5;
                 }
             }
 
-            owner.ActivePokemonCard.DamageCounters -= (int)damageToPrevent;
-
-            if (owner.ActivePokemonCard.DamageCounters < 0)
-            {
-                owner.ActivePokemonCard.DamageCounters = 0;
-            }
+            return (int)Math.Max(damageWithPrevention, 0);
         }
     }
 }

@@ -32,10 +32,13 @@ namespace TCGCards.TrainerEffects
                     continue;
                 }
 
-                pokemon.DamageCounters = 0;
+                pokemon.Heal(99999, game);
 
-                caster.DiscardPile.AddRange(pokemon.AttachedEnergy);
-                pokemon.AttachedEnergy.Clear();
+                while (pokemon.AttachedEnergy.Count > 0)
+                {
+                    var energyCard = pokemon.AttachedEnergy[0];
+                    pokemon.DiscardEnergyCard(energyCard, game);
+                }
             }
         }
     }
