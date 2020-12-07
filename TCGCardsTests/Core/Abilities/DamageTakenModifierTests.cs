@@ -19,7 +19,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(0, ability.GetModifiedDamage(10));
+            Assert.AreEqual(0, ability.GetModifiedDamage(10, null));
         }
 
         [TestMethod]
@@ -32,7 +32,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(10, ability.GetModifiedDamage(20));
+            Assert.AreEqual(10, ability.GetModifiedDamage(20, null));
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(10, ability.GetModifiedDamage(30));
+            Assert.AreEqual(10, ability.GetModifiedDamage(30, null));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(20, ability.GetModifiedDamage(40));
+            Assert.AreEqual(20, ability.GetModifiedDamage(40, null));
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(10, ability.GetModifiedDamage(10));
+            Assert.AreEqual(10, ability.GetModifiedDamage(10, null));
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(10, ability.GetModifiedDamage(20));
+            Assert.AreEqual(10, ability.GetModifiedDamage(20, null));
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(20, ability.GetModifiedDamage(30));
+            Assert.AreEqual(20, ability.GetModifiedDamage(30, null));
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(20, ability.GetModifiedDamage(40));
+            Assert.AreEqual(20, ability.GetModifiedDamage(40, null));
         }
 
         [TestMethod]
@@ -123,7 +123,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(0, ability.GetModifiedDamage(10));
+            Assert.AreEqual(0, ability.GetModifiedDamage(10, null));
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(0, ability.GetModifiedDamage(20));
+            Assert.AreEqual(0, ability.GetModifiedDamage(20, null));
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.AreEqual(10, ability.GetModifiedDamage(30));
+            Assert.AreEqual(10, ability.GetModifiedDamage(30, null));
         }
     }
 }

@@ -68,7 +68,7 @@ namespace TCGCards.Attacks
             if (applyIfMoreThanThis != -1 && applyIfMoreThanThis >= heads)
             {
                 var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, owner.ActivePokemonCard);
-                target?.ApplyStatusEffect(StatusEffect);
+                target?.ApplyStatusEffect(StatusEffect, game);
             }
 
             return heads * Damage;

@@ -95,18 +95,18 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            ApplyEffectTo(attachedTo, StatusEffect);
-            ApplyEffectTo(attachedTo, SecondaryEffect);
+            ApplyEffectTo(attachedTo, StatusEffect, game);
+            ApplyEffectTo(attachedTo, SecondaryEffect, game);
         }
 
-        private void ApplyEffectTo(PokemonCard pokemon, StatusEffect effect)
+        private void ApplyEffectTo(PokemonCard pokemon, StatusEffect effect, GameField game)
         {
             if (effect == StatusEffect.None)
             {
                 return;
             }
 
-            pokemon?.ApplyStatusEffect(effect);
+            pokemon?.ApplyStatusEffect(effect, game);
         }
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
@@ -125,8 +125,8 @@ namespace TCGCards.TrainerEffects
 
             var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            ApplyEffectTo(target, StatusEffect);
-            ApplyEffectTo(target, SecondaryEffect);
+            ApplyEffectTo(target, StatusEffect, game);
+            ApplyEffectTo(target, SecondaryEffect, game);
         }
     }
 }

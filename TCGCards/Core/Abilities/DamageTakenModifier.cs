@@ -3,7 +3,7 @@ using System;
 
 namespace TCGCards.Core.Abilities
 {
-    public class DamageTakenModifier : Ability
+    public class DamageTakenModifier : Ability, IDamageTakenModifier
     {
         private float modifer;
         private bool roundDown;
@@ -46,7 +46,7 @@ namespace TCGCards.Core.Abilities
             
         }
 
-        public int GetModifiedDamage(int damageTaken)
+        public int GetModifiedDamage(int damageTaken, GameField game)
         {
             var damageWithPrevention = Modifer < 1 ? Math.Ceiling(damageTaken * Modifer) : damageTaken - Modifer;
 

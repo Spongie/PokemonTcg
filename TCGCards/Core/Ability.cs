@@ -116,5 +116,7 @@ namespace TCGCards.Core
         {
             this.target = target;
         }
+
+        public virtual void EndTurn() { }
     }
 }

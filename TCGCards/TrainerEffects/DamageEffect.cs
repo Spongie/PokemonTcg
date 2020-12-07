@@ -68,7 +68,7 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            attachedTo.DealDamage(Amount, game, attachedTo);
+            attachedTo.DealDamage(Amount, game, attachedTo, false, false);
         }
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
@@ -101,7 +101,7 @@ namespace TCGCards.TrainerEffects
                 damage = Amount;
             }
 
-            target.DealDamage(damage, game, pokemonSource);
+            target.DealDamage(damage, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
         }
     }
 }

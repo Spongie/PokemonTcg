@@ -215,13 +215,13 @@ namespace TCGCards
 
             if (IsBurned)
             {
-                DealDamage(20, game, this, false);
+                DealDamage(20, game, this, false, false);
                 IsBurned = game.FlipCoins(1) == 0;
             }
 
             if (IsPoisoned)
             {
-                DealDamage(DoublePoison ? 20 : 10, game, this, false);
+                DealDamage(DoublePoison ? 20 : 10, game, this, false, false);
             }
 
             if(IsAsleep)
@@ -238,6 +238,7 @@ namespace TCGCards
 
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
+            Ability?.EndTurn();
         }
 
         public void Heal(int amount, GameField game)
@@ -256,7 +257,7 @@ namespace TCGCards
             });
         }
 
-        public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable = true)
+        public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable, bool fromAttack)
         {
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
 
@@ -277,9 +278,9 @@ namespace TCGCards
                     }
                 }
             }
-            foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<DamageTakenModifier>())
+            foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageTakenModifier>())
             {
-                totalDamage = ability.GetModifiedDamage(totalDamage);
+                totalDamage = ability.GetModifiedDamage(totalDamage, game);
             }
 
             DamageCounters += totalDamage;
@@ -389,11 +390,11 @@ namespace TCGCards
             return !string.IsNullOrWhiteSpace(evolution.EvolvesFrom) && evolution.EvolvesFrom == PokemonName;
         }
 
-        public virtual void ApplyStatusEffect(StatusEffect statusEffect)
+        public virtual void ApplyStatusEffect(StatusEffect statusEffect, GameField game)
         {
-            var statusPreventer = Ability as PreventStatusEffects;
+            var statusPreventer = Ability as IStatusPreventer;
 
-            if (statusPreventer != null && statusPreventer.PreventsEffect(statusEffect))
+            if (statusPreventer != null && statusPreventer.PreventsEffect(statusEffect, game))
             {
                 return;
             }

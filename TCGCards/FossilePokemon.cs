@@ -1,6 +1,7 @@
 ﻿using Entities;
 using NetworkingCore;
 using System.Collections.ObjectModel;
+using TCGCards.Core;
 using TCGCards.Core.Abilities;
 
 namespace TCGCards
@@ -33,7 +34,7 @@ namespace TCGCards
             return false;
         }
 
-        public override void ApplyStatusEffect(StatusEffect statusEffect)
+        public override void ApplyStatusEffect(StatusEffect statusEffect, GameField game)
         {
             //Can't happen
         }

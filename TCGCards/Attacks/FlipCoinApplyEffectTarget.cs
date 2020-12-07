@@ -28,7 +28,7 @@ namespace TCGCards.Attacks
         {
             if (game.FlipCoins(1) > 0)
             {
-                opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect);
+                opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect, game);
             }
 
             base.ProcessEffects(game, owner, opponent);

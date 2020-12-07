@@ -1,8 +1,9 @@
 ﻿using CardEditor.Views;
+using System;
 
 namespace TCGCards.Core.Abilities
 {
-    public class PreventDamageAbility : PassiveAbility
+    public class PreventDamageAbility : PassiveAbility, IDamageTakenModifier
     {
         private int minimumBeforePrevention;
         private int damageToPrevent;
@@ -54,6 +55,16 @@ namespace TCGCards.Core.Abilities
             {
                 PokemonOwner.DamageCounters -= DamageToPrevent;
             }
+        }
+
+        public int GetModifiedDamage(int damageTaken, GameField game)
+        {
+            if (damageTaken < minimumBeforePrevention)
+            {
+                return damageTaken;
+            }
+
+            return (int)Math.Max(damageTaken - damageToPrevent, 0);
         }
     }
 }

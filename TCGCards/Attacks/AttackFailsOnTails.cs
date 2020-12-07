@@ -47,7 +47,7 @@ namespace TCGCards.Attacks
 
             if (StatusEffect != StatusEffect.None)
             {
-                opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect);
+                opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect, game);
             }
 
             return base.GetDamage(owner, opponent, game);

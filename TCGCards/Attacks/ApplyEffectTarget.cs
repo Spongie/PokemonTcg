@@ -26,7 +26,7 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect);
+            opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect, game);
 
             base.ProcessEffects(game, owner, opponent);
         }

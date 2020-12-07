@@ -43,14 +43,14 @@ namespace TCGCards.TrainerEffects
             {
                 foreach (var pokemon in opponent.BenchedPokemon)
                 {
-                    pokemon.DealDamage(Damage, game, pokemonSource);
+                    pokemon.DealDamage(Damage, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
                 }
             }
             else
             {
                 foreach (var pokemon in caster.BenchedPokemon)
                 {
-                    pokemon.DealDamage(Damage, game, pokemonSource);
+                    pokemon.DealDamage(Damage, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
                 }
             }
         }

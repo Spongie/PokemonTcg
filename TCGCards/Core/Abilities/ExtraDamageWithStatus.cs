@@ -44,11 +44,11 @@ namespace TCGCards.Core.Abilities
         {
             if (target != null)
             {
-                ((PokemonCard)target).DealDamage(new Damage(Amount), game, PokemonOwner);
+                ((PokemonCard)target).DealDamage(new Damage(Amount), game, PokemonOwner, true, true);
             }
             else
             {
-                opponent.ActivePokemonCard.DealDamage(new Damage(Amount), game, PokemonOwner);
+                opponent.ActivePokemonCard.DealDamage(new Damage(Amount), game, PokemonOwner, true, true);
             }
         }
 

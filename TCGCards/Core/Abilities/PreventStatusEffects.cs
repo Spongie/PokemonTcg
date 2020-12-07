@@ -3,7 +3,7 @@ using Entities;
 
 namespace TCGCards.Core.Abilities
 {
-    public class PreventStatusEffects : PassiveAbility
+    public class PreventStatusEffects : PassiveAbility, IStatusPreventer
     {
         private bool preventBurn;
         private bool preventConfuse;
@@ -89,9 +89,9 @@ namespace TCGCards.Core.Abilities
             ModifierType = PassiveModifierType.StopStatusEffects;
         }
 
-        public bool PreventsEffect(StatusEffect statusEffect)
+        public bool PreventsEffect(StatusEffect statusEffect, GameField game)
         {
-            if (CoinFlip && CoinFlipper.FlipCoin())
+            if (CoinFlip && game.FlipCoins(1) == 0)
             {
                 return false;
             }

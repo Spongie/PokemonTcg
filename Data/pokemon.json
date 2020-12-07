@@ -21018,7 +21018,7 @@
             "$id": "1939",
             "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
             "Amount": 10,
-            "TargetingMode": 5,
+            "TargetingMode": 4,
             "CoinFlip": false,
             "ApplyWeaknessResistance": false,
             "EffectType": "Damage"
@@ -21118,7 +21118,7 @@
             "$id": "1948",
             "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
             "Amount": 10,
-            "TargetingMode": 5,
+            "TargetingMode": 4,
             "CoinFlip": false,
             "ApplyWeaknessResistance": false,
             "EffectType": "Damage"
@@ -21810,9 +21810,18 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "2013",
-      "$type": "TCGCards.Core.Abilities.AttackStopperAbility, TCGCards",
+      "$type": "TCGCards.Core.Abilities.StopEverythingToMeAbility, TCGCards",
+      "OnlyStopWhenSleeping": true,
+      "OnlyPreventAttacks": true,
       "CoinFlip": true,
-      "TriggerType": 11,
+      "UseSameCoinFlip": true,
+      "DamageToPrevent": 9999,
+      "PreventPoison": true,
+      "PreventParalyze": true,
+      "PreventSleep": true,
+      "PreventConfuse": true,
+      "PreventBurn": true,
+      "TriggerType": 12,
       "PokemonOwner": null,
       "Name": "Transparency",
       "Description": "Whenever an attack does anything to Haunter, flip a coin. If heads, prevent all effects of that attack, including damage, done to Haunter. This power stops working while Haunter is Asleep.",
@@ -21820,7 +21829,7 @@
       "Effects": [],
       "Id": {
         "$id": "2014",
-        "Value": "67340d41-d3d0-4cb0-9585-4e482cfb0327"
+        "Value": "4c579bd6-cd7d-440e-904b-d613efe276be"
       },
       "UsedTimes": 0
     },
@@ -21914,9 +21923,18 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "2023",
-      "$type": "TCGCards.Core.Abilities.AttackStopperAbility, TCGCards",
+      "$type": "TCGCards.Core.Abilities.StopEverythingToMeAbility, TCGCards",
+      "OnlyStopWhenSleeping": true,
+      "OnlyPreventAttacks": true,
       "CoinFlip": true,
-      "TriggerType": 11,
+      "UseSameCoinFlip": true,
+      "DamageToPrevent": 9999,
+      "PreventPoison": true,
+      "PreventParalyze": true,
+      "PreventSleep": true,
+      "PreventConfuse": true,
+      "PreventBurn": true,
+      "TriggerType": 12,
       "PokemonOwner": null,
       "Name": "Transparency",
       "Description": "Whenever an attack does anything to Haunter, flip a coin. If heads, prevent all effects of that attack, including damage, done to Haunter. This power stops working while Haunter is Asleep.",
@@ -21924,7 +21942,7 @@
       "Effects": [],
       "Id": {
         "$id": "2024",
-        "Value": "67c5af8c-4750-4298-a120-493a861bf555"
+        "Value": "f4708620-b0b6-486c-afec-30bf7d38c205"
       },
       "UsedTimes": 0
     },

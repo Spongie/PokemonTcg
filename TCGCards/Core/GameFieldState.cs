@@ -9,6 +9,7 @@
         InTurn,
         GameOver,
         Attacking,
-        TurnEnding
+        TurnEnding,
+        PostAttack
     }
 }

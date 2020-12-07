@@ -69,7 +69,7 @@ namespace TCGCards.Attacks
         {
             foreach (var pokemon in target.BenchedPokemon.Where(x => x.Type == targetType))
             {
-                pokemon.DealDamage(damageToBench, game, game.ActivePlayer.ActivePokemonCard);
+                pokemon.DealDamage(damageToBench, game, game.ActivePlayer.ActivePokemonCard, true, true);
             }
         }
     }

@@ -50,7 +50,7 @@ namespace TCGCards.Core.Abilities
                 return;
             }
 
-            ((PokemonCard)target).DealDamage(Damage, game, PokemonOwner, false);
+            ((PokemonCard)target).DealDamage(Damage, game, PokemonOwner, false, false);
         }
     }
 }

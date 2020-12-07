@@ -7,7 +7,7 @@ namespace TCGCards.Attacks
     {
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect.Poison);
+            opponent.ActivePokemonCard.ApplyStatusEffect(StatusEffect.Poison, game);
             opponent.ActivePokemonCard.DoublePoison = true;
 
             base.ProcessEffects(game, owner, opponent);
