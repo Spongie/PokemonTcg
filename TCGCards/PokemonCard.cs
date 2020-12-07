@@ -270,6 +270,7 @@ namespace TCGCards
                     if (totalDamage <= 0)
                     {
                         game.GameLog.AddMessage(GetName() + " Takes no damage");
+                        game?.SendEventToPlayers(new DamageTakenEvent() { Damage = 0, PokemonId = Id, DamageType = source != null ? source.Type : EnergyTypes.Colorless });
                         return 0;
                     }
                     else
@@ -343,7 +344,7 @@ namespace TCGCards
             if(!Owner.BenchedPokemon.Any())
                 return false;
 
-            return !IsParalyzed && !IsAsleep && AttachedEnergy.Count >= RetreatCost;
+            return !IsParalyzed && !IsAsleep && AttachedEnergy.Sum(x => x.Amount) >= RetreatCost;
         }
 
         public void DiscardEnergyCard(EnergyCard energyCard, GameField game)
