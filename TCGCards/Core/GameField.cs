@@ -686,7 +686,10 @@ namespace TCGCards.Core
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             
-            ActivePlayer.DiscardPile.Add(trainerCard);
+            if (trainerCard.AddToDiscardWhenCasting)
+            {
+                ActivePlayer.DiscardPile.Add(trainerCard);
+            }
 
             CurrentTrainerCard = null;
 

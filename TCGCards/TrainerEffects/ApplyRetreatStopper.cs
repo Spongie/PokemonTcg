@@ -8,7 +8,7 @@ namespace TCGCards.TrainerEffects
     public class ApplyRetreatStopper : DataModel, IEffect
     {
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
-        private int turns = 2;
+        private int turns = Ability.UNTIL_YOUR_NEXT_TURN;
         private bool flipCoin;
 
         [DynamicInput("Flip Coin?", InputControl.Boolean)]

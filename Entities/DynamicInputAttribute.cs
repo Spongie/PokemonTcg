@@ -33,6 +33,7 @@ namespace CardEditor.Views
         Text,
         Boolean,
         Dropdown,
-        Grid
+        Grid,
+        Ability
     }
 }

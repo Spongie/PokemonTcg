@@ -3,7 +3,7 @@ using Entities;
 
 namespace TCGCards.Core.Abilities
 {
-    public class EnergyTypeOverrideTemporaryAbility : TemporaryAbility
+    public class EnergyTypeOverrideTemporaryAbility : Ability
     {
         private EnergyTypes sourceType;
         private EnergyTypes newType;
@@ -16,6 +16,7 @@ namespace TCGCards.Core.Abilities
         public EnergyTypeOverrideTemporaryAbility(PokemonCard owner) : base(owner)
         {
             TriggerType = TriggerType.Passive;
+            TurnDuration = UNTIL_YOUR_NEXT_TURN;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

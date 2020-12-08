@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CardEditor.ViewModels;
+using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using TCGCards.TrainerEffects;
 
 namespace CardEditor.Views
 {
@@ -37,10 +39,16 @@ namespace CardEditor.Views
                         continue;
                     }
 
-                    var panel = new StackPanel();
-                    panel.Orientation = Orientation.Horizontal;
-                    panel.MaxHeight = 30;
-                    panel.Children.Add(new Label { Content = dynamicInput.DisplayName, MinWidth = 200 });
+                    var panel = new DockPanel();
+                    panel.LastChildFill = true;
+                    //panel.MaxHeight = 30;
+                    if (dynamicInput.InputType != InputControl.Ability)
+                    {
+                        var label = new Label { Content = dynamicInput.DisplayName, MinWidth = 200 };
+                        panel.Children.Add(label);
+                        DockPanel.SetDock(label, Dock.Left);
+                    }
+                    DockPanel.SetDock(panel, Dock.Top);
                     Control input;
 
                     switch (dynamicInput.InputType)
@@ -48,10 +56,12 @@ namespace CardEditor.Views
                         case InputControl.Text:
                             input = new TextBox() { MinWidth = 100 };
                             input.SetBinding(TextBox.TextProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                            DockPanel.SetDock(input, Dock.Left);
                             break;
                         case InputControl.Boolean:
                             input = new CheckBox();
                             input.SetBinding(CheckBox.IsCheckedProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                            DockPanel.SetDock(input, Dock.Left);
                             break;
                         case InputControl.Dropdown:
                             var comboBox = new ComboBox() { MinWidth = 100 };
@@ -61,6 +71,7 @@ namespace CardEditor.Views
                             }
                             comboBox.SetBinding(ComboBox.SelectedItemProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
                             input = comboBox;
+                            DockPanel.SetDock(input, Dock.Left);
                             break;
                         case InputControl.Grid:
                             var grid = new DataGrid
@@ -73,6 +84,19 @@ namespace CardEditor.Views
                             };
                             grid.SetBinding(DataGrid.ItemsSourceProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
                             input = grid;
+                            DockPanel.SetDock(input, Dock.Left);
+                            break;
+                        case InputControl.Ability:
+                            var button = new Button { Content = "Set Ability" };
+                            button.Command = new RelayCommand((x) => { return true; }, AddAbility);
+                            DockPanel.SetDock(button, Dock.Top);
+                            panel.Children.Add(button);
+                            var abilityInput = new AbilityView();
+                            abilityInput.MinHeight = 320;
+                            abilityInput.SetBinding(AbilityView.DataContextProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                            panel.VerticalAlignment = VerticalAlignment.Stretch;
+                            DockPanel.SetDock(abilityInput, Dock.Top);
+                            input = abilityInput;
                             break;
                         default:
                             throw new NotImplementedException();
@@ -86,6 +110,24 @@ namespace CardEditor.Views
             catch
             {
                 MessageBox.Show("Some error generating inputs, re-select attack");
+            }
+        }
+
+        private void AddAbility(object obj)
+        {
+            var avilityDialog = new AddAbilityWindow();
+
+            if (avilityDialog.ShowDialog().Value)
+            {
+                try
+                {
+                    var effect = (AttachmentEffect)DataContext; 
+                    effect.Ability = avilityDialog.SelectedAbility;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Some error when adding ability lol");
+                }
             }
         }
     }

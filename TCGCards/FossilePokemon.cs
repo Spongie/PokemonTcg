@@ -27,7 +27,10 @@ namespace TCGCards
             PrizeCards = 0;
             Attacks = new ObservableCollection<Attack>();
             Ability = new DiscardSelfAbility(this);
+            Source = source;
         }
+
+        public TrainerCard Source { get; set; }
 
         public override bool CanReatreat()
         {

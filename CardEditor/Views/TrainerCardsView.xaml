@@ -70,6 +70,10 @@
                 <TextBox Text="{Binding SetCode}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                <Label Content="Add To Discard when casting" MinWidth="80"/>
+                <CheckBox IsChecked="{Binding AddToDiscardWhenCasting}" VerticalAlignment="Center" />
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
                 <Label Content="Completed" MinWidth="80"/>
                 <CheckBox IsChecked="{Binding Completed}" VerticalAlignment="Center" />
             </DockPanel>
@@ -90,7 +94,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </DockPanel>
-                <DockPanel Grid.Column="1">
+                <DockPanel Grid.Column="1" LastChildFill="True">
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
                         <Label Content="Selected Effect: "/>
                         <Label Content="{Binding SelectedEffect.EffectType}" />

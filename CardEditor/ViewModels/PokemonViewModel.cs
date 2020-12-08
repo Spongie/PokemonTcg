@@ -94,7 +94,7 @@ namespace CardEditor.ViewModels
 			if (window.ShowDialog().Value)
 			{
 				card.Ability.Effects.Add(window.SelectedEffect);
-				SelectedAbilityEffect = card.Ability.Effects.Last();
+				//SelectedAbilityEffect = card.Ability.Effects.Last();
 			}
 		}
 
@@ -191,16 +191,6 @@ namespace CardEditor.ViewModels
 				FirePropertyChanged();
 			}
 		}
-
-        public IEffect SelectedAbilityEffect
-		{
-            get { return selectedAbilityEffect; }
-            set
-            {
-                selectedAbilityEffect = value;
-                FirePropertyChanged();
-            }
-        }
 
 
         public ICommand AddAttackCommand { get; set; }

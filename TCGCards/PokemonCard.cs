@@ -62,17 +62,17 @@ namespace TCGCards
         public PokemonCard(Player owner) : base(owner)
         {
             AttachedEnergy = new List<EnergyCard>();
-            TemporaryAbilities = new List<TemporaryAbility>();
+            TemporaryAbilities = new List<Ability>();
             DamageStoppers = new List<DamageStopper>();
         }
 
         public void ReInitLists()
         {
             AttachedEnergy = new List<EnergyCard>();
-            TemporaryAbilities = new List<TemporaryAbility>();
+            TemporaryAbilities = new List<Ability>();
             DamageStoppers = new List<DamageStopper>();
             AttachedEnergy = new List<EnergyCard>();
-            TemporaryAbilities = new List<TemporaryAbility>();
+            TemporaryAbilities = new List<Ability>();
         }
 
         public int Hp
@@ -169,6 +169,7 @@ namespace TCGCards
         public int DamageCounters { get; set; }
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
+        public List<TrainerCard> AttachedTools { get; set; } = new List<TrainerCard>();
         public bool PlayedThisTurn { get; set; }
         public bool ParalyzedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
@@ -177,7 +178,7 @@ namespace TCGCards
         public bool IsAsleep { get; set; }
         public bool IsConfused { get; set; }
         public PokemonCard KnockedOutBy { get; set; }
-        public List<TemporaryAbility> TemporaryAbilities { get; set; } = new List<TemporaryAbility>();
+        public List<Ability> TemporaryAbilities { get; set; } = new List<Ability>();
         public List<DamageStopper> DamageStoppers { get; set; } = new List<DamageStopper>();
         public int DamageTakenLastTurn { get; set; }
         public bool DoublePoison { get; set; }
@@ -190,11 +191,20 @@ namespace TCGCards
         {
             if (TemporaryAbilities == null)
             {
-                TemporaryAbilities = new List<TemporaryAbility>();
+                TemporaryAbilities = new List<Ability>();
             }
 
-            TemporaryAbilities.ForEach(x => x.TurnsLeft--);
-            TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnsLeft > 0).ToList();
+            foreach (var ability in TemporaryAbilities)
+            {
+                ability.EndTurn();
+
+                if (ability.TurnDuration <= 0)
+                {
+                    ability.OnDestroyed(game);
+                }
+            }
+
+            TemporaryAbilities = TemporaryAbilities.Where(x => x.TurnDuration > 0).ToList();
             foreach (var attack in Attacks)
             {
                 attack.DamageModifier?.ReduceTurnCount();
@@ -278,6 +288,10 @@ namespace TCGCards
                         game.GameLog.AddMessage(GetName() + $" Takes {damageStopper.Amount} less damage");
                     }
                 }
+            }
+            foreach (var ability in source.GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageDealtModifier>())
+            {
+                totalDamage = ability.GetModifiedDamage(totalDamage, game);
             }
             foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageTakenModifier>())
             {
@@ -424,5 +438,7 @@ namespace TCGCards
                     break;
             }
         }
+
+        public virtual void OnDeath() { }
     }
 }

@@ -16,11 +16,12 @@ namespace TCGCards.Attacks
             base.ProcessEffects(game, owner, opponent);
         }
 
-        private class DestinyBondAbilty : TemporaryAbility
+        private class DestinyBondAbilty : Ability
         {
             public DestinyBondAbilty(PokemonCard owner) : base(owner)
             {
                 TriggerType = TriggerType.Dies;
+                TurnDuration = UNTIL_YOUR_NEXT_TURN;
             }
 
             protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

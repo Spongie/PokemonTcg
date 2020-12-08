@@ -456,17 +456,21 @@
       "$id": "42",
       "$type": "TCGCards.Core.Abilities.MoveEnergyAbility, TCGCards",
       "EnergyType": 5,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "MoveEnergyAbility",
       "Name": "Energy Trans",
       "Description": "As often as you like during your turn (before your attack), you may take 1 Grass Energy card attached to 1 of your Pokémon and attach it to a different one. This power can't be used if Venusaur is Asleep, Confused, or Paralyzed.",
       "Usages": 999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "43",
         "Value": "635a52f4-6a25-4f78-95ae-3ecfbf0e89db"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 100,
@@ -1767,17 +1771,21 @@
       "$id": "164",
       "$type": "TCGCards.Core.Abilities.MoveDamageAbility, TCGCards",
       "Amount": 10,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "MoveDamageAbility",
       "Name": "Damage Swap",
       "Description": "As often as you like during your turn (before your attack), you may move 1 damage counter from 1 of your Pokémon to another as long as you don't Knock Out that Pokémon. This power can't be used if Alakazam is Asleep, Confused, or Paralyzed.",
       "Usages": 2147483647,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "165",
         "Value": "c4664128-6b04-4639-a6cd-27abfc06714f"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 80,
@@ -4900,18 +4908,21 @@
       "$type": "TCGCards.Core.Abilities.EnergyTypeOverrideTemporaryAbility, TCGCards",
       "SourceType": 1,
       "NewType": 4,
-      "TurnsLeft": 2,
+      "TurnDuration": 2,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "EnergyTypeOverrideTemporaryAbility",
       "Name": "Energy Burn",
       "Description": "As often as you like during your turn (before your attack), you may turn all Energy attached to Charizard into Fire Energy for the rest of the turn. This power can't be used if Charizard is Asleep, Confused, or Paralyzed.",
       "Usages": 999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "450",
         "Value": "fffdd577-d825-43e6-a94d-4c0e240c2863"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 120,
@@ -5094,17 +5105,21 @@
       "$id": "467",
       "$type": "TCGCards.Core.Abilities.TakesDamagesOnAttacked, TCGCards",
       "DamageReturned": 10,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "TakesDamagesOnAttacked",
       "Name": "Strikes Back",
       "Description": "Whenever your opponent's attack damages Machamp (even if Machamp is Knoced Out), this power does 10 damage to attacking Pokémon. (Don't apply Weakness and Resistance.) This power can't be used if Machamp is already Asleep, Confused, or Paralyzed when your opponent attacks.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "468",
         "Value": "f1e57af2-1d08-4ac7-91d1-b59ed1156b6f"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 100,
@@ -5405,17 +5420,21 @@
       "$type": "TCGCards.Core.Abilities.AttachEnergyFromHandAbility, TCGCards",
       "PokemonType": 3,
       "EnergyType": 3,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "AttachEnergyFromHandAbility",
       "Name": "Rain Dance",
       "Description": "As often as you like during your turn (before your attack), you may attach 1 Water Energy Card to 1 of your Water Pokémon. (This doesn't use up your 1 Energy card attachment for the turn.) This power can't be used if Blastoise is Asleep, Confused, or Paralyzed.",
       "Usages": 999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "497",
         "Value": "774112f2-b9bf-4a77-8683-b9b3bbaf8bfa"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 100,
@@ -5597,17 +5616,21 @@
     "Ability": {
       "$id": "514",
       "$type": "TCGCards.Core.Abilities.Buzzard, TCGCards",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "Buzzard",
       "Name": "Buzzard",
       "Description": "At any time during your turn (before your attack) you may Knock Out Electrode and attach it to 1 of your other Pokémon. If you do, chose a type of Energy. Electrode is now an Energy card (instead of a Pokémon) that provides 2 energy of that type. This power can't be used if Electrode is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "515",
         "Value": "9440967b-c9d8-434c-ac33-61c6c51b606e"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 80,
@@ -7064,8 +7087,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "652",
+      "TurnDuration": 9999,
       "TriggerType": 1,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Summon Minions",
       "Description": null,
       "Usages": 9999,
@@ -7082,11 +7107,13 @@
           "AddToBench": true
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "654",
         "Value": "dc2cb076-93d3-4506-95f4-5af8007825c2"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -7366,8 +7393,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "680",
+      "TurnDuration": 9999,
       "TriggerType": 1,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Summon Minions",
       "Description": null,
       "Usages": 1,
@@ -7384,11 +7413,13 @@
           "AddToBench": true
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "682",
         "Value": "0b948add-a0a1-4482-9800-c02f802476a4"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -7963,17 +7994,21 @@
       "ModifierType": 0,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "RetreatCostModifierAbility",
       "Name": "Sticky Goo",
       "Description": "As long as Dark Muk is your Active Pokemon your opponent pays 2 more to retreat.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "734",
         "Value": "9f98c30b-efc4-4e96-a190-bcf1f55dc559"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -8632,17 +8667,21 @@
     "Ability": {
       "$id": "793",
       "$type": "TCGCards.Core.Abilities.SwapPrizeWithTopOfDeck, TCGCards",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "SwapPrizeWithTopOfDeck",
       "Name": "Trickery",
       "Description": "Once during your turn (before your attack), you may switch 1 of your Prizes with the top card of your deck. This power can't be used if Rattata is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "794",
         "Value": "03ace457-e55d-4d6b-abec-0b5671d6dd62"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 40,
@@ -8909,17 +8948,21 @@
       "$type": "TCGCards.Core.Abilities.ExtraDamageWithStatus, TCGCards",
       "Status": 4,
       "Amount": 30,
+      "TurnDuration": 9999,
       "TriggerType": 3,
       "PokemonOwner": null,
+      "AbilityType": "ExtraDamageWithStatus",
       "Name": "Frenzy",
       "Description": "If Dark Primaeape does any damage while it's Confused it does 30 more damage",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "818",
         "Value": "0ccdcdd2-37b0-4f77-ae5f-273a64c9f944"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -9465,8 +9508,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "868",
+      "TurnDuration": 9999,
       "TriggerType": 1,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Reel In",
       "Description": null,
       "Usages": 1,
@@ -9479,11 +9524,13 @@
           "EffectType": "Pick from discard"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "870",
         "Value": "a44a54bf-f03b-4bf0-949a-04bc71f52d9d"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -9562,8 +9609,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "877",
+      "TurnDuration": 9999,
       "TriggerType": 1,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Sneak Attack",
       "Description": null,
       "Usages": 1,
@@ -9578,11 +9627,13 @@
           "EffectType": "Damage"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "879",
         "Value": "30aeb4d8-75ef-4b0b-a008-968b2a1f7ab7"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -10542,17 +10593,21 @@
       "$type": "TCGCards.Core.Abilities.DealDamageWhenRetreating, TCGCards",
       "CoinFlip": true,
       "Damage": 20,
+      "TurnDuration": 9999,
       "TriggerType": 8,
       "PokemonOwner": null,
+      "AbilityType": "DealDamageWhenRetreating",
       "Name": "Knock Down",
       "Description": "Whenever your opponent's Active Pokémon retreats, your opponent flips a coin. If tails, this power does 20 damage to that Pokémon. (Don't apply Weakness and Resistance.) This power stops working while Dark Dugtrio is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "969",
         "Value": "14735681-96af-475a-93aa-edba319ed99d"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -10631,8 +10686,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "976",
+      "TurnDuration": 9999,
       "TriggerType": 1,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Sneak Attack",
       "Description": null,
       "Usages": 1,
@@ -10647,11 +10704,13 @@
           "EffectType": "Damage"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "978",
         "Value": "3ad5d253-7770-4d17-b93c-89d90a4ee211"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -10851,17 +10910,21 @@
       "ModifierType": 1,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "StopTrainerCastsAbility",
       "Name": "Hay Fever",
       "Description": "No Trainer cards can be played",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "997",
         "Value": "2b8729bb-95a3-40dd-b5f7-8370aca7f416"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -11180,17 +11243,21 @@
       "Damage": 20,
       "DamageMultipliedByEnergy": true,
       "EnergyType": 3,
+      "TurnDuration": 9999,
       "TriggerType": 6,
       "PokemonOwner": null,
+      "AbilityType": "DealDamageWhenKnockedOut",
       "Name": "Final Beam",
       "Description": "When Dark Gyarados is Knocked Out by an attack, flip a coin. If heads, this power does 20 damage for each Water Energy attached to Dark Gyarados to the Pokémon that Knocked Out Dark Gyarados. Apply Weakness and Resistance. This power doesn't work if Dark Gyarados is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1027",
         "Value": "5771e7b9-1f2a-437a-b8ee-acf4387531c7"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -11317,8 +11384,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "1037",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Pollen Stench",
       "Description": null,
       "Usages": 1,
@@ -11346,11 +11415,13 @@
           "EffectType": "Apply Status"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1040",
         "Value": "95220c31-acf8-4c09-8ca4-a1137958737d"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -11555,8 +11626,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "1059",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Matter Exchange",
       "Description": null,
       "Usages": 1,
@@ -11579,11 +11652,13 @@
           "EffectType": "Draw cards"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1062",
         "Value": "b72feb67-9403-4fae-83b1-d7f3a309bc8f"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -12042,8 +12117,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "1103",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Gather Fire",
       "Description": "Once during your turn (before your attack), you may take 1 Fire Energy card attached to 1 of your other Pokémon and attach it to Charmander. This power can't be used if Charmander is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
@@ -12061,11 +12138,13 @@
           "EffectType": "Move attached energy"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1105",
         "Value": "b0ad0358-bc7e-4120-a4d1-7d481672fc25"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 40,
@@ -12449,17 +12528,21 @@
       "Damage": 20,
       "DamageMultipliedByEnergy": true,
       "EnergyType": 3,
+      "TurnDuration": 9999,
       "TriggerType": 6,
       "PokemonOwner": null,
+      "AbilityType": "DealDamageWhenKnockedOut",
       "Name": "Final Beam",
       "Description": "When Dark Gyarados is Knocked Out by an attack, flip a coin. If heads, this power does 20 damage for each Water Energy attached to Dark Gyarados to the Pokémon that Knocked Out Dark Gyarados. Apply Weakness and Resistance. This power doesn't work if Dark Gyarados is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1142",
         "Value": "b93c547f-3f10-4d0f-bb23-fe681a0f6810"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -12658,17 +12741,21 @@
       "$type": "TCGCards.Core.Abilities.DealDamageWhenRetreating, TCGCards",
       "CoinFlip": true,
       "Damage": 20,
+      "TurnDuration": 9999,
       "TriggerType": 8,
       "PokemonOwner": null,
+      "AbilityType": "DealDamageWhenRetreating",
       "Name": "Sinkhole",
       "Description": "Whenever your opponent's Active Pokémon retreats, your opponent flips a coin. If tails, this power does 20 damage to that Pokémon. (Don't apply Weakness and Resistance.) This power stops working while Dark Dugtrio is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1161",
         "Value": "fd61b455-440f-4c70-a2c1-36dd5f53f23f"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -12747,8 +12834,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "1168",
+      "TurnDuration": 9999,
       "TriggerType": 1,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Reel in",
       "Description": null,
       "Usages": 9999,
@@ -12761,11 +12850,13 @@
           "EffectType": "Pick from discard"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1170",
         "Value": "721e0971-c839-4cdb-a0d4-d6dbfeddbdb7"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -12849,17 +12940,21 @@
       "ModifierType": 1,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "StopTrainerCastsAbility",
       "Name": "Hay Fever",
       "Description": "No Trainer cards can be played. This power stops working while Dark Vileplume is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1178",
         "Value": "567eeb53-07d7-4449-94da-43abf6a0a626"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -13051,8 +13146,10 @@
     "PrizeCards": 1,
     "Ability": {
       "$id": "1196",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "Ability",
       "Name": "Long-Distance Hypnosis",
       "Description": null,
       "Usages": 1,
@@ -13080,11 +13177,13 @@
           "EffectType": "Apply Status"
         }
       ],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1199",
         "Value": "f0e05edf-6d56-49b4-adfb-51d4aab3b3b9"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -13971,17 +14070,21 @@
       "ModifierType": 0,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "RetreatCostModifierAbility",
       "Name": "Retreat Aid",
       "Description": "As long as Dodrio is Benched, pay 1 less to retreat your active pokemon",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1279",
         "Value": "17f4705e-1de5-4998-a78a-86a5d111c1ef"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -15730,17 +15833,21 @@
     "Ability": {
       "$id": "1436",
       "$type": "TCGCards.Core.Abilities.Peek, TCGCards",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "Peek",
       "Name": "Peek",
       "Description": "Once during your turn (before your attack), you may look at one of the following: the top card of either player's deck, a random card from your opponent's hand, or one of either player's Prizes. This power can't be used if Mankey is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1437",
         "Value": "c437fcca-ab71-458f-8346-6383208006b5"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 30,
@@ -16022,17 +16129,21 @@
       "ModifierType": 0,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 4,
       "PokemonOwner": null,
+      "AbilityType": "PreventDamageAbility",
       "Name": "Invisible Wall",
       "Description": "Whenever an attack (including your own) does 30 or more damage to Mr. Mime (after applying Weakness and Resistance), prevent that damage. (Any other effects of attacks still happen.) This power can't be used if Mr. Mime is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1463",
         "Value": "749056f5-5af1-4718-942f-26fce68ef68b"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 40,
@@ -16121,17 +16232,21 @@
       "ModifierType": 0,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 4,
       "PokemonOwner": null,
+      "AbilityType": "PreventDamageAbility",
       "Name": "Invisible Wall",
       "Description": "Whenever an attack (including your own) does 30 or more damage to Mr. Mime (after applying Weakness and Resistance), prevent that damage. (Any other effects of attacks still happen.) This power can't be used if Mr. Mime is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1472",
         "Value": "661934af-a0ab-4d58-bfb6-91ef555855a5"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 40,
@@ -18357,17 +18472,21 @@
       "ModifierType": 3,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "PreventStatusEffects",
       "Name": "Thick Skinned",
       "Description": "Snorlax can't become Asleep, Confused, Paralyzed, or Poisoned. This power can't be used if Snorlax is already Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1681",
         "Value": "a0293f9b-24fa-4017-bc8e-04c8ad4bf02b"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 90,
@@ -18465,17 +18584,21 @@
       "ModifierType": 3,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "PreventStatusEffects",
       "Name": "Thick Skinned",
       "Description": "Snorlax can't become Asleep, Confused, Paralyzed, or Poisoned. This power can't be used if Snorlax is already Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1690",
         "Value": "58cf8df9-d057-4f34-8bea-d2a68a645f5c"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 90,
@@ -18991,17 +19114,21 @@
       "$id": "1737",
       "$type": "TCGCards.Core.Abilities.ChangeTypeAbility, TCGCards",
       "OnlyToColorsInGame": true,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "ChangeTypeAbility",
       "Name": "Shift",
       "Description": "Once during your turn (before your attack), you may change the type of Venomoth to the type of any other Pokémon in play other than Colorless. This power can't be used if Venomoth is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1738",
         "Value": "41e05219-8934-42a9-a681-80c233548512"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -19091,17 +19218,21 @@
       "$id": "1746",
       "$type": "TCGCards.Core.Abilities.ChangeTypeAbility, TCGCards",
       "OnlyToColorsInGame": true,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "ChangeTypeAbility",
       "Name": "Shift",
       "Description": "Once during your turn (before your attack), you may change the type of Venomoth to the type of any other Pokémon in play other than Colorless. This power can't be used if Venomoth is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1747",
         "Value": "a56a9163-231f-4e03-8ea6-c57ad43de354"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -19538,17 +19669,21 @@
       "TargetingMode": 2,
       "Amount": 1,
       "CoinFlip": true,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "HealPokemonAbility",
       "Name": "Heal",
       "Description": "Once during your turn (before your attack), you may flip a coin. If heads, remove 1 damage counter from 1 of your Pokémon. This power can't be used if Vileplume is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1789",
         "Value": "08d7ad81-c2b5-46b3-bf2b-305ef5cff28a"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 80,
@@ -19633,17 +19768,21 @@
       "TargetingMode": 2,
       "Amount": 1,
       "CoinFlip": true,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "HealPokemonAbility",
       "Name": "Heal",
       "Description": "Once during your turn (before your attack), you may flip a coin. If heads, remove 1 damage counter from 1 of your Pokémon. This power can't be used if Vileplume is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1797",
         "Value": "40474aab-6563-4202-bbdf-49db6ecdd5a3"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 80,
@@ -20037,17 +20176,21 @@
       "ModifierType": 4,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "StopEvolutionCardsAbility",
       "Name": "Prehistoric Power",
       "Description": "No more Evolution cards can be played. This power stops working while Aerodactyl is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1833",
         "Value": "8d0e0505-4dcb-4240-adf8-b006f238d796"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -20128,17 +20271,21 @@
       "ModifierType": 4,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "StopEvolutionCardsAbility",
       "Name": "Prehistoric Power",
       "Description": "No more Evolution cards can be played. This power stops working while Aerodactyl is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1841",
         "Value": "88fd657b-610c-4f6e-92ce-62a2049e1025"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -20769,17 +20916,21 @@
     "Ability": {
       "$id": "1897",
       "$type": "TCGCards.Core.Abilities.BecomeActivePokemon, TCGCards",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "BecomeActivePokemon",
       "Name": "Step In",
       "Description": "Once during your turn (before you attack) if Dragonite is on your Bench, you may switch it with your Active Pokémon.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1898",
         "Value": "ed9b090d-0039-4aab-bbb2-7079a3d77644"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 100,
@@ -20861,17 +21012,21 @@
     "Ability": {
       "$id": "1905",
       "$type": "TCGCards.Core.Abilities.BecomeActivePokemon, TCGCards",
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "BecomeActivePokemon",
       "Name": "Step In",
       "Description": "Once during your turn (before you attack) if Dragonite is on your Bench, you may switch it with your Active Pokémon.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1906",
         "Value": "b5456832-9f1a-4195-bc87-dd2e64d7c232"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 100,
@@ -21201,17 +21356,21 @@
       "SourceTargetingMode": 5,
       "TargetingMode": 5,
       "AllowKnockout": true,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "MoveDamage",
       "Name": "Curse",
       "Description": "Once during your turn (before your attack), you may move 1 damage counter from 1 of your opponent's Pokémon to another (even if it would Knock Out the other Pokémon). This power can't be used if Gengar is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1937",
         "Value": "550644b3-5556-43ae-b191-3074ad95d9af"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 80,
@@ -21302,17 +21461,21 @@
       "SourceTargetingMode": 5,
       "TargetingMode": 5,
       "AllowKnockout": true,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "MoveDamage",
       "Name": "Curse",
       "Description": "Once during your turn (before your attack), you may move 1 damage counter from 1 of your opponent's Pokémon to another (even if it would Knock Out the other Pokémon). This power can't be used if Gengar is Asleep, Confused, or Paralyzed.",
       "Usages": 1,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "1946",
         "Value": "10406708-15a1-432c-8ede-aee6ca35f5f3"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 80,
@@ -22041,17 +22204,21 @@
       "PreventSleep": true,
       "PreventConfuse": true,
       "PreventBurn": true,
+      "TurnDuration": 9999,
       "TriggerType": 12,
       "PokemonOwner": null,
+      "AbilityType": "StopEverythingToMeAbility",
       "Name": "Transparency",
       "Description": "Whenever an attack does anything to Haunter, flip a coin. If heads, prevent all effects of that attack, including damage, done to Haunter. This power stops working while Haunter is Asleep.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2014",
         "Value": "4c579bd6-cd7d-440e-904b-d613efe276be"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -22155,17 +22322,21 @@
       "PreventSleep": true,
       "PreventConfuse": true,
       "PreventBurn": true,
+      "TurnDuration": 9999,
       "TriggerType": 12,
       "PokemonOwner": null,
+      "AbilityType": "StopEverythingToMeAbility",
       "Name": "Transparency",
       "Description": "Whenever an attack does anything to Haunter, flip a coin. If heads, prevent all effects of that attack, including damage, done to Haunter. This power stops working while Haunter is Asleep.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2024",
         "Value": "f4708620-b0b6-486c-afec-30bf7d38c205"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 50,
@@ -22789,17 +22960,21 @@
       "$type": "TCGCards.Core.Abilities.DamageTakenModifier, TCGCards",
       "RoundDown": true,
       "Modifer": 0.5,
+      "TurnDuration": 9999,
       "TriggerType": 4,
       "PokemonOwner": null,
+      "AbilityType": "DamageTakenModifier",
       "Name": "Kabuto Armor",
       "Description": "Whenever an attack (even your own) does damage to Kabuto (after applying Weakness and Resistance), that attack only does half the damage to Kabuto (rounded down to nearest 10). (Any other effects of attacks still happen.) This power stops working while Kabuto is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2084",
         "Value": "509a548e-1b52-4ffc-8340-a69ce3e358fa"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 30,
@@ -24048,17 +24223,21 @@
       "ModifierType": 2,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "StopPokemonPowersAbility",
       "Name": "Toxic Gas",
       "Description": "Ignore all Pokémon Powers other than Toxic Gases. This power stops working while Muk is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2201",
         "Value": "3d83b457-64e8-45f3-8ebf-7133241fb877"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -24151,17 +24330,21 @@
       "ModifierType": 2,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "StopPokemonPowersAbility",
       "Name": "Toxic Gas",
       "Description": "Ignore all Pokémon Powers other than Toxic Gases. This power stops working while Muk is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2210",
         "Value": "be826817-3bed-4a38-9b29-10a7de153637"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 70,
@@ -24253,17 +24436,21 @@
       "ModifierType": 5,
       "LimitedByTime": false,
       "TurnsLeft": 0,
+      "TurnDuration": 9999,
       "TriggerType": 10,
       "PokemonOwner": null,
+      "AbilityType": "AllowLookAtOpponentHand",
       "Name": "Clairvoyance",
       "Description": "Your opponent plays with his or her hand face up. This power stops working while Omanyte is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2219",
         "Value": "a86a8b14-a4e7-4b24-8c92-6197785a8d8e"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 40,
@@ -25055,17 +25242,21 @@
       "SourceTargetingMode": 2,
       "TargetingMode": 8,
       "AllowKnockout": false,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "MoveDamage",
       "Name": "Strange Behavior",
       "Description": "As often as you like during your turn (before your attack), you may move 1 damage counter from 1 of your Pokémon to Slowbro as long as you don't Knock Out Slowbro. This power can't be used if Slowbro is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2291",
         "Value": "50018472-bd2b-4a21-9d7f-18750d64385d"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 60,
@@ -25280,17 +25471,21 @@
       "$id": "2311",
       "$type": "TCGCards.Core.Abilities.BounceSelfAbility, TCGCards",
       "BounceAttachedCards": false,
+      "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
+      "AbilityType": "BounceSelfAbility",
       "Name": "Cowardice",
       "Description": "At any time during your turn (before your attack), you may return Tentacool to your hand. (Discard all cards attached to Tentacool.) This power can't be used the turn you put Tentacool into play or if Tentacool is Asleep, Confused, or Paralyzed.",
       "Usages": 9999,
       "Effects": [],
+      "SelectedAbilityEffect": null,
       "Id": {
         "$id": "2312",
         "Value": "5bee9778-d56e-470c-8fed-14fe813246a6"
       },
-      "UsedTimes": 0
+      "UsedTimes": 0,
+      "Source": null
     },
     "SelectedAttack": null,
     "Hp": 30,

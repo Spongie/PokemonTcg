@@ -2,7 +2,7 @@
 
 namespace TCGCards.Core.Abilities
 {
-    public class AttackStopperSpecificAbility : TemporaryAbility, IAttackStoppingAbility
+    public class AttackStopperSpecificAbility : Ability, IAttackStoppingAbility
     {
         private bool onlySelf = true;
         private bool onlyCurrentTarget;
@@ -17,6 +17,7 @@ namespace TCGCards.Core.Abilities
         public AttackStopperSpecificAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
             TriggerType = TriggerType.Attacked;
+            TurnDuration = UNTIL_YOUR_NEXT_TURN;
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)

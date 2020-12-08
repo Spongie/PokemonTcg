@@ -14,6 +14,7 @@
         EnergyUsage,
         Passive,
         Attacked,
-        DamageTakenModifier
+        DamageTakenModifier,
+        DamageDealtModifier
     }
 }

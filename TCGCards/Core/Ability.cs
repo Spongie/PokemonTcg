@@ -9,12 +9,14 @@ namespace TCGCards.Core
 {
     public class Ability : DataModel, IEntity
     {
+        public const int UNTIL_YOUR_NEXT_TURN = 2;
         protected Card target;
         private string name;
         private string description;
         private int usages = 9999;
         private TriggerType triggerType;
         private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
+        private IEffect selectedAbilityEffect;
 
         public Ability():this(null)
         {
@@ -29,6 +31,20 @@ namespace TCGCards.Core
 
         protected virtual void Activate(Player owner, Player opponent, int damageTaken, GameField game) { }
 
+        private int turnDuration = 9999;
+
+        [DynamicInput("Turn duration")]
+        public int TurnDuration
+        {
+            get { return turnDuration; }
+            set
+            {
+                turnDuration = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         [DynamicInput("Trigger type", InputControl.Dropdown, typeof(TriggerType))]
         public TriggerType TriggerType
         {
@@ -41,6 +57,14 @@ namespace TCGCards.Core
         }
 
         public PokemonCard PokemonOwner { get; set; }
+
+        public string AbilityType
+        {
+            get
+            {
+                return GetType().Name;
+            }
+        }
 
         public string Name
         {
@@ -82,8 +106,19 @@ namespace TCGCards.Core
             }
         }
 
+        public IEffect SelectedAbilityEffect
+        {
+            get { return selectedAbilityEffect; }
+            set
+            {
+                selectedAbilityEffect = value;
+                FirePropertyChanged();
+            }
+        }
+
         public NetworkId Id { get; set; }
         public int UsedTimes { get; set; }
+        public Card Source { get; set; }
 
         public void Trigger(Player owner, Player opponent, int damageTaken, GameField game)
         {
@@ -117,6 +152,18 @@ namespace TCGCards.Core
             this.target = target;
         }
 
-        public virtual void EndTurn() { }
+        public virtual void EndTurn() 
+        {
+            TurnDuration--;
+        }
+
+        public void OnDestroyed(GameField game)
+        {
+            if (Source != null)
+            {
+                PokemonOwner.Owner.DiscardPile.Add(Source);
+                Source = null;
+            }
+        }
     }
 }

@@ -391,6 +391,7 @@ namespace TCGCards.Core
 
         private void KillPokemon(PokemonCard pokemon)
         {
+            pokemon.OnDeath();
             DiscardPile.AddRange(pokemon.AttachedEnergy);
             pokemon.AttachedEnergy.Clear();
 

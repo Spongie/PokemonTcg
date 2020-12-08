@@ -33,6 +33,19 @@ namespace TCGCards
 
         public override string GetName() => Name;
 
+        private bool addToDiscardWhenCasting = true;
+
+        public bool AddToDiscardWhenCasting
+        {
+            get { return addToDiscardWhenCasting; }
+            set
+            {
+                addToDiscardWhenCasting = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public ObservableCollection<IEffect> Effects
         {
             get { return effects; }
