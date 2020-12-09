@@ -7,6 +7,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
     private Vector2 originalSize;
 
     public ZoomMode zoomMode;
+    public int extraX;
     
     [SerializeField]
     private bool hovered;
@@ -43,10 +44,22 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
         hovered = true;
     }
 
+    private Canvas FindCanvas()
+    {
+        var parentCanvas = transform.parent.gameObject.GetComponent<Canvas>();
+
+        if (parentCanvas != null)
+        {
+            return parentCanvas;
+        }
+
+        return GetComponent<Canvas>();
+    }
+
     private void OnZoomStart()
     {
         Debug.Log("Zoom start");
-        oldOrder = transform.parent.gameObject.GetComponent<Canvas>().sortingOrder;
+        oldOrder = FindCanvas().sortingOrder;
         zooming = true;
         var rectTransform = GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(440, 540);
@@ -75,7 +88,7 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
             rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x / 2, rectTransform.offsetMax.y / 2);
         }
 
-        var canvas = transform.parent.gameObject.GetComponent<Canvas>();
+        var canvas = FindCanvas();
         canvas.sortingOrder = 500;
     }
 
@@ -91,11 +104,11 @@ public partial class CardZoomer : MonoBehaviour, IPointerEnterHandler, IPointerE
         zooming = false;
         var rectTransform = GetComponent<RectTransform>();
         
-        rectTransform.sizeDelta = originalSize;
-        rectTransform.offsetMin = Vector2.zero;
+        rectTransform.offsetMin = new Vector2(extraX, 0);
         rectTransform.offsetMax = Vector2.zero;
+        rectTransform.sizeDelta = originalSize;
 
-        var canvas = transform.parent.gameObject.GetComponent<Canvas>();
+        var canvas = FindCanvas();
         canvas.sortingOrder = oldOrder;
     }
 }

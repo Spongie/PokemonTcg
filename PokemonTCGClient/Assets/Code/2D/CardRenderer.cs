@@ -13,6 +13,7 @@ using Assets.Code._2D;
 using Entities;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 public class CardRenderer : MonoBehaviour, IPointerClickHandler
 {
@@ -27,6 +28,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public GameObject overlay;
     public CardPopupHandler popupHandler;
     public GameObject DamageDisplay;
+    public Transform AttachmentParent;
+    public GameObject AttachmentPrefab;
 
     [Header("Status Images")]
     public GameObject PoisonIcon;
@@ -70,7 +73,18 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
-        //SetCard(new PokemonCard() { SetCode = "base1", IsRevealed = true, ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png", Attacks = new ObservableCollection<Attack> { new Attack() { Name = "Attacken"} } }, ZoomMode.Center, true);
+        //SetCard(new PokemonCard() 
+        //{ 
+        //    SetCode = "base1", 
+        //    IsRevealed = true, 
+        //    ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png", 
+        //    Attacks = new ObservableCollection<Attack> { new Attack() { Name = "Attacken"} },
+        //    AttachedTools = new List<TrainerCard>
+        //    {
+        //        new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/80_hires.png", SetCode = "base1" },
+        //        new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/84_hires.png", SetCode = "base1" },
+        //    }
+        //}, ZoomMode.Center, true);
         //GameController.Instance.AddCard(this);
         //SetCard(new Bulbasaur(null) { IsRevealed = true }, ZoomMode.Center);
     }
@@ -127,6 +141,8 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
                 SpawnAttachedEnergy(pokemon, zoomMode, myRect, sortOrder, offsetSize, attachedOffset);
             }
 
+            SpawnAttachments(pokemon.AttachedTools, zoomMode);
+
             if (pokemon.DamageCounters > 0)
             {
                 DamageDisplay.SetActive(true);
@@ -164,6 +180,26 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
             var attachedObject = Instantiate(AttachedEnergyPrefab, AttachedEnergyList.transform);
             attachedObject.GetComponent<AttachedEnergy>().energyCard = attachedEnergy;
             attachedObject.GetComponent<Image>().sprite = EnergyResourceManager.Instance.GetSpriteForEnergyCard(attachedEnergy);
+        }
+    }
+
+    private void SpawnAttachments(List<TrainerCard> attachments, ZoomMode zoomMode)
+    {
+        int extraX = 75;
+
+        foreach (var attachment in attachments)
+        {
+            var gameObject = Instantiate(AttachmentPrefab, AttachmentParent);
+
+            var rectTransform = gameObject.GetComponent<RectTransform>();
+            rectTransform.localPosition = new Vector3(extraX / 2, 0);
+
+            var zoomer = gameObject.GetComponent<CardZoomer>();
+            zoomer.zoomMode = zoomMode;
+            zoomer.extraX = extraX;
+            extraX += 75;
+
+            CardImageLoader.Instance.LoadSprite(attachment, gameObject.GetComponent<Image>());
         }
     }
 
