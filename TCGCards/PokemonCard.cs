@@ -289,9 +289,12 @@ namespace TCGCards
                     }
                 }
             }
-            foreach (var ability in source.GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageDealtModifier>())
+            if (source != null)
             {
-                totalDamage = ability.GetModifiedDamage(totalDamage, game);
+                foreach (var ability in source.GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageDealtModifier>())
+                {
+                    totalDamage = ability.GetModifiedDamage(totalDamage, game);
+                }
             }
             foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageTakenModifier>())
             {

@@ -66,7 +66,7 @@ namespace TCGCards.Core.Tests
             var p = new Player();
             var card = new TestPokemonCard(p);
             var card2 = new TestPokemonCard(p);
-            var energyCard = new EnergyCard();
+            var energyCard = new EnergyCard() { Amount = 1 };
             p.Hand.Add(energyCard);
 
             p.SetActivePokemon(card);
@@ -85,7 +85,7 @@ namespace TCGCards.Core.Tests
             var p = new Player();
             var card = new TestPokemonCard(p);
             var card2 = new TestPokemonCard(p);
-            var energyCard = new EnergyCard();
+            var energyCard = new EnergyCard() { Amount = 1 };
             p.Hand.Add(energyCard);
 
             p.SetActivePokemon(card);
@@ -109,7 +109,7 @@ namespace TCGCards.Core.Tests
             };
 
             var card2 = new TestPokemonCard(p);
-            var energyCard = new EnergyCard();
+            var energyCard = new EnergyCard() { Amount = 1 };
             p.Hand.Add(energyCard);
 
             p.SetActivePokemon(card);
