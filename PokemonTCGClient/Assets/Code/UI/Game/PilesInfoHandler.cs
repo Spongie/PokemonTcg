@@ -34,6 +34,11 @@ namespace Assets.Code.UI.Game
 
         public void OnDisplayDiscardPileClick()
         {
+            if (GameController.Instance.SpecialState != SpecialGameState.None)
+            {
+                return;
+            }
+
             var player = trackingOpponent ? GameController.Instance.OpponentPlayer : GameController.Instance.Player;
 
             if (player == null)
@@ -47,6 +52,11 @@ namespace Assets.Code.UI.Game
 
         public void OnDisplayPricePileClick()
         {
+            if (GameController.Instance.SpecialState != SpecialGameState.None)
+            {
+                return;
+            }
+
             var player = trackingOpponent ? GameController.Instance.OpponentPlayer : GameController.Instance.Player;
 
             if (player == null)

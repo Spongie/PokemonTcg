@@ -806,6 +806,11 @@ namespace Assets.Code
 
         public void EndTurnButtonClicked()
         {
+            if (SpecialState != SpecialGameState.None)
+            {
+                return;
+            }
+
             NetworkManager.Instance.gameService.EndTurn(gameField.Id);
         }
 
