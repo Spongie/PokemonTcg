@@ -4,7 +4,7 @@ using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
 
-namespace TCGCards.TrainerEffects
+namespace TCGCards.TrainerEffects.Util
 {
     public static class CardUtil
     {

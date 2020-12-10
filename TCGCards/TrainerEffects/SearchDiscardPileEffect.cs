@@ -6,6 +6,7 @@ using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {

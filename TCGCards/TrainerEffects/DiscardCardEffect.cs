@@ -3,6 +3,7 @@ using Entities.Models;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
