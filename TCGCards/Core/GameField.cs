@@ -72,6 +72,38 @@ namespace TCGCards.Core
             return heads;
         }
 
+        public int FlipCoinsUntilTails()
+        {
+            int heads = 0;
+
+            while (true)
+            {
+                if (CoinFlipper.FlipCoin() == CoinFlipper.TAILS)
+                {
+                    break;
+                }
+
+                heads++;
+            }
+
+            GameLog?.AddMessage($"Flips {heads + 1} coins and gets {heads} heads");
+
+            var results = new List<bool>();
+
+            for (int i = 0; i < heads; i++)
+            {
+                results.Add(true);
+            }
+            results.Add(false);
+
+            SendEventToPlayers(new CoinsFlippedEvent(results));
+
+            LastCoinFlipResult = heads > 0;
+            LastCoinFlipHeadCount = heads;
+
+            return heads;
+        }
+
         internal Player GetOpponentOf(Player player)
         {
             return Players.FirstOrDefault(p => !p.Id.Equals(player.Id));
