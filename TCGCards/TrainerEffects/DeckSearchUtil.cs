@@ -9,6 +9,7 @@ namespace TCGCards.TrainerEffects
     {
         public static List<Card> SearchDeck(GameField game, Player player, List<IDeckFilter> filters, int amount)
         {
+            game.GetOpponentOf(player).NetworkPlayer.Send(new InfoMessage("Opponent is searching their deck...").ToNetworkMessage(game.Id));
             var message = new DeckSearchMessage(player.Deck, filters, amount).ToNetworkMessage(game.Id);
 
             if (player.Deck.Cards.Count(card => filters.All(f => f.IsCardValid(card))) == 0)

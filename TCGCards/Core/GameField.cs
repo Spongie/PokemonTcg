@@ -72,6 +72,11 @@ namespace TCGCards.Core
             return heads;
         }
 
+        internal Player GetOpponentOf(Player player)
+        {
+            return Players.First(p => !p.Id.Equals(player.Id));
+        }
+
         public void SendEventToPlayers(Event gameEvent)
         {
             SendEventMessage(gameEvent, ActivePlayer);
