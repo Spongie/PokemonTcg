@@ -74,7 +74,7 @@ namespace TCGCards.Core
 
         internal Player GetOpponentOf(Player player)
         {
-            return Players.First(p => !p.Id.Equals(player.Id));
+            return Players.FirstOrDefault(p => !p.Id.Equals(player.Id));
         }
 
         public void SendEventToPlayers(Event gameEvent)
@@ -238,7 +238,7 @@ namespace TCGCards.Core
             return card.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= retreatCost;
         }
 
-        public void OnPokemonRetreated(PokemonCard replacementCard, List<EnergyCard> payedEnergy)
+        public void PokemonRetreated(PokemonCard replacementCard, List<EnergyCard> payedEnergy)
         {
             if (!ActivePlayer.Id.Equals(replacementCard.Owner.Id))
             {
@@ -260,7 +260,7 @@ namespace TCGCards.Core
             CheckDeadPokemon();
         }
 
-        public void OnBenchPokemonSelected(Player owner, List<PokemonCard> selectedPokemons)
+        public void AddPokemonToBench(Player owner, List<PokemonCard> selectedPokemons)
         {
             if (GameState != GameFieldState.BothSelectingBench)
             {
@@ -562,7 +562,7 @@ namespace TCGCards.Core
         private void DealDamageWithAttack(Attack attack)
         {
             Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer, this);
-            damage.NormalDamage = GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard, attack);
+            damage.NormalDamage = DamageCalculator.GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard, attack);
 
             if (DamageStoppers.Any(x => x.IsDamageIgnored(damage.NormalDamage + damage.DamageWithoutResistAndWeakness)))
             {
@@ -597,28 +597,7 @@ namespace TCGCards.Core
             }
         }
 
-        public int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender, Attack attack)
-        {
-            var realDamage = damage;
-
-            if (attack != null && !attack.ApplyWeaknessResistance)
-            {
-                return realDamage;
-            }
-
-            if (defender.Resistance == attacker.Type)
-            {
-                realDamage -= 30;
-            }
-            if (defender.Weakness == attacker.Type)
-            {
-                realDamage *= 2;
-            }
-
-            return Math.Max(realDamage, 0);
-        }
-
-        public void PostAttack()
+        private void PostAttack()
         {
             if (AbilityTriggeredByDeath())
             {
@@ -783,75 +762,8 @@ namespace TCGCards.Core
                 return;
             }
 
-            var killedPokemons = new List<PokemonCard>();
-
-            foreach (PokemonCard pokemon in NonActivePlayer.BenchedPokemon)
-            {
-                if (!pokemon.IsDead())
-                {
-                    continue;
-                }
-
-                SendEventToPlayers(new PokemonDiedEvent
-                {
-                    Pokemon = pokemon
-                });
-
-                killedPokemons.Add(pokemon);
-
-                TriggerAbilityOfType(TriggerType.Dies, pokemon);
-
-                if (ActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
-                {
-                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
-                    EndGame(ActivePlayer.Id);
-                    return;
-                }
-                else
-                {
-                    PushInfoToPlayer("Opponent is selecting a prize card", NonActivePlayer);
-                    ActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
-                }
-            }
-
-            foreach (var pokemon in killedPokemons)
-            {
-                NonActivePlayer.KillBenchedPokemon(pokemon);
-            }
-
-            foreach (PokemonCard pokemon in ActivePlayer.BenchedPokemon)
-            {
-                if (!pokemon.IsDead())
-                {
-                    continue;
-                }
-
-                SendEventToPlayers(new PokemonDiedEvent
-                {
-                    Pokemon = pokemon
-                });
-
-                killedPokemons.Add(pokemon);
-
-                TriggerAbilityOfType(TriggerType.Dies, pokemon);
-
-                if (NonActivePlayer.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
-                {
-                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + " wins the game");
-                    EndGame(NonActivePlayer.Id);
-                    return;
-                }
-                else
-                {
-                    PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
-                    NonActivePlayer.SelectPrizeCard(pokemon.PrizeCards, this);
-                }
-            }
-
-            foreach (var pokemon in killedPokemons)
-            {
-                ActivePlayer.KillBenchedPokemon(pokemon);
-            }
+            CheckDeadBenchedPokemon(NonActivePlayer);
+            CheckDeadBenchedPokemon(ActivePlayer);
 
             if (NonActivePlayer.ActivePokemonCard != null && NonActivePlayer.ActivePokemonCard.IsDead())
             {
@@ -919,7 +831,7 @@ namespace TCGCards.Core
                 var prizeCardValue = ActivePlayer.ActivePokemonCard.PrizeCards;
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 ActivePlayer.KillActivePokemon();
-                
+
                 if (ActivePlayer.BenchedPokemon.Any())
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
@@ -936,6 +848,45 @@ namespace TCGCards.Core
             }
 
             PushGameLogUpdatesToPlayers();
+        }
+
+        private void CheckDeadBenchedPokemon(Player player)
+        {
+            var opponent = GetOpponentOf(player);
+            var killedPokemons = new List<PokemonCard>();
+            foreach (PokemonCard pokemon in player.BenchedPokemon)
+            {
+                if (!pokemon.IsDead())
+                {
+                    continue;
+                }
+
+                SendEventToPlayers(new PokemonDiedEvent
+                {
+                    Pokemon = pokemon
+                });
+
+                killedPokemons.Add(pokemon);
+
+                TriggerAbilityOfType(TriggerType.Dies, pokemon);
+
+                if (opponent.PrizeCards.Count <= 1 && pokemon.PrizeCards > 0)
+                {
+                    GameLog.AddMessage(opponent.NetworkPlayer?.Name + " wins the game");
+                    EndGame(opponent.Id);
+                    return;
+                }
+                else
+                {
+                    PushInfoToPlayer("Opponent is selecting a prize card", player);
+                    opponent.SelectPrizeCard(pokemon.PrizeCards, this);
+                }
+            }
+
+            foreach (var pokemon in killedPokemons)
+            {
+                player.KillBenchedPokemon(pokemon);
+            }
         }
 
         public void TriggerAbilityOfType(TriggerType triggerType, PokemonCard pokemon, int damage = 0, PokemonCard target = null)
@@ -973,6 +924,11 @@ namespace TCGCards.Core
             {
                 player.NetworkPlayer?.Send(new GameOverMessage(winner).ToNetworkMessage(Id));
             }
+
+            ActivePlayer.OnCardsDrawn -= PlayerDrewCards;
+            ActivePlayer.OnCardsDiscarded -= PlayerDiscardedCards;
+            NonActivePlayer.OnCardsDrawn -= PlayerDrewCards;
+            NonActivePlayer.OnCardsDiscarded -= PlayerDiscardedCards;
         }
 
         public void EndTurn()

@@ -95,7 +95,7 @@ namespace TCGCards.TrainerEffects
 
             if (ApplyWeaknessResistance)
             {
-                damage = game.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null);
+                damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null);
             }
             else
             {

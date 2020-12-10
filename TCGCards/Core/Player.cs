@@ -304,7 +304,11 @@ namespace TCGCards.Core
 
         public void SetNetworkPlayer(INetworkPlayer networkPlayer)
         {
-            Id = networkPlayer.Id;
+            if (networkPlayer.Id != null)
+            {
+                Id = networkPlayer.Id;
+            }
+
             NetworkPlayer = networkPlayer;
         }
 

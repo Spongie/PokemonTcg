@@ -116,7 +116,7 @@ namespace Server.Services
             }
 
             var pokemons = pokemonIds.Distinct().Select(id => (PokemonCard)game.FindCardById(id));
-            game.OnBenchPokemonSelected(game.Players.First(p => p.Id.Equals(playerId)), pokemons.ToList());
+            game.AddPokemonToBench(game.Players.First(p => p.Id.Equals(playerId)), pokemons.ToList());
 
             return game;
         }
@@ -300,7 +300,7 @@ namespace Server.Services
 
             var energyCards = energyCardIds.Select(cardId => (EnergyCard)game.FindCardById(cardId)).ToList();
 
-            game.OnPokemonRetreated((PokemonCard)game.FindCardById(targetPokemon), energyCards);
+            game.PokemonRetreated((PokemonCard)game.FindCardById(targetPokemon), energyCards);
 
             return game;
         }

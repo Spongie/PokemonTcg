@@ -20,6 +20,7 @@ namespace TCGCardsTests.Effects
             };
 
             var player = new Player();
+            player.Id = NetworkId.Generate();
             var target = new EnergyCard();
             player.Deck.Cards.Push(target);
             player.Deck.Cards.Push(new EnergyCard());
