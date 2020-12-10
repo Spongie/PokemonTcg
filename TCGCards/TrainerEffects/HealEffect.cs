@@ -2,6 +2,7 @@
 using Entities;
 using Entities.Models;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -71,7 +72,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+            PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             target?.Heal(Amount, game);
         }

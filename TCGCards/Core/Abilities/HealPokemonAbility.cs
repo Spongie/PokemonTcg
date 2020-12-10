@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Core.Abilities
 {
@@ -59,7 +60,7 @@ namespace TCGCards.Core.Abilities
                 return;
             }
 
-            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner);
+            var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner);
             target?.Heal(Amount, game);
         }
     }

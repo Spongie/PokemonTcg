@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -112,7 +113,7 @@ namespace TCGCards.TrainerEffects
                 return true;
             }
 
-            foreach (var pokemon in CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
+            foreach (var pokemon in Targeting.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
             {
                 if (pokemon.AttachedEnergy.Count >= 1)
                 {
@@ -143,14 +144,14 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            if (CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard).All(x => x.AttachedEnergy.Count == 0))
+            if (Targeting.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard).All(x => x.AttachedEnergy.Count == 0))
             {
                 return;
             }
 
             while (true)
             {
-                PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+                PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
                 if (target.AttachedEnergy.Count == 0)
                 {

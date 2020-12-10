@@ -1,6 +1,7 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -73,7 +74,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, pokemonSource).Count == 0)
+            if (Targeting.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, pokemonSource).Count == 0)
             {
                 return;
             }
@@ -83,7 +84,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+            var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             if (target == null)
             {

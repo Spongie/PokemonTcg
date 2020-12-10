@@ -2,6 +2,7 @@
 using Entities.Models;
 using TCGCards.Core;
 using TCGCards.Core.SpecialAbilities;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -69,7 +70,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+            var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
             target?.TemporaryAbilities.Add(new RetreatStopper(target, Turns));
         }
     }

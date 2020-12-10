@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Core.Abilities
 {
@@ -78,7 +79,7 @@ namespace TCGCards.Core.Abilities
         {
             while (true)
             {
-                var source = CardUtil.AskForTargetFromTargetingMode(SourceTargetingMode, game, owner, opponent, PokemonOwner, "Select target to move damage from");
+                var source = Targeting.AskForTargetFromTargetingMode(SourceTargetingMode, game, owner, opponent, PokemonOwner, "Select target to move damage from");
 
                 if (source == null)
                 {
@@ -90,7 +91,7 @@ namespace TCGCards.Core.Abilities
                     continue;
                 }
 
-                var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner, "Select target to move damage to");
+                var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, PokemonOwner, "Select target to move damage to");
 
                 if (target == null)
                 {

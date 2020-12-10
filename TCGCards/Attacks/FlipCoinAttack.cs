@@ -2,6 +2,7 @@
 using Entities;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Attacks
 {
@@ -67,7 +68,7 @@ namespace TCGCards.Attacks
 
             if (applyIfMoreThanThis != -1 && applyIfMoreThanThis >= heads)
             {
-                var target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, owner.ActivePokemonCard);
+                var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, owner.ActivePokemonCard);
                 target?.ApplyStatusEffect(StatusEffect, game);
             }
 

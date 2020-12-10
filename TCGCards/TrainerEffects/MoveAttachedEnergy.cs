@@ -8,6 +8,7 @@ using System.Text;
 using TCGCards.Core;
 using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -123,7 +124,7 @@ namespace TCGCards.TrainerEffects
 
             while (true)
             {
-                source = CardUtil.AskForTargetFromTargetingMode(Source, game, caster, opponent, pokemonSource, "Select a pokemon to move energy from");
+                source = Targeting.AskForTargetFromTargetingMode(Source, game, caster, opponent, pokemonSource, "Select a pokemon to move energy from");
 
                 if (FromAnother && source == pokemonSource)
                 {
@@ -147,7 +148,7 @@ namespace TCGCards.TrainerEffects
             bool first = true;
             if (availableEnergyCards.Count <= Amount)
             {
-                target = CardUtil.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
+                target = Targeting.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
                 while (source.AttachedEnergy.Count > 0)
                 {
                     var energyCard = source.AttachedEnergy[0];
@@ -158,7 +159,7 @@ namespace TCGCards.TrainerEffects
 
                     if (DifferentTargetForEachCard && !first)
                     {
-                        target = CardUtil.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
+                        target = Targeting.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
                     }
 
                     target.AttachedEnergy.Add(energyCard);
@@ -174,13 +175,13 @@ namespace TCGCards.TrainerEffects
             var ids = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(game.Id)).Cards;
 
             var cards = source.AttachedEnergy.Where(x => ids.Contains(x.Id)).ToList();
-            target = CardUtil.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
+            target = Targeting.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
 
             foreach (var card in cards)
             {
                 if (DifferentTargetForEachCard && !first)
                 {
-                    target = CardUtil.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
+                    target = Targeting.AskForTargetFromTargetingMode(Target, game, caster, opponent, pokemonSource, "Select a pokemon to move energy to");
                 }
 
                 source.AttachedEnergy.Remove(card);

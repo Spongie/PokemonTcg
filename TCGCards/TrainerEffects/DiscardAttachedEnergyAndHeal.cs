@@ -3,6 +3,7 @@ using Entities.Models;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -55,7 +56,7 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            foreach (var pokemon in CardUtil.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
+            foreach (var pokemon in Targeting.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard))
             {
                 if (pokemon.AttachedEnergy.Count >= AmountToDiscard)
                 {
@@ -76,7 +77,7 @@ namespace TCGCards.TrainerEffects
         {
             while (true)
             {
-                PokemonCard target = CardUtil.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+                PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
                 if (target == null)
                 {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -21,7 +22,7 @@ namespace TCGCards.TrainerEffects
         private TargetingMode targeting;
 
         [DynamicInput("Target", InputControl.Dropdown, typeof(TargetingMode))]
-        public TargetingMode Targeting
+        public TargetingMode TargetingMode
         {
             get { return targeting; }
             set
@@ -56,7 +57,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            var target = CardUtil.AskForTargetFromTargetingMode(Targeting, game, caster, opponent, pokemonSource);
+            var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, pokemonSource);
 
             var ability = Ability.Clone();
             ability.Source = game.CurrentTrainerCard;
