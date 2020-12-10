@@ -16,7 +16,7 @@ namespace TCGCards.Core.Abilities
 
         public AttackStopperSpecificAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            TriggerType = TriggerType.Attacked;
+            TriggerType = TriggerType.Attacks;
             TurnDuration = UNTIL_YOUR_NEXT_TURN;
         }
 

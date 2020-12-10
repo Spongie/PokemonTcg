@@ -428,6 +428,7 @@ namespace Assets.Code
             if (!string.IsNullOrWhiteSpace(selectMessage.Info))
             {
                 infoText.text = selectMessage.Info;
+                currentDeckFilter = new PokemonOwnerAndTypeFilter(myId);
             }
             else if (selectMessage.TargetTypes.Any())
             {

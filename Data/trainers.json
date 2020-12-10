@@ -7,7 +7,7 @@
         "$id": "2",
         "$type": "TCGCards.TrainerEffects.AttachmentEffect, TCGCards",
         "EffectType": "Create attachment",
-        "Targeting": 2,
+        "TargetingMode": 0,
         "Ability": {
           "$id": "3",
           "$type": "TCGCards.Core.Abilities.DamageTakenModifier, TCGCards",
@@ -735,10 +735,11 @@
         "$id": "97",
         "$type": "TCGCards.TrainerEffects.AttachmentEffect, TCGCards",
         "EffectType": "Create attachment",
-        "Targeting": 0,
+        "TargetingMode": 0,
         "Ability": {
           "$id": "98",
           "$type": "TCGCards.Core.Abilities.DealDamageModifier, TCGCards",
+          "OnlyIfAnyDamage": true,
           "RoundDown": false,
           "Modifer": 10.0,
           "TurnDuration": 1,

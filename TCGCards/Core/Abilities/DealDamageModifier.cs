@@ -7,6 +7,18 @@ namespace TCGCards.Core.Abilities
     {
         private float modifer;
         private bool roundDown;
+        private bool onlyIfAnyDamage;
+
+        [DynamicInput("Only add damage if any damage", InputControl.Boolean)]
+        public bool OnlyIfAnyDamage
+        {
+            get { return onlyIfAnyDamage; }
+            set
+            {
+                onlyIfAnyDamage = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Round down?", InputControl.Boolean)]
         public bool RoundDown
@@ -48,6 +60,11 @@ namespace TCGCards.Core.Abilities
 
         public int GetModifiedDamage(int damageDone, GameField game)
         {
+            if (damageDone == 0 && OnlyIfAnyDamage)
+            {
+                return damageDone;
+            }
+
             var damageWithPrevention = Modifer < 1 ? Math.Ceiling(damageDone * Modifer) : damageDone + Modifer;
 
             if (damageWithPrevention % 5 == 0 && damageWithPrevention % 10 != 0)
