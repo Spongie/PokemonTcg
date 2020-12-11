@@ -33,6 +33,8 @@ namespace CardEditor.ViewModels
 			DeleteSelectedEffect = new RelayCommand(CanAddAttack, DeleteEffect);
 			MoveEffectUpCommand = new RelayCommand(CanMoveEffectUp, MoveEffectUp);
 			MoveEffectDownCommand = new RelayCommand(CanMoveEffectDown, MoveEffectDown);
+			MoveAttackUpCommand = new RelayCommand(CanMoveAttackUp, MoveAttackUp);
+			MoveAttackDownCommand = new RelayCommand(CanMoveAttackDown, MoveAttackDown);
 		}
 
         private void MoveEffectUp(object obj)
@@ -73,6 +75,46 @@ namespace CardEditor.ViewModels
 			var index = SelectedAttack.Effects.IndexOf((IEffect)obj);
 
 			return index < SelectedAttack.Effects.Count - 1;
+		}
+
+		private void MoveAttackUp(object obj)
+		{
+			var attack = (Attack)obj;
+			var index = Card.Attacks.IndexOf(attack);
+
+			Card.Attacks.Move(index, index - 1);
+		}
+
+		private bool CanMoveAttackUp(object obj)
+		{
+			if (Card == null)
+			{
+				return false;
+			}
+
+			var index = Card.Attacks.IndexOf((Attack)obj);
+
+			return index > 0;
+		}
+
+		private void MoveAttackDown(object obj)
+		{
+			var attack = (Attack)obj;
+			var index = Card.Attacks.IndexOf(attack);
+
+			Card.Attacks.Move(index, index + 1);
+		}
+
+		private bool CanMoveAttackDown(object obj)
+		{
+			if (Card == null)
+			{
+				return false;
+			}
+
+			var index = Card.Attacks.IndexOf((Attack)obj);
+
+			return index < Card.Attacks.Count - 1;
 		}
 
 		private void DeleteEffect(object obj)
@@ -201,5 +243,7 @@ namespace CardEditor.ViewModels
         public ICommand DeleteSelectedEffect { get; set; }
         public ICommand MoveEffectUpCommand { get; set; }
         public ICommand MoveEffectDownCommand { get; set; }
-    }
+		public ICommand MoveAttackUpCommand { get; set; }
+		public ICommand MoveAttackDownCommand { get; set; }
+	}
 }

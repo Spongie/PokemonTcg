@@ -2882,6 +2882,8 @@
     "Attacks": [
       {
         "$id": "266",
+        "$type": "TCGCards.Attacks.HealingAttack, TCGCards",
+        "Amount": 99999,
         "ApplyWeaknessResistance": true,
         "Effects": [],
         "Cost": [
@@ -2889,9 +2891,38 @@
             "$id": "267",
             "EnergyType": 7,
             "Amount": 2
-          },
+          }
+        ],
+        "ExtraDiscardCost": [
           {
             "$id": "268",
+            "EnergyType": 7,
+            "Amount": 1
+          }
+        ],
+        "Damage": 0,
+        "Description": "Discard 1 Psychic Energy card attached to Kadabra in order use this attack. Remove all damage counters from Kadabra.",
+        "Name": "Recover",
+        "AttackType": "HealingAttack",
+        "Id": {
+          "$id": "269",
+          "Value": "03b54218-6648-4ad2-a702-b6131299623a"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "270",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "271",
+            "EnergyType": 7,
+            "Amount": 2
+          },
+          {
+            "$id": "272",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -2902,39 +2933,8 @@
         "Name": "Super Psy",
         "AttackType": "Attack",
         "Id": {
-          "$id": "269",
-          "Value": "3ae7a409-7b88-4711-9e03-93b6b89f850b"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "270",
-        "$type": "TCGCards.Attacks.HealingAttack, TCGCards",
-        "Amount": 99999,
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "271",
-            "EnergyType": 7,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [
-          {
-            "$id": "272",
-            "EnergyType": 7,
-            "Amount": 1
-          }
-        ],
-        "Damage": 0,
-        "Description": "Discard 1 Psychic Energy card attached to Kadabra in order use this attack. Remove all damage counters from Kadabra.",
-        "Name": "Recover",
-        "AttackType": "HealingAttack",
-        "Id": {
           "$id": "273",
-          "Value": "03b54218-6648-4ad2-a702-b6131299623a"
+          "Value": "3ae7a409-7b88-4711-9e03-93b6b89f850b"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -4073,6 +4073,11 @@
     "Attacks": [
       {
         "$id": "377",
+        "$type": "TCGCards.Attacks.ApplyDamagePreventionEffect, TCGCards",
+        "OnlyProtectSelf": true,
+        "MaxDamage": 0,
+        "CoinFlip": true,
+        "Amount": 9999,
         "ApplyWeaknessResistance": true,
         "Effects": [],
         "Cost": [
@@ -4084,28 +4089,23 @@
           {
             "$id": "379",
             "EnergyType": 2,
-            "Amount": 2
+            "Amount": 1
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 40,
-        "Description": "",
-        "Name": "Bite",
-        "AttackType": "Attack",
+        "Damage": 0,
+        "Description": "Flip a coin. If heads, prevent all damage done to Wartortle during your opponent's next turn. (Any other effects of attacks still happen.)",
+        "Name": "Withdraw",
+        "AttackType": "ApplyDamagePreventionEffect",
         "Id": {
           "$id": "380",
-          "Value": "68496480-7dbb-469e-bf76-90399c79beb7"
+          "Value": "08404d14-a672-432c-a0d5-c02ee4346b5b"
         },
         "Disabled": false,
         "DamageModifier": null
       },
       {
         "$id": "381",
-        "$type": "TCGCards.Attacks.ApplyDamagePreventionEffect, TCGCards",
-        "OnlyProtectSelf": true,
-        "MaxDamage": 0,
-        "CoinFlip": true,
-        "Amount": 9999,
         "ApplyWeaknessResistance": true,
         "Effects": [],
         "Cost": [
@@ -4117,17 +4117,17 @@
           {
             "$id": "383",
             "EnergyType": 2,
-            "Amount": 1
+            "Amount": 2
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 0,
-        "Description": "Flip a coin. If heads, prevent all damage done to Wartortle during your opponent's next turn. (Any other effects of attacks still happen.)",
-        "Name": "Withdraw",
-        "AttackType": "ApplyDamagePreventionEffect",
+        "Damage": 40,
+        "Description": "",
+        "Name": "Bite",
+        "AttackType": "Attack",
         "Id": {
           "$id": "384",
-          "Value": "08404d14-a672-432c-a0d5-c02ee4346b5b"
+          "Value": "68496480-7dbb-469e-bf76-90399c79beb7"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -5720,29 +5720,6 @@
     "Attacks": [
       {
         "$id": "522",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "523",
-            "EnergyType": 2,
-            "Amount": 3
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "",
-        "Name": "Pot Smash",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "524",
-          "Value": "799ad8a9-2092-436d-9b44-85bc3df3f00e"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "525",
         "$type": "TCGCards.Attacks.AttackFailsOnTails, TCGCards",
         "StatusEffect": 5,
         "IsOneTimeUse": true,
@@ -5750,7 +5727,7 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "526",
+            "$id": "523",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -5761,8 +5738,31 @@
         "Name": "Leek Slap",
         "AttackType": "AttackFailsOnTails",
         "Id": {
-          "$id": "527",
+          "$id": "524",
           "Value": "6e9d16ec-720c-4a7c-87c4-d5c4a0e57878"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "525",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "526",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Pot Smash",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "527",
+          "Value": "799ad8a9-2092-436d-9b44-85bc3df3f00e"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -5819,37 +5819,6 @@
     "Attacks": [
       {
         "$id": "531",
-        "$type": "TCGCards.Attacks.SelfDamageAttack, TCGCards",
-        "CoinFlip": true,
-        "Amount": 30,
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "532",
-            "EnergyType": 6,
-            "Amount": 3
-          },
-          {
-            "$id": "533",
-            "EnergyType": 1,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 60,
-        "Description": "Flip a coin. If tails, Raichu does 30 damage to itself.",
-        "Name": "Thunder",
-        "AttackType": "SelfDamageAttack",
-        "Id": {
-          "$id": "534",
-          "Value": "79bccd30-366e-40cf-b1ca-bbaf5a11f47b"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "535",
         "$type": "TCGCards.Attacks.ApplyAttackPrevention, TCGCards",
         "OnlySelf": true,
         "OnlyCurrentTarget": false,
@@ -5858,12 +5827,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "536",
+            "$id": "532",
             "EnergyType": 6,
             "Amount": 1
           },
           {
-            "$id": "537",
+            "$id": "533",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -5874,8 +5843,39 @@
         "Name": "Agility",
         "AttackType": "ApplyAttackPrevention",
         "Id": {
-          "$id": "538",
+          "$id": "534",
           "Value": "aebaa9d2-149e-49ac-977e-0e49e09435b3"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "535",
+        "$type": "TCGCards.Attacks.SelfDamageAttack, TCGCards",
+        "CoinFlip": true,
+        "Amount": 30,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "536",
+            "EnergyType": 6,
+            "Amount": 3
+          },
+          {
+            "$id": "537",
+            "EnergyType": 1,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 60,
+        "Description": "Flip a coin. If tails, Raichu does 30 damage to itself.",
+        "Name": "Thunder",
+        "AttackType": "SelfDamageAttack",
+        "Id": {
+          "$id": "538",
+          "Value": "79bccd30-366e-40cf-b1ca-bbaf5a11f47b"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -9947,37 +9947,9 @@
       {
         "$id": "910",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "911",
-            "EnergyType": 7,
-            "Amount": 2
-          },
-          {
-            "$id": "912",
-            "EnergyType": 2,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 50,
-        "Description": "",
-        "Name": "Super Psy",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "913",
-          "Value": "1aa5e5f5-271c-4829-8fd9-9065191d802c"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "914",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "915",
+            "$id": "911",
             "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
             "MayAbility": false,
             "TargetingMode": 0,
@@ -9990,7 +9962,7 @@
             "EffectType": "Discard attached energy"
           },
           {
-            "$id": "916",
+            "$id": "912",
             "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
             "Opponents": false,
             "OnlyOnCoinFlip": false,
@@ -10000,7 +9972,7 @@
         ],
         "Cost": [
           {
-            "$id": "917",
+            "$id": "913",
             "EnergyType": 7,
             "Amount": 1
           }
@@ -10011,8 +9983,36 @@
         "Name": "Third Eye",
         "AttackType": "Attack",
         "Id": {
-          "$id": "918",
+          "$id": "914",
           "Value": "7b60979b-c2d3-4756-a6d4-709aed34c439"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "915",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "916",
+            "EnergyType": 7,
+            "Amount": 2
+          },
+          {
+            "$id": "917",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "",
+        "Name": "Super Psy",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "918",
+          "Value": "1aa5e5f5-271c-4829-8fd9-9065191d802c"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -13355,37 +13355,9 @@
       {
         "$id": "1219",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1220",
-            "EnergyType": 8,
-            "Amount": 1
-          },
-          {
-            "$id": "1221",
-            "EnergyType": 2,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 20,
-        "Description": "",
-        "Name": "Scratch",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1222",
-          "Value": "90ff7d68-fa0b-4090-af9d-2a239c5f5f83"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1223",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "1224",
+            "$id": "1220",
             "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
             "MayAbility": false,
             "EnergyToDiscard": 0,
@@ -13399,7 +13371,7 @@
         ],
         "Cost": [
           {
-            "$id": "1225",
+            "$id": "1221",
             "EnergyType": 8,
             "Amount": 1
           }
@@ -13410,8 +13382,36 @@
         "Name": "Dig Under",
         "AttackType": "Attack",
         "Id": {
-          "$id": "1226",
+          "$id": "1222",
           "Value": "6a25efaa-7f9d-4b8e-a554-8802729387c0"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1223",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1224",
+            "EnergyType": 8,
+            "Amount": 1
+          },
+          {
+            "$id": "1225",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "",
+        "Name": "Scratch",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1226",
+          "Value": "90ff7d68-fa0b-4090-af9d-2a239c5f5f83"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -13765,32 +13765,9 @@
       {
         "$id": "1256",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1257",
-            "EnergyType": 7,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 10,
-        "Description": "",
-        "Name": "Headbutt",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1258",
-          "Value": "3d400fee-f037-44d7-93f0-9469ebdabf50"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1259",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "1260",
+            "$id": "1257",
             "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
             "CardType": 4,
             "EnergyType": 7,
@@ -13805,8 +13782,31 @@
         "Name": "Afternoon Nap",
         "AttackType": "Attack",
         "Id": {
-          "$id": "1261",
+          "$id": "1258",
           "Value": "2868f6c2-9143-4d91-a834-c900a434d09b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1259",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1260",
+            "EnergyType": 7,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "",
+        "Name": "Headbutt",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1261",
+          "Value": "3d400fee-f037-44d7-93f0-9469ebdabf50"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -15002,29 +15002,6 @@
     "Attacks": [
       {
         "$id": "1366",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1367",
-            "EnergyType": 2,
-            "Amount": 4
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 40,
-        "Description": "",
-        "Name": "Drill Peck",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1368",
-          "Value": "6db82f59-d4ca-4dd0-8754-d4c139bc2afc"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1369",
         "$type": "TCGCards.Attacks.ApplyAttackPrevention, TCGCards",
         "OnlySelf": true,
         "OnlyCurrentTarget": false,
@@ -15038,8 +15015,31 @@
         "Name": "Agility",
         "AttackType": "ApplyAttackPrevention",
         "Id": {
-          "$id": "1370",
+          "$id": "1367",
           "Value": "98ca9d21-51f0-47f3-985a-05c6092d4149"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1368",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1369",
+            "EnergyType": 2,
+            "Amount": 4
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "",
+        "Name": "Drill Peck",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1370",
+          "Value": "6db82f59-d4ca-4dd0-8754-d4c139bc2afc"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -15096,40 +15096,6 @@
     "Attacks": [
       {
         "$id": "1374",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1375",
-            "EnergyType": 2,
-            "Amount": 2
-          },
-          {
-            "$id": "1376",
-            "EnergyType": 4,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [
-          {
-            "$id": "1377",
-            "EnergyType": 4,
-            "Amount": 1
-          }
-        ],
-        "Damage": 60,
-        "Description": "Discard 1 Fire Energy card attached to Flareon in order to use this attack.",
-        "Name": "Flamethrower",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1378",
-          "Value": "4b007b9f-db0e-4653-816f-da66e5b55986"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1379",
         "$type": "TCGCards.Attacks.FlipCoinPlusAttack, TCGCards",
         "ExtraforHeads": 20,
         "ExtraforTails": 0,
@@ -15137,7 +15103,7 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "1380",
+            "$id": "1375",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -15148,8 +15114,42 @@
         "Name": "Quick Attack",
         "AttackType": "FlipCoinPlusAttack",
         "Id": {
-          "$id": "1381",
+          "$id": "1376",
           "Value": "cd1a928a-0720-4fd8-a943-61ebcd55c761"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1377",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1378",
+            "EnergyType": 2,
+            "Amount": 2
+          },
+          {
+            "$id": "1379",
+            "EnergyType": 4,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [
+          {
+            "$id": "1380",
+            "EnergyType": 4,
+            "Amount": 1
+          }
+        ],
+        "Damage": 60,
+        "Description": "Discard 1 Fire Energy card attached to Flareon in order to use this attack.",
+        "Name": "Flamethrower",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1381",
+          "Value": "4b007b9f-db0e-4653-816f-da66e5b55986"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -15206,34 +15206,6 @@
     "Attacks": [
       {
         "$id": "1385",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$ref": "1375"
-          },
-          {
-            "$ref": "1376"
-          }
-        ],
-        "ExtraDiscardCost": [
-          {
-            "$ref": "1377"
-          }
-        ],
-        "Damage": 60,
-        "Description": "Discard 1 Fire Energy card attached to Flareon in order to use this attack.",
-        "Name": "Flamethrower",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1386",
-          "Value": "9c74c802-fd36-402d-aa06-68e2aa21385d"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1387",
         "$type": "TCGCards.Attacks.FlipCoinPlusAttack, TCGCards",
         "ExtraforHeads": 20,
         "ExtraforTails": 0,
@@ -15241,7 +15213,7 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "1388",
+            "$id": "1386",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -15252,8 +15224,36 @@
         "Name": "Quick Attack",
         "AttackType": "FlipCoinPlusAttack",
         "Id": {
-          "$id": "1389",
+          "$id": "1387",
           "Value": "cd1a928a-0720-4fd8-a943-61ebcd55c761"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1388",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$ref": "1378"
+          },
+          {
+            "$ref": "1379"
+          }
+        ],
+        "ExtraDiscardCost": [
+          {
+            "$ref": "1380"
+          }
+        ],
+        "Damage": 60,
+        "Description": "Discard 1 Fire Energy card attached to Flareon in order to use this attack.",
+        "Name": "Flamethrower",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1389",
+          "Value": "9c74c802-fd36-402d-aa06-68e2aa21385d"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -15504,36 +15504,13 @@
     "Attacks": [
       {
         "$id": "1410",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1411",
-            "EnergyType": 2,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 20,
-        "Description": "",
-        "Name": "Pound",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1412",
-          "Value": "5defec0a-050f-467f-892f-4c64d299cc8f"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1413",
         "$type": "TCGCards.Attacks.ApplyEffectTarget, TCGCards",
         "StatusEffect": 0,
         "ApplyWeaknessResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "1414",
+            "$id": "1411",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -15544,8 +15521,31 @@
         "Name": "Lullaby",
         "AttackType": "ApplyEffectTarget",
         "Id": {
-          "$id": "1415",
+          "$id": "1412",
           "Value": "54ca0662-91de-49b7-84c2-46d334e2f9ef"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1413",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1414",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "",
+        "Name": "Pound",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1415",
+          "Value": "5defec0a-050f-467f-892f-4c64d299cc8f"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -16658,34 +16658,6 @@
     "Attacks": [
       {
         "$id": "1514",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1515",
-            "EnergyType": 5,
-            "Amount": 2
-          },
-          {
-            "$id": "1516",
-            "EnergyType": 2,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 50,
-        "Description": "",
-        "Name": "Mega Punch",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1517",
-          "Value": "01551e72-228e-434b-9b27-876e94c64240"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1518",
         "$type": "TCGCards.Attacks.ExtraDamageByNames, TCGCards",
         "AlsoCountOpponents": false,
         "ExtraDamage": 20,
@@ -16694,12 +16666,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "1519",
+            "$id": "1515",
             "EnergyType": 5,
             "Amount": 1
           },
           {
-            "$id": "1520",
+            "$id": "1516",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -16710,8 +16682,36 @@
         "Name": "Boyfriends",
         "AttackType": "ExtraDamageByNames",
         "Id": {
-          "$id": "1521",
+          "$id": "1517",
           "Value": "bd072e6b-492e-4594-bb26-9543eac53a5c"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1518",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1519",
+            "EnergyType": 5,
+            "Amount": 2
+          },
+          {
+            "$id": "1520",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "",
+        "Name": "Mega Punch",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1521",
+          "Value": "01551e72-228e-434b-9b27-876e94c64240"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -16768,34 +16768,6 @@
     "Attacks": [
       {
         "$id": "1525",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1526",
-            "EnergyType": 5,
-            "Amount": 2
-          },
-          {
-            "$id": "1527",
-            "EnergyType": 2,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 50,
-        "Description": "",
-        "Name": "Mega Punch",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1528",
-          "Value": "39540380-94b9-4781-95ff-5a15cf0afb70"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1529",
         "$type": "TCGCards.Attacks.ExtraDamageByNames, TCGCards",
         "AlsoCountOpponents": false,
         "ExtraDamage": 20,
@@ -16804,12 +16776,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "1530",
+            "$id": "1526",
             "EnergyType": 5,
             "Amount": 1
           },
           {
-            "$id": "1531",
+            "$id": "1527",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -16820,8 +16792,36 @@
         "Name": "Boyfriends",
         "AttackType": "ExtraDamageByNames",
         "Id": {
-          "$id": "1532",
+          "$id": "1528",
           "Value": "f78c8c5a-8c8c-4a33-88eb-9cda6a7406e2"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1529",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1530",
+            "EnergyType": 5,
+            "Amount": 2
+          },
+          {
+            "$id": "1531",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "",
+        "Name": "Mega Punch",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1532",
+          "Value": "39540380-94b9-4781-95ff-5a15cf0afb70"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -17329,36 +17329,13 @@
     "Attacks": [
       {
         "$id": "1577",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1578",
-            "EnergyType": 2,
-            "Amount": 3
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "",
-        "Name": "Slash",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1579",
-          "Value": "04f78503-72e9-4195-9cc0-e7e594ce9b0c"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1580",
         "$type": "TCGCards.Attacks.ApplyEffectTarget, TCGCards",
         "StatusEffect": 0,
         "ApplyWeaknessResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "1581",
+            "$id": "1578",
             "EnergyType": 5,
             "Amount": 2
           }
@@ -17369,8 +17346,31 @@
         "Name": "Spore",
         "AttackType": "ApplyEffectTarget",
         "Id": {
-          "$id": "1582",
+          "$id": "1579",
           "Value": "02992f69-ffda-4a84-b0e6-618805770523"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1580",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1581",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Slash",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1582",
+          "Value": "04f78503-72e9-4195-9cc0-e7e594ce9b0c"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -18487,32 +18487,9 @@
       {
         "$id": "1684",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1685",
-            "EnergyType": 2,
-            "Amount": 3
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "",
-        "Name": "Slash",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1686",
-          "Value": "e005125d-1d95-4f6f-ab3f-12429cf8dc04"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1687",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "1688",
+            "$id": "1685",
             "$type": "TCGCards.TrainerEffects.ApplyTemporaryDamageBoost, TCGCards",
             "Turns": 2,
             "NewDamage": 60,
@@ -18522,7 +18499,7 @@
         ],
         "Cost": [
           {
-            "$id": "1689",
+            "$id": "1686",
             "EnergyType": 5,
             "Amount": 1
           }
@@ -18533,8 +18510,31 @@
         "Name": "Swords Dance",
         "AttackType": "Attack",
         "Id": {
-          "$id": "1690",
+          "$id": "1687",
           "Value": "1420f103-d841-4d5c-aa4f-9f45f59ebd80"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1688",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1689",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Slash",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1690",
+          "Value": "e005125d-1d95-4f6f-ab3f-12429cf8dc04"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -18592,32 +18592,9 @@
       {
         "$id": "1694",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1695",
-            "EnergyType": 2,
-            "Amount": 3
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "",
-        "Name": "Slash",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "1696",
-          "Value": "361554d4-7bc5-467d-92c6-30087b9f26bc"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1697",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "1698",
+            "$id": "1695",
             "$type": "TCGCards.TrainerEffects.ApplyTemporaryDamageBoost, TCGCards",
             "Turns": 2,
             "NewDamage": 60,
@@ -18627,7 +18604,7 @@
         ],
         "Cost": [
           {
-            "$id": "1699",
+            "$id": "1696",
             "EnergyType": 5,
             "Amount": 1
           }
@@ -18638,8 +18615,31 @@
         "Name": "Swords Dance",
         "AttackType": "Attack",
         "Id": {
-          "$id": "1700",
+          "$id": "1697",
           "Value": "c9139050-94cf-4274-a083-003f0b0d3ebf"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1698",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1699",
+            "EnergyType": 2,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "",
+        "Name": "Slash",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "1700",
+          "Value": "361554d4-7bc5-467d-92c6-30087b9f26bc"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -20702,14 +20702,13 @@
         "Effects": [
           {
             "$id": "1883",
-            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
-            "UseLastCoin": false,
-            "CheckTails": false,
-            "FlipCoin": false,
-            "StatusEffect": 1,
-            "SecondaryEffect": 5,
-            "TargetingMode": 3,
-            "EffectType": "Apply Status"
+            "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
+            "EffectType": "Swap Active Pokemon",
+            "RequireUsabled": true,
+            "IsChoice": false,
+            "OpponentChooses": true,
+            "Opponents": true,
+            "OnlyOnCoinFlip": true
           }
         ],
         "Cost": [
@@ -20725,13 +20724,13 @@
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "The Defending Pokémon is now Poisoned.",
-        "Name": "Poison Fang",
+        "Damage": 10,
+        "Description": "Flip a coin. If heads and if your opponent has any Benched Pokémon, he or she chooses 1 of them and switches it with the Defending Pokémon. (Do the damage before switching the Pokémon.)",
+        "Name": "Terror Strike",
         "AttackType": "Attack",
         "Id": {
           "$id": "1886",
-          "Value": "fd8453da-a7cf-4855-acaa-a1a6e43f4c1b"
+          "Value": "dc93665c-d153-48d9-9ba2-0c80473c22a5"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -20742,13 +20741,14 @@
         "Effects": [
           {
             "$id": "1888",
-            "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
-            "EffectType": "Swap Active Pokemon",
-            "RequireUsabled": true,
-            "IsChoice": false,
-            "OpponentChooses": true,
-            "Opponents": true,
-            "OnlyOnCoinFlip": true
+            "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
+            "UseLastCoin": false,
+            "CheckTails": false,
+            "FlipCoin": false,
+            "StatusEffect": 1,
+            "SecondaryEffect": 5,
+            "TargetingMode": 3,
+            "EffectType": "Apply Status"
           }
         ],
         "Cost": [
@@ -20764,13 +20764,13 @@
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 10,
-        "Description": "Flip a coin. If heads and if your opponent has any Benched Pokémon, he or she chooses 1 of them and switches it with the Defending Pokémon. (Do the damage before switching the Pokémon.)",
-        "Name": "Terror Strike",
+        "Damage": 30,
+        "Description": "The Defending Pokémon is now Poisoned.",
+        "Name": "Poison Fang",
         "AttackType": "Attack",
         "Id": {
           "$id": "1891",
-          "Value": "dc93665c-d153-48d9-9ba2-0c80473c22a5"
+          "Value": "fd8453da-a7cf-4855-acaa-a1a6e43f4c1b"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -21057,34 +21057,6 @@
     "Attacks": [
       {
         "$id": "1917",
-        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
-        "Coins": 2,
-        "ApplyStatusIfThisOrMoreHeads": -1,
-        "StatusEffect": 0,
-        "TargetingMode": 0,
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "1918",
-            "EnergyType": 3,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "Flip 2 coins. This attack does 30 damage times the number of heads.",
-        "Name": "Spike Cannon",
-        "AttackType": "FlipCoinAttack",
-        "Id": {
-          "$id": "1919",
-          "Value": "f64c26a7-899f-4712-ade1-c56b3107a82f"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "1920",
         "$type": "TCGCards.Attacks.AttackFailsOnTails, TCGCards",
         "StatusEffect": 2,
         "IsOneTimeUse": false,
@@ -21097,8 +21069,36 @@
         "Name": "Clamp",
         "AttackType": "AttackFailsOnTails",
         "Id": {
-          "$id": "1921",
+          "$id": "1918",
           "Value": "74d276b2-56f3-4658-818d-667581b19c82"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "1919",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 2,
+        "ApplyStatusIfThisOrMoreHeads": -1,
+        "StatusEffect": 0,
+        "TargetingMode": 0,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "1920",
+            "EnergyType": 3,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "Flip 2 coins. This attack does 30 damage times the number of heads.",
+        "Name": "Spike Cannon",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "1921",
+          "Value": "f64c26a7-899f-4712-ade1-c56b3107a82f"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -22319,34 +22319,6 @@
     "Attacks": [
       {
         "$id": "2027",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2028",
-            "EnergyType": 8,
-            "Amount": 2
-          },
-          {
-            "$id": "2029",
-            "EnergyType": 2,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 40,
-        "Description": "",
-        "Name": "Rock Throw",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "2030",
-          "Value": "b7e75043-a99b-4427-9298-0df7c4c3dcc8"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2031",
         "$type": "TCGCards.Attacks.ApplyDamagePreventionEffect, TCGCards",
         "OnlyProtectSelf": true,
         "MaxDamage": 30,
@@ -22356,7 +22328,7 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2032",
+            "$id": "2028",
             "EnergyType": 8,
             "Amount": 2
           }
@@ -22367,8 +22339,36 @@
         "Name": "Harden",
         "AttackType": "ApplyDamagePreventionEffect",
         "Id": {
-          "$id": "2033",
+          "$id": "2029",
           "Value": "79f7ec95-dfde-4d32-be3c-d6e4cafa867b"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2030",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2031",
+            "EnergyType": 8,
+            "Amount": 2
+          },
+          {
+            "$id": "2032",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "",
+        "Name": "Rock Throw",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "2033",
+          "Value": "b7e75043-a99b-4427-9298-0df7c4c3dcc8"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -22884,32 +22884,9 @@
       {
         "$id": "2077",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2078",
-            "EnergyType": 8,
-            "Amount": 3
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 50,
-        "Description": "",
-        "Name": "High Jump Kick",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "2079",
-          "Value": "b3049b4a-df74-41f7-b2c1-dced220ca03e"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2080",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "2081",
+            "$id": "2078",
             "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
             "MayAbility": false,
             "EnergyToDiscard": 0,
@@ -22923,7 +22900,7 @@
         ],
         "Cost": [
           {
-            "$id": "2082",
+            "$id": "2079",
             "EnergyType": 8,
             "Amount": 2
           }
@@ -22934,8 +22911,31 @@
         "Name": "Stretch Kick",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2083",
+          "$id": "2080",
           "Value": "0c90708d-a6d3-4d73-a4d3-a2f3e3c36fa3"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2081",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2082",
+            "EnergyType": 8,
+            "Amount": 3
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "",
+        "Name": "High Jump Kick",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "2083",
+          "Value": "b3049b4a-df74-41f7-b2c1-dced220ca03e"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -23603,40 +23603,12 @@
     "Attacks": [
       {
         "$id": "2143",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2144",
-            "EnergyType": 3,
-            "Amount": 2
-          },
-          {
-            "$id": "2145",
-            "EnergyType": 2,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 40,
-        "Description": "",
-        "Name": "Crabhammer",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "2146",
-          "Value": "cc59ca1b-36d1-4c3a-acc6-84bf57f707be"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2147",
         "$type": "TCGCards.Attacks.DamageMultipliedByDamage, TCGCards",
         "ApplyWeaknessResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2148",
+            "$id": "2144",
             "EnergyType": 3,
             "Amount": 1
           }
@@ -23647,8 +23619,36 @@
         "Name": "Flail",
         "AttackType": "DamageMultipliedByDamage",
         "Id": {
-          "$id": "2149",
+          "$id": "2145",
           "Value": "8972f491-2cba-4ce6-90f0-e7d6c56aa5b8"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2146",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2147",
+            "EnergyType": 3,
+            "Amount": 2
+          },
+          {
+            "$id": "2148",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 40,
+        "Description": "",
+        "Name": "Crabhammer",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "2149",
+          "Value": "cc59ca1b-36d1-4c3a-acc6-84bf57f707be"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -23706,37 +23706,9 @@
       {
         "$id": "2153",
         "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2154",
-            "EnergyType": 3,
-            "Amount": 1
-          },
-          {
-            "$id": "2155",
-            "EnergyType": 2,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 20,
-        "Description": "",
-        "Name": "Irongrip",
-        "AttackType": "Attack",
-        "Id": {
-          "$id": "2156",
-          "Value": "4cfef2f8-4cf1-47b6-8c0a-493cd6392cc7"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2157",
-        "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "2158",
+            "$id": "2154",
             "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
             "EffectType": "Search your deck for Pokémon",
             "EvolveSource": false,
@@ -23750,7 +23722,7 @@
         ],
         "Cost": [
           {
-            "$id": "2159",
+            "$id": "2155",
             "EnergyType": 3,
             "Amount": 1
           }
@@ -23761,8 +23733,36 @@
         "Name": "Call for Family",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2160",
+          "$id": "2156",
           "Value": "94510589-1e49-49af-94ad-413bcca6cef7"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2157",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2158",
+            "EnergyType": 3,
+            "Amount": 1
+          },
+          {
+            "$id": "2159",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "",
+        "Name": "Irongrip",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "2160",
+          "Value": "4cfef2f8-4cf1-47b6-8c0a-493cd6392cc7"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -23819,10 +23819,37 @@
     "Attacks": [
       {
         "$id": "2164",
+        "$type": "TCGCards.Attacks.ExtraForUnusedEnergy, TCGCards",
+        "AmountPerEnergy": 10,
+        "MaxExtraDamage": 20,
+        "EnergyType": 3,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2165",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Does 10 damage plus 10 more damage for each Water Energy attached to Lapras but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count.",
+        "Name": "Water Gun",
+        "AttackType": "ExtraForUnusedEnergy",
+        "Id": {
+          "$id": "2166",
+          "Value": "43e72b90-bb2f-4911-aec9-137416a1aec5"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2167",
         "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "2165",
+            "$id": "2168",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -23835,7 +23862,7 @@
         ],
         "Cost": [
           {
-            "$id": "2166",
+            "$id": "2169",
             "EnergyType": 3,
             "Amount": 2
           }
@@ -23846,35 +23873,8 @@
         "Name": "Confuse Ray",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2167",
-          "Value": "18783ae8-cbc5-4ee0-8734-0982eb0c0516"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2168",
-        "$type": "TCGCards.Attacks.ExtraForUnusedEnergy, TCGCards",
-        "AmountPerEnergy": 10,
-        "MaxExtraDamage": 20,
-        "EnergyType": 3,
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2169",
-            "EnergyType": 3,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 10,
-        "Description": "Does 10 damage plus 10 more damage for each Water Energy attached to Lapras but not used to pay for this attack's Energy cost. Extra Water Energy after the 2nd doesn't count.",
-        "Name": "Water Gun",
-        "AttackType": "ExtraForUnusedEnergy",
-        "Id": {
           "$id": "2170",
-          "Value": "43e72b90-bb2f-4911-aec9-137416a1aec5"
+          "Value": "18783ae8-cbc5-4ee0-8734-0982eb0c0516"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -24043,10 +24043,34 @@
     "Attacks": [
       {
         "$id": "2184",
+        "$type": "TCGCards.Attacks.ApplyAttackFailOnTails, TCGCards",
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2185",
+            "EnergyType": 4,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.",
+        "Name": "Smokescreen",
+        "AttackType": "ApplyAttackFailOnTails",
+        "Id": {
+          "$id": "2186",
+          "Value": "8d223197-7583-4da1-83a5-fee92818cbae"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2187",
         "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "2185",
+            "$id": "2188",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -24059,7 +24083,7 @@
         ],
         "Cost": [
           {
-            "$id": "2186",
+            "$id": "2189",
             "EnergyType": 4,
             "Amount": 2
           }
@@ -24070,32 +24094,8 @@
         "Name": "Smog",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2187",
-          "Value": "3021ba5a-5b91-461b-af01-2b010e807600"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2188",
-        "$type": "TCGCards.Attacks.ApplyAttackFailOnTails, TCGCards",
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2189",
-            "EnergyType": 4,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 10,
-        "Description": "If the Defending Pokémon tries to attack during your opponent's next turn, your opponent flips a coin. If tails, that attack does nothing.",
-        "Name": "Smokescreen",
-        "AttackType": "ApplyAttackFailOnTails",
-        "Id": {
           "$id": "2190",
-          "Value": "8d223197-7583-4da1-83a5-fee92818cbae"
+          "Value": "3021ba5a-5b91-461b-af01-2b010e807600"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -24620,7 +24620,7 @@
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 0,
+        "Damage": 30,
         "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
         "Name": "Sludge",
         "AttackType": "Attack",
@@ -24727,7 +24727,7 @@
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 0,
+        "Damage": 30,
         "Description": "Flip a coin. If heads, the Defending Pokémon is now Poisoned.",
         "Name": "Sludge",
         "AttackType": "Attack",
@@ -24888,34 +24888,6 @@
     "Attacks": [
       {
         "$id": "2260",
-        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
-        "Coins": 2,
-        "ApplyStatusIfThisOrMoreHeads": -1,
-        "StatusEffect": 0,
-        "TargetingMode": 0,
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2261",
-            "EnergyType": 2,
-            "Amount": 2
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 30,
-        "Description": "Flip 2 coins. This attack does 30 damage times the number of heads.",
-        "Name": "Spike Cannon",
-        "AttackType": "FlipCoinAttack",
-        "Id": {
-          "$id": "2262",
-          "Value": "bc9b4603-c120-436f-b9ec-bb67e0e864ef"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2263",
         "$type": "TCGCards.Attacks.ExtraForUnusedEnergy, TCGCards",
         "AmountPerEnergy": 10,
         "MaxExtraDamage": 20,
@@ -24924,12 +24896,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2264",
+            "$id": "2261",
             "EnergyType": 3,
             "Amount": 1
           },
           {
-            "$id": "2265",
+            "$id": "2262",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -24940,8 +24912,36 @@
         "Name": "Water Gun",
         "AttackType": "ExtraForUnusedEnergy",
         "Id": {
-          "$id": "2266",
+          "$id": "2263",
           "Value": "8af6d6b6-f75b-497d-ab09-de215f0096d6"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2264",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 2,
+        "ApplyStatusIfThisOrMoreHeads": -1,
+        "StatusEffect": 0,
+        "TargetingMode": 0,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2265",
+            "EnergyType": 2,
+            "Amount": 2
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 30,
+        "Description": "Flip 2 coins. This attack does 30 damage times the number of heads.",
+        "Name": "Spike Cannon",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "2266",
+          "Value": "bc9b4603-c120-436f-b9ec-bb67e0e864ef"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -24998,45 +24998,17 @@
     "Attacks": [
       {
         "$id": "2270",
-        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
-        "Coins": 3,
-        "ApplyStatusIfThisOrMoreHeads": -1,
-        "StatusEffect": 0,
-        "TargetingMode": 0,
-        "ApplyWeaknessResistance": true,
-        "Effects": [],
-        "Cost": [
-          {
-            "$id": "2271",
-            "EnergyType": 3,
-            "Amount": 1
-          }
-        ],
-        "ExtraDiscardCost": [],
-        "Damage": 10,
-        "Description": "Flip 3 coins. This attack does 10 damage times the number of heads.",
-        "Name": "Fury Swipes",
-        "AttackType": "FlipCoinAttack",
-        "Id": {
-          "$id": "2272",
-          "Value": "593715ff-cb17-4690-a712-e6df472eb906"
-        },
-        "Disabled": false,
-        "DamageModifier": null
-      },
-      {
-        "$id": "2273",
         "ApplyWeaknessResistance": true,
         "Effects": [
           {
-            "$id": "2274",
+            "$id": "2271",
             "$type": "TCGCards.TrainerEffects.ApplyStopTrainerCards, TCGCards",
             "EffectType": "Stop trainer casting"
           }
         ],
         "Cost": [
           {
-            "$id": "2275",
+            "$id": "2272",
             "EnergyType": 7,
             "Amount": 1
           }
@@ -25047,8 +25019,36 @@
         "Name": "Headache",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2276",
+          "$id": "2273",
           "Value": "cedf123e-971f-4720-909b-ba832047583a"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2274",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 3,
+        "ApplyStatusIfThisOrMoreHeads": -1,
+        "StatusEffect": 0,
+        "TargetingMode": 0,
+        "ApplyWeaknessResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2275",
+            "EnergyType": 3,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "Flip 3 coins. This attack does 10 damage times the number of heads.",
+        "Name": "Fury Swipes",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "2276",
+          "Value": "593715ff-cb17-4690-a712-e6df472eb906"
         },
         "Disabled": false,
         "DamageModifier": null
