@@ -30,9 +30,12 @@ namespace TCGCards.TrainerEffects
 
                 var basicName = PokemonNames.GetBasicVersionOf(pokemon.PokemonName);
 
-                if (caster.Hand.OfType<PokemonCard>().Any(x => x.PokemonName == basicName))
+                foreach (var basicPokemon in caster.GetAllPokemonCards().Where(x => x.PokemonName == basicName))
                 {
-                    return true;
+                    if (basicPokemon.CanEvolve())
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -45,13 +48,18 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            var responseStage2 = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new DiscardCardsMessage(1, new List<IDeckFilter> { new Stage2Filter() }).ToNetworkMessage(game.Id));
+            var discardMessage = new DiscardCardsMessage(1, new List<IDeckFilter> { new Stage2Filter() })
+            {
+                Info = "Select a stage 2 Pokémon from your hand"
+            };
+
+            var responseStage2 = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(discardMessage.ToNetworkMessage(game.Id));
             var evolutionCard = (PokemonCard)game.FindCardById(responseStage2.Cards.First());
             var basicVersionName = PokemonNames.GetBasicVersionOf(evolutionCard.PokemonName);
 
             var availableCards = new List<PokemonCard>();
 
-            foreach (var pokemon in caster.GetAllPokemonCards().Where(p => p.PokemonName == basicVersionName))
+            foreach (var pokemon in caster.GetAllPokemonCards().Where(p => p.PokemonName == basicVersionName && p.CanEvolve()))
             {
                 availableCards.Add(pokemon);
             }

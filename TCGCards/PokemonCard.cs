@@ -246,6 +246,8 @@ namespace TCGCards
             
             ParalyzedThisTurn = false;
 
+            AttachedTools = AttachedTools.Where(tool => !Owner.DiscardPile.Contains(tool)).ToList();
+
             DamageStoppers.ForEach(x => x.TurnsLeft--);
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
             Ability?.EndTurn();

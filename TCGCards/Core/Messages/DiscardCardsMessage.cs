@@ -24,5 +24,6 @@ namespace TCGCards.Core.Messages
 
         public int Count { get; set; }
         public List<IDeckFilter> Filters { get; set; }
+        public string Info { get; set; }
     }
 }

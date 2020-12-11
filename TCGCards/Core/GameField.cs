@@ -138,7 +138,7 @@ namespace TCGCards.Core
                 return;
             }
 
-            if (!ignoreAllChecks && !basePokemon.CanEvolve() || !basePokemon.CanEvolveTo(evolution))
+            if (!ignoreAllChecks && (!basePokemon.CanEvolve() || !basePokemon.CanEvolveTo(evolution)))
             {
                 return;
             }

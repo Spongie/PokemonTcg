@@ -209,7 +209,6 @@ namespace TCGCards.Core
             { Nidoking, NidoranMale},
             { Nidoqueen, NidoranFemale},
             { Poliwrath, Poliwag},
-            { Venusaur, Bulbasaur},
             { Golem, Geodude},
             { Gengar, Gastly},
             { Pidgeot, Pidgey},

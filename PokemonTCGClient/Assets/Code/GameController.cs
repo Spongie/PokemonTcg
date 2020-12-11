@@ -487,11 +487,12 @@ namespace Assets.Code
 
         private void OnStartDiscardCards(object message, NetworkId messageId)
         {
+            var discardMessage = ((DiscardCardsMessage)message);
             selectedCards.Clear();
             SpecialState = SpecialGameState.DiscardingCards;
-            minSelectedCardCount = ((DiscardCardsMessage)message).Count;
+            minSelectedCardCount = discardMessage.Count;
             maxSelectedCardCount = minSelectedCardCount;
-            currentDeckFilter = ((DiscardCardsMessage)message).Filters.FirstOrDefault();
+            currentDeckFilter = discardMessage.Filters.FirstOrDefault();
 
             EnableButtons();
 
@@ -500,9 +501,15 @@ namespace Assets.Code
                 doneButton.SetActive(true);
             }
 
-            string cardsText = minSelectedCardCount > 1 ? "cards" : "card";
-
-            infoText.text = $"Discard {minSelectedCardCount} {cardsText} from your hand";
+            if (!string.IsNullOrEmpty(discardMessage.Info))
+            {
+                infoText.text = discardMessage.Info;
+            }
+            else
+            {
+                string cardsText = minSelectedCardCount > 1 ? "cards" : "card";
+                infoText.text = $"Discard {minSelectedCardCount} {cardsText} from your hand";
+            }
         }
 
         private void OnGameEventReceived(object arg1, NetworkId arg2)
