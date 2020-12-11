@@ -866,34 +866,40 @@
   {
     "$id": "114",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "115",
+        "$type": "TCGCards.TrainerEffects.PokemonBreeder, TCGCards",
+        "EffectType": "Pokémon Breeder"
+      }
+    ],
     "CardId": {
-      "$id": "115",
+      "$id": "116",
       "Value": "8f5f210f-9c68-4652-9dc6-cec313235527"
     },
     "Id": {
-      "$id": "116",
+      "$id": "117",
       "Value": "f464f3f2-fc49-4815-81f5-25ddc08b8820"
     },
     "SetCode": "base1",
     "Name": "Pokémon Breeder",
     "ImageUrl": "https://images.pokemontcg.io/base1/76_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "117",
+    "$id": "118",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "118",
+      "$id": "119",
       "Value": "c0807c37-bed3-4803-9b75-5546e1f4cd2a"
     },
     "Id": {
-      "$id": "119",
+      "$id": "120",
       "Value": "39b28f25-4341-470d-8230-b7b1f43adfd8"
     },
     "SetCode": "base5",
@@ -906,11 +912,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "120",
+    "$id": "121",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "121",
+        "$id": "122",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 1,
@@ -919,7 +925,7 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "122",
+        "$id": "123",
         "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
         "CardType": 0,
         "Opponents": true,
@@ -927,7 +933,7 @@
         "EffectType": "Shuffle hand into deck"
       },
       {
-        "$id": "123",
+        "$id": "124",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
@@ -936,11 +942,11 @@
       }
     ],
     "CardId": {
-      "$id": "124",
+      "$id": "125",
       "Value": "8af2df5c-069a-4c70-a998-c7e8fa55eb64"
     },
     "Id": {
-      "$id": "125",
+      "$id": "126",
       "Value": "8b94a75c-91da-4cc3-bf05-3d6c01dd50d5"
     },
     "SetCode": "base5",
@@ -953,11 +959,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "126",
+    "$id": "127",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "127",
+        "$id": "128",
         "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
         "UseLastCoin": false,
         "CheckTails": false,
@@ -969,11 +975,11 @@
       }
     ],
     "CardId": {
-      "$id": "128",
+      "$id": "129",
       "Value": "696726da-0872-4ada-9ddf-fb3137df229b"
     },
     "Id": {
-      "$id": "129",
+      "$id": "130",
       "Value": "189fb50a-d3dc-46ef-9262-17b8f1c2fa01"
     },
     "SetCode": "base5",
@@ -986,15 +992,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "130",
+    "$id": "131",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "131",
+      "$id": "132",
       "Value": "f3996d29-ab4b-4f75-8d65-328310f6b9bd"
     },
     "Id": {
-      "$id": "132",
+      "$id": "133",
       "Value": "5e8532a5-a8d9-4afd-a8fc-886b13273f46"
     },
     "SetCode": "base5",
@@ -1007,15 +1013,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "133",
+    "$id": "134",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "134",
+      "$id": "135",
       "Value": "6d6da40d-2b8a-484c-b1df-01953d64eb67"
     },
     "Id": {
-      "$id": "135",
+      "$id": "136",
       "Value": "c381342b-b03f-4490-9ed4-f174f66a02f8"
     },
     "SetCode": "base5",
@@ -1028,15 +1034,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "136",
+    "$id": "137",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "137",
+      "$id": "138",
       "Value": "aec0e37f-561e-4cee-b126-28908f38f7bb"
     },
     "Id": {
-      "$id": "138",
+      "$id": "139",
       "Value": "90c549f8-98ab-4892-ba93-273286b8d9e4"
     },
     "SetCode": "base5",
@@ -1049,15 +1055,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "139",
+    "$id": "140",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "140",
+      "$id": "141",
       "Value": "0dba5be9-092d-4be1-8644-a7dea6ec41f9"
     },
     "Id": {
-      "$id": "141",
+      "$id": "142",
       "Value": "56885af9-6f75-4042-bc5b-081403f87f49"
     },
     "SetCode": "base5",
@@ -1070,15 +1076,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "142",
+    "$id": "143",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "143",
+      "$id": "144",
       "Value": "94171457-01d1-4c1a-993a-bab8759142ce"
     },
     "Id": {
-      "$id": "144",
+      "$id": "145",
       "Value": "357071c9-a7ee-4ac5-8361-f4483676c171"
     },
     "SetCode": "base5",
@@ -1091,15 +1097,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "145",
+    "$id": "146",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "146",
+      "$id": "147",
       "Value": "f06f8f0f-9f4a-4653-a55f-e903ad711349"
     },
     "Id": {
-      "$id": "147",
+      "$id": "148",
       "Value": "5ef94ad2-bc33-4a2a-95de-a9113a4da462"
     },
     "SetCode": "base5",
@@ -1112,15 +1118,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "148",
+    "$id": "149",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "149",
+      "$id": "150",
       "Value": "2b16d607-2557-4418-b18d-89c6f34612aa"
     },
     "Id": {
-      "$id": "150",
+      "$id": "151",
       "Value": "623ae613-6ec6-4173-be54-24be64ec1699"
     },
     "SetCode": "base5",
@@ -1133,15 +1139,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "151",
+    "$id": "152",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "152",
+      "$id": "153",
       "Value": "f12c8049-2cc8-4d4e-acbe-abb680466aa8"
     },
     "Id": {
-      "$id": "153",
+      "$id": "154",
       "Value": "d372651b-d34f-4c32-9581-6f7e3026f971"
     },
     "SetCode": "base5",
@@ -1154,15 +1160,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "154",
+    "$id": "155",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "155",
+      "$id": "156",
       "Value": "d4b069e3-2d2a-4a76-afab-6381cc024417"
     },
     "Id": {
-      "$id": "156",
+      "$id": "157",
       "Value": "fe591130-646f-461d-970c-e953377442d5"
     },
     "SetCode": "base5",
@@ -1175,11 +1181,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "157",
+    "$id": "158",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "158",
+        "$id": "159",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "CoinFlip": true,
@@ -1191,11 +1197,11 @@
       }
     ],
     "CardId": {
-      "$id": "159",
+      "$id": "160",
       "Value": "90a98997-2f24-428a-b52d-62db3b29ddff"
     },
     "Id": {
-      "$id": "160",
+      "$id": "161",
       "Value": "de8ad004-8d7d-43e1-a72d-660243606683"
     },
     "SetCode": "base2",
@@ -1208,11 +1214,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "161",
+    "$id": "162",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "162",
+        "$id": "163",
         "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
         "CardType": 4,
         "EnergyType": 1,
@@ -1221,11 +1227,11 @@
       }
     ],
     "CardId": {
-      "$id": "163",
+      "$id": "164",
       "Value": "276bc34d-87eb-48f0-b896-9278fc7ea23a"
     },
     "Id": {
-      "$id": "164",
+      "$id": "165",
       "Value": "6307b243-9936-460c-87d7-24ed8dd9c174"
     },
     "SetCode": "base3",
@@ -1238,11 +1244,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "165",
+    "$id": "166",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "166",
+        "$id": "167",
         "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
         "OnlyBasic": false,
         "TargetingMode": 1,
@@ -1252,11 +1258,11 @@
       }
     ],
     "CardId": {
-      "$id": "167",
+      "$id": "168",
       "Value": "eb354064-fcb5-4597-adc5-c5d92879160d"
     },
     "Id": {
-      "$id": "168",
+      "$id": "169",
       "Value": "b010955b-c0a7-4d86-a733-df8217dbac93"
     },
     "SetCode": "base3",
@@ -1269,11 +1275,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "169",
+    "$id": "170",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "170",
+        "$id": "171",
         "$type": "TCGCards.TrainerEffects.PutCardFromDiscardOnDeck, TCGCards",
         "CoinFlip": true,
         "Amount": 1,
@@ -1282,11 +1288,11 @@
       }
     ],
     "CardId": {
-      "$id": "171",
+      "$id": "172",
       "Value": "3e857d2a-37fa-4700-b769-d425cbc94bd8"
     },
     "Id": {
-      "$id": "172",
+      "$id": "173",
       "Value": "fa8398a5-57f0-4407-8ffd-4c738146e716"
     },
     "SetCode": "base3",
@@ -1299,11 +1305,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "173",
+    "$id": "174",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "174",
+        "$id": "175",
         "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
         "CardType": 0,
         "Opponents": false,
@@ -1311,7 +1317,7 @@
         "EffectType": "Shuffle hand into deck"
       },
       {
-        "$id": "175",
+        "$id": "176",
         "$type": "TCGCards.TrainerEffects.DrawCardsDependingOnFlip, TCGCards",
         "AmountIfTails": 1,
         "AmountIfHeads": 8,
@@ -1319,11 +1325,11 @@
       }
     ],
     "CardId": {
-      "$id": "176",
+      "$id": "177",
       "Value": "e59204e9-c2d7-47b4-b5cd-75fd6fabc689"
     },
     "Id": {
-      "$id": "177",
+      "$id": "178",
       "Value": "648abd7c-3289-454e-8052-00280a149715"
     },
     "SetCode": "base3",
@@ -1336,21 +1342,21 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "178",
+    "$id": "179",
     "AddToDiscardWhenCasting": false,
     "Effects": [
       {
-        "$id": "179",
+        "$id": "180",
         "$type": "TCGCards.TrainerEffects.CreateFossilePokemon, TCGCards",
         "EffectType": "Create fossile Pokémon"
       }
     ],
     "CardId": {
-      "$id": "180",
+      "$id": "181",
       "Value": "52c0f6ba-7482-4858-92b3-f3b06e4f3805"
     },
     "Id": {
-      "$id": "181",
+      "$id": "182",
       "Value": "03438986-4438-471c-9f85-8d30b3ed308b"
     },
     "SetCode": "base3",

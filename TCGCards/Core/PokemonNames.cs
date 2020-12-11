@@ -1,4 +1,6 @@
-﻿namespace TCGCards.Core
+﻿using System.Collections.Generic;
+
+namespace TCGCards.Core
 {
     public class PokemonNames
     {
@@ -184,5 +186,45 @@
         public const string DarkWartortle = "Dark Wartortle";
         public const string DarkRaichu = "Dark Raichu";
         public const string DarkRaticate = "Dark Raticate";
+        public const string MysteriousFossil = "Mysterious Fossil";
+
+        public static Dictionary<string, string> stage2basicMap = new Dictionary<string, string>
+        {
+            { Charizard, Charmander },
+            { Blastoise, Squirtle},
+            { DarkBlastoise, Squirtle},
+            { DarkCharizard, Charmander },
+            { Venusaur, Bulbasaur},
+            { DarkAlakazam, Abra},
+            { Alakazam, Abra},
+            { Dragonite, Dratini},
+            { DarkDragonite, Dratini},
+            { Beedrill, Weedle},
+            { Victreebel, Bellsprout},
+            { Butterfree, Caterpie},
+            { Vileplume, Oddish},
+            { DarkVileplume, Oddish},
+            { Machamp, Machop},
+            { DarkMachamp, Machop},
+            { Nidoking, NidoranMale},
+            { Nidoqueen, NidoranFemale},
+            { Poliwrath, Poliwag},
+            { Venusaur, Bulbasaur},
+            { Golem, Geodude},
+            { Gengar, Gastly},
+            { Pidgeot, Pidgey},
+            { Kabutops, MysteriousFossil },
+            { Omastar, MysteriousFossil }
+        };
+
+        public static string GetBasicVersionOf(string evolutionName)
+        {
+            if (stage2basicMap.ContainsKey(evolutionName))
+            {
+                return stage2basicMap[evolutionName];
+            }
+
+            return string.Empty;
+        }
     }
 }

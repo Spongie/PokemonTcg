@@ -441,6 +441,11 @@ namespace Assets.Code
                 infoText.text = "Select one of your Pokémon";
                 currentDeckFilter = new PokemonOwnerAndTypeFilter(myId);
             }
+
+            if (selectMessage.Filter != null)
+            {
+                currentDeckFilter = selectMessage.Filter;
+            }
         }
 
         private void OnYesNoMessage(object message, NetworkId messageId)

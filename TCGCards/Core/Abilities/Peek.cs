@@ -23,6 +23,10 @@ namespace TCGCards.Core.Abilities
             {
                 owner.RevealCard(opponent.Deck.Cards.Peek());
             }
+            else if (AskYesNo(owner, "Look at the top card of your deck?"))
+            {
+                owner.RevealCard(owner.Deck.Cards.Peek());
+            }
             else if (AskYesNo(owner, "Look at a random card from opponents hand?"))
             {
                 owner.RevealCard(opponent.Hand[new Random().Next(0, opponent.Hand.Count)]);

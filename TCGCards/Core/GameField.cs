@@ -124,21 +124,21 @@ namespace TCGCards.Core
             //TODO: Complete this
         }
 
-        public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution)
+        public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution, bool ignoreAllChecks = false)
         {
-            if (!ActivePlayer.Id.Equals(basePokemon.Owner.Id) || !ActivePlayer.Id.Equals(evolution.Owner.Id))
+            if (!ignoreAllChecks && !ActivePlayer.Id.Equals(basePokemon.Owner.Id) || !ActivePlayer.Id.Equals(evolution.Owner.Id))
             {
                 GameLog.AddMessage("Evolution stopped by epic 1337 anti-cheat");
                 return;
             }
 
-            if (GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopEvolutions))
+            if (!ignoreAllChecks && GetAllPassiveAbilities().Any(ability => ability.ModifierType == PassiveModifierType.StopEvolutions))
             {
                 GameLog.AddMessage("Evolution stopped by ability");
                 return;
             }
 
-            if (!basePokemon.CanEvolve() || !basePokemon.CanEvolveTo(evolution))
+            if (!ignoreAllChecks && !basePokemon.CanEvolve() || !basePokemon.CanEvolveTo(evolution))
             {
                 return;
             }
