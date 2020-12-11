@@ -21,7 +21,21 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            throw new NotImplementedException();
+            foreach (var pokemon in caster.Hand.OfType<PokemonCard>())
+            {
+                if (pokemon.Stage < 2)
+                {
+                    continue;
+                }
+
+                var basicName = PokemonNames.GetBasicVersionOf(pokemon.PokemonName);
+
+                if (caster.Hand.OfType<PokemonCard>().Any(x => x.PokemonName == basicName))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

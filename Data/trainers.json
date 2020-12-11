@@ -7,7 +7,7 @@
         "$id": "2",
         "$type": "TCGCards.TrainerEffects.AttachmentEffect, TCGCards",
         "EffectType": "Create attachment",
-        "TargetingMode": 0,
+        "TargetingMode": 2,
         "Ability": {
           "$id": "3",
           "$type": "TCGCards.Core.Abilities.DamageTakenModifier, TCGCards",
