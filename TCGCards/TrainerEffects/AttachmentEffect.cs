@@ -63,6 +63,11 @@ namespace TCGCards.TrainerEffects
             ability.Source = game.CurrentTrainerCard;
             ability.PokemonOwner = target;
             target.TemporaryAbilities.Add(ability);
+
+            if (game.CurrentTrainerCard != null)
+            {
+                target.AttachedTools.Add(game.CurrentTrainerCard);
+            }
         }
     }
 }

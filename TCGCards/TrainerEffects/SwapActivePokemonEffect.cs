@@ -21,6 +21,18 @@ namespace TCGCards.TrainerEffects
         private bool opponentChooses;
         private bool isChoice; 
         private bool onlyOnCoinflip;
+        private bool requireUsable = true;
+
+        [DynamicInput("Require Usable", InputControl.Boolean)]
+        public bool RequireUsabled
+        {
+            get { return requireUsable; }
+            set
+            {
+                requireUsable = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Is Choice?", InputControl.Boolean)]
         public bool IsChoice
@@ -69,6 +81,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (opponent.BenchedPokemon.Count == 0)
+            {
+                return;
+            }
+
             if (OnlyOnCoinFlip && game.FlipCoins(1) == 0)
             {
                 return;
@@ -115,6 +132,11 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
+            if (RequireUsabled)
+            {
+                return true;
+            }
+
             if (opponents)
             {
                 return opponent.BenchedPokemon.Any();

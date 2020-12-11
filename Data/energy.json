@@ -228,6 +228,9 @@
       {
         "$id": "31",
         "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+        "MayAbility": false,
+        "EnergyToDiscard": 0,
+        "EnergyType": 0,
         "Amount": 10,
         "TargetingMode": 3,
         "CoinFlip": false,

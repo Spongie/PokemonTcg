@@ -26,6 +26,19 @@ namespace TCGCards.TrainerEffects
         private int amount;
         private bool coinFlip;
         private bool revealCard;
+        private bool evolveSource;
+
+        [DynamicInput("Evolve user", InputControl.Boolean)]
+        public bool EvolveSource
+        {
+            get { return evolveSource; }
+            set
+            {
+                evolveSource = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Coin Flip", InputControl.Boolean)]
         public bool CoinFlip
@@ -117,7 +130,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) { OnlyBasic = addToBench } }, Amount))
+            foreach (PokemonCard card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) { OnlyBasic = addToBench } }, Amount))
             {
                 caster.Deck.Cards = new Stack<Card>(caster.Deck.Cards.Except(new[] { card }));
                 
@@ -126,10 +139,14 @@ namespace TCGCards.TrainerEffects
                     card.IsRevealed = true;
                 }
 
-                if (addToBench)
+                if (evolveSource)
                 {
-                    caster.BenchedPokemon.Add((PokemonCard)card);
-                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = (PokemonCard)card });
+                    game.EvolvePokemon(pokemonSource, card, true);
+                }
+                else if (addToBench)
+                {
+                    caster.BenchedPokemon.Add(card);
+                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = card });
                 }
                 else
                 {

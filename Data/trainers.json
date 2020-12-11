@@ -359,6 +359,7 @@
         "$id": "49",
         "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
         "EffectType": "Swap Active Pokemon",
+        "RequireUsabled": true,
         "IsChoice": false,
         "OpponentChooses": false,
         "Opponents": true,
@@ -496,6 +497,7 @@
         "$id": "67",
         "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
         "EffectType": "Swap Active Pokemon",
+        "RequireUsabled": true,
         "IsChoice": false,
         "OpponentChooses": false,
         "Opponents": false,
@@ -555,6 +557,7 @@
       {
         "$id": "75",
         "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+        "MayAbility": false,
         "TargetingMode": 5,
         "Amount": 1,
         "EnergyType": 0,
@@ -628,6 +631,7 @@
       {
         "$id": "84",
         "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+        "MayAbility": false,
         "TargetingMode": 2,
         "Amount": 1,
         "EnergyType": 0,
@@ -640,6 +644,7 @@
       {
         "$id": "85",
         "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+        "MayAbility": false,
         "TargetingMode": 5,
         "Amount": 2,
         "EnergyType": 0,
@@ -1188,6 +1193,7 @@
         "$id": "159",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
+        "EvolveSource": false,
         "CoinFlip": true,
         "Amount": 1,
         "Names": null,

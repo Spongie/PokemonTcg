@@ -1,6 +1,7 @@
 ﻿using CardEditor.Views;
 using Entities;
 using Entities.Models;
+using NetworkingCore.Messages;
 using System;
 using System.Linq;
 using TCGCards.Core;
@@ -18,6 +19,18 @@ namespace TCGCards.TrainerEffects
         private bool useLastCoin;
         private bool checkTails;
         private bool allowUseWithoutTarget;
+        private bool askYesNo;
+
+        [DynamicInput("Ask Yes/No", InputControl.Boolean)]
+        public bool MayAbility
+        {
+            get { return askYesNo; }
+            set
+            {
+                askYesNo = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Targeting type", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -97,7 +110,6 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-
         public string EffectType
         {
             get
@@ -132,6 +144,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (MayAbility && !AskYesNo(caster, "Discard attached energy?"))
+            {
+                return;
+            }
+
             var targetValue = CheckTails ? 0 : 1;
             var lastValue = game.LastCoinFlipResult ? 1 : 0;
 
@@ -182,6 +199,13 @@ namespace TCGCards.TrainerEffects
 
                 break;
             }
+        }
+
+        private bool AskYesNo(Player caster, string info)
+        {
+            var message = new YesNoMessage() { Message = info }.ToNetworkMessage(caster.Id);
+
+            return caster.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(message).AnsweredYes;
         }
     }
 }
