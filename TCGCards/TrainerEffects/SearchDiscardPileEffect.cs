@@ -14,6 +14,7 @@ namespace TCGCards.TrainerEffects
     {
         private CardType cardType;
         private int amount = 1;
+        private bool shuffleIntoDeck;
 
         [DynamicInput("Cards to pick up")]
         public int Amount
@@ -36,6 +37,18 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
+
+        [DynamicInput("Shuffle into deck", InputControl.Boolean)]
+        public bool ShuffleIntoDeck
+        {
+            get { return shuffleIntoDeck; }
+            set
+            {
+                shuffleIntoDeck = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EffectType
         {
@@ -61,14 +74,29 @@ namespace TCGCards.TrainerEffects
 
             var message = new PickFromListMessage(choices, 0, Amount).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;
+            var cards = new List<Card>();
 
             foreach (var id in response)
             {
                 var card = game.Cards[id];
-                caster.Hand.Add(card);
                 caster.DiscardPile.Remove(card);
+                
+                if (shuffleIntoDeck)
+                {
+                    cards.Add(card);
+                    caster.Deck.Cards.Push(card);
+                }
+                else
+                {
+                    caster.Hand.Add(card);
+                    game.SendEventToPlayers(new DrawCardsEvent() { Amount = 1, Player = caster.Id, Cards = new List<Card>() { card } });
+                }
+            }
 
-                game.SendEventToPlayers(new DrawCardsEvent() { Amount = 1, Player = caster.Id, Cards = new List<Card>() { card } });
+            if (shuffleIntoDeck)
+            {
+                opponent.RevealCards(cards);
+                caster.Deck.Shuffle();
             }
         }
     }
