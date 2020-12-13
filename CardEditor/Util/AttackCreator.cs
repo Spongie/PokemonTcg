@@ -52,7 +52,7 @@ namespace CardEditor.Util
                     return true;
                 }
             }
-            else if (sdkAttack.Text.ToLower().Trim() == "Flip a coin. If tails, this attack does nothing.")
+            else if (sdkAttack.Text.Trim() == "Flip a coin. If tails, this attack does nothing.")
             {
                 var cost = baseAttack.Cost.ToList();
                 var damage = baseAttack.Damage;
@@ -64,6 +64,7 @@ namespace CardEditor.Util
                     Cost = new ObservableCollection<Energy>(cost),
                     Damage = damage
                 };
+                return true;
             }
             else if (Regex.IsMatch(sdkAttack.Text, @"Flip \d+ coins[.] This attack does \d+ damage times the number of heads[.]"))
             {
@@ -85,7 +86,7 @@ namespace CardEditor.Util
             {
                 var cost = baseAttack.Cost.ToList();
                 int damage = baseAttack.Damage;
-                int extraForHeads = int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[1].Value);
+                int extraForHeads = int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[0].Value) + int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[1].Value);
                 int extraForTails = int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[2].Value);
 
                 baseAttack = new FlipCoinPlusAttack
@@ -122,6 +123,7 @@ namespace CardEditor.Util
                     TargetingMode = TargetingMode.OpponentActive,
                     Turns = 2
                 });
+                return true;
             }
 
             return false;

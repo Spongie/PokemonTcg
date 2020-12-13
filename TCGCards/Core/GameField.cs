@@ -429,6 +429,12 @@ namespace TCGCards.Core
 
         public void ActivateAbility(Ability ability)
         {
+            if (GetAllPassiveAbilities().Any(x => x.ModifierType == PassiveModifierType.StopAbilities))
+            {
+                GameLog.AddMessage($"{ability.Name} stopped by ability");
+                return;
+            }
+
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates ability {ability.Name}");
 
             SendEventToPlayers(new AbilityActivatedEvent() { PokemonId = ability.PokemonOwner.Id });
@@ -830,6 +836,11 @@ namespace TCGCards.Core
 
         public void TriggerAbilityOfType(TriggerType triggerType, PokemonCard pokemon, int damage = 0, PokemonCard target = null)
         {
+            if (GetAllPassiveAbilities().Any(x => x.ModifierType == PassiveModifierType.StopAbilities))
+            {
+                return;
+            }
+
             var abilities = new List<Ability>();
             abilities.AddRange(pokemon.TemporaryAbilities);
 
@@ -942,6 +953,13 @@ namespace TCGCards.Core
 
             if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
                 return new List<PassiveAbility>();
+
+            var idOfStopper = passiveAbilities.FirstOrDefault(x => x.ModifierType == PassiveModifierType.StopAbilities);
+
+            if (idOfStopper != null)
+            {
+                return passiveAbilities.Where(x => x.Id.Equals(idOfStopper) || x.IsBuff).ToList();
+            }
             
             return passiveAbilities;
         }

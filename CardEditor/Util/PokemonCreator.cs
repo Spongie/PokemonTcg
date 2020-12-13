@@ -30,16 +30,6 @@ namespace CardEditor.Util
 				Type = convertFullTypeToType(pokemonSdk.Types.First())
 			};
 
-			pokemon.PokemonName = pokemon.PokemonName.Replace("Brock's", string.Empty)
-				.Replace("Misty's", string.Empty)
-				.Replace("Sabrina's", string.Empty)
-				.Replace("Erika's", string.Empty)
-				.Replace("Lt. Surge's", string.Empty)
-				.Replace("Blaine's", string.Empty)
-				.Replace("Giovanni's", string.Empty)
-				.Replace("Koga's", string.Empty)
-				.Replace("Rocket's", string.Empty).Trim();
-
 			if (pokemonSdk.Weaknesses != null)
 			{
 				pokemon.Weakness = convertFullTypeToType(pokemonSdk.Weaknesses.First().Type);

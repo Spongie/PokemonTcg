@@ -7,6 +7,8 @@
         NoPokemonPowers,
         StopStatusEffects,
         StopEvolutions,
-        LookAtOpponentHand
+        LookAtOpponentHand,
+        StopAbilities,
+        StopAttack
     }
 }

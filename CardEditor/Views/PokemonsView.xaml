@@ -82,6 +82,10 @@
                 <TextBox Text="{Binding Card.Hp}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
+                <Label Content="Stage" MinWidth="80"/>
+                <TextBox Text="{Binding Card.Stage}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
                 <Label Content="SetCode" MinWidth="80"/>
                 <TextBox Text="{Binding Card.SetCode}"/>
             </DockPanel>
@@ -160,8 +164,12 @@
                                         <TextBox Text="{Binding SelectedAttack.Damage}"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Top">
-                                        <Label Content="Apply Weakness/Resistance" MinWidth="80"/>
-                                        <CheckBox IsChecked="{Binding SelectedAttack.ApplyWeaknessResistance}" VerticalAlignment="Center"/>
+                                        <Label Content="Apply Weakness" MinWidth="80"/>
+                                        <CheckBox IsChecked="{Binding SelectedAttack.ApplyWeakness}" VerticalAlignment="Center"/>
+                                    </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Apply Resistance" MinWidth="80"/>
+                                        <CheckBox IsChecked="{Binding SelectedAttack.ApplyResistance}" VerticalAlignment="Center"/>
                                     </DockPanel>
                                     <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
 

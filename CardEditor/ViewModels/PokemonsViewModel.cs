@@ -181,7 +181,7 @@ namespace CardEditor.ViewModels
                 {
 					pokemon.CardId = NetworkId.Generate();
                 }
-				
+
 				PokemonCards.Add(new PokemonViewModel(pokemon));
 			}
 		}

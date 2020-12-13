@@ -21,7 +21,8 @@ namespace TCGCards
         private string description;
         private int damage;
         protected bool foreverDisabled = false;
-        private bool applyWeaknessResistance = true;
+        private bool applyWeakness = true;
+        private bool applyResistance = true;
 
         public Attack()
         {
@@ -39,16 +40,25 @@ namespace TCGCards
             Damage = selectedAttack.Damage;
         }
 
-        public bool ApplyWeaknessResistance
+        public bool ApplyWeakness
         {
-            get { return applyWeaknessResistance; }
+            get { return applyWeakness; }
             set
             {
-                applyWeaknessResistance = value;
+                applyWeakness = value;
                 FirePropertyChanged();
             }
         }
 
+        public bool ApplyResistance
+        {
+            get { return applyResistance; }
+            set
+            {
+                applyResistance = value;
+                FirePropertyChanged();
+            }
+        }
 
         public ObservableCollection<IEffect> Effects
         {

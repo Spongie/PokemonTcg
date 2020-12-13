@@ -14,6 +14,19 @@ namespace TCGCards.TrainerEffects
         private bool shuffleIntoDeck;
         private bool returnAttachedToHand;
         private bool onlyBasic;
+        private bool coinFlip;
+
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Only return basic version", InputControl.Boolean)]
         public bool OnlyBasic
@@ -84,6 +97,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             if (target == null)

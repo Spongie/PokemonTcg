@@ -23,8 +23,8 @@ namespace TCGCards.TrainerEffects
         private bool onlyOnCoinflip;
         private bool requireUsable = true;
 
-        [DynamicInput("Require Usable", InputControl.Boolean)]
-        public bool RequireUsabled
+        [DynamicInput("Require Target Usable", InputControl.Boolean)]
+        public bool RequireTargetUsabled
         {
             get { return requireUsable; }
             set
@@ -132,7 +132,7 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            if (RequireUsabled)
+            if (!RequireTargetUsabled)
             {
                 return true;
             }

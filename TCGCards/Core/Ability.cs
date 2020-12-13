@@ -119,6 +119,7 @@ namespace TCGCards.Core
         public NetworkId Id { get; set; }
         public int UsedTimes { get; set; }
         public Card Source { get; set; }
+        public bool IsBuff { get; set; }
 
         public void Trigger(Player owner, Player opponent, int damageTaken, GameField game)
         {

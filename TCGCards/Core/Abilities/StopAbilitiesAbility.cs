@@ -4,18 +4,18 @@ using NetworkingCore;
 
 namespace TCGCards.Core.Abilities
 {
-    public class StopTrainerCastsAbility : PassiveAbility
+    public class StopAbilitiesAbility : PassiveAbility
     {
         private bool onlyWhenActive;
 
-        public StopTrainerCastsAbility() : this(null)
+        public StopAbilitiesAbility() : this(null)
         {
-            
+
         }
 
-        public StopTrainerCastsAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
+        public StopAbilitiesAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            ModifierType = PassiveModifierType.StopTrainerCast;
+            ModifierType = PassiveModifierType.StopAbilities;
         }
 
         [DynamicInput("Only when active", InputControl.Boolean)]

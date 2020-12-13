@@ -398,7 +398,7 @@ namespace TCGCards
 
         public bool CanEvolve() => !PlayedThisTurn && !EvolvedThisTurn && Owner.TurnsTaken > 0;
 
-        public bool CanAttack() => !IsParalyzed && !IsAsleep;
+        public bool CanAttack() => !IsParalyzed && !IsAsleep && !TemporaryAbilities.OfType<PassiveAbility>().Any(x => x.ModifierType == PassiveModifierType.StopAttack);
 
         public void SetBase(PokemonCard target)
         {

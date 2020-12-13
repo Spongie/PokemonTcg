@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
-using CardEditor.Views;
-using NetworkingCore;
+﻿using CardEditor.Views;
 
 namespace TCGCards.Core.Abilities
 {
-    public class StopTrainerCastsAbility : PassiveAbility
+    public class StopEvolutionCardsAbility : PassiveAbility
     {
         private bool onlyWhenActive;
 
-        public StopTrainerCastsAbility() : this(null)
+        public StopEvolutionCardsAbility() : this(null)
         {
             
         }
 
-        public StopTrainerCastsAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
+        public StopEvolutionCardsAbility(PokemonCard pokemonOwner) : base(pokemonOwner)
         {
-            ModifierType = PassiveModifierType.StopTrainerCast;
+            ModifierType = PassiveModifierType.StopEvolutions;
         }
 
         [DynamicInput("Only when active", InputControl.Boolean)]
@@ -37,11 +35,6 @@ namespace TCGCards.Core.Abilities
             }
 
             return true;
-        }
-
-        public virtual HashSet<NetworkId> GetUnAffectedCards()
-        {
-            return new HashSet<NetworkId>();
         }
     }
 }

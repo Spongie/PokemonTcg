@@ -8,16 +8,16 @@ namespace TCGCards.Core
         {
             var realDamage = damage;
 
-            if (attack != null && !attack.ApplyWeaknessResistance)
+            if (attack != null)
             {
                 return realDamage;
             }
 
-            if (defender.Resistance == attacker.Type)
+            if (attack.ApplyResistance && defender.Resistance == attacker.Type)
             {
                 realDamage -= 30;
             }
-            if (defender.Weakness == attacker.Type)
+            if (attack.ApplyWeakness &&  defender.Weakness == attacker.Type)
             {
                 realDamage *= 2;
             }

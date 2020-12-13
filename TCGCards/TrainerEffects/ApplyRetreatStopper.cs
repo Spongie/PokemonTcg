@@ -71,7 +71,7 @@ namespace TCGCards.TrainerEffects
             }
 
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
-            target?.TemporaryAbilities.Add(new RetreatStopper(target, Turns));
+            target?.TemporaryAbilities.Add(new RetreatStopper(target, Turns) { IsBuff = true });
         }
     }
 }

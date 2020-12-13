@@ -8,6 +8,19 @@ namespace TCGCards.Attacks
     {
         private int selfDamage;
         private int extraDamage;
+        private int coins = 1;
+
+        [DynamicInput("Number of coins")]
+        public int Coins
+        {
+            get { return coins; }
+            set
+            {
+                coins = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("SelfDamage when tails")]
         public int SelfDamage
@@ -33,15 +46,15 @@ namespace TCGCards.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            if (game.FlipCoins(1) == 0)
+            int heads = game.FlipCoins(Coins);
+            int tails = Coins - heads;
+
+            if (tails > 0)
             {
-                owner.ActivePokemonCard.DealDamage(SelfDamage, game, owner.ActivePokemonCard, true);
-                return Damage;
+                owner.ActivePokemonCard.DealDamage(SelfDamage * tails, game, owner.ActivePokemonCard, true);
             }
-            else
-            {
-                return Damage + ExtraDamage;
-            }
+
+            return Damage + (extraDamage * heads);
         }
     }
 }
