@@ -95,7 +95,7 @@ namespace TCGCards.TrainerEffects
                 var message = new DiscardCardsMessage(Amount, CardUtil.GetCardFilters(CardType));
                 var choices = target.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(game.Id)).Cards;
 
-                var cards = choices.Select(id => game.FindCardById(id)).ToList();
+                var cards = choices.Select(id => game.Cards[id]).ToList();
 
                 foreach (var card in cards)
                 {

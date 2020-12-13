@@ -150,7 +150,7 @@ namespace TCGCards
 
                 foreach (var card in response.Cards)
                 {
-                    owner.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.FindCardById(card), game);
+                    owner.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.Cards[card], game);
                 }
             }
         }

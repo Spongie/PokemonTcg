@@ -29,7 +29,7 @@ namespace TCGCards.Attacks
             {
                 var message = new PickFromListMessage(owner.ActivePokemonCard.AttachedEnergy.OfType<Card>().ToList(), heads).ToNetworkMessage(owner.Id);
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
-                opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.FindCardById(response.Cards.First()), game);
+                opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.Cards[response.Cards.First()], game);
             }
 
             return heads * Damage;

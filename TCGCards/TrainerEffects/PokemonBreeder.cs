@@ -54,7 +54,7 @@ namespace TCGCards.TrainerEffects
             };
 
             var responseStage2 = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(discardMessage.ToNetworkMessage(game.Id));
-            var evolutionCard = (PokemonCard)game.FindCardById(responseStage2.Cards.First());
+            var evolutionCard = (PokemonCard)game.Cards[responseStage2.Cards.First()];
             var basicVersionName = PokemonNames.GetBasicVersionOf(evolutionCard.PokemonName);
 
             var availableCards = new List<PokemonCard>();
@@ -77,7 +77,7 @@ namespace TCGCards.TrainerEffects
                 Filter = new PokemonWithNameAndOwner() { Owner = caster.Id,  Names = availableCards.Select(x => x.PokemonName).Distinct().ToList() }
             }.ToNetworkMessage(game.Id));
 
-            var selectedCard = (PokemonCard)game.FindCardById(pickTargetResponse.Cards.First());
+            var selectedCard = (PokemonCard)game.Cards[pickTargetResponse.Cards.First()];
 
             game.EvolvePokemon(selectedCard, evolutionCard, true);
         }

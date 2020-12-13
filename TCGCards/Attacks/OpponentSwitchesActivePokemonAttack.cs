@@ -12,7 +12,7 @@ namespace TCGCards.Attacks
                 return;
 
             var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourBenchMessage(1).ToNetworkMessage(opponent.Id));
-            var newActive = (PokemonCard)game.FindCardById(response.Cards.First());
+            var newActive = (PokemonCard)game.Cards[response.Cards.First()];
             opponent.ForceRetreatActivePokemon(newActive, game);
 
             base.ProcessEffects(game, owner, opponent);

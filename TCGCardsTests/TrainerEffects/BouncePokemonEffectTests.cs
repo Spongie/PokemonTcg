@@ -209,7 +209,7 @@ namespace TCGCards.TrainerEffects.Tests
                 ReturnAttachedToHand = false,
                 ShuffleIntoDeck = false
             };
-
+            var game = new GameField();
             var player = new Player();
 
             var activePokemon = new PokemonCard() { Stage = 1, Owner = player };
@@ -226,11 +226,11 @@ namespace TCGCards.TrainerEffects.Tests
             player.ActivePokemonCard = activePokemon;
             player.BenchedPokemon.Add(targetPokemon);
 
-            var game = new GameField();
+            
             game.ActivePlayer = player;
             game.NonActivePlayer = new Player();
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -273,7 +273,7 @@ namespace TCGCards.TrainerEffects.Tests
             game.ActivePlayer = player;
             game.NonActivePlayer = new Player();
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -316,7 +316,7 @@ namespace TCGCards.TrainerEffects.Tests
             game.ActivePlayer = player;
             game.NonActivePlayer = new Player();
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -357,7 +357,7 @@ namespace TCGCards.TrainerEffects.Tests
             game.ActivePlayer = player;
             game.NonActivePlayer = new Player();
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -398,7 +398,7 @@ namespace TCGCards.TrainerEffects.Tests
             game.ActivePlayer = player;
             game.NonActivePlayer = new Player();
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
 
             effect.Process(game, player, game.NonActivePlayer, null);
 

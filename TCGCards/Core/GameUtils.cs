@@ -12,7 +12,7 @@ namespace TCGCards.Core
 
             if (response.Cards.Any())
             {
-                return (PokemonCard)game.FindCardById(response.Cards.First());
+                return (PokemonCard)game.Cards[response.Cards.First()];
             }
 
             return null;

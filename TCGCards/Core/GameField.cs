@@ -72,6 +72,41 @@ namespace TCGCards.Core
             return heads;
         }
 
+        public void AddPlayer(Player player)
+        {
+            Players.Add(player);
+
+            foreach (var card in player.Deck.Cards)
+            {
+                Cards.Add(card.Id, card);
+
+                var pokemon = card as PokemonCard;
+
+                if (pokemon != null)
+                {
+                    foreach (var attack in pokemon.Attacks)
+                    {
+                        Attacks.Add(attack.Id, attack);
+                    }
+
+                    if (pokemon.Ability != null)
+                    {
+                        Abilities.Add(pokemon.Ability.Id, pokemon.Ability);
+                    }
+                }
+            }
+
+            foreach (var pokemon in player.GetAllPokemonCards())
+            {
+                Cards.Add(pokemon.Id, pokemon);
+
+                foreach (var energy in pokemon.AttachedEnergy)
+                {
+                    Cards.Add(energy.Id, energy);
+                }
+            }
+        }
+
         public int FlipCoinsUntilTails()
         {
             int heads = 0;
@@ -117,7 +152,7 @@ namespace TCGCards.Core
 
         public void RevealCardsTo(List<NetworkId> pickedCards, Player player)
         {
-            foreach (var card in pickedCards.Select(id => FindCardById(id)))
+            foreach (var card in pickedCards.Select(id => Cards[id]))
             {
                 card.IsRevealed = true;
             }
@@ -334,134 +369,6 @@ namespace TCGCards.Core
                     }
                 }
             }
-        }
-
-        public Card FindCardById(NetworkId id)
-        {
-            foreach (Player player in Players)
-            {
-                foreach (Card card in player.Hand)
-                {
-                    if (card.Id.Equals(id))
-                    {
-                        return card;
-                    }
-                }
-
-                foreach (PokemonCard pokemon in player.GetAllPokemonCards())
-                {
-                    if (pokemon.Id.Equals(id))
-                    {
-                        return pokemon;
-                    }
-
-                    if (pokemon.AttachedEnergy == null)
-                    {
-                        continue;
-                    }
-
-                    foreach (EnergyCard energy in pokemon.AttachedEnergy)
-                    {
-                        if (energy.Id.Equals(id))
-                        {
-                            return energy;
-                        }
-                    }
-                }
-
-                foreach (Card card in player.DiscardPile)
-                {
-                    if (card.Id.Equals(id))
-                    {
-                        return card;
-                    }
-                }
-
-                foreach (Card card in player.PrizeCards)
-                {
-                    if (card.Id.Equals(id))
-                    {
-                        return card;
-                    }
-                }
-
-                foreach (Card card in player.Deck.Cards)
-                {
-                    if (card.Id.Equals(id))
-                    {
-                        return card;
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        public Attack FindAttackById(NetworkId attackId)
-        {
-            foreach (Player player in Players)
-            {
-                foreach (PokemonCard pokemon in player.GetAllPokemonCards())
-                {
-                    foreach (Attack attack in pokemon.Attacks)
-                    {
-                        if (attack.Id.Equals(attackId))
-                        {
-                            return attack;
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        public Ability FindAbilityById(NetworkId id)
-        {
-            foreach (Player player in Players)
-            {
-                foreach (PokemonCard card in player.Hand.OfType<PokemonCard>())
-                {
-                    if (card.Ability != null && card.Ability.Id.Equals(id))
-                    {
-                        return card.Ability;
-                    }
-                }
-
-                foreach (PokemonCard pokemon in player.GetAllPokemonCards())
-                {
-                    if (pokemon.Ability != null && pokemon.Ability.Id.Equals(id))
-                    {
-                        return pokemon.Ability;
-                    }
-                }
-
-                foreach (PokemonCard card in player.DiscardPile.OfType<PokemonCard>())
-                {
-                    if (card.Ability != null && card.Ability.Id.Equals(id))
-                    {
-                        return card.Ability;
-                    }
-                }
-
-                foreach (PokemonCard card in player.PrizeCards.OfType<PokemonCard>())
-                {
-                    if (card.Ability != null && card.Ability.Id.Equals(id))
-                    {
-                        return card.Ability;
-                    }
-                }
-
-                foreach (PokemonCard card in player.Deck.Cards.OfType<PokemonCard>())
-                {
-                    if (card.Ability != null && card.Ability.Id.Equals(id))
-                    {
-                        return card.Ability;
-                    }
-                }
-            }
-
-            return null;
         }
 
         public void StartGame()
@@ -1059,7 +966,7 @@ namespace TCGCards.Core
 
         public GameFieldState GameState { get; set; }
         public NetworkId Id { get; set; }
-        public List<Player> Players { get; set; }
+        public List<Player> Players { get; set; } = new List<Player>();
         public Player ActivePlayer { get; set; }
         public Player NonActivePlayer { get; set; }
         public GameLog GameLog { get; set; } = new GameLog();
@@ -1071,5 +978,8 @@ namespace TCGCards.Core
         public TrainerCard CurrentTrainerCard { get; set; }
         public bool LastCoinFlipResult { get; set; }
         public int LastCoinFlipHeadCount { get; set; }
+        public Dictionary<NetworkId, Card> Cards { get; set; } = new Dictionary<NetworkId, Card>();
+        public Dictionary<NetworkId, Attack> Attacks { get; set; } = new Dictionary<NetworkId, Attack>();
+        public Dictionary<NetworkId, Ability> Abilities { get; set; } = new Dictionary<NetworkId, Ability>();
     }
 }

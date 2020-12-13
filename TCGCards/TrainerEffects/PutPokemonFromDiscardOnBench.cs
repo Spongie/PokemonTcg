@@ -71,7 +71,7 @@ namespace TCGCards.TrainerEffects
             var message = new PickFromListMessage(pokemons, 1).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
 
-            var card = game.FindCardById(response);
+            var card = game.Cards[response];
 
             var pokemonCard = (PokemonCard)card;
 

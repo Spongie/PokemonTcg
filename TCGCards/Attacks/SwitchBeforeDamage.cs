@@ -16,7 +16,7 @@ namespace TCGCards.Attacks
         {
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBenchMessage().ToNetworkMessage(game.Id));
 
-            var newActivePokemon = (PokemonCard)game.FindCardById(response.Cards.First());
+            var newActivePokemon = (PokemonCard)game.Cards[response.Cards.First()];
             opponent.ForceRetreatActivePokemon(newActivePokemon, game);
 
             return base.GetDamage(owner, opponent, game);

@@ -59,7 +59,7 @@ namespace TCGCards.Core.Abilities
             } while (selectedPokemon == null || selectedPokemon.AttachedEnergy.Count(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType) == 0);
             
             var newPokemonResponse = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourPokemonMessage("Select pokemon to receive the energy").ToNetworkMessage(NetworkId.Generate()));
-            PokemonCard newPokemon = (PokemonCard)game.FindCardById(newPokemonResponse.Cards.First());
+            PokemonCard newPokemon = (PokemonCard)game.Cards[newPokemonResponse.Cards.First()];
 
             if (selectedPokemon.AttachedEnergy.Count == 1)
             {

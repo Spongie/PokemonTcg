@@ -66,7 +66,7 @@ namespace TCGCards.TrainerEffects
             var message = new SelectFromOpponentBenchMessage(AmountOfTargets).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            foreach (var pokemon in response.Cards.Select(id => game.FindCardById(id)).OfType<PokemonCard>())
+            foreach (var pokemon in response.Cards.Select(id => game.Cards[id]).OfType<PokemonCard>())
             {
                 pokemon.DealDamage(Damage, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
             }

@@ -20,7 +20,7 @@ namespace TCGCards.TrainerEffects
             
             var response = player.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;
 
-            return response.Select(x => game.FindCardById(x)).ToList();
+            return response.Select(x => game.Cards[x]).ToList();
         }
     }
 }

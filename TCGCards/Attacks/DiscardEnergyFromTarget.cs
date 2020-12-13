@@ -21,7 +21,7 @@ namespace TCGCards.Attacks
 
             var message = new PickFromListMessage(opponent.ActivePokemonCard.AttachedEnergy.OfType<Card>().ToList(), 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
-            opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.FindCardById(response.Cards.First()), game);
+            opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.Cards[response.Cards.First()], game);
 
             base.ProcessEffects(game, owner, opponent);
         }

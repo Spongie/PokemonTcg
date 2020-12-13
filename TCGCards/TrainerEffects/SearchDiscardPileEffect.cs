@@ -64,7 +64,7 @@ namespace TCGCards.TrainerEffects
 
             foreach (var id in response)
             {
-                var card = game.FindCardById(id);
+                var card = game.Cards[id];
                 caster.Hand.Add(card);
                 caster.DiscardPile.Remove(card);
 

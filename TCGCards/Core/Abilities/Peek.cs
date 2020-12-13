@@ -36,7 +36,7 @@ namespace TCGCards.Core.Abilities
                 var message = new PickFromListMessage(opponent.PrizeCards, 1).ToNetworkMessage(game.Id);
                 var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.FirstOrDefault();
 
-                owner.RevealCard(game.FindCardById(response));
+                owner.RevealCard(game.Cards[response]);
             }
         }
 

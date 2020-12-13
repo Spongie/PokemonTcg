@@ -21,7 +21,7 @@ namespace TCGCards.Core.Abilities
             var message = new SelectPrizeCardsMessage(1).ToNetworkMessage(NetworkId.Generate());
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            var selectedCard = game.FindCardById(response.Cards.First());
+            var selectedCard = game.Cards[response.Cards.First()];
 
             owner.PrizeCards.Remove(selectedCard);
 

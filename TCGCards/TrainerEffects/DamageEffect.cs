@@ -137,7 +137,7 @@ namespace TCGCards.TrainerEffects
 
                 foreach (var id in response.Cards)
                 {
-                    var card = game.FindCardById(id);
+                    var card = game.Cards[id];
                     pokemonSource.DiscardEnergyCard((EnergyCard)card, game);
                 }
             }

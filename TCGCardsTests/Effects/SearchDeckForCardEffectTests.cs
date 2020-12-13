@@ -33,7 +33,7 @@ namespace TCGCardsTests.Effects
             player.SetNetworkPlayer(sub);
 
             var game = new GameField();
-            game.Players.Add(player);
+            game.AddPlayer(player);
             effect.Process(game, player, null, null);
 
             Assert.AreEqual(1, player.Hand.Count);

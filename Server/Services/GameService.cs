@@ -56,7 +56,7 @@ namespace Server.Services
                 player.Deck.Cards.Push(card);
             }
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
             ActiveGames.TryAdd(game.Id, game);
 
             return game;
@@ -93,7 +93,7 @@ namespace Server.Services
                 player.Deck.Cards.Push(card);
             }
 
-            game.Players.Add(player);
+            game.AddPlayer(player);
             game.StartGame();
 
             SendUpdateToPlayers(game.Players, game);
@@ -115,7 +115,7 @@ namespace Server.Services
                 return game;
             }
 
-            var pokemons = pokemonIds.Distinct().Select(id => (PokemonCard)game.FindCardById(id));
+            var pokemons = pokemonIds.Distinct().Select(id => (PokemonCard)game.Cards[id]);
             game.AddPokemonToBench(game.Players.First(p => p.Id.Equals(playerId)), pokemons.ToList());
 
             return game;
@@ -166,7 +166,7 @@ namespace Server.Services
                 return game;
             }
 
-            game.OnActivePokemonSelected(playerId, (PokemonCard)game.FindCardById(pokemonId));
+            game.OnActivePokemonSelected(playerId, (PokemonCard)game.Cards[pokemonId]);
 
             return game;
         }
@@ -185,8 +185,8 @@ namespace Server.Services
                 return game;
             }
 
-            var energyCard = (EnergyCard)game.FindCardById(energyCardId);
-            var target = (PokemonCard)game.FindCardById(targetId);
+            var energyCard = (EnergyCard)game.Cards[energyCardId];
+            var target = (PokemonCard)game.Cards[targetId];
             
             game.ActivePlayer.PlayEnergyCard(energyCard, target, game);
 
@@ -207,7 +207,7 @@ namespace Server.Services
                 return game;
             }
 
-            var ability = game.FindAbilityById(abilityId);
+            var ability = game.Abilities[abilityId];
             game.ActivateAbility(ability);
 
             return game;
@@ -227,7 +227,7 @@ namespace Server.Services
                 return game;
             }
 
-            var attack = game.FindAttackById(attackId);
+            var attack = game.Attacks[attackId];
 
             game.Attack(attack);
 
@@ -248,7 +248,7 @@ namespace Server.Services
                 return game;
             }
 
-            var card = game.FindCardById(cardId);
+            var card = game.Cards[cardId];
 
             if (card is TrainerCard)
             {
@@ -276,8 +276,8 @@ namespace Server.Services
                 return game;
             }
 
-            var card = (PokemonCard)game.FindCardById(basePokemonId);
-            var target = (PokemonCard)game.FindCardById(targetPokemonId);
+            var card = (PokemonCard)game.Cards[basePokemonId];
+            var target = (PokemonCard)game.Cards[targetPokemonId];
 
             game.EvolvePokemon(card, target);
 
@@ -298,9 +298,9 @@ namespace Server.Services
                 return game;
             }
 
-            var energyCards = energyCardIds.Select(cardId => (EnergyCard)game.FindCardById(cardId)).ToList();
+            var energyCards = energyCardIds.Select(cardId => (EnergyCard)game.Cards[cardId]).ToList();
 
-            game.PokemonRetreated((PokemonCard)game.FindCardById(targetPokemon), energyCards);
+            game.PokemonRetreated((PokemonCard)game.Cards[targetPokemon], energyCards);
 
             return game;
         }

@@ -58,7 +58,7 @@ namespace TCGCards.TrainerEffects
             var message = new PickFromListMessage(choices, 0, choices.Count).ToNetworkMessage(game.Id);
             var resoponse = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            foreach (var card in resoponse.Cards.Select(id => game.FindCardById(id)))
+            foreach (var card in resoponse.Cards.Select(id => game.Cards[id]))
             {
                 caster.ActivePokemonCard.DiscardEnergyCard((EnergyCard)card, game);
             }

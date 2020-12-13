@@ -63,12 +63,12 @@ namespace TCGCards.TrainerEffects.Util
                     }
                     message = new SelectFromYourBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
+                    target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.YourPokemon:
                     message = new SelectFromYourPokemonMessage() { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
+                    target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.OpponentActive:
                     target = opponent.ActivePokemonCard;
@@ -85,12 +85,12 @@ namespace TCGCards.TrainerEffects.Util
 
                     message = new SelectFromOpponentBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
+                    target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.OpponentPokemon:
                     message = new SelectOpponentPokemonMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
-                    target = (PokemonCard)game.FindCardById(selectedId);
+                    target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.AnyPokemon:
                     throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in CardUtil");
