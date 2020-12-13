@@ -423,6 +423,8 @@ namespace TCGCards
             {
                 case StatusEffect.Sleep:
                     IsAsleep = true;
+                    IsConfused = false;
+                    IsParalyzed = false;
                     break;
                 case StatusEffect.Poison:
                     IsPoisoned = true;
@@ -430,12 +432,16 @@ namespace TCGCards
                 case StatusEffect.Paralyze:
                     ParalyzedThisTurn = true;
                     IsParalyzed = true;
+                    IsAsleep = false;
+                    IsConfused = false;
                     break;
                 case StatusEffect.Burn:
                     IsBurned = true;
                     break;
                 case StatusEffect.Confuse:
                     IsConfused = true;
+                    IsAsleep = false;
+                    IsParalyzed = false;
                     break;
                 case StatusEffect.None:
                     break;
