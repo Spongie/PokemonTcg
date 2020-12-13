@@ -257,5 +257,143 @@
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
+  },
+  {
+    "$id": "34",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 8,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "35",
+      "Value": "5f865851-68cf-4c6b-bf4c-79fe4aaef9de"
+    },
+    "Id": {
+      "$id": "36",
+      "Value": "e4aa4ac9-53e7-4c5a-853a-3a813ae3ceb3"
+    },
+    "SetCode": "gym1",
+    "Name": "Fighting Energy",
+    "ImageUrl": "https://images.pokemontcg.io/gym1/127_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": false,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "37",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 4,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "38",
+      "Value": "ac0a15bb-ac6a-4b08-85e0-9d7524f25e0c"
+    },
+    "Id": {
+      "$id": "39",
+      "Value": "28e60a4f-01a3-4b91-8de9-c8b974fa8821"
+    },
+    "SetCode": "gym1",
+    "Name": "Fire Energy",
+    "ImageUrl": "https://images.pokemontcg.io/gym1/128_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": false,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "40",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 5,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "41",
+      "Value": "f736e5ee-d8ed-4b0f-bbc3-20b360f55b22"
+    },
+    "Id": {
+      "$id": "42",
+      "Value": "a0fc17d2-7abd-4379-bc67-760e11fa163d"
+    },
+    "SetCode": "gym1",
+    "Name": "Grass Energy",
+    "ImageUrl": "https://images.pokemontcg.io/gym1/129_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": false,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "43",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 6,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "44",
+      "Value": "53e93c4a-d04f-4c6d-a3a4-28c88387a199"
+    },
+    "Id": {
+      "$id": "45",
+      "Value": "46f0bb48-a72f-4b75-8429-db82b2eeff78"
+    },
+    "SetCode": "gym1",
+    "Name": "Lightning Energy",
+    "ImageUrl": "https://images.pokemontcg.io/gym1/130_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": false,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "46",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 3,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "47",
+      "Value": "eb0f6e1e-768a-43bc-9d37-8ad22706a66d"
+    },
+    "Id": {
+      "$id": "48",
+      "Value": "7a01f1d5-af8d-47d2-bafd-4145df46da3a"
+    },
+    "SetCode": "gym1",
+    "Name": "Water Energy",
+    "ImageUrl": "https://images.pokemontcg.io/gym1/132_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": false,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "49",
+    "Effects": [],
+    "Amount": 1,
+    "EnergyType": 7,
+    "IsBasic": true,
+    "CardId": {
+      "$id": "50",
+      "Value": "306e94ac-7ba5-4167-bc00-940963389541"
+    },
+    "Id": {
+      "$id": "51",
+      "Value": "c2cf1133-3499-4926-92dd-4ac260623bdb"
+    },
+    "SetCode": "gym1",
+    "Name": "Psychic Energy",
+    "ImageUrl": "https://images.pokemontcg.io/gym1/131_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": false,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
   }
 ]
