@@ -42,7 +42,7 @@ namespace Assets.Code.UI.Game
             limit = deckSearchMessage.CardCount;
             minCount = 0;
 
-            foreach (var card in deckSearchMessage.Deck.Cards)
+            foreach (var card in deckSearchMessage.Cards)
             {
                 card.IsRevealed = true;
 
@@ -54,7 +54,7 @@ namespace Assets.Code.UI.Game
                 }
             }
 
-            foreach (var card in deckSearchMessage.Deck.Cards)
+            foreach (var card in deckSearchMessage.Cards)
             {
                 if (!deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
@@ -69,7 +69,6 @@ namespace Assets.Code.UI.Game
             {
                 limit = 0;
                 minCount = 0;
-                onlyView = true;
             }
         }
 

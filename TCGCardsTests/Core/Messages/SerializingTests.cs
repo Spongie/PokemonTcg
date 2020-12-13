@@ -38,7 +38,7 @@ namespace TCGCardsTests.Core.Messages
         [TestMethod]
         public void DeckSearchMessage()
         {
-            var message = new DeckSearchMessage(new Deck(), new List<IDeckFilter>(), 1);
+            var message = new DeckSearchMessage(new List<Card>(), new List<IDeckFilter>(), 1);
 
             Assert.IsNotNull(SerializeAndBack(message));
         }

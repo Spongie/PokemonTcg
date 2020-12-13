@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using System.Collections.Generic;
+using System.Linq;
 using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 
@@ -30,7 +31,7 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            var message = new DeckSearchMessage(owner.Deck, new List<IDeckFilter> { new EvolutionPokemonFilter() }, amount).ToNetworkMessage(owner.Id);
+            var message = new DeckSearchMessage(owner.Deck.Cards.ToList(), new List<IDeckFilter> { new EvolutionPokemonFilter() }, amount).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
             owner.DrawCardsFromDeck(response.Cards);
