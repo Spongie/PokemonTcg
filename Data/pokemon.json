@@ -9629,6 +9629,7 @@
           "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
           "Amount": 3,
           "CardType": 1,
+          "ShuffleIntoDeck": false,
           "EffectType": "Pick from discard"
         }
       ],
@@ -13156,6 +13157,7 @@
           "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
           "Amount": 3,
           "CardType": 1,
+          "ShuffleIntoDeck": false,
           "EffectType": "Pick from discard"
         }
       ],
@@ -21615,6 +21617,7 @@
             "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
             "Amount": 2,
             "CardType": 3,
+            "ShuffleIntoDeck": false,
             "EffectType": "Pick from discard"
           }
         ],
@@ -25754,6 +25757,7 @@
             "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
             "Amount": 1,
             "CardType": 2,
+            "ShuffleIntoDeck": false,
             "EffectType": "Pick from discard"
           }
         ],

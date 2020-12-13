@@ -217,6 +217,7 @@
         "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
         "Amount": 2,
         "CardType": 4,
+        "ShuffleIntoDeck": false,
         "EffectType": "Pick from discard"
       }
     ],
@@ -401,6 +402,7 @@
         "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
         "Amount": 1,
         "CardType": 2,
+        "ShuffleIntoDeck": false,
         "EffectType": "Pick from discard"
       }
     ],
@@ -999,82 +1001,82 @@
   {
     "$id": "131",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "132",
+        "$type": "TCGCards.TrainerEffects.RevealPrizeCardsEffect, TCGCards",
+        "EffectType": "Reveal prize cards"
+      }
+    ],
     "CardId": {
-      "$id": "132",
+      "$id": "133",
       "Value": "f3996d29-ab4b-4f75-8d65-328310f6b9bd"
     },
     "Id": {
-      "$id": "133",
+      "$id": "134",
       "Value": "5e8532a5-a8d9-4afd-a8fc-886b13273f46"
     },
     "SetCode": "base5",
     "Name": "Here Comes Team Rocket!",
     "ImageUrl": "https://images.pokemontcg.io/base5/71_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "134",
+    "$id": "135",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "136",
+        "$type": "TCGCards.TrainerEffects.SearchDiscardPileEffect, TCGCards",
+        "Amount": 3,
+        "CardType": 1,
+        "ShuffleIntoDeck": true,
+        "EffectType": "Pick from discard"
+      }
+    ],
     "CardId": {
-      "$id": "135",
+      "$id": "137",
       "Value": "6d6da40d-2b8a-484c-b1df-01953d64eb67"
     },
     "Id": {
-      "$id": "136",
+      "$id": "138",
       "Value": "c381342b-b03f-4490-9ed4-f174f66a02f8"
     },
     "SetCode": "base5",
     "Name": "Nightly Garbage Run",
     "ImageUrl": "https://images.pokemontcg.io/base5/77_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "137",
+    "$id": "139",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "140",
+        "$type": "TCGCards.TrainerEffects.RevealPrizeCardsEffect, TCGCards",
+        "EffectType": "Reveal prize cards"
+      }
+    ],
     "CardId": {
-      "$id": "138",
+      "$id": "141",
       "Value": "aec0e37f-561e-4cee-b126-28908f38f7bb"
     },
     "Id": {
-      "$id": "139",
+      "$id": "142",
       "Value": "90c549f8-98ab-4892-ba93-273286b8d9e4"
     },
     "SetCode": "base5",
     "Name": "Here Comes Team Rocket!",
     "ImageUrl": "https://images.pokemontcg.io/base5/15_hires.png",
-    "Completed": false,
-    "Owner": null,
-    "IsRevealed": true,
-    "IsTestCard": false,
-    "IgnoreInBuilder": false
-  },
-  {
-    "$id": "140",
-    "AddToDiscardWhenCasting": true,
-    "Effects": [],
-    "CardId": {
-      "$id": "141",
-      "Value": "0dba5be9-092d-4be1-8644-a7dea6ec41f9"
-    },
-    "Id": {
-      "$id": "142",
-      "Value": "56885af9-6f75-4042-bc5b-081403f87f49"
-    },
-    "SetCode": "base5",
-    "Name": "Rocket's Sneak Attack",
-    "ImageUrl": "https://images.pokemontcg.io/base5/16_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
@@ -1083,13 +1085,43 @@
   {
     "$id": "143",
     "AddToDiscardWhenCasting": true,
+    "Effects": [
+      {
+        "$id": "144",
+        "$type": "TCGCards.TrainerEffects.LookAtAndDiscardCardFromOpponent, TCGCards",
+        "EffectType": "Look and discard card from opponent",
+        "Amount": 1,
+        "CardType": 2,
+        "ShuffleIntoDeck": true
+      }
+    ],
+    "CardId": {
+      "$id": "145",
+      "Value": "0dba5be9-092d-4be1-8644-a7dea6ec41f9"
+    },
+    "Id": {
+      "$id": "146",
+      "Value": "56885af9-6f75-4042-bc5b-081403f87f49"
+    },
+    "SetCode": "base5",
+    "Name": "Rocket's Sneak Attack",
+    "ImageUrl": "https://images.pokemontcg.io/base5/16_hires.png",
+    "Completed": true,
+    "Owner": null,
+    "IsRevealed": true,
+    "IsTestCard": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "147",
+    "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "144",
+      "$id": "148",
       "Value": "94171457-01d1-4c1a-993a-bab8759142ce"
     },
     "Id": {
-      "$id": "145",
+      "$id": "149",
       "Value": "357071c9-a7ee-4ac5-8361-f4483676c171"
     },
     "SetCode": "base5",
@@ -1102,15 +1134,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "146",
+    "$id": "150",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "147",
+      "$id": "151",
       "Value": "f06f8f0f-9f4a-4653-a55f-e903ad711349"
     },
     "Id": {
-      "$id": "148",
+      "$id": "152",
       "Value": "5ef94ad2-bc33-4a2a-95de-a9113a4da462"
     },
     "SetCode": "base5",
@@ -1123,57 +1155,79 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "149",
+    "$id": "153",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "154",
+        "$type": "TCGCards.TrainerEffects.LookAtAndDiscardCardFromOpponent, TCGCards",
+        "EffectType": "Look and discard card from opponent",
+        "Amount": 1,
+        "CardType": 2,
+        "ShuffleIntoDeck": true
+      }
+    ],
     "CardId": {
-      "$id": "150",
+      "$id": "155",
       "Value": "2b16d607-2557-4418-b18d-89c6f34612aa"
     },
     "Id": {
-      "$id": "151",
+      "$id": "156",
       "Value": "623ae613-6ec6-4173-be54-24be64ec1699"
     },
     "SetCode": "base5",
     "Name": "Rocket's Sneak Attack",
     "ImageUrl": "https://images.pokemontcg.io/base5/72_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "152",
+    "$id": "157",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "158",
+        "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
+        "EffectType": "Search your deck for Pokémon",
+        "EvolveSource": false,
+        "CoinFlip": false,
+        "Amount": 1,
+        "Names": "Dark ",
+        "RevealCard": true,
+        "EnergyType": 0,
+        "AddToBench": false
+      }
+    ],
     "CardId": {
-      "$id": "153",
+      "$id": "159",
       "Value": "f12c8049-2cc8-4d4e-acbe-abb680466aa8"
     },
     "Id": {
-      "$id": "154",
+      "$id": "160",
       "Value": "d372651b-d34f-4c32-9581-6f7e3026f971"
     },
     "SetCode": "base5",
     "Name": "The Boss's Way",
     "ImageUrl": "https://images.pokemontcg.io/base5/73_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": true,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "155",
+    "$id": "161",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "156",
+      "$id": "162",
       "Value": "d4b069e3-2d2a-4a76-afab-6381cc024417"
     },
     "Id": {
-      "$id": "157",
+      "$id": "163",
       "Value": "fe591130-646f-461d-970c-e953377442d5"
     },
     "SetCode": "base5",
@@ -1186,11 +1240,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "158",
+    "$id": "164",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "159",
+        "$id": "165",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "EvolveSource": false,
@@ -1203,11 +1257,11 @@
       }
     ],
     "CardId": {
-      "$id": "160",
+      "$id": "166",
       "Value": "90a98997-2f24-428a-b52d-62db3b29ddff"
     },
     "Id": {
-      "$id": "161",
+      "$id": "167",
       "Value": "de8ad004-8d7d-43e1-a72d-660243606683"
     },
     "SetCode": "base2",
@@ -1220,11 +1274,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "162",
+    "$id": "168",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "163",
+        "$id": "169",
         "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
         "CardType": 4,
         "EnergyType": 1,
@@ -1233,11 +1287,11 @@
       }
     ],
     "CardId": {
-      "$id": "164",
+      "$id": "170",
       "Value": "276bc34d-87eb-48f0-b896-9278fc7ea23a"
     },
     "Id": {
-      "$id": "165",
+      "$id": "171",
       "Value": "6307b243-9936-460c-87d7-24ed8dd9c174"
     },
     "SetCode": "base3",
@@ -1250,11 +1304,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "166",
+    "$id": "172",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "167",
+        "$id": "173",
         "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
         "OnlyBasic": false,
         "TargetingMode": 1,
@@ -1264,11 +1318,11 @@
       }
     ],
     "CardId": {
-      "$id": "168",
+      "$id": "174",
       "Value": "eb354064-fcb5-4597-adc5-c5d92879160d"
     },
     "Id": {
-      "$id": "169",
+      "$id": "175",
       "Value": "b010955b-c0a7-4d86-a733-df8217dbac93"
     },
     "SetCode": "base3",
@@ -1281,11 +1335,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "170",
+    "$id": "176",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "171",
+        "$id": "177",
         "$type": "TCGCards.TrainerEffects.PutCardFromDiscardOnDeck, TCGCards",
         "CoinFlip": true,
         "Amount": 1,
@@ -1294,11 +1348,11 @@
       }
     ],
     "CardId": {
-      "$id": "172",
+      "$id": "178",
       "Value": "3e857d2a-37fa-4700-b769-d425cbc94bd8"
     },
     "Id": {
-      "$id": "173",
+      "$id": "179",
       "Value": "fa8398a5-57f0-4407-8ffd-4c738146e716"
     },
     "SetCode": "base3",
@@ -1311,11 +1365,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "174",
+    "$id": "180",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "175",
+        "$id": "181",
         "$type": "TCGCards.TrainerEffects.ShuffleHandIntoDeck, TCGCards",
         "CardType": 0,
         "Opponents": false,
@@ -1323,7 +1377,7 @@
         "EffectType": "Shuffle hand into deck"
       },
       {
-        "$id": "176",
+        "$id": "182",
         "$type": "TCGCards.TrainerEffects.DrawCardsDependingOnFlip, TCGCards",
         "AmountIfTails": 1,
         "AmountIfHeads": 8,
@@ -1331,11 +1385,11 @@
       }
     ],
     "CardId": {
-      "$id": "177",
+      "$id": "183",
       "Value": "e59204e9-c2d7-47b4-b5cd-75fd6fabc689"
     },
     "Id": {
-      "$id": "178",
+      "$id": "184",
       "Value": "648abd7c-3289-454e-8052-00280a149715"
     },
     "SetCode": "base3",
@@ -1348,21 +1402,21 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "179",
+    "$id": "185",
     "AddToDiscardWhenCasting": false,
     "Effects": [
       {
-        "$id": "180",
+        "$id": "186",
         "$type": "TCGCards.TrainerEffects.CreateFossilePokemon, TCGCards",
         "EffectType": "Create fossile Pokémon"
       }
     ],
     "CardId": {
-      "$id": "181",
+      "$id": "187",
       "Value": "52c0f6ba-7482-4858-92b3-f3b06e4f3805"
     },
     "Id": {
-      "$id": "182",
+      "$id": "188",
       "Value": "03438986-4438-471c-9f85-8d30b3ed308b"
     },
     "SetCode": "base3",
