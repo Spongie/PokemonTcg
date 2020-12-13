@@ -57,7 +57,7 @@ namespace TCGCards.TrainerEffects
             {
                 if (game.FlipCoins(1) == 1)
                 {
-                    pokemon.DealDamage(DamageToOpponents, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
+                    pokemon.DealDamage(DamageToOpponents, game, pokemonSource, true);
                 }
                 else
                 {
@@ -65,7 +65,7 @@ namespace TCGCards.TrainerEffects
                 }
             }
 
-            caster.ActivePokemonCard.DealDamage(tails * damagePerTails, game, pokemonSource, false, game.GameState == GameFieldState.Attacking);
+            caster.ActivePokemonCard.DealDamage(tails * damagePerTails, game, pokemonSource, false);
         }
     }
 }

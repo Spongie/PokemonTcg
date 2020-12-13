@@ -62,7 +62,7 @@ namespace TCGCards.TrainerEffects
             {
                 if (names.Contains(pokemon.Name.ToLower()))
                 {
-                    pokemon.DealDamage(Damage, game, pokemonSource, false, game.GameState == GameFieldState.Attacking);
+                    pokemon.DealDamage(Damage, game, pokemonSource, false);
                 }
             }
 
@@ -70,7 +70,7 @@ namespace TCGCards.TrainerEffects
             {
                 if (names.Contains(pokemon.Name.ToLower()))
                 {
-                    pokemon.DealDamage(Damage, game, pokemonSource, false, game.GameState == GameFieldState.Attacking);
+                    pokemon.DealDamage(Damage, game, pokemonSource, false);
                 }
             }
         }

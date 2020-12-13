@@ -104,7 +104,7 @@ namespace TCGCards.Core.Abilities
                 }
 
                 source.Heal(Amount, game);
-                target.DealDamage(Amount, game, null, false, false);
+                target.DealDamage(Amount, game, null, false);
                 break;
             }
         }

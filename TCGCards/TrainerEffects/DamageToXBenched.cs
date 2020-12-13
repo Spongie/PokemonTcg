@@ -57,7 +57,7 @@ namespace TCGCards.TrainerEffects
             {
                 foreach (var pokemon in opponent.BenchedPokemon)
                 {
-                    pokemon.DealDamage(Damage, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
+                    pokemon.DealDamage(Damage, game, pokemonSource, true);
                 }
 
                 return;
@@ -68,7 +68,7 @@ namespace TCGCards.TrainerEffects
 
             foreach (var pokemon in response.Cards.Select(id => game.Cards[id]).OfType<PokemonCard>())
             {
-                pokemon.DealDamage(Damage, game, pokemonSource, true, game.GameState == GameFieldState.Attacking);
+                pokemon.DealDamage(Damage, game, pokemonSource, true);
             }
         }
     }

@@ -22,10 +22,10 @@ namespace TCGCards.Core.Abilities
             if (attackBack)
             {
                 var damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(damageTaken, PokemonOwner, opponent.ActivePokemonCard, null);
-                opponent.ActivePokemonCard.DealDamage(damage, game, PokemonOwner, true, false);
+                opponent.ActivePokemonCard.DealDamage(damage, game, PokemonOwner, true);
             }
             {
-                opponent.ActivePokemonCard.DealDamage(DamageReturned, game, PokemonOwner, false, false);
+                opponent.ActivePokemonCard.DealDamage(DamageReturned, game, PokemonOwner, false);
             }
         }
 

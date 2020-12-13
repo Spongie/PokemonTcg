@@ -225,13 +225,13 @@ namespace TCGCards
 
             if (IsBurned)
             {
-                DealDamage(20, game, this, false, false);
+                DealDamage(20, game, this, false);
                 IsBurned = game.FlipCoins(1) == 0;
             }
 
             if (IsPoisoned)
             {
-                DealDamage(DoublePoison ? 20 : 10, game, this, false, false);
+                DealDamage(DoublePoison ? 20 : 10, game, this, false);
             }
 
             if(IsAsleep)
@@ -269,7 +269,7 @@ namespace TCGCards
             });
         }
 
-        public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable, bool fromAttack)
+        public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable)
         {
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
 
@@ -449,7 +449,5 @@ namespace TCGCards
                     break;
             }
         }
-
-        public virtual void OnDeath() { }
     }
 }

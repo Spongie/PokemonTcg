@@ -71,7 +71,7 @@ namespace TCGCards.Core.Abilities
             
 
             selectedSource.Heal(Amount, game);
-            target.DealDamage(Amount, game, PokemonOwner, false, false);
+            target.DealDamage(Amount, game, PokemonOwner, false);
         }
     }
 }

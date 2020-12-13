@@ -513,7 +513,7 @@ namespace TCGCards.Core
                 return;
             }
 
-            var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, this, ActivePlayer.ActivePokemonCard, true, true);
+            var dealtDamage = NonActivePlayer.ActivePokemonCard.DealDamage(damage, this, ActivePlayer.ActivePokemonCard, true);
             attack.OnDamageDealt(dealtDamage, ActivePlayer, this);
 
             if (!damage.IsZero()) 
@@ -526,7 +526,7 @@ namespace TCGCards.Core
         private void HitItselfInConfusion()
         {
             GameLog.AddMessage($"{ActivePlayer.ActivePokemonCard.GetName()} hurt itself in its confusion");
-            ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), this, ActivePlayer.ActivePokemonCard, false, true);
+            ActivePlayer.ActivePokemonCard.DealDamage(new Damage(0, ConfusedDamage), this, ActivePlayer.ActivePokemonCard, false);
 
             if (ActivePlayer.ActivePokemonCard.Ability?.TriggerType == TriggerType.DealsDamage)
             {

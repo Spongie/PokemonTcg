@@ -36,7 +36,7 @@ namespace TCGCards.TrainerEffects
 
             foreach (var pokemon in opponent.BenchedPokemon)
             {
-                pokemon.DealDamage(damage, game, pokemonSource, false, true);
+                pokemon.DealDamage(damage, game, pokemonSource, false);
             }
         }
     }
