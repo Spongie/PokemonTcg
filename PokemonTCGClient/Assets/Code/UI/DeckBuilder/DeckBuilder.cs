@@ -1,8 +1,10 @@
 ﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TCGCards;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,21 +13,36 @@ namespace Assets.Code.UI.DeckBuilder
 {
     public class DeckBuilder : MonoBehaviour
     {
-        public static string CurrentDeck;
+        public static TCGCards.Core.Deck CurrentDeck;
         public InputField deckName;
         public GameObject cardPrefab;
         public GameObject deckContent;
 
-        public Text textFieldCount;
-        public Text textFieldEnergyCount;
-        public Text textFieldTrainerCount;
-        public Text textFieldPokemonCount;
+        public TextMeshProUGUI textFieldCount;
+        public TextMeshProUGUI textFieldEnergyCount;
+        public TextMeshProUGUI textFieldTrainerCount;
+        public TextMeshProUGUI textFieldPokemonCount;
+
+        public GameObject ValidationModal;
+        public TextMeshProUGUI ValidationText;
+
+        public Dropdown formatDropdown;
 
         private void Start()
         {
-            if (!string.IsNullOrWhiteSpace(CurrentDeck))
+            NetworkId defaultFormatId = null;
+
+            if (CurrentDeck != null)
             {
-                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", CurrentDeck + MainMenu.Deck.deckExtension);
+                var filename = CurrentDeck.Name;
+                defaultFormatId = CurrentDeck.FormatId;
+
+                foreach (var character in Path.GetInvalidFileNameChars())
+                {
+                    filename = filename.Replace(character, '\0');
+                }
+
+                var fullPath = Path.Combine(Application.streamingAssetsPath, "Decks", filename + MainMenu.Deck.deckExtension);
                 var deck = Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(fullPath));
 
                 foreach (var card in deck.Cards)
@@ -33,8 +50,29 @@ namespace Assets.Code.UI.DeckBuilder
                     AddToDeck(card);
                 }
 
-                deckName.text = CurrentDeck;
+                deckName.text = CurrentDeck.Name;
             }
+
+            formatDropdown.options.Clear();
+            int index = 0;
+            int formatIndex = 1;
+
+            foreach (var format in MainMenu.MainMenu.formats)
+            {
+                formatDropdown.options.Add(new Dropdown.OptionData
+                {
+                    text = format.Name
+                });
+
+                if (defaultFormatId != null && format.Id.Equals(defaultFormatId))
+                {
+                    formatIndex = index;
+                }
+
+                index++;
+            }
+
+            formatDropdown.value = formatIndex;
         }
 
         public void OnExitClick()
@@ -49,7 +87,7 @@ namespace Assets.Code.UI.DeckBuilder
 
             foreach (var character in Path.GetInvalidFileNameChars())
             {
-                filename.Replace(character, '\0');
+                filename = filename.Replace(character, '\0');
             }
 
             var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
@@ -59,12 +97,32 @@ namespace Assets.Code.UI.DeckBuilder
                 Directory.CreateDirectory(directory);
             }
 
+            var format = MainMenu.MainMenu.formats.First(x => x.Name == formatDropdown.options[formatDropdown.value].text);
+
             var fullPath = Path.Combine(directory, filename);
+
+            var cards = deckContent.GetComponentsInChildren<DeckCard>();
+
+            if (cards.Length == 0)
+            {
+                return;
+            }
 
             var deck = new TCGCards.Core.Deck
             {
-                Cards = new Stack<Card>(deckContent.GetComponentsInChildren<DeckCard>().Select(deckCard => deckCard.card))
+                Cards = new Stack<Card>(cards.Select(deckCard => deckCard.card)),
+                FormatId = format.Id,
+                Name = deckName.text
             };
+
+            var deckValidation = format.ValidateDeck(deck);
+
+            if (!deckValidation.Result)
+            {
+                ValidationModal.SetActive(true);
+                ValidationText.text = string.Join(Environment.NewLine, deckValidation.Messages);
+                return;
+            }
 
             var data = Serializer.Serialize(deck);
 

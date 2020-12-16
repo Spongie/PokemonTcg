@@ -1,0 +1,194 @@
+[
+  {
+    "$id": "1",
+    "Name": "Base - Fossile",
+    "Id": {
+      "$id": "2",
+      "Value": "6df34473-e242-4ed1-9880-92e1e7e64dc1"
+    },
+    "SetCodes": [],
+    "Sets": [
+      {
+        "$id": "3",
+        "SetCode": "base1",
+        "Name": null
+      },
+      {
+        "$id": "4",
+        "SetCode": "base2",
+        "Name": null
+      },
+      {
+        "$id": "5",
+        "SetCode": "base3",
+        "Name": null
+      }
+    ],
+    "Restrictions": []
+  },
+  {
+    "$id": "6",
+    "Name": "2001 - 2002",
+    "Id": {
+      "$id": "7",
+      "Value": "d3dfeb8c-fdab-44e0-a018-0f7ce8554b71"
+    },
+    "SetCodes": [],
+    "Sets": [
+      {
+        "$id": "8",
+        "SetCode": "base5",
+        "Name": null
+      },
+      {
+        "$id": "9",
+        "SetCode": "gym1",
+        "Name": null
+      },
+      {
+        "$id": "10",
+        "SetCode": "gym2",
+        "Name": null
+      }
+    ],
+    "Restrictions": [
+      {
+        "$id": "11",
+        "RestrictedId": null,
+        "Name": null,
+        "MaxCount": 3
+      }
+    ]
+  },
+  {
+    "$id": "12",
+    "Name": "Unlimited",
+    "Id": {
+      "$id": "13",
+      "Value": "cea235f7-a8b3-47f5-9c5b-27e96e8eb0de"
+    },
+    "SetCodes": [],
+    "Sets": [],
+    "Restrictions": []
+  },
+  {
+    "$id": "14",
+    "Name": "Original - Removal",
+    "Id": {
+      "$id": "15",
+      "Value": "ec4b6ad1-3cc2-41bf-bf0f-de41ea61b565"
+    },
+    "SetCodes": [],
+    "Sets": [
+      {
+        "$id": "16",
+        "SetCode": "base1",
+        "Name": null
+      },
+      {
+        "$id": "17",
+        "SetCode": "base2",
+        "Name": null
+      },
+      {
+        "$id": "18",
+        "SetCode": "base3",
+        "Name": null
+      }
+    ],
+    "Restrictions": [
+      {
+        "$id": "19",
+        "RestrictedId": {
+          "$id": "20",
+          "Value": "8608e8f2-8c53-495e-9683-642cee011348"
+        },
+        "Name": "Super Energy Removal",
+        "MaxCount": 1
+      },
+      {
+        "$id": "21",
+        "RestrictedId": {
+          "$id": "22",
+          "Value": "a3c3b3e5-b42b-4d59-9c33-2f26337ac9e0"
+        },
+        "Name": "Energy Removal",
+        "MaxCount": 2
+      }
+    ]
+  },
+  {
+    "$id": "23",
+    "Name": "Base - Rocket",
+    "Id": {
+      "$id": "24",
+      "Value": "2bd3a601-fff8-445c-88d9-d84758ab48b0"
+    },
+    "SetCodes": [],
+    "Sets": [
+      {
+        "$id": "25",
+        "SetCode": "base1",
+        "Name": null
+      },
+      {
+        "$id": "26",
+        "SetCode": "base2",
+        "Name": null
+      },
+      {
+        "$id": "27",
+        "SetCode": "base3",
+        "Name": null
+      },
+      {
+        "$id": "28",
+        "SetCode": "base5",
+        "Name": null
+      }
+    ],
+    "Restrictions": []
+  },
+  {
+    "$id": "29",
+    "Name": "Base - Gym",
+    "Id": {
+      "$id": "30",
+      "Value": "825adf79-e589-4851-a7cb-7ed263768f7a"
+    },
+    "SetCodes": [],
+    "Sets": [
+      {
+        "$id": "31",
+        "SetCode": "base1",
+        "Name": null
+      },
+      {
+        "$id": "32",
+        "SetCode": "base2",
+        "Name": null
+      },
+      {
+        "$id": "33",
+        "SetCode": "base3",
+        "Name": null
+      },
+      {
+        "$id": "34",
+        "SetCode": "base5",
+        "Name": null
+      },
+      {
+        "$id": "35",
+        "SetCode": "gym1",
+        "Name": null
+      },
+      {
+        "$id": "36",
+        "SetCode": "gym2",
+        "Name": null
+      }
+    ],
+    "Restrictions": []
+  }
+]

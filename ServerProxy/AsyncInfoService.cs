@@ -97,4 +97,16 @@ public NetworkingCore.NetworkId GetSetsJson()
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
+public NetworkingCore.NetworkId GetFormatsJson()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetFormatsJson",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		networkPlayer.Send(message);	
+		return message.MessageId;
+	} 
 }

@@ -10,13 +10,15 @@ namespace CardEditor.ViewModels
 		private PokemonsViewModel pokemonsViewModel;
 		private EnergyCardsViewModel energyCardsViewModel;
 		private TrainerCardsViewModel trainerCardsViewModel;
+		private FormatsViewModel formatViewModel;
 
 		public MainViewModel()
 		{
 			SetViewModel = new SetsViewModel();
 			PokemonsViewModel = new PokemonsViewModel(SetViewModel.Sets);
-			energyCardsViewModel = new EnergyCardsViewModel(SetViewModel.Sets);
-			trainerCardsViewModel = new TrainerCardsViewModel(SetViewModel.Sets);
+			EnergyCardsViewModel = new EnergyCardsViewModel(SetViewModel.Sets);
+			TrainerCardViewModel = new TrainerCardsViewModel(SetViewModel.Sets);
+			FormatViewModel = new FormatsViewModel(this, SetViewModel.Sets);
 		}
 
         internal async Task Commit()
@@ -27,6 +29,7 @@ namespace CardEditor.ViewModels
 			File.Copy("Data/pokemon.json", @"E:\Programming\PokemonTcg\Data\pokemon.json", true);
 			File.Copy("Data/energy.json", @"E:\Programming\PokemonTcg\Data\energy.json", true);
 			File.Copy("Data/trainers.json", @"E:\Programming\PokemonTcg\Data\trainers.json", true);
+			File.Copy("Data/formats.json", @"E:\Programming\PokemonTcg\Data\formats.json", true);
 		}
 
         public async Task Save()
@@ -36,6 +39,7 @@ namespace CardEditor.ViewModels
 			await PokemonsViewModel.Save();
 			await energyCardsViewModel.Save();
 			await trainerCardsViewModel.Save();
+			await formatViewModel.Save();
 		}
 
 		public async Task Load()
@@ -47,6 +51,7 @@ namespace CardEditor.ViewModels
 			await PokemonsViewModel.Load();
 			await energyCardsViewModel.Load();
 			await trainerCardsViewModel.Load();
+			await formatViewModel.Load();
 		}
 
         public TrainerCardsViewModel TrainerCardViewModel
@@ -88,5 +93,15 @@ namespace CardEditor.ViewModels
                 FirePropertyChanged();
             }
         }
-    }
+
+		public FormatsViewModel FormatViewModel
+		{
+			get { return formatViewModel; }
+			set
+			{
+				formatViewModel = value;
+				FirePropertyChanged();
+			}
+		}
+	}
 }

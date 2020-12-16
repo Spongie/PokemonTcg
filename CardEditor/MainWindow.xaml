@@ -32,6 +32,9 @@
             <TabItem Header="Sets" DataContext="{Binding SetViewModel}">
                 <views:SetsView/>
             </TabItem>
+            <TabItem Header="Formats" DataContext="{Binding FormatViewModel}">
+                <views:FormatView/>
+            </TabItem>
         </TabControl>
 
     </DockPanel>

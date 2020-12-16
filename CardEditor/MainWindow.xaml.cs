@@ -44,8 +44,9 @@ namespace CardEditor
             var sets = await File.ReadAllTextAsync("Data/sets.json");
             var energy = await File.ReadAllTextAsync("Data/energy.json");
             var trainers = await File.ReadAllTextAsync("Data/trainers.json");
+            var formats = await File.ReadAllTextAsync("Data/formats.json");
 
-            cardService.UpdateCards(pokemons, energy, trainers, sets);
+            cardService.UpdateCards(pokemons, energy, trainers, sets, formats);
 
             MessageBox.Show("Data uploaded!");
         }

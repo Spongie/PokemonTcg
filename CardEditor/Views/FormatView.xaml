@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="CardEditor.Views.FormatView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CardEditor.Views"
+             xmlns:m="clr-namespace:CardEditor"
+             xmlns:vm="clr-namespace:CardEditor.ViewModels"
+             xmlns:en="clr-namespace:Entities;assembly=Entities"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:FormatsViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="mainPanel">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="70*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                </Grid.RowDefinitions>
+                <DockPanel DataContext="{Binding SelectedFormat}">
+                    <DataGrid AutoGenerateColumns="false" ItemsSource="{Binding Sets}" CanUserAddRows="True" CanUserDeleteRows="true" >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Set" MinWidth="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding SetCode}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding ElementName=mainPanel, Path=DataContext.Sets}" SelectedItem="{Binding SetCode}" SelectedValuePath="SetCode" SelectedValue="{Binding SetCode}" >
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                <ListBox Grid.Row="1" ItemsSource="{Binding SelectedFormat.Restrictions}" SelectedItem="{Binding SelectedRestriction}" HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Label FontSize="18" FontWeight="Bold" Content="{Binding Name}" />
+                                <Button HorizontalAlignment="Right" Content="&#xf1f8;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Command="{Binding ElementName=mainPanel, Path=DataContext.DeleteRestriction}" CommandParameter="{Binding }" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </DockPanel>
+        <DockPanel Margin="5" LastChildFill="true" x:Name="groupPanel">
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Selected Format" MinWidth="50"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5">
+                <Label Content="Name" MinWidth="50"/>
+                <TextBox Text="{Binding SelectedFormat.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5" DataContext="{Binding SelectedRestriction}">
+                <Label Content="Selected Restriction" DockPanel.Dock="Top" />
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5">
+                    <Label Content="Restriction" MinWidth="50"/>
+                    <TextBox Text="{Binding Name}" />
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5">
+                    <Label Content="Card" MinWidth="50"/>
+                    <ComboBox ItemsSource="{Binding ElementName=groupPanel, Path=DataContext.AllCards}" SelectedItem="{Binding CardId}" SelectedValuePath="CardId" SelectedValue="{Binding RestrictedId}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding SetCode}"/>
+                                    <Label Content=" - "/>
+                                    <Label Content="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top" Margin="0,0,0,5">
+                    <Label Content="Limit" MinWidth="50"/>
+                    <TextBox Text="{Binding MaxCount}" />
+                </DockPanel>
+                <Button DockPanel.Dock="Top" Content="Add Restriction" Command="{Binding ElementName=mainPanel, Path=DataContext.AddRestriction}" />
+            </DockPanel>
+            <Button DockPanel.Dock="Bottom" Content="Add Format" Command="{Binding AddNewCommand}"/>
+            <ListBox ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}" DockPanel.Dock="Top" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </Grid>
+</UserControl>

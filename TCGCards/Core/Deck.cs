@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetworkingCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,8 @@ namespace TCGCards.Core
         }
 
         public Stack<Card> Cards { get; set; }
+        public NetworkId FormatId { get; set; }
+        public string Name { get; set; }
 
         public void Shuffle()
         {

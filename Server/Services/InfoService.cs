@@ -19,5 +19,6 @@ namespace Server.Services
         public string GetEnergyJson() => File.ReadAllText("energy.json");
         public string GetTrainerJson() => File.ReadAllText("trainers.json");
         public string GetSetsJson() => File.ReadAllText("sets.json");
+        public string GetFormatsJson() => File.ReadAllText("formats.json");
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using NetworkingCore;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +24,8 @@ namespace Assets.Code.UI.MainMenu
             foreach (var file in Directory.GetFiles(directory).Where(f => f.EndsWith(Deck.deckExtension)))
             {
                 var spawned = Instantiate(deckPrefab, content.transform);
-                spawned.GetComponent<Deck>().Init(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty));
+                var deck = Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(file));
+                spawned.GetComponent<Deck>().Init(deck);
             }
         }
 
@@ -34,9 +36,10 @@ namespace Assets.Code.UI.MainMenu
 
         public void DeleteDeck(Deck deck)
         {
+            string filename = deck.GetSafeFileName();
             var directory = Path.Combine(Application.streamingAssetsPath, "Decks");
 
-            File.Delete(Path.Combine(directory, deck.deckNameText.text + Deck.deckExtension));
+            File.Delete(Path.Combine(directory, filename + Deck.deckExtension));
             Destroy(deck.gameObject);
         }
     }

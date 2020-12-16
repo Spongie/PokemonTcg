@@ -2,11 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using TCGCards;
 using TCGCards.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +18,7 @@ namespace Assets.Code.UI.DeckBuilder
     {
         public bool loading;
         public InputField searchInput;
-        public Text text;
+        public TextMeshProUGUI cardCountText;
         public GameObject Content;
         public GameObject CardPrefab;
 
@@ -177,7 +179,7 @@ namespace Assets.Code.UI.DeckBuilder
 
                 cards.Add(card.CardId, card);
 
-                text.text = cards.Count.ToString();
+                cardCountText.text = cards.Count.ToString();
                 var spawnedObject = Instantiate(CardPrefab, Content.transform);
                 spawnedObject.GetComponent<DeckCard>().Init(card);
 

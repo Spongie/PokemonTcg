@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using TCGCards;
 using TCGCards.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ namespace Assets.Code.UI.MainMenu
         public GameObject content;
         public GameObject gamePrefab;
         public Dropdown deckDropDown;
+        public static List<Format> formats;
 
         private void Awake()
         {
@@ -25,6 +27,7 @@ namespace Assets.Code.UI.MainMenu
 
         private void Start()
         {
+            formats = Serializer.Deserialize<List<Format>>(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Data", "formats.json")));
             RefreshGames();
 
             deckDropDown.options.Clear();
@@ -32,7 +35,18 @@ namespace Assets.Code.UI.MainMenu
 
             foreach (var file in Directory.GetFiles(directory).Where(f => f.EndsWith(Deck.deckExtension)))
             {
-                deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty)));
+                var deck = Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(file));
+
+                if (deck.FormatId == null)
+                {
+                    deck.FormatId = formats.FirstOrDefault(f => f.Name == "Unlimited").Id;
+                    deck.Name = new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty);
+                    File.WriteAllText(file, Serializer.Serialize(deck));
+                }
+
+                string formatName = formats.FirstOrDefault(f => f.Id.Equals(deck.FormatId)).Name;
+
+                deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty) + " - " + formatName));
             }
 
             if (deckDropDown.options.Count > 0)

@@ -101,6 +101,7 @@ namespace Launcher
             UpdatePokemonCards(streamingAssetsFolder, dataFolder);
             UpdateEnergyCards(streamingAssetsFolder, dataFolder);
             UpdateTrainerCards(streamingAssetsFolder, dataFolder);
+			UpdateFormats(dataFolder);
 
             Directory.CreateDirectory(Path.Combine(streamingAssetsFolder, "Decks"));
 
@@ -109,7 +110,13 @@ namespace Launcher
             File.WriteAllText("cards.version", CardsVersionNumber.ToString());
         }
 
-        private void UpdateSets(string streamingAssetsFolder, string dataFolder)
+		private void UpdateFormats(string dataFolder)
+		{
+			var setsJson = infoService.GetFormatsJson();
+			File.WriteAllText(Path.Combine(dataFolder, "formats.json"), setsJson);
+		}
+
+		private void UpdateSets(string streamingAssetsFolder, string dataFolder)
         {
             var setsJson = infoService.GetSetsJson();
             File.WriteAllText(Path.Combine(dataFolder, "sets.json"), setsJson);

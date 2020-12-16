@@ -26,7 +26,8 @@ namespace Server.Services
             {
                 HostingPlayer = game.Players.First().NetworkPlayer.Name,
                 FormatName = "Unlimited",
-                Id = game.Id
+                Id = game.Id,
+                Format = game.Format
             }).ToList();
         }
 
@@ -35,6 +36,7 @@ namespace Server.Services
             RemoveCompletedGames();
             var player = new Player(MasterServer.Instance.Clients[hostPlayer]);
             var game = new GameField();
+            game.Format = deckInfo.FormatId;
 
             var cardService = (CardService)MasterServer.Instance.Services[typeof(CardService).Name];
 

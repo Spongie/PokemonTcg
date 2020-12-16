@@ -999,5 +999,6 @@ namespace TCGCards.Core
         public Dictionary<NetworkId, Card> Cards { get; set; } = new Dictionary<NetworkId, Card>();
         public Dictionary<NetworkId, Attack> Attacks { get; set; } = new Dictionary<NetworkId, Attack>();
         public Dictionary<NetworkId, Ability> Abilities { get; set; } = new Dictionary<NetworkId, Ability>();
+        public NetworkId Format { get; set; }
     }
 }

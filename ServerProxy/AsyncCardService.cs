@@ -37,13 +37,13 @@ public NetworkingCore.NetworkId GetAllSets()
 		networkPlayer.Send(message);	
 		return message.MessageId;
 	} 
-public NetworkingCore.NetworkId UpdateCards(System.String pokemonCards,System.String energyCards,System.String tainerCards,System.String sets)
+public NetworkingCore.NetworkId UpdateCards(System.String pokemonCards,System.String energyCards,System.String tainerCards,System.String sets,System.String formats)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "UpdateCards",
 			TargetClass = "CardService",
-			Parameters = new object[] { pokemonCards,energyCards,tainerCards,sets }
+			Parameters = new object[] { pokemonCards,energyCards,tainerCards,sets,formats }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		networkPlayer.Send(message);	

@@ -39,7 +39,7 @@ namespace Server.Services
         public List<Card> GetAllCards() => cards.Values.ToList();
         public List<Set> GetAllSets() => sets;
 
-        public bool UpdateCards(string pokemonCards, string energyCards, string tainerCards, string sets)
+        public bool UpdateCards(string pokemonCards, string energyCards, string tainerCards, string sets, string formats)
         {
             Logger.Instance.Log("Received card updates, updating cards...");
 
@@ -47,6 +47,7 @@ namespace Server.Services
             File.WriteAllText("energy.json", energyCards);
             File.WriteAllText("trainers.json", tainerCards);
             File.WriteAllText("sets.json", sets);
+            File.WriteAllText("formats.json", formats);
 
             Logger.Instance.Log("reloading caches...");
             InitTypes();

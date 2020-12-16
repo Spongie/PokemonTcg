@@ -7,5 +7,6 @@ namespace TCGCards.Core
         public NetworkId Id { get; set; }
         public string HostingPlayer { get; set; }
         public string FormatName { get; set; }
+        public NetworkId Format { get; set; }
     }
 }

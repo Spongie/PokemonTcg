@@ -35,13 +35,13 @@ public System.Collections.Generic.List<Entities.Models.Set> GetAllSets()
 		
 		return networkPlayer.SendAndWaitForResponse<System.Collections.Generic.List<Entities.Models.Set>>(message);
 	}
-public System.Boolean UpdateCards(System.String pokemonCards,System.String energyCards,System.String tainerCards,System.String sets)
+public System.Boolean UpdateCards(System.String pokemonCards,System.String energyCards,System.String tainerCards,System.String sets,System.String formats)
 	{
 		var message = new GenericMessageData
 		{
 			TargetMethod = "UpdateCards",
 			TargetClass = "CardService",
-			Parameters = new object[] { pokemonCards,energyCards,tainerCards,sets }
+			Parameters = new object[] { pokemonCards,energyCards,tainerCards,sets,formats }
 		}.ToNetworkMessage(networkPlayer.Id);
 		
 		return networkPlayer.SendAndWaitForResponse<System.Boolean>(message);

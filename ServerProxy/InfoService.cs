@@ -90,4 +90,15 @@ public System.String GetSetsJson()
 		
 		return networkPlayer.SendAndWaitForResponse<System.String>(message);
 	}
+public System.String GetFormatsJson()
+	{
+		var message = new GenericMessageData
+		{
+			TargetMethod = "GetFormatsJson",
+			TargetClass = "InfoService",
+			Parameters = new object[] {  }
+		}.ToNetworkMessage(networkPlayer.Id);
+		
+		return networkPlayer.SendAndWaitForResponse<System.String>(message);
+	}
 }

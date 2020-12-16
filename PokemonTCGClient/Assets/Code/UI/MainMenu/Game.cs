@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TCGCards.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,12 +12,14 @@ namespace Assets.Code.UI.MainMenu
         private GameInfo game;
         public Text hostedName;
         public Text gameFormat;
+        public Text formatName;
 
         public void Init(GameInfo game)
         {
             this.game = game;
             hostedName.text = game.HostingPlayer;
             gameFormat.text = game.FormatName;
+            formatName.text = MainMenu.formats.FirstOrDefault(f => f.Id.Equals(game.Format)).Name;
         }
 
         public void OnJoinGameClick()
