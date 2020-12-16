@@ -7,6 +7,7 @@ namespace TCGCards.Attacks
     public class ExtraPerAttachedEnergy : Attack
     {
         private int extraPerEnergy;
+        private bool countDefender;
 
         [DynamicInput("Extra per damage counter")]
         public int ExtraPerEnergy
@@ -19,9 +20,23 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Count defender", InputControl.Boolean)]
+        public bool CountDefender
+        {
+            get { return countDefender; }
+            set
+            {
+                countDefender = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            var extraDamage = owner.ActivePokemonCard.AttachedEnergy.Count * ExtraPerEnergy;
+            var target = CountDefender ? opponent.ActivePokemonCard : owner.ActivePokemonCard;
+
+            var extraDamage = target.AttachedEnergy.Count * ExtraPerEnergy;
             return Damage + extraDamage;
         }
     }

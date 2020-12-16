@@ -1,6 +1,7 @@
 ﻿using CardEditor.Views;
 using Entities.Models;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -9,6 +10,7 @@ namespace TCGCards.TrainerEffects
         private int amount;
         private bool onlyOnCoinflip;
         private bool opponents;
+        private bool isMay;
 
         [DynamicInput("Targets opponent?", InputControl.Boolean)]
         public bool Opponents
@@ -43,6 +45,17 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Ask yes/no", InputControl.Boolean)]
+        public bool IsMay
+        {
+            get { return isMay; }
+            set
+            {
+                isMay = value;
+                FirePropertyChanged();
+            }
+        }
+
         public string EffectType
         {
             get
@@ -60,12 +73,18 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            var target = opponents ? opponent : caster;
+
+            if (IsMay && !CardUtil.AskYesNo(target, $"Draw {Amount} Cards?"))
+            {
+                return;
+            }
+            
             if (onlyOnCoinflip && game.FlipCoins(1) == 0)
             {
                 return;
             }
 
-            var target = opponents ? opponent : caster;
             target.DrawCards(Amount);
         }
     }

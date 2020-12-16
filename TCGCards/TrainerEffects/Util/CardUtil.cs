@@ -1,4 +1,5 @@
 ﻿using Entities;
+using NetworkingCore.Messages;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
@@ -61,6 +62,13 @@ namespace TCGCards.TrainerEffects.Util
             }
 
             return filter;
+        }
+
+        public static bool AskYesNo(Player caster, string info)
+        {
+            var message = new YesNoMessage() { Message = info }.ToNetworkMessage(caster.Id);
+
+            return caster.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(message).AnsweredYes;
         }
     }
 }

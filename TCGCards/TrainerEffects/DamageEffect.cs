@@ -121,7 +121,7 @@ namespace TCGCards.TrainerEffects
 
             string yesNoInfo = EnergyToDiscard > 0 ? "Discard energy card?" : "Deal damage to a benched pokemon?";
 
-            if (askYesNo && !AskYesNo(caster, yesNoInfo))
+            if (askYesNo && !CardUtil.AskYesNo(caster, yesNoInfo))
             {
                 return;
             }
@@ -166,13 +166,6 @@ namespace TCGCards.TrainerEffects
             }
 
             target.DealDamage(damage, game, pokemonSource, true);
-        }
-
-        private bool AskYesNo(Player caster, string info)
-        {
-            var message = new YesNoMessage() { Message = info }.ToNetworkMessage(caster.Id);
-
-            return caster.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(message).AnsweredYes;
         }
     }
 }

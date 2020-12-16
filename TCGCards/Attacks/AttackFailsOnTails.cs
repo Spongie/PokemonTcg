@@ -8,6 +8,7 @@ namespace TCGCards.Attacks
     {
         private bool isOneTime;
         private StatusEffect effect = StatusEffect.None;
+        private int selfDamage;
 
         [DynamicInput("Applies status effect?", InputControl.Dropdown, typeof(StatusEffect))]
         public StatusEffect StatusEffect
@@ -32,6 +33,18 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Self damage on fail")]
+        public int SelfDamage
+        {
+            get { return selfDamage; }
+            set
+            {
+                selfDamage = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             if (game.FlipCoins(1) == 0)
@@ -39,6 +52,11 @@ namespace TCGCards.Attacks
                 if (isOneTime)
                 {
                     foreverDisabled = true;
+                }
+
+                if (SelfDamage > 0)
+                {
+                    owner.ActivePokemonCard.DealDamage(SelfDamage, game, owner.ActivePokemonCard, false);
                 }
 
                 game?.GameLog.AddMessage("The attack did nothing");
