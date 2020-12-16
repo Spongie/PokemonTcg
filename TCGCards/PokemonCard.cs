@@ -383,8 +383,9 @@ namespace TCGCards
         public List<Ability> GetAllActiveAbilities(GameField game, Player caster, Player opponent)
         {
             var abilities = new List<Ability>();
+            var areAbilitiesBlocked = game == null ? false : game.IsAbilitiesBlocked();
             
-            if (Ability != null && game != null && Ability.CanActivate(game, caster, opponent))
+            if (Ability != null && game != null && !areAbilitiesBlocked && Ability.CanActivate(game, caster, opponent))
             {
                 abilities.Add(Ability);
             }

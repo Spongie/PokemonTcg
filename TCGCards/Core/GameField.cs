@@ -945,6 +945,11 @@ namespace TCGCards.Core
             NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
         }
 
+        public bool IsAbilitiesBlocked()
+        {
+            return GetAllPassiveAbilities().Count(x => x.ModifierType == PassiveModifierType.StopAbilities) > 0;
+        }
+
         public List<PassiveAbility> GetAllPassiveAbilities()
         {
             var passiveAbilities = new List<PassiveAbility>(ActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
@@ -952,7 +957,7 @@ namespace TCGCards.Core
             passiveAbilities.AddRange(TemporaryPassiveAbilities);
 
             if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
-                return new List<PassiveAbility>();
+                return new List<PassiveAbility>() { passiveAbilities.First(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers) };
 
             var idOfStopper = passiveAbilities.FirstOrDefault(x => x.ModifierType == PassiveModifierType.StopAbilities);
 
