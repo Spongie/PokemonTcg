@@ -53,6 +53,11 @@ namespace Assets.Code.UI.DeckBuilder
                 deckName.text = CurrentDeck.Name;
             }
 
+            if (defaultFormatId == null)
+            {
+                defaultFormatId = MainMenu.MainMenu.formats.FirstOrDefault(f => f.Name == "Unlimited").Id;
+            }
+
             formatDropdown.options.Clear();
             int index = 0;
             int formatIndex = 1;
@@ -64,7 +69,7 @@ namespace Assets.Code.UI.DeckBuilder
                     text = format.Name
                 });
 
-                if (defaultFormatId != null && format.Id.Equals(defaultFormatId))
+                if (format.Id.Equals(defaultFormatId))
                 {
                     formatIndex = index;
                 }

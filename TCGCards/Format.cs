@@ -92,6 +92,7 @@ namespace TCGCards
                 Messages = new List<string>()
             };
 
+            var setCodes = new HashSet<string>(Sets.Select(x => x.SetCode));
             var checkedIds = new HashSet<NetworkId>();
 
             foreach (var cardId in deck.Cards.Where(c => !IgnoreCard(c)).Select(x => x.CardId).Distinct())
@@ -102,11 +103,16 @@ namespace TCGCards
                 }
 
                 var cards = deck.Cards.Count(x => x.CardId.Equals(cardId));
+                var restrictedCard = deck.Cards.FirstOrDefault(card => card.CardId.Equals(cardId));
 
                 if (cards > 4)
                 {
-                    var restrictedCard = deck.Cards.FirstOrDefault(card => card.CardId.Equals(cardId));
                     validationResult.Messages.Add($"You are only allowed up to 4 of {restrictedCard?.Name} but you have {cards}");
+                    validationResult.Result = false;
+                }
+                else if (setCodes.Count > 0 && !setCodes.Contains(restrictedCard.SetCode))
+                {
+                    validationResult.Messages.Add($"{restrictedCard.Name} from {restrictedCard.SetCode} is not available in this format");
                     validationResult.Result = false;
                 }
 

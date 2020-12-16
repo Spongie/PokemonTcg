@@ -28,6 +28,8 @@ namespace Assets.Code.UI.DeckBuilder
 
         private Dictionary<NetworkId, Card> cards = new Dictionary<NetworkId, Card>();
         private string lastFrameSearch = string.Empty;
+        public Dropdown FormatDropDown;
+        private Format currentFormat;
 
         [Header("Energy Toggles")]
         public Toggle FightingToggle;
@@ -134,13 +136,19 @@ namespace Assets.Code.UI.DeckBuilder
                 return;
             }
 
+            if (currentFormat == null)
+            {
+                currentFormat = MainMenu.MainMenu.formats.FirstOrDefault(f => f.Name == "Unlimited");
+            }
+
             var searchString = searchInput.text;
+            var setCodes = new HashSet<string>(currentFormat.Sets.Select(x => x.SetCode));
 
             if (string.IsNullOrWhiteSpace(searchString) && searchString.Trim() != lastFrameSearch)
             {
                 foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
                 {
-                    deckCard.gameObject.SetActive(IsToggleEnabledForCard(deckCard.card));
+                    deckCard.gameObject.SetActive(IsSetValid(setCodes, deckCard.card.SetCode) && IsToggleEnabledForCard(deckCard.card));
                 }
             }
 
@@ -160,9 +168,33 @@ namespace Assets.Code.UI.DeckBuilder
                 }
                 else
                 {
-                    deckCard.gameObject.SetActive(IsToggleEnabledForCard(deckCard.card));
+                    deckCard.gameObject.SetActive(IsSetValid(setCodes, deckCard.card.SetCode) && IsToggleEnabledForCard(deckCard.card));
                 }
             }
+        }
+
+        public void OnSelectedFormatValueChanged()
+        {
+            var selected = FormatDropDown.options[FormatDropDown.value].text;
+            var format = MainMenu.MainMenu.formats.First(x => x.Name == selected);
+
+            currentFormat = format;
+            var setCodes = new HashSet<string>(format.Sets.Select(x => x.SetCode));
+
+            foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
+            {
+                deckCard.gameObject.SetActive(IsSetValid(setCodes, deckCard.card.SetCode) && IsToggleEnabledForCard(deckCard.card));
+            }
+        }
+
+        private bool IsSetValid(HashSet<string> setCodes, string targetCode)
+        {
+            if (setCodes.Count == 0)
+            {
+                return true;
+            }
+
+            return setCodes.Contains(targetCode);
         }
 
         IEnumerator LoadCards()

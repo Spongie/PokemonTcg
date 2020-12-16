@@ -1354,7 +1354,18 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1070002067}
+        m_MethodName: OnSelectedFormatValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &211912277
 MonoBehaviour:
@@ -5499,6 +5510,7 @@ MonoBehaviour:
   pokemonToggle: {fileID: 2123219372}
   trainerToggle: {fileID: 1474351344}
   energyToggle: {fileID: 1064435576}
+  FormatDropDown: {fileID: 211912276}
   FightingToggle: {fileID: 1462864068}
   WaterToggle: {fileID: 902196005}
   FireToggle: {fileID: 1969381218}
