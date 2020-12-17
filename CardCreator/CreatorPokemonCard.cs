@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace CardCreator
 {
-    public class PokemonCard
+    public class CreatorPokemonCard
     {
         private const string templateHP = "{HP}";
         private const string templateName = "{NAME}";
@@ -21,12 +21,12 @@ namespace CardCreator
         private const string templateClassName = "{CLASSNAME}";
         private const string templateStage = "{STAGE}";
 
-        public PokemonCard()
+        public CreatorPokemonCard()
         {
             Attacks = new List<Attack>();
         }
 
-        public PokemonCard(PokemonTcgSdk.Models.PokemonCard card) : this()
+        public CreatorPokemonCard(PokemonTcgSdk.Models.PokemonCard card) : this()
         {
             Hp = int.Parse(card.Hp);
             Type = card.Types.First();

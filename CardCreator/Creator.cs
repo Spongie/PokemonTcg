@@ -47,7 +47,7 @@ namespace CardCreator
 
             foreach (var card in cards)
             {
-                var pokemon = new PokemonCard(card);
+                var pokemon = new CreatorPokemonCard(card);
                 Console.WriteLine("Processing " + pokemon.Name);
                 string code = pokemon.buildFromTemplate(namespaceName);
 

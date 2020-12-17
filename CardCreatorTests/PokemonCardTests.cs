@@ -9,7 +9,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void PokemonCardTest()
         {
-            var pokemon = new PokemonCard(new PokemonTcgSdk.Models.PokemonCard
+            var pokemon = new CreatorPokemonCard(new PokemonTcgSdk.Models.PokemonCard
             {
                 Hp = "60",
                 Name = "Psyduck",
@@ -35,7 +35,7 @@ namespace CardCreator.Tests
         [TestMethod()]
         public void PokemonCardTest_Stage1()
         {
-            var pokemon = new PokemonCard(new PokemonTcgSdk.Models.PokemonCard
+            var pokemon = new CreatorPokemonCard(new PokemonTcgSdk.Models.PokemonCard
             {
                 Hp = "60",
                 Name = "Psyduck",
