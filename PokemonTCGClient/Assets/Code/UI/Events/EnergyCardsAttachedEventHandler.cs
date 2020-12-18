@@ -17,62 +17,35 @@ namespace Assets.Code.UI.Events
         public void TriggerCardPlayer(EnergyCard card, PokemonCard attachedTo)
         {
             GameController.Instance.playerHand.RemoveCard(card);
-            StartCoroutine(DisplayCardEnumerator(card, attachedTo));
-        }
 
-        IEnumerator DisplayCardEnumerator(EnergyCard card, PokemonCard attachedTo)
-        {
             cardImage.sprite = null;
             cardImage.rectTransform.localScale = new Vector3(0.1f, 0.1f, 1);
             cardImage.color = new Color(cardImage.color.r, cardImage.color.g, cardImage.color.b, 0);
 
-            yield return loader.LoadSpriteRoutine(card, cardImage);
+            loader.LoadSprite(card, cardImage);
 
-            while (true)
+            cardImage.rectTransform.LeanAlpha(1.0f, 0.2f);
+            cardImage.rectTransform.LeanScale(new Vector3(1.0f, 1.0f, 1.0f), 0.25f).setOnComplete(() =>
             {
-                bool anyChanged = false;
-
-                if (cardImage.color.a < 1)
+                cardImage.rectTransform.LeanScale(new Vector3(0.1f, 0.1f, 0.1f), 0.2f).setDelay(0.25f).setOnComplete(() =>
                 {
-                    cardImage.color = new Color(cardImage.color.r, cardImage.color.g, cardImage.color.b, cardImage.color.a + 0.05f);
-                    anyChanged = true;
-                }
-                if (cardImage.rectTransform.localScale.x < 1)
-                {
-                    cardImage.rectTransform.localScale = new Vector3(cardImage.rectTransform.localScale.x + 0.05f, cardImage.rectTransform.localScale.y + 0.05f, 1);
-                    anyChanged = true;
-                }
+                    var target = GameController.Instance.GetCardRendererById(attachedTo.Id);
+                    var targetTransform = target.GetComponent<RectTransform>();
+                    cardImage.sprite = energyResourceManager.GetSpriteForEnergyCard(card);
+                    cardImage.color = new Color(cardImage.color.r, cardImage.color.g, cardImage.color.b, 0);
+                    var attachedEnergy = Instantiate(attachedEnergyPrefab, attachedParent.transform);
 
-                if (!anyChanged)
-                {
-                    break;
-                }
+                    var energyRectTransform = attachedEnergy.GetComponent<RectTransform>();
+                    energyRectTransform.localPosition = new Vector3(400, 0);
+                    attachedEnergy.transform.SetParent(targetTransform.transform);
+                    attachedEnergy.GetComponent<Image>().sprite = EnergyResourceManager.Instance.GetSpriteForEnergyCard(card);
 
-                yield return new WaitForSeconds(0.01f);
-            }
-
-            yield return new WaitForSeconds(0.25f);
-
-            while (cardImage.rectTransform.localScale.x > 0.1f)
-            {
-                cardImage.rectTransform.localScale = new Vector3(cardImage.rectTransform.localScale.x - 0.05f, cardImage.rectTransform.localScale.y - 0.05f, 1);
-                yield return new WaitForEndOfFrame();
-            }
-
-            var target = GameController.Instance.GetCardRendererById(attachedTo.Id);
-            var targetTransform = target.GetComponent<RectTransform>();
-            cardImage.sprite = energyResourceManager.GetSpriteForEnergyCard(card);
-            cardImage.color = new Color(cardImage.color.r, cardImage.color.g, cardImage.color.b, 0);
-            var attachedEnergy = Instantiate(attachedEnergyPrefab, attachedParent.transform);
-            
-            attachedEnergy.GetComponent<RectTransform>().localPosition = new Vector3(400, 0);
-            attachedEnergy.transform.SetParent(targetTransform.transform);
-            attachedEnergy.GetComponent<Image>().sprite = EnergyResourceManager.Instance.GetSpriteForEnergyCard(card);
-
-            attachedEnergy.LeanMoveLocal(new Vector3(20, -targetTransform.rect.height + 30, 0), 0.75f).setEaseOutCirc().setDestroyOnComplete(true).setOnComplete(() =>
-            {
-                target.insertAttachedEnergy(card);
-                GameEventHandler.Instance.EventCompleted();
+                    energyRectTransform.LeanMove(new Vector3(20 * (attachedTo.AttachedEnergy.Count + 1), -targetTransform.rect.height + 20, 0), 0.75f).setEaseOutCirc().setDestroyOnComplete(true).setOnComplete(() =>
+                    {
+                        target.insertAttachedEnergy(card);
+                        GameEventHandler.Instance.EventCompleted();
+                    });
+                });
             });
         }
     }

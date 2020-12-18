@@ -480,7 +480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2.35}
+  m_AnchoredPosition: {x: 0, y: 2.3500004}
   m_SizeDelta: {x: 0, y: -4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &625730370
@@ -725,6 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d195a4ae92a2bcb458292dd3112839bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonParent: {fileID: 1468448287}
   AddToBenchButton: {fileID: 1557203427}
   AttackButtonPrefab: {fileID: 7185379420301616365, guid: 914faf2bf92a83c4d8e2c73de30c812e,
     type: 3}
@@ -1527,7 +1528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2.35}
+  m_AnchoredPosition: {x: 0, y: 2.3500004}
   m_SizeDelta: {x: 0, y: -4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1726760435
@@ -1718,7 +1719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2.35}
+  m_AnchoredPosition: {x: 0, y: 2.3500004}
   m_SizeDelta: {x: 0, y: -4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1867687673
@@ -1874,7 +1875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2.35}
+  m_AnchoredPosition: {x: 0, y: 2.3500004}
   m_SizeDelta: {x: 0, y: -4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1875558879
@@ -2030,7 +2031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2.35}
+  m_AnchoredPosition: {x: 0, y: 2.3500004}
   m_SizeDelta: {x: 0, y: -4.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2032840180
@@ -2765,10 +2766,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a1499636a56174c8f2b83b0e58d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  art: {fileID: 0}
+  art: {fileID: 7423805535720219387}
   isSelected: 0
   overlay: {fileID: 771806385}
-  popupHandler: {fileID: 0}
+  popupHandler: {fileID: 818802946}
   DamageDisplay: {fileID: 7423805536557605657}
   attachedCardPanel: {fileID: 1307710352}
   PoisonIcon: {fileID: 7423805535185883559}

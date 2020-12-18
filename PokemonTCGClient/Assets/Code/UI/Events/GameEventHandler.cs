@@ -50,11 +50,11 @@ namespace Assets.Code.UI.Events
 
         private void Update()
         {
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    var x = new PokemonDiedEvent() { Pokemon = pokemon };
-            //    TriggerEvent(x);
-            //}
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                var x = new AttachedEnergyDiscardedEvent() { FromPokemonId = tempTarget.card.Id, DiscardedCard = ((PokemonCard)tempTarget.card).AttachedEnergy[0] };
+                TriggerEvent(x);
+            }
 
             if (currentEvent != null || eventQueue.Count == 0)
             {
