@@ -1,0 +1,130 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+namespace Assets.Code._2D.GameCard
+{
+    [RequireComponent(typeof(RectTransform))]
+    [RequireComponent(typeof(Canvas))]
+    public class Zoomer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    {
+        private const int cBottomLeftIndex = 0;
+        private const int cTopLeftIndex = 1;
+        private const int cTopRightIndex = 2;
+        private const int cBottomRightIndex = 3;
+
+        private RectTransform rectTransform;
+        private Canvas canvas;
+        [SerializeField]private bool isZooming;
+        [SerializeField]private bool isHovered;
+        public Vector3 zoomedScale = new Vector3(3.5f, 3.5f, 1f);
+
+        private void Start()
+        {
+            rectTransform = GetComponent<RectTransform>();
+            canvas = GetComponent<Canvas>();
+        }
+
+        private void Update()
+        {
+            if (!isHovered)
+            {
+                return;
+            }
+
+            if (Input.GetMouseButton(2))
+            {
+                if (!isZooming)
+                {
+                    BeginZoom();
+                }
+            }
+            else if (isZooming)
+            {
+                EndZoom();
+            }
+        }
+
+        private void BeginZoom()
+        {
+            isZooming = true;
+            canvas.sortingOrder = 999;
+
+            SetZoomPivot();
+
+            rectTransform.LeanScale(zoomedScale, 0.15f);
+        }
+
+        private void SetZoomPivot()
+        {
+            rectTransform.localScale = zoomedScale;
+            var corners = new Vector3[4];
+            rectTransform.GetWorldCorners(corners);
+            var screenRect = new Rect(0, 0, Screen.width, Screen.height);
+
+            if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cTopLeftIndex])))
+            {
+                if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cTopRightIndex])))
+                {
+                    rectTransform.pivot = new Vector2(0.5f, 1);
+                }
+                else
+                {
+                    rectTransform.pivot = new Vector2(0, 0);
+                }
+            }
+            else if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cTopRightIndex])))
+            {
+                rectTransform.pivot = new Vector2(1, 0);
+            }
+            else if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cBottomLeftIndex])))
+            {
+                rectTransform.pivot = new Vector2(0.5f, 0);
+            }
+            else if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cBottomRightIndex])))
+            {
+                rectTransform.pivot = new Vector2(0.5f, 0);
+            }
+            else
+            {
+                rectTransform.pivot = new Vector2(0.5f, 0.5f);
+            }
+
+            rectTransform.localScale = new Vector3(1, 1, 1);
+        }
+
+        private void EndZoom()
+        {
+            isZooming = false;
+            rectTransform.LeanScale(new Vector3(1, 1, 1), 0.1f).setOnComplete(() =>
+              {
+                 canvas.sortingOrder = 10;
+              });
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            isHovered = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            isHovered = false;
+            EndZoom();
+        }
+
+        public void SetPivotForHand()
+        {
+            rectTransform.pivot = new Vector2(0.5f, 0);
+        }
+
+        public void SetPivotForGame()
+        {
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        }
+    }
+}
