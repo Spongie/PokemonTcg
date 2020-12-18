@@ -11,29 +11,33 @@ namespace Assets.Code.UI.Gameplay
     public class CardPopupHandler : MonoBehaviour
     {
         private Card card;
+        private List<GameObject> attackButtons;
+
+        public Transform buttonParent;
+
+        [Header("Buttons")]
         public GameObject AddToBenchButton;
         public GameObject AttackButtonPrefab;
         public GameObject ActivateAbilityButton;
         public GameObject EvolveButton;
         public GameObject RetreatButton;
-        private List<GameObject> attackButtons;
 
         public void Init(Card card)
         {
             attackButtons = new List<GameObject>();
             this.card = card;
             var player = GameController.Instance.Player ?? new Player() { ActivePokemonCard = (PokemonCard)card };
-            AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < 6 && player.Hand.Contains(card) && ((PokemonCard)card).Stage == 0);
+            AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < GameField.BenchMaxSize && player.Hand.Contains(card) && ((PokemonCard)card).Stage == 0);
 
             if (card is PokemonCard)
             {
                 var pokemonCard = (PokemonCard)card;
 
-                if (GameController.Instance.Player?.ActivePokemonCard != null && GameController.Instance.Player.ActivePokemonCard.Id.Equals(card.Id))
+                if (player?.ActivePokemonCard != null && player.ActivePokemonCard.Id.Equals(card.Id))
                 {
                     foreach (var attack in pokemonCard.Attacks.Reverse())
                     {
-                        var attackButton = Instantiate(AttackButtonPrefab, transform);
+                        var attackButton = Instantiate(AttackButtonPrefab, buttonParent);
                         attackButton.GetComponent<AttackButton>().Init(attack);
                         attackButton.gameObject.transform.SetAsFirstSibling();
                         attackButtons.Add(attackButton);
@@ -46,7 +50,7 @@ namespace Assets.Code.UI.Gameplay
                     RetreatButton.SetActive(false);
                 }
 
-                EvolveButton.SetActive(pokemonCard.Stage >= 1 && GameController.Instance.Player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
+                EvolveButton.SetActive(pokemonCard.Stage >= 1 && player.Hand.Any(x => x.Id.Equals(pokemonCard.Id)));
 
                 var ability = pokemonCard.Ability;
 
@@ -59,6 +63,7 @@ namespace Assets.Code.UI.Gameplay
                 {
                     ActivateAbilityButton.SetActive(true);
                     var abilityButton = ActivateAbilityButton.GetComponent<AbilityButton>();
+                    abilityButton.gameObject.transform.SetAsFirstSibling();
                     abilityButton.Init(ability);
                 }
                 else

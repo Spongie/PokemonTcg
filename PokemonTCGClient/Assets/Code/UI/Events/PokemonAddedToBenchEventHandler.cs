@@ -15,12 +15,11 @@ namespace Assets.Code.UI.Events
             GameController.Instance.playerHand.RemoveCard(addedToBenchEvent.Pokemon);
             bool isMyPokemon = addedToBenchEvent.Player.Equals(GameController.Instance.myId);
             GameObject targetParent = isMyPokemon ? PlayerBench : OpponentBench;
-            ZoomMode zoomMode = isMyPokemon ? ZoomMode.FromBottom : ZoomMode.FromTop;
 
             var spawnedObject = Instantiate(CardPrefab, transform);
             var rectTransform = spawnedObject.GetComponent<RectTransform>();
             var renderer = spawnedObject.GetComponent<CardRenderer>();
-            renderer.SetCard(addedToBenchEvent.Pokemon, zoomMode, true);
+            renderer.SetCard(addedToBenchEvent.Pokemon, true);
             
             GameController.Instance.AddCard(renderer);
             GameController.Instance.Player.Hand.Remove(addedToBenchEvent.Pokemon);

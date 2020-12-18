@@ -10,7 +10,7 @@ namespace Assets.Code.UI.Events
         {
             GameController.Instance.playerHand.RemoveCard(pokemonEvolvedEvent.NewPokemonCard);
             var targetPokemon = GameController.Instance.GetCardRendererById(pokemonEvolvedEvent.TargetPokemonId);
-            targetPokemon.SetCard(pokemonEvolvedEvent.NewPokemonCard, ZoomMode.Center, false);
+            targetPokemon.SetCard(pokemonEvolvedEvent.NewPokemonCard, false);
             targetPokemon.SpawnEvolveEffect();
             StartCoroutine(JustWaitForComplete());
         }

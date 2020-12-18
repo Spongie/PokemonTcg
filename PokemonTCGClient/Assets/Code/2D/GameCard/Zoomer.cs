@@ -31,6 +31,7 @@ namespace Assets.Code._2D.GameCard
             rectTransform = GetComponent<RectTransform>();
             canvas = GetComponent<Canvas>();
             originalSortorder = canvas.sortingOrder;
+            oldPivot = rectTransform.pivot;
         }
 
         private void Update()

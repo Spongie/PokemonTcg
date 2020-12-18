@@ -35,11 +35,10 @@ namespace Assets.Code.UI.Events
             NetworkId myId = GameController.Instance.myId;
             var isMySwitch = pokemonCard.Owner.Id.Equals(myId);
             var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
-            var zoomMode = isMySwitch ? ZoomMode.Center : ZoomMode.FromTop;
 
             var gameObject = Instantiate(CardPrefab, activeParent);
             var renderer = gameObject.GetComponent<CardRenderer>();
-            renderer.SetCard(pokemonCard, zoomMode, true);
+            renderer.SetCard(pokemonCard, true);
             GameController.Instance.AddCard(renderer);
 
             gameObject.GetComponent<RectTransform>().LeanSize(new Vector2(200, 270), 1.5f);
@@ -56,18 +55,15 @@ namespace Assets.Code.UI.Events
             }
 
             var newActive = GameController.Instance.GetCardRendererById(activeEvent.NewActivePokemonId);
-            ZoomMode oldZoom = newActive.GetZoomMode();
             NetworkId myId = GameController.Instance.myId;
             var isMySwitch = newActive.card.Owner.Id.Equals(myId);
             var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
             var benchParent = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
 
             var oldPosition = newActive.GetComponent<RectTransform>().localPosition;
-            var zoomMode = isMySwitch ? ZoomMode.Center : ZoomMode.FromTop;
             newActive.transform.SetParent(activeParent, true);
             newActive.GetComponent<RectTransform>().LeanSize(new Vector2(200, 270), 1.5f);
             newActive.GetComponent<RectTransform>().LeanMove(Vector3.zero, 1.5f).setEaseInCubic();
-            newActive.SetZoomMode(zoomMode);
             CardRenderer oldActive = null;
 
             if (activeEvent.ReplacedPokemonId != null)
@@ -79,7 +75,6 @@ namespace Assets.Code.UI.Events
                 oldActive.transform.SetParent(benchParent.transform, true);
                 oldActive.GetComponent<RectTransform>().LeanSize(oldSize, 1.5f);
                 oldActive.SetIsBenched();
-                oldActive.SetZoomMode(oldZoom);
                 oldActive.EnableStatusIcons();
                 oldActive.gameObject.LeanMoveLocal(oldPosition, 1.5f).setEaseInCubic().setOnComplete(() => 
                 {

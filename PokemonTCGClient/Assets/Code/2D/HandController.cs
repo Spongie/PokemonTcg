@@ -1,5 +1,5 @@
-﻿using NetworkingCore;
-using System;
+﻿using Assets.Code._2D.GameCard;
+using NetworkingCore;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards;
@@ -33,7 +33,8 @@ namespace Assets.Code._2D
             {
                 card.IsRevealed = isPlayerHand;
                 var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
-                spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom, false);
+                spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, false);
+                spawnedCard.GetComponent<Zoomer>().SetPivotForHand();
                 index++;
                 idObjectCache.Add(card.Id, spawnedCard);
                 GameController.Instance.AddCard(spawnedCard.GetComponent<CardRenderer>());
@@ -54,9 +55,10 @@ namespace Assets.Code._2D
         {
             card.IsRevealed = isPlayerHand;
             var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
-            spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, ZoomMode.FromBottom, false);
+            spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, false);
             idObjectCache.Add(card.Id, spawnedCard);
             GameController.Instance.AddCard(spawnedCard.GetComponent<CardRenderer>());
+            spawnedCard.GetComponent<Zoomer>().SetPivotForHand();
         }
 
         public void FadeOutCards(IEnumerable<Card> cards)

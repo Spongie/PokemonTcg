@@ -49,7 +49,7 @@ namespace Assets.Code.UI.Game
                 if (deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {
                     var spawnedCard = Instantiate(previewCard, contentObject.transform);
-                    spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None, false, true);
+                    spawnedCard.GetComponent<CardRenderer>().SetCard(card, false, true);
                     availableCards.Add(card.Id);
                 }
             }
@@ -61,7 +61,7 @@ namespace Assets.Code.UI.Game
                     var spawnedCard = Instantiate(previewCard, contentObject.transform);
                     var cardRenderer = spawnedCard.GetComponent<CardRenderer>();
                     cardRenderer.FadeOut();
-                    cardRenderer.SetCard(card, ZoomMode.None, false, true);
+                    cardRenderer.SetCard(card, false, true);
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Assets.Code.UI.Game
             foreach (var card in cards)
             {
                 var spawnedCard = Instantiate(previewCard, contentObject.transform);
-                spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None, false, true);
+                spawnedCard.GetComponent<CardRenderer>().SetCard(card, false, true);
                 availableCards.Add(card.Id);
             }
         }
@@ -96,7 +96,7 @@ namespace Assets.Code.UI.Game
             foreach (var card in discardPile)
             {
                 var spawnedCard = Instantiate(previewCard, contentObject.transform);
-                spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None, false, true);
+                spawnedCard.GetComponent<CardRenderer>().SetCard(card, false, true);
             }
         }
 
@@ -117,7 +117,7 @@ namespace Assets.Code.UI.Game
             foreach (var card in cards)
             {
                 var spawnedCard = Instantiate(previewCard, contentObject.transform);
-                spawnedCard.GetComponent<CardRenderer>().SetCard(card, ZoomMode.None, false, true);
+                spawnedCard.GetComponent<CardRenderer>().SetCard(card, false, true);
                 availableCards.Add(card.Id);
             }
         }

@@ -142,8 +142,6 @@ namespace Assets.Code.UI.DeckBuilder
             deckCard.Init(card);
             deckCard.isInDeck = true;
 
-            spawnedObject.GetComponentInChildren<CardZoomer>().zoomMode = ZoomMode.FromTopLeft;
-
             UpdateCountInfo();
         }
 

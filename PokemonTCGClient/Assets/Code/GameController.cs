@@ -923,11 +923,11 @@ namespace Assets.Code
 
             playerHand.SetHand(me.Hand);
 
-            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard, ZoomMode.Center);
-            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard, ZoomMode.FromTop);
+            SetActivePokemon(playerActivePokemon, me.ActivePokemonCard);
+            SetActivePokemon(opponentActivePokemon, opponent.ActivePokemonCard);
 
-            SetBenchedPokemon(playerBench, me.BenchedPokemon, ZoomMode.FromBottom);
-            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon, ZoomMode.FromTop);
+            SetBenchedPokemon(playerBench, me.BenchedPokemon);
+            SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
 
             EnableButtons();
         }
@@ -952,7 +952,7 @@ namespace Assets.Code
 
             if (OpponentPlayer != null && OpponentPlayer.ActivePokemonCard != null)
             {
-                SetActivePokemon(opponentActivePokemon, OpponentPlayer.ActivePokemonCard, ZoomMode.FromTop);
+                SetActivePokemon(opponentActivePokemon, OpponentPlayer.ActivePokemonCard);
             }
 
             Player.DiscardPile = gameInfo.Me.CardsInDiscard;
@@ -963,7 +963,7 @@ namespace Assets.Code
 
             if (Player != null && Player.ActivePokemonCard != null)
             {
-                SetActivePokemon(playerActivePokemon, Player.ActivePokemonCard, ZoomMode.Center);
+                SetActivePokemon(playerActivePokemon, Player.ActivePokemonCard);
             }
 
             IsMyTurn = gameInfo.ActivePlayer.Equals(myId);
@@ -982,7 +982,7 @@ namespace Assets.Code
             SetInfoAndEnableButtons();
         }
 
-        private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons, ZoomMode zoomMode)
+        private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)
         {
             parent.DestroyAllChildren();
 
@@ -991,13 +991,13 @@ namespace Assets.Code
                 var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
                 var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-                controller.SetCard(pokemon, zoomMode, true);
+                controller.SetCard(pokemon, true);
                 controller.SetIsBenched();
                 AddCard(controller);
             }
         }
 
-        private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard, ZoomMode zoomMode)
+        private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
         {
             if (pokemonCard == null)
             {
@@ -1009,7 +1009,7 @@ namespace Assets.Code
             var spawnedCard = Instantiate(cardPrefab, parent.transform);
 
             var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-            controller.SetCard(pokemonCard, zoomMode, true);
+            controller.SetCard(pokemonCard, true);
             controller.SetIsActivePokemon();
             AddCard(controller);
         }
