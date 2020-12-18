@@ -24,6 +24,14 @@
                     <Label Content="Usage limit" MinWidth="80"/>
                     <TextBox Text="{Binding Usages}"/>
                 </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Usable while active" MinWidth="80"/>
+                    <CheckBox IsChecked="{Binding UsableWhileActive}"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Usable while benched" MinWidth="80"/>
+                    <CheckBox IsChecked="{Binding UsableWhileBenched}"/>
+                </DockPanel>
                 <local:DynamicInputControl DataContext="{Binding }" VerticalAlignment="Stretch">
 
                 </local:DynamicInputControl>

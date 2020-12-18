@@ -17,6 +17,8 @@ namespace TCGCards.Core
         private TriggerType triggerType;
         private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
         private IEffect selectedAbilityEffect;
+        private bool usableWhileActive = true;
+        private bool usableWhileBenched = true;
 
         public Ability():this(null)
         {
@@ -116,6 +118,27 @@ namespace TCGCards.Core
             }
         }
 
+        public bool UsableWhileActive
+        {
+            get { return usableWhileActive; }
+            set
+            {
+                usableWhileActive = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UsableWhileBenched
+        {
+            get { return usableWhileBenched; }
+            set
+            {
+                usableWhileBenched = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public NetworkId Id { get; set; }
         public int UsedTimes { get; set; }
         public Card Source { get; set; }
@@ -140,6 +163,15 @@ namespace TCGCards.Core
 
         public virtual bool CanActivate(GameField game, Player caster, Player opponent)
         {
+            if (!usableWhileActive && caster.ActivePokemonCard == PokemonOwner)
+            {
+                return false;
+            }
+            else if (!usableWhileBenched && caster.BenchedPokemon.Contains(PokemonOwner))
+            {
+                return false;
+            }
+            
             return !PokemonOwner.AbilityDisabled 
                 && !PokemonOwner.IsAsleep 
                 && !PokemonOwner.IsConfused 

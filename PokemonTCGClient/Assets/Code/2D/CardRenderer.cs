@@ -27,7 +27,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     public bool isSelected;
     public GameObject overlay;
     public CardPopupHandler popupHandler;
-    public GameObject DamageDisplay;
+    public TextMeshProUGUI DamageDisplay;
     public Transform AttachmentParent;
     public GameObject AttachmentPrefab;
 
@@ -145,12 +145,11 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
             if (pokemon.DamageCounters > 0)
             {
-                DamageDisplay.SetActive(true);
-                DamageDisplay.GetComponentInChildren<TextMeshProUGUI>().text = pokemon.DamageCounters.ToString();
+                DamageDisplay.text = pokemon.DamageCounters.ToString();
             }
             else
             {
-                DamageDisplay.SetActive(false);
+                DamageDisplay.text = string.Empty;
             }
 
             EnableStatusIcons();

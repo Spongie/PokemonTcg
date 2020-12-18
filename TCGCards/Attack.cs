@@ -142,12 +142,11 @@ namespace TCGCards
 
                 if (energy.EnergyType == EnergyTypes.All && energy.Amount == -1)
                 {
-                    foreach (var card in owner.ActivePokemonCard.AttachedEnergy)
+                    foreach (var card in new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy))
                     {
-                        owner.DiscardPile.Add(card);
+                        owner.ActivePokemonCard.DiscardEnergyCard(card, game);
                     }
 
-                    owner.ActivePokemonCard.AttachedEnergy.Clear();
                     return;
                 }
                 else if (energy.EnergyType == EnergyTypes.All)

@@ -10,6 +10,7 @@ namespace TCGCards.Core.Abilities
     public class MoveEnergyAbility : Ability
     {
         private EnergyTypes energyType;
+        private bool attachToSelf;
 
         public MoveEnergyAbility() : this(null)
         {
@@ -32,43 +33,64 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        [DynamicInput("Attach to self", InputControl.Boolean)]
+        public bool AttachToSelf
+        {
+            get { return attachToSelf; }
+            set
+            {
+                attachToSelf = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
             var pokemons = PokemonOwner.Owner.GetAllPokemonCards().ToList();
-            return base.CanActivate(game, caster, opponent) && pokemons.Count >= 2 && pokemons.Any(p => p.AttachedEnergy.Any(e => EnergyType == EnergyTypes.All || e.EnergyType == EnergyType));
+            int targetCount = 2;
+
+            if (attachToSelf)
+            {
+                pokemons.Remove(PokemonOwner);
+                targetCount = 1;
+            }
+
+            return base.CanActivate(game, caster, opponent) && pokemons.Count >= targetCount && pokemons.Any(p => p.AttachedEnergy.Any(e => EnergyType == EnergyTypes.All || e.EnergyType == EnergyType));
         }
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            PokemonCard selectedPokemon = null;
+            PokemonCard sourcePokemon = null;
             do
             {
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourPokemonMessage("Select a pokemon to move energy from").ToNetworkMessage(NetworkId.Generate()));
                 var selectedId = response.Cards.First();
 
-                foreach (var pokemon in owner.GetAllPokemonCards())
-                {
-                    if (pokemon.Id.Equals(selectedId))
-                    {
-                        selectedPokemon = pokemon;
-                        break;
-                    }
-                }
+                sourcePokemon = game.Cards[selectedId] as PokemonCard;
 
-            } while (selectedPokemon == null || selectedPokemon.AttachedEnergy.Count(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType) == 0);
+            } while (sourcePokemon == null || sourcePokemon.Id.Equals(PokemonOwner.Id) || sourcePokemon.AttachedEnergy.Count(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType) == 0);
             
-            var newPokemonResponse = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourPokemonMessage("Select pokemon to receive the energy").ToNetworkMessage(NetworkId.Generate()));
-            PokemonCard newPokemon = (PokemonCard)game.Cards[newPokemonResponse.Cards.First()];
+            PokemonCard newPokemon;
 
-            if (selectedPokemon.AttachedEnergy.Count == 1)
+            if (attachToSelf)
             {
-                var energyCard = selectedPokemon.AttachedEnergy.First();
-                selectedPokemon.AttachedEnergy.Clear();
+                newPokemon = PokemonOwner;
+            }
+            else
+            {
+                var newPokemonResponse = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourPokemonMessage("Select pokemon to receive the energy").ToNetworkMessage(NetworkId.Generate()));
+                newPokemon = (PokemonCard)game.Cards[newPokemonResponse.Cards.First()];
+            }
+
+            if (sourcePokemon.AttachedEnergy.Count == 1)
+            {
+                var energyCard = sourcePokemon.AttachedEnergy.First();
+                sourcePokemon.AttachedEnergy.Clear();
 
                 game?.SendEventToPlayers(new AttachedEnergyDiscardedEvent
                 {
-                    FromPokemonId = selectedPokemon.Id,
+                    FromPokemonId = sourcePokemon.Id,
                     DiscardedCard = energyCard
                 });
 
@@ -76,13 +98,13 @@ namespace TCGCards.Core.Abilities
             }
             else
             {
-                var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(selectedPokemon.AttachedEnergy.Where(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType).OfType<Card>().ToList(), 1).ToNetworkMessage(owner.Id));
-                var energyCard = selectedPokemon.AttachedEnergy.FirstOrDefault(card => card.Id.Equals(selectedEnergyId.Cards.First()));
+                var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(sourcePokemon.AttachedEnergy.Where(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType).OfType<Card>().ToList(), 1).ToNetworkMessage(owner.Id));
+                var energyCard = sourcePokemon.AttachedEnergy.FirstOrDefault(card => card.Id.Equals(selectedEnergyId.Cards.First()));
 
-                selectedPokemon.AttachedEnergy.Remove(energyCard);
+                sourcePokemon.AttachedEnergy.Remove(energyCard);
                 game?.SendEventToPlayers(new AttachedEnergyDiscardedEvent
                 {
-                    FromPokemonId = selectedPokemon.Id,
+                    FromPokemonId = sourcePokemon.Id,
                     DiscardedCard = energyCard
                 });
                 newPokemon.AttachEnergy(energyCard, game);
