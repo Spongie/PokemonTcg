@@ -18,10 +18,16 @@ namespace Assets.Code.UI.Events
             var cardRenderer = GameController.Instance.GetCardRendererById(attackingPokemon.Id);
             var startPos = cardRenderer.GetComponent<RectTransform>().position;
             var targetPos = GameController.Instance.GetCardRendererById(defending.Id).GetComponent<RectTransform>().position;
+            var canvas = cardRenderer.GetComponent<Canvas>();
+            canvas.sortingOrder += 1;
 
             cardRenderer.gameObject.LeanMove(targetPos, 0.5f).setEaseInCubic().setOnComplete(() =>
             {
-                cardRenderer.gameObject.LeanMove(startPos, 0.4f).setEaseInOutCubic();
+                cardRenderer.gameObject.LeanMove(startPos, 0.4f).setEaseInOutCubic().setOnComplete(() =>
+                {
+                    canvas.sortingOrder -= 1;
+                });
+
                 GameEventHandler.Instance.EventCompleted();
             });
         }
