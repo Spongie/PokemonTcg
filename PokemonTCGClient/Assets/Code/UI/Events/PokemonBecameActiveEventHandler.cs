@@ -40,9 +40,6 @@ namespace Assets.Code.UI.Events
             var renderer = gameObject.GetComponent<CardRenderer>();
             renderer.SetCard(pokemonCard, true);
             GameController.Instance.AddCard(renderer);
-
-            gameObject.GetComponent<RectTransform>().LeanSize(new Vector2(200, 270), 1.5f);
-            gameObject.GetComponent<RectTransform>().LeanMove(Vector3.zero, 1.5f).setEaseInCubic();
             GameEventHandler.Instance.EventCompleted();
         }
 
@@ -62,8 +59,8 @@ namespace Assets.Code.UI.Events
 
             var oldPosition = newActive.GetComponent<RectTransform>().localPosition;
             newActive.transform.SetParent(activeParent, true);
-            newActive.GetComponent<RectTransform>().LeanSize(new Vector2(200, 270), 1.5f);
             newActive.GetComponent<RectTransform>().LeanMove(Vector3.zero, 1.5f).setEaseInCubic();
+            
             CardRenderer oldActive = null;
 
             if (activeEvent.ReplacedPokemonId != null)
@@ -73,10 +70,9 @@ namespace Assets.Code.UI.Events
                 ((PokemonCard)oldActive.card).ClearStatusEffects();
                 oldActive.tag = "Ignore";
                 oldActive.transform.SetParent(benchParent.transform, true);
-                oldActive.GetComponent<RectTransform>().LeanSize(oldSize, 1.5f);
                 oldActive.SetIsBenched();
                 oldActive.EnableStatusIcons();
-                oldActive.gameObject.LeanMoveLocal(oldPosition, 1.5f).setEaseInCubic().setOnComplete(() => 
+                oldActive.gameObject.LeanMove(Vector3.zero, 1.5f).setEaseInCubic().setOnComplete(() => 
                 {
                     newActive.SetIsActivePokemon();
                     oldActive.tag = "Untagged";
