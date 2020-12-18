@@ -10,7 +10,7 @@ namespace Assets.Code._2D.GameCard
 {
     [RequireComponent(typeof(RectTransform))]
     [RequireComponent(typeof(Canvas))]
-    public class Zoomer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class Zoomer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
         private const int cBottomLeftIndex = 0;
         private const int cTopLeftIndex = 1;
@@ -19,14 +19,18 @@ namespace Assets.Code._2D.GameCard
 
         private RectTransform rectTransform;
         private Canvas canvas;
+        private int originalSortorder;
+        private Vector2 oldPivot;
         [SerializeField]private bool isZooming;
         [SerializeField]private bool isHovered;
+
         public Vector3 zoomedScale = new Vector3(3.5f, 3.5f, 1f);
 
         private void Start()
         {
             rectTransform = GetComponent<RectTransform>();
             canvas = GetComponent<Canvas>();
+            originalSortorder = canvas.sortingOrder;
         }
 
         private void Update()
@@ -40,7 +44,7 @@ namespace Assets.Code._2D.GameCard
             {
                 if (!isZooming)
                 {
-                    BeginZoom();
+                    //BeginZoom();
                 }
             }
             else if (isZooming)
@@ -53,6 +57,7 @@ namespace Assets.Code._2D.GameCard
         {
             isZooming = true;
             canvas.sortingOrder = 999;
+            oldPivot = rectTransform.pivot;
 
             SetZoomPivot();
 
@@ -102,12 +107,18 @@ namespace Assets.Code._2D.GameCard
             isZooming = false;
             rectTransform.LeanScale(new Vector3(1, 1, 1), 0.1f).setOnComplete(() =>
               {
-                 canvas.sortingOrder = 10;
+                  canvas.sortingOrder = originalSortorder;
+                  rectTransform.pivot = oldPivot;
               });
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (eventData.pointerEnter != gameObject)
+            {
+                return;
+            }    
+
             isHovered = true;
         }
 
@@ -125,6 +136,19 @@ namespace Assets.Code._2D.GameCard
         public void SetPivotForGame()
         {
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Middle)
+            {
+                BeginZoom();
+            }
         }
     }
 }

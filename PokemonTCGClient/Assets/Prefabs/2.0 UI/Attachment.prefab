@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6643887685953208913}
   - component: {fileID: 8733627828352703467}
   - component: {fileID: 2599579965392925209}
-  - component: {fileID: 7998296089585400287}
   - component: {fileID: 5342506396435767206}
   - component: {fileID: 7958270368562919083}
+  - component: {fileID: 7077407511604168228}
   m_Layer: 5
   m_Name: Attachment
   m_TagString: Untagged
@@ -35,10 +35,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: 0}
-  m_SizeDelta: {x: 200, y: 270}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8733627828352703467
 CanvasRenderer:
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 98b13738afdfd7e4594712ddaa33691c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cdcfa9f5825074541b5a62cddfe2dc52, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -76,22 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7998296089585400287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8025881960760544062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b91313fc3d3614eafc66b62290e931, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoomMode: 0
-  extraX: 0
-  hovered: 0
-  zooming: 0
 --- !u!223 &5342506396435767206
 Canvas:
   m_ObjectHideFlags: 0
@@ -130,3 +114,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7077407511604168228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025881960760544062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6031cf623c90c934db5a7baef560f7ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isZooming: 0
+  isHovered: 0
+  zoomedScale: {x: 3.5, y: 3.5, z: 1}
