@@ -31,8 +31,8 @@ namespace Assets.Code
         public HandController playerHand;
         public GameObject selectAttackPanel;
         public GameObject attackButtonPrefab;
-        public GameObject playerBench;
-        public GameObject opponentBench;
+        public BenchController playerBench;
+        public BenchController opponentBench;
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
         public GameObject selectColorPanel;
@@ -982,18 +982,27 @@ namespace Assets.Code
             SetInfoAndEnableButtons();
         }
 
-        private void SetBenchedPokemon(GameObject parent, IEnumerable<PokemonCard> pokemons)
+        private void SetBenchedPokemon(BenchController bench, IEnumerable<PokemonCard> pokemons)
         {
-            parent.DestroyAllChildren();
+            int index = 0;
+            bench.ClearSlots();
 
             foreach (var pokemon in pokemons)
             {
-                var spawnedCard = Instantiate(cardPrefab, parent.transform);
+                if (pokemon == null)
+                {
+                    index++;
+                    continue;
+                }
+
+                var slot = bench.GetSlot(index);
+                var spawnedCard = Instantiate(cardPrefab, slot.transform);
 
                 var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
                 controller.SetCard(pokemon, true);
                 controller.SetIsBenched();
                 AddCard(controller);
+                index++;
             }
         }
 

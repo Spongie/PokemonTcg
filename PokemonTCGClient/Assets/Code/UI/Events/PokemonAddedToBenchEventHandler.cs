@@ -1,4 +1,5 @@
-﻿using Assets.Code.UI.Gameplay;
+﻿using Assets.Code._2D;
+using Assets.Code.UI.Gameplay;
 using TCGCards.Core.GameEvents;
 using UnityEngine;
 
@@ -7,14 +8,18 @@ namespace Assets.Code.UI.Events
     public class PokemonAddedToBenchEventHandler : MonoBehaviour
     {
         public GameObject CardPrefab;
-        public GameObject OpponentBench;
-        public GameObject PlayerBench;
+        public BenchController OpponentBench;
+        public BenchController PlayerBench;
 
         public void Trigger(PokemonAddedToBenchEvent addedToBenchEvent)
         {
             GameController.Instance.playerHand.RemoveCard(addedToBenchEvent.Pokemon);
             bool isMyPokemon = addedToBenchEvent.Player.Equals(GameController.Instance.myId);
-            GameObject targetParent = isMyPokemon ? PlayerBench : OpponentBench;
+            BenchController targetBench = isMyPokemon ? PlayerBench : OpponentBench;
+            var player = isMyPokemon ? GameController.Instance.Player : GameController.Instance.OpponentPlayer;
+
+            int index = player.BenchedPokemon.IndexOf(addedToBenchEvent.Pokemon);
+            var targetParent = isMyPokemon ? PlayerBench.GetSlot(index) : OpponentBench.GetSlot(index);
 
             var spawnedObject = Instantiate(CardPrefab, transform);
             var rectTransform = spawnedObject.GetComponent<RectTransform>();
@@ -28,14 +33,12 @@ namespace Assets.Code.UI.Events
             var oldSortorder = canvas.sortingOrder;
             canvas.sortingOrder = 9999;
 
-            var targetPosition = targetParent.GetComponent<CardZone>().GetNextChildPosition();
-
             rectTransform.localScale = new Vector3(2, 2, 1);
             rectTransform.localPosition = new Vector3(-50, 270, 0);
             spawnedObject.tag = "Ignore";
             rectTransform.transform.SetParent(targetParent.transform);
 
-            rectTransform.LeanMoveLocal(targetPosition, 0.5f).setDelay(0.5f);
+            rectTransform.LeanMove(Vector3.zero, 0.5f).setDelay(0.5f);
             rectTransform.LeanScale(new Vector3(1, 1, 1), 0.25f).setDelay(0.55f).setOnComplete(() =>
             {
                 spawnedObject.tag = "Untagged";

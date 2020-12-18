@@ -352,9 +352,9 @@ MonoBehaviour:
   CardPrefab: {fileID: 4089488600536689639, guid: 463e7cea3b78c9b49b963b202435dea7,
     type: 3}
   PlayerActivePokemonTransform: {fileID: 876039499}
-  PlayerBenchedPokemonZone: {fileID: 2049043059}
+  PlayerBenchedPokemonZone: {fileID: 0}
   OpponentActivePokemonTransform: {fileID: 234891729}
-  OpponentBenchedPokemonZone: {fileID: 1356239565}
+  OpponentBenchedPokemonZone: {fileID: 0}
   TempActive: {fileID: 0}
   TempBench: {fileID: 0}
 --- !u!224 &122100024 stripped
@@ -516,10 +516,10 @@ MonoBehaviour:
   SpecialState: 0
   playerHand: {fileID: 2048005963}
   selectAttackPanel: {fileID: 1810786684}
-  attackButtonPrefab: {fileID: 1923161883637468530, guid: 337f6a1b694312246ae17aca023d05cc,
+  attackButtonPrefab: {fileID: 7769122886726173811, guid: 8fd33ce5b8df6604babd2c5e496e6975,
     type: 3}
-  playerBench: {fileID: 2049043057}
-  opponentBench: {fileID: 1356239563}
+  playerBench: {fileID: 2049043059}
+  opponentBench: {fileID: 1356239565}
   playerActivePokemon: {fileID: 876039498}
   opponentActivePokemon: {fileID: 234891728}
   selectColorPanel: {fileID: 1366457101}
@@ -6583,18 +6583,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356239563}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa70f0925b46407458bcbeeeb613870c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ba219486bb522c46bc47f273b779d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Centered: 1
-  maxCards: 0
-  width: 132
-  height: 200
-  yOffset: -2
-  overrideHeight: 1
-  adjustZoneWidth: 0
+  Slot1: {fileID: 762158173}
+  Slot2: {fileID: 1850778633}
+  Slot3: {fileID: 1243914489}
+  Slot4: {fileID: 1757598464}
+  Slot5: {fileID: 1008716646}
 --- !u!114 &1356239566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9036,8 +9034,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardPrefab: {fileID: 4089488600536689639, guid: 463e7cea3b78c9b49b963b202435dea7,
     type: 3}
-  OpponentBench: {fileID: 1356239563}
-  PlayerBench: {fileID: 2049043057}
+  OpponentBench: {fileID: 1356239565}
+  PlayerBench: {fileID: 2049043059}
 --- !u!1 &1746458562
 GameObject:
   m_ObjectHideFlags: 0
@@ -10886,18 +10884,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049043057}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa70f0925b46407458bcbeeeb613870c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ba219486bb522c46bc47f273b779d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Centered: 1
-  maxCards: 0
-  width: 160
-  height: 200
-  yOffset: -4
-  overrideHeight: 1
-  adjustZoneWidth: 0
+  Slot1: {fileID: 793107916}
+  Slot2: {fileID: 2066434201}
+  Slot3: {fileID: 1321565015}
+  Slot4: {fileID: 1940157014}
+  Slot5: {fileID: 699981398}
 --- !u!114 &2049043060
 MonoBehaviour:
   m_ObjectHideFlags: 0
