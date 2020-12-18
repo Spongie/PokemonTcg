@@ -73,27 +73,27 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         zoomer = GetComponent<Zoomer>();
-        SetCard(new PokemonCard()
-        {
-            SetCode = "base1",
-            IsRevealed = true,
-            ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png",
-            Attacks = new ObservableCollection<Attack>
-            {
-                new Attack() { Name = "Mega punch", Cost = new ObservableCollection<Energy> { new Energy(EnergyTypes.Grass, 2) } },
-                new Attack() { Name = "Power Slut", Cost = new ObservableCollection<Energy> { new Energy(EnergyTypes.Grass, 2), new Energy(EnergyTypes.Colorless, 1) } }
-            },
-            AttachedEnergy = new List<EnergyCard>
-            {
-                new EnergyCard() { SetCode = "base1", ImageUrl = "", EnergyType = EnergyTypes.Grass }
-            },
-            AttachedTools = new List<TrainerCard>
-            {
-                new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/80_hires.png", SetCode = "base1" },
-                new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/84_hires.png", SetCode = "base1" },
-            }
-        }, true);
-        GameController.Instance.AddCard(this);
+        //SetCard(new PokemonCard()
+        //{
+        //    SetCode = "base1",
+        //    IsRevealed = true,
+        //    ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png",
+        //    Attacks = new ObservableCollection<Attack>
+        //    {
+        //        new Attack() { Name = "Mega punch", Cost = new ObservableCollection<Energy> { new Energy(EnergyTypes.Grass, 2) } },
+        //        new Attack() { Name = "Power Slut", Cost = new ObservableCollection<Energy> { new Energy(EnergyTypes.Grass, 2), new Energy(EnergyTypes.Colorless, 1) } }
+        //    },
+        //    AttachedEnergy = new List<EnergyCard>
+        //    {
+        //        new EnergyCard() { SetCode = "base1", ImageUrl = "", EnergyType = EnergyTypes.Grass }
+        //    },
+        //    AttachedTools = new List<TrainerCard>
+        //    {
+        //        new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/80_hires.png", SetCode = "base1" },
+        //        new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/84_hires.png", SetCode = "base1" },
+        //    }
+        //}, true);
+        //GameController.Instance.AddCard(this);
     }
 
     public void SetCard(Card card, bool spawnAttachedEnergy, bool isPreview = false)

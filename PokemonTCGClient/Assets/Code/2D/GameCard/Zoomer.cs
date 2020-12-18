@@ -23,6 +23,7 @@ namespace Assets.Code._2D.GameCard
         private Vector2 oldPivot;
         [SerializeField]private bool isZooming;
         [SerializeField]private bool isHovered;
+        [SerializeField] private bool skipWorldConversion;
 
         public Vector3 zoomedScale = new Vector3(3.5f, 3.5f, 1f);
 
@@ -65,6 +66,16 @@ namespace Assets.Code._2D.GameCard
             rectTransform.LeanScale(zoomedScale, 0.15f);
         }
 
+        private Vector3 GetPoint(Vector3 basePoint)
+        {
+            if (skipWorldConversion)
+            {
+                return basePoint;
+            }
+
+            return Camera.main.WorldToScreenPoint(basePoint);
+        }
+
         private void SetZoomPivot()
         {
             rectTransform.localScale = zoomedScale;
@@ -72,26 +83,47 @@ namespace Assets.Code._2D.GameCard
             rectTransform.GetWorldCorners(corners);
             var screenRect = new Rect(0, 0, Screen.width, Screen.height);
 
-            if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cTopLeftIndex])))
+            if (!screenRect.Contains(GetPoint(corners[cTopLeftIndex])))
             {
-                if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cTopRightIndex])))
+                if (!screenRect.Contains(GetPoint(corners[cTopRightIndex])))
                 {
                     rectTransform.pivot = new Vector2(0.5f, 1);
+
+                    if (!screenRect.Contains(GetPoint(corners[cBottomLeftIndex])))
+                    {
+                        rectTransform.pivot = new Vector2(0, 1);
+                    }
+                    else if (!screenRect.Contains(GetPoint(corners[cBottomRightIndex])))
+                    {
+                        rectTransform.pivot = new Vector2(1, 1);
+                    }
                 }
                 else
                 {
                     rectTransform.pivot = new Vector2(0, 0);
                 }
             }
-            else if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cTopRightIndex])))
+            else if (!screenRect.Contains(GetPoint(corners[cTopRightIndex])))
             {
-                rectTransform.pivot = new Vector2(1, 0);
+                if (!screenRect.Contains(GetPoint(corners[cBottomRightIndex])))
+                {
+                    rectTransform.pivot = new Vector2(1, 1);
+
+                    if (!screenRect.Contains(GetPoint(corners[cBottomLeftIndex])))
+                    {
+                        rectTransform.pivot = new Vector2(1, 0f);
+                    }
+                }
+                else
+                {
+                    rectTransform.pivot = new Vector2(1, 0);
+                }
             }
-            else if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cBottomLeftIndex])))
+            else if (!screenRect.Contains(GetPoint(corners[cBottomLeftIndex])))
             {
                 rectTransform.pivot = new Vector2(0.5f, 0);
             }
-            else if (!screenRect.Contains(Camera.main.WorldToScreenPoint(corners[cBottomRightIndex])))
+            else if (!screenRect.Contains(GetPoint(corners[cBottomRightIndex])))
             {
                 rectTransform.pivot = new Vector2(0.5f, 0);
             }
