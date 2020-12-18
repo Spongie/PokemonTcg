@@ -10,5 +10,6 @@ namespace TCGCards.Core.GameEvents
         }
 
         public NetworkId PokemonId { get; set; }
+        public bool ToHand { get; set; }
     }
 }

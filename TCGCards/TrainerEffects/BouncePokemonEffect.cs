@@ -262,14 +262,13 @@ namespace TCGCards.TrainerEffects
             if (target == target.Owner.ActivePokemonCard)
             {
                 target.Owner.ActivePokemonCard = null;
-                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
+                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id, ToHand = true });
                 target.Owner.SelectActiveFromBench(game);
             }
             else
             {
-                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id });
                 target.Owner.BenchedPokemon.Remove(target);
-                game?.SendEventToPlayers(new PokemonRemovedFromBench { PokemonId = target.Id });
+                game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id, ToHand = true });
             }
 
             game?.SendEventToPlayers(new DrawCardsEvent() { Player = target.Owner.Id, Amount = cardsDrawn.Count, Cards = new List<Card>(cardsDrawn) });
