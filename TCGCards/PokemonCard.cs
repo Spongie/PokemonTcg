@@ -323,6 +323,10 @@ namespace TCGCards
                 Owner.Hand.Remove(energyCard);
                 fromHand = true;
             }
+            else if (Owner.DiscardPile.Contains(energyCard))
+            {
+                Owner.DiscardPile.Remove(energyCard);
+            }
 
             game.SendEventToPlayers(new EnergyCardsAttachedEvent()
             {
