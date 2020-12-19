@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Assets.Code._2D.GameCard
@@ -27,7 +22,7 @@ namespace Assets.Code._2D.GameCard
 
         public Vector3 zoomedScale = new Vector3(3.5f, 3.5f, 1f);
 
-        private void Start()
+        private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
             canvas = GetComponent<Canvas>();

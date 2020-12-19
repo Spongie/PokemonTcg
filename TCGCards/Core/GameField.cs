@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using NetworkingCore;
+using Newtonsoft.Json;
 using TCGCards.Core.Abilities;
 using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
@@ -342,12 +343,14 @@ namespace TCGCards.Core
             {
                 if (owner.BenchedPokemon.Count < BenchMaxSize && pokemon.Stage == 0)
                 {
+                    int index = owner.BenchedPokemon.Count;
                     owner.SetBenchedPokemon(pokemon);
                     pokemon.IsRevealed = true;
                     SendEventToPlayers(new PokemonAddedToBenchEvent()
                     {
                         Pokemon = pokemon,
-                        Player = owner.Id
+                        Player = owner.Id,
+                        Index = index
                     });
                 }
             }
@@ -998,12 +1001,21 @@ namespace TCGCards.Core
         public bool PrizeCardsFaceUp { get; set; }
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
+        
+        [JsonIgnore]
         public TrainerCard CurrentTrainerCard { get; set; }
         public bool LastCoinFlipResult { get; set; }
         public int LastCoinFlipHeadCount { get; set; }
+        
+        [JsonIgnore]
         public Dictionary<NetworkId, Card> Cards { get; set; } = new Dictionary<NetworkId, Card>();
+        
+        [JsonIgnore]
         public Dictionary<NetworkId, Attack> Attacks { get; set; } = new Dictionary<NetworkId, Attack>();
+
+        [JsonIgnore]
         public Dictionary<NetworkId, Ability> Abilities { get; set; } = new Dictionary<NetworkId, Ability>();
+        
         public NetworkId Format { get; set; }
     }
 }

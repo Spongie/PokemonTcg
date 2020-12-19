@@ -28,7 +28,7 @@ namespace TCGCards.TrainerEffects
         {
             var pokemon = new FossilePokemon(game.CurrentTrainerCard);
             caster.BenchedPokemon.Add(pokemon);
-            game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = pokemon });
+            game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = pokemon, Index = caster.BenchedPokemon.Count - 1 });
         }
     }
 }

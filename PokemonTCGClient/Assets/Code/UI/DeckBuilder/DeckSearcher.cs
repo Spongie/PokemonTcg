@@ -217,10 +217,9 @@ namespace Assets.Code.UI.DeckBuilder
 
                 counter++;
 
-                if (counter >= 100)
+                if (counter >= 50)
                 {
                     yield return new WaitForEndOfFrame();
-                    break;
                 }
             }
 

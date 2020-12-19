@@ -145,7 +145,7 @@ namespace TCGCards.TrainerEffects
                 else if (addToBench)
                 {
                     caster.BenchedPokemon.Add(card);
-                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = card });
+                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = card, Index = caster.BenchedPokemon.Count - 1 });
                 }
                 else
                 {

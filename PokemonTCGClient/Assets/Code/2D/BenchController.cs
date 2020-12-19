@@ -32,7 +32,7 @@ namespace Assets.Code._2D
                 case 4:
                     return Slot5;
                 default:
-                    return null;
+                    return Slot1;
             }
         }
 

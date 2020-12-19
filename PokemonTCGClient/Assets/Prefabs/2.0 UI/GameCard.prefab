@@ -2609,6 +2609,7 @@ GameObject:
   - component: {fileID: 7423805535720219387}
   - component: {fileID: 7423805535720219388}
   - component: {fileID: 122100025}
+  - component: {fileID: -6099086837261501257}
   m_Layer: 5
   m_Name: GameCard
   m_TagString: Untagged
@@ -2753,6 +2754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isZooming: 0
   isHovered: 0
+  skipWorldConversion: 0
   zoomedScale: {x: 3.5, y: 3.5, z: 1}
 --- !u!114 &122100025
 MonoBehaviour:
@@ -2812,6 +2814,26 @@ MonoBehaviour:
   DeathEffect: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   BounceEffect: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
   HealEffect: {fileID: 100004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
+--- !u!114 &-6099086837261501257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423805535720219381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 220
+  m_PreferredHeight: 270
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &7423805535789234715
 GameObject:
   m_ObjectHideFlags: 0

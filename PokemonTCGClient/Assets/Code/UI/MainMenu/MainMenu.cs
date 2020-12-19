@@ -19,15 +19,16 @@ namespace Assets.Code.UI.MainMenu
         public GameObject gamePrefab;
         public Dropdown deckDropDown;
         public static List<Format> formats;
+        private List<TCGCards.Core.Deck> decks;
 
         private void Awake()
         {
-
+            formats = Serializer.Deserialize<List<Format>>(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Data", "formats.json")));
         }
 
         private void Start()
         {
-            formats = Serializer.Deserialize<List<Format>>(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "Data", "formats.json")));
+            decks = new List<TCGCards.Core.Deck>();
             RefreshGames();
 
             deckDropDown.options.Clear();
@@ -46,6 +47,7 @@ namespace Assets.Code.UI.MainMenu
 
                 string formatName = formats.FirstOrDefault(f => f.Id.Equals(deck.FormatId)).Name;
 
+                decks.Add(deck);
                 deckDropDown.options.Add(new Dropdown.OptionData(new FileInfo(file).Name.Replace(Deck.deckExtension, string.Empty) + " - " + formatName));
             }
 
@@ -86,7 +88,14 @@ namespace Assets.Code.UI.MainMenu
 
         public TCGCards.Core.Deck LoadDeckSelectedDeck()
         {
-            var deckFile = Path.Combine(Application.streamingAssetsPath, "Decks", deckDropDown.options[deckDropDown.value].text + Deck.deckExtension);
+            var fileName = decks[deckDropDown.value].Name;
+
+            foreach (var character in Path.GetInvalidFileNameChars())
+            {
+                fileName = fileName.Replace(character, '\0');
+            }
+
+            var deckFile = Path.Combine(Application.streamingAssetsPath, "Decks", fileName + Deck.deckExtension);
 
             var deck = Serializer.Deserialize<TCGCards.Core.Deck>(File.ReadAllText(deckFile));
 

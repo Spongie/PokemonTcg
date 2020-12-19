@@ -11,5 +11,6 @@ namespace TCGCards.Core.GameEvents
 
         public PokemonCard Pokemon { get; set; }
         public NetworkId Player { get; set; }
+        public int Index { get; set; }
     }
 }

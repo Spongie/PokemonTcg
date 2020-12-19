@@ -48,10 +48,15 @@ namespace Server.Services
                 var pokemonCard = card as PokemonCard;
                 if (pokemonCard != null && pokemonCard.Ability != null)
                 {
+                    pokemonCard.Ability.Id = NetworkId.Generate();
                     pokemonCard.Ability.PokemonOwner = pokemonCard;
                 }
                 if (pokemonCard != null)
                 {
+                    foreach (var attack in pokemonCard.Attacks)
+                    {
+                        attack.Id = NetworkId.Generate();
+                    }
                     pokemonCard.ReInitLists();
                 }
 
@@ -85,10 +90,15 @@ namespace Server.Services
                 var pokemonCard = card as PokemonCard;
                 if (pokemonCard != null && pokemonCard.Ability != null)
                 {
+                    pokemonCard.Ability.Id = NetworkId.Generate();
                     pokemonCard.Ability.PokemonOwner = pokemonCard;
                 }
                 if (pokemonCard != null)
                 {
+                    foreach (var attack in pokemonCard.Attacks)
+                    {
+                        attack.Id = NetworkId.Generate();
+                    }
                     pokemonCard.ReInitLists();
                 }
 

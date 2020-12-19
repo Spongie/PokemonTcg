@@ -61,8 +61,8 @@ namespace Assets.Code.UI
         public void OnClick()
         {
             NetworkManager.Instance.gameService.Attack(GameController.Instance.gameField.Id, attack.Id);
-            transform.parent.gameObject.GetComponent<CardPopupHandler>().ClearAttackButtons();
-            transform.parent.gameObject.SetActive(false);
+            transform.parent.parent.gameObject.GetComponent<CardPopupHandler>().ClearAttackButtons();
+            transform.parent.parent.gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }

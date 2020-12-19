@@ -1,4 +1,5 @@
-﻿using Assets.Code.UI.Gameplay;
+﻿using Assets.Code._2D;
+using Assets.Code.UI.Gameplay;
 using NetworkingCore;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace Assets.Code.UI.Events
     {
         public GameObject CardPrefab;
         public Transform PlayerActivePokemonTransform;
-        public CardZone PlayerBenchedPokemonZone;
+        public BenchController PlayerBenchedPokemonZone;
         public Transform OpponentActivePokemonTransform;
-        public CardZone OpponentBenchedPokemonZone;
+        public BenchController OpponentBenchedPokemonZone;
         public CardRenderer TempActive;
         public CardRenderer TempBench;
 
@@ -55,16 +56,19 @@ namespace Assets.Code.UI.Events
             NetworkId myId = GameController.Instance.myId;
             var isMySwitch = newActive.card.Owner.Id.Equals(myId);
             var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
-            var benchParent = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
+            var bench = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
+            int index = isMySwitch ? GameController.Instance.Player.BenchedPokemon.IndexOf(newActive.pokemon) : GameController.Instance.OpponentPlayer.BenchedPokemon.IndexOf(newActive.pokemon);
 
             var oldPosition = newActive.GetComponent<RectTransform>().localPosition;
             newActive.transform.SetParent(activeParent, true);
+            newActive.transform.LeanScale(new Vector3(1, 1, 1), 0.4f);
             newActive.GetComponent<RectTransform>().LeanMove(Vector3.zero, 1.5f).setEaseInCubic();
-            
+
             CardRenderer oldActive = null;
 
             if (activeEvent.ReplacedPokemonId != null)
             {
+                var benchParent = bench.GetSlot(index);
                 var oldSize = new Vector2(newActive.GetComponent<RectTransform>().rect.width, newActive.GetComponent<RectTransform>().rect.height);
                 oldActive = GameController.Instance.GetCardRendererById(activeEvent.ReplacedPokemonId);
                 ((PokemonCard)oldActive.card).ClearStatusEffects();
@@ -72,6 +76,7 @@ namespace Assets.Code.UI.Events
                 oldActive.transform.SetParent(benchParent.transform, true);
                 oldActive.SetIsBenched();
                 oldActive.EnableStatusIcons();
+                oldActive.transform.LeanScale(new Vector3(1, 1, 1), 0.4f);
                 oldActive.gameObject.LeanMove(Vector3.zero, 1.5f).setEaseInCubic().setOnComplete(() => 
                 {
                     newActive.SetIsActivePokemon();

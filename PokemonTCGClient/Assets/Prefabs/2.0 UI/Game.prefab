@@ -413,3 +413,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostedName: {fileID: 363138262186127569}
   gameFormat: {fileID: 8988955210007520038}
+  formatName: {fileID: 8988955210007520038}

@@ -5,6 +5,7 @@ using System.Linq;
 using TCGCards;
 using TCGCards.Core.Messages;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Code.UI.Game
 {
@@ -187,6 +188,16 @@ namespace Assets.Code.UI.Game
             minCount = 1;
             limit = 1;
             InitForCards(cards, message.Amount, message.Amount);
+        }
+
+        public void SetLayoutForView(CardRenderer cardRenderer)
+        {
+            var layoutElement = cardRenderer.GetComponent<LayoutElement>();
+            layoutElement.preferredHeight = 540;
+            layoutElement.preferredWidth = 440;
+
+            var canvas = cardRenderer.GetComponent<Canvas>();
+            canvas.sortingOrder = canvas.sortingOrder + 1;
         }
     }
 }

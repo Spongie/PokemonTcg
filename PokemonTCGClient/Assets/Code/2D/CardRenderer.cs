@@ -70,7 +70,7 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     private Zoomer zoomer;
 
-    void Start()
+    void Awake()
     {
         zoomer = GetComponent<Zoomer>();
         //SetCard(new PokemonCard()

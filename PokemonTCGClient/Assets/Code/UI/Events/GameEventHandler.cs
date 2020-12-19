@@ -52,7 +52,14 @@ namespace Assets.Code.UI.Events
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var x = new AttachedEnergyDiscardedEvent() { FromPokemonId = tempTarget.card.Id, DiscardedCard = ((PokemonCard)tempTarget.card).AttachedEnergy[0] };
+                GameController.Instance.myId = NetworkingCore.NetworkId.Generate();
+                var x = new PokemonAddedToBenchEvent()
+                {
+                    Player = GameController.Instance.myId,
+                    Pokemon = new PokemonCard { IsRevealed = true, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/29_hires.png" },
+                    Index = 0
+                };
+                
                 TriggerEvent(x);
             }
 
