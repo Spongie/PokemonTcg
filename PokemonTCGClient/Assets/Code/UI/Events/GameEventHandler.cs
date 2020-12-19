@@ -48,20 +48,44 @@ namespace Assets.Code.UI.Events
             //tempTarget.insertAttachedEnergy(energyCard);
         }
 
+        //PokemonCard activePokemon;
+        //PokemonCard benchPokemon;
+
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GameController.Instance.myId = NetworkingCore.NetworkId.Generate();
-                var x = new PokemonAddedToBenchEvent()
-                {
-                    Player = GameController.Instance.myId,
-                    Pokemon = new PokemonCard { IsRevealed = true, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/29_hires.png" },
-                    Index = 0
-                };
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
                 
-                TriggerEvent(x);
-            }
+            //    activePokemon = new PokemonCard { IsRevealed = true, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/29_hires.png" };
+            //    var a = new PokemonBecameActiveEvent()
+            //    {
+            //        NewActivePokemon = activePokemon
+            //    };
+
+            //    eventQueue.Enqueue(a);
+
+            //    GameController.Instance.myId = NetworkingCore.NetworkId.Generate();
+            //    benchPokemon = new PokemonCard { IsRevealed = true, SetCode = "base1", ImageUrl = "https://images.pokemontcg.io/base1/29_hires.png" };
+            //    var x = new PokemonAddedToBenchEvent()
+            //    {
+            //        Player = GameController.Instance.myId,
+            //        Pokemon = benchPokemon,
+            //        Index = 0
+            //    };
+
+            //    eventQueue.Enqueue(x);
+            //}
+
+            //if (Input.GetKeyDown(KeyCode.C))
+            //{
+            //    var a2 = new PokemonBecameActiveEvent()
+            //    {
+            //        NewActivePokemonId = benchPokemon.Id,
+            //        ReplacedPokemonId = activePokemon.Id
+            //    };
+
+            //    TriggerEvent(a2);
+            //}
 
             if (currentEvent != null || eventQueue.Count == 0)
             {

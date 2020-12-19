@@ -944,6 +944,7 @@ namespace Assets.Code
 
         public void OnInfoUpdated(GameFieldInfo gameInfo, string textInfo)
         {
+            return; ;
             OpponentPlayer.DiscardPile = gameInfo.Opponent.CardsInDiscard;
             OpponentPlayer.PrizeCards = gameInfo.Opponent.PrizeCards;
             OpponentPlayer.ActivePokemonCard = (PokemonCard)gameInfo.Opponent.ActivePokemon;

@@ -352,9 +352,9 @@ MonoBehaviour:
   CardPrefab: {fileID: 7423805535720219381, guid: 207c901571816614a9b9bae2ca61eca9,
     type: 3}
   PlayerActivePokemonTransform: {fileID: 876039499}
-  PlayerBenchedPokemonZone: {fileID: 0}
+  PlayerBenchedPokemonZone: {fileID: 2049043059}
   OpponentActivePokemonTransform: {fileID: 234891729}
-  OpponentBenchedPokemonZone: {fileID: 0}
+  OpponentBenchedPokemonZone: {fileID: 1356239565}
   TempActive: {fileID: 0}
   TempBench: {fileID: 0}
 --- !u!1 &140961428

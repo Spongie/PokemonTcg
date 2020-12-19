@@ -1,11 +1,5 @@
 ﻿using Assets.Code._2D;
-using Assets.Code.UI.Gameplay;
 using NetworkingCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.GameEvents;
@@ -77,7 +71,7 @@ namespace Assets.Code.UI.Events
                 oldActive.SetIsBenched();
                 oldActive.EnableStatusIcons();
                 oldActive.transform.LeanScale(new Vector3(1, 1, 1), 0.4f);
-                oldActive.gameObject.LeanMove(Vector3.zero, 1.5f).setEaseInCubic().setOnComplete(() => 
+                oldActive.gameObject.LeanMoveLocal(Vector3.zero, 1.5f).setEaseInCubic().setOnComplete(() => 
                 {
                     newActive.SetIsActivePokemon();
                     oldActive.tag = "Untagged";
