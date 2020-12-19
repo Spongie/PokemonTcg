@@ -1,9 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities;
 using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TCGCards.Core;
 
 namespace TCGCards.TrainerEffects

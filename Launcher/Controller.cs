@@ -1,6 +1,5 @@
 ﻿using NetworkingCore;
 using Newtonsoft.Json;
-using PokemonTcgSdk;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +14,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using TCGCards;
 using TCGCards.Core;
 
 namespace Launcher

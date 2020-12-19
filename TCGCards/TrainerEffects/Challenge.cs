@@ -1,8 +1,5 @@
 ﻿using NetworkingCore.Messages;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TCGCards.Core;
 using TCGCards.TrainerEffects.Util;
 

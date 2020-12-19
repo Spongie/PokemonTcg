@@ -1,7 +1,5 @@
 ﻿using CardEditor.Models;
 using CardEditor.ViewModels;
-using PokemonTcgSdk.Models;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;

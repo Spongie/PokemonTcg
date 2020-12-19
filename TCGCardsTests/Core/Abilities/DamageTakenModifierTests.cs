@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TCGCards.Core.Abilities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TCGCards.Core.Abilities.Tests
 {

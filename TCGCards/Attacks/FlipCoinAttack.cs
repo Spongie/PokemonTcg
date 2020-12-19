@@ -1,7 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities;
 using TCGCards.Core;
-using TCGCards.TrainerEffects;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Attacks

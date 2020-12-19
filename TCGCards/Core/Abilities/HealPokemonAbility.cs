@@ -1,5 +1,4 @@
 ﻿using CardEditor.Views;
-using TCGCards.TrainerEffects;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Core.Abilities

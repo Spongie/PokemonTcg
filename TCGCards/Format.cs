@@ -1,10 +1,8 @@
 ﻿using Entities.Models;
 using NetworkingCore;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using TCGCards.Core;
 
 namespace TCGCards

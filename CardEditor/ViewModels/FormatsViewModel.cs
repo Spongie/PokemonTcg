@@ -1,5 +1,4 @@
-﻿using Entities;
-using Entities.Models;
+﻿using Entities.Models;
 using NetworkingCore;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

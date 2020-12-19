@@ -1,5 +1,4 @@
-﻿using TCGCards.TrainerEffects;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using TCGCards.Core;
 using NSubstitute;
