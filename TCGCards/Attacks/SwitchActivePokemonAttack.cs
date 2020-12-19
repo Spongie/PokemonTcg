@@ -8,9 +8,10 @@ namespace TCGCards.Attacks
     {
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            if (!opponent.BenchedPokemon.Any())
+            if (!opponent.BenchedPokemon.Where(p => p != null).Any())
                 return;
 
+            opponent.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active Pokémon for you").ToNetworkMessage(Id));
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBenchMessage(1).ToNetworkMessage(opponent.Id));
             var newActive = (PokemonCard)game.Cards[response.Cards.First()];
             opponent.ForceRetreatActivePokemon(newActive, game);

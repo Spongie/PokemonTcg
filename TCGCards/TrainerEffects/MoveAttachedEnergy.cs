@@ -110,7 +110,7 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            return caster.BenchedPokemon.Count > 0;
+            return caster.BenchedPokemon.Where(p => p != null).Count() > 0;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

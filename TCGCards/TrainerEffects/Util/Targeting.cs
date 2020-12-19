@@ -53,11 +53,11 @@ namespace TCGCards.TrainerEffects.Util
                     target = caster.ActivePokemonCard;
                     break;
                 case TargetingMode.YourBench:
-                    if (caster.BenchedPokemon.Count == 0)
+                    if (caster.BenchedPokemon.Where(p => p != null).Count() == 0)
                     {
                         return null;
                     }
-                    else if (caster.BenchedPokemon.Count == 1)
+                    else if (caster.BenchedPokemon.Where(p => p != null).Count() == 1)
                     {
                         return caster.BenchedPokemon[0];
                     }
@@ -74,11 +74,11 @@ namespace TCGCards.TrainerEffects.Util
                     target = opponent.ActivePokemonCard;
                     break;
                 case TargetingMode.OpponentBench:
-                    if (opponent.BenchedPokemon.Count == 0)
+                    if (opponent.BenchedPokemon.Where(p => p != null).Count() == 0)
                     {
                         return null;
                     }
-                    else if (opponent.BenchedPokemon.Count == 1)
+                    else if (opponent.BenchedPokemon.Where(p => p != null).Count() == 1)
                     {
                         return opponent.BenchedPokemon[0];
                     }

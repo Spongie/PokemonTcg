@@ -360,7 +360,7 @@ namespace TCGCards
 
         public virtual bool CanReatreat()
         {
-            if(!Owner.BenchedPokemon.Any())
+            if(!Owner.BenchedPokemon.Where(p => p != null).Any())
                 return false;
 
             return !IsParalyzed && !IsAsleep && AttachedEnergy.Sum(x => x.Amount) >= RetreatCost;

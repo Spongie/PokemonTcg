@@ -46,10 +46,10 @@ namespace TCGCards.TrainerEffects
         {
             if (targetsOpponent)
             {
-                return opponent.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - opponent.BenchedPokemon.Count > 0;
+                return opponent.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - opponent.BenchedPokemon.Where(p => p != null).Count() > 0;
             }
 
-            return caster.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - caster.BenchedPokemon.Count > 0;
+            return caster.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - caster.BenchedPokemon.Where(p => p != null).Count() > 0;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

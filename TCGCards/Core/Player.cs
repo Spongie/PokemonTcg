@@ -126,7 +126,7 @@ namespace TCGCards.Core
         {
             for (int i = 0; i < GameField.BenchMaxSize; i++)
             {
-                if (i >= BenchedPokemon.Count)
+                if (i >= BenchedPokemon.Where(p => p != null).Count())
                 {
                     BenchedPokemon.Add(pokemon);
                     break;
@@ -408,7 +408,7 @@ namespace TCGCards.Core
 
         public void SelectActiveFromBench(GameField game)
         {
-            if (BenchedPokemon.Count == 1)
+            if (BenchedPokemon.Where(p => p != null).Count() == 1)
             {
                 game?.SendEventToPlayers(new PokemonBecameActiveEvent
                 {

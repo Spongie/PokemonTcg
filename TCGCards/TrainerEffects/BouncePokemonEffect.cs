@@ -84,10 +84,10 @@ namespace TCGCards.TrainerEffects
         {
             if (TargetingMode == TargetingMode.OpponentActive || TargetingMode == TargetingMode.OpponentBench || TargetingMode == TargetingMode.OpponentPokemon)
             {
-                return opponent.BenchedPokemon.Any();
+                return opponent.BenchedPokemon.Where(p => p != null).Any();
             }
 
-            return caster.BenchedPokemon.Any();
+            return caster.BenchedPokemon.Where(p => p != null).Any();
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

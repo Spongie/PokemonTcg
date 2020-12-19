@@ -83,12 +83,12 @@ namespace TCGCards.TrainerEffects
         {
             if (!RequireTargetUsabled)
             {
-                if (opponents && opponent.BenchedPokemon.Count == 0)
+                if (opponents && opponent.BenchedPokemon.Where(p => p != null).Count() == 0)
                 {
                     return;
                 }
 
-                if (!opponents && caster.BenchedPokemon.Count == 0)
+                if (!opponents && caster.BenchedPokemon.Where(p => p != null).Count() == 0)
                 {
                     return;
                 }
@@ -147,10 +147,10 @@ namespace TCGCards.TrainerEffects
 
             if (opponents)
             {
-                return opponent.BenchedPokemon.Any();
+                return opponent.BenchedPokemon.Where(p => p != null).Any();
             }
 
-            return caster.BenchedPokemon.Any();
+            return caster.BenchedPokemon.Where(p => p != null).Any();
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

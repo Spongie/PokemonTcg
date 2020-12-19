@@ -9,7 +9,7 @@ namespace TCGCards.Attacks
     {
         public override bool CanBeUsed(GameField game, Player owner, Player opponent)
         {
-            return opponent.BenchedPokemon.Any() && base.CanBeUsed(game, owner, opponent);
+            return opponent.BenchedPokemon.Where(p => p != null).Any() && base.CanBeUsed(game, owner, opponent);
         }
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)

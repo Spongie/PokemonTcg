@@ -53,7 +53,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (opponent.BenchedPokemon.Count <= AmountOfTargets)
+            if (opponent.BenchedPokemon.Where(p => p != null).Count() <= AmountOfTargets)
             {
                 foreach (var pokemon in opponent.BenchedPokemon)
                 {

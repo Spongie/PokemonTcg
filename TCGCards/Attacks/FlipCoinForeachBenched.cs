@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using Entities;
+using System.Linq;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks
@@ -21,7 +22,7 @@ namespace TCGCards.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            int count = OpponentsBench ? opponent.BenchedPokemon.Count : owner.BenchedPokemon.Count;
+            int count = OpponentsBench ? opponent.BenchedPokemon.Where(p => p != null).Count() : owner.BenchedPokemon.Where(p => p != null).Count();
             return game.FlipCoins(count) * Damage;
         }
     }
