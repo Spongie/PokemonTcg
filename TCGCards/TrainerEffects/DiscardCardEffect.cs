@@ -69,12 +69,14 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            if (amount == -1)
+            var availableChoices = CardUtil.GetCardsOfType(caster.Hand, CardType);
+
+            if (amount == -1 && availableChoices.Count > 0)
             {
                 return true;
             }
 
-            return caster.Hand.Count - 1 >= amount;
+            return availableChoices.Count >= amount;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)

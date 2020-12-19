@@ -81,9 +81,17 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (opponent.BenchedPokemon.Count == 0)
+            if (!RequireTargetUsabled)
             {
-                return;
+                if (opponents && opponent.BenchedPokemon.Count == 0)
+                {
+                    return;
+                }
+
+                if (!opponents && caster.BenchedPokemon.Count == 0)
+                {
+                    return;
+                }
             }
 
             if (OnlyOnCoinFlip && game.FlipCoins(1) == 0)

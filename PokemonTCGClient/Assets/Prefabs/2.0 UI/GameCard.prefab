@@ -710,7 +710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.2599945, y: 14}
+  m_AnchoredPosition: {x: 3.2600098, y: 14}
   m_SizeDelta: {x: -40.160004, y: -141.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &818802946
@@ -2755,7 +2755,7 @@ MonoBehaviour:
   isZooming: 0
   isHovered: 0
   skipWorldConversion: 0
-  zoomedScale: {x: 3.5, y: 3.5, z: 1}
+  zoomedScale: {x: 3, y: 3, z: 1}
 --- !u!114 &122100025
 MonoBehaviour:
   m_ObjectHideFlags: 0

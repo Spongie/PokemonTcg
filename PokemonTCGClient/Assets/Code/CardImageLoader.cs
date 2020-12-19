@@ -27,6 +27,11 @@ namespace Assets.Code
             string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
             string finalPath = "file:///" + fullCardPath;
 
+            if (targetImage == null)
+            {
+                yield break;
+            }
+
             if (!card.IsRevealed)
             {
                 targetImage.sprite = cardBack;

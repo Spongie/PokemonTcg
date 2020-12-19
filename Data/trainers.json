@@ -22,6 +22,8 @@
           "Usages": 9999,
           "Effects": [],
           "SelectedAbilityEffect": null,
+          "UsableWhileActive": true,
+          "UsableWhileBenched": true,
           "Id": {
             "$id": "4",
             "Value": "f5a1986e-fb54-4126-a460-7b1b54894685"
@@ -764,6 +766,8 @@
           "Usages": 9999,
           "Effects": [],
           "SelectedAbilityEffect": null,
+          "UsableWhileActive": true,
+          "UsableWhileBenched": true,
           "Id": {
             "$id": "99",
             "Value": "86e6db1d-a648-4157-8ad0-a11b870f651b"

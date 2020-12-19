@@ -8,7 +8,7 @@ namespace TCGCards.Core
         {
             var realDamage = damage;
 
-            if (attack != null)
+            if (attack == null)
             {
                 return realDamage;
             }

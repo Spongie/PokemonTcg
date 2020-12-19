@@ -464,6 +464,7 @@
       "$id": "42",
       "$type": "TCGCards.Core.Abilities.MoveEnergyAbility, TCGCards",
       "EnergyType": 5,
+      "AttachToSelf": false,
       "TurnDuration": 9999,
       "TriggerType": 0,
       "PokemonOwner": null,
@@ -473,6 +474,8 @@
       "Usages": 999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "43",
         "Value": "635a52f4-6a25-4f78-95ae-3ecfbf0e89db"
@@ -1812,6 +1815,8 @@
       "Usages": 2147483647,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "165",
         "Value": "c4664128-6b04-4639-a6cd-27abfc06714f"
@@ -3582,7 +3587,7 @@
         "Cost": [
           {
             "$id": "327",
-            "EnergyType": 7,
+            "EnergyType": 8,
             "Amount": 2
           },
           {
@@ -5006,6 +5011,8 @@
       "Usages": 999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "450",
         "Value": "fffdd577-d825-43e6-a94d-4c0e240c2863"
@@ -5200,7 +5207,7 @@
       "AttackBack": false,
       "DamageReturned": 10,
       "TurnDuration": 9999,
-      "TriggerType": 0,
+      "TriggerType": 4,
       "PokemonOwner": null,
       "AbilityType": "TakesDamagesOnAttacked",
       "Name": "Strikes Back",
@@ -5208,6 +5215,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "468",
         "Value": "f1e57af2-1d08-4ac7-91d1-b59ed1156b6f"
@@ -5530,6 +5539,8 @@
       "Usages": 999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "497",
         "Value": "774112f2-b9bf-4a77-8683-b9b3bbaf8bfa"
@@ -5730,6 +5741,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "515",
         "Value": "9440967b-c9d8-434c-ac33-61c6c51b606e"
@@ -7247,6 +7260,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "654",
         "Value": "dc2cb076-93d3-4506-95f4-5af8007825c2"
@@ -7561,6 +7576,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "682",
         "Value": "0b948add-a0a1-4482-9800-c02f802476a4"
@@ -8234,6 +8251,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "743",
         "Value": "9f98c30b-efc4-4e96-a190-bcf1f55dc559"
@@ -8921,6 +8940,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "803",
         "Value": "03ace457-e55d-4d6b-abec-0b5671d6dd62"
@@ -9237,6 +9258,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "831",
         "Value": "0ccdcdd2-37b0-4f77-ae5f-273a64c9f944"
@@ -9817,6 +9840,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "883",
         "Value": "a44a54bf-f03b-4bf0-949a-04bc71f52d9d"
@@ -9926,6 +9951,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "892",
         "Value": "30aeb4d8-75ef-4b0b-a008-968b2a1f7ab7"
@@ -10961,6 +10988,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "986",
         "Value": "14735681-96af-475a-93aa-edba319ed99d"
@@ -11069,6 +11098,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "995",
         "Value": "3ad5d253-7770-4d17-b93c-89d90a4ee211"
@@ -11290,6 +11321,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1014",
         "Value": "2b8729bb-95a3-40dd-b5f7-8370aca7f416"
@@ -11633,6 +11666,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1044",
         "Value": "5771e7b9-1f2a-437a-b8ee-acf4387531c7"
@@ -11737,6 +11772,8 @@
       "SelectedAbilityEffect": {
         "$ref": "1052"
       },
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1053",
         "Value": "eaa5c313-798a-4835-9650-eb05053f4274"
@@ -11855,6 +11892,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1063",
         "Value": "95220c31-acf8-4c09-8ca4-a1137958737d"
@@ -12097,6 +12136,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1085",
         "Value": "b72feb67-9403-4fae-83b1-d7f3a309bc8f"
@@ -12358,6 +12399,8 @@
               "Usages": 1,
               "Effects": [],
               "SelectedAbilityEffect": null,
+              "UsableWhileActive": true,
+              "UsableWhileBenched": true,
               "Id": {
                 "$id": "1109",
                 "Value": "13d94cfb-812f-48be-8e54-be3aa576766c"
@@ -12688,6 +12731,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1139",
         "Value": "b0ad0358-bc7e-4120-a4d1-7d481672fc25"
@@ -13093,6 +13138,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1176",
         "Value": "b93c547f-3f10-4d0f-bb23-fe681a0f6810"
@@ -13310,6 +13357,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1195",
         "Value": "fd61b455-440f-4c70-a2c1-36dd5f53f23f"
@@ -13414,6 +13463,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1204",
         "Value": "721e0971-c839-4cdb-a0d4-d6dbfeddbdb7"
@@ -13515,6 +13566,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1212",
         "Value": "567eeb53-07d7-4449-94da-43abf6a0a626"
@@ -13751,6 +13804,8 @@
         }
       ],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1233",
         "Value": "f0e05edf-6d56-49b4-adfb-51d4aab3b3b9"
@@ -14674,6 +14729,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1313",
         "Value": "17f4705e-1de5-4998-a78a-86a5d111c1ef"
@@ -16473,6 +16530,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1471",
         "Value": "c437fcca-ab71-458f-8346-6383208006b5"
@@ -16776,6 +16835,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1497",
         "Value": "749056f5-5af1-4718-942f-26fce68ef68b"
@@ -16881,6 +16942,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1506",
         "Value": "661934af-a0ab-4d58-bfb6-91ef555855a5"
@@ -19170,6 +19233,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1715",
         "Value": "a0293f9b-24fa-4017-bc8e-04c8ad4bf02b"
@@ -19284,6 +19349,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1724",
         "Value": "58cf8df9-d057-4f34-8bea-d2a68a645f5c"
@@ -19824,6 +19891,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1772",
         "Value": "41e05219-8934-42a9-a681-80c233548512"
@@ -19930,6 +19999,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1781",
         "Value": "a56a9163-231f-4e03-8ea6-c57ad43de354"
@@ -20391,6 +20462,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1823",
         "Value": "08d7ad81-c2b5-46b3-bf2b-305ef5cff28a"
@@ -20492,6 +20565,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1831",
         "Value": "40474aab-6563-4202-bbdf-49db6ecdd5a3"
@@ -20908,6 +20983,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1867",
         "Value": "8d0e0505-4dcb-4240-adf8-b006f238d796"
@@ -21005,6 +21082,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1875",
         "Value": "88fd657b-610c-4f6e-92ce-62a2049e1025"
@@ -21662,6 +21741,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1932",
         "Value": "ed9b090d-0039-4aab-bbb2-7079a3d77644"
@@ -21760,6 +21841,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1940",
         "Value": "b5456832-9f1a-4195-bc87-dd2e64d7c232"
@@ -22111,6 +22194,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1971",
         "Value": "550644b3-5556-43ae-b191-3074ad95d9af"
@@ -22221,6 +22306,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "1980",
         "Value": "10406708-15a1-432c-8ede-aee6ca35f5f3"
@@ -22981,6 +23068,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2048",
         "Value": "4c579bd6-cd7d-440e-904b-d613efe276be"
@@ -23101,6 +23190,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2058",
         "Value": "f4708620-b0b6-486c-afec-30bf7d38c205"
@@ -23762,6 +23853,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2118",
         "Value": "509a548e-1b52-4ffc-8340-a69ce3e358fa"
@@ -25052,6 +25145,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2235",
         "Value": "3d83b457-64e8-45f3-8ebf-7133241fb877"
@@ -25161,6 +25256,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2244",
         "Value": "be826817-3bed-4a38-9b29-10a7de153637"
@@ -25269,6 +25366,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2253",
         "Value": "a86a8b14-a4e7-4b24-8c92-6197785a8d8e"
@@ -26089,6 +26188,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2325",
         "Value": "50018472-bd2b-4a21-9d7f-18750d64385d"
@@ -26324,6 +26425,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2346",
         "Value": "5bee9778-d56e-470c-8fed-14fe813246a6"
@@ -27744,6 +27847,8 @@
       "Usages": 1,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2471",
         "Value": "f429d299-66f7-4bc1-a448-f78896749156"
@@ -30594,6 +30699,8 @@
               "Usages": 9999,
               "Effects": [],
               "SelectedAbilityEffect": null,
+              "UsableWhileActive": true,
+              "UsableWhileBenched": true,
               "Id": {
                 "$id": "2731",
                 "Value": "9b384727-d94e-49cd-b2c8-eef9093b6c21"
@@ -31072,6 +31179,8 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
         "$id": "2776",
         "Value": "067b8349-3e98-4f55-9064-59f6bc83f62f"
@@ -31409,7 +31518,7 @@
     "RetreatCost": 2,
     "Weakness": 4,
     "Resistance": 0,
-    "EvolvesFrom": "Weepinbell",
+    "EvolvesFrom": "Erika's Weepinbell",
     "Stage": 2,
     "Attacks": [
       {
@@ -31483,7 +31592,7 @@
     "RetreatCost": 2,
     "Weakness": 4,
     "Resistance": 0,
-    "EvolvesFrom": "Gloom",
+    "EvolvesFrom": "Erika's Gloom",
     "Stage": 2,
     "Attacks": [],
     "PokemonName": "Erika's Vileplume",
@@ -31532,7 +31641,7 @@
     "RetreatCost": 2,
     "Weakness": 4,
     "Resistance": 0,
-    "EvolvesFrom": "Bellsprout",
+    "EvolvesFrom": "Erika's Bellsprout",
     "Stage": 1,
     "Attacks": [
       {
@@ -31611,7 +31720,7 @@
     "RetreatCost": 1,
     "Weakness": 4,
     "Resistance": 0,
-    "EvolvesFrom": "Bellsprout",
+    "EvolvesFrom": "Erika's Bellsprout",
     "Stage": 1,
     "Attacks": [
       {
@@ -32015,6 +32124,44 @@
         "Effects": [
           {
             "$id": "2856",
+            "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+            "MayAbility": false,
+            "TargetingMode": 3,
+            "Amount": 1,
+            "EnergyType": 0,
+            "CoinFlip": false,
+            "UseLastCoin": false,
+            "CheckTails": false,
+            "AllowUseWithoutTarget": true,
+            "EffectType": "Discard attached energy"
+          }
+        ],
+        "Cost": [
+          {
+            "$id": "2857",
+            "EnergyType": 6,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 10,
+        "Description": "If the Defending Pokémon has any Energy cards attached to it, flip a coin. If heads, choose 1 of those Energy cards and discard it.",
+        "Name": "Removal Pulse",
+        "AttackType": "Attack",
+        "Id": {
+          "$id": "2858",
+          "Value": "007d6494-35e7-4f1e-9e1c-cf8c278d5a64"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2859",
+        "ApplyWeakness": true,
+        "ApplyResistance": true,
+        "Effects": [
+          {
+            "$id": "2860",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -32027,7 +32174,7 @@
         ],
         "Cost": [
           {
-            "$id": "2857",
+            "$id": "2861",
             "EnergyType": 6,
             "Amount": 2
           }
@@ -32038,7 +32185,7 @@
         "Name": "Confusion Pulse",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2858",
+          "$id": "2862",
           "Value": "b3928938-6053-455c-a5e3-97143e494f44"
         },
         "Disabled": false,
@@ -32065,35 +32212,91 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2859",
+      "$id": "2863",
       "Value": "c677fb71-bfb1-4613-88e6-0b3814a84aa8"
     },
     "Id": {
-      "$id": "2860",
+      "$id": "2864",
       "Value": "447e7b91-1f24-4c1b-af32-791f4b7a97b3"
     },
     "SetCode": "gym1",
     "Name": "Lt. Surge's Magnemite",
     "ImageUrl": "https://images.pokemontcg.io/gym1/50_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2861",
+    "$id": "2865",
     "PrizeCards": 1,
-    "Ability": null,
+    "Ability": {
+      "$id": "2866",
+      "$type": "TCGCards.Core.Abilities.MoveEnergyAbility, TCGCards",
+      "EnergyType": 6,
+      "AttachToSelf": true,
+      "TurnDuration": 9999,
+      "TriggerType": 0,
+      "PokemonOwner": null,
+      "AbilityType": "MoveEnergyAbility",
+      "Name": "Energy Charge",
+      "Description": "As often as you like during your turn (before your attack), if Lt. Surge's Magneton is your Active Pokémon, you may take 1 Lightning Energy card attached to 1 of your Pokémon and attach it to Lt. Surge's Magneton. This power can't be used if Lt. Surge's Magneton is Asleep, Confused, or Paralyzed.",
+      "Usages": 9999,
+      "Effects": [],
+      "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": false,
+      "Id": {
+        "$id": "2867",
+        "Value": "30b167fb-316c-4eeb-9263-0edb778613fc"
+      },
+      "UsedTimes": 0,
+      "Source": null,
+      "IsBuff": false
+    },
     "SelectedAttack": null,
     "Hp": 70,
     "Type": 6,
     "RetreatCost": 2,
     "Weakness": 8,
     "Resistance": 0,
-    "EvolvesFrom": "",
+    "EvolvesFrom": "Lt. Surge's Magnemite",
     "Stage": 1,
-    "Attacks": [],
+    "Attacks": [
+      {
+        "$id": "2868",
+        "$type": "TCGCards.Attacks.SelfDamageAttack, TCGCards",
+        "CoinFlip": true,
+        "Amount": 20,
+        "ApplyWeakness": true,
+        "ApplyResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2869",
+            "EnergyType": 6,
+            "Amount": 3
+          },
+          {
+            "$id": "2870",
+            "EnergyType": 2,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 50,
+        "Description": "Flip a coin. If tails, Lt. Surge's Magneton does 20 damage to itself.",
+        "Name": "Mega Shock",
+        "AttackType": "SelfDamageAttack",
+        "Id": {
+          "$id": "2871",
+          "Value": "0da424a2-08ba-4330-a7f5-a79b5c88ac7d"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      }
+    ],
     "PokemonName": "Lt. Surge's Magneton",
     "DamageCounters": 0,
     "EvolvedFrom": null,
@@ -32114,24 +32317,24 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2862",
+      "$id": "2872",
       "Value": "4f0a0ff0-46bf-422d-a9e4-e7ac5fe756e1"
     },
     "Id": {
-      "$id": "2863",
+      "$id": "2873",
       "Value": "9c337097-04cb-45d8-9525-858ecad28878"
     },
     "SetCode": "gym1",
     "Name": "Lt. Surge's Magneton",
     "ImageUrl": "https://images.pokemontcg.io/gym1/8_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2864",
+    "$id": "2874",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32144,12 +32347,12 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2865",
+        "$id": "2875",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "2866",
+            "$id": "2876",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -32162,7 +32365,7 @@
         ],
         "Cost": [
           {
-            "$id": "2867",
+            "$id": "2877",
             "EnergyType": 6,
             "Amount": 2
           }
@@ -32173,7 +32376,7 @@
         "Name": "Lightning Tail",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2868",
+          "$id": "2878",
           "Value": "f66867d4-62ed-48d3-8a96-ccc0fa53c72a"
         },
         "Disabled": false,
@@ -32200,11 +32403,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2869",
+      "$id": "2879",
       "Value": "6b0eeb0c-df6d-43b4-806f-959ab005bb1f"
     },
     "Id": {
-      "$id": "2870",
+      "$id": "2880",
       "Value": "35662706-74df-4345-916e-ecdadb8f34e5"
     },
     "SetCode": "gym1",
@@ -32217,7 +32420,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2871",
+    "$id": "2881",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32226,17 +32429,17 @@
     "RetreatCost": 2,
     "Weakness": 8,
     "Resistance": 0,
-    "EvolvesFrom": "Pikachu",
+    "EvolvesFrom": "Lt. Surge's Pikachu",
     "Stage": 1,
     "Attacks": [
       {
-        "$id": "2872",
+        "$id": "2882",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2873",
+            "$id": "2883",
             "EnergyType": 6,
             "Amount": 2
           }
@@ -32247,7 +32450,7 @@
         "Name": "Mega Punch",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2874",
+          "$id": "2884",
           "Value": "3525edca-8c93-4399-9a64-b219f3672393"
         },
         "Disabled": false,
@@ -32274,11 +32477,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2875",
+      "$id": "2885",
       "Value": "b4944f1a-cd25-4e67-a766-3057a2cd9d57"
     },
     "Id": {
-      "$id": "2876",
+      "$id": "2886",
       "Value": "8dc100da-864b-4e0c-95c7-e5518de22006"
     },
     "SetCode": "gym1",
@@ -32291,7 +32494,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2877",
+    "$id": "2887",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32323,11 +32526,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2878",
+      "$id": "2888",
       "Value": "ac566887-22c4-45d5-b4da-57601e624799"
     },
     "Id": {
-      "$id": "2879",
+      "$id": "2889",
       "Value": "e1fed627-b1ed-433b-9fc1-9a97b9a388a2"
     },
     "SetCode": "gym1",
@@ -32340,7 +32543,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2880",
+    "$id": "2890",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32353,13 +32556,13 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2881",
+        "$id": "2891",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2882",
+            "$id": "2892",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -32370,7 +32573,7 @@
         "Name": "Gnaw",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2883",
+          "$id": "2893",
           "Value": "fa66c0a2-cfb6-4548-a0bc-d557f917e9af"
         },
         "Disabled": false,
@@ -32397,11 +32600,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2884",
+      "$id": "2894",
       "Value": "aa27307c-72e1-4620-be37-6f7cc41e800b"
     },
     "Id": {
-      "$id": "2885",
+      "$id": "2895",
       "Value": "f9adfc5f-ef4b-4e1c-b0de-beb7d39c0599"
     },
     "SetCode": "gym1",
@@ -32414,7 +32617,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2886",
+    "$id": "2896",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32427,12 +32630,12 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2887",
+        "$id": "2897",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "2888",
+            "$id": "2898",
             "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
             "EffectType": "Swap Active Pokemon",
             "RequireTargetUsabled": false,
@@ -32444,7 +32647,7 @@
         ],
         "Cost": [
           {
-            "$id": "2889",
+            "$id": "2899",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -32455,14 +32658,14 @@
         "Name": "Whirlwind",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2890",
+          "$id": "2900",
           "Value": "c13d82e3-e021-4a88-9386-175eee791c74"
         },
         "Disabled": false,
         "DamageModifier": null
       },
       {
-        "$id": "2891",
+        "$id": "2901",
         "$type": "TCGCards.Attacks.AttackFailsOnTails, TCGCards",
         "StatusEffect": 5,
         "IsOneTimeUse": false,
@@ -32472,7 +32675,7 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2892",
+            "$id": "2902",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -32483,7 +32686,7 @@
         "Name": "Razor Wind",
         "AttackType": "AttackFailsOnTails",
         "Id": {
-          "$id": "2893",
+          "$id": "2903",
           "Value": "7e54bd2d-f12c-45b2-a834-ae0753910555"
         },
         "Disabled": false,
@@ -32510,11 +32713,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2894",
+      "$id": "2904",
       "Value": "3c656b8c-7bd5-4c34-be22-f1d90c4bec04"
     },
     "Id": {
-      "$id": "2895",
+      "$id": "2905",
       "Value": "8238ce55-0b30-4c6d-a48b-5be7218e1d16"
     },
     "SetCode": "gym1",
@@ -32527,7 +32730,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2896",
+    "$id": "2906",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32540,13 +32743,13 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2897",
+        "$id": "2907",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2898",
+            "$id": "2908",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -32557,7 +32760,7 @@
         "Name": "Drill Peck",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2899",
+          "$id": "2909",
           "Value": "7998d0e5-2a77-40f1-a73f-9956cdbf1512"
         },
         "Disabled": false,
@@ -32584,11 +32787,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2900",
+      "$id": "2910",
       "Value": "6074fbbe-f8ff-4265-bb1d-2e40c0793dfa"
     },
     "Id": {
-      "$id": "2901",
+      "$id": "2911",
       "Value": "d615ab80-fc1b-4239-ab11-b2cbb4481aef"
     },
     "SetCode": "gym1",
@@ -32601,7 +32804,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2902",
+    "$id": "2912",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32614,7 +32817,36 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2903",
+        "$id": "2913",
+        "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
+        "Coins": 1,
+        "ApplyStatusIfThisOrMoreHeads": -1,
+        "StatusEffect": 0,
+        "TargetingMode": 0,
+        "ApplyWeakness": true,
+        "ApplyResistance": true,
+        "Effects": [],
+        "Cost": [
+          {
+            "$id": "2914",
+            "EnergyType": 6,
+            "Amount": 1
+          }
+        ],
+        "ExtraDiscardCost": [],
+        "Damage": 20,
+        "Description": "Flip 1 coin. This attack does 20 damage times the number of heads.",
+        "Name": "Spin Ball",
+        "AttackType": "FlipCoinAttack",
+        "Id": {
+          "$id": "2915",
+          "Value": "819ed76a-34b0-47c8-be43-f57ffd625ad2"
+        },
+        "Disabled": false,
+        "DamageModifier": null
+      },
+      {
+        "$id": "2916",
         "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
         "Coins": 2,
         "ApplyStatusIfThisOrMoreHeads": -1,
@@ -32625,12 +32857,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2904",
+            "$id": "2917",
             "EnergyType": 6,
             "Amount": 1
           },
           {
-            "$id": "2905",
+            "$id": "2918",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -32641,8 +32873,8 @@
         "Name": "Double Spin",
         "AttackType": "FlipCoinAttack",
         "Id": {
-          "$id": "2906",
-          "Value": "819ed76a-34b0-47c8-be43-f57ffd625ad2"
+          "$id": "2919",
+          "Value": "93eb871d-82c2-4ea1-8598-24d932342c99"
         },
         "Disabled": false,
         "DamageModifier": null
@@ -32668,27 +32900,27 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2907",
+      "$id": "2920",
       "Value": "6c1f3eee-bdd6-4d52-af11-95a8892fa17a"
     },
     "Id": {
-      "$id": "2908",
+      "$id": "2921",
       "Value": "4000536b-2fbe-47d3-a667-6d7386032543"
     },
     "SetCode": "gym1",
     "Name": "Lt. Surge's Voltorb",
     "ImageUrl": "https://images.pokemontcg.io/gym1/84_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2909",
+    "$id": "2922",
     "PrizeCards": 1,
     "Ability": {
-      "$id": "2910",
+      "$id": "2923",
       "$type": "TCGCards.Core.Abilities.DamageTakenModifier, TCGCards",
       "RoundDown": false,
       "Modifer": 10.0,
@@ -32701,8 +32933,10 @@
       "Usages": 9999,
       "Effects": [],
       "SelectedAbilityEffect": null,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
       "Id": {
-        "$id": "2911",
+        "$id": "2924",
         "Value": "c45ec25f-0c4c-4706-b612-75618da1978c"
       },
       "UsedTimes": 0,
@@ -32719,7 +32953,7 @@
     "Stage": 1,
     "Attacks": [
       {
-        "$id": "2912",
+        "$id": "2925",
         "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
         "Coins": 3,
         "ApplyStatusIfThisOrMoreHeads": -1,
@@ -32730,12 +32964,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2913",
+            "$id": "2926",
             "EnergyType": 3,
             "Amount": 2
           },
           {
-            "$id": "2914",
+            "$id": "2927",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -32746,7 +32980,7 @@
         "Name": "Triple Cannon",
         "AttackType": "FlipCoinAttack",
         "Id": {
-          "$id": "2915",
+          "$id": "2928",
           "Value": "806bbc44-54f2-4c81-a8f5-e5c2293a8581"
         },
         "Disabled": false,
@@ -32773,11 +33007,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2916",
+      "$id": "2929",
       "Value": "3074cc95-dfc0-416f-82de-5f1a74156289"
     },
     "Id": {
-      "$id": "2917",
+      "$id": "2930",
       "Value": "86883903-57ac-46c7-be60-a603e8c47e66"
     },
     "SetCode": "gym1",
@@ -32790,7 +33024,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2918",
+    "$id": "2931",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32803,7 +33037,7 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2919",
+        "$id": "2932",
         "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
         "Coins": 2,
         "ApplyStatusIfThisOrMoreHeads": -1,
@@ -32814,7 +33048,7 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2920",
+            "$id": "2933",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -32825,19 +33059,19 @@
         "Name": "Fury Attack",
         "AttackType": "FlipCoinAttack",
         "Id": {
-          "$id": "2921",
+          "$id": "2934",
           "Value": "e1061109-250e-4943-aa00-8d99e3a1943d"
         },
         "Disabled": false,
         "DamageModifier": null
       },
       {
-        "$id": "2922",
+        "$id": "2935",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "2923",
+            "$id": "2936",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -32850,7 +33084,7 @@
         ],
         "Cost": [
           {
-            "$id": "2924",
+            "$id": "2937",
             "EnergyType": 3,
             "Amount": 1
           }
@@ -32861,7 +33095,7 @@
         "Name": "Supersonic",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2925",
+          "$id": "2938",
           "Value": "a4fc0018-4fe4-4daa-b4ac-a5ef0ce35253"
         },
         "Disabled": false,
@@ -32888,24 +33122,24 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2926",
+      "$id": "2939",
       "Value": "1b78292b-ffff-4e63-82ab-5c497fbc8ace"
     },
     "Id": {
-      "$id": "2927",
+      "$id": "2940",
       "Value": "d5b9c82a-d031-47cc-ab8d-a46242ef6c1a"
     },
     "SetCode": "gym1",
     "Name": "Misty's Goldeen",
     "ImageUrl": "https://images.pokemontcg.io/gym1/85_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2928",
+    "$id": "2941",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32918,7 +33152,7 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2929",
+        "$id": "2942",
         "$type": "TCGCards.Attacks.AttackFailsOnTails, TCGCards",
         "StatusEffect": 5,
         "IsOneTimeUse": false,
@@ -32928,18 +33162,18 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2930",
+            "$id": "2943",
             "EnergyType": 3,
             "Amount": 1
           }
         ],
         "ExtraDiscardCost": [],
-        "Damage": 0,
+        "Damage": 30,
         "Description": "Flip a coin. If tails, this attack does nothing.",
         "Name": "Horn Hazard",
         "AttackType": "AttackFailsOnTails",
         "Id": {
-          "$id": "2931",
+          "$id": "2944",
           "Value": "15aec1c7-d071-4700-8208-29807ab24c0e"
         },
         "Disabled": false,
@@ -32966,24 +33200,24 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2932",
+      "$id": "2945",
       "Value": "4d8e327c-4610-418a-a2c1-c22beb21d3a7"
     },
     "Id": {
-      "$id": "2933",
+      "$id": "2946",
       "Value": "f387a726-8a79-43bd-b568-f4084818043d"
     },
     "SetCode": "gym1",
     "Name": "Misty's Goldeen",
     "ImageUrl": "https://images.pokemontcg.io/gym1/30_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2934",
+    "$id": "2947",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -32996,13 +33230,13 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2935",
+        "$id": "2948",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2936",
+            "$id": "2949",
             "EnergyType": 3,
             "Amount": 1
           }
@@ -33013,21 +33247,21 @@
         "Name": "Tackle",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2937",
+          "$id": "2950",
           "Value": "20cc0677-651a-4e47-b6b1-d1eae3d398d0"
         },
         "Disabled": false,
         "DamageModifier": null
       },
       {
-        "$id": "2938",
+        "$id": "2951",
         "$type": "TCGCards.Attacks.ApplyAttackFailOnTails, TCGCards",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2939",
+            "$id": "2952",
             "EnergyType": 3,
             "Amount": 2
           }
@@ -33038,7 +33272,7 @@
         "Name": "Smokescreen",
         "AttackType": "ApplyAttackFailOnTails",
         "Id": {
-          "$id": "2940",
+          "$id": "2953",
           "Value": "cafa0ae2-c762-40cb-8eb0-c7caf739f8b3"
         },
         "Disabled": false,
@@ -33065,11 +33299,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2941",
+      "$id": "2954",
       "Value": "501fee78-96cc-4e27-b44b-4df424637885"
     },
     "Id": {
-      "$id": "2942",
+      "$id": "2955",
       "Value": "c42ddf10-48e8-40b1-a05f-05fd727c218e"
     },
     "SetCode": "gym1",
@@ -33082,7 +33316,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2943",
+    "$id": "2956",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33095,7 +33329,7 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2944",
+        "$id": "2957",
         "$type": "TCGCards.Attacks.FlipCoinAttack, TCGCards",
         "Coins": 2,
         "ApplyStatusIfThisOrMoreHeads": -1,
@@ -33106,12 +33340,12 @@
         "Effects": [],
         "Cost": [
           {
-            "$id": "2945",
+            "$id": "2958",
             "EnergyType": 3,
             "Amount": 1
           },
           {
-            "$id": "2946",
+            "$id": "2959",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -33122,7 +33356,7 @@
         "Name": "Tail Rap",
         "AttackType": "FlipCoinAttack",
         "Id": {
-          "$id": "2947",
+          "$id": "2960",
           "Value": "7b941431-f1f2-4b67-a2f3-c74a3ff0253c"
         },
         "Disabled": false,
@@ -33149,11 +33383,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2948",
+      "$id": "2961",
       "Value": "7389db88-9922-44c5-a873-78d6266fbc01"
     },
     "Id": {
-      "$id": "2949",
+      "$id": "2962",
       "Value": "a596545c-081f-4b9e-8445-9b94effce5ab"
     },
     "SetCode": "gym1",
@@ -33166,7 +33400,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2950",
+    "$id": "2963",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33198,11 +33432,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2951",
+      "$id": "2964",
       "Value": "3502655a-3f27-4470-81a3-85b90e1982d8"
     },
     "Id": {
-      "$id": "2952",
+      "$id": "2965",
       "Value": "d1953aad-280e-4846-9e7b-a0899e9aacd1"
     },
     "SetCode": "gym1",
@@ -33215,7 +33449,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2953",
+    "$id": "2966",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33247,11 +33481,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2954",
+      "$id": "2967",
       "Value": "c6f54bc1-8e3d-4d7f-b11d-bb81638ab8f1"
     },
     "Id": {
-      "$id": "2955",
+      "$id": "2968",
       "Value": "2a79e9cc-5cc2-42a2-ad10-59bae822a2d1"
     },
     "SetCode": "gym1",
@@ -33264,7 +33498,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2956",
+    "$id": "2969",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33277,13 +33511,13 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2957",
+        "$id": "2970",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2958",
+            "$id": "2971",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -33294,7 +33528,7 @@
         "Name": "Scratch",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2959",
+          "$id": "2972",
           "Value": "86840f93-a043-4df2-8631-f387ddaa59b9"
         },
         "Disabled": false,
@@ -33321,11 +33555,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2960",
+      "$id": "2973",
       "Value": "67792f8e-cc45-4c97-981d-37ec7a4a96d4"
     },
     "Id": {
-      "$id": "2961",
+      "$id": "2974",
       "Value": "15443415-35d1-45f4-bfce-1cb57727774a"
     },
     "SetCode": "gym1",
@@ -33338,7 +33572,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2962",
+    "$id": "2975",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33351,13 +33585,13 @@
     "Stage": 1,
     "Attacks": [
       {
-        "$id": "2963",
+        "$id": "2976",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2964",
+            "$id": "2977",
             "EnergyType": 3,
             "Amount": 1
           }
@@ -33368,7 +33602,7 @@
         "Name": "Tail Snap",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2965",
+          "$id": "2978",
           "Value": "bf3bcd83-2371-48bf-87c8-f6447ff4184d"
         },
         "Disabled": false,
@@ -33395,11 +33629,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2966",
+      "$id": "2979",
       "Value": "748ba093-807b-4812-a100-61f1a9c9706a"
     },
     "Id": {
-      "$id": "2967",
+      "$id": "2980",
       "Value": "0988ee8c-3fa2-408c-800c-33c56f9f7a47"
     },
     "SetCode": "gym1",
@@ -33412,7 +33646,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2968",
+    "$id": "2981",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33425,13 +33659,13 @@
     "Stage": 1,
     "Attacks": [
       {
-        "$id": "2969",
+        "$id": "2982",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2970",
+            "$id": "2983",
             "EnergyType": 3,
             "Amount": 1
           }
@@ -33442,7 +33676,7 @@
         "Name": "Horn Attack",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2971",
+          "$id": "2984",
           "Value": "725bc772-1b8b-4a69-b8fb-b5d9ddfd7c42"
         },
         "Disabled": false,
@@ -33469,11 +33703,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2972",
+      "$id": "2985",
       "Value": "0124d7bf-9248-4c88-94f1-394c43eca1aa"
     },
     "Id": {
-      "$id": "2973",
+      "$id": "2986",
       "Value": "700784e8-f72b-4a9d-8a2a-6d0e02267a59"
     },
     "SetCode": "gym1",
@@ -33486,7 +33720,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2974",
+    "$id": "2987",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33499,18 +33733,18 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2975",
+        "$id": "2988",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2976",
+            "$id": "2989",
             "EnergyType": 3,
             "Amount": 1
           },
           {
-            "$id": "2977",
+            "$id": "2990",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -33521,7 +33755,7 @@
         "Name": "Aurora Beam",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2978",
+          "$id": "2991",
           "Value": "35664d16-3299-4ed9-a051-a92ed99501d0"
         },
         "Disabled": false,
@@ -33548,11 +33782,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2979",
+      "$id": "2992",
       "Value": "3e0ebd14-3ada-42b5-b858-e5cec1f8dc36"
     },
     "Id": {
-      "$id": "2980",
+      "$id": "2993",
       "Value": "6c1113ac-0138-4eae-b54f-9e8120ff3aea"
     },
     "SetCode": "gym1",
@@ -33565,7 +33799,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2981",
+    "$id": "2994",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33578,13 +33812,13 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "2982",
+        "$id": "2995",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "2983",
+            "$id": "2996",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -33595,14 +33829,14 @@
         "Name": "Tackle",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2984",
+          "$id": "2997",
           "Value": "d4608e76-4ba6-44ae-acaa-b6dd8c43c7ce"
         },
         "Disabled": false,
         "DamageModifier": null
       },
       {
-        "$id": "2985",
+        "$id": "2998",
         "$type": "TCGCards.Attacks.AttackFailsOnTails, TCGCards",
         "StatusEffect": 5,
         "IsOneTimeUse": false,
@@ -33611,7 +33845,7 @@
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "2986",
+            "$id": "2999",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": true,
             "CheckTails": false,
@@ -33624,12 +33858,12 @@
         ],
         "Cost": [
           {
-            "$id": "2987",
+            "$id": "3000",
             "EnergyType": 3,
             "Amount": 1
           },
           {
-            "$id": "2988",
+            "$id": "3001",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -33640,7 +33874,7 @@
         "Name": "Clamp",
         "AttackType": "AttackFailsOnTails",
         "Id": {
-          "$id": "2989",
+          "$id": "3002",
           "Value": "08f3667c-d76e-4e4a-b209-0385ffee94c5"
         },
         "Disabled": false,
@@ -33667,11 +33901,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2990",
+      "$id": "3003",
       "Value": "383ebba7-eadd-4816-8950-3f0e16258bb9"
     },
     "Id": {
-      "$id": "2991",
+      "$id": "3004",
       "Value": "a3569a95-7ce7-4db9-b107-65d222cb11bd"
     },
     "SetCode": "gym1",
@@ -33684,7 +33918,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2992",
+    "$id": "3005",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33697,12 +33931,12 @@
     "Stage": 1,
     "Attacks": [
       {
-        "$id": "2993",
+        "$id": "3006",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "2994",
+            "$id": "3007",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -33715,7 +33949,7 @@
         ],
         "Cost": [
           {
-            "$id": "2995",
+            "$id": "3008",
             "EnergyType": 3,
             "Amount": 3
           }
@@ -33726,7 +33960,7 @@
         "Name": "Bubblebeam",
         "AttackType": "Attack",
         "Id": {
-          "$id": "2996",
+          "$id": "3009",
           "Value": "20e64ab0-a25b-4209-8ea5-28ffbe4692a5"
         },
         "Disabled": false,
@@ -33753,11 +33987,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "2997",
+      "$id": "3010",
       "Value": "11f715e9-019d-421a-9407-83eefec57eab"
     },
     "Id": {
-      "$id": "2998",
+      "$id": "3011",
       "Value": "72b25ffc-5e38-4806-bcb6-69eb3b57ad2b"
     },
     "SetCode": "gym1",
@@ -33770,7 +34004,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "2999",
+    "$id": "3012",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33802,11 +34036,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3000",
+      "$id": "3013",
       "Value": "ce692fe3-0d9b-4536-8cea-f99b3100a23e"
     },
     "Id": {
-      "$id": "3001",
+      "$id": "3014",
       "Value": "dae85e8e-ca1a-4b0c-aa9d-ff00a9576942"
     },
     "SetCode": "gym1",
@@ -33819,7 +34053,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3002",
+    "$id": "3015",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33851,11 +34085,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3003",
+      "$id": "3016",
       "Value": "b6bf50c9-7243-49f1-a385-6c6cf66a8fb7"
     },
     "Id": {
-      "$id": "3004",
+      "$id": "3017",
       "Value": "8b39bc6a-cd55-4c41-b378-3d778e6687bd"
     },
     "SetCode": "gym1",
@@ -33868,7 +34102,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3005",
+    "$id": "3018",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33881,12 +34115,12 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3006",
+        "$id": "3019",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "3007",
+            "$id": "3020",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -33899,7 +34133,7 @@
         ],
         "Cost": [
           {
-            "$id": "3008",
+            "$id": "3021",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -33910,7 +34144,7 @@
         "Name": "Mysterious Light",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3009",
+          "$id": "3022",
           "Value": "08fce781-f054-4849-ba6f-c619ddb7dc4d"
         },
         "Disabled": false,
@@ -33937,11 +34171,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3010",
+      "$id": "3023",
       "Value": "41389b69-9f40-4b49-8878-16a53280152f"
     },
     "Id": {
-      "$id": "3011",
+      "$id": "3024",
       "Value": "54c40b8e-53db-4b21-bd33-78968fe5841a"
     },
     "SetCode": "gym1",
@@ -33954,7 +34188,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3012",
+    "$id": "3025",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -33986,11 +34220,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3013",
+      "$id": "3026",
       "Value": "97739053-d16e-4003-9a3f-de8efda8dfd7"
     },
     "Id": {
-      "$id": "3014",
+      "$id": "3027",
       "Value": "10ba5816-df6e-4f12-9b87-a62d6fa72d5d"
     },
     "SetCode": "gym1",
@@ -34003,7 +34237,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3015",
+    "$id": "3028",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34016,18 +34250,18 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3016",
+        "$id": "3029",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "3017",
+            "$id": "3030",
             "EnergyType": 8,
             "Amount": 2
           },
           {
-            "$id": "3018",
+            "$id": "3031",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -34038,7 +34272,7 @@
         "Name": "Magnum Punch",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3019",
+          "$id": "3032",
           "Value": "62f3c816-5221-4c08-8a09-7eaec7f55678"
         },
         "Disabled": false,
@@ -34065,11 +34299,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3020",
+      "$id": "3033",
       "Value": "aff7bddc-50ac-4ff2-975d-84133d4e326a"
     },
     "Id": {
-      "$id": "3021",
+      "$id": "3034",
       "Value": "132ad01b-bafc-48e5-bd6d-c79978700e8c"
     },
     "SetCode": "gym1",
@@ -34082,7 +34316,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3022",
+    "$id": "3035",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34114,11 +34348,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3023",
+      "$id": "3036",
       "Value": "b69a2896-d472-41c4-9ebd-fdcc77586edd"
     },
     "Id": {
-      "$id": "3024",
+      "$id": "3037",
       "Value": "6f7957d0-fc39-407b-8fa3-4fbe667c6e1d"
     },
     "SetCode": "gym1",
@@ -34131,7 +34365,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3025",
+    "$id": "3038",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34144,18 +34378,18 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3026",
+        "$id": "3039",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "3027",
+            "$id": "3040",
             "EnergyType": 5,
             "Amount": 1
           },
           {
-            "$id": "3028",
+            "$id": "3041",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -34166,7 +34400,7 @@
         "Name": "Blinding Scythe",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3029",
+          "$id": "3042",
           "Value": "4a7571d3-e60b-4358-aec2-b9aff3b5202a"
         },
         "Disabled": false,
@@ -34193,11 +34427,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3030",
+      "$id": "3043",
       "Value": "fc071fe7-4a5d-41d9-99fb-970328410cdb"
     },
     "Id": {
-      "$id": "3031",
+      "$id": "3044",
       "Value": "dbe5a69e-4d7b-41f5-a520-2114477dddd4"
     },
     "SetCode": "gym1",
@@ -34210,7 +34444,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3032",
+    "$id": "3045",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34242,11 +34476,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3033",
+      "$id": "3046",
       "Value": "92d40416-a4f2-4775-bb2b-1cb355f82318"
     },
     "Id": {
-      "$id": "3034",
+      "$id": "3047",
       "Value": "a7961c65-5801-46ab-90f7-529585288831"
     },
     "SetCode": "gym1",
@@ -34259,7 +34493,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3035",
+    "$id": "3048",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34291,11 +34525,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3036",
+      "$id": "3049",
       "Value": "3159d531-00c1-40b1-91d9-cf901b917212"
     },
     "Id": {
-      "$id": "3037",
+      "$id": "3050",
       "Value": "95371fc2-b401-403f-8756-d0b1469784c8"
     },
     "SetCode": "gym1",
@@ -34308,7 +34542,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3038",
+    "$id": "3051",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34321,13 +34555,13 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3039",
+        "$id": "3052",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "3040",
+            "$id": "3053",
             "EnergyType": 2,
             "Amount": 2
           }
@@ -34338,7 +34572,7 @@
         "Name": "Headbutt",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3041",
+          "$id": "3054",
           "Value": "3af2012d-0585-44f5-b415-5f9c567f0106"
         },
         "Disabled": false,
@@ -34365,11 +34599,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3042",
+      "$id": "3055",
       "Value": "0069ed72-c193-4396-b518-5c80b6185863"
     },
     "Id": {
-      "$id": "3043",
+      "$id": "3056",
       "Value": "9dc7a278-b0dd-4501-b9fc-f544a1e76fd4"
     },
     "SetCode": "gym1",
@@ -34382,7 +34616,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3044",
+    "$id": "3057",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34395,12 +34629,12 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3045",
+        "$id": "3058",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "3046",
+            "$id": "3059",
             "$type": "TCGCards.TrainerEffects.ApplyRetreatStopper, TCGCards",
             "FlipCoin": false,
             "Turns": 2,
@@ -34410,12 +34644,12 @@
         ],
         "Cost": [
           {
-            "$id": "3047",
+            "$id": "3060",
             "EnergyType": 7,
             "Amount": 1
           },
           {
-            "$id": "3048",
+            "$id": "3061",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -34426,7 +34660,7 @@
         "Name": "Spook",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3049",
+          "$id": "3062",
           "Value": "0489a14d-b046-4bdb-8501-f097e01af12d"
         },
         "Disabled": false,
@@ -34453,11 +34687,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3050",
+      "$id": "3063",
       "Value": "7ef5939b-1dc3-4a68-9f30-f11722948f1b"
     },
     "Id": {
-      "$id": "3051",
+      "$id": "3064",
       "Value": "e238471d-965d-4c95-b2ab-c424e6213f52"
     },
     "SetCode": "gym1",
@@ -34470,7 +34704,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3052",
+    "$id": "3065",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34502,11 +34736,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3053",
+      "$id": "3066",
       "Value": "d2060ef1-d10f-4200-a80e-0ba91f474a74"
     },
     "Id": {
-      "$id": "3054",
+      "$id": "3067",
       "Value": "035d0cdf-4c3a-4c79-bfef-c711bd57da46"
     },
     "SetCode": "gym1",
@@ -34519,7 +34753,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3055",
+    "$id": "3068",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34551,11 +34785,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3056",
+      "$id": "3069",
       "Value": "9ebc258f-8bcc-4aa9-a3f3-fcd03707356d"
     },
     "Id": {
-      "$id": "3057",
+      "$id": "3070",
       "Value": "acecc662-6946-4469-ae87-c0202457e5a2"
     },
     "SetCode": "gym1",
@@ -34568,7 +34802,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3058",
+    "$id": "3071",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34581,12 +34815,12 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3059",
+        "$id": "3072",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "3060",
+            "$id": "3073",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -34599,7 +34833,7 @@
         ],
         "Cost": [
           {
-            "$id": "3061",
+            "$id": "3074",
             "EnergyType": 7,
             "Amount": 1
           }
@@ -34610,7 +34844,7 @@
         "Name": "Good Night",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3062",
+          "$id": "3075",
           "Value": "414f428d-296b-4bbb-acd6-f7123678acb2"
         },
         "Disabled": false,
@@ -34637,11 +34871,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3063",
+      "$id": "3076",
       "Value": "72fc7b83-29b8-4df5-81b8-717a6684aa21"
     },
     "Id": {
-      "$id": "3064",
+      "$id": "3077",
       "Value": "e4c32ad6-e861-459d-af6d-d5de5412939d"
     },
     "SetCode": "gym1",
@@ -34654,7 +34888,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3065",
+    "$id": "3078",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34667,18 +34901,18 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3066",
+        "$id": "3079",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [],
         "Cost": [
           {
-            "$id": "3067",
+            "$id": "3080",
             "EnergyType": 7,
             "Amount": 1
           },
           {
-            "$id": "3068",
+            "$id": "3081",
             "EnergyType": 2,
             "Amount": 1
           }
@@ -34689,7 +34923,7 @@
         "Name": "Slap",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3069",
+          "$id": "3082",
           "Value": "2e84234d-b8e8-43af-aab1-7dbab4c31e40"
         },
         "Disabled": false,
@@ -34716,11 +34950,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3070",
+      "$id": "3083",
       "Value": "a9d4ce2c-fa5a-4497-85b7-14403528e3c2"
     },
     "Id": {
-      "$id": "3071",
+      "$id": "3084",
       "Value": "e6edbec2-100a-46d5-ad96-b9e73be40d8e"
     },
     "SetCode": "gym1",
@@ -34733,7 +34967,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3072",
+    "$id": "3085",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34765,11 +34999,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3073",
+      "$id": "3086",
       "Value": "912d5c9d-6416-4508-b857-fe3107889eb3"
     },
     "Id": {
-      "$id": "3074",
+      "$id": "3087",
       "Value": "b763f5b6-594b-4858-b0c7-41edc1431057"
     },
     "SetCode": "gym1",
@@ -34782,7 +35016,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3075",
+    "$id": "3088",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34814,11 +35048,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3076",
+      "$id": "3089",
       "Value": "12ff13c9-40b7-4ba4-b7f3-7458ae9d31ef"
     },
     "Id": {
-      "$id": "3077",
+      "$id": "3090",
       "Value": "d5ab434d-9298-4935-a215-6a970b8bd515"
     },
     "SetCode": "gym1",
@@ -34831,7 +35065,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3078",
+    "$id": "3091",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34863,11 +35097,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3079",
+      "$id": "3092",
       "Value": "38e44c96-a84e-432e-884f-89a0d3aa9251"
     },
     "Id": {
-      "$id": "3080",
+      "$id": "3093",
       "Value": "e9277d03-f7b2-43b3-b5e7-7f513b432aff"
     },
     "SetCode": "gym1",
@@ -34880,7 +35114,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "3081",
+    "$id": "3094",
     "PrizeCards": 1,
     "Ability": null,
     "SelectedAttack": null,
@@ -34893,12 +35127,12 @@
     "Stage": 0,
     "Attacks": [
       {
-        "$id": "3082",
+        "$id": "3095",
         "ApplyWeakness": true,
         "ApplyResistance": true,
         "Effects": [
           {
-            "$id": "3083",
+            "$id": "3096",
             "$type": "TCGCards.TrainerEffects.ApplyStatusEffect, TCGCards",
             "UseLastCoin": false,
             "CheckTails": false,
@@ -34911,7 +35145,7 @@
         ],
         "Cost": [
           {
-            "$id": "3084",
+            "$id": "3097",
             "EnergyType": 5,
             "Amount": 1
           }
@@ -34922,7 +35156,7 @@
         "Name": "Poison Antennae",
         "AttackType": "Attack",
         "Id": {
-          "$id": "3085",
+          "$id": "3098",
           "Value": "02763a25-3a40-4dd0-8bd2-9ddd36869ab8"
         },
         "Disabled": false,
@@ -34949,11 +35183,11 @@
     "EvolvedThisTurn": false,
     "AbilityDisabled": false,
     "CardId": {
-      "$id": "3086",
+      "$id": "3099",
       "Value": "fdf24ee1-90dd-4b72-bab4-21020eadf39a"
     },
     "Id": {
-      "$id": "3087",
+      "$id": "3100",
       "Value": "fcc2e28b-a3e9-495a-b1b7-a475c27cb8d6"
     },
     "SetCode": "gym1",
