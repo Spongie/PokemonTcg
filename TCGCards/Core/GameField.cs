@@ -804,7 +804,7 @@ namespace TCGCards.Core
             var killedPokemons = new List<PokemonCard>();
             foreach (PokemonCard pokemon in player.BenchedPokemon)
             {
-                if (!pokemon.IsDead())
+                if (pokemon == null || !pokemon.IsDead())
                 {
                     continue;
                 }

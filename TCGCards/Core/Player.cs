@@ -355,7 +355,10 @@ namespace TCGCards.Core
 
             foreach (var pokemon in BenchedPokemon)
             {
-                pokemonCards.Add(pokemon);
+                if (pokemon != null)
+                {
+                    pokemonCards.Add(pokemon);
+                }
             }
 
             return pokemonCards;
@@ -415,6 +418,8 @@ namespace TCGCards.Core
                 SetActivePokemon(BenchedPokemon[0]);
                 return;
             }
+
+            game.GetOpponentOf(this).NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active Pokémon").ToNetworkMessage(Id));
 
             var message = new SelectFromYourBenchMessage(1).ToNetworkMessage(Id);
 

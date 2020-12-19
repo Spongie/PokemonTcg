@@ -14,6 +14,7 @@ namespace TCGCards.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
+            opponent.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active Pokémon for you").ToNetworkMessage(Id));
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromOpponentBenchMessage().ToNetworkMessage(game.Id));
 
             var newActivePokemon = (PokemonCard)game.Cards[response.Cards.First()];
