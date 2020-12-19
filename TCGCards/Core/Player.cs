@@ -201,7 +201,7 @@ namespace TCGCards.Core
 
             foreach(var pokemon in BenchedPokemon)
             {
-                pokemon.EndTurn(game);
+                pokemon?.EndTurn(game);
             }
         }
 

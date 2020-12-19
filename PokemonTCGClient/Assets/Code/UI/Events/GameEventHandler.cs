@@ -19,6 +19,7 @@ namespace Assets.Code.UI.Events
         public AbilityActivatedEventHandler AbilityActivatedEventHandler;
         public PokemonBecameActiveEventHandler PokemonBecameActiveEventHandler;
         public PokemonAddedToBenchEventHandler PokemonAddedToBenchEventHandler;
+        public PokemonRemovedFromBenchEventHandler PokemonRemovedFromBenchEventHandler;
         public PokemonEvolvedEventHandler PokemonEvolvedEventHandler;
         public AttachedEnergyDiscardedEventHandler AttachedEnergyDiscardedEventHandler;
         public PokemonDiedEventHandler PokemonDiedEventHandler;
@@ -175,6 +176,10 @@ namespace Assets.Code.UI.Events
                 case GameEventType.PokemonHealed:
                     PokemonHealedEventHandler.gameObject.SetActive(true);
                     PokemonHealedEventHandler.Trigger((PokemonHealedEvent)gameEvent);
+                    break;
+                case GameEventType.RemovedFromBench:
+                    PokemonRemovedFromBenchEventHandler.gameObject.SetActive(true);
+                    PokemonRemovedFromBenchEventHandler.Trigger((PokemonRemovedFromBench)gameEvent);
                     break;
                 default:
                     break;

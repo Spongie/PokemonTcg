@@ -18,6 +18,7 @@
         SyncGame = 13,
         GameInfo = 14,
         PokemonBounced = 15,
-        PokemonHealed = 16
+        PokemonHealed = 16,
+        RemovedFromBench = 17
     }
 }
