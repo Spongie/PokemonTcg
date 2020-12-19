@@ -32,6 +32,18 @@
                     <Label Content="Usable while benched" MinWidth="80"/>
                     <CheckBox IsChecked="{Binding UsableWhileBenched}"/>
                 </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Usable while asleep" MinWidth="80"/>
+                    <CheckBox IsChecked="{Binding UsableWhileAsleep}"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Usable while paralyzed" MinWidth="80"/>
+                    <CheckBox IsChecked="{Binding UsableWhileParalyzed}"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Usable while confused" MinWidth="80"/>
+                    <CheckBox IsChecked="{Binding UsableWhileConfused}"/>
+                </DockPanel>
                 <local:DynamicInputControl DataContext="{Binding }" VerticalAlignment="Stretch">
 
                 </local:DynamicInputControl>

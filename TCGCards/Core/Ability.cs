@@ -19,6 +19,9 @@ namespace TCGCards.Core
         private IEffect selectedAbilityEffect;
         private bool usableWhileActive = true;
         private bool usableWhileBenched = true;
+        private bool usableWhileParalyzed = false;
+        private bool usableWhileAsleep = false;
+        private bool usableWhileConfused = false;
 
         public Ability():this(null)
         {
@@ -118,6 +121,37 @@ namespace TCGCards.Core
             }
         }
 
+        public bool UsableWhileConfused
+        {
+            get { return usableWhileConfused; }
+            set
+            {
+                usableWhileConfused = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UsableWhileAsleep
+        {
+            get { return usableWhileAsleep; }
+            set
+            {
+                usableWhileAsleep = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool UsableWhileParalyzed
+        {
+            get { return usableWhileParalyzed; }
+            set
+            {
+                usableWhileParalyzed = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public bool UsableWhileActive
         {
             get { return usableWhileActive; }
@@ -171,11 +205,20 @@ namespace TCGCards.Core
             {
                 return false;
             }
-            
+            else if (!UsableWhileAsleep && PokemonOwner.IsAsleep)
+            {
+                return false;
+            }
+            else if (!UsableWhileConfused && PokemonOwner.IsConfused)
+            {
+                return false;
+            }
+            else if (!UsableWhileParalyzed && PokemonOwner.IsParalyzed)
+            {
+                return false;
+            }
+
             return !PokemonOwner.AbilityDisabled 
-                && !PokemonOwner.IsAsleep 
-                && !PokemonOwner.IsConfused 
-                && !PokemonOwner.IsParalyzed 
                 && UsedTimes < Usages 
                 && Effects.All(effect => effect.CanCast(game, caster, opponent));
         }

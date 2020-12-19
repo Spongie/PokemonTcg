@@ -22,6 +22,9 @@
           "Usages": 9999,
           "Effects": [],
           "SelectedAbilityEffect": null,
+          "UsableWhileConfused": false,
+          "UsableWhileAsleep": false,
+          "UsableWhileParalyzed": false,
           "UsableWhileActive": true,
           "UsableWhileBenched": true,
           "Id": {
@@ -766,6 +769,9 @@
           "Usages": 9999,
           "Effects": [],
           "SelectedAbilityEffect": null,
+          "UsableWhileConfused": false,
+          "UsableWhileAsleep": false,
+          "UsableWhileParalyzed": false,
           "UsableWhileActive": true,
           "UsableWhileBenched": true,
           "Id": {
@@ -1899,34 +1905,45 @@
   {
     "$id": "252",
     "AddToDiscardWhenCasting": true,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "253",
+        "$type": "TCGCards.TrainerEffects.PickCardFromTopOfDeck, TCGCards",
+        "EffectType": "Pick cards from top of deck",
+        "AmountToPick": 2,
+        "AmountToPickFrom": 7,
+        "CardType": 0,
+        "EnergyType": 0,
+        "RevealPickedCards": false
+      }
+    ],
     "CardId": {
-      "$id": "253",
+      "$id": "254",
       "Value": "c329757b-1625-445f-affc-94204623c743"
     },
     "Id": {
-      "$id": "254",
+      "$id": "255",
       "Value": "9777a315-de35-44d5-ae18-b64f744e52bc"
     },
     "SetCode": "gym1",
     "Name": "Misty's Wrath",
     "ImageUrl": "https://images.pokemontcg.io/gym1/114_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "IsRevealed": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "255",
+    "$id": "256",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "256",
+      "$id": "257",
       "Value": "c7c1f12b-9525-4c9c-8e46-487f023ece5b"
     },
     "Id": {
-      "$id": "257",
+      "$id": "258",
       "Value": "3fd31dd4-7543-4efd-bc4d-a007a5db8a09"
     },
     "SetCode": "gym1",
@@ -1939,15 +1956,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "258",
+    "$id": "259",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "259",
+      "$id": "260",
       "Value": "b195ad84-5ef5-4ca2-8edd-6118905eea08"
     },
     "Id": {
-      "$id": "260",
+      "$id": "261",
       "Value": "ca90d2ed-95eb-4741-b532-5c1381534211"
     },
     "SetCode": "gym1",
@@ -1960,15 +1977,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "261",
+    "$id": "262",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "262",
+      "$id": "263",
       "Value": "52fc3238-1a5d-41ee-8dfa-c2761fa4a7eb"
     },
     "Id": {
-      "$id": "263",
+      "$id": "264",
       "Value": "f76cf6b9-232c-4152-833a-6e7b1dc989bb"
     },
     "SetCode": "gym1",
@@ -1981,15 +1998,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "264",
+    "$id": "265",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "265",
+      "$id": "266",
       "Value": "1ba3e045-5826-47b8-b00c-ad81a5e4dc05"
     },
     "Id": {
-      "$id": "266",
+      "$id": "267",
       "Value": "8dd70f3b-de56-4128-bfcb-090f90c7805b"
     },
     "SetCode": "gym1",
@@ -2002,11 +2019,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "267",
+    "$id": "268",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "268",
+        "$id": "269",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "EvolveSource": false,
@@ -2019,11 +2036,11 @@
       }
     ],
     "CardId": {
-      "$id": "269",
+      "$id": "270",
       "Value": "273adcce-6f3f-456e-ac0c-f65bb14c4187"
     },
     "Id": {
-      "$id": "270",
+      "$id": "271",
       "Value": "e4f5abb2-82c5-4bd7-9826-265d419035ba"
     },
     "SetCode": "gym1",
@@ -2036,15 +2053,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "271",
+    "$id": "272",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "272",
+      "$id": "273",
       "Value": "a0c30b06-fce9-478b-b75b-f8f2aa909b15"
     },
     "Id": {
-      "$id": "273",
+      "$id": "274",
       "Value": "1172360c-df52-4d41-b3ba-9c324ea55a30"
     },
     "SetCode": "gym1",
@@ -2057,15 +2074,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "274",
+    "$id": "275",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "275",
+      "$id": "276",
       "Value": "2123b1dc-6743-4baa-b78d-23a39a5452ee"
     },
     "Id": {
-      "$id": "276",
+      "$id": "277",
       "Value": "bc15a2eb-c300-466b-a599-5f8553413e6e"
     },
     "SetCode": "gym1",
@@ -2078,15 +2095,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "277",
+    "$id": "278",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "278",
+      "$id": "279",
       "Value": "8b5eefb0-066e-4a25-a760-a2a0c05d9585"
     },
     "Id": {
-      "$id": "279",
+      "$id": "280",
       "Value": "0083a211-8aad-480c-90c0-795e83b93b4c"
     },
     "SetCode": "gym1",
@@ -2099,15 +2116,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "280",
+    "$id": "281",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "281",
+      "$id": "282",
       "Value": "f5a409fc-2997-4837-8cbf-7f810e0aab78"
     },
     "Id": {
-      "$id": "282",
+      "$id": "283",
       "Value": "5e4052b0-aa9f-4b3e-b407-1f22424578fb"
     },
     "SetCode": "gym1",
@@ -2120,11 +2137,11 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "283",
+    "$id": "284",
     "AddToDiscardWhenCasting": true,
     "Effects": [
       {
-        "$id": "284",
+        "$id": "285",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
@@ -2133,7 +2150,7 @@
         "EffectType": "Draw cards"
       },
       {
-        "$id": "285",
+        "$id": "286",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
@@ -2143,11 +2160,11 @@
       }
     ],
     "CardId": {
-      "$id": "286",
+      "$id": "287",
       "Value": "2873696f-daf3-4e9a-aff1-fba3a48e8f23"
     },
     "Id": {
-      "$id": "287",
+      "$id": "288",
       "Value": "c44ae620-aedc-484b-bae6-b7b9f0db8e98"
     },
     "SetCode": "gym1",
@@ -2160,15 +2177,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "288",
+    "$id": "289",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "289",
+      "$id": "290",
       "Value": "6981ee1c-ca59-4f97-8ba6-b1a272d5896a"
     },
     "Id": {
-      "$id": "290",
+      "$id": "291",
       "Value": "233a2673-933c-4136-93ac-cfe726a8049e"
     },
     "SetCode": "gym1",
@@ -2181,15 +2198,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "291",
+    "$id": "292",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "292",
+      "$id": "293",
       "Value": "bd6a5784-e74d-4fed-9203-be8edbbcf3a2"
     },
     "Id": {
-      "$id": "293",
+      "$id": "294",
       "Value": "92458066-2918-44cf-af4b-135548413ee5"
     },
     "SetCode": "gym1",
@@ -2202,15 +2219,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "294",
+    "$id": "295",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "295",
+      "$id": "296",
       "Value": "adf21400-f799-4ba3-9ba2-7c2089e4afa1"
     },
     "Id": {
-      "$id": "296",
+      "$id": "297",
       "Value": "eeccca62-97d8-4cf4-9190-a172085c686a"
     },
     "SetCode": "gym1",
@@ -2223,15 +2240,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "297",
+    "$id": "298",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "298",
+      "$id": "299",
       "Value": "c6e4efba-7b03-4752-8a32-7b06d03bdfa4"
     },
     "Id": {
-      "$id": "299",
+      "$id": "300",
       "Value": "56161f28-e68c-4d79-87f0-6814bedccfce"
     },
     "SetCode": "gym1",
@@ -2244,15 +2261,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "300",
+    "$id": "301",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "301",
+      "$id": "302",
       "Value": "ef3767bb-5acf-4c90-bb11-1551783e11f5"
     },
     "Id": {
-      "$id": "302",
+      "$id": "303",
       "Value": "0d3e7856-e98d-462b-a29b-ca327d36d456"
     },
     "SetCode": "gym1",
@@ -2265,15 +2282,15 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "303",
+    "$id": "304",
     "AddToDiscardWhenCasting": true,
     "Effects": [],
     "CardId": {
-      "$id": "304",
+      "$id": "305",
       "Value": "b6646413-2723-4817-85cd-e51980afd69b"
     },
     "Id": {
-      "$id": "305",
+      "$id": "306",
       "Value": "2bbcc0f8-59ad-4712-b398-aeb9680e8742"
     },
     "SetCode": "gym1",

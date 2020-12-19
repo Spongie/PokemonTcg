@@ -9,6 +9,7 @@ namespace TCGCards.Attacks
     public class FlipCoinForeachEnergy : Attack
     {
         private bool discardForEachHead;
+        private EnergyTypes onlyThisType = EnergyTypes.All;
 
         [DynamicInput("Discard for each heads?", InputControl.Boolean)]
         public bool DiscardForeachHead
@@ -21,9 +22,34 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Only this type", InputControl.Dropdown, typeof(EnergyTypes))]
+        public EnergyTypes OnlyThisType
+        {
+            get { return onlyThisType; }
+            set
+            {
+                onlyThisType = value;
+                FirePropertyChanged();
+            }
+        }
+
+        private int extraBaseDamage;
+
+        [DynamicInput("Extra Damage after flips")]
+        public int ExtraBaseDamage
+        {
+            get { return extraBaseDamage; }
+            set
+            {
+                extraBaseDamage = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            var heads = game.FlipCoins(owner.ActivePokemonCard.AttachedEnergy.Count);
+            var heads = game.FlipCoins(owner.ActivePokemonCard.AttachedEnergy.Count(e => OnlyThisType == EnergyTypes.All || e.EnergyType == OnlyThisType));
 
             if (heads > 0)
             {
@@ -32,7 +58,7 @@ namespace TCGCards.Attacks
                 opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.Cards[response.Cards.First()], game);
             }
 
-            return heads * Damage;
+            return ExtraBaseDamage + (heads * Damage);
         }
     }
 }

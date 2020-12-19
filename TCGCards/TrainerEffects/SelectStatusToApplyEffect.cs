@@ -17,6 +17,7 @@ namespace TCGCards.TrainerEffects
         private bool canSelectSleep;
 
         private TargetingMode targetingMode;
+        private bool coinFlip;
 
         [DynamicInput("Target", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -85,6 +86,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("CoinFlip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -105,6 +118,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+
             var response = caster.NetworkPlayer.SendAndWaitForResponse<StatusEffectMessage>(new PickStatusMessage()
             {
                 CanBurn = CanSelectBurn,
