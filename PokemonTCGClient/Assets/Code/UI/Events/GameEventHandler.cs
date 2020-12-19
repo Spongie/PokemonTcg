@@ -203,6 +203,7 @@ namespace Assets.Code.UI.Events
             PokemonDiedEventHandler.gameObject.SetActive(false);
             PokemonBouncedEventHandler.gameObject.SetActive(false);
             PokemonHealedEventHandler.gameObject.SetActive(false);
+            PokemonBouncedEventHandler.gameObject.SetActive(false);
 
             string info = currentEvent is GameSyncEvent ? ((GameSyncEvent)currentEvent).Info : "";
             GameController.Instance.OnInfoUpdated(currentEvent.GameField, info);

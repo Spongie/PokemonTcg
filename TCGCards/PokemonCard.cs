@@ -225,13 +225,13 @@ namespace TCGCards
 
             if (IsBurned)
             {
-                DealDamage(20, game, this, false);
+                DealDamage(20, game, new PokemonCard() { Type = EnergyTypes.Fire }, false);
                 IsBurned = game.FlipCoins(1) == 0;
             }
 
             if (IsPoisoned)
             {
-                DealDamage(DoublePoison ? 20 : 10, game, this, false);
+                DealDamage(DoublePoison ? 20 : 10, game, new PokemonCard() { Type = EnergyTypes.Psychic }, false);
             }
 
             if(IsAsleep)

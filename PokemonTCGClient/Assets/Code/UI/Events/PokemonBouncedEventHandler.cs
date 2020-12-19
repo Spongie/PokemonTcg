@@ -1,6 +1,8 @@
-﻿using TCGCards;
+﻿using System.Collections;
+using TCGCards;
 using TCGCards.Core.GameEvents;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Code.UI.Events
 {
@@ -13,25 +15,31 @@ namespace Assets.Code.UI.Events
             var pokemon = (PokemonCard)renderer.card;
 
             renderer.SpawnBounceEffect();
-            renderer.GetComponent<RectTransform>().LeanAlpha(0, 1f).setOnComplete(() =>
+            StartCoroutine(FadeOutRoutine(pokemon, renderer.gameObject));
+        }
+
+        IEnumerator FadeOutRoutine(PokemonCard pokemon, GameObject gameObject)
+        {
+            var image = gameObject.GetComponent<Image>();
+            var isMyPokemon = pokemon.Owner.Id.Equals(GameController.Instance.myId);
+
+            while (image.color.a > 0)
             {
-                if (isMyPokemon)
-                {
-                    GameController.Instance.Player.BenchedPokemon.Remove(pokemon);
+                image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - 0.05f);
+                yield return new WaitForSeconds(0.025f);
+            }
 
-                    if (bounceEvent.ToHand)
-                    {
-                        GameController.Instance.playerHand.AddCardToHand(pokemon);
-                    }
-                }
-                else
-                {
-                    GameController.Instance.OpponentPlayer.BenchedPokemon.Remove(pokemon);
-                }
+            if (isMyPokemon)
+            {
+                GameController.Instance.Player.BenchedPokemon.Remove(pokemon);
+            }
+            else
+            {
+                GameController.Instance.OpponentPlayer.BenchedPokemon.Remove(pokemon);
+            }
 
-                Destroy(renderer.gameObject);
-                GameEventHandler.Instance.EventCompleted();
-            });
+            Destroy(gameObject);
+            GameEventHandler.Instance.EventCompleted();
         }
     }
 }

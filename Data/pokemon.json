@@ -2762,7 +2762,7 @@
         "Cost": [
           {
             "$id": "251",
-            "EnergyType": 1,
+            "EnergyType": 2,
             "Amount": 3
           }
         ],

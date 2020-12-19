@@ -187,14 +187,16 @@ namespace TCGCards.Core
                 ActivePlayer.ActivePokemonCard = evolution;
                 evolution.EvolvedThisTurn = true;
             }
-
-            for (var i = 0; i < ActivePlayer.BenchedPokemon.Where(p => p != null).Count(); i++)
+            else
             {
-                if (ActivePlayer.BenchedPokemon[i].Id.Equals(basePokemon.Id))
+                for (var i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
                 {
-                    basePokemon.Evolve(evolution);
-                    ActivePlayer.BenchedPokemon[i] = evolution;
-                    evolution.EvolvedThisTurn = true;
+                    if (ActivePlayer.BenchedPokemon[i] != null && ActivePlayer.BenchedPokemon[i].Id.Equals(basePokemon.Id))
+                    {
+                        basePokemon.Evolve(evolution);
+                        ActivePlayer.BenchedPokemon[i] = evolution;
+                        evolution.EvolvedThisTurn = true;
+                    }
                 }
             }
 
@@ -343,7 +345,21 @@ namespace TCGCards.Core
             {
                 if (owner.BenchedPokemon.Where(p => p != null).Count() < BenchMaxSize && pokemon.Stage == 0)
                 {
-                    int index = owner.BenchedPokemon.Where(p => p != null).Count();
+                    int index = -1;
+
+                    for (int i = 0; i < owner.BenchedPokemon.Count; i++)
+                    {
+                        if (owner.BenchedPokemon[i] == null)
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index == -1)
+                    {
+                        index = owner.BenchedPokemon.Count;
+                    }
+
                     owner.SetBenchedPokemon(pokemon);
                     pokemon.IsRevealed = true;
                     SendEventToPlayers(new PokemonAddedToBenchEvent()

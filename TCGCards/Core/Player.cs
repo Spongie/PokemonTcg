@@ -134,6 +134,7 @@ namespace TCGCards.Core
                 else if (BenchedPokemon[i] == null)
                 {
                     BenchedPokemon[i] = pokemon;
+                    break;
                 }
             }
         }
