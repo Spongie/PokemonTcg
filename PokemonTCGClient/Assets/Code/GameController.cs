@@ -46,6 +46,7 @@ namespace Assets.Code
         public GameObject NoButton;
         public GameObject EscapeMenu;
         public GameObject WinMenu;
+        public SelectStatusPanel SelectStatusPanel;
         public Text winnerText;
         public PilesInfoHandler playerInfoHandler;
         public PilesInfoHandler opponentInfoHandler;
@@ -339,8 +340,24 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameOver, OnGameEnded);
             NetworkManager.Instance.RegisterCallback(MessageTypes.Info, OnInfoReceived);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameEvent, OnGameEventReceived);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.SelectStatus, OnBeginSelectStatus);
 
             OnGameUpdated(gameField);
+        }
+
+        private void OnBeginSelectStatus(object message, NetworkId arg2)
+        {
+            SpecialState = SpecialGameState.SelectingStatus;
+            EnableButtons();
+            SelectStatusPanel.gameObject.SetActive(true);
+            SelectStatusPanel.Init((PickStatusMessage)message);
+        }
+
+        public void OnStatusSelected(StatusEffect status)
+        {
+            NetworkManager.Instance.SendToServer(new StatusEffectMessage() { StatusEffect = status }, true);
+            SpecialState = SpecialGameState.None;
+            EnableButtons();
         }
 
         private void OnCardsRevealed(object message, NetworkId arg2)
@@ -612,6 +629,10 @@ namespace Assets.Code
                     cancelButton.SetActive(false);
                     break;
                 case SpecialGameState.None:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    break;
+                case SpecialGameState.SelectingStatus:
                     doneButton.SetActive(false);
                     cancelButton.SetActive(false);
                     break;

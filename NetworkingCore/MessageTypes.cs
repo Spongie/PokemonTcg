@@ -28,5 +28,7 @@
         SelectAttack,
         SelectedAttack,
         RevealCardsMessage,
+        SelectStatus,
+        StatusSelected,
     }
 }
