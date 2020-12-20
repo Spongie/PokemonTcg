@@ -145,6 +145,11 @@ namespace Assets.Code.UI.DeckBuilder
             UpdateCountInfo();
         }
 
+        private void Update()
+        {
+            UpdateCountInfo();
+        }
+
         public void UpdateCountInfo()
         {
             var cards = deckContent.GetComponentsInChildren<DeckCard>().Select(x => x.card);
