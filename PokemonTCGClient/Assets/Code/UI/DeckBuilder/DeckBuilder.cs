@@ -139,7 +139,7 @@ namespace Assets.Code.UI.DeckBuilder
             var spawnedObject = Instantiate(cardPrefab, deckContent.transform);
             var deckCard = spawnedObject.GetComponent<DeckCard>();
 
-            deckCard.Init(card);
+            deckCard.InitAndLoad(card);
             deckCard.isInDeck = true;
 
             UpdateCountInfo();

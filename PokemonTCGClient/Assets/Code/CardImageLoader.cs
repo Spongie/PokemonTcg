@@ -27,17 +27,22 @@ namespace Assets.Code
             string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
             string finalPath = "file:///" + fullCardPath;
 
-            if (targetImage == null)
-            {
-                yield break;
-            }
-
             if (!card.IsRevealed)
             {
+                if (targetImage == null)
+                {
+                    yield break;
+                }
+
                 targetImage.sprite = cardBack;
             }
             else if (SpriteCache.Instance.cache.ContainsKey(fullCardPath))
             {
+                if (targetImage == null)
+                {
+                    yield break;
+                }
+
                 targetImage.sprite = SpriteCache.Instance.cache[fullCardPath];
             }
             else
@@ -53,8 +58,11 @@ namespace Assets.Code
 
                     var texture = DownloadHandlerTexture.GetContent(request);
                     var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                    targetImage.sprite = sprite;
 
+                    if (targetImage != null)
+                    {
+                        targetImage.sprite = sprite;
+                    }
                     if (!SpriteCache.Instance.cache.ContainsKey(fullCardPath))
                     {
                         SpriteCache.Instance.cache.Add(fullCardPath, sprite);

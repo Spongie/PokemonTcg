@@ -200,7 +200,6 @@ namespace Assets.Code.UI.DeckBuilder
         IEnumerator LoadCards()
         {
             loading = true;
-            int counter = 0;
 
             foreach (var card in CardLoader.LoadAllCards())
             {
@@ -213,14 +212,9 @@ namespace Assets.Code.UI.DeckBuilder
 
                 cardCountText.text = cards.Count.ToString();
                 var spawnedObject = Instantiate(CardPrefab, Content.transform);
-                spawnedObject.GetComponent<DeckCard>().Init(card);
-
-                counter++;
-
-                if (counter >= 50)
-                {
-                    yield return new WaitForEndOfFrame();
-                }
+                var deckCard = spawnedObject.GetComponent<DeckCard>();
+                deckCard.card = card;
+                yield return deckCard.GetAndSetCardArt(card);
             }
 
             loading = false;

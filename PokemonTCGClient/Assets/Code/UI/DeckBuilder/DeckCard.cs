@@ -36,18 +36,19 @@ namespace Assets.Code.UI.DeckBuilder
             }
             else
             {
+                gameObject.tag = "Destroying";
                 Destroy(gameObject);
                 deckBuilder.UpdateCountInfo();
             }
         }
 
-        internal void Init(Card card)
+        internal void InitAndLoad(Card card)
         {
             this.card = card;
             StartCoroutine(GetAndSetCardArt(card));
         }
 
-        IEnumerator GetAndSetCardArt(Card card)
+        public IEnumerator GetAndSetCardArt(Card card)
         {
             while (true)
             {
