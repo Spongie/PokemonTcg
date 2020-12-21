@@ -409,24 +409,13 @@ namespace TCGCards.Core
 
         public void SelectActiveFromBench(GameField game)
         {
-            if (BenchedPokemon.Where(p => p != null).Count() == 1)
-            {
-                game?.SendEventToPlayers(new PokemonBecameActiveEvent
-                {
-                    NewActivePokemonId = BenchedPokemon[0].Id
-                });
-
-                SetActivePokemon(BenchedPokemon[0]);
-                return;
-            }
-
             game.GetOpponentOf(this).NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active Pokémon").ToNetworkMessage(Id));
 
             var message = new SelectFromYourBenchMessage(1).ToNetworkMessage(Id);
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            var card = BenchedPokemon.First(x => x.Id.Equals(response.Cards.First()));
+            var card = BenchedPokemon.First(x => x != null && x.Id.Equals(response.Cards.First()));
 
             game?.SendEventToPlayers(new PokemonBecameActiveEvent
             {

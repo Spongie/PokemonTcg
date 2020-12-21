@@ -1,8 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Code;
-using Boo.Lang;
 using NetworkingCore;
 using TCGCards;
 using TMPro;

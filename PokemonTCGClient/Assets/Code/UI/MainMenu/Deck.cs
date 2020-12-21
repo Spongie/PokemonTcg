@@ -18,7 +18,7 @@ namespace Assets.Code.UI.MainMenu
         {
             this.deck = deck;
             var formatName = MainMenu.formats.FirstOrDefault(f => f.Id.Equals(deck.FormatId)).Name;
-            deckNameText.text = $"{deck.Name} - {formatName}";
+            deckNameText.text = $"{deck.Name} ({formatName})";
         }
 
         public void OnEditDeckClicked()
