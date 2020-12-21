@@ -40,6 +40,11 @@ namespace TCGCards.Core.Deckfilters
                 valid = Names.Split(';').Contains(card.Name);
             }
 
+            if (OnlyBasic && pokemon.Stage > 0)
+            {
+                valid = false;
+            }
+
             return valid;
         }
     }
