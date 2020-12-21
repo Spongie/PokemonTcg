@@ -55,7 +55,7 @@ namespace TCGCards.TrainerEffects
         {
             if (opponent.BenchedPokemon.Count <= AmountOfTargets)
             {
-                foreach (var pokemon in opponent.BenchedPokemon)
+                foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
                 {
                     pokemon.DealDamage(Damage, game, pokemonSource, true);
                 }

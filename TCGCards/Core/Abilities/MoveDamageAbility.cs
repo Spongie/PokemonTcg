@@ -33,7 +33,7 @@ namespace TCGCards.Core.Abilities
 
         public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
-            var availablePokemons = new List<PokemonCard>(caster.BenchedPokemon);
+            var availablePokemons = new List<PokemonCard>(caster.BenchedPokemon.ValidPokemonCards);
             availablePokemons.Add(caster.ActivePokemonCard);
 
             if (availablePokemons.Where(x => x.DamageCounters > 0).Count() < 2)
@@ -46,7 +46,7 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            var availablePokemons = new List<PokemonCard>(owner.BenchedPokemon);
+            var availablePokemons = new List<PokemonCard>(owner.BenchedPokemon.ValidPokemonCards);
             availablePokemons.Add(owner.ActivePokemonCard);
 
             var sourcePokemons = availablePokemons.Where(x => x.DamageCounters > 0).OfType<Card>().ToList();

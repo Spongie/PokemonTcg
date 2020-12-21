@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NetworkingCore;
 
 namespace TCGCards.Core.Tests
 {
@@ -15,6 +16,26 @@ namespace TCGCards.Core.Tests
             bench.Add(new PokemonCard());
 
             Assert.AreEqual(3, bench.Count);
+        }
+
+        [TestMethod]
+        public void StupidJson()
+        {
+            var bench = new Bench();
+
+            var p1 = new PokemonCard();
+            var p2 = new PokemonCard();
+            var p3 = new PokemonCard();
+            bench.Add(p1);
+            bench.Add(p2);
+            bench.Add(p3);
+
+            bench.Remove(p2);
+
+            var json = Serializer.Serialize(bench);
+
+
+            Assert.Fail();
         }
 
         [TestMethod]

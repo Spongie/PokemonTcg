@@ -135,7 +135,7 @@ namespace TCGCards.TrainerEffects
 
             var targetPlayer = opponents ? opponent : caster;
 
-            targetPlayer.ForceRetreatActivePokemon(targetPlayer.BenchedPokemon.First(x => x.Id.Equals(selectedId)), game);
+            targetPlayer.ForceRetreatActivePokemon(targetPlayer.BenchedPokemon.ValidPokemonCards.First(x => x.Id.Equals(selectedId)), game);
         }
 
         public bool CanCast(GameField game, Player caster, Player opponent)

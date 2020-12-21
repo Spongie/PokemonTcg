@@ -67,7 +67,7 @@ namespace TCGCards.Attacks
 
         private void DealDamageToPlayersBench(Player target, EnergyTypes targetType, GameField game)
         {
-            foreach (var pokemon in target.BenchedPokemon.Where(x => x.Type == targetType))
+            foreach (var pokemon in target.BenchedPokemon.ValidPokemonCards.Where(x => x.Type == targetType))
             {
                 pokemon.DealDamage(damageToBench, game, game.ActivePlayer.ActivePokemonCard, true);
             }

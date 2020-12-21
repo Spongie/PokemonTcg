@@ -1,13 +1,13 @@
 ﻿using TCGCards.Core;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Code.UI.Game
 {
     public class AbilityButton : MonoBehaviour
     {
         private Ability ability;
-        public Text abilityName;
+        public TextMeshProUGUI abilityName;
 
         public void Init(Ability ability)
         {

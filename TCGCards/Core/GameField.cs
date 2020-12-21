@@ -197,6 +197,7 @@ namespace TCGCards.Core
             if (ActivePlayer.Hand.Contains(evolution))
             {
                 ActivePlayer.Hand.Remove(evolution);
+                TriggerAbilityOfType(TriggerType.EnterPlay, evolution);
             }
 
             evolution.IsRevealed = true;
@@ -693,8 +694,8 @@ namespace TCGCards.Core
 
         private bool IsDraw()
         {
-            return ActivePlayer.ActivePokemonCard.IsDead() && ActivePlayer.BenchedPokemon.All(pokemon => pokemon.IsDead())
-                && NonActivePlayer.ActivePokemonCard.IsDead() && NonActivePlayer.BenchedPokemon.All(pokemon => pokemon.IsDead());
+            return ActivePlayer.ActivePokemonCard.IsDead() && ActivePlayer.BenchedPokemon.ValidPokemonCards.All(pokemon => pokemon.IsDead())
+                && NonActivePlayer.ActivePokemonCard.IsDead() && NonActivePlayer.BenchedPokemon.ValidPokemonCards.All(pokemon => pokemon.IsDead());
         }
 
         private void CheckDeadPokemon()
@@ -798,7 +799,7 @@ namespace TCGCards.Core
         {
             var opponent = GetOpponentOf(player);
             var killedPokemons = new List<PokemonCard>();
-            foreach (PokemonCard pokemon in player.BenchedPokemon)
+            foreach (PokemonCard pokemon in player.BenchedPokemon.ValidPokemonCards)
             {
                 if (pokemon == null || !pokemon.IsDead())
                 {

@@ -53,7 +53,7 @@ namespace TCGCards.TrainerEffects
         {
             var tails = 0;
 
-            foreach (var pokemon in opponent.BenchedPokemon)
+            foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
             {
                 if (game.FlipCoins(1) == 1)
                 {

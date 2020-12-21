@@ -1028,27 +1028,24 @@ namespace Assets.Code
             SetInfoAndEnableButtons();
         }
 
-        private void SetBenchedPokemon(BenchController bench, IEnumerable<PokemonCard> pokemons)
+        private void SetBenchedPokemon(BenchController benchController, Bench bench)
         {
-            int index = 0;
-            bench.ClearSlots();
+            benchController.ClearSlots();
 
-            foreach (var pokemon in pokemons)
+            for (int i = 0; i < bench.Pokemons.Length; i++)
             {
-                if (pokemon == null)
+                if (bench.Pokemons[i] == null)
                 {
-                    index++;
                     continue;
                 }
 
-                var slot = bench.GetSlot(index);
+                var slot = benchController.GetSlot(i);
                 var spawnedCard = Instantiate(cardPrefab, slot.transform);
 
                 var controller = spawnedCard.GetComponentInChildren<CardRenderer>();
-                controller.SetCard(pokemon, true);
+                controller.SetCard(bench.Pokemons[i], true);
                 controller.SetIsBenched();
                 AddCard(controller);
-                index++;
             }
         }
 

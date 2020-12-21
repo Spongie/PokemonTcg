@@ -31,7 +31,7 @@ namespace TCGCards.TrainerEffects
 
             var damage = game.FlipCoins(1) == 1 ? 20 : 10;
 
-            foreach (var pokemon in opponent.BenchedPokemon)
+            foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
             {
                 pokemon.DealDamage(damage, game, pokemonSource, false);
             }

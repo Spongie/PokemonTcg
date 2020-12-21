@@ -907,6 +907,7 @@ GameObject:
   - component: {fileID: 1495311038}
   - component: {fileID: 1495311037}
   - component: {fileID: 1495311036}
+  - component: {fileID: 7712205090303119327}
   m_Layer: 5
   m_Name: Ability Button
   m_TagString: Untagged
@@ -1044,6 +1045,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &7712205090303119327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495311035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 384574a3c9eb3ae40a0542643136c3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: {fileID: 1875558878}
 --- !u!1 &1557203427
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,7 +181,7 @@ namespace TCGCards.Core
             HasPlayedEnergy = false;
             ActivePokemonCard?.EndTurn(game);
 
-            foreach(var pokemon in BenchedPokemon)
+            foreach(var pokemon in BenchedPokemon.ValidPokemonCards)
             {
                 pokemon?.EndTurn(game);
             }
@@ -328,7 +328,7 @@ namespace TCGCards.Core
                 pokemonCards.Add(ActivePokemonCard);
             }
 
-            foreach (var pokemon in BenchedPokemon)
+            foreach (var pokemon in BenchedPokemon.ValidPokemonCards)
             {
                 if (pokemon != null)
                 {

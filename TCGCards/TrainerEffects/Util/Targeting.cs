@@ -16,13 +16,13 @@ namespace TCGCards.TrainerEffects.Util
                 case TargetingMode.YourActive:
                     return new List<PokemonCard> { caster.ActivePokemonCard };
                 case TargetingMode.YourBench:
-                    return caster.BenchedPokemon.ToList();
+                    return caster.BenchedPokemon.ValidPokemonCards.ToList();
                 case TargetingMode.YourPokemon:
                     return caster.GetAllPokemonCards();
                 case TargetingMode.OpponentActive:
                     return new List<PokemonCard> { opponent.ActivePokemonCard };
                 case TargetingMode.OpponentBench:
-                    return opponent.BenchedPokemon.ToList();
+                    return opponent.BenchedPokemon.ValidPokemonCards.ToList();
                 case TargetingMode.OpponentPokemon:
                     return opponent.GetAllPokemonCards();
                 case TargetingMode.AnyPokemon:

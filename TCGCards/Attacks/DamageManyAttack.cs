@@ -47,11 +47,11 @@ namespace TCGCards.Attacks
             var source = game?.ActivePlayer.ActivePokemonCard;
 
             owner.ActivePokemonCard.DealDamage(SelfDamage, game, source, false);
-            foreach (var pokemon in opponent.BenchedPokemon)
+            foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
             {
                 pokemon.DealDamage(EnemyBenchDamage, game, source, true);
             }
-            foreach (var pokemon in owner.BenchedPokemon)
+            foreach (var pokemon in owner.BenchedPokemon.ValidPokemonCards)
             {
                 pokemon.DealDamage(TeamBenchDamage, game, source, true);
             }

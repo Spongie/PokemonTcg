@@ -27,11 +27,11 @@ namespace Assets.Code.UI.Game
             set.Add(GameController.Instance.Player.ActivePokemonCard.Type);
             set.Add(GameController.Instance.OpponentPlayer.ActivePokemonCard.Type);
 
-            foreach (var pokemon in GameController.Instance.Player.BenchedPokemon)
+            foreach (var pokemon in GameController.Instance.Player.BenchedPokemon.ValidPokemonCards)
             {
                 set.Add(pokemon.Type);
             }
-            foreach (var pokemon in GameController.Instance.OpponentPlayer.BenchedPokemon)
+            foreach (var pokemon in GameController.Instance.OpponentPlayer.BenchedPokemon.ValidPokemonCards)
             {
                 set.Add(pokemon.Type);
             }

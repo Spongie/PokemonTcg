@@ -9,6 +9,10 @@ namespace Assets.Code.UI.Events
         public void Trigger(PokemonHealedEvent pokemonHealedEvent)
         {
             var target = GameController.Instance.GetCardRendererById(pokemonHealedEvent.PokemonId);
+            int currentDamage = int.Parse(target.DamageDisplay.text);
+            int afterHeal = currentDamage - pokemonHealedEvent.Healing;
+            target.DamageDisplay.text = afterHeal > 0 ? afterHeal.ToString() : string.Empty;
+
             target.SpawnHealEffect();
             StartCoroutine(JustWait());
         }

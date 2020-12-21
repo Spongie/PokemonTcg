@@ -54,14 +54,14 @@ namespace TCGCards.TrainerEffects
         {
             if (game.FlipCoins(1) == 1)
             {
-                foreach (var pokemon in opponent.BenchedPokemon)
+                foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
                 {
                     pokemon.DealDamage(DamageToOpponentBenchIfHeads, game, pokemonSource, true);
                 }
             }
             else
             {
-                foreach (var pokemon in caster.BenchedPokemon)
+                foreach (var pokemon in caster.BenchedPokemon.ValidPokemonCards)
                 {
                     pokemon.DealDamage(DamageToOwnBenchIfTails, game, pokemonSource, true);
                 }

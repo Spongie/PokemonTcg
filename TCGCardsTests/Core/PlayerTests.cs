@@ -57,7 +57,7 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), null);
 
             Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
         }
@@ -76,7 +76,7 @@ namespace TCGCards.Core.Tests
 
             p.PlayEnergyCard(energyCard, p.ActivePokemonCard, null);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), null);
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
         }
@@ -95,7 +95,7 @@ namespace TCGCards.Core.Tests
 
             p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
             Assert.IsFalse(card.AttachedEnergy.Any());
@@ -119,7 +119,7 @@ namespace TCGCards.Core.Tests
 
             p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
 
             Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
             Assert.IsFalse(card.IsBurned);
@@ -146,7 +146,7 @@ namespace TCGCards.Core.Tests
             p.PlayCard(card2);
 
             Assert.AreEqual(card, p.ActivePokemonCard);
-            Assert.AreEqual(card2, p.BenchedPokemon.First());
+            Assert.AreEqual(card2, p.BenchedPokemon.ValidPokemonCards.First());
         }
 
         [TestMethod]

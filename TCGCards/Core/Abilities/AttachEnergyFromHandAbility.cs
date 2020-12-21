@@ -66,7 +66,7 @@ namespace TCGCards.Core.Abilities
             response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(selectPokemonMessage);
             var selectedId = response.Cards.First();
 
-            var pokemon = owner.ActivePokemonCard.Id.Equals(selectedId) ? owner.ActivePokemonCard : owner.BenchedPokemon.First(x => x.Id.Equals(selectedId));
+            var pokemon = owner.ActivePokemonCard.Id.Equals(selectedId) ? owner.ActivePokemonCard : owner.BenchedPokemon.ValidPokemonCards.First(x => x.Id.Equals(selectedId));
 
             pokemon.AttachEnergy((EnergyCard)energyCard, game);
         }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace TCGCards.Core
 {
-    public class Bench : ICollection<PokemonCard>
+    public class Bench
     {
         [JsonProperty]
         private List<PokemonCard> allValidPokemons;
@@ -28,16 +28,19 @@ namespace TCGCards.Core
             }
         }
 
-        public PokemonCard[] Pokemons { get; private set; }
+        public PokemonCard[] Pokemons { get; set; }
+
+        public IEnumerable<PokemonCard> ValidPokemonCards
+        {
+            get
+            {
+                return allValidPokemons;
+            }
+        }
 
         public int Count
         {
             get { return allValidPokemons.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return false; }
         }
 
         public bool Contains(PokemonCard pokemon)
@@ -51,16 +54,6 @@ namespace TCGCards.Core
             }
 
             return false;
-        }
-
-        public IEnumerator<PokemonCard> GetEnumerator()
-        {
-            return allValidPokemons.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return allValidPokemons.GetEnumerator();
         }
 
         public void ReplaceWith(PokemonCard oldPokemon, PokemonCard newPokemon)
@@ -117,19 +110,6 @@ namespace TCGCards.Core
             return null;
         }
 
-        public void Clear()
-        {
-            allValidPokemons.Clear();
-            for (int i = 0; i < Pokemons.Length; i++)
-            {
-                Pokemons[i] = null;
-            }
-        }
-
-        public void CopyTo(PokemonCard[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Remove(PokemonCard pokemon)
         {

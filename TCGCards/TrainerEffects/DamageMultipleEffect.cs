@@ -67,7 +67,7 @@ namespace TCGCards.TrainerEffects
         {
             if (EnemyBenchDamage > 0)
             {
-                foreach (var pokemon in opponent.BenchedPokemon)
+                foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
                 {
                     if (OnlyOfType == EnergyTypes.All || OnlyOfType == EnergyTypes.None || pokemon.Type == OnlyOfType)
                     {
@@ -77,7 +77,7 @@ namespace TCGCards.TrainerEffects
             }
             if (TeamBenchDamage > 0)
             {
-                foreach (var pokemon in caster.BenchedPokemon)
+                foreach (var pokemon in caster.BenchedPokemon.ValidPokemonCards)
                 {
                     if (OnlyOfType == EnergyTypes.All || OnlyOfType == EnergyTypes.None || pokemon.Type == OnlyOfType)
                     {
