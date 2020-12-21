@@ -424,9 +424,12 @@ namespace TCGCards.Core
             }
 
             DiscardPile.Add(pokemon);
+
+            pokemon.DamageCounters = 0;
+            pokemon.ClearStatusEffects();
         }
 
-        internal void KillBenchedPokemon(PokemonCard pokemon)
+        public void KillBenchedPokemon(PokemonCard pokemon)
         {
             KillPokemon(pokemon);
             BenchedPokemon.Remove(pokemon);
