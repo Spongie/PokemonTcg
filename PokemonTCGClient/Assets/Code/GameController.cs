@@ -564,6 +564,31 @@ namespace Assets.Code
 
         private void EnableButtons()
         {
+            if (gameField == null || gameField.GameState != GameFieldState.InTurn)
+            {
+                switch (gameField.GameState)
+                {
+                    case GameFieldState.WaitingForConnection:
+                    case GameFieldState.WaitingForRegistration:
+                        cancelButton.SetActive(false);
+                        endTurnButton.SetActive(false);
+                        doneButton.SetActive(false);
+                        return;
+                    case GameFieldState.BothSelectingActive:
+                        cancelButton.SetActive(false);
+                        endTurnButton.SetActive(false);
+                        doneButton.SetActive(false);
+                        return;
+                    case GameFieldState.BothSelectingBench:
+                        cancelButton.SetActive(false);
+                        endTurnButton.SetActive(false);
+                        doneButton.SetActive(true);
+                        return;
+                    default:
+                        break;
+                }
+            }
+
             endTurnButton.SetActive(IsMyTurn);
 
             switch (SpecialState)
@@ -1080,6 +1105,8 @@ namespace Assets.Code
                 default:
                     break;
             }
+
+            EnableButtons();
         }
 
         internal void OnEnergyTypeClicked(EnergyTypes energyType)
