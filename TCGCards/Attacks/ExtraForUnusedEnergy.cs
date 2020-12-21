@@ -48,14 +48,18 @@ namespace TCGCards.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            int energyAmount = owner.ActivePokemonCard.AttachedEnergy.Count(energy => energy.EnergyType == EnergyType) - Cost.Sum(x => x.Amount);
+            int energyOfType = owner.ActivePokemonCard.AttachedEnergy.Where(e => e.EnergyType == EnergyType).Sum(e => e.Amount);
+            int colorless = owner.ActivePokemonCard.AttachedEnergy.Where(e => e.EnergyType != EnergyType).Sum(e => e.Amount);
 
-            if (!owner.ActivePokemonCard.AttachedEnergy.Any(energy => energy.EnergyType != EnergyType))
+            energyOfType -= Cost.Where(c => c.EnergyType == EnergyType).Sum(c => c.Amount);
+            colorless -= Cost.Where(c => c.EnergyType != EnergyType).Sum(c => c.Amount);
+
+            if (colorless < 0)
             {
-                energyAmount--;
+                energyOfType -= colorless;
             }
 
-            return Damage + Math.Min(MaxExtraDamage, energyAmount * AmountPerEnergy);
+            return Damage + Math.Min(MaxExtraDamage, energyOfType * AmountPerEnergy);
         }
     }
 }

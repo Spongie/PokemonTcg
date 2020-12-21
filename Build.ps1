@@ -34,7 +34,13 @@ function BuildClient {
     $p = Start-Process Unity.exe -ArgumentList '-quit', '-batchmode', '-projectPath PokemonTCGClient', '-executeMethod Builder.PerformBuild', '-logfile editor.log' -PassThru
     $p | Wait-Process
 
-    Get-ChildItem -Path  'E:\PokemonBuild\Client\PokemonTCGClient_Data\StreamingAssets\Cards\' -Recurse -exclude *.deck |
+    Get-ChildItem -Path  'E:\PokemonBuild\Client\PokemonTCGClient_Data\StreamingAssets\Cards\' -Recurse |
+    Select -ExpandProperty FullName |
+    Where {$_ -notlike '*TCGCards*'} |
+    sort length -Descending |
+    Remove-Item -force 
+
+    Get-ChildItem -Path  'E:\PokemonBuild\Client\PokemonTCGClient_Data\StreamingAssets\Decks\' -Recurse |
     Select -ExpandProperty FullName |
     Where {$_ -notlike '*TCGCards*'} |
     sort length -Descending |

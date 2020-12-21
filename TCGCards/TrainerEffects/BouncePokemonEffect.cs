@@ -237,6 +237,9 @@ namespace TCGCards.TrainerEffects
             
             while (evolution2.EvolvedFrom != null)
             {
+                evolution2.EvolvedFrom.DamageCounters = 0;
+                evolution2.EvolvedFrom.ClearStatusEffects();
+
                 if (ReturnAttachedToHand)
                 {
                     target.Owner.Hand.Add(evolution2.EvolvedFrom);
@@ -252,6 +255,8 @@ namespace TCGCards.TrainerEffects
                 evolution2.EvolvedFrom = null;
             }
 
+            target.DamageCounters = 0;
+            target.ClearStatusEffects();
             target.Owner.Hand.Add(target);
             cardsDrawn.Add(target);
 
@@ -284,12 +289,17 @@ namespace TCGCards.TrainerEffects
 
             while (evolution.EvolvedFrom != null)
             {
+                evolution.EvolvedFrom.DamageCounters = 0;
+                evolution.EvolvedFrom.ClearStatusEffects();
+
                 target.Owner.Deck.Cards.Push(evolution.EvolvedFrom);
 
                 evolution = evolution.EvolvedFrom;
                 evolution.EvolvedFrom = null;
             }
 
+            target.DamageCounters = 0;
+            target.ClearStatusEffects();
             target.Owner.Deck.Cards.Push(target);
             target.Owner.Deck.Shuffle();
 
