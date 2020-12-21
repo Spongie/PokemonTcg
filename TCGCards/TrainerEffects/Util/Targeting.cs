@@ -16,13 +16,13 @@ namespace TCGCards.TrainerEffects.Util
                 case TargetingMode.YourActive:
                     return new List<PokemonCard> { caster.ActivePokemonCard };
                 case TargetingMode.YourBench:
-                    return caster.BenchedPokemon;
+                    return caster.BenchedPokemon.ToList();
                 case TargetingMode.YourPokemon:
                     return caster.GetAllPokemonCards();
                 case TargetingMode.OpponentActive:
                     return new List<PokemonCard> { opponent.ActivePokemonCard };
                 case TargetingMode.OpponentBench:
-                    return opponent.BenchedPokemon;
+                    return opponent.BenchedPokemon.ToList();
                 case TargetingMode.OpponentPokemon:
                     return opponent.GetAllPokemonCards();
                 case TargetingMode.AnyPokemon:
@@ -53,13 +53,13 @@ namespace TCGCards.TrainerEffects.Util
                     target = caster.ActivePokemonCard;
                     break;
                 case TargetingMode.YourBench:
-                    if (caster.BenchedPokemon.Where(p => p != null).Count() == 0)
+                    if (caster.BenchedPokemon.Count == 0)
                     {
                         return null;
                     }
-                    else if (caster.BenchedPokemon.Where(p => p != null).Count() == 1)
+                    else if (caster.BenchedPokemon.Count == 1)
                     {
-                        return caster.BenchedPokemon[0];
+                        return caster.BenchedPokemon.GetFirst();
                     }
                     message = new SelectFromYourBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
@@ -74,13 +74,13 @@ namespace TCGCards.TrainerEffects.Util
                     target = opponent.ActivePokemonCard;
                     break;
                 case TargetingMode.OpponentBench:
-                    if (opponent.BenchedPokemon.Where(p => p != null).Count() == 0)
+                    if (opponent.BenchedPokemon.Count == 0)
                     {
                         return null;
                     }
-                    else if (opponent.BenchedPokemon.Where(p => p != null).Count() == 1)
+                    else if (opponent.BenchedPokemon.Count == 1)
                     {
-                        return opponent.BenchedPokemon[0];
+                        return opponent.BenchedPokemon.GetFirst();
                     }
 
                     message = new SelectFromOpponentBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);

@@ -8,7 +8,7 @@ namespace TCGCards.Attacks
     {
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
-            if (!opponent.BenchedPokemon.Where(p => p != null).Any())
+            if (opponent.BenchedPokemon.Count == 0)
                 return;
 
             opponent.NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active Pokémon for you").ToNetworkMessage(Id));

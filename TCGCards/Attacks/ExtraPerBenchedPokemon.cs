@@ -22,7 +22,7 @@ namespace TCGCards.Attacks
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            return Damage + ExtraPerPokemon * owner.BenchedPokemon.Where(p => p != null).Count();
+            return Damage + ExtraPerPokemon * owner.BenchedPokemon.Count;
         }
     }
 }

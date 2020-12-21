@@ -88,7 +88,13 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent, null);
+            var game = new GameField();
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(opponent);
+            opponent.Id = NetworkId.Generate();
+            game.Cards.Add(other.Id, other);
+
+            effect.Process(game, game.Players[0], opponent, null);
 
             Assert.AreEqual(2, opponent.Deck.Cards.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);
@@ -124,7 +130,13 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent, null);
+            var game = new GameField();
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(opponent);
+            opponent.Id = NetworkId.Generate();
+            game.Cards.Add(other.Id, other);
+
+            effect.Process(game, game.Players[0], opponent, null);
 
             Assert.AreEqual(2, opponent.Hand.Count);
             Assert.AreEqual(other, opponent.ActivePokemonCard);
@@ -157,7 +169,13 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent, null);
+            var game = new GameField();
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(opponent);
+            opponent.Id = NetworkId.Generate();
+            game.Cards.Add(other.Id, other);
+
+            effect.Process(game, game.Players[0], opponent, null);
 
             Assert.AreEqual(2, opponent.Hand.Count);
         }
@@ -190,7 +208,13 @@ namespace TCGCards.TrainerEffects.Tests
             });
             opponent.SetNetworkPlayer(sub);
 
-            effect.Process(new GameField(), new Player(), opponent, null);
+            var game = new GameField();
+            game.Players.Add(new Player() { Id = NetworkId.Generate() });
+            game.Players.Add(opponent);
+            opponent.Id = NetworkId.Generate();
+            game.Cards.Add(other.Id, other);
+
+            effect.Process(game, game.Players[0], opponent, null);
 
             Assert.AreEqual(1, opponent.Hand.Count);
             Assert.AreEqual(pokemon.Id, opponent.Hand[0].Id);
@@ -234,7 +258,7 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Where(p => p != null).Count());
+            Assert.AreEqual(0, player.BenchedPokemon.Count);
             Assert.AreEqual(2, player.DiscardPile.Count);
             Assert.AreEqual(1, player.Hand.Count);
             Assert.AreEqual(targetPokemon.Id, player.Hand[0].Id);
@@ -277,7 +301,7 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Where(p => p != null).Count());
+            Assert.AreEqual(0, player.BenchedPokemon.Count);
             Assert.AreEqual(3, player.DiscardPile.Count);
             Assert.AreEqual(1, player.Hand.Count);
             Assert.AreEqual(basicPokemon.Id, player.Hand[0].Id);
@@ -320,7 +344,7 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Where(p => p != null).Count());
+            Assert.AreEqual(0, player.BenchedPokemon.Count);
             Assert.AreEqual(1, player.DiscardPile.Count);
             Assert.AreEqual(3, player.Hand.Count);
         }
@@ -361,7 +385,7 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Where(p => p != null).Count());
+            Assert.AreEqual(0, player.BenchedPokemon.Count);
             Assert.AreEqual(0, player.DiscardPile.Count);
             Assert.AreEqual(4, player.Hand.Count);
         }
@@ -402,7 +426,7 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Where(p => p != null).Count());
+            Assert.AreEqual(0, player.BenchedPokemon.Count);
             Assert.AreEqual(0, player.DiscardPile.Count);
             Assert.AreEqual(4, player.Deck.Cards.Count);
             Assert.AreEqual(0, player.Hand.Count);

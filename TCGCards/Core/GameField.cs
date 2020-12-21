@@ -189,15 +189,9 @@ namespace TCGCards.Core
             }
             else
             {
-                for (var i = 0; i < ActivePlayer.BenchedPokemon.Count; i++)
-                {
-                    if (ActivePlayer.BenchedPokemon[i] != null && ActivePlayer.BenchedPokemon[i].Id.Equals(basePokemon.Id))
-                    {
-                        basePokemon.Evolve(evolution);
-                        ActivePlayer.BenchedPokemon[i] = evolution;
-                        evolution.EvolvedThisTurn = true;
-                    }
-                }
+                basePokemon.Evolve(evolution);
+                evolution.EvolvedThisTurn = true;
+                ActivePlayer.BenchedPokemon.ReplaceWith(basePokemon, evolution);
             }
 
             if (ActivePlayer.Hand.Contains(evolution))
@@ -343,23 +337,9 @@ namespace TCGCards.Core
             
             foreach (PokemonCard pokemon in selectedPokemons)
             {
-                if (owner.BenchedPokemon.Where(p => p != null).Count() < BenchMaxSize && pokemon.Stage == 0)
+                if (owner.BenchedPokemon.Count < BenchMaxSize && pokemon.Stage == 0)
                 {
-                    int index = -1;
-
-                    for (int i = 0; i < owner.BenchedPokemon.Count; i++)
-                    {
-                        if (owner.BenchedPokemon[i] == null)
-                        {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index == -1)
-                    {
-                        index = owner.BenchedPokemon.Count;
-                    }
-
+                    int index = owner.BenchedPokemon.GetNextFreeIndex();
                     owner.SetBenchedPokemon(pokemon);
                     pokemon.IsRevealed = true;
                     SendEventToPlayers(new PokemonAddedToBenchEvent()
@@ -669,7 +649,7 @@ namespace TCGCards.Core
             {
                 Id = ActivePlayer.Id,
                 ActivePokemon = ActivePlayer.ActivePokemonCard,
-                BenchedPokemon = ActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
+                BenchedPokemon = ActivePlayer.BenchedPokemon,
                 CardsInDeck = ActivePlayer.Deck.Cards.Count,
                 CardsInDiscard = ActivePlayer.DiscardPile,
                 CardsInHand = ActivePlayer.Hand.Count,
@@ -680,7 +660,7 @@ namespace TCGCards.Core
             {
                 Id = NonActivePlayer.Id,
                 ActivePokemon = NonActivePlayer.ActivePokemonCard,
-                BenchedPokemon = NonActivePlayer.BenchedPokemon.OfType<Card>().ToList(),
+                BenchedPokemon = NonActivePlayer.BenchedPokemon,
                 CardsInDeck = NonActivePlayer.Deck.Cards.Count,
                 CardsInDiscard = NonActivePlayer.DiscardPile,
                 CardsInHand = NonActivePlayer.Hand.Count,
@@ -753,7 +733,7 @@ namespace TCGCards.Core
                     EndGame(ActivePlayer.Id);
                     return;
                 }
-                else if (NonActivePlayer.BenchedPokemon.Where(p => p != null).Count() == 0)
+                else if (NonActivePlayer.BenchedPokemon.Count == 0)
                 {
                     GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
                     EndGame(ActivePlayer.Id);
@@ -766,7 +746,7 @@ namespace TCGCards.Core
                 }
 
                 NonActivePlayer.KillActivePokemon();
-                if (NonActivePlayer.BenchedPokemon.Where(p => p != null).Any())
+                if (NonActivePlayer.BenchedPokemon.Count > 0)
                 {
                     PushInfoToPlayer("Opponent is selecting a new active Pokémon", ActivePlayer);
                     NonActivePlayer.SelectActiveFromBench(this);
@@ -796,7 +776,7 @@ namespace TCGCards.Core
                 ActivePlayer.ActivePokemonCard.KnockedOutBy = NonActivePlayer.ActivePokemonCard;
                 ActivePlayer.KillActivePokemon();
 
-                if (ActivePlayer.BenchedPokemon.Where(p => p != null).Any())
+                if (ActivePlayer.BenchedPokemon.Count > 0)
                 {
                     PushInfoToPlayer("Opponent is selecting a prize card", ActivePlayer);
                     NonActivePlayer.SelectPrizeCard(prizeCardValue, this);

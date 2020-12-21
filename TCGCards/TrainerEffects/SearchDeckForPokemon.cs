@@ -111,7 +111,7 @@ namespace TCGCards.TrainerEffects
         {
             if (AddToBench)
             {
-                return GameField.BenchMaxSize - caster.BenchedPokemon.Where(p => p != null).Count() - amount >= 0;
+                return GameField.BenchMaxSize - caster.BenchedPokemon.Count - amount >= 0;
             }
 
             return true;
@@ -145,7 +145,7 @@ namespace TCGCards.TrainerEffects
                 else if (addToBench)
                 {
                     caster.BenchedPokemon.Add(card);
-                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = card, Index = caster.BenchedPokemon.Where(p => p != null).Count() - 1 });
+                    game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Player = caster.Id, Pokemon = card, Index = caster.BenchedPokemon.Count - 1 });
                 }
                 else
                 {

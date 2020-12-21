@@ -27,7 +27,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (caster.BenchedPokemon.Where(p => p != null).Count() == GameField.BenchMaxSize && opponent.BenchedPokemon.Where(p => p != null).Count() == GameField.BenchMaxSize)
+            if (caster.BenchedPokemon.Count == GameField.BenchMaxSize && opponent.BenchedPokemon.Count == GameField.BenchMaxSize)
             {
                 caster.DrawCards(2);
                 return;
@@ -41,8 +41,8 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            var casterResponse = DeckSearchUtil.SearchDeck(game, caster, CardUtil.GetCardFilters(CardType.BasicPokemon), GameField.BenchMaxSize - caster.BenchedPokemon.Where(p => p != null).Count());
-            var opponentResponse = DeckSearchUtil.SearchDeck(game, opponent, CardUtil.GetCardFilters(CardType.BasicPokemon), GameField.BenchMaxSize - opponent.BenchedPokemon.Where(p => p != null).Count());
+            var casterResponse = DeckSearchUtil.SearchDeck(game, caster, CardUtil.GetCardFilters(CardType.BasicPokemon), GameField.BenchMaxSize - caster.BenchedPokemon.Count);
+            var opponentResponse = DeckSearchUtil.SearchDeck(game, opponent, CardUtil.GetCardFilters(CardType.BasicPokemon), GameField.BenchMaxSize - opponent.BenchedPokemon.Count);
 
 
             game.AddPokemonToBench(caster, casterResponse.OfType<PokemonCard>().ToList());

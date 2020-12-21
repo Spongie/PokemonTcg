@@ -993,7 +993,7 @@ namespace Assets.Code
             OpponentPlayer.DiscardPile = gameInfo.Opponent.CardsInDiscard;
             OpponentPlayer.PrizeCards = gameInfo.Opponent.PrizeCards;
             OpponentPlayer.ActivePokemonCard = (PokemonCard)gameInfo.Opponent.ActivePokemon;
-            OpponentPlayer.BenchedPokemon = gameInfo.Opponent.BenchedPokemon.OfType<PokemonCard>().ToList();
+            OpponentPlayer.BenchedPokemon = gameInfo.Opponent.BenchedPokemon;
             opponentInfoHandler.UpdateWithInfo(gameInfo.Opponent);
 
             if (OpponentPlayer != null && OpponentPlayer.ActivePokemonCard != null)
@@ -1004,7 +1004,7 @@ namespace Assets.Code
             Player.DiscardPile = gameInfo.Me.CardsInDiscard;
             Player.PrizeCards = gameInfo.Me.PrizeCards;
             Player.ActivePokemonCard = (PokemonCard)gameInfo.Me.ActivePokemon;
-            Player.BenchedPokemon = gameInfo.Me.BenchedPokemon.OfType<PokemonCard>().ToList();
+            Player.BenchedPokemon = gameInfo.Me.BenchedPokemon;
             playerInfoHandler.UpdateWithInfo(gameInfo.Me);
 
             if (Player != null && Player.ActivePokemonCard != null)

@@ -84,10 +84,10 @@ namespace TCGCards.TrainerEffects
         {
             if (TargetingMode == TargetingMode.OpponentActive || TargetingMode == TargetingMode.OpponentBench || TargetingMode == TargetingMode.OpponentPokemon)
             {
-                return opponent.BenchedPokemon.Where(p => p != null).Any();
+                return opponent.BenchedPokemon.Count > 0;
             }
 
-            return caster.BenchedPokemon.Where(p => p != null).Any();
+            return caster.BenchedPokemon.Count > 0;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
@@ -187,13 +187,7 @@ namespace TCGCards.TrainerEffects
             pokemon.EvolvedFrom = null;
             pokemon.DamageCounters = 0;
             pokemon.ClearStatusEffects();
-
-            int benchIndex = target.Owner.BenchedPokemon.IndexOf(pokemon);
-
-            if (benchIndex != -1)
-            {
-                target.Owner.BenchedPokemon[benchIndex] = null;
-            }
+            target.Owner.BenchedPokemon.Remove(pokemon);
 
             if (pokemon.Stage > 0)
             {

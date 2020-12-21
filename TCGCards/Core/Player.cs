@@ -18,7 +18,7 @@ namespace TCGCards.Core
         public Player()
         {
             Hand = new List<Card>();
-            BenchedPokemon = new List<PokemonCard>();
+            BenchedPokemon = new Bench();
             PrizeCards = new List<Card>();
             Deck = new Deck();
             DiscardPile = new List<Card>();
@@ -118,33 +118,15 @@ namespace TCGCards.Core
                 Hand.Remove(pokemon);
             }
 
-            AddPokemonToNextFreeBenchslot(pokemon);
+            BenchedPokemon.Add(pokemon);
             pokemon.IsRevealed = true;
-        }
-
-        private void AddPokemonToNextFreeBenchslot(PokemonCard pokemon)
-        {
-            for (int i = 0; i < GameField.BenchMaxSize; i++)
-            {
-                if (i >= BenchedPokemon.Where(p => p != null).Count())
-                {
-                    BenchedPokemon.Add(pokemon);
-                    break;
-                }
-                else if (BenchedPokemon[i] == null)
-                {
-                    BenchedPokemon[i] = pokemon;
-                    break;
-                }
-            }
         }
 
         public void ForceRetreatActivePokemon(PokemonCard replacementPokemon, GameField game)
         {
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
-            int oldIndex = BenchedPokemon.IndexOf(replacementPokemon);
-            BenchedPokemon[oldIndex] = oldActivePokemon;
+            BenchedPokemon.ReplaceWith(replacementPokemon, oldActivePokemon);
             oldActivePokemon.ClearStatusEffects();
 
             game?.SendEventToPlayers(new PokemonBecameActiveEvent
@@ -170,9 +152,8 @@ namespace TCGCards.Core
 
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
-            int oldIndex = BenchedPokemon.IndexOf(replacementPokemon);
 
-            BenchedPokemon[oldIndex] = oldActivePokemon;
+            BenchedPokemon.ReplaceWith(replacementPokemon, oldActivePokemon);
 
             oldActivePokemon.ClearStatusEffects();
 
@@ -206,18 +187,18 @@ namespace TCGCards.Core
             }
         }
 
-        public void PlayCard(PokemonCard card)
+        public void PlayCard(PokemonCard pokemon)
         {
             if (ActivePokemonCard == null)
             {
-                ActivePokemonCard = card;
+                ActivePokemonCard = pokemon;
             }
             else
             {
-                AddPokemonToNextFreeBenchslot(card);
+                BenchedPokemon.Add(pokemon);
             }
 
-            card.IsRevealed = true;
+            pokemon.IsRevealed = true;
         }
         
         public void SetActivePokemon(PokemonCard pokemon)
@@ -233,12 +214,7 @@ namespace TCGCards.Core
                 Hand.Remove(pokemon);
             }
 
-            int benchIndex = BenchedPokemon.IndexOf(pokemon);
-
-            if(benchIndex != -1)
-            {
-                BenchedPokemon[benchIndex] = null;
-            }
+            BenchedPokemon.Remove(pokemon);
 
             ActivePokemonCard = pokemon;
             pokemon.IsRevealed = true;
@@ -246,9 +222,7 @@ namespace TCGCards.Core
 
         public void SwapActivePokemon(PokemonCard pokemon, GameField game)
         {
-            int benchIndex = BenchedPokemon.IndexOf(ActivePokemonCard);
-
-            BenchedPokemon[benchIndex] = ActivePokemonCard;
+            BenchedPokemon.ReplaceWith(pokemon, ActivePokemonCard);
 
             game?.SendEventToPlayers(new PokemonBecameActiveEvent
             {
@@ -365,7 +339,7 @@ namespace TCGCards.Core
             return pokemonCards;
         }
 
-        public List<PokemonCard> BenchedPokemon { get; set; }
+        public Bench BenchedPokemon { get; set; }
         public PokemonCard ActivePokemonCard { get; set; }
         public List<Card> PrizeCards { get; set; }
         public List<Card> DiscardPile { get; set; }
@@ -409,13 +383,13 @@ namespace TCGCards.Core
 
         public void SelectActiveFromBench(GameField game)
         {
-            game.GetOpponentOf(this).NetworkPlayer.Send(new InfoMessage("Opponent is selecting a new active Pokémon").ToNetworkMessage(Id));
+            game.GetOpponentOf(this).NetworkPlayer?.Send(new InfoMessage("Opponent is selecting a new active Pokémon").ToNetworkMessage(Id));
 
             var message = new SelectFromYourBenchMessage(1).ToNetworkMessage(Id);
 
             var response = NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            var card = BenchedPokemon.First(x => x != null && x.Id.Equals(response.Cards.First()));
+            var card = (PokemonCard)game.Cards[response.Cards.First()];
 
             game?.SendEventToPlayers(new PokemonBecameActiveEvent
             {
@@ -455,8 +429,7 @@ namespace TCGCards.Core
         internal void KillBenchedPokemon(PokemonCard pokemon)
         {
             KillPokemon(pokemon);
-            int index = BenchedPokemon.IndexOf(pokemon);
-            BenchedPokemon[index] = null;
+            BenchedPokemon.Remove(pokemon);
         }
     }
 }

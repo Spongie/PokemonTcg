@@ -27,8 +27,8 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(null, player, opponent);
 
-            Assert.AreEqual(10, opponent.BenchedPokemon[0].DamageCounters);
-            Assert.AreEqual(40, player.BenchedPokemon[0].DamageCounters);
+            Assert.AreEqual(10, opponent.BenchedPokemon.GetFirst().DamageCounters);
+            Assert.AreEqual(40, player.BenchedPokemon.GetFirst().DamageCounters);
             Assert.AreEqual(30, player.ActivePokemonCard.DamageCounters);
             Assert.AreEqual(20, attack.GetDamage(null, null, null).NormalDamage);
         }
