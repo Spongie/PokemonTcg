@@ -389,7 +389,7 @@ namespace Assets.Code
         public void OnAttackSelected(Attack attack) 
         {
             selectAttackPanel.GetComponentInChildren<VerticalLayoutGroup>().gameObject.DestroyAllChildren();
-            selectAttackPanel.SetActive(true);
+            selectAttackPanel.SetActive(false);
 
             SpecialState = SpecialGameState.None;
             NetworkManager.Instance.SendToServer(new AttackMessage(attack), true);
