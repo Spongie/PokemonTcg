@@ -36,7 +36,6 @@ namespace Assets.Code.UI.DeckBuilder
             }
             else
             {
-                gameObject.tag = "Destroying";
                 Destroy(gameObject);
                 deckBuilder.UpdateCountInfo();
             }

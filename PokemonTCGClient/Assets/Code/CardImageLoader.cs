@@ -27,7 +27,7 @@ namespace Assets.Code
             string fullCardPath = Path.Combine(Application.streamingAssetsPath, "Cards", card.SetCode, card.GetImageName());
             string finalPath = "file:///" + fullCardPath;
 
-            if (!card.IsRevealedToMe(GameController.Instance.myId))
+            if (GameController.Instance != null && !card.IsRevealedToMe(GameController.Instance.myId))
             {
                 if (targetImage == null)
                 {

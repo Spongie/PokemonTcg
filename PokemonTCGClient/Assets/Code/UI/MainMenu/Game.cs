@@ -25,7 +25,16 @@ namespace Assets.Code.UI.MainMenu
         public void OnJoinGameClick()
         {
             var menu = GameObject.FindGameObjectWithTag("mainMenu").GetComponent<MainMenu>();
-            var id = NetworkManager.Instance.gameService.JoinTheActiveGame(NetworkManager.Instance.Me.Id, game.Id, menu.LoadDeckSelectedDeck());
+            var selectedDeck = menu.LoadDeckSelectedDeck();
+
+            if (!selectedDeck.FormatId.Equals(game.Format))
+            {
+                var deckFormatName = MainMenu.formats.First(x => x.Id.Equals(selectedDeck.FormatId)).Name;
+                ModalHandler.Instance.DisplayMessage($"You tried to join a {game.FormatName} game with a {deckFormatName} deck");
+                return;
+            }
+
+            var id = NetworkManager.Instance.gameService.JoinTheActiveGame(NetworkManager.Instance.Me.Id, game.Id, selectedDeck);
             NetworkManager.Instance.RegisterCallbackById(id, OnGameJoined);
         }
 
