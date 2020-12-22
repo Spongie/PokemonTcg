@@ -7,9 +7,7 @@ namespace TCGCards.Core.Abilities
     public class RetreatCostModifierAbility : PassiveAbility
     {
         private int amount;
-        private bool onlyWhenActive;
         private bool worksOnSelf;
-        private bool onlyWhenBenched;
         private bool onlyForYou;
 
         public RetreatCostModifierAbility() : this(null)
@@ -44,28 +42,6 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        [DynamicInput("Only when benched", InputControl.Boolean)]
-        public bool OnlyWhenBenched
-        {
-            get { return onlyWhenBenched; }
-            set
-            {
-                onlyWhenBenched = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Only when active", InputControl.Boolean)]
-        public bool OnlyWhenActive
-        {
-            get { return onlyWhenActive; }
-            set
-            {
-                onlyWhenActive = value;
-                FirePropertyChanged();
-            }
-        }
-
         [DynamicInput("Amount Extra")]
         public int Amount
         {
@@ -84,16 +60,7 @@ namespace TCGCards.Core.Abilities
                 return false;
             }
 
-            if (onlyWhenActive)
-            {
-                return PokemonOwner.Owner.ActivePokemonCard.Id.Equals(PokemonOwner.Id);
-            }
-            else if (onlyWhenBenched)
-            {
-                return PokemonOwner.Owner.BenchedPokemon.Contains(PokemonOwner);
-            }
-
-            return true;
+            return base.CanActivate(game, PokemonOwner.Owner, game.GetOpponentOf(PokemonOwner.Owner));
         }
 
         public virtual HashSet<NetworkId> GetUnAffectedCards()

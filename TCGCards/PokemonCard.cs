@@ -363,12 +363,12 @@ namespace TCGCards
             IsConfused = false;
         }
 
-        public virtual bool CanReatreat()
+        public virtual bool CanReatreat(GameField game)
         {
             if(Owner.BenchedPokemon.Count == 0)
                 return false;
 
-            return !IsParalyzed && !IsAsleep && AttachedEnergy.Sum(x => x.Amount) >= RetreatCost;
+            return !IsParalyzed && !IsAsleep && AttachedEnergy.Sum(x => x.Amount) >= (RetreatCost + game.GetRetreatCostModified());
         }
 
         public void DiscardEnergyCard(EnergyCard energyCard, GameField game)

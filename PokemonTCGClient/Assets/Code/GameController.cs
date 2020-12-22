@@ -167,14 +167,15 @@ namespace Assets.Code
         internal void StartRetreating(PokemonCard pokemonCard)
         {
             var totalAttachedEnergy = pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount);
+            int retreatCost = Math.Max(pokemonCard.RetreatCost + gameField.GetRetreatCostModified(), 0);
 
-            if (pokemonCard.RetreatCost == 0)
+            if (retreatCost == 0)
             {
                 infoText.text = "Select new active Pokémon";
                 SpecialState = SpecialGameState.SelectingRetreatTarget;
                 selectedCards.Clear();
             }
-            else if (totalAttachedEnergy == pokemonCard.RetreatCost)
+            else if (totalAttachedEnergy == retreatCost)
             {
                 infoText.text = "Select new active Pokémon";
                 SpecialState = SpecialGameState.SelectingRetreatTarget;

@@ -139,7 +139,7 @@ namespace TCGCards.Core
         {
             var retreatStoppers = GetAllPokemonCards().SelectMany(pokemon => pokemon.TemporaryAbilities.OfType<RetreatStopper>());
 
-            if(!ActivePokemonCard.CanReatreat() || retreatStoppers.Any())
+            if(!ActivePokemonCard.CanReatreat(game) || retreatStoppers.Any())
             {
                 return;
             }

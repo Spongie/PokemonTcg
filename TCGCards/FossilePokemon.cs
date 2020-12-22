@@ -32,7 +32,7 @@ namespace TCGCards
 
         public TrainerCard Source { get; set; }
 
-        public override bool CanReatreat()
+        public override bool CanReatreat(GameField game)
         {
             return false;
         }

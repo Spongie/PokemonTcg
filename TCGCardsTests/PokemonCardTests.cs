@@ -17,6 +17,35 @@ namespace TCGCards.Tests
         [TestMethod]
         public void DealDamage_Defender_Applied()
         {
+            TestWithValues(20, 0, 0);
+            TestWithValues(20, 10, 0);
+            TestWithValues(20, 20, 0);
+            TestWithValues(20, 30, 10);
+            TestWithValues(20, 40, 20);
+        }
+
+        [TestMethod]
+        public void DealDamage_Modify_Percentage()
+        {
+            TestWithValues(0.5f, 0, 0);
+            TestWithValues(0.5f, 10, 10);
+            TestWithValues(0.5f, 20, 10);
+            TestWithValues(0.5f, 30, 20);
+            TestWithValues(0.5f, 40, 20);
+        }
+
+        [TestMethod]
+        public void DealDamage_Modify_Percentage_Round_Down()
+        {
+            TestWithValues(0.5f, 0, 0, true);
+            TestWithValues(0.5f, 10, 0, true);
+            TestWithValues(0.5f, 20, 10, true);
+            TestWithValues(0.5f, 30, 10, true);
+            TestWithValues(0.5f, 40, 20, true);
+        }
+
+        private void TestWithValues(float modifier, int damage, int expected, bool roundDown = false)
+        {
             var game = new GameField();
 
             var player = new Player() { Id = NetworkId.Generate() };
@@ -42,7 +71,8 @@ namespace TCGCards.Tests
             {
                 Ability = new DamageTakenModifier()
                 {
-                    Modifer = 20
+                    Modifer = modifier,
+                    RoundDown = roundDown
                 },
                 TargetingMode = TargetingMode.YourActive
             };
@@ -51,9 +81,9 @@ namespace TCGCards.Tests
 
             effect.Process(game, player, opponent, player.ActivePokemonCard);
 
-            pokemon.DealDamage(30, game, opponent.ActivePokemonCard, true);
+            pokemon.DealDamage(damage, game, opponent.ActivePokemonCard, true);
 
-            Assert.AreEqual(10, pokemon.DamageCounters);
+            Assert.AreEqual(expected, pokemon.DamageCounters);
         }
     }
 }

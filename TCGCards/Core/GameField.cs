@@ -303,6 +303,17 @@ namespace TCGCards.Core
             return card.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= retreatCost;
         }
 
+        public int GetRetreatCostModified()
+        {
+            List<RetreatCostModifierAbility> costModifierAbilities = GetAllPassiveAbilities()
+                .OfType<RetreatCostModifierAbility>()
+                .Where(ability => ability.IsActive(this)
+                    && ability.ModifierType == PassiveModifierType.RetreatCost
+                    && !ability.GetUnAffectedCards().Contains(ActivePlayer.ActivePokemonCard.Id)).ToList();
+
+            return costModifierAbilities.Sum(ability => ability.Amount);
+        }
+
         public void PokemonRetreated(PokemonCard replacementCard, List<EnergyCard> payedEnergy)
         {
             if (!ActivePlayer.Id.Equals(replacementCard.Owner.Id))

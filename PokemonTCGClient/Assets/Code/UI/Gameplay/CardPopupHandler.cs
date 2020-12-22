@@ -43,7 +43,7 @@ namespace Assets.Code.UI.Gameplay
                         attackButtons.Add(attackButton);
                     }
 
-                    RetreatButton.SetActive(pokemonCard.AttachedEnergy.Sum(energy => energy.GetEnergry().Amount) >= pokemonCard.RetreatCost && player.BenchedPokemon.Count > 0);
+                    RetreatButton.SetActive(GameController.Instance.gameField.CanRetreat(pokemonCard));
                 }
                 else
                 {
