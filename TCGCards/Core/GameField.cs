@@ -967,7 +967,7 @@ namespace TCGCards.Core
                 return passiveAbilities.Where(x => x.Id.Equals(idOfStopper) || x.IsBuff).ToList();
             }
             
-            return passiveAbilities;
+            return passiveAbilities.Where(a => a.CanActivate(this, a.PokemonOwner.Owner, GetOpponentOf(a.PokemonOwner.Owner))).ToList();
         }
 
         public void PushGameLogUpdatesToPlayers()
