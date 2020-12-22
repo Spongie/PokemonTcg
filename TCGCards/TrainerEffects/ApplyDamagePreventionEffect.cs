@@ -93,7 +93,7 @@ namespace TCGCards.TrainerEffects
 
             if (onlyProtectSelf)
             {
-                caster.ActivePokemonCard.DamageStoppers.Add(damageStopper);
+                pokemonSource.DamageStoppers.Add(damageStopper);
             }
             else
             {
