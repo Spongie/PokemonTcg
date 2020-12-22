@@ -589,7 +589,14 @@ namespace Assets.Code
                 }
             }
 
-            endTurnButton.SetActive(IsMyTurn);
+            if (SpecialState != SpecialGameState.None)
+            {
+                endTurnButton.SetActive(false);
+            }
+            else
+            {
+                endTurnButton.SetActive(IsMyTurn);
+            }
 
             switch (SpecialState)
             {
