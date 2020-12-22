@@ -1,10 +1,12 @@
-﻿using Entities;
+﻿using TCGCards;
+using Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetworkingCore;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.Abilities;
 
 namespace TCGCards.Tests
 {
@@ -166,6 +168,189 @@ namespace TCGCards.Tests
             game.NonActivePlayer.ActivePokemonCard = new TestPokemon(game.NonActivePlayer);
 
             return game;
+        }
+
+        [TestMethod()]
+        public void HaveEnoughEnergy_Missing_One()
+        {
+            var attack = new Attack
+            {
+                Cost = new ObservableCollection<Energy>()
+                {
+                    new Energy(EnergyTypes.Fire, 4)
+                }
+            };
+
+            var player = new Player
+            {
+                ActivePokemonCard = new PokemonCard
+                {
+                    AttachedEnergy = new List<EnergyCard>
+                    {
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                    }
+                }
+            };
+
+            Assert.IsFalse(attack.HaveEnoughEnergy(player));
+        }
+
+        [TestMethod()]
+        public void HaveEnoughEnergy_One_Wrong()
+        {
+            var attack = new Attack
+            {
+                Cost = new ObservableCollection<Energy>()
+                {
+                    new Energy(EnergyTypes.Fire, 4)
+                }
+            };
+
+            var player = new Player
+            {
+                ActivePokemonCard = new PokemonCard
+                {
+                    AttachedEnergy = new List<EnergyCard>
+                    {
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Water},
+                    }
+                }
+            };
+
+            Assert.IsFalse(attack.HaveEnoughEnergy(player));
+        }
+
+        [TestMethod()]
+        public void HaveEnoughEnergy_All_Same()
+        {
+            var attack = new Attack
+            {
+                Cost = new ObservableCollection<Energy>()
+                {
+                    new Energy(EnergyTypes.Fire, 4)
+                }
+            };
+
+            var player = new Player
+            {
+                ActivePokemonCard = new PokemonCard
+                {
+                    AttachedEnergy = new List<EnergyCard>
+                    {
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                    }
+                }
+            };
+
+            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+        }
+
+        [TestMethod()]
+        public void HaveEnoughEnergy_With_Colorless_Cost()
+        {
+            var attack = new Attack
+            {
+                Cost = new ObservableCollection<Energy>()
+                {
+                    new Energy(EnergyTypes.Fire, 3),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var player = new Player
+            {
+                ActivePokemonCard = new PokemonCard
+                {
+                    AttachedEnergy = new List<EnergyCard>
+                    {
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                    }
+                }
+            };
+
+            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+        }
+
+        [TestMethod()]
+        public void HaveEnoughEnergy_With_Override()
+        {
+            var attack = new Attack
+            {
+                Cost = new ObservableCollection<Energy>()
+                {
+                    new Energy(EnergyTypes.Fire, 4)
+                }
+            };
+
+            var player = new Player
+            {
+                ActivePokemonCard = new PokemonCard
+                {
+                    AttachedEnergy = new List<EnergyCard>
+                    {
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Water},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Water},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Fire},
+                    },
+                    TemporaryAbilities = new List<Ability>
+                    {
+                        new EnergyTypeOverrideTemporaryAbility()
+                        {
+                            NewType = EnergyTypes.Fire,
+                            SourceType = EnergyTypes.All
+                        }
+                    }
+                }
+            };
+
+            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+        }
+
+        [TestMethod()]
+        public void HaveEnoughEnergy_With_Override_Double_Colorless()
+        {
+            var attack = new Attack
+            {
+                Cost = new ObservableCollection<Energy>()
+                {
+                    new Energy(EnergyTypes.Fire, 4)
+                }
+            };
+
+            var player = new Player
+            {
+                ActivePokemonCard = new PokemonCard
+                {
+                    AttachedEnergy = new List<EnergyCard>
+                    {
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Water},
+                        new EnergyCard { Amount = 1, EnergyType = EnergyTypes.Water},
+                        new EnergyCard { Amount = 2, EnergyType = EnergyTypes.Colorless},
+                    },
+                    TemporaryAbilities = new List<Ability>
+                    {
+                        new EnergyTypeOverrideTemporaryAbility()
+                        {
+                            NewType = EnergyTypes.Fire,
+                            SourceType = EnergyTypes.All
+                        }
+                    }
+                }
+            };
+
+            Assert.IsTrue(attack.HaveEnoughEnergy(player));
         }
     }
 }

@@ -129,13 +129,11 @@ namespace TCGCards.TrainerEffects
                 }
             }
             
-
-            
             NetworkId selectedId = selectedPlayer.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
 
             var targetPlayer = opponents ? opponent : caster;
 
-            targetPlayer.ForceRetreatActivePokemon(targetPlayer.BenchedPokemon.ValidPokemonCards.First(x => x.Id.Equals(selectedId)), game);
+            targetPlayer.ForceRetreatActivePokemon((PokemonCard)game.Cards[selectedId], game);
         }
 
         public bool CanCast(GameField game, Player caster, Player opponent)

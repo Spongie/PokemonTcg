@@ -186,36 +186,48 @@ namespace TCGCards
                 return false;
             }
 
+            return HaveEnoughEnergy(owner) && Effects.All(x => x.CanCast(game, owner, opponent));
+        }
+
+        public bool HaveEnoughEnergy(Player owner)
+        {
             var availableEnergy = new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy).OrderBy(card => card.IsBasic).ToList();
             var energyOverride = owner.ActivePokemonCard.TemporaryAbilities.OfType<EnergyTypeOverrideTemporaryAbility>().FirstOrDefault();
-
-            foreach (var energy in Cost.OrderByDescending(cost => cost.EnergyType != EnergyTypes.Colorless))
+            var energyCosts = new Dictionary<EnergyTypes, int>();
+            
+            foreach (var cost in Cost)
             {
-                for (int i = 0; i < energy.Amount; i+=0)
+                energyCosts.Add(cost.EnergyType, cost.Amount);
+            }
+
+            foreach (var energy in availableEnergy)
+            {
+                var actualType = energy.EnergyType;
+
+                if (energyOverride != null && energyOverride.CoversType(energy.EnergyType))
                 {
-                    var actualType = energy.EnergyType;
+                    actualType = energyOverride.NewType;
+                }
 
-                    if (energyOverride != null && energyOverride.CoversType(energy.EnergyType))
-                    {
-                        actualType = energyOverride.NewType;
-                    }
-
-                    EnergyCard energyCard = actualType == EnergyTypes.Colorless ?
-                        availableEnergy.FirstOrDefault()
-                        : availableEnergy.FirstOrDefault(card => card.EnergyType == actualType);
-
-                    if (energyCard == null)
-                    {                 
-                        return false;
-                    }
-
-                    availableEnergy.Remove(energyCard);
-
-                    i += energyCard.GetEnergry().Amount;
+                if (energyCosts.ContainsKey(actualType) && energyCosts[actualType] > 0)
+                {
+                    energyCosts[actualType] -= energy.Amount;
+                }
+                else if (energyCosts.ContainsKey(EnergyTypes.Colorless))
+                {
+                    energyCosts[EnergyTypes.Colorless] -= energy.Amount;
                 }
             }
 
-            return Effects.All(x => x.CanCast(game, owner, opponent));
+            foreach (var cost in energyCosts)
+            {
+                if (cost.Value > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public override bool Equals(object obj)

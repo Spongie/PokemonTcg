@@ -833,6 +833,11 @@ namespace Assets.Code
 
         private void BothSelectingBenchClicked(CardRenderer cardController)
         {
+            if (Player.ActivePokemonCard.Id.Equals(cardController.card.Id))
+            {
+                return;
+            }
+
             if (cardController.isSelected)
             {
                 cardController.SetSelected(false);
