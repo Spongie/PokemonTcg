@@ -291,6 +291,7 @@ namespace TCGCards
                     }
                 }
             }
+            
             if (source != null)
             {
                 foreach (var ability in source.GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageDealtModifier>())
