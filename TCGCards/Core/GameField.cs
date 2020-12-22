@@ -953,8 +953,8 @@ namespace TCGCards.Core
 
         public List<PassiveAbility> GetAllPassiveAbilities()
         {
-            var passiveAbilities = new List<PassiveAbility>(ActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
-            passiveAbilities.AddRange(NonActivePlayer.GetAllPokemonCards().Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
+            var passiveAbilities = new List<PassiveAbility>(ActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
+            passiveAbilities.AddRange(NonActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
             passiveAbilities.AddRange(TemporaryPassiveAbilities);
 
             if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
