@@ -212,10 +212,6 @@ namespace TCGCards.Core
 
             if (triggerEnterPlay)
             {
-                SendEventToPlayers(new AbilityActivatedEvent
-                {
-                    PokemonId = evolution.Id
-                });
                 TriggerAbilityOfType(TriggerType.EnterPlay, evolution);
             }
 
@@ -883,6 +879,10 @@ namespace TCGCards.Core
                 if (ability.TriggerType == triggerType && ability.CanActivate(this, ability.PokemonOwner.Owner, other))
                 {
                     GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers...");
+                    SendEventToPlayers(new AbilityActivatedEvent
+                    {
+                        PokemonId = pokemon.Id
+                    });
                     ability.SetTarget(target);
                     ability.Trigger(pokemon.Owner, Players.First(x => !x.Id.Equals(pokemon.Owner.Id)), damage, this);
                     ability.SetTarget(null);
