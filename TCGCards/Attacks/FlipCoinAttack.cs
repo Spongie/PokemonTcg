@@ -65,7 +65,7 @@ namespace TCGCards.Attacks
         {
             int heads = game.FlipCoins(Coins);
 
-            if (applyIfMoreThanThis != -1 && applyIfMoreThanThis >= heads)
+            if (ApplyStatusIfThisOrMoreHeads != -1 &&  heads >= ApplyStatusIfThisOrMoreHeads)
             {
                 var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, owner, opponent, owner.ActivePokemonCard);
                 target?.ApplyStatusEffect(StatusEffect, game);
