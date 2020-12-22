@@ -18,7 +18,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/102_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -41,7 +42,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/96_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -64,7 +66,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/98_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -87,7 +90,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/99_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -110,7 +114,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/100_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -133,7 +138,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/97_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -156,7 +162,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base1/101_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -188,7 +195,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base5/82_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -218,7 +226,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base5/81_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -254,7 +263,8 @@
     "ImageUrl": "https://images.pokemontcg.io/base5/80_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": true,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -277,7 +287,8 @@
     "ImageUrl": "https://images.pokemontcg.io/gym1/127_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": false,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -300,7 +311,8 @@
     "ImageUrl": "https://images.pokemontcg.io/gym1/128_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": false,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -323,7 +335,8 @@
     "ImageUrl": "https://images.pokemontcg.io/gym1/129_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": false,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -346,7 +359,8 @@
     "ImageUrl": "https://images.pokemontcg.io/gym1/130_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": false,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -369,7 +383,8 @@
     "ImageUrl": "https://images.pokemontcg.io/gym1/132_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": false,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   },
@@ -392,7 +407,8 @@
     "ImageUrl": "https://images.pokemontcg.io/gym1/131_hires.png",
     "Completed": true,
     "Owner": null,
-    "IsRevealed": false,
+    "RevealedTo": [],
+    "RevealedToAll": false,
     "IsTestCard": false,
     "IgnoreInBuilder": false
   }
