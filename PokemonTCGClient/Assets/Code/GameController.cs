@@ -563,7 +563,7 @@ namespace Assets.Code
             infoText.text = $"Select one of your benched Pokémon to attach {realMessage.EnergyCards.First().GetName()} to";
         }
 
-        private void EnableButtons()
+        public void EnableButtons()
         {
             if (gameField == null || gameField.GameState != GameFieldState.InTurn)
             {
@@ -590,7 +590,7 @@ namespace Assets.Code
                 }
             }
 
-            if (SpecialState != SpecialGameState.None)
+            if (SpecialState != SpecialGameState.None || GameEventHandler.Instance.currentEvent != null)
             {
                 endTurnButton.SetActive(false);
             }

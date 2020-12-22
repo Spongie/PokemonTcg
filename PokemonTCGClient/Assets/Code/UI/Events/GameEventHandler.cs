@@ -184,6 +184,8 @@ namespace Assets.Code.UI.Events
                 default:
                     break;
             }
+
+            GameController.Instance.EnableButtons();
         }
 
         public void EventCompleted()
