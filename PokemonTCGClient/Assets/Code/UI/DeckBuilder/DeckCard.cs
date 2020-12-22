@@ -56,6 +56,7 @@ namespace Assets.Code.UI.DeckBuilder
                 if (SpriteCache.Instance.cache.ContainsKey(imagePath))
                 {
                     art.sprite = SpriteCache.Instance.cache[imagePath];
+                    yield break;
                 }
 
                 if (imagePath == null)
