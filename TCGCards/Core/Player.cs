@@ -34,7 +34,7 @@ namespace TCGCards.Core
         {
             foreach (var card in cards)
             {
-                card.IsRevealed = true;
+                card.RevealTo(Id);
             }
 
             var message = new RevealCardsMessage(cards).ToNetworkMessage(Id);
@@ -51,7 +51,6 @@ namespace TCGCards.Core
             for(int _ = 0; _ < prizeCards; _++)
             {
                 var card = Deck.DrawCard();
-                card.IsRevealed = false;
                 PrizeCards.Add(card);
             }
         }
@@ -69,7 +68,7 @@ namespace TCGCards.Core
             foreach (var card in cards)
             {
                 Hand.Remove(card);
-                card.IsRevealed = true;
+                card.RevealToAll();
             }
 
             OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = new List<Card>(cards), Amount = cards.Count(), Player = this });
@@ -84,7 +83,7 @@ namespace TCGCards.Core
         {
             DiscardPile.Add(card);
             Hand.Remove(card);
-            card.IsRevealed = true;
+            card.RevealToAll();
 
             OnCardsDiscarded?.Invoke(this, new PlayerCardDraw() { Cards = new List<Card> { card }, Amount = 1, Player = this });
         }
@@ -119,7 +118,7 @@ namespace TCGCards.Core
             }
 
             BenchedPokemon.Add(pokemon);
-            pokemon.IsRevealed = true;
+            pokemon.RevealToAll();
         }
 
         public void ForceRetreatActivePokemon(PokemonCard replacementPokemon, GameField game)
@@ -198,7 +197,7 @@ namespace TCGCards.Core
                 BenchedPokemon.Add(pokemon);
             }
 
-            pokemon.IsRevealed = true;
+            pokemon.RevealToAll();
         }
         
         public void SetActivePokemon(PokemonCard pokemon)
@@ -217,7 +216,7 @@ namespace TCGCards.Core
             BenchedPokemon.Remove(pokemon);
 
             ActivePokemonCard = pokemon;
-            pokemon.IsRevealed = true;
+            pokemon.RevealToAll();
         }
 
         public void SwapActivePokemon(PokemonCard pokemon, GameField game)
@@ -231,9 +230,7 @@ namespace TCGCards.Core
             });
 
             ActivePokemonCard = pokemon;
-            pokemon.IsRevealed = true;
-
-            
+            pokemon.RevealToAll();
         }
 
         public void PlayEnergyCard(EnergyCard energyCard, PokemonCard targetPokemonCard, GameField game = null)
@@ -244,7 +241,7 @@ namespace TCGCards.Core
             game?.GameLog.AddMessage($"Attaching {energyCard.GetName()} to {targetPokemonCard.GetName()}");
 
             HasPlayedEnergy = true;
-            energyCard.IsRevealed = true;
+            energyCard.RevealToAll();
             targetPokemonCard.AttachedEnergy.Add(energyCard);
 
             bool fromHand = false;

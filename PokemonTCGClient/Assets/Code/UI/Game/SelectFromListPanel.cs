@@ -45,7 +45,7 @@ namespace Assets.Code.UI.Game
 
             foreach (var card in deckSearchMessage.Cards)
             {
-                card.IsRevealed = true;
+                card.RevealToAll();
 
                 if (deckSearchMessage.Filters.All(filter => filter.IsCardValid(card)))
                 {

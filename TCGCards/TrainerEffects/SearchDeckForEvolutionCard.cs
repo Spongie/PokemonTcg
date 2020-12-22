@@ -58,7 +58,7 @@ namespace TCGCards.TrainerEffects
             {
                 if (revealCard)
                 {
-                    card.IsRevealed = revealCard;
+                    card.RevealToAll();
                 }
 
                 caster.DrawCardsFromDeck(new List<Card> { card });

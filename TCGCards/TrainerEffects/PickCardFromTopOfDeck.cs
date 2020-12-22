@@ -107,12 +107,15 @@ namespace TCGCards.TrainerEffects
             {
                 if (cards.Contains(card))
                 {
-                    card.IsRevealed = revealPickedCards;
+                    if (revealPickedCards)
+                    {
+                        card.RevealToAll();
+                    }
                     cardsDrawn.Add(card);
                 }
                 else
                 {
-                    card.IsRevealed = true;
+                    card.RevealToAll();
                     discardedCards.Add(card);
                 }
             }

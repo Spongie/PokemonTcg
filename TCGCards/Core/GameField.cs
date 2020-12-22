@@ -155,7 +155,7 @@ namespace TCGCards.Core
         {
             foreach (var card in pickedCards.Select(id => Cards[id]))
             {
-                card.IsRevealed = true;
+                card.RevealToAll();
             }
             //TODO: Complete this
         }
@@ -200,7 +200,7 @@ namespace TCGCards.Core
                 TriggerAbilityOfType(TriggerType.EnterPlay, evolution);
             }
 
-            evolution.IsRevealed = true;
+            evolution.RevealToAll();
 
             SendEventToPlayers(new PokemonEvolvedEvent
             {
@@ -342,7 +342,7 @@ namespace TCGCards.Core
                 {
                     int index = owner.BenchedPokemon.GetNextFreeIndex();
                     owner.SetBenchedPokemon(pokemon);
-                    pokemon.IsRevealed = true;
+                    pokemon.RevealToAll();
                     SendEventToPlayers(new PokemonAddedToBenchEvent()
                     {
                         Pokemon = pokemon,
@@ -597,7 +597,7 @@ namespace TCGCards.Core
                 return;
             }
 
-            trainerCard.IsRevealed = true;
+            trainerCard.RevealToAll();
             CurrentTrainerCard = trainerCard;
 
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());

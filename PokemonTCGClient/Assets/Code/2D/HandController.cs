@@ -31,7 +31,11 @@ namespace Assets.Code._2D
             int index = 0;
             foreach (var card in cards)
             {
-                card.IsRevealed = isPlayerHand;
+                if (isPlayerHand)
+                {
+                    card.RevealToAll();
+                }
+
                 var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
                 spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, false);
                 spawnedCard.GetComponent<Zoomer>().SetPivotForHand();
@@ -53,7 +57,11 @@ namespace Assets.Code._2D
 
         public void AddCardToHand(Card card)
         {
-            card.IsRevealed = isPlayerHand;
+            if (isPlayerHand)
+            {
+                card.RevealToAll();
+            }
+
             var spawnedCard = Instantiate(cardPrefab, cardZone.transform);
             spawnedCard.GetComponentInChildren<CardRenderer>().SetCard(card, false);
             idObjectCache.Add(card.Id, spawnedCard);

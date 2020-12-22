@@ -26,12 +26,12 @@ namespace TCGCards.TrainerEffects
         {
             foreach (var prizeCard in caster.PrizeCards)
             {
-                prizeCard.IsRevealed = true;
+                prizeCard.RevealToAll();
             }
 
             foreach (var prizeCard in opponent.PrizeCards)
             {
-                prizeCard.IsRevealed = true;
+                prizeCard.RevealToAll();
             }
         }
     }

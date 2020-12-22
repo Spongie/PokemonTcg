@@ -135,7 +135,7 @@ namespace TCGCards.TrainerEffects
                 
                 if (revealCard)
                 {
-                    card.IsRevealed = true;
+                    card.RevealToAll();
                 }
 
                 if (evolveSource)

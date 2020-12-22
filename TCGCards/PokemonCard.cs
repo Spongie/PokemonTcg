@@ -314,7 +314,7 @@ namespace TCGCards
 
         public void AttachEnergy(EnergyCard energyCard, GameField game)
         {
-            energyCard.IsRevealed = true;
+            energyCard.RevealToAll();
             AttachedEnergy.Add(energyCard);
             bool fromHand = false;
 

@@ -20,7 +20,7 @@ namespace TCGCards
             PokemonName = Name;
             Owner = source.Owner;
             SetCode = source.SetCode;
-            IsRevealed = true;
+            RevealedToAll = true;
             ImageUrl = source.ImageUrl;
             Type = EnergyTypes.Colorless;
             Hp = 10;

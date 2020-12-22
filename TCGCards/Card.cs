@@ -78,7 +78,8 @@ namespace TCGCards
 
         public Player Owner { get; set; }
 
-        public bool IsRevealed { get; set; } = false;
+        public HashSet<NetworkId> RevealedTo { get; set; } = new HashSet<NetworkId>();
+        public bool RevealedToAll { get; set; }
 
         public bool IsTestCard { get; set; }
 
@@ -135,6 +136,21 @@ namespace TCGCards
             }
 
             return card;
+        }
+
+        public void RevealToAll()
+        {
+            RevealedToAll = true;
+        }
+
+        public void RevealTo(NetworkId playerId)
+        {
+            RevealedTo.Add(playerId);
+        }
+
+        public bool IsRevealedToMe(NetworkId id)
+        {
+            return RevealedToAll || RevealedTo.Contains(id);
         }
     }
 }
