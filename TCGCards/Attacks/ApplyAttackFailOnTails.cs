@@ -10,9 +10,9 @@ namespace TCGCards.Attacks
             opponent.ActivePokemonCard.TemporaryAbilities.Add(new AttackStopperSpecificAbility(owner.ActivePokemonCard)
             {
                 CoinFlip = true,
-                OnlyCurrentTarget = true,
-                CurrentTarget = opponent.ActivePokemonCard,
-                StopOnTails = true
+                OnlyCurrentTarget = false,
+                StopOnTails = true,
+                IsBuff = true
             });
 
             base.ProcessEffects(game, owner, opponent);

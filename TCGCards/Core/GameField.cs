@@ -479,6 +479,7 @@ namespace TCGCards.Core
 
             var abilities = new List<Ability>();
             abilities.AddRange(NonActivePlayer.ActivePokemonCard.GetAllActiveAbilities(this, NonActivePlayer, ActivePlayer));
+            abilities.AddRange(ActivePlayer.ActivePokemonCard.GetAllActiveAbilities(this, NonActivePlayer, ActivePlayer));
 
             foreach (var ability in abilities.OfType<IAttackStoppingAbility>())
             {
@@ -851,7 +852,7 @@ namespace TCGCards.Core
 
             foreach (var ability in abilities)
             {
-                if (ability is AttackStopperAbility)
+                if (ability is IAttackStoppingAbility)
                 {
                     continue;
                 }
