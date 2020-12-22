@@ -1064,7 +1064,7 @@ namespace Assets.Code
 
         private void SetActivePokemon(GameObject parent, PokemonCard pokemonCard)
         {
-            if (pokemonCard == null)
+            if (pokemonCard == null || pokemonCard.IsDead())
             {
                 return;
             }

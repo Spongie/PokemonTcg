@@ -194,10 +194,12 @@ namespace TCGCards.Core
                 ActivePlayer.BenchedPokemon.ReplaceWith(basePokemon, evolution);
             }
 
+            bool triggerEnterPlay = false;
+
             if (ActivePlayer.Hand.Contains(evolution))
             {
                 ActivePlayer.Hand.Remove(evolution);
-                TriggerAbilityOfType(TriggerType.EnterPlay, evolution);
+                triggerEnterPlay = true;
             }
 
             evolution.RevealToAll();
@@ -207,6 +209,15 @@ namespace TCGCards.Core
                 TargetPokemonId = basePokemon.Id,
                 NewPokemonCard = evolution
             });
+
+            if (triggerEnterPlay)
+            {
+                SendEventToPlayers(new AbilityActivatedEvent
+                {
+                    PokemonId = evolution.Id
+                });
+                TriggerAbilityOfType(TriggerType.EnterPlay, evolution);
+            }
 
             PushGameLogUpdatesToPlayers();
         }
