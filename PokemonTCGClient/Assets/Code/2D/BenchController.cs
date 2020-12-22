@@ -39,7 +39,7 @@ namespace Assets.Code._2D
 
                 if (slot.transform.childCount > 0)
                 {
-                    Destroy(slot.transform.GetChild(0).gameObject);
+                    slot.transform.gameObject.DestroyAllChildren();
                 }
             }
         }
