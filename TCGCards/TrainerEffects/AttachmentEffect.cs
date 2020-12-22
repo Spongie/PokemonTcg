@@ -59,6 +59,7 @@ namespace TCGCards.TrainerEffects
             var ability = Ability.Clone();
             ability.Source = game.CurrentTrainerCard;
             ability.PokemonOwner = target;
+            ability.IsBuff = true;
             target.TemporaryAbilities.Add(ability);
 
             if (game.CurrentTrainerCard != null)

@@ -197,6 +197,10 @@ namespace TCGCards.Core
 
         public virtual bool CanActivate(GameField game, Player caster, Player opponent)
         {
+            if (IsBuff)
+            {
+                return true;
+            }
             if (!usableWhileActive && caster.ActivePokemonCard == PokemonOwner)
             {
                 return false;
