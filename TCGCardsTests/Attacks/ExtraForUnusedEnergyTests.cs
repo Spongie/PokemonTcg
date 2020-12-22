@@ -404,5 +404,223 @@ namespace TCGCards.Attacks.Tests
 
             Assert.AreEqual(60, damage.NormalDamage);
         }
+
+        [TestMethod()]
+        public void Seadra_0_Extra()
+        {
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 20,
+                AmountPerEnergy = 10,
+                EnergyType = EnergyTypes.Water,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Water, 1),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var owner = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    attack
+                }
+            };
+
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+
+            var player = new Player();
+            player.ActivePokemonCard = owner;
+
+            var damage = attack.GetDamage(player, null, null);
+
+            Assert.AreEqual(20, damage.NormalDamage);
+        }
+
+        [TestMethod()]
+        public void Seadra_1_Extra()
+        {
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 20,
+                AmountPerEnergy = 10,
+                EnergyType = EnergyTypes.Water,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Water, 1),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var owner = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    attack
+                }
+            };
+
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+
+            var player = new Player();
+            player.ActivePokemonCard = owner;
+
+            var damage = attack.GetDamage(player, null, null);
+
+            Assert.AreEqual(30, damage.NormalDamage);
+        }
+
+        [TestMethod()]
+        public void Seadra_1_Extra_With_Double()
+        {
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 20,
+                AmountPerEnergy = 10,
+                EnergyType = EnergyTypes.Water,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Water, 1),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var owner = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    attack
+                }
+            };
+
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 2, EnergyType = EnergyTypes.Colorless });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+
+            var player = new Player();
+            player.ActivePokemonCard = owner;
+
+            var damage = attack.GetDamage(player, null, null);
+
+            Assert.AreEqual(30, damage.NormalDamage);
+        }
+
+        [TestMethod()]
+        public void Seadra_2_Extra()
+        {
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 20,
+                AmountPerEnergy = 10,
+                EnergyType = EnergyTypes.Water,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Water, 1),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var owner = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    attack
+                }
+            };
+
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+
+            var player = new Player();
+            player.ActivePokemonCard = owner;
+
+            var damage = attack.GetDamage(player, null, null);
+
+            Assert.AreEqual(40, damage.NormalDamage);
+        }
+
+        [TestMethod()]
+        public void Seadra_4_Extra()
+        {
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 20,
+                AmountPerEnergy = 10,
+                EnergyType = EnergyTypes.Water,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Water, 1),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var owner = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    attack
+                }
+            };
+
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+
+            var player = new Player();
+            player.ActivePokemonCard = owner;
+
+            var damage = attack.GetDamage(player, null, null);
+
+            Assert.AreEqual(40, damage.NormalDamage);
+        }
+
+        [TestMethod()]
+        public void Seadra_1_Extra_Wrong_Type()
+        {
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 20,
+                AmountPerEnergy = 10,
+                EnergyType = EnergyTypes.Water,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Water, 1),
+                    new Energy(EnergyTypes.Colorless, 1),
+                }
+            };
+
+            var owner = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    attack
+                }
+            };
+
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 2, EnergyType = EnergyTypes.Colorless });
+
+            var player = new Player();
+            player.ActivePokemonCard = owner;
+
+            var damage = attack.GetDamage(player, null, null);
+
+            Assert.AreEqual(20, damage.NormalDamage);
+        }
     }
 }

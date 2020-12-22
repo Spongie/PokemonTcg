@@ -56,7 +56,7 @@ namespace TCGCards.Attacks
 
             if (colorless < 0)
             {
-                energyOfType -= colorless;
+                energyOfType -= -colorless;
             }
 
             return Damage + Math.Min(MaxExtraDamage, energyOfType * AmountPerEnergy);
