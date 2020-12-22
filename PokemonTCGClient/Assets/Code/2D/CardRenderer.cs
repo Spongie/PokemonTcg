@@ -266,7 +266,12 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         damagePreviewText.fontSize = 30;
 
         var actualDamageText = DamageDisplay.GetComponentInChildren<TextMeshProUGUI>();
-        int currentDamage = int.Parse(actualDamageText.text.Trim());
+        int currentDamage = 0;
+
+        if (!string.IsNullOrEmpty(actualDamageText.text.Trim()))
+        {
+            currentDamage = int.Parse(actualDamageText.text.Trim());
+        }
 
         actualDamageText.text = (currentDamage + damage).ToString();
     }

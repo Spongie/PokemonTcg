@@ -22,6 +22,8 @@ namespace TCGCards.Core
         private bool usableWhileParalyzed = false;
         private bool usableWhileAsleep = false;
         private bool usableWhileConfused = false;
+        private int turnDuration = 9999;
+        private bool usableImmediately = true;
 
         public Ability():this(null)
         {
@@ -36,7 +38,17 @@ namespace TCGCards.Core
 
         protected virtual void Activate(Player owner, Player opponent, int damageTaken, GameField game) { }
 
-        private int turnDuration = 9999;
+        [DynamicInput("Usable Immediately", InputControl.Boolean)]
+        public bool UsableImmediately
+        {
+            get { return usableImmediately; }
+            set
+            {
+                usableImmediately = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Turn duration")]
         public int TurnDuration
@@ -197,6 +209,10 @@ namespace TCGCards.Core
 
         public virtual bool CanActivate(GameField game, Player caster, Player opponent)
         {
+            if (!UsableImmediately && PokemonOwner.PlayedThisTurn)
+            {
+                return false;
+            }
             if (IsBuff)
             {
                 return true;

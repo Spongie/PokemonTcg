@@ -65,6 +65,7 @@ namespace TCGCards.Core
                     Pokemons[i] = newPokemon;
                     allValidPokemons.Remove(oldPokemon);
                     allValidPokemons.Add(newPokemon);
+                    break;
                 }
             }
         }
@@ -130,7 +131,7 @@ namespace TCGCards.Core
         {
             for (int i = 0; i < Pokemons.Length; i++)
             {
-                if (Pokemons[i] == pokemon)
+                if (Pokemons[i] != null && Pokemons[i].Id.Equals(pokemon.Id))
                 {
                     return i;
                 }

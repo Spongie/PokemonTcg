@@ -51,8 +51,7 @@ namespace Assets.Code.UI.Events
             var isMySwitch = newActive.card.Owner.Id.Equals(myId);
             var activeParent = isMySwitch ? PlayerActivePokemonTransform : OpponentActivePokemonTransform;
             var bench = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
-            int index = isMySwitch ? GameController.Instance.Player.BenchedPokemon.IndexOf(newActive.pokemon) : GameController.Instance.OpponentPlayer.BenchedPokemon.IndexOf(newActive.pokemon);
-
+            
             var oldPosition = newActive.GetComponent<RectTransform>().localPosition;
             newActive.transform.SetParent(activeParent, true);
             newActive.transform.LeanScale(new Vector3(1, 1, 1), 0.4f);
@@ -62,9 +61,12 @@ namespace Assets.Code.UI.Events
 
             if (activeEvent.ReplacedPokemonId != null)
             {
-                var benchParent = bench.GetSlot(index);
-                var oldSize = new Vector2(newActive.GetComponent<RectTransform>().rect.width, newActive.GetComponent<RectTransform>().rect.height);
                 oldActive = GameController.Instance.GetCardRendererById(activeEvent.ReplacedPokemonId);
+                
+                int index = isMySwitch ? GameController.Instance.Player.BenchedPokemon.IndexOf(newActive.pokemon) : GameController.Instance.OpponentPlayer.BenchedPokemon.IndexOf(newActive.pokemon);
+                var benchParent = bench.GetSlot(index);
+
+                var oldSize = new Vector2(newActive.GetComponent<RectTransform>().rect.width, newActive.GetComponent<RectTransform>().rect.height);
                 ((PokemonCard)oldActive.card).ClearStatusEffects();
                 oldActive.tag = "Ignore";
                 oldActive.transform.SetParent(benchParent.transform, true);
