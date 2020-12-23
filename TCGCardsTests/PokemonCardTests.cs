@@ -14,37 +14,23 @@ namespace TCGCards.Tests
 {
     public class PokemonCardTests
     {
-        [Fact]
-        public void DealDamage_Defender_Applied()
-        {
-            TestWithValues(20, 0, 0);
-            TestWithValues(20, 10, 0);
-            TestWithValues(20, 20, 0);
-            TestWithValues(20, 30, 10);
-            TestWithValues(20, 40, 20);
-        }
-
-        [Fact]
-        public void DealDamage_Modify_Percentage()
-        {
-            TestWithValues(0.5f, 0, 0);
-            TestWithValues(0.5f, 10, 10);
-            TestWithValues(0.5f, 20, 10);
-            TestWithValues(0.5f, 30, 20);
-            TestWithValues(0.5f, 40, 20);
-        }
-
-        [Fact]
-        public void DealDamage_Modify_Percentage_Round_Down()
-        {
-            TestWithValues(0.5f, 0, 0, true);
-            TestWithValues(0.5f, 10, 0, true);
-            TestWithValues(0.5f, 20, 10, true);
-            TestWithValues(0.5f, 30, 10, true);
-            TestWithValues(0.5f, 40, 20, true);
-        }
-
-        private void TestWithValues(float modifier, int damage, int expected, bool roundDown = false)
+        [Theory]
+        [InlineData(0.5f, 0, 0, true)]
+        [InlineData(0.5f, 10, 0, true)]
+        [InlineData(0.5f, 20, 10, true)]
+        [InlineData(0.5f, 30, 10, true)]
+        [InlineData(0.5f, 40, 20, true)]
+        [InlineData(0.5f, 0, 0, false)]
+        [InlineData(0.5f, 10, 10, false)]
+        [InlineData(0.5f, 20, 10, false)]
+        [InlineData(0.5f, 30, 20, false)]
+        [InlineData(0.5f, 40, 20, false)]
+        [InlineData(20, 0, 0, false)]
+        [InlineData(20, 10, 0, false)]
+        [InlineData(20, 20, 0, false)]
+        [InlineData(20, 30, 10, false)]
+        [InlineData(20, 40, 20, false)]
+        public void TestWithValues(float modifier, int damage, int expected, bool roundDown = false)
         {
             var game = new GameField();
 
