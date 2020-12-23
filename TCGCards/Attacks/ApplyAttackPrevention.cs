@@ -4,6 +4,7 @@ using TCGCards.Core.Abilities;
 
 namespace TCGCards.Attacks
 {
+    //prevent all effects of attacks, including damage, done to self
     public class ApplyAttackPrevention : Attack
     {
         private bool coinFlip;
@@ -51,24 +52,22 @@ namespace TCGCards.Attacks
                 return;
             }
 
-            if (onlySelf || onlyCurrentTarget)
+            var source = owner.ActivePokemonCard;
+
+            source.TemporaryAbilities.Add(new DamageTakenModifier(source)
             {
-                owner.ActivePokemonCard.TemporaryAbilities.Add(new AttackStopperSpecificAbility(owner.ActivePokemonCard)
-                {
-                    OnlyCurrentTarget = onlyCurrentTarget,
-                    OnlySelf = onlySelf,
-                    CurrentTarget = opponent.ActivePokemonCard
-                });
-            }
-            else
+                Modifer = 999999,
+                IsBuff = true
+            });
+            source.TemporaryAbilities.Add(new PreventStatusEffects(source)
             {
-                owner.ActivePokemonCard.TemporaryAbilities.Add(new AttackStopperSpecificAbility(owner.ActivePokemonCard)
-                {
-                    CoinFlip = false,
-                    OnlyCurrentTarget = false,
-                    OnlySelf = false
-                });
-            }
+                IsBuff = true,
+                PreventBurn = true,
+                PreventConfuse = true,
+                PreventParalyze = true,
+                PreventPoison = true,
+                PreventSleep = true
+            });
 
             base.ProcessEffects(game, owner, opponent);
         }
