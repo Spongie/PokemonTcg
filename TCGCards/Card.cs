@@ -77,12 +77,8 @@ namespace TCGCards
         }
 
         public Player Owner { get; set; }
-
         public HashSet<NetworkId> RevealedTo { get; set; } = new HashSet<NetworkId>();
         public bool RevealedToAll { get; set; }
-
-        public bool IsTestCard { get; set; }
-
         public bool IgnoreInBuilder { get; set; }
 
         public override bool Equals(object other)
@@ -129,11 +125,6 @@ namespace TCGCards
             }
 
             var card = (Card)constructor.Invoke(parameters.ToArray());
-            
-            if (card.IsTestCard)
-            {
-                return null;
-            }
 
             return card;
         }
