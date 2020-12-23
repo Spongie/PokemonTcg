@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards;
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,13 @@ using TCGCards.Core.Abilities;
 using TCGCards.Core;
 using System.Collections.ObjectModel;
 using NetworkingCore;
+using Entities;
 
 namespace TCGCards.Tests
 {
-    [TestClass]
     public class PokemonCardTests
     {
-        [TestMethod]
+        [Fact]
         public void DealDamage_Defender_Applied()
         {
             TestWithValues(20, 0, 0);
@@ -24,7 +24,7 @@ namespace TCGCards.Tests
             TestWithValues(20, 40, 20);
         }
 
-        [TestMethod]
+        [Fact]
         public void DealDamage_Modify_Percentage()
         {
             TestWithValues(0.5f, 0, 0);
@@ -34,7 +34,7 @@ namespace TCGCards.Tests
             TestWithValues(0.5f, 40, 20);
         }
 
-        [TestMethod]
+        [Fact]
         public void DealDamage_Modify_Percentage_Round_Down()
         {
             TestWithValues(0.5f, 0, 0, true);
@@ -83,7 +83,42 @@ namespace TCGCards.Tests
 
             pokemon.DealDamage(damage, game, opponent.ActivePokemonCard, true);
 
-            Assert.AreEqual(expected, pokemon.DamageCounters);
+            Assert.Equal(expected, pokemon.DamageCounters);
+        }
+
+        [Theory]
+        [InlineData(StatusEffect.Burn)]
+        [InlineData(StatusEffect.Sleep)]
+        [InlineData(StatusEffect.Confuse)]
+        [InlineData(StatusEffect.Poison)]
+        [InlineData(StatusEffect.Paralyze)]
+        public void ApplyStatusEffectTest(StatusEffect status)
+        {
+            var pokemon = new PokemonCard();
+            pokemon.ApplyStatusEffect(status, null);
+
+            switch (status)
+            {
+                case StatusEffect.Sleep:
+                    Assert.True(pokemon.IsAsleep);
+                    break;
+                case StatusEffect.Poison:
+                    Assert.True(pokemon.IsPoisoned);
+                    break;
+                case StatusEffect.Paralyze:
+                    Assert.True(pokemon.IsParalyzed);
+                    break;
+                case StatusEffect.Burn:
+                    Assert.True(pokemon.IsBurned);
+                    break;
+                case StatusEffect.Confuse:
+                    Assert.True(pokemon.IsConfused);
+                    break;
+                case StatusEffect.None:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

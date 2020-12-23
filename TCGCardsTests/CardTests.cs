@@ -1,19 +1,18 @@
 ﻿using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using TCGCards;
 using TCGCards.Core;
 
 namespace TCGCardsTests
 {
-    [TestClass]
     public class CardTests
     {
-        [TestMethod]
+        [Fact]
         public void GetLogicalNameTest()
         {
             var card = new TestCard(null);
 
-            Assert.AreEqual(Path.Combine("Cards", "TCGCardsTests", "TCGCardsTests", "TestCard"), card.GetLogicalName());
+            Assert.Equal(Path.Combine("Cards", "TCGCardsTests", "TCGCardsTests", "TestCard"), card.GetLogicalName());
         }
     }
 

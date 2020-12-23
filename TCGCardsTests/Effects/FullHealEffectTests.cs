@@ -1,14 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class FullHealEffectTests
     {
-        [TestMethod]
+        [Fact]
         public void FullHeal_CuresAll()
         {
             var pokemon = new PokemonCard();
@@ -30,14 +29,14 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, null, null);
 
-            Assert.IsFalse(pokemon.IsBurned);
-            Assert.IsFalse(pokemon.IsAsleep);
-            Assert.IsFalse(pokemon.IsParalyzed);
-            Assert.IsFalse(pokemon.IsPoisoned);
-            Assert.IsFalse(pokemon.IsConfused);
+            Assert.False(pokemon.IsBurned);
+            Assert.False(pokemon.IsAsleep);
+            Assert.False(pokemon.IsParalyzed);
+            Assert.False(pokemon.IsPoisoned);
+            Assert.False(pokemon.IsConfused);
         }
 
-        [TestMethod]
+        [Fact]
         public void FullHeal_CuresAll_AttachedTo()
         {
             var pokemon = new PokemonCard();
@@ -59,11 +58,11 @@ namespace TCGCardsTests.Effects
 
             effect.OnAttachedTo(pokemon, true, null);
 
-            Assert.IsFalse(pokemon.IsBurned);
-            Assert.IsFalse(pokemon.IsAsleep);
-            Assert.IsFalse(pokemon.IsParalyzed);
-            Assert.IsFalse(pokemon.IsPoisoned);
-            Assert.IsFalse(pokemon.IsConfused);
+            Assert.False(pokemon.IsBurned);
+            Assert.False(pokemon.IsAsleep);
+            Assert.False(pokemon.IsParalyzed);
+            Assert.False(pokemon.IsPoisoned);
+            Assert.False(pokemon.IsConfused);
         }
     }
 }

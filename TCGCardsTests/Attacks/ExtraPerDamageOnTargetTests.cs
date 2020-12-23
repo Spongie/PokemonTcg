@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class ExtraPerDamageOnTargetTests
     {
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_No_Damage()
         {
             var attack = new ExtraPerDamageOnTarget()
@@ -16,11 +15,10 @@ namespace TCGCards.Attacks.Tests
             };
 
             var target = new PokemonCard();
-
-            Assert.AreEqual(10, attack.GetDamage(new Player { ActivePokemonCard = new PokemonCard() }, new Player { ActivePokemonCard = target }, null).NormalDamage);
+            Assert.Equal(10, attack.GetDamage(new Player { ActivePokemonCard = new PokemonCard() }, new Player { ActivePokemonCard = target }, null).NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_20_Damage()
         {
             var attack = new ExtraPerDamageOnTarget()
@@ -31,7 +29,7 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard() { DamageCounters = 20 };
 
-            Assert.AreEqual(30, attack.GetDamage(new Player { ActivePokemonCard = new PokemonCard() }, new Player { ActivePokemonCard = target }, null).NormalDamage);
+            Assert.Equal(30, attack.GetDamage(new Player { ActivePokemonCard = new PokemonCard() }, new Player { ActivePokemonCard = target }, null).NormalDamage);
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using System.Collections.Generic;
 
 namespace CardCreator.Tests
 {
-    [TestClass()]
     public class PokemonCardTests
     {
-        [TestMethod()]
+        [Fact]
         public void PokemonCardTest()
         {
             var pokemon = new CreatorPokemonCard(new PokemonTcgSdk.Models.PokemonCard
@@ -25,14 +24,14 @@ namespace CardCreator.Tests
                 Attacks = new List<PokemonTcgSdk.Models.Attack>()
             });
 
-            Assert.AreEqual(60, pokemon.Hp);
-            Assert.AreEqual("Psyduck", pokemon.Name);
-            Assert.AreEqual("Water", pokemon.Type);
-            Assert.AreEqual(0, pokemon.Stage);
-            Assert.IsTrue(string.IsNullOrWhiteSpace(pokemon.EvolvesFrom));
+            Assert.Equal(60, pokemon.Hp);
+            Assert.Equal("Psyduck", pokemon.Name);
+            Assert.Equal("Water", pokemon.Type);
+            Assert.Equal(0, pokemon.Stage);
+            Assert.True(string.IsNullOrWhiteSpace(pokemon.EvolvesFrom));
         }
 
-        [TestMethod()]
+        [Fact]
         public void PokemonCardTest_Stage1()
         {
             var pokemon = new CreatorPokemonCard(new PokemonTcgSdk.Models.PokemonCard
@@ -51,7 +50,7 @@ namespace CardCreator.Tests
                 Attacks = new List<PokemonTcgSdk.Models.Attack>()
             });
 
-            Assert.AreEqual(1, pokemon.Stage);
+            Assert.Equal(1, pokemon.Stage);
         }
     }
 }

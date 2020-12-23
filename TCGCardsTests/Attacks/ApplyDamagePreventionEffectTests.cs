@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards.Core;
 using Entities;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class ApplyDamagePreventionEffectTests
     {
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Flip_Heads()
         {
             var pokemon = new PokemonCard() { Hp = 100 };
@@ -27,18 +26,16 @@ namespace TCGCards.Attacks.Tests
                 ActivePokemonCard = new PokemonCard() { Hp = 100 }
             };
 
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
             game.ActivePlayer = player;
             game.NonActivePlayer = opponent;
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, player.ActivePokemonCard.DamageStoppers.Count);
+            Assert.Single(player.ActivePokemonCard.DamageStoppers);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Flip_Tails()
         {
             var pokemon = new PokemonCard() { Hp = 100 };
@@ -57,18 +54,16 @@ namespace TCGCards.Attacks.Tests
                 ActivePokemonCard = new PokemonCard() { Hp = 100 }
             };
 
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.TAILS);
             game.ActivePlayer = player;
             game.NonActivePlayer = opponent;
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(0, player.ActivePokemonCard.DamageStoppers.Count);
+            Assert.Empty(player.ActivePokemonCard.DamageStoppers);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_ProtectsAll()
         {
             var pokemon = new PokemonCard() { Hp = 100 };
@@ -88,19 +83,17 @@ namespace TCGCards.Attacks.Tests
                 ActivePokemonCard = new PokemonCard() { Hp = 100 }
             };
 
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
             game.ActivePlayer = player;
             game.NonActivePlayer = opponent;
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(0, player.ActivePokemonCard.DamageStoppers.Count);
-            Assert.AreEqual(1, game.DamageStoppers.Count);
+            Assert.Empty(player.ActivePokemonCard.DamageStoppers);
+            Assert.Single(game.DamageStoppers);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_PreventionLimit_LowDamage()
         {
             var pokemon = new PokemonCard() { Hp = 100 };
@@ -121,20 +114,18 @@ namespace TCGCards.Attacks.Tests
                 ActivePokemonCard = new PokemonCard() { Hp = 100 }
             };
 
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
             game.ActivePlayer = player;
             game.NonActivePlayer = opponent;
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(0, player.ActivePokemonCard.DamageStoppers.Count);
-            Assert.AreEqual(1, game.DamageStoppers.Count);
-            Assert.IsTrue(game.DamageStoppers[0].IsDamageIgnored(10));
+            Assert.Empty(player.ActivePokemonCard.DamageStoppers);
+            Assert.Single(game.DamageStoppers);
+            Assert.True(game.DamageStoppers[0].IsDamageIgnored(10));
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_PreventionLimit_HighDamage()
         {
             var pokemon = new PokemonCard() { Hp = 100 };
@@ -155,17 +146,15 @@ namespace TCGCards.Attacks.Tests
                 ActivePokemonCard = new PokemonCard() { Hp = 100 }
             };
 
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
             game.ActivePlayer = player;
             game.NonActivePlayer = opponent;
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(0, player.ActivePokemonCard.DamageStoppers.Count);
-            Assert.AreEqual(1, game.DamageStoppers.Count);
-            Assert.IsFalse(game.DamageStoppers[0].IsDamageIgnored(410));
+            Assert.Empty(player.ActivePokemonCard.DamageStoppers);
+            Assert.Single(game.DamageStoppers);
+            Assert.False(game.DamageStoppers[0].IsDamageIgnored(410));
         }
     }
 }

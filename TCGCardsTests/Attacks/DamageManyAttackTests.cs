@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class DamageManyAttackTests
     {
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest()
         {
             var attack = new DamageManyAttack
@@ -27,10 +26,10 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(null, player, opponent);
 
-            Assert.AreEqual(10, opponent.BenchedPokemon.GetFirst().DamageCounters);
-            Assert.AreEqual(40, player.BenchedPokemon.GetFirst().DamageCounters);
-            Assert.AreEqual(30, player.ActivePokemonCard.DamageCounters);
-            Assert.AreEqual(20, attack.GetDamage(null, null, null).NormalDamage);
+            Assert.Equal(10, opponent.BenchedPokemon.GetFirst().DamageCounters);
+            Assert.Equal(40, player.BenchedPokemon.GetFirst().DamageCounters);
+            Assert.Equal(30, player.ActivePokemonCard.DamageCounters);
+            Assert.Equal(20, attack.GetDamage(null, null, null).NormalDamage);
         }
     }
 }

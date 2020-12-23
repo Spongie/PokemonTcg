@@ -1,14 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class HealEffectTests
     {
-        [TestMethod]
+        [Fact]
         public void HealApplied()
         {
             var effect = new HealEffect
@@ -22,10 +21,10 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, null, null);
 
-            Assert.AreEqual(20, player.ActivePokemonCard.DamageCounters);
+            Assert.Equal(20, player.ActivePokemonCard.DamageCounters);
         }
 
-        [TestMethod]
+        [Fact]
         public void HealApplied_HealthNotNegative()
         {
             var effect = new HealEffect
@@ -39,7 +38,7 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, null, null);
 
-            Assert.AreEqual(0, player.ActivePokemonCard.DamageCounters);
+            Assert.Equal(0, player.ActivePokemonCard.DamageCounters);
         }
     }
 }

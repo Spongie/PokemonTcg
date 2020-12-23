@@ -1,41 +1,34 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Entities;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class AttackFailsOnTailsTests
     {
-        [TestMethod()]
+        [Fact]
         public void GetDamage_Heads()
         {
             var attack = new AttackFailsOnTails() { Damage = 10 };
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-
-            Assert.AreEqual(10, attack.GetDamage(null, null, new GameField()).NormalDamage);
+            Assert.Equal(10, attack.GetDamage(null, null, new GameField().WithFlips(CoinFlipper.HEADS)).NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamage_Tails()
         {
             var attack = new AttackFailsOnTails() { Damage = 10 };
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-
-            Assert.AreEqual(0, attack.GetDamage(null, null, new GameField()).NormalDamage);
+            Assert.Equal(0, attack.GetDamage(null, null, new GameField().WithFlips(CoinFlipper.TAILS)).NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamage_Forever()
         {
             var attack = new AttackFailsOnTails() { Damage = 10 };
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-
-            Assert.AreEqual(0, attack.GetDamage(null, null, new GameField()).NormalDamage);
-            Assert.IsFalse(attack.CanBeUsed(new GameField(), new Player(), new Player()));
+            Assert.Equal(0, attack.GetDamage(null, null, new GameField().WithFlips(CoinFlipper.TAILS)).NormalDamage);
+            Assert.False(attack.CanBeUsed(new GameField(), new Player(), new Player()));
         }
     }
 }

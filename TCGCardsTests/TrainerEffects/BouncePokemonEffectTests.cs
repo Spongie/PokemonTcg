@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using System.Collections.Generic;
 using TCGCards.Core;
 using NSubstitute;
@@ -8,10 +8,9 @@ using System.Linq;
 
 namespace TCGCards.TrainerEffects.Tests
 {
-    [TestClass()]
     public class BouncePokemonEffectTests
     {
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_Bench()
         {
             var effect = new BouncePokemonEffect()
@@ -33,10 +32,10 @@ namespace TCGCards.TrainerEffects.Tests
             var other = new PokemonCard(opponent);
             opponent.BenchedPokemon.Add(other);
 
-            Assert.IsTrue(effect.CanCast(new GameField(), null, opponent));
+            Assert.True(effect.CanCast(new GameField(), null, opponent));
         }
 
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_EmptyBench()
         {
             var effect = new BouncePokemonEffect()
@@ -56,10 +55,10 @@ namespace TCGCards.TrainerEffects.Tests
 
             opponent.ActivePokemonCard = pokemon;
 
-            Assert.IsFalse(effect.CanCast(new GameField(), null, opponent));
+            Assert.False(effect.CanCast(new GameField(), null, opponent));
         }
 
-        [TestMethod()]
+        [Fact]
         public void CardShuffledIntoDeck()
         {
             var effect = new BouncePokemonEffect()
@@ -96,11 +95,11 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, game.Players[0], opponent, null);
 
-            Assert.AreEqual(2, opponent.Deck.Cards.Count);
-            Assert.AreEqual(other, opponent.ActivePokemonCard);
+            Assert.Equal(2, opponent.Deck.Cards.Count);
+            Assert.Equal(other, opponent.ActivePokemonCard);
         }
 
-        [TestMethod()]
+        [Fact]
         public void CardShuffledIntoHand()
         {
             var effect = new BouncePokemonEffect()
@@ -138,11 +137,11 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, game.Players[0], opponent, null);
 
-            Assert.AreEqual(2, opponent.Hand.Count);
-            Assert.AreEqual(other, opponent.ActivePokemonCard);
+            Assert.Equal(2, opponent.Hand.Count);
+            Assert.Equal(other, opponent.ActivePokemonCard);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Bounce_EvolvedPokemon()
         {
             var effect = new BouncePokemonEffect()
@@ -177,10 +176,10 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, game.Players[0], opponent, null);
 
-            Assert.AreEqual(2, opponent.Hand.Count);
+            Assert.Equal(2, opponent.Hand.Count);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Bounce_EvolvedPokemon_OnlyBasic()
         {
             var effect = new BouncePokemonEffect()
@@ -216,14 +215,14 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, game.Players[0], opponent, null);
 
-            Assert.AreEqual(1, opponent.Hand.Count);
-            Assert.AreEqual(pokemon.Id, opponent.Hand[0].Id);
+            Assert.Single(opponent.Hand);
+            Assert.Equal(pokemon.Id, opponent.Hand[0].Id);
 
-            Assert.AreEqual(1, opponent.DiscardPile.Count);
-            Assert.AreEqual(evolution.Id, opponent.DiscardPile[0].Id);
+            Assert.Single(opponent.DiscardPile);
+            Assert.Equal(evolution.Id, opponent.DiscardPile[0].Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void ScoopUp_TargetIsBasic()
         {
             var effect = new BouncePokemonEffect
@@ -258,13 +257,13 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Count);
-            Assert.AreEqual(2, player.DiscardPile.Count);
-            Assert.AreEqual(1, player.Hand.Count);
-            Assert.AreEqual(targetPokemon.Id, player.Hand[0].Id);
+            Assert.Equal(0, player.BenchedPokemon.Count);
+            Assert.Equal(2, player.DiscardPile.Count);
+            Assert.Single(player.Hand);
+            Assert.Equal(targetPokemon.Id, player.Hand[0].Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void ScoopUp_TargetIsEvolved()
         {
             var effect = new BouncePokemonEffect
@@ -301,13 +300,13 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Count);
-            Assert.AreEqual(3, player.DiscardPile.Count);
-            Assert.AreEqual(1, player.Hand.Count);
-            Assert.AreEqual(basicPokemon.Id, player.Hand[0].Id);
+            Assert.Equal(0, player.BenchedPokemon.Count);
+            Assert.Equal(3, player.DiscardPile.Count);
+            Assert.Single(player.Hand);
+            Assert.Equal(basicPokemon.Id, player.Hand[0].Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void ScoopUp_TargetIsEvolved_ToHand()
         {
             var effect = new BouncePokemonEffect
@@ -344,12 +343,12 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Count);
-            Assert.AreEqual(1, player.DiscardPile.Count);
-            Assert.AreEqual(3, player.Hand.Count);
+            Assert.Equal(0, player.BenchedPokemon.Count);
+            Assert.Single(player.DiscardPile);
+            Assert.Equal(3, player.Hand.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void ScoopUp_TargetIsEvolved_AttachedToHand()
         {
             var effect = new BouncePokemonEffect
@@ -385,12 +384,12 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Count);
-            Assert.AreEqual(0, player.DiscardPile.Count);
-            Assert.AreEqual(4, player.Hand.Count);
+            Assert.Equal(0, player.BenchedPokemon.Count);
+            Assert.Empty(player.DiscardPile);
+            Assert.Equal(4, player.Hand.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void ScoopUp_TargetIsEvolved_Shuffle()
         {
             var effect = new BouncePokemonEffect
@@ -426,10 +425,10 @@ namespace TCGCards.TrainerEffects.Tests
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
-            Assert.AreEqual(0, player.BenchedPokemon.Count);
-            Assert.AreEqual(0, player.DiscardPile.Count);
-            Assert.AreEqual(4, player.Deck.Cards.Count);
-            Assert.AreEqual(0, player.Hand.Count);
+            Assert.Equal(0, player.BenchedPokemon.Count);
+            Assert.Empty(player.DiscardPile);
+            Assert.Equal(4, player.Deck.Cards.Count);
+            Assert.Empty(player.Hand);
         }
     }
 }

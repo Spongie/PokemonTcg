@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class ApplyAttackFailOnTailsTests
     {
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Heads()
         {
             var pokemon = new PokemonCard() { Hp = 100 };
@@ -28,7 +27,7 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(game, player, opponent);
 
-            Assert.AreEqual(1, opponent.ActivePokemonCard.TemporaryAbilities.Count);
+            Assert.Single(opponent.ActivePokemonCard.TemporaryAbilities);
         }
     }
 }

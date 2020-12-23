@@ -1,64 +1,57 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Entities;
 
 namespace TCGCards.Core.Tests
 {
-    [TestClass()]
     public class GameFieldTests
     {
-        [TestMethod()]
+        [Fact]
         public void IsSuccessfulFlipTest_Default()
         {
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            Assert.IsTrue(game.IsSuccessfulFlip(true, false, false));
+            Assert.True(game.IsSuccessfulFlip(true, false, false));
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            Assert.IsFalse(game.IsSuccessfulFlip(true, false, false));
+            game.WithFlips(CoinFlipper.TAILS);
+            Assert.False(game.IsSuccessfulFlip(true, false, false));
         }
 
-        [TestMethod()]
+        [Fact]
         public void IsSuccessfulFlipTest_Check_Tails()
         {
-            var game = new GameField();
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            Assert.IsFalse(game.IsSuccessfulFlip(true, false, true));
+            Assert.False(game.IsSuccessfulFlip(true, false, true));
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            Assert.IsTrue(game.IsSuccessfulFlip(true, false, true));
+            game.WithFlips(CoinFlipper.TAILS);
+            Assert.True(game.IsSuccessfulFlip(true, false, true));
         }
 
-        [TestMethod()]
+        [Fact]
         public void IsSuccessfulFlipTest_CheckLast_Heads()
         {
-            var game = new GameField();
-
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
+            var game = new GameField().WithFlips(CoinFlipper.HEADS);
             game.FlipCoins(1);
 
-            Assert.IsTrue(game.IsSuccessfulFlip(false, true, false));
+            Assert.True(game.IsSuccessfulFlip(false, true, false));
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
+            game.WithFlips(CoinFlipper.TAILS);
             game.FlipCoins(1);
 
-            Assert.IsFalse(game.IsSuccessfulFlip(false, true, false));
+            Assert.False(game.IsSuccessfulFlip(false, true, false));
         }
 
-        [TestMethod()]
+        [Fact]
         public void IsSuccessfulFlipTest_CheckLast_Tails()
         {
-            var game = new GameField();
-
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
+            var game = new GameField().WithFlips(CoinFlipper.TAILS);
             game.FlipCoins(1);
 
-            Assert.IsTrue(game.IsSuccessfulFlip(false, true, true));
+            Assert.True(game.IsSuccessfulFlip(false, true, true));
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
+            game.WithFlips(CoinFlipper.HEADS);
             game.FlipCoins(1);
-            Assert.IsFalse(game.IsSuccessfulFlip(false, true, true));
+            Assert.False(game.IsSuccessfulFlip(false, true, true));
         }
     }
 }

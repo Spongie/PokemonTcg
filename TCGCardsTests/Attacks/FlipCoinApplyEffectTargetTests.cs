@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Entities;
 using TCGCards.Core;
+using System;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class FlipCoinApplyEffectTargetTests
     {
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Burn()
         {
             var attack = new FlipCoinApplyEffectTarget()
@@ -17,13 +17,12 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard();
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
+            attack.ProcessEffects(new GameField().WithFlips(CoinFlipper.HEADS), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsBurned);
+            Assert.True(target.IsBurned);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Confuse()
         {
             var attack = new FlipCoinApplyEffectTarget()
@@ -33,13 +32,12 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard();
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
+            attack.ProcessEffects(new GameField().WithFlips(CoinFlipper.HEADS), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsConfused);
+            Assert.True(target.IsConfused);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Paralyze()
         {
             var attack = new FlipCoinApplyEffectTarget()
@@ -49,13 +47,12 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard();
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
+            attack.ProcessEffects(new GameField().WithFlips(CoinFlipper.HEADS), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsParalyzed);
+            Assert.True(target.IsParalyzed);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Sleep()
         {
             var attack = new FlipCoinApplyEffectTarget()
@@ -65,13 +62,12 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard();
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
+            attack.ProcessEffects(new GameField().WithFlips(CoinFlipper.HEADS), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsAsleep);
+            Assert.True(target.IsAsleep);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Poison()
         {
             var attack = new FlipCoinApplyEffectTarget()
@@ -81,13 +77,12 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard();
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
+            attack.ProcessEffects(new GameField().WithFlips(CoinFlipper.HEADS), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsPoisoned);
+            Assert.True(target.IsPoisoned);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Tails()
         {
             var attack = new FlipCoinApplyEffectTarget()
@@ -97,10 +92,9 @@ namespace TCGCards.Attacks.Tests
 
             var target = new PokemonCard();
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
+            attack.ProcessEffects(new GameField().WithFlips(CoinFlipper.TAILS), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsFalse(target.IsPoisoned);
+            Assert.False(target.IsPoisoned);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using TCGCards;
 using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using NetworkingCore;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,10 +25,9 @@ namespace TCGCards.Tests
         }
     }
 
-    [TestClass()]
     public class AttackTests
     {
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_NoAttachedEnergy()
         {
             var game = createTestGame();
@@ -46,10 +45,10 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsFalse(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
+            Assert.False(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
         }
 
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_EnoughAttached_Colorless_Cost()
         {
             var game = createTestGame();
@@ -72,10 +71,10 @@ namespace TCGCards.Tests
                 new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 }
             };
 
-            Assert.IsTrue(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
+            Assert.True(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
         }
 
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_EnoughAttached_FirstTurn()
         {
             var game = createTestGame();
@@ -99,10 +98,10 @@ namespace TCGCards.Tests
                 new EnergyCard() { EnergyType = EnergyTypes.Fire, Amount = 1 }
             };
 
-            Assert.IsFalse(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
+            Assert.False(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
         }
 
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_EnoughAttached_Colorless_Cost_Double()
         {
             var game = createTestGame();
@@ -125,10 +124,10 @@ namespace TCGCards.Tests
                 new EnergyCard() { EnergyType = EnergyTypes.Colorless, Amount = 2 }
             };
 
-            Assert.IsTrue(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
+            Assert.True(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
         }
 
-        [TestMethod()]
+        [Fact]
         public void CanBeUsed_EnoughAttached_NoColorless_Attached()
         {
             var game = createTestGame();
@@ -151,7 +150,7 @@ namespace TCGCards.Tests
                 new EnergyCard() { EnergyType = EnergyTypes.Water, Amount = 1 }
             };
 
-            Assert.IsTrue(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
+            Assert.True(pokemon.Attacks.First().CanBeUsed(game, game.ActivePlayer, game.NonActivePlayer));
         }
 
         private GameField createTestGame()
@@ -170,7 +169,7 @@ namespace TCGCards.Tests
             return game;
         }
 
-        [TestMethod()]
+        [Fact]
         public void HaveEnoughEnergy_Missing_One()
         {
             var attack = new Attack
@@ -194,10 +193,10 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsFalse(attack.HaveEnoughEnergy(player));
+            Assert.False(attack.HaveEnoughEnergy(player));
         }
 
-        [TestMethod()]
+        [Fact]
         public void HaveEnoughEnergy_One_Wrong()
         {
             var attack = new Attack
@@ -222,10 +221,10 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsFalse(attack.HaveEnoughEnergy(player));
+            Assert.False(attack.HaveEnoughEnergy(player));
         }
 
-        [TestMethod()]
+        [Fact]
         public void HaveEnoughEnergy_All_Same()
         {
             var attack = new Attack
@@ -250,10 +249,10 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+            Assert.True(attack.HaveEnoughEnergy(player));
         }
 
-        [TestMethod()]
+        [Fact]
         public void HaveEnoughEnergy_With_Colorless_Cost()
         {
             var attack = new Attack
@@ -279,10 +278,10 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+            Assert.True(attack.HaveEnoughEnergy(player));
         }
 
-        [TestMethod()]
+        [Fact]
         public void HaveEnoughEnergy_With_Override()
         {
             var attack = new Attack
@@ -315,10 +314,10 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+            Assert.True(attack.HaveEnoughEnergy(player));
         }
 
-        [TestMethod()]
+        [Fact]
         public void HaveEnoughEnergy_With_Override_Double_Colorless()
         {
             var attack = new Attack
@@ -350,7 +349,7 @@ namespace TCGCards.Tests
                 }
             };
 
-            Assert.IsTrue(attack.HaveEnoughEnergy(player));
+            Assert.True(attack.HaveEnoughEnergy(player));
         }
     }
 }

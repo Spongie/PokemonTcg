@@ -1,15 +1,14 @@
 ﻿using TCGCards.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
 
 namespace TCGCards.Core.Tests
 {
-    [TestClass()]
     public class PlayerTests
     {
-        [TestMethod()]
+        [Fact]
         public void SetActivePokemon_CardInHand()
         {
             var p = new Player();
@@ -18,10 +17,10 @@ namespace TCGCards.Core.Tests
 
             p.SetActivePokemon(card);
 
-            Assert.IsFalse(p.Hand.Contains(card));
+            Assert.False(p.Hand.Contains(card));
         }
 
-        [TestMethod()]
+        [Fact]
         public void SetActivePokemon_CardOnBench()
         {
             var p = new Player();
@@ -30,10 +29,10 @@ namespace TCGCards.Core.Tests
 
             p.SetActivePokemon(card);
 
-            Assert.IsFalse(p.BenchedPokemon.Contains(card));
+            Assert.False(p.BenchedPokemon.Contains(card));
         }
 
-        [TestMethod()]
+        [Fact]
         public void SetActivePokemon_SpotTaken()
         {
             var p = new Player();
@@ -43,26 +42,26 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetActivePokemon(card2);
 
-            Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
-            Assert.IsFalse(p.BenchedPokemon.Count > 0);
+            Assert.Equal(card.Id, p.ActivePokemonCard.Id);
+            Assert.False(p.BenchedPokemon.Count > 0);
         }
 
-        [TestMethod]
+        [Fact]
         public void RetreatActivePokemon_NoEnergy()
         {
             var p = new Player();
-            var card = new PokemonCard(p);
+            var card = new PokemonCard(p) { RetreatCost = 1 };
             var card2 = new PokemonCard(p);
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), new GameField());
 
-            Assert.AreEqual(card.Id, p.ActivePokemonCard.Id);
+            Assert.Equal(card.Id, p.ActivePokemonCard.Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void RetreatActivePokemon_Energy()
         {
             var p = new Player();
@@ -76,12 +75,12 @@ namespace TCGCards.Core.Tests
 
             p.PlayEnergyCard(energyCard, p.ActivePokemonCard, null);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), new GameField());
 
-            Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
+            Assert.Equal(card2.Id, p.ActivePokemonCard.Id);
         }
 
-        [TestMethod]
+        [Fact]
         public void RetreatActivePokemon_Energy_Removed()
         {
             var p = new Player();
@@ -95,13 +94,13 @@ namespace TCGCards.Core.Tests
 
             p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), new GameField());
 
-            Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
-            Assert.IsFalse(card.AttachedEnergy.Any());
+            Assert.Equal(card2.Id, p.ActivePokemonCard.Id);
+            Assert.False(card.AttachedEnergy.Any());
         }
 
-        [TestMethod]
+        [Fact]
         public void RetreatActivePokemon_StatusReset()
         {
             var p = new Player();
@@ -119,13 +118,13 @@ namespace TCGCards.Core.Tests
 
             p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
-            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), null);
+            p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), new GameField());
 
-            Assert.AreEqual(card2.Id, p.ActivePokemonCard.Id);
-            Assert.IsFalse(card.IsBurned);
+            Assert.Equal(card2.Id, p.ActivePokemonCard.Id);
+            Assert.False(card.IsBurned);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PlayCardTest_NoActive()
         {
             var p = new Player();
@@ -133,10 +132,10 @@ namespace TCGCards.Core.Tests
 
             p.PlayCard(card);
 
-            Assert.AreEqual(card, p.ActivePokemonCard);
+            Assert.Equal(card, p.ActivePokemonCard);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PlayCardTest_Active()
         {
             var p = new Player();
@@ -145,11 +144,11 @@ namespace TCGCards.Core.Tests
             p.PlayCard(card);
             p.PlayCard(card2);
 
-            Assert.AreEqual(card, p.ActivePokemonCard);
-            Assert.AreEqual(card2, p.BenchedPokemon.ValidPokemonCards.First());
+            Assert.Equal(card, p.ActivePokemonCard);
+            Assert.Equal(card2, p.BenchedPokemon.ValidPokemonCards.First());
         }
 
-        [TestMethod]
+        [Fact]
         public void KillActivePokemon_Basic_NothingAttached()
         {
             var player = new Player();
@@ -157,11 +156,11 @@ namespace TCGCards.Core.Tests
 
             player.KillActivePokemon();
 
-            Assert.IsNull(player.ActivePokemonCard);
-            Assert.AreEqual(1, player.DiscardPile.Count);
+            Assert.Null(player.ActivePokemonCard);
+            Assert.Single(player.DiscardPile);
         }
 
-        [TestMethod]
+        [Fact]
         public void KillActivePokemon_Basic_AttachedEnergy()
         {
             var player = new Player();
@@ -171,11 +170,11 @@ namespace TCGCards.Core.Tests
 
             player.KillActivePokemon();
 
-            Assert.IsNull(player.ActivePokemonCard);
-            Assert.AreEqual(3, player.DiscardPile.Count);
+            Assert.Null(player.ActivePokemonCard);
+            Assert.Equal(3, player.DiscardPile.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void KillActivePokemon_StageOne_AttachedEnergy()
         {
             var player = new Player();
@@ -190,11 +189,11 @@ namespace TCGCards.Core.Tests
 
             player.KillActivePokemon();
 
-            Assert.IsNull(player.ActivePokemonCard);
-            Assert.AreEqual(4, player.DiscardPile.Count);
+            Assert.Null(player.ActivePokemonCard);
+            Assert.Equal(4, player.DiscardPile.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void KillActivePokemon_StageOne_NoEnergy()
         {
             var player = new Player();
@@ -207,11 +206,11 @@ namespace TCGCards.Core.Tests
 
             player.KillActivePokemon();
 
-            Assert.IsNull(player.ActivePokemonCard);
-            Assert.AreEqual(2, player.DiscardPile.Count);
+            Assert.Null(player.ActivePokemonCard);
+            Assert.Equal(2, player.DiscardPile.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void KillActivePokemonTest_FullyHealedInDiscard()
         {
             var player = new Player();
@@ -232,17 +231,17 @@ namespace TCGCards.Core.Tests
 
             player.KillActivePokemon();
 
-            Assert.AreEqual(1, player.DiscardPile.Count);
+            Assert.Single(player.DiscardPile);
 
-            Assert.IsFalse(pokemon.IsAsleep);
-            Assert.IsFalse(pokemon.IsPoisoned);
-            Assert.IsFalse(pokemon.IsParalyzed);
-            Assert.IsFalse(pokemon.IsBurned);
-            Assert.IsFalse(pokemon.IsConfused);
-            Assert.AreEqual(0, pokemon.DamageCounters);
+            Assert.False(pokemon.IsAsleep);
+            Assert.False(pokemon.IsPoisoned);
+            Assert.False(pokemon.IsParalyzed);
+            Assert.False(pokemon.IsBurned);
+            Assert.False(pokemon.IsConfused);
+            Assert.Equal(0, pokemon.DamageCounters);
         }
 
-        [TestMethod()]
+        [Fact]
         public void KillBenchedPokemonTest()
         {
             var player = new Player();
@@ -264,15 +263,15 @@ namespace TCGCards.Core.Tests
 
             player.KillBenchedPokemon(pokemon);
 
-            Assert.AreEqual(1, player.DiscardPile.Count);
-            Assert.AreEqual(0, player.BenchedPokemon.Count);
+            Assert.Single(player.DiscardPile);
+            Assert.Equal(0, player.BenchedPokemon.Count);
 
-            Assert.IsFalse(pokemon.IsAsleep);
-            Assert.IsFalse(pokemon.IsPoisoned);
-            Assert.IsFalse(pokemon.IsParalyzed);
-            Assert.IsFalse(pokemon.IsBurned);
-            Assert.IsFalse(pokemon.IsConfused);
-            Assert.AreEqual(0, pokemon.DamageCounters);
+            Assert.False(pokemon.IsAsleep);
+            Assert.False(pokemon.IsPoisoned);
+            Assert.False(pokemon.IsParalyzed);
+            Assert.False(pokemon.IsBurned);
+            Assert.False(pokemon.IsConfused);
+            Assert.Equal(0, pokemon.DamageCounters);
         }
     }
 }

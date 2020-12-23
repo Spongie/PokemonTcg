@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards;
 using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class DamageEffectTests
     {
-        [TestMethod]
+        [Fact]
         public void DamageAppliedToSelf()
         {
             var effect = new DamageEffect()
@@ -18,7 +17,7 @@ namespace TCGCardsTests.Effects
             var pokemon = new PokemonCard();
             effect.OnAttachedTo(pokemon, true, null);
 
-            Assert.AreEqual(10, pokemon.DamageCounters);
+            Assert.Equal(10, pokemon.DamageCounters);
         }
     }
 }

@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Entities;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class ApplyEffectTargetTests
     {
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Burn()
         {
             var attack = new ApplyEffectTarget()
@@ -19,10 +18,10 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsBurned);
+            Assert.True(target.IsBurned);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Confuse()
         {
             var attack = new ApplyEffectTarget()
@@ -34,10 +33,10 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsConfused);
+            Assert.True(target.IsConfused);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Paralyze()
         {
             var attack = new ApplyEffectTarget()
@@ -49,10 +48,10 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsParalyzed);
+            Assert.True(target.IsParalyzed);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Sleep()
         {
             var attack = new ApplyEffectTarget()
@@ -64,10 +63,10 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsAsleep);
+            Assert.True(target.IsAsleep);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest_Poison()
         {
             var attack = new ApplyEffectTarget()
@@ -79,7 +78,7 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(new GameField(), null, new Player { ActivePokemonCard = target });
 
-            Assert.IsTrue(target.IsPoisoned);
+            Assert.True(target.IsPoisoned);
         }
     }
 }

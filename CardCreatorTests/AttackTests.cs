@@ -1,66 +1,65 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CardCreator.Tests
 {
-    [TestClass()]
     public class AttackTests
     {
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Name()
         {
             Attack attack = new Attack(createTestPokemon().Attacks.First());
 
-            Assert.AreEqual("Teleport Blast", attack.Name);
+            Assert.Equal("Teleport Blast", attack.Name);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Damage()
         {
             Attack attack = new Attack(createTestPokemon().Attacks.First());
 
-            Assert.AreEqual("30", attack.Damage);
+            Assert.Equal("30", attack.Damage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Description()
         {
             Attack attack = new Attack(createTestPokemon().Attacks.First());
 
-            Assert.AreEqual("You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)", attack.Description);
+            Assert.Equal("You may switch Dark Alakazam with 1 of your Benched Pokémon. (Do the damage before switching the Pokémon.)", attack.Description);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Name2()
         {
             Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
-            Assert.AreEqual("Dizziness", attack.Name);
+            Assert.Equal("Dizziness", attack.Name);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Damage2()
         {
             Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
-            Assert.AreEqual("0", attack.Damage);
+            Assert.Equal("0", attack.Damage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Description2()
         {
             Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
-            Assert.AreEqual("Draw a card.", attack.Description);
+            Assert.Equal("Draw a card.", attack.Description);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_NeedsMode_Plus()
         {
             Attack attack = new Attack(createTestPokemon2().Attacks.First());
 
-            Assert.IsTrue(attack.NeedsMore);
+            Assert.True(attack.NeedsMore);
         }
 
         private PokemonTcgSdk.Models.PokemonCard createTestPokemon()

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards.Core;
 using NSubstitute;
 using TCGCards.Core.Messages;
@@ -7,10 +7,9 @@ using Entities;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class Conversion2Tests
     {
-        [TestMethod()]
+        [Fact]
         public void ProcessEffectsTest()
         {
             var attack = new Conversion2();
@@ -32,7 +31,7 @@ namespace TCGCards.Attacks.Tests
 
             attack.ProcessEffects(new GameField(), player, opponent);
 
-            Assert.AreEqual(EnergyTypes.Darkness, player.ActivePokemonCard.Resistance);
+            Assert.Equal(EnergyTypes.Darkness, player.ActivePokemonCard.Resistance);
         }
     }
 }

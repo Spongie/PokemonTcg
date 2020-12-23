@@ -1,30 +1,29 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using System.Collections.Generic;
 
 namespace CardCreator.Tests
 {
-    [TestClass()]
     public class WeaknessResistenceInfoTests
     {
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Resistence()
         {
             var weaknessResistence = CreateWeaknessResistenceFromHtml();
-            Assert.AreEqual("Fighting", weaknessResistence.Resistence);
+            Assert.Equal("Fighting", weaknessResistence.Resistence);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Weakness()
         {
             var weaknessResistence = CreateWeaknessResistenceFromHtml();
-            Assert.AreEqual("Psychic", weaknessResistence.Weakness);
+            Assert.Equal("Psychic", weaknessResistence.Weakness);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ParseTest_Retreat()
         {
             var weaknessResistence = CreateWeaknessResistenceFromHtml();
-            Assert.AreEqual(1, weaknessResistence.RetreatCost);
+            Assert.Equal(1, weaknessResistence.RetreatCost);
         }
 
         private static WeaknessResistenceInfo CreateWeaknessResistenceFromHtml()

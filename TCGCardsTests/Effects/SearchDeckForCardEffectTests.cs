@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using NetworkingCore;
 using NSubstitute;
 using System.Collections.Generic;
@@ -8,10 +8,9 @@ using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class SearchDeckForCardEffectTests
     {
-        [TestMethod]
+        [Fact]
         public void DeckSearched()
         {
             var effect = new SearchDeckForCardEffect()
@@ -36,9 +35,9 @@ namespace TCGCardsTests.Effects
             game.AddPlayer(player);
             effect.Process(game, player, null, null);
 
-            Assert.AreEqual(1, player.Hand.Count);
-            Assert.AreEqual(4, player.Deck.Cards.Count);
-            Assert.AreEqual(target.Id, player.Hand[0].Id);
+            Assert.Single(player.Hand);
+            Assert.Equal(4, player.Deck.Cards.Count);
+            Assert.Equal(target.Id, player.Hand[0].Id);
         }
     }
 }

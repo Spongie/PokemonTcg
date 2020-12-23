@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Entities
 {
@@ -10,15 +9,8 @@ namespace Entities
         public static readonly bool HEADS = true;
         public static readonly bool TAILS = false;
 
-        public static Queue<bool> ForcedNextFlips = new Queue<bool>();
-
         public static bool FlipCoin()
         {
-            if (ForcedNextFlips.Any())
-            {
-                return ForcedNextFlips.Dequeue();
-            }
-
             return random.Next(2) > 0;
         }
 
@@ -28,12 +20,6 @@ namespace Entities
 
             for(int _ = 0; _ < count; _++)
             {
-                if (ForcedNextFlips.Any())
-                {
-                    heads += ForcedNextFlips.Dequeue() ? 1 : 0;
-                    continue;
-                }
-
                 heads += random.Next(2);
             }
 

@@ -1,5 +1,5 @@
 ﻿using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using NetworkingCore;
 using NSubstitute;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class DiscardCardEffectTests
     {
+        [Fact]
         public void DiscardAny_NoFlip()
         {
             var effect = new DiscardCardEffect()
@@ -33,11 +33,11 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, null, null);
 
-            Assert.AreEqual(1, player.DiscardPile.Count);
-            Assert.AreEqual(2, player.Hand.Count);
+            Assert.Single(player.DiscardPile);
+            Assert.Equal(2, player.Hand.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void DiscardAny_Flip_Tails()
         {
             var effect = new DiscardCardEffect()
@@ -55,14 +55,13 @@ namespace TCGCardsTests.Effects
             var sub = Substitute.For<INetworkPlayer>();
             sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage { Cards = new List<NetworkId> { player.Hand[0].Id } });
             player.SetNetworkPlayer(sub);
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), player, null, null);
+            effect.Process(new GameField().WithFlips(CoinFlipper.TAILS), player, null, null);
 
-            Assert.AreEqual(0, player.DiscardPile.Count);
-            Assert.AreEqual(3, player.Hand.Count);
+            Assert.Empty(player.DiscardPile);
+            Assert.Equal(3, player.Hand.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void DiscardAny_Flip_Heads()
         {
             var effect = new DiscardCardEffect()
@@ -80,14 +79,13 @@ namespace TCGCardsTests.Effects
             var sub = Substitute.For<INetworkPlayer>();
             sub.SendAndWaitForResponse<CardListMessage>(Arg.Any<NetworkMessage>()).ReturnsForAnyArgs(new CardListMessage { Cards = new List<NetworkId> { player.Hand[0].Id } });
             player.SetNetworkPlayer(sub);
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), player, null, null);
+            effect.Process(new GameField().WithFlips(CoinFlipper.HEADS), player, null, null);
 
-            Assert.AreEqual(1, player.DiscardPile.Count);
-            Assert.AreEqual(2, player.Hand.Count);
+            Assert.Single(player.DiscardPile);
+            Assert.Equal(2, player.Hand.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void DiscardAllCards()
         {
             var effect = new DiscardCardEffect()
@@ -104,11 +102,11 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, null, null);
 
-            Assert.AreEqual(3, player.DiscardPile.Count);
-            Assert.AreEqual(0, player.Hand.Count);
+            Assert.Equal(3, player.DiscardPile.Count);
+            Assert.Empty(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void DiscardAny_OnlyTrainer()
         {
             var effect = new DiscardCardEffect()
@@ -130,9 +128,9 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, null, null);
 
-            Assert.AreEqual(1, player.DiscardPile.Count);
-            Assert.AreEqual(2, player.Hand.Count);
-            Assert.AreEqual(target.Id, player.DiscardPile[0].Id);
+            Assert.Single(player.DiscardPile);
+            Assert.Equal(2, player.Hand.Count);
+            Assert.Equal(target.Id, player.DiscardPile[0].Id);
         }
     }
 }

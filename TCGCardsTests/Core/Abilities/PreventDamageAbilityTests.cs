@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace TCGCards.Core.Abilities.Tests
 {
-    [TestClass()]
     public class PreventDamageAbilityTests
     {
-        [TestMethod()]
+        [Fact]
         public void PreventDamageAbilityTest_Minimum_NotZero_Low_Damage()
         {
             var pokemon = new PokemonCard();
@@ -19,10 +18,10 @@ namespace TCGCards.Core.Abilities.Tests
 
             ability.Trigger(new Player(), new Player(), 20, new GameField());
 
-            Assert.AreEqual(20, pokemon.DamageCounters);
+            Assert.Equal(20, pokemon.DamageCounters);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PreventDamageAbilityTest_Minimum_NotZero_High_Damage()
         {
             var pokemon = new PokemonCard();
@@ -36,10 +35,10 @@ namespace TCGCards.Core.Abilities.Tests
 
             ability.Trigger(new Player(), new Player(), 70, new GameField());
 
-            Assert.AreEqual(0, pokemon.DamageCounters);
+            Assert.Equal(0, pokemon.DamageCounters);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PreventDamageAbilityTest_Minimum_NotZero_Prevent_Some()
         {
             var pokemon = new PokemonCard();
@@ -53,7 +52,7 @@ namespace TCGCards.Core.Abilities.Tests
 
             ability.Trigger(new Player(), new Player(), 70, new GameField());
 
-            Assert.AreEqual(40, pokemon.DamageCounters);
+            Assert.Equal(40, pokemon.DamageCounters);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using TCGCards.Attacks;
 using System;
 using System.Collections.Generic;
@@ -9,10 +9,9 @@ using TCGCards.Core;
 
 namespace TCGCards.Attacks.Tests
 {
-    [TestClass()]
     public class ExtraForUnusedEnergyTests
     {
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_1_Energy()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -42,10 +41,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(10, damage.NormalDamage);
+            Assert.Equal(10, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_1_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -76,10 +75,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(20, damage.NormalDamage);
+            Assert.Equal(20, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_2_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -111,10 +110,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(30, damage.NormalDamage);
+            Assert.Equal(30, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_4_Extra_Limited()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -148,10 +147,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(30, damage.NormalDamage);
+            Assert.Equal(30, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_1_Energy_With_Colorless_Cost()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -183,10 +182,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(10, damage.NormalDamage);
+            Assert.Equal(10, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_1_Extra_With_Colorless_Cost()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -219,10 +218,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(20, damage.NormalDamage);
+            Assert.Equal(20, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetDamageTest_1_Extra_Wrong_With_Colorless_Cost()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -255,10 +254,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(10, damage.NormalDamage);
+            Assert.Equal(10, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Blastoise_0_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -290,10 +289,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(40, damage.NormalDamage);
+            Assert.Equal(40, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Blastoise_1_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -326,10 +325,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(50, damage.NormalDamage);
+            Assert.Equal(50, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Blastoise_2_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -363,11 +362,16 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(60, damage.NormalDamage);
+            Assert.Equal(60, damage.NormalDamage);
         }
 
-        [TestMethod()]
-        public void Blastoise_4_Extra()
+        [Theory]
+        [InlineData(7)]
+        [InlineData(8)]
+        [InlineData(9)]
+        [InlineData(10)]
+        [InlineData(14)]
+        public void Blastoise_4_Extra(int attachedEnergy)
         {
             var attack = new ExtraForUnusedEnergy()
             {
@@ -389,23 +393,20 @@ namespace TCGCards.Attacks.Tests
                 }
             };
 
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            for (int i = 0; i < attachedEnergy; i++)
+            {
+                owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            }
 
             var player = new Player();
             player.ActivePokemonCard = owner;
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(60, damage.NormalDamage);
+            Assert.Equal(60, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Seadra_0_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -437,10 +438,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(20, damage.NormalDamage);
+            Assert.Equal(20, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Seadra_1_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -473,10 +474,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(30, damage.NormalDamage);
+            Assert.Equal(30, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Seadra_1_Extra_With_Double()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -509,10 +510,10 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(30, damage.NormalDamage);
+            Assert.Equal(30, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Seadra_2_Extra()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -546,11 +547,16 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(40, damage.NormalDamage);
+            Assert.Equal(40, damage.NormalDamage);
         }
 
-        [TestMethod()]
-        public void Seadra_4_Extra()
+        [Theory]
+        [InlineData(6)]
+        [InlineData(7)]
+        [InlineData(8)]
+        [InlineData(9)]
+        [InlineData(10)]
+        public void Seadra_4_Extra(int attachedEnergy)
         {
             var attack = new ExtraForUnusedEnergy()
             {
@@ -573,22 +579,20 @@ namespace TCGCards.Attacks.Tests
                 }
             };
 
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
-            owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            for (int i = 0; i < attachedEnergy; i++)
+            {
+                owner.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            }
 
             var player = new Player();
             player.ActivePokemonCard = owner;
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(40, damage.NormalDamage);
+            Assert.Equal(40, damage.NormalDamage);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Seadra_1_Extra_Wrong_Type()
         {
             var attack = new ExtraForUnusedEnergy()
@@ -620,7 +624,7 @@ namespace TCGCards.Attacks.Tests
 
             var damage = attack.GetDamage(player, null, null);
 
-            Assert.AreEqual(20, damage.NormalDamage);
+            Assert.Equal(20, damage.NormalDamage);
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NetworkingCore;
+﻿using Xunit;
 
 namespace TCGCards.Core.Tests
 {
-    [TestClass]
     public class BenchTests
     {
-        [TestMethod]
+        [Fact]
         public void Add_Empty()
         {
             var bench = new Bench();
@@ -15,10 +13,10 @@ namespace TCGCards.Core.Tests
             bench.Add(new PokemonCard());
             bench.Add(new PokemonCard());
 
-            Assert.AreEqual(3, bench.Count);
+            Assert.Equal(3, bench.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void Remove()
         {
             var bench = new Bench();
@@ -33,14 +31,14 @@ namespace TCGCards.Core.Tests
 
             bench.Remove(p2);
 
-            Assert.AreEqual(2, bench.Count);
-            Assert.IsTrue(bench.Contains(p1));
-            Assert.IsTrue(bench.Contains(p3));
-            Assert.IsFalse(bench.Contains(p2));
+            Assert.Equal(2, bench.Count);
+            Assert.True(bench.Contains(p1));
+            Assert.True(bench.Contains(p3));
+            Assert.False(bench.Contains(p2));
         }
 
 
-        [TestMethod]
+        [Fact]
         public void Remove_Then_Add()
         {
             var bench = new Bench();
@@ -56,35 +54,35 @@ namespace TCGCards.Core.Tests
 
             bench.Remove(p2);
 
-            Assert.AreEqual(1, bench.GetNextFreeIndex());
+            Assert.Equal(1, bench.GetNextFreeIndex());
 
             bench.Add(p4);
 
-            Assert.AreEqual(3, bench.Count);
-            Assert.IsTrue(bench.Contains(p1));
-            Assert.IsFalse(bench.Contains(p2));
-            Assert.IsTrue(bench.Contains(p3));
-            Assert.IsTrue(bench.Contains(p4));
+            Assert.Equal(3, bench.Count);
+            Assert.True(bench.Contains(p1));
+            Assert.False(bench.Contains(p2));
+            Assert.True(bench.Contains(p3));
+            Assert.True(bench.Contains(p4));
 
-            Assert.AreEqual(p4, bench.Pokemons[1]);
+            Assert.Equal(p4, bench.Pokemons[1]);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNextFreeIndex_Empty()
         {
             var bench = new Bench();
 
-            Assert.AreEqual(0, bench.GetNextFreeIndex());
+            Assert.Equal(0, bench.GetNextFreeIndex());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNextFreeIndex_NotEmpty()
         {
             var bench = new Bench();
             bench.Add(new PokemonCard());
             bench.Add(new PokemonCard());
 
-            Assert.AreEqual(2, bench.GetNextFreeIndex());
+            Assert.Equal(2, bench.GetNextFreeIndex());
         }
     }
 }

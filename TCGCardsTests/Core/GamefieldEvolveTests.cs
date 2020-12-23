@@ -1,14 +1,13 @@
 ﻿using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using TCGCards;
 using TCGCards.Core;
 
 namespace TCGCardsTests.Core
 {
-    [TestClass]
     public class GamefieldEvolveTests
     {
-        [TestMethod]
+        [Fact]
         public void EvolveAndAttachEnergy()
         {
             var game = new GameField();
@@ -27,11 +26,11 @@ namespace TCGCardsTests.Core
 
             game.EvolvePokemon(pokemon, evolution);
 
-            Assert.AreEqual(evolution, player.ActivePokemonCard);
+            Assert.Equal(evolution, player.ActivePokemonCard);
 
             game.ActivePlayer.PlayEnergyCard(energyCard, evolution, game);
 
-            Assert.AreEqual(1, evolution.AttachedEnergy.Count);
+            Assert.Single(evolution.AttachedEnergy);
         }
     }
 }

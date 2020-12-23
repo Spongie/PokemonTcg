@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using NetworkingCore;
 using NSubstitute;
 using System.Collections.Generic;
@@ -9,10 +9,9 @@ using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class DiscardAttachedEnergyTests
     {
-        [TestMethod]
+        [Fact]
         public void AttachedAmountSameAsDiscard()
         {
             var effect = new DiscardAttachedEnergy
@@ -28,11 +27,11 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, opponent, null);
 
-            Assert.AreEqual(0, opponent.ActivePokemonCard.AttachedEnergy.Count);
-            Assert.AreEqual(1, opponent.DiscardPile.Count);
+            Assert.Empty(opponent.ActivePokemonCard.AttachedEnergy);
+            Assert.Single(opponent.DiscardPile);
         }
 
-        [TestMethod]
+        [Fact]
         public void AttachedAmountMoreThanDiscard()
         {
             var effect = new DiscardAttachedEnergy
@@ -57,9 +56,9 @@ namespace TCGCardsTests.Effects
 
             effect.Process(new GameField(), player, opponent, null);
 
-            Assert.AreEqual(1, opponent.ActivePokemonCard.AttachedEnergy.Count);
-            Assert.AreEqual(goodCard.Id, opponent.DiscardPile[0].Id);
-            Assert.AreEqual(1, opponent.DiscardPile.Count);
+            Assert.Single(opponent.ActivePokemonCard.AttachedEnergy);
+            Assert.Equal(goodCard.Id, opponent.DiscardPile[0].Id);
+            Assert.Single(opponent.DiscardPile);
         }
     }
 }

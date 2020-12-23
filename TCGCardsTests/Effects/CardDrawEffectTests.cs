@@ -1,15 +1,14 @@
 ﻿using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class CardDrawEffectTests
     {
-        [TestMethod]
+        [Fact]
         public void CardDrawNoFlip()
         {
             var effect = new CardDrawEffect()
@@ -23,11 +22,11 @@ namespace TCGCardsTests.Effects
             player.Deck.Cards.Push(new PokemonCard());
 
             effect.Process(new GameField(), player, null, null);
-            Assert.AreEqual(0, player.Deck.Cards.Count);
-            Assert.AreEqual(1, player.Hand.Count);
+            Assert.Empty(player.Deck.Cards);
+            Assert.Single(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void CardDrawFlipTails()
         {
             var effect = new CardDrawEffect()
@@ -39,13 +38,12 @@ namespace TCGCardsTests.Effects
 
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), player, null, null);
-            Assert.AreEqual(1, player.Deck.Cards.Count);
-            Assert.AreEqual(0, player.Hand.Count);
+            effect.Process(new GameField().WithFlips(CoinFlipper.TAILS), player, null, null);
+            Assert.Single(player.Deck.Cards);
+            Assert.Empty(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void CardDrawFlipHeads()
         {
             var effect = new CardDrawEffect()
@@ -57,13 +55,12 @@ namespace TCGCardsTests.Effects
 
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), player, null, null);
-            Assert.AreEqual(0, player.Deck.Cards.Count);
-            Assert.AreEqual(1, player.Hand.Count);
+            effect.Process(new GameField().WithFlips(CoinFlipper.HEADS), player, null, null);
+            Assert.Empty(player.Deck.Cards);
+            Assert.Single(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void CardDrawNoFlip_Opponent()
         {
             var effect = new CardDrawEffect()
@@ -77,11 +74,11 @@ namespace TCGCardsTests.Effects
             player.Deck.Cards.Push(new PokemonCard());
 
             effect.Process(new GameField(), null, player, null);
-            Assert.AreEqual(0, player.Deck.Cards.Count);
-            Assert.AreEqual(1, player.Hand.Count);
+            Assert.Empty(player.Deck.Cards);
+            Assert.Single(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void CardDrawFlipTails_Opponent()
         {
             var effect = new CardDrawEffect()
@@ -93,13 +90,12 @@ namespace TCGCardsTests.Effects
 
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), null, player, null);
-            Assert.AreEqual(1, player.Deck.Cards.Count);
-            Assert.AreEqual(0, player.Hand.Count);
+            effect.Process(new GameField().WithFlips(CoinFlipper.TAILS), null, player, null);
+            Assert.Single(player.Deck.Cards);
+            Assert.Empty(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void CardDrawFlipHeads_Opponent()
         {
             var effect = new CardDrawEffect()
@@ -111,13 +107,12 @@ namespace TCGCardsTests.Effects
 
             var player = new Player();
             player.Deck.Cards.Push(new PokemonCard());
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), null, player, null);
-            Assert.AreEqual(0, player.Deck.Cards.Count);
-            Assert.AreEqual(1, player.Hand.Count);
+            effect.Process(new GameField().WithFlips(CoinFlipper.HEADS), null, player, null);
+            Assert.Empty(player.Deck.Cards);
+            Assert.Single(player.Hand);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnAttachedTo()
         {
             var effect = new CardDrawEffect()
@@ -131,7 +126,7 @@ namespace TCGCardsTests.Effects
             player.Deck.Cards.Push(new PokemonCard());
             var pokemon = new PokemonCard() { Owner = player };
             effect.OnAttachedTo(pokemon, true, null);
-            Assert.AreEqual(1, player.Hand.Count);
+            Assert.Single(player.Hand);
         }
     }
 }

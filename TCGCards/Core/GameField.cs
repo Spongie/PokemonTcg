@@ -19,6 +19,7 @@ namespace TCGCards.Core
         public const int BenchMaxSize = 5;
         private readonly object lockObject = new object();
         private readonly HashSet<NetworkId> playersSetStartBench;
+        private Queue<bool> forcedFlips;
         
         public GameField()
         {
@@ -29,6 +30,17 @@ namespace TCGCards.Core
             TemporaryPassiveAbilities = new List<PassiveAbility>();
             GameState = GameFieldState.WaitingForConnection;
             GameLog = new GameLog();
+            forcedFlips = new Queue<bool>();
+        }
+
+        public GameField WithFlips(params bool[] flips)
+        {
+            foreach (var flip in flips)
+            {
+                forcedFlips.Enqueue(flip);
+            }
+
+            return this;
         }
 
         public bool IsSuccessfulFlip(bool flipCoin, bool checkLastFlip, bool checkTails)
@@ -50,7 +62,23 @@ namespace TCGCards.Core
 
         public int FlipCoins(int coins)
         {
-            var heads = CoinFlipper.FlipCoins(coins);
+            int heads;
+
+            if (forcedFlips.Count > 0)
+            {
+                heads = 0;
+                while (forcedFlips.Count > 0)
+                {
+                    if (forcedFlips.Dequeue())
+                    {
+                        heads++;
+                    }
+                }
+            }
+            else
+            {
+                heads = CoinFlipper.FlipCoins(coins);
+            }
 
             GameLog?.AddMessage($"Flips {coins} coins and gets {heads} heads");
 
@@ -975,8 +1003,17 @@ namespace TCGCards.Core
 
         public List<PassiveAbility> GetAllPassiveAbilities()
         {
-            var passiveAbilities = new List<PassiveAbility>(ActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
-            passiveAbilities.AddRange(NonActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
+            var passiveAbilities = new List<PassiveAbility>();
+
+            if (ActivePlayer != null)
+            {
+                passiveAbilities.AddRange(ActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
+            }
+            if (NonActivePlayer != null)
+            {
+                passiveAbilities.AddRange(NonActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
+            }
+
             passiveAbilities.AddRange(TemporaryPassiveAbilities);
 
             if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))

@@ -1,15 +1,14 @@
 ﻿using Entities;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
 
 namespace TCGCardsTests.Effects
 {
-    [TestClass]
     public class ApplyStatusEffectTests
     {
-        [TestMethod]
+        [Fact]
         public void AppliesCorrectStatus()
         {
             var pokemon = new PokemonCard();
@@ -22,30 +21,30 @@ namespace TCGCardsTests.Effects
 
 
             effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsTrue(pokemon.IsBurned);
+            Assert.True(pokemon.IsBurned);
 
             pokemon.IsBurned = false;
             effect.StatusEffect = StatusEffect.Confuse;
             effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsTrue(pokemon.IsConfused);
+            Assert.True(pokemon.IsConfused);
 
             pokemon.IsConfused = false;
             effect.StatusEffect = StatusEffect.Paralyze;
             effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsTrue(pokemon.IsParalyzed);
+            Assert.True(pokemon.IsParalyzed);
 
             pokemon.IsParalyzed = false;
             effect.StatusEffect = StatusEffect.Poison;
             effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsTrue(pokemon.IsPoisoned);
+            Assert.True(pokemon.IsPoisoned);
 
             pokemon.IsPoisoned = false;
             effect.StatusEffect = StatusEffect.Sleep;
             effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsTrue(pokemon.IsAsleep);
+            Assert.True(pokemon.IsAsleep);
         }
 
-        [TestMethod]
+        [Fact]
         public void CoinFlip_AppliesOnHeads()
         {
             var pokemon = new PokemonCard();
@@ -56,12 +55,11 @@ namespace TCGCardsTests.Effects
                 TargetingMode = TargetingMode.OpponentActive
             };
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.HEADS);
-            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsTrue(pokemon.IsBurned);
+            effect.Process(new GameField().WithFlips(CoinFlipper.HEADS), new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            Assert.True(pokemon.IsBurned);
         }
 
-        [TestMethod]
+        [Fact]
         public void CoinFlip_FailsOnTails()
         {
             var pokemon = new PokemonCard();
@@ -72,12 +70,11 @@ namespace TCGCardsTests.Effects
                 TargetingMode = TargetingMode.OpponentActive
             };
 
-            CoinFlipper.ForcedNextFlips.Enqueue(CoinFlipper.TAILS);
-            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
-            Assert.IsFalse(pokemon.IsBurned);
+            effect.Process(new GameField().WithFlips(CoinFlipper.TAILS), new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            Assert.False(pokemon.IsBurned);
         }
 
-        [TestMethod]
+        [Fact]
         public void OnAttachedTo()
         {
             var pokemon = new PokemonCard();
@@ -89,7 +86,7 @@ namespace TCGCardsTests.Effects
             };
 
             effect.OnAttachedTo(pokemon, true, null);
-            Assert.IsTrue(pokemon.IsBurned);
+            Assert.True(pokemon.IsBurned);
         }
     }
 }
