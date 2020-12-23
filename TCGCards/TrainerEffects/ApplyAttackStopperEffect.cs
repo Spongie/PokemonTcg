@@ -18,6 +18,7 @@ namespace TCGCards.TrainerEffects
 
         private TargetingMode targetingMode;
         private int duration;
+        private bool onlyStopAttacksOnSelf;
 
         [DynamicInput("Duration")]
         public int Duration
@@ -41,6 +42,16 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Only stop attacking self", InputControl.Boolean)]
+        public bool OnlyStopAttacksOnSelf
+        {
+            get { return onlyStopAttacksOnSelf; }
+            set
+            {
+                onlyStopAttacksOnSelf = value;
+                FirePropertyChanged();
+            }
+        }
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
@@ -56,11 +67,18 @@ namespace TCGCards.TrainerEffects
         {
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, pokemonSource);
 
-            target.TemporaryAbilities.Add(new AttackStoppingAbility()
+            var ability = new AttackStoppingAbility()
             {
                 TurnDuration = Duration,
-                IsBuff = true
-            });
+                IsBuff = true,
+            };
+
+            if (OnlyStopAttacksOnSelf)
+            {
+                ability.OnlyOnCard = pokemonSource.Id;
+            }
+
+            target.TemporaryAbilities.Add(ability);
         }
     }
 }

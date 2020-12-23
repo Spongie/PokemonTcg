@@ -1,4 +1,6 @@
-﻿namespace TCGCards.Core.Abilities
+﻿using NetworkingCore;
+
+namespace TCGCards.Core.Abilities
 {
     public class AttackStoppingAbility : PassiveAbility
     {
@@ -6,5 +8,7 @@
         {
             ModifierType = PassiveModifierType.StopAttack;
         }
+
+        public NetworkId OnlyOnCard { get; set; }
     }
 }

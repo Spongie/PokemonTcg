@@ -186,6 +186,21 @@ namespace TCGCards
                 return false;
             }
 
+            foreach (var ability in owner.ActivePokemonCard.GetAllActiveAbilities(game, owner, opponent).OfType<AttackStoppingAbility>())
+            {
+                if (ability.OnlyOnCard != null)
+                {
+                    if (opponent.ActivePokemonCard.Id.Equals(ability.OnlyOnCard))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
             return HaveEnoughEnergy(owner) && Effects.All(x => x.CanCast(game, owner, opponent));
         }
 
