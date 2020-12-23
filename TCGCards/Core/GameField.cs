@@ -227,8 +227,8 @@ namespace TCGCards.Core
 
             for (var i = 0; i < 20; i++)
             {
-                ActivePlayer.Deck.Cards.Push(new TestPokemonCard(ActivePlayer));
-                NonActivePlayer.Deck.Cards.Push(new TestPokemonCard(NonActivePlayer));
+                ActivePlayer.Deck.Cards.Push(new PokemonCard(ActivePlayer));
+                NonActivePlayer.Deck.Cards.Push(new PokemonCard(NonActivePlayer));
             }
         }
 

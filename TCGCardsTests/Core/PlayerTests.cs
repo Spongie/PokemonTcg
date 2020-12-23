@@ -13,7 +13,7 @@ namespace TCGCards.Core.Tests
         public void SetActivePokemon_CardInHand()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
             p.Hand.Add(card);
 
             p.SetActivePokemon(card);
@@ -25,7 +25,7 @@ namespace TCGCards.Core.Tests
         public void SetActivePokemon_CardOnBench()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
             p.BenchedPokemon.Add(card);
 
             p.SetActivePokemon(card);
@@ -37,8 +37,8 @@ namespace TCGCards.Core.Tests
         public void SetActivePokemon_SpotTaken()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
-            var card2 = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
+            var card2 = new PokemonCard(p);
 
             p.SetActivePokemon(card);
             p.SetActivePokemon(card2);
@@ -51,8 +51,8 @@ namespace TCGCards.Core.Tests
         public void RetreatActivePokemon_NoEnergy()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
-            var card2 = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
+            var card2 = new PokemonCard(p);
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
@@ -66,8 +66,8 @@ namespace TCGCards.Core.Tests
         public void RetreatActivePokemon_Energy()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
-            var card2 = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
+            var card2 = new PokemonCard(p);
             var energyCard = new EnergyCard() { Amount = 1 };
             p.Hand.Add(energyCard);
 
@@ -85,8 +85,8 @@ namespace TCGCards.Core.Tests
         public void RetreatActivePokemon_Energy_Removed()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
-            var card2 = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
+            var card2 = new PokemonCard(p);
             var energyCard = new EnergyCard() { Amount = 1 };
             p.Hand.Add(energyCard);
 
@@ -105,12 +105,12 @@ namespace TCGCards.Core.Tests
         public void RetreatActivePokemon_StatusReset()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p)
+            var card = new PokemonCard(p)
             {
                 IsBurned = true
             };
 
-            var card2 = new TestPokemonCard(p);
+            var card2 = new PokemonCard(p);
             var energyCard = new EnergyCard() { Amount = 1 };
             p.Hand.Add(energyCard);
 
@@ -129,7 +129,7 @@ namespace TCGCards.Core.Tests
         public void PlayCardTest_NoActive()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
 
             p.PlayCard(card);
 
@@ -140,8 +140,8 @@ namespace TCGCards.Core.Tests
         public void PlayCardTest_Active()
         {
             var p = new Player();
-            var card = new TestPokemonCard(p);
-            var card2 = new TestPokemonCard(p);
+            var card = new PokemonCard(p);
+            var card2 = new PokemonCard(p);
             p.PlayCard(card);
             p.PlayCard(card2);
 
@@ -153,7 +153,7 @@ namespace TCGCards.Core.Tests
         public void KillActivePokemon_Basic_NothingAttached()
         {
             var player = new Player();
-            player.ActivePokemonCard = new TestPokemonCard(player);
+            player.ActivePokemonCard = new PokemonCard(player);
 
             player.KillActivePokemon();
 
@@ -165,7 +165,7 @@ namespace TCGCards.Core.Tests
         public void KillActivePokemon_Basic_AttachedEnergy()
         {
             var player = new Player();
-            player.ActivePokemonCard = new TestPokemonCard(player);
+            player.ActivePokemonCard = new PokemonCard(player);
             player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
             player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard());
 
@@ -179,8 +179,8 @@ namespace TCGCards.Core.Tests
         public void KillActivePokemon_StageOne_AttachedEnergy()
         {
             var player = new Player();
-            var abra = new TestPokemonCard(player);
-            var kadabra = new TestPokemonCard(player);
+            var abra = new PokemonCard(player);
+            var kadabra = new PokemonCard(player);
 
             abra.Evolve(kadabra);
 
@@ -198,8 +198,8 @@ namespace TCGCards.Core.Tests
         public void KillActivePokemon_StageOne_NoEnergy()
         {
             var player = new Player();
-            var abra = new TestPokemonCard(player);
-            var kadabra = new TestPokemonCard(player);
+            var abra = new PokemonCard(player);
+            var kadabra = new PokemonCard(player);
 
             abra.Evolve(kadabra);
 
