@@ -626,5 +626,153 @@ namespace TCGCards.Attacks.Tests
 
             Assert.Equal(20, damage.NormalDamage);
         }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        public void usedWithMetronome_other_type_attached(int attached)
+        {
+            var opponentPokemon = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    new ExtraForUnusedEnergy()
+                    {
+                        Damage = 40,
+                        MaxExtraDamage = 20,
+                        AmountPerEnergy = 10,
+                        EnergyType = EnergyTypes.Water,
+                        Cost = new ObservableCollection<Energy>
+                        {
+                            new Energy(EnergyTypes.Water, 3)
+                        }
+                    }
+                }
+            };
+            var opponent = new Player
+            {
+                ActivePokemonCard = opponentPokemon
+            };
+
+            var attack = new Metronome();
+            var player = new Player()
+            {
+                ActivePokemonCard = new PokemonCard()
+                {
+                    Attacks = new ObservableCollection<Attack>
+                    {
+                        
+                    }
+                }
+            };
+
+            for (int i = 0; i < attached; i++)
+            {
+                player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Fire });
+            }
+
+            Assert.Equal(40, attack.GetDamage(player, opponent, new GameField()).NormalDamage);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void usedWithMetronome_correct_type_attached_less_than_cost(int attached)
+        {
+            var opponentPokemon = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    new ExtraForUnusedEnergy()
+                    {
+                        Damage = 40,
+                        MaxExtraDamage = 20,
+                        AmountPerEnergy = 10,
+                        EnergyType = EnergyTypes.Water,
+                        Cost = new ObservableCollection<Energy>
+                        {
+                            new Energy(EnergyTypes.Water, 3)
+                        }
+                    }
+                }
+            };
+            var opponent = new Player
+            {
+                ActivePokemonCard = opponentPokemon
+            };
+
+            var attack = new Metronome();
+            var player = new Player()
+            {
+                ActivePokemonCard = new PokemonCard()
+                {
+                    Attacks = new ObservableCollection<Attack>
+                    {
+
+                    }
+                }
+            };
+
+            for (int i = 0; i < attached; i++)
+            {
+                player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            }
+
+            Assert.Equal(40, attack.GetDamage(player, opponent, new GameField()).NormalDamage);
+        }
+
+        [Theory]
+        [InlineData(4, 50)]
+        [InlineData(5, 60)]
+        [InlineData(6, 60)]
+        [InlineData(7, 60)]
+        [InlineData(8, 60)]
+        [InlineData(9, 60)]
+        public void usedWithMetronome_correct_type_attached(int attached, int expected)
+        {
+            var opponentPokemon = new PokemonCard()
+            {
+                Attacks = new ObservableCollection<Attack>
+                {
+                    new ExtraForUnusedEnergy()
+                    {
+                        Damage = 40,
+                        MaxExtraDamage = 20,
+                        AmountPerEnergy = 10,
+                        EnergyType = EnergyTypes.Water,
+                        Cost = new ObservableCollection<Energy>
+                        {
+                            new Energy(EnergyTypes.Water, 3)
+                        }
+                    }
+                }
+            };
+            var opponent = new Player
+            {
+                ActivePokemonCard = opponentPokemon
+            };
+
+            var attack = new Metronome();
+            var player = new Player()
+            {
+                ActivePokemonCard = new PokemonCard()
+                {
+                    Attacks = new ObservableCollection<Attack>
+                    {
+
+                    }
+                }
+            };
+
+            for (int i = 0; i < attached; i++)
+            {
+                player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Water });
+            }
+
+            Assert.Equal(expected, attack.GetDamage(player, opponent, new GameField()).NormalDamage);
+        }
     }
 }

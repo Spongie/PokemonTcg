@@ -59,7 +59,7 @@ namespace TCGCards.Attacks
                 energyOfType -= -colorless;
             }
 
-            return Damage + Math.Min(MaxExtraDamage, energyOfType * AmountPerEnergy);
+            return Damage + Math.Max(Math.Min(MaxExtraDamage, energyOfType * AmountPerEnergy), 0);
         }
     }
 }
