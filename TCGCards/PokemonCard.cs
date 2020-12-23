@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,36 +24,6 @@ namespace TCGCards
         private Ability ablity;
         private int prizeCards = 1;
         private string pokemonName;
-
-        public int PrizeCards
-        {
-            get { return prizeCards; }
-            set
-            {
-                prizeCards = value;
-                FirePropertyChanged();
-            }
-        }
-
-        public Ability Ability
-        {
-            get { return ablity; }
-            set
-            {
-                ablity = value;
-                FirePropertyChanged();
-            }
-        }
-
-        public Attack SelectedAttack
-        {
-            get { return selectedAttack; }
-            set
-            {
-                selectedAttack = value;
-                FirePropertyChanged();
-            }
-        }
 
         public PokemonCard() :base(null)
         {
@@ -165,7 +136,36 @@ namespace TCGCards
             }
         }
 
+        public int PrizeCards
+        {
+            get { return prizeCards; }
+            set
+            {
+                prizeCards = value;
+                FirePropertyChanged();
+            }
+        }
 
+        public Ability Ability
+        {
+            get { return ablity; }
+            set
+            {
+                ablity = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        public Attack SelectedAttack
+        {
+            get { return selectedAttack; }
+            set
+            {
+                selectedAttack = value;
+                FirePropertyChanged();
+            }
+        }
         public int DamageCounters { get; set; }
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
