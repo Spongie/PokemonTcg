@@ -1,4 +1,5 @@
-﻿using NetworkingCore;
+﻿using Entities;
+using NetworkingCore;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,22 @@ namespace Assets.Code.UI.DeckBuilder
 {
     public class DeckSearcher : MonoBehaviour
     {
+        private Dictionary<NetworkId, Card> cards = new Dictionary<NetworkId, Card>();
+        private string lastFrameSearch = string.Empty;
+        private HashSet<string> setCodes;
+        private Format currentFormat;
+
         public bool loading;
         public InputField searchInput;
         public TextMeshProUGUI cardCountText;
         public GameObject Content;
         public GameObject CardPrefab;
+        public Dropdown FormatDropDown;
 
+        [Header("Type Toggles")]
         public Toggle pokemonToggle;
         public Toggle trainerToggle;
         public Toggle energyToggle;
-
-        private Dictionary<NetworkId, Card> cards = new Dictionary<NetworkId, Card>();
-        private string lastFrameSearch = string.Empty;
-        public Dropdown FormatDropDown;
-        private Format currentFormat;
 
         [Header("Energy Toggles")]
         public Toggle FightingToggle;
@@ -46,63 +49,37 @@ namespace Assets.Code.UI.DeckBuilder
 
         public void OnToggleChanged()
         {
+            FilterCards();
+        }
+
+        public void FilterCards()
+        {
+            var searchString = searchInput.text.Trim().ToLower();
+
             foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
             {
-                if (deckCard.card is EnergyCard)
+                if (!IsToggleEnabledForCard(deckCard.card))
                 {
-                    deckCard.gameObject.SetActive(energyToggle.isOn);
+                    deckCard.gameObject.SetActive(false);
+                    continue;
                 }
-                else if (deckCard.card is PokemonCard)
+                else if (deckCard.card is PokemonCard && !IsTypeToggleEnabled(deckCard.card))
                 {
-                    bool shouldShow = true;
-
-                    switch (((PokemonCard)deckCard.card).Type)
-                    {
-                        case Entities.EnergyTypes.Colorless:
-                            shouldShow = ColorlessToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Water:
-                            shouldShow = WaterToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Fire:
-                            shouldShow = FireToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Grass:
-                            shouldShow = GrassToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Electric:
-                            shouldShow = ElectricToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Psychic:
-                            shouldShow = PsychicToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Fighting:
-                            shouldShow = FightingToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Darkness:
-                            shouldShow = DarknessToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Steel:
-                            shouldShow = SteelToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Fairy:
-                            shouldShow = FairyToggle.isOn;
-                            break;
-                        case Entities.EnergyTypes.Dragon:
-                            shouldShow = DragonToggle.isOn;
-                            break;
-                        default:
-                            break;
-                    }
-
-                    shouldShow = shouldShow && pokemonToggle.isOn;
-
-                    deckCard.gameObject.SetActive(shouldShow);
+                    deckCard.gameObject.SetActive(false);
+                    continue;
                 }
-                else if (deckCard.card is TrainerCard)
+                else if (!IsSetValid(deckCard.card.SetCode))
                 {
-                    deckCard.gameObject.SetActive(trainerToggle.isOn);
+                    deckCard.gameObject.SetActive(false);
+                    continue;
                 }
+                else if (!string.IsNullOrEmpty(searchString) && !deckCard.card.Name.ToLower().Contains(searchString))
+                {
+                    deckCard.gameObject.SetActive(false);
+                    continue;
+                }
+
+                deckCard.gameObject.SetActive(true);
             }
         }
 
@@ -124,6 +101,37 @@ namespace Assets.Code.UI.DeckBuilder
             return false;
         }
 
+        private bool IsTypeToggleEnabled(Card card)
+        {
+            switch (((PokemonCard)card).Type)
+            {
+                case EnergyTypes.Colorless:
+                    return ColorlessToggle.isOn;
+                case EnergyTypes.Water:
+                    return WaterToggle.isOn;
+                case EnergyTypes.Fire:
+                    return FireToggle.isOn;
+                case EnergyTypes.Grass:
+                    return GrassToggle.isOn;
+                case EnergyTypes.Electric:
+                    return ElectricToggle.isOn;
+                case EnergyTypes.Psychic:
+                    return PsychicToggle.isOn;
+                case EnergyTypes.Fighting:
+                    return FightingToggle.isOn;
+                case EnergyTypes.Darkness:
+                    return DarknessToggle.isOn;
+                case EnergyTypes.Steel:
+                    return SteelToggle.isOn;
+                case EnergyTypes.Fairy:
+                    return FairyToggle.isOn;
+                case EnergyTypes.Dragon:
+                    return DragonToggle.isOn;
+                default:
+                    return true;
+            }
+        }
+
         private void Update()
         {
             if (loading)
@@ -137,35 +145,16 @@ namespace Assets.Code.UI.DeckBuilder
             }
 
             var searchString = searchInput.text;
-            var setCodes = new HashSet<string>(currentFormat.Sets.Select(x => x.SetCode));
+            setCodes = new HashSet<string>(currentFormat.Sets.Select(x => x.SetCode));
 
-            if (string.IsNullOrWhiteSpace(searchString) && searchString.Trim() != lastFrameSearch)
-            {
-                foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
-                {
-                    deckCard.gameObject.SetActive(IsSetValid(setCodes, deckCard.card.SetCode) && IsToggleEnabledForCard(deckCard.card));
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(searchString) || searchString.Trim() == lastFrameSearch)
+            if (string.IsNullOrWhiteSpace(searchString.Trim()) || searchString.Trim() == lastFrameSearch)
             {
                 return;
             }
 
-            lastFrameSearch = searchString;
-            var formattedSearch = searchString.ToLower();
+            FilterCards();
 
-            foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
-            {
-                if (!deckCard.card.GetName().ToLower().Contains(formattedSearch))
-                {
-                    deckCard.gameObject.SetActive(false);
-                }
-                else
-                {
-                    deckCard.gameObject.SetActive(IsSetValid(setCodes, deckCard.card.SetCode) && IsToggleEnabledForCard(deckCard.card));
-                }
-            }
+            lastFrameSearch = searchString;
         }
 
         public void OnSelectedFormatValueChanged()
@@ -174,15 +163,12 @@ namespace Assets.Code.UI.DeckBuilder
             var format = MainMenu.MainMenu.formats.First(x => x.Name == selected);
 
             currentFormat = format;
-            var setCodes = new HashSet<string>(format.Sets.Select(x => x.SetCode));
+            setCodes = new HashSet<string>(format.Sets.Select(x => x.SetCode));
 
-            foreach (var deckCard in Content.GetComponentsInChildren<DeckCard>(true))
-            {
-                deckCard.gameObject.SetActive(IsSetValid(setCodes, deckCard.card.SetCode) && IsToggleEnabledForCard(deckCard.card));
-            }
+            FilterCards();
         }
 
-        private bool IsSetValid(HashSet<string> setCodes, string targetCode)
+        private bool IsSetValid(string targetCode)
         {
             if (setCodes.Count == 0)
             {
