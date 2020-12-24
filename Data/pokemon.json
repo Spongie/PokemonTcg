@@ -18860,7 +18860,7 @@
           {
             "$id": "1686",
             "$type": "TCGCards.TrainerEffects.ApplyTemporaryDamageBoost, TCGCards",
-            "Turns": 2,
+            "Turns": 3,
             "NewDamage": 60,
             "AttackName": "Slash",
             "EffectType": "Apply temporary damage boost"
@@ -18966,7 +18966,7 @@
           {
             "$id": "1696",
             "$type": "TCGCards.TrainerEffects.ApplyTemporaryDamageBoost, TCGCards",
-            "Turns": 2,
+            "Turns": 3,
             "NewDamage": 60,
             "AttackName": "Slash",
             "EffectType": "Apply temporary damage boost"
@@ -32852,7 +32852,7 @@
           {
             "$id": "2933",
             "$type": "TCGCards.TrainerEffects.ApplyTemporaryDamageBoost, TCGCards",
-            "Turns": 2,
+            "Turns": 3,
             "NewDamage": 20,
             "AttackName": "Gnaw",
             "EffectType": "Apply temporary damage boost"

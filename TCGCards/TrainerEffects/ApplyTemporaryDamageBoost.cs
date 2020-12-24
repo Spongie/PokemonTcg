@@ -10,7 +10,7 @@ namespace TCGCards.TrainerEffects
     {
         private string attackName;
         private int newDamage;
-        private int turns = 2;
+        private int turns = 3;
 
         [DynamicInput("How many turns")]
         public int Turns
@@ -63,9 +63,9 @@ namespace TCGCards.TrainerEffects
             ApplyModifier(attachedTo);
         }
 
-        private void ApplyModifier(PokemonCard attachedTo)
+        private void ApplyModifier(PokemonCard pokemon)
         {
-            var attack = attachedTo.Attacks.FirstOrDefault(x => x.Name.ToLower() == AttackName.ToLower());
+            var attack = pokemon.Attacks.FirstOrDefault(x => x.Name.ToLower() == AttackName.ToLower());
 
             if (attack != null)
             {

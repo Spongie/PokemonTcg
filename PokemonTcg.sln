@@ -40,7 +40,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Launcher", "Launcher\Launch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardEditor", "CardEditor\CardEditor.csproj", "{4FB98C9E-FA2D-4BEB-8B9E-62A1A80B0C4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerController", "ServerController\ServerController.csproj", "{F01459EB-F947-47FE-B5AB-E293991639D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerController", "ServerController\ServerController.csproj", "{F01459EB-F947-47FE-B5AB-E293991639D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -22,10 +22,5 @@ namespace TCGCards.Core.SpecialAbilities
         {
             TurnsLeft--;
         }
-
-        internal bool IsActive()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
