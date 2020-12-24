@@ -179,15 +179,6 @@ namespace TCGCards.Core
             SendEventMessage(gameEvent, NonActivePlayer);
         }
 
-        public void RevealCardsTo(List<NetworkId> pickedCards, Player player)
-        {
-            foreach (var card in pickedCards.Select(id => Cards[id]))
-            {
-                card.RevealToAll();
-            }
-            //TODO: Complete this
-        }
-
         public void EvolvePokemon(PokemonCard basePokemon, PokemonCard evolution, bool ignoreAllChecks = false)
         {
             if (!ignoreAllChecks && !ActivePlayer.Id.Equals(basePokemon.Owner.Id) || !ActivePlayer.Id.Equals(evolution.Owner.Id))
