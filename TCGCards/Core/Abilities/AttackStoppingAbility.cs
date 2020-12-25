@@ -10,5 +10,6 @@ namespace TCGCards.Core.Abilities
         }
 
         public NetworkId OnlyOnCard { get; set; }
+        public string OnlyStopThisAttack { get; set; }
     }
 }

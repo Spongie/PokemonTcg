@@ -1,4 +1,5 @@
 ﻿using CardEditor.Views;
+using Entities;
 
 namespace TCGCards.Core.Abilities
 {
@@ -6,6 +7,9 @@ namespace TCGCards.Core.Abilities
     {
         private int damageReturned;
         private bool attackBack;
+        private float attackBackModifier = 1.0f;
+        private bool coinFlip;
+        private StatusEffect requiredEffect = StatusEffect.None;
 
         public TakesDamagesOnAttacked() :this(null)
         {
@@ -19,9 +23,20 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                return;
+            }
+            
+            if (requiredEffect != StatusEffect.None && !PokemonOwner.HaveStatus(RequiredEffect))
+            {
+                return;
+            }
+
             if (attackBack)
             {
-                var damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(damageTaken, PokemonOwner, opponent.ActivePokemonCard, null);
+                var baseDamage = DamageReturned > 0 ? DamageReturned : damageTaken;
+                var damage = DamageCalculator.GetDamageAfterWeaknessAndResistance((int)(baseDamage * attackBackModifier), PokemonOwner, opponent.ActivePokemonCard, null);
                 opponent.ActivePokemonCard.DealDamage(damage, game, PokemonOwner, true);
             }
             {
@@ -29,7 +44,31 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        [DynamicInput("Attack back for same damage", InputControl.Boolean)]
+        [DynamicInput("Require effect on self", InputControl.Dropdown, typeof(StatusEffect))]
+        public StatusEffect RequiredEffect
+        {
+            get { return requiredEffect; }
+            set
+            {
+                requiredEffect = value;
+                FirePropertyChanged();
+            }
+        }
+
+
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
+
+        [DynamicInput("Attack back", InputControl.Boolean)]
         public bool AttackBack
         {
             get { return attackBack; }
@@ -40,6 +79,16 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        [DynamicInput("Modifer if attacking back")]
+        public float AttackBackModifier
+        {
+            get { return attackBackModifier; }
+            set
+            {
+                attackBackModifier = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Damage returned")]
         public int DamageReturned

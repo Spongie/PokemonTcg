@@ -190,6 +190,10 @@ namespace TCGCards
             {
                 if (ability.OnlyOnCard != null)
                 {
+                    if (!string.IsNullOrEmpty(ability.OnlyStopThisAttack.Trim()))
+                    {
+                        return ability.OnlyStopThisAttack.Trim() != Name;
+                    }
                     if (opponent.ActivePokemonCard.Id.Equals(ability.OnlyOnCard))
                     {
                         return false;
@@ -197,6 +201,11 @@ namespace TCGCards
                 }
                 else
                 {
+                    if (!string.IsNullOrEmpty(ability.OnlyStopThisAttack.Trim()))
+                    {
+                        return ability.OnlyStopThisAttack.Trim() != Name;
+                    }
+
                     return false;
                 }
             }

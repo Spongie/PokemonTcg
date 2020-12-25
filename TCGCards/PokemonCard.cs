@@ -455,5 +455,24 @@ namespace TCGCards
                     break;
             }
         }
+
+        internal bool HaveStatus(StatusEffect requiredEffect)
+        {
+            switch (requiredEffect)
+            {
+                case StatusEffect.Sleep:
+                    return IsAsleep;
+                case StatusEffect.Poison:
+                    return IsPoisoned;
+                case StatusEffect.Paralyze:
+                    return IsParalyzed;
+                case StatusEffect.Burn:
+                    return IsBurned;
+                case StatusEffect.Confuse:
+                    return IsConfused;
+                default:
+                    return true;
+            }
+        }
     }
 }

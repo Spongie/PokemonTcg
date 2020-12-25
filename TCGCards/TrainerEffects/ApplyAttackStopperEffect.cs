@@ -8,6 +8,11 @@ namespace TCGCards.TrainerEffects
 {
     public class ApplyAttackStopperEffect : DataModel, IEffect
     {
+        private TargetingMode targetingMode;
+        private int duration;
+        private bool onlyStopAttacksOnSelf;
+        private string onlyThisAttack;
+
         public string EffectType
         {
             get
@@ -15,10 +20,6 @@ namespace TCGCards.TrainerEffects
                 return "Apply attack stopper";
             }
         }
-
-        private TargetingMode targetingMode;
-        private int duration;
-        private bool onlyStopAttacksOnSelf;
 
         [DynamicInput("Duration")]
         public int Duration
@@ -53,6 +54,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Only stop this attack")]
+        public string OnlyThisAttack
+        {
+            get { return onlyThisAttack; }
+            set
+            {
+                onlyThisAttack = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
             return true;
@@ -71,6 +84,7 @@ namespace TCGCards.TrainerEffects
             {
                 TurnDuration = Duration,
                 IsBuff = true,
+                OnlyStopThisAttack = OnlyThisAttack
             };
 
             if (OnlyStopAttacksOnSelf)

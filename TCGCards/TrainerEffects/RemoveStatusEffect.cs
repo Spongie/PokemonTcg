@@ -85,7 +85,7 @@ namespace TCGCards.TrainerEffects
         {
             get
             {
-                return "Apply Status";
+                return "Remove Status";
             }
         }
 
