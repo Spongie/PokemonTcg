@@ -13,6 +13,7 @@ namespace TCGCards.TrainerEffects
         private CardType cardType;
         private EnergyTypes energyType = EnergyTypes.None;
         private bool revealCard;
+        private bool useLastDiscardCount;
 
         [DynamicInput("Card type", InputControl.Dropdown, typeof(CardType))]
         public CardType CardType
@@ -47,6 +48,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Search for last discard amount", InputControl.Boolean)]
+        public bool UseLastDiscardCount
+        {
+            get { return useLastDiscardCount; }
+            set
+            {
+                useLastDiscardCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -68,8 +81,9 @@ namespace TCGCards.TrainerEffects
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var filter = CardUtil.GetCardFilters(CardType, EnergyType).ToList();
+            int amount = useLastDiscardCount ? game.LastDiscard : 1;
 
-            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, filter, 1))
+            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, filter, amount))
             {
                 if (revealCard)
                 {
