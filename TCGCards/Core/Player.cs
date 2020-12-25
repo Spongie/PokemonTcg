@@ -152,6 +152,7 @@ namespace TCGCards.Core
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
 
+            ActivePokemonCard.DamageStoppers = ActivePokemonCard.DamageStoppers.Where(d => !d.LastsUntilDamageTaken).ToList();
             BenchedPokemon.ReplaceWith(replacementPokemon, oldActivePokemon);
 
             oldActivePokemon.ClearStatusEffects();

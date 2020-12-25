@@ -1,6 +1,5 @@
 ﻿using CardEditor.Views;
 using Entities;
-using System.Linq;
 using TCGCards.Core;
 
 namespace TCGCards.Attacks

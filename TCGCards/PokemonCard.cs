@@ -242,15 +242,22 @@ namespace TCGCards
             if (Ability != null)
             {
                 Ability.UsedTimes = 0;
+                Ability.EndTurn();
             }
             
             ParalyzedThisTurn = false;
 
             AttachedTools = AttachedTools.Where(tool => !Owner.DiscardPile.Contains(tool)).ToList();
 
-            DamageStoppers.ForEach(x => x.TurnsLeft--);
+            foreach (var damagestopper in DamageStoppers)
+            {
+                if (!damagestopper.LastsUntilDamageTaken)
+                {
+                    damagestopper.TurnsLeft--;
+                }
+            }
+
             DamageStoppers = DamageStoppers.Where(x => x.TurnsLeft > 0).ToList();
-            Ability?.EndTurn();
         }
 
         public void Heal(int amount, GameField game)
@@ -272,6 +279,7 @@ namespace TCGCards
         public int DealDamage(Damage damage, GameField game, PokemonCard source, bool preventable)
         {
             var totalDamage = damage.DamageWithoutResistAndWeakness + damage.NormalDamage;
+            var damageStoppersToRemove = new List<DamageStopper>();
 
             foreach (var damageStopper in DamageStoppers)
             {
@@ -289,7 +297,17 @@ namespace TCGCards
                     {
                         game.GameLog.AddMessage(GetName() + $" Takes {damageStopper.Amount} less damage");
                     }
+
+                    if (damageStopper.LastsUntilDamageTaken)
+                    {
+                        damageStoppersToRemove.Add(damageStopper);
+                    }
                 }
+            }
+
+            foreach (var damagestopper in damageStoppersToRemove)
+            {
+                DamageStoppers.Remove(damagestopper);
             }
             
             if (source != null)

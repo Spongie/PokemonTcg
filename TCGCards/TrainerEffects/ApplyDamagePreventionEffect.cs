@@ -12,6 +12,7 @@ namespace TCGCards.TrainerEffects
         private bool coinFlip;
         private int maxDamage;
         private bool onlyProtectSelf = true;
+        private bool lastsUntilDamage;
 
         [DynamicInput("Only protect self", InputControl.Boolean)]
         public bool OnlyProtectSelf
@@ -23,7 +24,6 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
-
 
         [DynamicInput("Prevention Limit")]
         public int MaxDamage
@@ -58,6 +58,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Lasts until damage taken", InputControl.Boolean)]
+        public bool LastsUntilDamage
+        {
+            get { return lastsUntilDamage; }
+            set
+            {
+                lastsUntilDamage = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -90,6 +102,8 @@ namespace TCGCards.TrainerEffects
             {
                 damageStopper = new DamageStopper((x) => true) { Amount = amount };
             }
+
+            damageStopper.LastsUntilDamageTaken = LastsUntilDamage;
 
             if (onlyProtectSelf)
             {
