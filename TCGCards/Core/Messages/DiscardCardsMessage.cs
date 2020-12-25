@@ -22,6 +22,7 @@ namespace TCGCards.Core.Messages
             Filters = new List<IDeckFilter>(filters);
         }
 
+        public int MinCount { get; set; }
         public int Count { get; set; }
         public List<IDeckFilter> Filters { get; set; }
         public string Info { get; set; }

@@ -18,20 +18,22 @@ namespace TCGCards.Core
             return null;
         }
 
-        public static void DiscardCardsFromHand(Player player, int amount, bool shuffleIntoDeck = false)
+        public static void DiscardCardsFromHand(Player player, GameField game, DiscardCardSettings discardSettings)
         {
-            DiscardCardsFromHand(player, amount, new List<IDeckFilter>(), shuffleIntoDeck);
-        }
+            var message = new DiscardCardsMessage
+            {
+                MinCount = discardSettings.MinAmount,
+                Count = discardSettings.MaxAmount,
+                Filters = discardSettings.Filters.ToList(),
+            };
 
-        public static void DiscardCardsFromHand(Player player, int amount, List<IDeckFilter> filters, bool shuffleIntoDeck = false)
-        {
-            var message = new DiscardCardsMessage(amount, filters);
             var response = player.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(player.Id));
 
-            if (shuffleIntoDeck)
+            if (discardSettings.ShuffleIntoDeck)
             {
                 var cardsToDiscard = response.Cards.Select(id => player.Hand.First(x => x.Id.Equals(id))).ToList();
                 player.Deck.ShuffleInCards(cardsToDiscard);
+                game.LastDiscard = cardsToDiscard.Count;
 
                 foreach (var card in cardsToDiscard)
                 {
@@ -42,6 +44,7 @@ namespace TCGCards.Core
             }
             else
             {
+                game.LastDiscard = response.Cards.Count;
                 foreach (var id in response.Cards)
                 {
                     var card = player.Hand.First(x => x.Id.Equals(id));

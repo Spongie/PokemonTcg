@@ -508,8 +508,8 @@ namespace Assets.Code
             var discardMessage = ((DiscardCardsMessage)message);
             selectedCards.Clear();
             SpecialState = SpecialGameState.DiscardingCards;
-            minSelectedCardCount = discardMessage.Count;
-            maxSelectedCardCount = minSelectedCardCount;
+            minSelectedCardCount = discardMessage.MinCount;
+            maxSelectedCardCount = discardMessage.Count;
             currentDeckFilter = discardMessage.Filters.FirstOrDefault();
 
             EnableButtons();
@@ -522,6 +522,11 @@ namespace Assets.Code
             if (!string.IsNullOrEmpty(discardMessage.Info))
             {
                 infoText.text = discardMessage.Info;
+            }
+            else if (minSelectedCardCount != maxSelectedCardCount)
+            {
+                string cardsText = minSelectedCardCount > 1 ? "cards" : "card";
+                infoText.text = $"Discard up to {maxSelectedCardCount} {cardsText} from your hand";
             }
             else
             {

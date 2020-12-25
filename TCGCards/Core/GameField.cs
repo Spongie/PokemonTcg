@@ -1065,5 +1065,6 @@ namespace TCGCards.Core
         public Dictionary<NetworkId, Ability> Abilities { get; set; } = new Dictionary<NetworkId, Ability>();
         
         public NetworkId Format { get; set; }
+        public int LastDiscard { get; set; }
     }
 }

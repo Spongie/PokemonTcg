@@ -13,6 +13,7 @@ namespace TCGCards.TrainerEffects
         private bool onlyOnCoinflip;
         private CardType cardType = CardType.Any;
         private bool shuffleIntoDeck;
+        private bool allowDiscardLess;
 
         [DynamicInput("Flip coin", InputControl.Boolean)]
         public bool OnlyOnCoinFlip
@@ -32,6 +33,18 @@ namespace TCGCards.TrainerEffects
             set
             {
                 amount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        
+        [DynamicInput("Allow discard 0", InputControl.Boolean)]
+        public bool AllowDiscardLess
+        {
+            get { return allowDiscardLess; }
+            set
+            {
+                allowDiscardLess = value;
                 FirePropertyChanged();
             }
         }
@@ -95,6 +108,8 @@ namespace TCGCards.TrainerEffects
             {
                 var allCards = new List<Card>(caster.Hand);
 
+                game.LastDiscard = allCards.Count;
+
                 if (ShuffleIntoDeck)
                 {
                     caster.Deck.ShuffleInCards(new List<Card>(caster.Hand));
@@ -108,9 +123,11 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            List<IDeckFilter> filters = CardUtil.GetCardFilters(CardType).ToList();
+            IDeckFilter[] filters = CardUtil.GetCardFilters(CardType).ToArray();
 
-            GameUtils.DiscardCardsFromHand(caster, Amount, filters, ShuffleIntoDeck);
+            int minAmount = AllowDiscardLess ? 0 : Amount;
+
+            GameUtils.DiscardCardsFromHand(caster, game, new DiscardCardSettings(minAmount, Amount, filters, ShuffleIntoDeck));
         }
     }
 }
