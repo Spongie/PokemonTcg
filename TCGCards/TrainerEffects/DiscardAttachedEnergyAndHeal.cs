@@ -104,7 +104,7 @@ namespace TCGCards.TrainerEffects
 
                     foreach (var id in response.Cards)
                     {
-                        var card = target.AttachedEnergy.First(x => x.Id.Equals(id));
+                        var card = (EnergyCard)game.Cards[id];
 
                         target.DiscardEnergyCard(card, game);
                     }

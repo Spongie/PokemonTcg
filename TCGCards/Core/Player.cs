@@ -369,7 +369,7 @@ namespace TCGCards.Core
 
             foreach (var cardId in response.Cards)
             {
-                var card = PrizeCards.First(x => x.Id.Equals(cardId));
+                var card = game.Cards[cardId];
                 PrizeCards.Remove(card);
                 Hand.Add(card);
                 cardsDrawn.Add(card);

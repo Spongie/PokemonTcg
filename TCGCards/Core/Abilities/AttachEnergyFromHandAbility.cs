@@ -60,7 +60,7 @@ namespace TCGCards.Core.Abilities
             var message = new PickFromListMessage(energyCards.ToList(), 1).ToNetworkMessage(owner.Id);
             var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
 
-            var energyCard = owner.Hand.First(x => x.Id.Equals(response.Cards.First()));
+            var energyCard = game.Cards[response.Cards.First()];
 
             var selectPokemonMessage = new SelectFromYourPokemonMessage(energyType).ToNetworkMessage(owner.Id);
             response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(selectPokemonMessage);

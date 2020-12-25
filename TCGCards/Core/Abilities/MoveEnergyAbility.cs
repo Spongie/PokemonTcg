@@ -99,7 +99,7 @@ namespace TCGCards.Core.Abilities
             else
             {
                 var selectedEnergyId = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new PickFromListMessage(sourcePokemon.AttachedEnergy.Where(energy => EnergyType == EnergyTypes.All || EnergyType == energy.EnergyType).OfType<Card>().ToList(), 1).ToNetworkMessage(owner.Id));
-                var energyCard = sourcePokemon.AttachedEnergy.FirstOrDefault(card => card.Id.Equals(selectedEnergyId.Cards.First()));
+                var energyCard = (EnergyCard)game.Cards[selectedEnergyId.Cards.First()];
 
                 sourcePokemon.AttachedEnergy.Remove(energyCard);
                 game?.SendEventToPlayers(new AttachedEnergyDiscardedEvent
