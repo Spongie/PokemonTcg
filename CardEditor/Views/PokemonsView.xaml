@@ -176,6 +176,28 @@
                                     </local:DynamicInputControl>
                                 </DockPanel>
                             </TabItem>
+                            <TabItem Header="Costs">
+                                <DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Cost" DockPanel.Dock="Top" />
+                                        <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.Cost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Discard for using attack" DockPanel.Dock="Top" />
+                                        <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.ExtraDiscardCost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
+                                                <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DockPanel>
+                                </DockPanel>
+                            </TabItem>
                             <TabItem Header="Attack Effects">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -206,28 +228,6 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
-                </TabItem>
-                <TabItem Header="Costs">
-                    <DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Cost" DockPanel.Dock="Top" />
-                            <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.Cost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <Label Content="Discard for using attack" DockPanel.Dock="Top" />
-                            <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.ExtraDiscardCost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Amount" Width="70" Binding="{Binding Amount}" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DockPanel>
-                    </DockPanel>
                 </TabItem>
                 <TabItem Header="Ability">
                     <DockPanel>
