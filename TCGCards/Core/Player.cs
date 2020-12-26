@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TCGCards.Core.Abilities;
 using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;
@@ -238,6 +239,15 @@ namespace TCGCards.Core
         {
             if(HasPlayedEnergy || !Hand.Contains(energyCard) || Hand.Contains(targetPokemonCard))
                 return;
+
+            foreach (var ability in targetPokemonCard.TemporaryAbilities)
+            {
+                if (ability is DisableEnergyAttachmentAbility)
+                {
+                    game?.GameLog.AddMessage($"Ability {ability.Name} stops attaching energy to {targetPokemonCard.Name}");
+                    return;
+                }
+            }
 
             game?.GameLog.AddMessage($"Attaching {energyCard.GetName()} to {targetPokemonCard.GetName()}");
 

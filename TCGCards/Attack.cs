@@ -25,6 +25,7 @@ namespace TCGCards
         private bool applyWeakness = true;
         private bool applyResistance = true;
         private DiscardCostMode extraCostMode = DiscardCostMode.Discard;
+        private bool ignoreEffects;
 
         public Attack()
         {
@@ -61,6 +62,17 @@ namespace TCGCards
                 FirePropertyChanged();
             }
         }
+
+        public bool IgnoreEffects
+        {
+            get { return ignoreEffects; }
+            set
+            {
+                ignoreEffects = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public ObservableCollection<IEffect> Effects
         {
@@ -155,8 +167,11 @@ namespace TCGCards
 
                 if (energy.EnergyType == EnergyTypes.All && energy.Amount == -1)
                 {
+                    game.LastDiscard = 0;
                     foreach (var card in new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy))
                     {
+                        game.LastDiscard++;
+
                         switch (ExtraCostMode)
                         {
                             case DiscardCostMode.Discard:
@@ -188,8 +203,10 @@ namespace TCGCards
                 var message = new PickFromListMessage(choices.OfType<Card>().ToList(), energy.Amount);
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message.ToNetworkMessage(Id));
 
+                game.LastDiscard = 0;
                 foreach (var card in response.Cards)
                 {
+                    game.LastDiscard++;
                     owner.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.Cards[card], game);
                 }
             }

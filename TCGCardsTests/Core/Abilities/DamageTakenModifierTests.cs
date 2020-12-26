@@ -14,7 +14,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(0, ability.GetModifiedDamage(10, null));
+            Assert.Equal(0, ability.GetModifiedDamage(10, null, null));
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(10, ability.GetModifiedDamage(20, null));
+            Assert.Equal(10, ability.GetModifiedDamage(20, null, null));
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(10, ability.GetModifiedDamage(30, null));
+            Assert.Equal(10, ability.GetModifiedDamage(30, null, null));
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(20, ability.GetModifiedDamage(40, null));
+            Assert.Equal(20, ability.GetModifiedDamage(40, null, null));
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(10, ability.GetModifiedDamage(10, null));
+            Assert.Equal(10, ability.GetModifiedDamage(10, null, null));
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(10, ability.GetModifiedDamage(20, null));
+            Assert.Equal(10, ability.GetModifiedDamage(20, null, null));
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(20, ability.GetModifiedDamage(30, null));
+            Assert.Equal(20, ability.GetModifiedDamage(30, null, null));
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(20, ability.GetModifiedDamage(40, null));
+            Assert.Equal(20, ability.GetModifiedDamage(40, null, null));
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(0, ability.GetModifiedDamage(10, null));
+            Assert.Equal(0, ability.GetModifiedDamage(10, null, null));
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(0, ability.GetModifiedDamage(20, null));
+            Assert.Equal(0, ability.GetModifiedDamage(20, null, null));
         }
 
         [Fact]
@@ -144,7 +144,35 @@ namespace TCGCards.Core.Abilities.Tests
             };
 
 
-            Assert.Equal(10, ability.GetModifiedDamage(30, null));
+            Assert.Equal(10, ability.GetModifiedDamage(30, null, null));
+        }
+
+        [Fact]
+        public void ModifierDamageOnlyBasic_BasicSource()
+        {
+            var ability = new DamageTakenModifier
+            {
+                Modifer = 20f,
+                RoundDown = true,
+                OnlyPreventFromBasic = true
+            };
+
+
+            Assert.Equal(10, ability.GetModifiedDamage(30, new PokemonCard(), null));
+        }
+
+        [Fact]
+        public void ModifierDamageOnlyBasic_NonBasicSource()
+        {
+            var ability = new DamageTakenModifier
+            {
+                Modifer = 20f,
+                RoundDown = true,
+                OnlyPreventFromBasic = true
+            };
+
+
+            Assert.Equal(30, ability.GetModifiedDamage(30, new PokemonCard() { Stage = 2 }, null));
         }
     }
 }

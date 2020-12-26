@@ -177,6 +177,10 @@
                                         <Label Content="Apply Resistance" MinWidth="80"/>
                                         <CheckBox IsChecked="{Binding SelectedAttack.ApplyResistance}" VerticalAlignment="Center"/>
                                     </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Ignore Effects" MinWidth="80"/>
+                                        <CheckBox IsChecked="{Binding SelectedAttack.IgnoreEffects}" VerticalAlignment="Center"/>
+                                    </DockPanel>
                                     <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
 
                                     </local:DynamicInputControl>

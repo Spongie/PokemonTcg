@@ -166,6 +166,8 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
+            int cardsDiscarded = 0;
+
             while (true)
             {
                 PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
@@ -180,6 +182,7 @@ namespace TCGCards.TrainerEffects
                     for (int i = 0; i < Amount; i++)
                     {
                         target.DiscardEnergyCard(target.AttachedEnergy[0], game);
+                        cardsDiscarded++;
                     }
 
                     target.AttachedEnergy.Clear();
@@ -194,10 +197,16 @@ namespace TCGCards.TrainerEffects
                     foreach (var card in cards)
                     {
                         target.DiscardEnergyCard(card, game);
+                        cardsDiscarded++;
                     }
                 }
 
                 break;
+            }
+
+            if (targetingMode == TargetingMode.Self || targetingMode == TargetingMode.YourActive || targetingMode == TargetingMode.YourBench || targetingMode == TargetingMode.YourPokemon)
+            {
+                game.LastDiscard = cardsDiscarded;
             }
         }
     }

@@ -13,6 +13,7 @@
           "$type": "TCGCards.Core.Abilities.DamageTakenModifier, TCGCards",
           "RoundDown": false,
           "Modifer": 20.0,
+          "OnlyPreventFromBasic": false,
           "UsableImmediately": true,
           "TurnDuration": 2,
           "TriggerType": 12,
@@ -64,6 +65,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 1,
+        "AllowDiscardLess": false,
         "CardType": 1,
         "ShuffleIntoDeck": true,
         "EffectType": "Discard cards"
@@ -74,6 +76,7 @@
         "CardType": 1,
         "EnergyType": 0,
         "RevealCard": false,
+        "UseLastDiscardCount": false,
         "EffectType": "Search your deck for a card"
       }
     ],
@@ -145,10 +148,13 @@
         "$id": "19",
         "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
         "CoinFlip": false,
+        "Coins": 1,
+        "HeadsForSuccess": 1,
         "OnlyBasic": true,
         "TargetingMode": 2,
         "ShuffleIntoDeck": false,
         "ReturnAttachedToHand": false,
+        "IsMay": false,
         "EffectType": "Bounce pokemon"
       }
     ],
@@ -217,6 +223,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 1,
+        "AllowDiscardLess": false,
         "CardType": 0,
         "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
@@ -402,6 +409,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 2,
+        "AllowDiscardLess": false,
         "CardType": 0,
         "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
@@ -607,6 +615,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 2,
+        "AllowDiscardLess": false,
         "CardType": 0,
         "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
@@ -617,6 +626,7 @@
         "CardType": 0,
         "EnergyType": 0,
         "RevealCard": false,
+        "UseLastDiscardCount": false,
         "EffectType": "Search your deck for a card"
       }
     ],
@@ -694,6 +704,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": -1,
+        "AllowDiscardLess": false,
         "CardType": 0,
         "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
@@ -946,6 +957,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 1,
+        "AllowDiscardLess": false,
         "CardType": 0,
         "ShuffleIntoDeck": false,
         "EffectType": "Discard cards"
@@ -1315,6 +1327,7 @@
         "CardType": 4,
         "EnergyType": 1,
         "RevealCard": false,
+        "UseLastDiscardCount": false,
         "EffectType": "Search your deck for a card"
       }
     ],
@@ -1343,10 +1356,13 @@
         "$id": "175",
         "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
         "CoinFlip": false,
+        "Coins": 1,
+        "HeadsForSuccess": 1,
         "OnlyBasic": false,
         "TargetingMode": 1,
         "ShuffleIntoDeck": true,
         "ReturnAttachedToHand": false,
+        "IsMay": false,
         "EffectType": "Bounce pokemon"
       }
     ],
@@ -1554,6 +1570,7 @@
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "OnlyOnCoinFlip": false,
         "Amount": 2,
+        "AllowDiscardLess": false,
         "CardType": 0,
         "ShuffleIntoDeck": true,
         "EffectType": "Discard cards"

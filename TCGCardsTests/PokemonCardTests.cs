@@ -106,5 +106,129 @@ namespace TCGCards.Tests
                     break;
             }
         }
+
+        [Fact]
+        public void DealDamage_Redirect_Less_Than_Taken()
+        {
+            var game = new GameField();
+            game.NonActivePlayer = new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100 }, Id = NetworkId.Generate() };
+            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
+            var player = new Player() { Id = NetworkId.Generate() };
+
+            var active = new PokemonCard()
+            {
+                Hp = 100,
+                Owner = player
+            };
+
+            player.ActivePokemonCard = active;
+
+            var benched = new PokemonCard()
+            {
+                Hp = 100,
+                Owner = player
+            };
+
+            benched.Ability = new DamageRedirectorAbility(benched)
+            {
+                AskYesNo = false,
+                AmountToRedirect = 10
+            };
+            player.BenchedPokemon.Add(benched);
+
+            game.ActivePlayer = player;
+
+            game.AddPlayer(player);
+            game.AddPlayer(game.NonActivePlayer);
+
+            game.ActivePlayer.ActivePokemonCard.DealDamage(50, game, game.NonActivePlayer.ActivePokemonCard, true);
+
+            Assert.Equal(40, active.DamageCounters);
+            Assert.Equal(10, benched.DamageCounters);
+        }
+
+        [Fact]
+        public void DealDamage_Redirect_Equal_Taken()
+        {
+            var game = new GameField();
+            game.NonActivePlayer = new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100, }, Id = NetworkId.Generate() };
+            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
+
+            var player = new Player()
+            {
+                Id = NetworkId.Generate()
+            };
+
+            var active = new PokemonCard()
+            {
+                Hp = 100,
+                Owner = player
+            };
+
+            player.ActivePokemonCard = active;
+
+            var benched = new PokemonCard()
+            {
+                Hp = 100,
+                Owner = player
+            };
+
+            benched.Ability = new DamageRedirectorAbility(benched)
+            {
+                AskYesNo = false,
+                AmountToRedirect = 50
+            };
+            player.BenchedPokemon.Add(benched);
+
+            game.ActivePlayer = player;
+
+            game.AddPlayer(player);
+            game.AddPlayer(game.NonActivePlayer);
+
+            game.ActivePlayer.ActivePokemonCard.DealDamage(50, game, game.NonActivePlayer.ActivePokemonCard, true);
+
+            Assert.Equal(0, active.DamageCounters);
+            Assert.Equal(50, benched.DamageCounters);
+        }
+
+        [Fact]
+        public void DealDamage_Redirect_Higher_Than_Taken()
+        {
+            var game = new GameField();
+            game.NonActivePlayer = new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100 }, Id = NetworkId.Generate() };
+            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
+            var player = new Player() { Id = NetworkId.Generate() };
+
+            var active = new PokemonCard()
+            {
+                Hp = 100,
+                Owner = player
+            };
+
+            player.ActivePokemonCard = active;
+
+            var benched = new PokemonCard()
+            {
+                Hp = 100,
+                Owner = player
+            };
+
+            benched.Ability = new DamageRedirectorAbility(benched)
+            {
+                AskYesNo = false,
+                AmountToRedirect = 50
+            };
+            player.BenchedPokemon.Add(benched);
+
+            game.ActivePlayer = player;
+
+            game.AddPlayer(player);
+            game.AddPlayer(game.NonActivePlayer);
+
+            game.ActivePlayer.ActivePokemonCard.DealDamage(20, game, game.NonActivePlayer.ActivePokemonCard, true);
+
+            Assert.Equal(0, active.DamageCounters);
+            Assert.Equal(20, benched.DamageCounters);
+        }
     }
 }

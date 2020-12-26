@@ -310,16 +310,53 @@ namespace TCGCards
                 DamageStoppers.Remove(damagestopper);
             }
             
-            if (source != null)
+            if (source != null && preventable)
             {
                 foreach (var ability in source.GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageDealtModifier>())
                 {
                     totalDamage = ability.GetModifiedDamage(totalDamage, game);
                 }
             }
-            foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageTakenModifier>())
+            if (preventable)
             {
-                totalDamage = ability.GetModifiedDamage(totalDamage, game);
+                foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageTakenModifier>())
+                {
+                    totalDamage = ability.GetModifiedDamage(totalDamage, source, game);
+                }
+            }
+
+            foreach (var pokemon in Owner.GetAllPokemonCards())
+            {
+                if (pokemon == this || !preventable)
+                {
+                    continue;
+                }
+
+                foreach (var ability in pokemon.GetAllActiveAbilities(game, Owner, game?.GetOpponentOf(Owner)).OfType<DamageRedirectorAbility>())
+                {
+                    if (totalDamage == 0)
+                    {
+                        continue;
+                    }
+                    if (ability.AskYesNo && !game.AskYesNo(Owner, $"Redirect damage to {ability.PokemonOwner.Name}"))
+                    {
+                        continue;
+                    }
+
+                    int damageToRedirect;
+
+                    if (totalDamage >= ability.AmountToRedirect)
+                    {
+                        damageToRedirect = ability.AmountToRedirect;
+                    }
+                    else
+                    {
+                        damageToRedirect = totalDamage;
+                    }
+
+                    totalDamage -= damageToRedirect;
+                    ability.PokemonOwner.DealDamage(damageToRedirect, game, ability.PokemonOwner, false);
+                }
             }
 
             DamageCounters += totalDamage;

@@ -57,7 +57,7 @@ namespace TCGCards.Core.Abilities
             }
         }
 
-        public int GetModifiedDamage(int damageTaken, GameField game)
+        public int GetModifiedDamage(int damageTaken, PokemonCard damageSource, GameField game)
         {
             if (damageTaken < minimumBeforePrevention)
             {

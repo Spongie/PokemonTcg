@@ -2,6 +2,6 @@
 {
     public interface IDamageTakenModifier
     {
-        int GetModifiedDamage(int damageTaken, GameField game);
+        int GetModifiedDamage(int damageTaken, PokemonCard damageSource, GameField game);
     }
 }

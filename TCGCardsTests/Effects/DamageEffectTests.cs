@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using TCGCards;
 using TCGCards.TrainerEffects;
+using TCGCards.Core;
 
 namespace TCGCardsTests.Effects
 {
@@ -14,7 +15,7 @@ namespace TCGCardsTests.Effects
                 Amount = 10
             };
 
-            var pokemon = new PokemonCard();
+            var pokemon = new PokemonCard() { Owner = new Player() };
             effect.OnAttachedTo(pokemon, true, null);
 
             Assert.Equal(10, pokemon.DamageCounters);

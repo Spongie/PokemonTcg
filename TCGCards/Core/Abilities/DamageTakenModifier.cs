@@ -7,6 +7,7 @@ namespace TCGCards.Core.Abilities
     {
         private float modifer;
         private bool roundDown;
+        private bool onlyPreventBasic;
 
         [DynamicInput("Round down?", InputControl.Boolean)]
         public bool RoundDown
@@ -31,6 +32,17 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        [DynamicInput("Only prevent from basic Pokémon", InputControl.Boolean)]
+        public bool OnlyPreventFromBasic
+        {
+            get { return onlyPreventBasic; }
+            set
+            {
+                onlyPreventBasic = value;
+                FirePropertyChanged();
+            }
+        }
+
         public DamageTakenModifier() :this(null)
         {
 
@@ -46,8 +58,13 @@ namespace TCGCards.Core.Abilities
             
         }
 
-        public int GetModifiedDamage(int damageTaken, GameField game)
+        public int GetModifiedDamage(int damageTaken, PokemonCard damageSource, GameField game)
         {
+            if (OnlyPreventFromBasic && damageSource != null && damageSource.Stage > 0)
+            {
+                return damageTaken;
+            }
+
             var damageWithPrevention = Modifer < 1 ? Math.Ceiling(damageTaken * Modifer) : damageTaken - Modifer;
 
             if (damageWithPrevention % 5 == 0 && damageWithPrevention % 10 != 0)

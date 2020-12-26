@@ -11,6 +11,7 @@ namespace TCGCards.Attacks
         private int applyIfMoreThanThis = -1;
         private StatusEffect statusEffect;
         private TargetingMode targetingMode;
+        private bool useLastDiscardCount;
 
         public FlipCoinAttack() : base()
         {
@@ -61,9 +62,23 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Use last discarded amount for #coins", InputControl.Boolean)]
+        public bool UseLastDiscardCount
+        {
+            get { return useLastDiscardCount; }
+            set
+            {
+                useLastDiscardCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
-            int heads = game.FlipCoins(Coins);
+            int coins = UseLastDiscardCount ? game.LastDiscard : Coins;
+
+            int heads = game.FlipCoins(coins);
 
             if (ApplyStatusIfThisOrMoreHeads != -1 &&  heads >= ApplyStatusIfThisOrMoreHeads)
             {

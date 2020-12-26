@@ -156,7 +156,7 @@ namespace TCGCards.Core.Abilities
             return lastFlip.Value;
         }
 
-        public int GetModifiedDamage(int damageTaken, GameField game)
+        public int GetModifiedDamage(int damageTaken, PokemonCard damageSource, GameField game)
         {
             if (OnlyPreventAttacks && game.GameState != GameFieldState.Attacking || !IsCoinFlipHeads(game))
             {

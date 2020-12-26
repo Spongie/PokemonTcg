@@ -17,12 +17,12 @@ namespace TCGCards.Attacks.Tests
             };
 
             var player = new Player();
-            player.ActivePokemonCard = new PokemonCard() { Hp = 100 };
-            player.BenchedPokemon.Add(new PokemonCard() { Hp = 100 });
+            player.ActivePokemonCard = new PokemonCard() { Hp = 100, Owner = player };
+            player.BenchedPokemon.Add(new PokemonCard() { Hp = 100, Owner = player });
 
             var opponent = new Player();
-            opponent.ActivePokemonCard = new PokemonCard() { Hp = 100 };
-            opponent.BenchedPokemon.Add(new PokemonCard() { Hp = 100 });
+            opponent.ActivePokemonCard = new PokemonCard() { Hp = 100, Owner = opponent };
+            opponent.BenchedPokemon.Add(new PokemonCard() { Hp = 100, Owner = opponent });
 
             attack.ProcessEffects(null, player, opponent);
 

@@ -134,7 +134,7 @@ namespace TCGCards.TrainerEffects
             
         }
 
-        public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
+        public virtual void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             if (TargetingMode == TargetingMode.OpponentActive && opponent.ActivePokemonCard.IsDead())
             {
@@ -169,6 +169,11 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
+            PerformBounce(game, caster, opponent);
+        }
+
+        protected void PerformBounce(GameField game, Player caster, Player opponent)
+        {
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
             if (target == null)
