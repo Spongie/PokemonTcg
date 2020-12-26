@@ -73,7 +73,8 @@ namespace TCGCards.TrainerEffects.Tests
                 AttachedEnergy = new List<EnergyCard>
                 {
                     new EnergyCard()
-                }
+                },
+                Hp = 100
             };
 
             opponent.ActivePokemonCard = pokemon;
@@ -115,7 +116,8 @@ namespace TCGCards.TrainerEffects.Tests
                 AttachedEnergy = new List<EnergyCard>
                 {
                     new EnergyCard()
-                }
+                },
+                Hp = 100
             };
 
             opponent.ActivePokemonCard = pokemon;
@@ -153,8 +155,8 @@ namespace TCGCards.TrainerEffects.Tests
 
             var opponent = new Player();
 
-            var pokemon = new PokemonCard(opponent) { Name = "Pokemon1", Stage = 0 };
-            var evolution = new PokemonCard(opponent) { Name = "Evo", Stage = 1, EvolvesFrom = "Pokemon1" };
+            var pokemon = new PokemonCard(opponent) { Name = "Pokemon1", Stage = 0, Hp = 100 };
+            var evolution = new PokemonCard(opponent) { Name = "Evo", Stage = 1, EvolvesFrom = "Pokemon1", Hp = 100 };
             opponent.ActivePokemonCard = evolution;
 
             pokemon.Evolve(evolution);
@@ -192,8 +194,8 @@ namespace TCGCards.TrainerEffects.Tests
 
             var opponent = new Player();
 
-            var pokemon = new PokemonCard(opponent) { Name = "Pokemon1", Stage = 0 };
-            var evolution = new PokemonCard(opponent) { Name = "Evo", Stage = 1, EvolvesFrom = "Pokemon1" };
+            var pokemon = new PokemonCard(opponent) { Name = "Pokemon1", Stage = 0, Hp = 100 };
+            var evolution = new PokemonCard(opponent) { Name = "Evo", Stage = 1, EvolvesFrom = "Pokemon1", Hp = 100 };
             opponent.ActivePokemonCard = evolution;
 
             pokemon.Evolve(evolution);
@@ -235,12 +237,13 @@ namespace TCGCards.TrainerEffects.Tests
             var game = new GameField();
             var player = new Player();
 
-            var activePokemon = new PokemonCard() { Stage = 1, Owner = player };
+            var activePokemon = new PokemonCard() { Stage = 1, Owner = player, Hp = 100 };
             var targetPokemon = new PokemonCard()
             {
                 Stage = 0,
                 AttachedEnergy = new List<EnergyCard> { new EnergyCard(), new EnergyCard() },
-                Owner = player
+                Owner = player,
+                Hp = 100
             };
 
             var sub = Substitute.For<INetworkPlayer>();
@@ -276,14 +279,15 @@ namespace TCGCards.TrainerEffects.Tests
 
             var player = new Player();
 
-            var activePokemon = new PokemonCard() { Stage = 1, Owner = player };
+            var activePokemon = new PokemonCard() { Stage = 1, Owner = player, Hp = 100 };
             var basicPokemon = new PokemonCard();
             var targetPokemon = new PokemonCard()
             {
                 Stage = 1,
                 AttachedEnergy = new List<EnergyCard> { new EnergyCard(), new EnergyCard() },
                 Owner = player,
-                EvolvedFrom = basicPokemon
+                EvolvedFrom = basicPokemon,
+                Hp = 100
             };
 
             var sub = Substitute.For<INetworkPlayer>();
@@ -319,14 +323,15 @@ namespace TCGCards.TrainerEffects.Tests
 
             var player = new Player();
 
-            var activePokemon = new PokemonCard() { Stage = 1, Owner = player };
+            var activePokemon = new PokemonCard() { Stage = 1, Owner = player, Hp = 100 };
             var basicPokemon = new PokemonCard();
             var targetPokemon = new PokemonCard()
             {
                 Stage = 1,
                 AttachedEnergy = new List<EnergyCard> { new EnergyCard(), new EnergyCard() },
                 Owner = player,
-                EvolvedFrom = basicPokemon
+                EvolvedFrom = basicPokemon,
+                Hp = 100
             };
 
             var sub = Substitute.For<INetworkPlayer>();
@@ -360,7 +365,7 @@ namespace TCGCards.TrainerEffects.Tests
 
             var player = new Player();
 
-            var activePokemon = new PokemonCard() { Stage = 1, Owner = player };
+            var activePokemon = new PokemonCard() { Stage = 1, Owner = player, Hp = 100 };
             var basicPokemon = new PokemonCard();
             var targetPokemon = new PokemonCard()
             {
@@ -401,14 +406,15 @@ namespace TCGCards.TrainerEffects.Tests
 
             var player = new Player();
 
-            var activePokemon = new PokemonCard() { Stage = 1, Owner = player };
+            var activePokemon = new PokemonCard() { Stage = 1, Owner = player, Hp = 100 };
             var basicPokemon = new PokemonCard();
             var targetPokemon = new PokemonCard()
             {
                 Stage = 1,
                 AttachedEnergy = new List<EnergyCard> { new EnergyCard(), new EnergyCard() },
                 Owner = player,
-                EvolvedFrom = basicPokemon
+                EvolvedFrom = basicPokemon,
+                Hp = 100
             };
 
             var sub = Substitute.For<INetworkPlayer>();

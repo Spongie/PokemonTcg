@@ -3,6 +3,7 @@ using Entities.Models;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.Abilities;
 using TCGCards.Core.GameEvents;
 using TCGCards.TrainerEffects.Util;
 
@@ -172,6 +173,14 @@ namespace TCGCards.TrainerEffects
 
             if (target == null)
             {
+                return;
+            }
+
+            var preventer = target.TemporaryAbilities.OfType<EffectPreventer>().FirstOrDefault();
+
+            if (preventer != null)
+            {
+                game.GameLog.AddMessage($"Bounce effect prevented by {preventer.Name}");
                 return;
             }
 

@@ -391,6 +391,14 @@ namespace TCGCards
 
         public void DiscardEnergyCard(EnergyCard energyCard, GameField game)
         {
+            var preventer = TemporaryAbilities.OfType<EffectPreventer>().FirstOrDefault();
+
+            if (preventer != null)
+            {
+                game.GameLog.AddMessage($"Discard energy card prevented by {preventer.Name}");
+                return;
+            }
+
             AttachedEnergy.Remove(energyCard);
             Owner.DiscardPile.Add(energyCard);
             

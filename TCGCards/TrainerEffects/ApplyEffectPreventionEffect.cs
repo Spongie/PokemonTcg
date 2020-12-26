@@ -118,7 +118,10 @@ namespace TCGCards.TrainerEffects
                 PreventSleep = true,
                 TurnDuration = TurnDuration
             });
-            //TODO: prevent other stuff
+            target.TemporaryAbilities.Add(new EffectPreventer() 
+            { 
+                TurnDuration = TurnDuration
+            });
         }
     }
 }

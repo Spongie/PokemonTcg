@@ -82,7 +82,10 @@ namespace TCGCards.Attacks
                 PreventSleep = true,
                 TurnDuration = TurnDuration
             });
-            //TODO: prevent other stuff
+            source.TemporaryAbilities.Add(new EffectPreventer()
+            {
+                TurnDuration = TurnDuration
+            });
 
             base.ProcessEffects(game, owner, opponent);
         }
