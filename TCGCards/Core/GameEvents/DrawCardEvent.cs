@@ -11,7 +11,6 @@ namespace TCGCards.Core.GameEvents
         }
 
         public NetworkId Player { get; set; }
-        public int Amount { get; set; }
         public List<Card> Cards { get; set; }
     }
 }

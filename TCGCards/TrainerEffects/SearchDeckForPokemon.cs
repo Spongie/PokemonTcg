@@ -150,7 +150,7 @@ namespace TCGCards.TrainerEffects
                 else
                 {
                     caster.Hand.Add(card);
-                    game.SendEventToPlayers(new DrawCardsEvent() { Amount = 1, Player = caster.Id, Cards = new List<Card>() { card } });
+                    game.SendEventToPlayers(new DrawCardsEvent() { Player = caster.Id, Cards = new List<Card>() { card } });
                 }
             }
         }

@@ -14,6 +14,7 @@ namespace TCGCards.TrainerEffects
         private bool shuffleIntoDeck;
         private bool returnAttachedToHand;
         private bool onlyBasic;
+        private bool isMay;
         private bool coinFlip;
         private int coins = 1;
         private int headsForSuccess = 1;
@@ -97,6 +98,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Ask Yes/No?", InputControl.Boolean)]
+        public bool IsMay
+        {
+            get { return isMay; }
+            set
+            {
+                isMay = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -123,6 +136,29 @@ namespace TCGCards.TrainerEffects
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             if (TargetingMode == TargetingMode.OpponentActive && opponent.ActivePokemonCard.IsDead())
+            {
+                return;
+            }
+
+            string specificTargetName;
+
+            switch (targetingMode)
+            {
+                case TargetingMode.YourActive:
+                    specificTargetName = caster.ActivePokemonCard.Name;
+                    break;
+                case TargetingMode.OpponentActive:
+                    specificTargetName = opponent.ActivePokemonCard.Name;
+                    break;
+                case TargetingMode.Self:
+                    specificTargetName = pokemonSource.Name;
+                    break;
+                default:
+                    specificTargetName = "Pokémon";
+                    break;
+            }
+
+            if (isMay && !CardUtil.AskYesNo(caster, $"Return {specificTargetName} to it's owners hand?"))
             {
                 return;
             }
@@ -163,12 +199,12 @@ namespace TCGCards.TrainerEffects
                 if (shuffleIntoDeck)
                 {
                     target.Owner.Deck.Cards.Push(card);
-                    game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { card } });
+                    game.SendEventToPlayers(new DrawCardsEvent { Player = target.Owner.Id, Cards = new List<Card> { card } });
                 }
                 else if (ReturnAttachedToHand)
                 {
                     target.Owner.Hand.Add(card);
-                    game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { card } });
+                    game.SendEventToPlayers(new DrawCardsEvent { Player = target.Owner.Id, Cards = new List<Card> { card } });
                 }
                 else
                 {
@@ -234,12 +270,12 @@ namespace TCGCards.TrainerEffects
             else if (shuffleIntoDeck)
             {
                 target.Owner.Deck.ShuffleInCard(pokemon);
-                game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
+                game.SendEventToPlayers(new DrawCardsEvent { Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
             }
             else
             {
                 target.Owner.Hand.Add(pokemon);
-                game.SendEventToPlayers(new DrawCardsEvent { Amount = 1, Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
+                game.SendEventToPlayers(new DrawCardsEvent { Player = target.Owner.Id, Cards = new List<Card> { pokemon } });
             }
         }
 
@@ -304,7 +340,7 @@ namespace TCGCards.TrainerEffects
                 game?.SendEventToPlayers(new PokemonBouncedEvent() { PokemonId = target.Id, ToHand = true });
             }
 
-            game?.SendEventToPlayers(new DrawCardsEvent() { Player = target.Owner.Id, Amount = cardsDrawn.Count, Cards = new List<Card>(cardsDrawn) });
+            game?.SendEventToPlayers(new DrawCardsEvent() { Player = target.Owner.Id, Cards = new List<Card>(cardsDrawn) });
         }
 
         private static void ShuffleCardsIntoDeck(PokemonCard target, GameField game)

@@ -8,6 +8,7 @@
              xmlns:m="clr-namespace:CardEditor"
              xmlns:vm="clr-namespace:CardEditor.ViewModels"
              xmlns:en="clr-namespace:Entities;assembly=Entities"
+             xmlns:tcg="clr-namespace:TCGCards;assembly=TCGCards"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vm:PokemonsViewModel, IsDesignTimeCreatable=True}"
              Background="White">
@@ -22,6 +23,11 @@
         <ObjectDataProvider x:Key="statusEffects" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="en:StatusEffect"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="discardModes" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="tcg:DiscardCostMode"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
@@ -189,6 +195,10 @@
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Top">
                                         <Label Content="Discard for using attack" DockPanel.Dock="Top" />
+                                        <DockPanel DockPanel.Dock="Top">
+                                            <Label Content="Extra cost mode" MinWidth="80"/>
+                                            <ComboBox ItemsSource="{Binding Source={StaticResource discardModes}}" SelectedItem="{Binding SelectedAttack.ExtraCostMode}"/>
+                                        </DockPanel>
                                         <DataGrid Margin="5" ItemsSource="{Binding SelectedAttack.ExtraDiscardCost}" CanUserAddRows="True" MinHeight="120" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
                                                 <DataGridComboBoxColumn Header="Type" Width="100" ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedValueBinding="{Binding EnergyType, Mode=TwoWay}"/>

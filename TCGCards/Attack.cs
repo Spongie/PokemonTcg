@@ -9,10 +9,11 @@ using System.Collections.ObjectModel;
 using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects;
 using TCGCards.Core.SpecialAbilities;
+using TCGCards.Core.GameEvents;
 
 namespace TCGCards
 {
-    public class Attack : DataModel, IEntity
+    public partial class Attack : DataModel, IEntity
     {
         private ObservableCollection<Energy> cost = new ObservableCollection<Energy>();
         private ObservableCollection<Energy> extraDiscardCost = new ObservableCollection<Energy>();
@@ -23,6 +24,7 @@ namespace TCGCards
         protected bool foreverDisabled = false;
         private bool applyWeakness = true;
         private bool applyResistance = true;
+        private DiscardCostMode extraCostMode = DiscardCostMode.Discard;
 
         public Attack()
         {
@@ -129,6 +131,17 @@ namespace TCGCards
             }
         }
 
+        public DiscardCostMode ExtraCostMode
+        {
+            get { return extraCostMode; }
+            set
+            {
+                extraCostMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string AttackType { get => GetType().Name; }
         public NetworkId Id { get; set; }
         public bool Disabled { get; set; }
@@ -144,7 +157,25 @@ namespace TCGCards
                 {
                     foreach (var card in new List<EnergyCard>(owner.ActivePokemonCard.AttachedEnergy))
                     {
-                        owner.ActivePokemonCard.DiscardEnergyCard(card, game);
+                        switch (ExtraCostMode)
+                        {
+                            case DiscardCostMode.Discard:
+                                owner.ActivePokemonCard.DiscardEnergyCard(card, game);
+                                break;
+                            case DiscardCostMode.ToHand:
+                                owner.ActivePokemonCard.AttachedEnergy.Remove(card);
+                                game.SendEventToPlayers(new AttachedEnergyDiscardedEvent() { DiscardedCard = card, FromPokemonId = owner.ActivePokemonCard.Id });
+                                owner.Hand.Add(card);
+                                game.SendEventToPlayers(new DrawCardsEvent() { Cards = new List<Card> { card }, Player = owner.Id });
+                                break;
+                            case DiscardCostMode.IntoDeck:
+                                owner.ActivePokemonCard.AttachedEnergy.Remove(card);
+                                game.SendEventToPlayers(new AttachedEnergyDiscardedEvent() { DiscardedCard = card, FromPokemonId = owner.ActivePokemonCard.Id });
+                                owner.Deck.ShuffleInCard(card);
+                                break;
+                            default:
+                                break;
+                        }
                     }
 
                     return;

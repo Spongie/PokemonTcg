@@ -376,7 +376,7 @@ namespace TCGCards.Core
                 cardsDrawn.Add(card);
             }
 
-            game.SendEventToPlayers(new DrawCardsEvent() { Cards = new List<Card>(cardsDrawn), Amount = cardsDrawn.Count, Player = Id });
+            game.SendEventToPlayers(new DrawCardsEvent() { Cards = new List<Card>(cardsDrawn), Player = Id });
         }
 
         public void SelectActiveFromBench(GameField game)
