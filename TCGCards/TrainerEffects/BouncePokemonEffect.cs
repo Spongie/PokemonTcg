@@ -15,6 +15,8 @@ namespace TCGCards.TrainerEffects
         private bool returnAttachedToHand;
         private bool onlyBasic;
         private bool coinFlip;
+        private int coins = 1;
+        private int headsForSuccess = 1;
 
         [DynamicInput("Coin Flip", InputControl.Boolean)]
         public bool CoinFlip
@@ -26,6 +28,29 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
+
+        [DynamicInput("Coins")]
+        public int Coins
+        {
+            get { return coins; }
+            set
+            {
+                coins = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Heads for success")]
+        public int HeadsForSuccess
+        {
+            get { return headsForSuccess; }
+            set
+            {
+                headsForSuccess = value;
+                FirePropertyChanged();
+            }
+        }
+
 
 
         [DynamicInput("Only return basic version", InputControl.Boolean)]
@@ -97,7 +122,12 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (TargetingMode == TargetingMode.OpponentActive && opponent.ActivePokemonCard.IsDead())
+            {
+                return;
+            }
+
+            if (CoinFlip && game.FlipCoins(Coins) < HeadsForSuccess)
             {
                 return;
             }
