@@ -99,6 +99,11 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
+            if (IsChoice && !game.AskYesNo(caster, "Swap active Pokémon"))
+            {
+                return;
+            }
+
             Player selectedPlayer = opponentChooses ? opponent : caster;
             NetworkMessage message;
 

@@ -20,26 +20,26 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-            if (CardUtil.AskYesNo(owner, "Look at the top card of opponents deck?"))
+            if (game.AskYesNo(owner, "Look at the top card of opponents deck?"))
             {
                 owner.RevealCard(opponent.Deck.Cards.Peek());
             }
-            else if (CardUtil.AskYesNo(owner, "Look at the top card of your deck?"))
+            else if (game.AskYesNo(owner, "Look at the top card of your deck?"))
             {
                 owner.RevealCard(owner.Deck.Cards.Peek());
             }
-            else if (CardUtil.AskYesNo(owner, "Look at a random card from opponents hand?"))
+            else if (game.AskYesNo(owner, "Look at a random card from opponents hand?"))
             {
                 owner.RevealCard(opponent.Hand[new Random().Next(0, opponent.Hand.Count)]);
             }
-            else if (CardUtil.AskYesNo(owner, "Look at a prize card from opponent?"))
+            else if (game.AskYesNo(owner, "Look at a prize card from opponent?"))
             {
                 var message = new PickFromListMessage(opponent.PrizeCards, 1).ToNetworkMessage(game.Id);
                 var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.FirstOrDefault();
 
                 owner.RevealCard(game.Cards[response]);
             }
-            else if (CardUtil.AskYesNo(owner, "Look at one of your prize cards?"))
+            else if (game.AskYesNo(owner, "Look at one of your prize cards?"))
             {
                 var message = new PickFromListMessage(owner.PrizeCards, 1).ToNetworkMessage(game.Id);
                 var response = opponent.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.FirstOrDefault();

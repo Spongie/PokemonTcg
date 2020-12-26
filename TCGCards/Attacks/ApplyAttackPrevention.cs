@@ -10,6 +10,7 @@ namespace TCGCards.Attacks
         private bool coinFlip;
         private bool onlySelf = true;
         private bool onlyCurrentTarget;
+        private int turnDuration = Ability.UNTIL_YOUR_NEXT_TURN;
 
         [DynamicInput("Only prevent on self", InputControl.Boolean)]
         public bool OnlySelf
@@ -45,6 +46,18 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Turn duration")]
+        public int TurnDuration
+        {
+            get { return turnDuration; }
+            set
+            {
+                turnDuration = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
             if (CoinFlip && game.FlipCoins(1) == 0)
@@ -66,8 +79,10 @@ namespace TCGCards.Attacks
                 PreventConfuse = true,
                 PreventParalyze = true,
                 PreventPoison = true,
-                PreventSleep = true
+                PreventSleep = true,
+                TurnDuration = TurnDuration
             });
+            //TODO: prevent other stuff
 
             base.ProcessEffects(game, owner, opponent);
         }

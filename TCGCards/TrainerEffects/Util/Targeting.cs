@@ -20,7 +20,14 @@ namespace TCGCards.TrainerEffects.Util
                 case TargetingMode.YourPokemon:
                     return caster.GetAllPokemonCards();
                 case TargetingMode.OpponentActive:
-                    return new List<PokemonCard> { opponent.ActivePokemonCard };
+                    {
+                        if (game.CurrentDefender != null)
+                        {
+                            return new List<PokemonCard> { game.CurrentDefender };
+                        }
+
+                        return new List<PokemonCard> { opponent.ActivePokemonCard };
+                    }
                 case TargetingMode.OpponentBench:
                     return opponent.BenchedPokemon.ValidPokemonCards.ToList();
                 case TargetingMode.OpponentPokemon:

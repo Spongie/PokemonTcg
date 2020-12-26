@@ -144,7 +144,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (MayAbility && !AskYesNo(caster, "Discard attached energy?"))
+            if (MayAbility && !game.AskYesNo(caster, "Discard attached energy?"))
             {
                 return;
             }
@@ -199,13 +199,6 @@ namespace TCGCards.TrainerEffects
 
                 break;
             }
-        }
-
-        private bool AskYesNo(Player caster, string info)
-        {
-            var message = new YesNoMessage() { Message = info }.ToNetworkMessage(caster.Id);
-
-            return caster.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(message).AnsweredYes;
         }
     }
 }

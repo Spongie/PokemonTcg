@@ -158,7 +158,7 @@ namespace TCGCards.TrainerEffects
                     break;
             }
 
-            if (isMay && !CardUtil.AskYesNo(caster, $"Return {specificTargetName} to it's owners hand?"))
+            if (isMay && !game.AskYesNo(caster, $"Return {specificTargetName} to it's owners hand?"))
             {
                 return;
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using NetworkingCore;
+using NetworkingCore.Messages;
 using Newtonsoft.Json;
 using TCGCards.Core.Abilities;
 using TCGCards.Core.GameEvents;
@@ -456,7 +457,6 @@ namespace TCGCards.Core
         {
             var gameEvent = new DrawCardsEvent()
             {
-                Amount = e.Amount,
                 Player = ActivePlayer.Id,
                 Cards = new List<Card>(e.Cards)
             };
@@ -483,6 +483,8 @@ namespace TCGCards.Core
             PushGameLogUpdatesToPlayers();
         }
 
+        public PokemonCard CurrentDefender { get; set; }
+
         public void Attack(Attack attack)
         {
             if (attack.Disabled || !attack.CanBeUsed(this, ActivePlayer, NonActivePlayer) || !ActivePlayer.ActivePokemonCard.CanAttack() || !ActivePlayer.ActivePokemonCard.Attacks.Contains(attack))
@@ -497,6 +499,7 @@ namespace TCGCards.Core
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates attack {attack.Name}");
 
             attack.PayExtraCosts(this, ActivePlayer, NonActivePlayer);
+            CurrentDefender = NonActivePlayer.ActivePokemonCard;
 
             if (ActivePlayer.ActivePokemonCard.IsConfused && FlipCoins(1) == 0)
             {
@@ -534,6 +537,7 @@ namespace TCGCards.Core
 
             attack.ProcessEffects(this, ActivePlayer, NonActivePlayer);
 
+            CurrentDefender = null;
             GameState = GameFieldState.PostAttack;
 
             if (!IgnorePostAttack)
@@ -1038,6 +1042,17 @@ namespace TCGCards.Core
             player.NetworkPlayer.Send(message.ToNetworkMessage(Id));
         }
 
+        public bool AskYesNo(Player caster, string info)
+        {
+            var message = new YesNoMessage() { Message = info }.ToNetworkMessage(caster.Id);
+
+            var response = caster.NetworkPlayer.SendAndWaitForResponse<YesNoMessage>(message).AnsweredYes;
+
+            LastYesNo = response;
+
+            return response;
+        }
+
         public GameFieldState GameState { get; set; }
         public NetworkId Id { get; set; }
         public List<Player> Players { get; set; } = new List<Player>();
@@ -1066,5 +1081,6 @@ namespace TCGCards.Core
         
         public NetworkId Format { get; set; }
         public int LastDiscard { get; set; }
+        public bool LastYesNo { get; set; }
     }
 }

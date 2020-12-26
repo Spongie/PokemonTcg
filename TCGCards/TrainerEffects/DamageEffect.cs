@@ -120,7 +120,7 @@ namespace TCGCards.TrainerEffects
 
             string yesNoInfo = EnergyToDiscard > 0 ? "Discard energy card?" : "Deal damage to a benched pokemon?";
 
-            if (askYesNo && !CardUtil.AskYesNo(caster, yesNoInfo))
+            if (askYesNo && !game.AskYesNo(caster, yesNoInfo))
             {
                 return;
             }

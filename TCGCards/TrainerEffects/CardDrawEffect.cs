@@ -75,7 +75,7 @@ namespace TCGCards.TrainerEffects
         {
             var target = opponents ? opponent : caster;
 
-            if (IsMay && !CardUtil.AskYesNo(target, $"Draw {Amount} Cards?"))
+            if (IsMay && !game.AskYesNo(target, $"Draw {Amount} Cards?"))
             {
                 return;
             }
