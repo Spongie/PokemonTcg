@@ -131,7 +131,7 @@ namespace TCGCards.Core
 
             game?.SendEventToPlayers(new PokemonBecameActiveEvent
             {
-                NewActivePokemonId = replacementPokemon.Id,
+                NewActivePokemonId = replacementPokemon == null ? null : replacementPokemon.Id,
                 ReplacedPokemonId = oldActivePokemon.Id
             });
         }

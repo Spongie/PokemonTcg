@@ -14,6 +14,19 @@ namespace TCGCards.TrainerEffects
         private CardType cardType = CardType.Any;
         private bool shuffleIntoDeck;
         private bool allowDiscardLess;
+        private bool targetsOpponent;
+
+        [DynamicInput("Target Opponent?", InputControl.Boolean)]
+        public bool TargetsOpponent
+        {
+            get { return targetsOpponent; }
+            set
+            {
+                targetsOpponent = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Flip coin", InputControl.Boolean)]
         public bool OnlyOnCoinFlip
@@ -99,6 +112,8 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            var target = TargetsOpponent ? opponent : caster;
+            
             if (onlyOnCoinflip && game.FlipCoins(1) == 0)
             {
                 return;
@@ -106,19 +121,19 @@ namespace TCGCards.TrainerEffects
 
             if (amount == -1)
             {
-                var allCards = new List<Card>(caster.Hand);
+                var allCards = new List<Card>(target.Hand);
 
                 game.LastDiscard = allCards.Count;
 
                 if (ShuffleIntoDeck)
                 {
-                    caster.Deck.ShuffleInCards(new List<Card>(caster.Hand));
-                    caster.Hand.Clear();
-                    caster.TriggerDiscardEvent(allCards);
+                    target.Deck.ShuffleInCards(new List<Card>(target.Hand));
+                    target.Hand.Clear();
+                    target.TriggerDiscardEvent(allCards);
                 }
                 else
                 {
-                    caster.DiscardCards(allCards);
+                    target.DiscardCards(allCards);
                 }
                 return;
             }
@@ -127,7 +142,7 @@ namespace TCGCards.TrainerEffects
 
             int minAmount = AllowDiscardLess ? 0 : Amount;
 
-            GameUtils.DiscardCardsFromHand(caster, game, new DiscardCardSettings(minAmount, Amount, filters, ShuffleIntoDeck));
+            GameUtils.DiscardCardsFromHand(target, game, new DiscardCardSettings(minAmount, Amount, filters, ShuffleIntoDeck));
         }
     }
 }

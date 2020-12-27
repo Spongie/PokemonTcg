@@ -11,6 +11,8 @@ namespace TCGCards.TrainerEffects
         private bool onlyOnCoinflip;
         private bool opponents;
         private bool isMay;
+        private bool useLastDiscard;
+        private float modiferForLastCount = 1.0f;
 
         [DynamicInput("Targets opponent?", InputControl.Boolean)]
         public bool Opponents
@@ -56,6 +58,29 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Use last discarded amount", InputControl.Boolean)]
+        public bool UseLastDiscardCount
+        {
+            get { return useLastDiscard; }
+            set
+            {
+                useLastDiscard = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Last discard count modifier")]
+        public float ModifierForLastDiscardCount
+        {
+            get { return modiferForLastCount; }
+            set
+            {
+                modiferForLastCount = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -85,7 +110,9 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            target.DrawCards(Amount);
+            int amount = UseLastDiscardCount ? (int)(game.LastDiscard * ModifierForLastDiscardCount) : Amount;
+
+            target.DrawCards(amount);
         }
     }
 }

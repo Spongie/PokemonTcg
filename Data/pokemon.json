@@ -10492,6 +10492,8 @@
             "OnlyOnCoinFlip": false,
             "Amount": 3,
             "IsMay": false,
+            "UseLastDiscardCount": false,
+            "ModifierForLastDiscardCount": 1.0,
             "EffectType": "Draw cards"
           }
         ],
@@ -12535,6 +12537,7 @@
         {
           "$id": "1086",
           "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+          "TargetsOpponent": false,
           "OnlyOnCoinFlip": false,
           "Amount": 1,
           "AllowDiscardLess": false,
@@ -12549,6 +12552,8 @@
           "OnlyOnCoinFlip": false,
           "Amount": 1,
           "IsMay": false,
+          "UseLastDiscardCount": false,
+          "ModifierForLastDiscardCount": 1.0,
           "EffectType": "Draw cards"
         }
       ],
@@ -16731,6 +16736,8 @@
             "OnlyOnCoinFlip": false,
             "Amount": 1,
             "IsMay": false,
+            "UseLastDiscardCount": false,
+            "ModifierForLastDiscardCount": 1.0,
             "EffectType": "Draw cards"
           }
         ],
@@ -16848,6 +16855,8 @@
             "OnlyOnCoinFlip": false,
             "Amount": 1,
             "IsMay": false,
+            "UseLastDiscardCount": false,
+            "ModifierForLastDiscardCount": 1.0,
             "EffectType": "Draw cards"
           }
         ],
@@ -17315,6 +17324,8 @@
             "OnlyOnCoinFlip": true,
             "Amount": 1,
             "IsMay": false,
+            "UseLastDiscardCount": false,
+            "ModifierForLastDiscardCount": 1.0,
             "EffectType": "Draw cards"
           }
         ],
@@ -30782,6 +30793,8 @@
             "OnlyOnCoinFlip": false,
             "Amount": 1,
             "IsMay": false,
+            "UseLastDiscardCount": false,
+            "ModifierForLastDiscardCount": 1.0,
             "EffectType": "Draw cards"
           },
           {
@@ -31943,6 +31956,7 @@
           {
             "$id": "2751",
             "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+            "TargetsOpponent": false,
             "OnlyOnCoinFlip": false,
             "Amount": -1,
             "AllowDiscardLess": false,
@@ -31957,6 +31971,8 @@
             "OnlyOnCoinFlip": false,
             "Amount": 5,
             "IsMay": false,
+            "UseLastDiscardCount": false,
+            "ModifierForLastDiscardCount": 1.0,
             "EffectType": "Draw cards"
           }
         ],
@@ -37609,6 +37625,7 @@
           {
             "$id": "3246",
             "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+            "TargetsOpponent": false,
             "OnlyOnCoinFlip": false,
             "Amount": 3,
             "AllowDiscardLess": true,

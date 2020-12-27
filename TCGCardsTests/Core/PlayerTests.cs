@@ -273,5 +273,21 @@ namespace TCGCards.Core.Tests
             Assert.False(pokemon.IsConfused);
             Assert.Equal(0, pokemon.DamageCounters);
         }
+
+        [Fact()]
+        public void ForceRetreatActivePokemon_No_replacement()
+        {
+            var player = new Player();
+            var pokemon = new PokemonCard
+            {
+                Owner = player
+            };
+            player.ActivePokemonCard = pokemon;
+
+            player.ForceRetreatActivePokemon(null, new GameField());
+
+            Assert.Null(player.ActivePokemonCard);
+            Assert.Equal(pokemon, player.BenchedPokemon.GetFirst());
+        }
     }
 }

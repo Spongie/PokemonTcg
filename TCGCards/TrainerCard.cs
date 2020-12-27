@@ -8,6 +8,9 @@ namespace TCGCards
     public class TrainerCard : Card
     {
         private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
+        private bool addToDiscardWhenCasting = true;
+        private int maxCardsInHand = 99;
+        private int maxBenchedPokemon = 99;
 
         public TrainerCard() : base(null)
         {
@@ -28,12 +31,12 @@ namespace TCGCards
 
         public virtual bool CanCast(GameField game, Player caster, Player opponent)
         {
-            return Effects.All(effect => effect.CanCast(game, caster, opponent));
+            return Effects.All(effect => effect.CanCast(game, caster, opponent))
+                && caster.Hand.Count < MaxCardsInHand
+                && caster.BenchedPokemon.Count < MaxBenchedPokemon;
         }
 
         public override string GetName() => Name;
-
-        private bool addToDiscardWhenCasting = true;
 
         public bool AddToDiscardWhenCasting
         {
@@ -41,6 +44,26 @@ namespace TCGCards
             set
             {
                 addToDiscardWhenCasting = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int MaxCardsInHand
+        {
+            get { return maxCardsInHand; }
+            set
+            {
+                maxCardsInHand = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public int MaxBenchedPokemon
+        {
+            get { return maxBenchedPokemon; }
+            set
+            {
+                maxBenchedPokemon = value;
                 FirePropertyChanged();
             }
         }

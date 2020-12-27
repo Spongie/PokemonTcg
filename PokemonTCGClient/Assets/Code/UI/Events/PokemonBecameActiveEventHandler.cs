@@ -46,6 +46,12 @@ namespace Assets.Code.UI.Events
                 return;
             }
 
+            if (activeEvent.NewActivePokemonId == null)
+            {
+                ActiveJustMovedToBench(activeEvent.ReplacedPokemonId);
+                return;
+            }
+
             var newActive = GameController.Instance.GetCardRendererById(activeEvent.NewActivePokemonId);
             NetworkId myId = GameController.Instance.myId;
             var isMySwitch = newActive.card.Owner.Id.Equals(myId);
@@ -98,6 +104,29 @@ namespace Assets.Code.UI.Events
             {
                 switchingPlayer.BenchedPokemon.Add((PokemonCard)oldActive.card);
             }
+        }
+
+        private void ActiveJustMovedToBench(NetworkId activePokemonId)
+        {
+            var renderer = GameController.Instance.GetCardRendererById(activePokemonId);
+            var myId = GameController.Instance.myId;
+            var isMySwitch = renderer.card.Owner.Id.Equals(myId);
+            var bench = isMySwitch ? PlayerBenchedPokemonZone : OpponentBenchedPokemonZone;
+            int index = isMySwitch ? GameController.Instance.Player.BenchedPokemon.IndexOf(renderer.pokemon) : GameController.Instance.OpponentPlayer.BenchedPokemon.IndexOf(renderer.pokemon);
+            var benchParent = bench.GetSlot(index);
+
+            ((PokemonCard)renderer.card).ClearStatusEffects();
+            renderer.tag = "Ignore";
+            renderer.transform.SetParent(benchParent.transform, true);
+            renderer.SetIsBenched();
+            renderer.EnableStatusIcons();
+            renderer.transform.LeanScale(new Vector3(1, 1, 1), 0.4f);
+            renderer.gameObject.LeanMoveLocal(Vector3.zero, 1.5f).setEaseInCubic().setOnComplete(() =>
+            {
+                renderer.tag = "Untagged";
+                GameEventHandler.Instance.EventCompleted();
+            });
+
         }
     }
 }

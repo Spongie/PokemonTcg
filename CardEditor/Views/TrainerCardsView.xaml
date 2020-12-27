@@ -69,6 +69,14 @@
                 <Label Content="SetCode" MinWidth="80"/>
                 <TextBox Text="{Binding SetCode}"/>
             </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Max cards in hand to cast" MinWidth="150"/>
+                <TextBox Text="{Binding MaxCardsInHand}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Label Content="Max benched to cast" MinWidth="150"/>
+                <TextBox Text="{Binding MaxBenchedPokemon}"/>
+            </DockPanel>
             <DockPanel DockPanel.Dock="Top" LastChildFill="False">
                 <Label Content="Add To Discard when casting" MinWidth="80"/>
                 <CheckBox IsChecked="{Binding AddToDiscardWhenCasting}" VerticalAlignment="Center" />
