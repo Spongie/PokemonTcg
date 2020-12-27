@@ -47,14 +47,15 @@ namespace TCGCards.Core.Abilities
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             IEnumerable<Card> energyCards;
+            Player activator = GetActivator(game.ActivePlayer);
 
             if (energyType != EnergyTypes.All)
             {
-                energyCards = PokemonOwner.Owner.Hand.OfType<EnergyCard>().Where(card => energyType == card.EnergyType);
+                energyCards = activator.Hand.OfType<EnergyCard>().Where(card => energyType == card.EnergyType);
             }
             else
             {
-                energyCards = PokemonOwner.Owner.Hand.OfType<EnergyCard>();
+                energyCards = activator.Hand.OfType<EnergyCard>();
             }
 
             var message = new PickFromListMessage(energyCards.ToList(), 1).ToNetworkMessage(owner.Id);
@@ -74,14 +75,15 @@ namespace TCGCards.Core.Abilities
         public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
             bool hasEnergyType;
+            Player activator = GetActivator(game.ActivePlayer);
 
             if (energyType != EnergyTypes.All)
             {
-                hasEnergyType = PokemonOwner.Owner.Hand.OfType<EnergyCard>().Any(card => energyType == card.EnergyType);
+                hasEnergyType = activator.Hand.OfType<EnergyCard>().Any(card => energyType == card.EnergyType);
             }
             else
             {
-                hasEnergyType = PokemonOwner.Owner.Hand.OfType<EnergyCard>().Any();
+                hasEnergyType = activator.Hand.OfType<EnergyCard>().Any();
             }
 
             return hasEnergyType && base.CanActivate(game, caster, opponent);

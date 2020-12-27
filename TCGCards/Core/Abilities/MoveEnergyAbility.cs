@@ -47,7 +47,8 @@ namespace TCGCards.Core.Abilities
 
         public override bool CanActivate(GameField game, Player caster, Player opponent)
         {
-            var pokemons = PokemonOwner.Owner.GetAllPokemonCards().ToList();
+            Player activator = GetActivator(game.ActivePlayer);
+            var pokemons = activator.GetAllPokemonCards().ToList();
             int targetCount = 2;
 
             if (attachToSelf)
@@ -62,6 +63,7 @@ namespace TCGCards.Core.Abilities
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             PokemonCard sourcePokemon = null;
+
             do
             {
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(new SelectFromYourPokemonMessage("Select a pokemon to move energy from").ToNetworkMessage(NetworkId.Generate()));

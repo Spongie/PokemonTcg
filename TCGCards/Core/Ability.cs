@@ -250,6 +250,16 @@ namespace TCGCards.Core
                 && Effects.All(effect => effect.CanCast(game, caster, opponent));
         }
 
+        public Player GetActivator(Player activePlayer)
+        {
+            if (PokemonOwner != null)
+            {
+                return PokemonOwner.Owner;
+            }
+
+            return activePlayer;
+        }
+
         public virtual void SetTarget(Card target)
         {
             this.target = target;
