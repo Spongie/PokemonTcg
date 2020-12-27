@@ -926,6 +926,11 @@ namespace TCGCards.Core
                 return;
             }
 
+            if (StadiumCard.Ability != null && StadiumCard.Ability.TriggerType == triggerType)
+            {
+                StadiumCard.Ability.Trigger(ActivePlayer, NonActivePlayer, damage, this);
+            }
+
             var abilities = new List<Ability>();
             abilities.AddRange(pokemon.TemporaryAbilities);
 
@@ -1054,7 +1059,7 @@ namespace TCGCards.Core
 
             if (StadiumCard != null && StadiumCard.Ability is PassiveAbility)
             {
-                passiveAbilities.AddRange((PassiveAbility)StadiumCard.Ability);
+                passiveAbilities.Add((PassiveAbility)StadiumCard.Ability);
             }
 
             passiveAbilities.AddRange(TemporaryPassiveAbilities);
