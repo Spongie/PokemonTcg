@@ -1052,6 +1052,11 @@ namespace TCGCards.Core
                 passiveAbilities.AddRange(NonActivePlayer.GetAllPokemonCards().Where(p => p.Ability != null).Select(pokemon => pokemon.Ability).OfType<PassiveAbility>());
             }
 
+            if (StadiumCard != null && StadiumCard.Ability is PassiveAbility)
+            {
+                passiveAbilities.AddRange((PassiveAbility)StadiumCard.Ability);
+            }
+
             passiveAbilities.AddRange(TemporaryPassiveAbilities);
 
             if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
