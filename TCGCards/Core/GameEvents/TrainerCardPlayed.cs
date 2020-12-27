@@ -12,6 +12,4 @@ namespace TCGCards.Core.GameEvents
         public NetworkId Player { get; set; }
         public TrainerCard Card { get; set; }
     }
-
-    
 }

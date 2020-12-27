@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TCGCards;
@@ -38,6 +39,7 @@ namespace CardEditor.ViewModels
             AddTrainerCardCommand = new RelayCommand((x) => true, AddTrainerCard);
             ImportTrainerSetCommand = new AsyncRelayCommand((x) => true, ImportTrainerCardsFromSet);
             AddEffectCommand = new RelayCommand((x) => SelectedTrainerCard != null, AddEffect);
+            SetAbilityCommand = new RelayCommand((x) => SelectedTrainerCard != null, SetAbility);
         }
 
         private void AddEffect(object obj)
@@ -83,6 +85,23 @@ namespace CardEditor.ViewModels
         {
             TrainerCards.Add(new TrainerCard() { Name = "New Trainer", CardId = NetworkId.Generate() });
             SelectedTrainerCard = TrainerCards.Last();
+        }
+
+        private void SetAbility(object obj)
+        {
+            var abilityDialog = new AddAbilityWindow();
+
+            if (abilityDialog.ShowDialog().Value)
+            {
+                try
+                {
+                    SelectedTrainerCard.Ability = abilityDialog.SelectedAbility;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Some error when adding ability lol");
+                }
+            }
         }
 
         private void EnergyCardsViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -217,5 +236,6 @@ namespace CardEditor.ViewModels
         public ICommand AddTrainerCardCommand { get; set; }
         public ICommand ImportTrainerSetCommand { get; set; }
         public ICommand AddEffectCommand { get; set; }
+        public ICommand SetAbilityCommand { get; set; }
     }
 }

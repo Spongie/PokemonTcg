@@ -7,6 +7,7 @@ using TCGCards.TrainerEffects;
 
 namespace TCGCards.Core
 {
+
     public class Ability : DataModel, IEntity
     {
         public const int UNTIL_YOUR_NEXT_TURN = 2;
@@ -209,37 +210,43 @@ namespace TCGCards.Core
 
         public virtual bool CanActivate(GameField game, Player caster, Player opponent)
         {
-            if (!UsableImmediately && PokemonOwner.PlayedThisTurn)
+            if (PokemonOwner != null)
             {
-                return false;
-            }
-            if (IsBuff)
-            {
-                return true;
-            }
-            if (!usableWhileActive && caster.ActivePokemonCard == PokemonOwner)
-            {
-                return false;
-            }
-            else if (!usableWhileBenched && caster.BenchedPokemon.Contains(PokemonOwner))
-            {
-                return false;
-            }
-            else if (!UsableWhileAsleep && PokemonOwner.IsAsleep)
-            {
-                return false;
-            }
-            else if (!UsableWhileConfused && PokemonOwner.IsConfused)
-            {
-                return false;
-            }
-            else if (!UsableWhileParalyzed && PokemonOwner.IsParalyzed)
-            {
-                return false;
+                if (!UsableImmediately && PokemonOwner.PlayedThisTurn)
+                {
+                    return false;
+                }
+                if (IsBuff)
+                {
+                    return true;
+                }
+                if (!usableWhileActive && caster.ActivePokemonCard == PokemonOwner)
+                {
+                    return false;
+                }
+                else if (!usableWhileBenched && caster.BenchedPokemon.Contains(PokemonOwner))
+                {
+                    return false;
+                }
+                else if (!UsableWhileAsleep && PokemonOwner.IsAsleep)
+                {
+                    return false;
+                }
+                else if (!UsableWhileConfused && PokemonOwner.IsConfused)
+                {
+                    return false;
+                }
+                else if (!UsableWhileParalyzed && PokemonOwner.IsParalyzed)
+                {
+                    return false;
+                }
+                else if (PokemonOwner.AbilityDisabled)
+                {
+                    return false;
+                }
             }
 
-            return !PokemonOwner.AbilityDisabled 
-                && UsedTimes < Usages 
+            return UsedTimes < Usages 
                 && Effects.All(effect => effect.CanCast(game, caster, opponent));
         }
 

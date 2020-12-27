@@ -935,7 +935,7 @@ namespace TCGCards.Core
                 return;
             }
 
-            if (StadiumCard.Ability != null && StadiumCard.Ability.TriggerType == triggerType)
+            if (StadiumCard != null && StadiumCard.Ability != null && StadiumCard.Ability.TriggerType == triggerType)
             {
                 StadiumCard.Ability.Trigger(ActivePlayer, NonActivePlayer, damage, this);
             }

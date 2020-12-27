@@ -87,31 +87,41 @@
             </DockPanel>
         </DockPanel>
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40*"/>
-                    <ColumnDefinition Width="60*"/>
-                </Grid.ColumnDefinitions>
-                <DockPanel Grid.Column="0">
-                    <Button Content="Add Effect" Command="{Binding AddEffectCommand}" DockPanel.Dock="Bottom"/>
-                    <ListBox ItemsSource="{Binding SelectedTrainerCard.Effects}" SelectedItem="{Binding SelectedEffect}" DockPanel.Dock="Top">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding EffectType}" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </DockPanel>
-                <DockPanel Grid.Column="1" LastChildFill="True">
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                        <Label Content="Selected Effect: "/>
-                        <Label Content="{Binding SelectedEffect.EffectType}" />
-                    </StackPanel>
-                    <local:DynamicInputControl DockPanel.Dock="Top" DataContext="{Binding SelectedEffect}">
+            <TabControl>
+                <TabItem Header="Effects">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="0">
+                            <Button Content="Add Effect" Command="{Binding AddEffectCommand}" DockPanel.Dock="Bottom"/>
+                            <ListBox ItemsSource="{Binding SelectedTrainerCard.Effects}" SelectedItem="{Binding SelectedEffect}" DockPanel.Dock="Top">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding EffectType}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+                        <DockPanel Grid.Column="1" LastChildFill="True">
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                                <Label Content="Selected Effect: "/>
+                                <Label Content="{Binding SelectedEffect.EffectType}" />
+                            </StackPanel>
+                            <local:DynamicInputControl DockPanel.Dock="Top" DataContext="{Binding SelectedEffect}">
 
-                    </local:DynamicInputControl>
-                </DockPanel>
-            </Grid>
+                            </local:DynamicInputControl>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Stadium Ability">
+                    <DockPanel>
+                        <Button Content="Set Ability" DockPanel.Dock="Top" Command="{Binding SetAbilityCommand}"/>
+                        <local:AbilityView DataContext="{Binding SelectedTrainerCard.Ability}" />
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
         </DockPanel>
         <DockPanel Grid.Column="2">
             <Image Source="{Binding ImageSrc}" />
