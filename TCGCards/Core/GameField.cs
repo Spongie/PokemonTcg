@@ -124,6 +124,15 @@ namespace TCGCards.Core
                         Abilities.Add(pokemon.Ability.Id, pokemon.Ability);
                     }
                 }
+                else 
+                {
+                    var trainer = card as TrainerCard;
+
+                    if (trainer != null && trainer.Ability != null)
+                    {
+                        Abilities.Add(trainer.Ability.Id, trainer.Ability);
+                    }
+                }
             }
 
             foreach (var pokemon in player.GetAllPokemonCards())
