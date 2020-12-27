@@ -639,6 +639,12 @@ namespace TCGCards.Core
                 return;
             }
 
+            if (trainerCard.IsStadium())
+            {
+                PlayStadiumCard(trainerCard);
+                return;
+            }
+
             trainerCard.RevealToAll();
             CurrentTrainerCard = trainerCard;
 
@@ -657,6 +663,43 @@ namespace TCGCards.Core
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
             
+            if (trainerCard.AddToDiscardWhenCasting)
+            {
+                ActivePlayer.DiscardPile.Add(trainerCard);
+            }
+
+            CurrentTrainerCard = null;
+
+            if (ActivePlayer.IsDead)
+            {
+                GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
+                EndGame(NonActivePlayer.Id);
+            }
+
+            SendEventToPlayers(new GameInfoEvent { });
+        }
+
+        private void PlayStadiumCard(TrainerCard trainerCard)
+        {
+            trainerCard.RevealToAll();
+            CurrentTrainerCard = trainerCard;
+
+            GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
+            PushGameLogUpdatesToPlayers();
+
+            ActivePlayer.Hand.Remove(trainerCard);
+
+            var trainerEvent = new StadiumCardPlayedEvent()
+            {
+                Card = trainerCard,
+                Player = ActivePlayer.Id
+            };
+
+            SendEventToPlayers(trainerEvent);
+
+            trainerCard.Process(this, ActivePlayer, NonActivePlayer);
+            StadiumCard = trainerCard;
+
             if (trainerCard.AddToDiscardWhenCasting)
             {
                 ActivePlayer.DiscardPile.Add(trainerCard);
@@ -1064,7 +1107,8 @@ namespace TCGCards.Core
         public bool PrizeCardsFaceUp { get; set; }
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
-        
+        public TrainerCard StadiumCard { get; set; }
+
         [JsonIgnore]
         public TrainerCard CurrentTrainerCard { get; set; }
         public bool LastCoinFlipResult { get; set; }

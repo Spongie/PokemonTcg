@@ -19,6 +19,7 @@
         GameInfo = 14,
         PokemonBounced = 15,
         PokemonHealed = 16,
-        RemovedFromBench = 17
+        RemovedFromBench = 17,
+        StadiumCardPlayed = 18
     }
 }

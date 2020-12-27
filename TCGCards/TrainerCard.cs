@@ -11,6 +11,7 @@ namespace TCGCards
         private bool addToDiscardWhenCasting = true;
         private int maxCardsInHand = 99;
         private int maxBenchedPokemon = 99;
+        private Ability ability;
 
         public TrainerCard() : base(null)
         {
@@ -37,6 +38,11 @@ namespace TCGCards
         }
 
         public override string GetName() => Name;
+
+        public bool IsStadium()
+        {
+            return ability != null;
+        }
 
         public bool AddToDiscardWhenCasting
         {
@@ -68,13 +74,22 @@ namespace TCGCards
             }
         }
 
-
         public ObservableCollection<IEffect> Effects
         {
             get { return effects; }
             set
             {
                 effects = value;
+                FirePropertyChanged();
+            }
+        }
+
+        public Ability Ability
+        {
+            get { return ability; }
+            set
+            {
+                ability = value;
                 FirePropertyChanged();
             }
         }
