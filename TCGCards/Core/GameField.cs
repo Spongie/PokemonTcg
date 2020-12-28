@@ -28,7 +28,7 @@ namespace TCGCards.Core
             Players = new List<Player>();
             playersSetStartBench = new HashSet<NetworkId>();
             DamageStoppers = new List<DamageStopper>();
-            TemporaryPassiveAbilities = new List<PassiveAbility>();
+            TemporaryPassiveAbilities = new List<Ability>();
             GameState = GameFieldState.WaitingForConnection;
             GameLog = new GameLog();
             forcedFlips = new Queue<bool>();
@@ -998,8 +998,22 @@ namespace TCGCards.Core
             }
 
             GameState = GameFieldState.TurnEnding;
-            TemporaryPassiveAbilities.ForEach(x => x.TurnsLeft--);
-            TemporaryPassiveAbilities = TemporaryPassiveAbilities.Where(x => x.TurnsLeft > 0 || !x.LimitedByTime).ToList();
+
+            var abilitiesToRemove = new List<Ability>();
+            foreach (var ability in TemporaryPassiveAbilities.OfType<PassiveAbility>())
+            {
+                ability.TurnsLeft--;
+
+                if (ability.TurnsLeft <= 0 && !ability.LimitedByTime)
+                {
+                    abilitiesToRemove.Add(ability);
+                }
+            }
+
+            foreach (var ability in abilitiesToRemove)
+            {
+                TemporaryPassiveAbilities.Remove(ability);
+            }
 
             ActivePlayer.EndTurn(this);
             ActivePlayer.TurnsTaken++;
@@ -1077,7 +1091,7 @@ namespace TCGCards.Core
                 passiveAbilities.Add((PassiveAbility)StadiumCard.Ability);
             }
 
-            passiveAbilities.AddRange(TemporaryPassiveAbilities);
+            passiveAbilities.AddRange(TemporaryPassiveAbilities.OfType<PassiveAbility>());
 
             if (passiveAbilities.Any(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers))
                 return new List<PassiveAbility>() { passiveAbilities.First(ability => ability.ModifierType == PassiveModifierType.NoPokemonPowers) };
@@ -1128,7 +1142,7 @@ namespace TCGCards.Core
         public Player NonActivePlayer { get; set; }
         public GameLog GameLog { get; set; } = new GameLog();
         public List<DamageStopper> DamageStoppers { get; set; }
-        public List<PassiveAbility> TemporaryPassiveAbilities { get; set; }
+        public List<Ability> TemporaryPassiveAbilities { get; set; }
         public bool PrizeCardsFaceUp { get; set; }
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }

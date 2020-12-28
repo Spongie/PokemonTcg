@@ -121,8 +121,16 @@ namespace CardEditor.Views
             {
                 try
                 {
-                    var effect = (AttachmentEffect)DataContext; 
-                    effect.Ability = avilityDialog.SelectedAbility;
+                    if (DataContext is AttachmentEffect)
+                    {
+                        var effect = (AttachmentEffect)DataContext;
+                        effect.Ability = avilityDialog.SelectedAbility;
+                    }
+                    else if (DataContext is CreateAbilityOnGameEffect)
+                    {
+                        var effect = (CreateAbilityOnGameEffect)DataContext;
+                        effect.Ability = avilityDialog.SelectedAbility;
+                    }
                 }
                 catch (Exception e)
                 {

@@ -464,12 +464,14 @@ namespace TCGCards
         {
             var abilities = new List<Ability>();
             var areAbilitiesBlocked = game == null ? false : game.IsAbilitiesBlocked();
-            
+
+
             if (Ability != null && game != null && !areAbilitiesBlocked && Ability.CanActivate(game, caster, opponent))
             {
                 abilities.Add(Ability);
             }
 
+            abilities.AddRange(game.TemporaryPassiveAbilities);
             abilities.AddRange(TemporaryAbilities.Where(x => x.CanActivate(game, caster, opponent)).ToList());
 
             return abilities;

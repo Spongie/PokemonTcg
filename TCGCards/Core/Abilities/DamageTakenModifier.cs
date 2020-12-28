@@ -8,6 +8,7 @@ namespace TCGCards.Core.Abilities
         private float modifer;
         private bool roundDown;
         private bool onlyPreventBasic;
+        private string attackerName;
 
         [DynamicInput("Round down?", InputControl.Boolean)]
         public bool RoundDown
@@ -43,6 +44,18 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        [DynamicInput("Only apply for attackers with name")]
+        public string AttackerName
+        {
+            get { return attackerName; }
+            set
+            {
+                attackerName = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public DamageTakenModifier() :this(null)
         {
 
@@ -60,6 +73,11 @@ namespace TCGCards.Core.Abilities
 
         public int GetModifiedDamage(int damageTaken, PokemonCard damageSource, GameField game)
         {
+            if (!string.IsNullOrEmpty(AttackerName) && damageSource != null && !damageSource.Name.ToLower().Contains(AttackerName.ToLower()))
+            {
+                return damageTaken;
+            }
+
             if (OnlyPreventFromBasic && damageSource != null && damageSource.Stage > 0)
             {
                 return damageTaken;
