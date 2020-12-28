@@ -74,6 +74,10 @@
                 <TextBox Text="{Binding MaxCardsInHand}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
+                <Label Content="Max basics in hand to cast" MinWidth="150"/>
+                <TextBox Text="{Binding MaxBasicInHand}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
                 <Label Content="Max benched to cast" MinWidth="150"/>
                 <TextBox Text="{Binding MaxBenchedPokemon}"/>
             </DockPanel>

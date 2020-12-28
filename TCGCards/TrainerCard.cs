@@ -12,6 +12,7 @@ namespace TCGCards
         private int maxCardsInHand = 99;
         private int maxBenchedPokemon = 99;
         private Ability ability;
+        private int maxBasicPokemonInHand = 99;
 
         public TrainerCard() : base(null)
         {
@@ -34,7 +35,8 @@ namespace TCGCards
         {
             return Effects.All(effect => effect.CanCast(game, caster, opponent))
                 && caster.Hand.Count < MaxCardsInHand
-                && caster.BenchedPokemon.Count < MaxBenchedPokemon;
+                && caster.BenchedPokemon.Count < MaxBenchedPokemon
+                && caster.Hand.OfType<PokemonCard>().Count(p => p.Stage == 0) < MaxBasicInHand;
         }
 
         public override string GetName() => Name;
@@ -73,6 +75,17 @@ namespace TCGCards
                 FirePropertyChanged();
             }
         }
+
+        public int MaxBasicInHand
+        {
+            get { return maxBasicPokemonInHand; }
+            set
+            {
+                maxBasicPokemonInHand = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public ObservableCollection<IEffect> Effects
         {
