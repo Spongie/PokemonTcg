@@ -79,7 +79,7 @@ namespace Assets.Code
         private Dictionary<NetworkId, NetworkId> energyPokemonMap;
         private EnergyCard currentEnergyCard;
         private PokemonCard currentEvolvingCard;
-        private IDeckFilter currentDeckFilter;
+        private List<IDeckFilter> currentDeckFilter;
         public List<string> gameLog = new List<string>();
         public ISpecialStateHandler currentClickHandler;
 
@@ -90,6 +90,7 @@ namespace Assets.Code
             energyCardsToAttach = new Queue<EnergyCard>();
             energyPokemonMap = new Dictionary<NetworkId, NetworkId>();
             cardRenderers = new Dictionary<NetworkId, CardRenderer>();
+            currentDeckFilter = new List<IDeckFilter>();
             RegisterClickHandlers();
         }
 
@@ -134,7 +135,7 @@ namespace Assets.Code
 
         private void OnDiscardCardSelected(CardRenderer card)
         {
-            if (currentDeckFilter != null && !currentDeckFilter.IsCardValid(card.card) || !Player.Hand.Contains(card.card))
+            if (currentDeckFilter != null && !currentDeckFilter.All(f => f.IsCardValid(card.card)) || !Player.Hand.Contains(card.card))
             {
                 return;
             }
@@ -211,7 +212,7 @@ namespace Assets.Code
 
         private void OnSelectPokemonWithFilter(CardRenderer clickedCard)
         {
-            if (currentDeckFilter == null || currentDeckFilter.IsCardValid(clickedCard.card))
+            if (currentDeckFilter == null || currentDeckFilter.All(f => f.IsCardValid(clickedCard.card)))
             {
                 if (minSelectedCardCount == 1 && maxSelectedCardCount == 1)
                 {
@@ -219,7 +220,7 @@ namespace Assets.Code
                     NetworkManager.Instance.SendToServer(message, true);
                     SpecialState = SpecialGameState.None;
                     infoText.text = string.Empty;
-
+                    currentDeckFilter.Clear();
                     return;
                 }
 
@@ -448,23 +449,23 @@ namespace Assets.Code
             if (!string.IsNullOrWhiteSpace(selectMessage.Info))
             {
                 infoText.text = selectMessage.Info;
-                currentDeckFilter = new PokemonOwnerAndTypeFilter(myId);
+                currentDeckFilter.Add(new PokemonOwnerAndTypeFilter(myId));
             }
             else if (selectMessage.TargetTypes.Any())
             {
                 var typeText = string.Join(" ", selectMessage.TargetTypes.Select(type => Enum.GetName(typeof(EnergyTypes), type)));
                 infoText.text = $"Select one of your {typeText} Pokémon";
-                currentDeckFilter = new PokemonOwnerAndTypeFilter(myId, selectMessage.TargetTypes[0]);
+                currentDeckFilter.Add(new PokemonOwnerAndTypeFilter(myId, selectMessage.TargetTypes[0]));
             }
             else
             {
                 infoText.text = "Select one of your Pokémon";
-                currentDeckFilter = new PokemonOwnerAndTypeFilter(myId);
+                currentDeckFilter.Add(new PokemonOwnerAndTypeFilter(myId));
             }
 
             if (selectMessage.Filter != null)
             {
-                currentDeckFilter = selectMessage.Filter;
+                currentDeckFilter.Add(selectMessage.Filter);
             }
         }
 
@@ -512,7 +513,7 @@ namespace Assets.Code
             SpecialState = SpecialGameState.DiscardingCards;
             minSelectedCardCount = discardMessage.MinCount;
             maxSelectedCardCount = discardMessage.Count;
-            currentDeckFilter = discardMessage.Filters.FirstOrDefault();
+            currentDeckFilter.AddRange(discardMessage.Filters);
 
             EnableButtons();
 
@@ -715,6 +716,7 @@ namespace Assets.Code
             minSelectedCardCount = minCount;
             maxSelectedCardCount = maxCount;
             SpecialState = SpecialGameState.SelectingYourBenchedPokemon;
+            currentDeckFilter.Add(selectYourPokemon.Filter);
             EnableButtons();
 
             if (!string.IsNullOrEmpty(selectYourPokemon.Info))
@@ -737,6 +739,7 @@ namespace Assets.Code
             minSelectedCardCount = minCount;
             maxSelectedCardCount = maxCount;
             SpecialState = SpecialGameState.SelectingOpponentsBenchedPokemon;
+            currentDeckFilter.Add(selectOpponentsMessage.Filter);
             EnableButtons();
 
             if (!string.IsNullOrEmpty(selectOpponentsMessage.Info))
@@ -758,6 +761,7 @@ namespace Assets.Code
             var minCount = selectOpponentMessage.MinCount;
             minSelectedCardCount = minCount;
             maxSelectedCardCount = maxCount;
+            currentDeckFilter.Add(selectOpponentMessage.Filter);
 
             SpecialState = SpecialGameState.SelectingOpponentsPokemon;
             EnableButtons();
@@ -823,7 +827,7 @@ namespace Assets.Code
 
         private void SelectedOpponentPokemon(CardRenderer cardController)
         {
-            if (cardController.card.Owner.Id.Equals(myId) || !(cardController.card is PokemonCard))
+            if (cardController.card.Owner.Id.Equals(myId) || !(cardController.card is PokemonCard) || currentDeckFilter.All(f => f.IsCardValid(cardController.card)))
             {
                 return;
             }
@@ -833,7 +837,9 @@ namespace Assets.Code
 
         private void SelectedOpponentBenchedPokemon(CardRenderer cardController)
         {
-            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) || !(cardController.card is PokemonCard))
+            if (!opponentBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) 
+                || !(cardController.card is PokemonCard)
+                || currentDeckFilter.All(f => f.IsCardValid(cardController.card)))
             {
                 return;
             }
@@ -843,7 +849,9 @@ namespace Assets.Code
 
         private void SelectedPlayerBenchedPokemon(CardRenderer cardController)
         {
-            if (!playerBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) || !(cardController.card is PokemonCard))
+            if (!playerBench.GetComponentsInChildren<CardRenderer>().Any(controller => controller.card.Id.Equals(cardController.card.Id)) 
+                || !(cardController.card is PokemonCard)
+                || currentDeckFilter.All(f => f.IsCardValid(cardController.card)))
             {
                 return;
             }
@@ -947,6 +955,7 @@ namespace Assets.Code
                 NetworkManager.Instance.SendToServer(message, true);
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
+                currentDeckFilter.Clear();
             }
             else if (SpecialState == SpecialGameState.SelectingOpponentsBenchedPokemon
             || SpecialState == SpecialGameState.SelectingYourBenchedPokemon
@@ -967,6 +976,7 @@ namespace Assets.Code
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
                 selectedCards.Clear();
+                currentDeckFilter.Clear();
             }
 
             NetworkManager.Instance.RespondingTo = null;
