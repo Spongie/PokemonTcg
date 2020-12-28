@@ -707,12 +707,13 @@ namespace TCGCards.Core
             SendEventToPlayers(trainerEvent);
 
             trainerCard.Process(this, ActivePlayer, NonActivePlayer);
-            StadiumCard = trainerCard;
 
-            if (trainerCard.AddToDiscardWhenCasting)
+            if (StadiumCard != null)
             {
-                ActivePlayer.DiscardPile.Add(trainerCard);
+                StadiumCard.Owner.DiscardPile.Add(StadiumCard);
             }
+
+            StadiumCard = trainerCard;
 
             CurrentTrainerCard = null;
 
