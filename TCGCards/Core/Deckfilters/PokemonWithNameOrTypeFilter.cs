@@ -10,10 +10,16 @@ namespace TCGCards.Core.Deckfilters
 
         }
 
-        public PokemonWithNameOrTypeFilter(string names, EnergyTypes type)
+        public PokemonWithNameOrTypeFilter(string names, EnergyTypes type) :this(names, type, false)
+        {
+
+        }
+
+        public PokemonWithNameOrTypeFilter(string names, EnergyTypes type, bool onlyBasic)
         {
             Names = names;
             Type = type;
+            OnlyBasic = onlyBasic;
         }
 
         public string Names { get; set; }

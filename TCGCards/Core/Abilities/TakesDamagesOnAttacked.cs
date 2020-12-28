@@ -36,7 +36,7 @@ namespace TCGCards.Core.Abilities
             if (attackBack)
             {
                 var baseDamage = DamageReturned > 0 ? DamageReturned : damageTaken;
-                var damage = DamageCalculator.GetDamageAfterWeaknessAndResistance((int)(baseDamage * attackBackModifier), PokemonOwner, opponent.ActivePokemonCard, null);
+                var damage = DamageCalculator.GetDamageAfterWeaknessAndResistance((int)(baseDamage * attackBackModifier), PokemonOwner, opponent.ActivePokemonCard, null, game.FindResistanceModifier());
                 opponent.ActivePokemonCard.DealDamage(damage, game, PokemonOwner, true);
             }
             {

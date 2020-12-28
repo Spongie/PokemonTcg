@@ -20,6 +20,7 @@ namespace TCGCards.TrainerEffects
         private bool checkTails;
         private bool allowUseWithoutTarget;
         private bool askYesNo;
+        private string onlyWithLikeName;
 
         [DynamicInput("Ask Yes/No", InputControl.Boolean)]
         public bool MayAbility
@@ -110,6 +111,17 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Only with name ")]
+        public string OnlyWithNameLike
+        {
+            get { return onlyWithLikeName; }
+            set
+            {
+                onlyWithLikeName = value;
+                FirePropertyChanged();
+            }
+        }
+
         public string EffectType
         {
             get
@@ -139,7 +151,7 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
@@ -161,7 +173,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            if (Targeting.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard).All(x => x.AttachedEnergy.Count == 0))
+            if (Targeting.GetPossibleTargetsFromMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard, OnlyWithNameLike).All(x => x.AttachedEnergy.Count == 0))
             {
                 return;
             }
@@ -170,7 +182,7 @@ namespace TCGCards.TrainerEffects
 
             while (true)
             {
-                PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+                PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard, string.Empty, OnlyWithNameLike);
 
                 if (target.AttachedEnergy.Count == 0)
                 {

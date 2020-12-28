@@ -558,7 +558,7 @@ namespace TCGCards.Core
         private void DealDamageWithAttack(Attack attack)
         {
             Damage damage = attack.GetDamage(ActivePlayer, NonActivePlayer, this);
-            damage.NormalDamage = DamageCalculator.GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard, attack);
+            damage.NormalDamage = DamageCalculator.GetDamageAfterWeaknessAndResistance(damage.NormalDamage, ActivePlayer.ActivePokemonCard, NonActivePlayer.ActivePokemonCard, attack, FindResistanceModifier());
 
             if (DamageStoppers.Any(x => x.IsDamageIgnored(damage.NormalDamage + damage.DamageWithoutResistAndWeakness)))
             {
@@ -578,6 +578,11 @@ namespace TCGCards.Core
                 TriggerAbilityOfType(TriggerType.TakesDamage, NonActivePlayer.ActivePokemonCard, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
                 TriggerAbilityOfType(TriggerType.DealsDamage, ActivePlayer.ActivePokemonCard, damage.NormalDamage + damage.DamageWithoutResistAndWeakness);
             }
+        }
+
+        public IResistanceModifier FindResistanceModifier()
+        {
+            return GetAllPassiveAbilities().OfType<IResistanceModifier>().FirstOrDefault();
         }
 
         private void HitItselfInConfusion()
@@ -1134,6 +1139,9 @@ namespace TCGCards.Core
         public bool LastCoinFlipResult { get; set; }
         public int LastCoinFlipHeadCount { get; set; }
         
+        [JsonIgnore]
+        public PokemonCard LastTarget { get; set; }
+
         [JsonIgnore]
         public Dictionary<NetworkId, Card> Cards { get; set; } = new Dictionary<NetworkId, Card>();
         

@@ -17,6 +17,7 @@ namespace TCGCards
         private int retreatCost;
         private EnergyTypes weakness;
         private EnergyTypes resistance;
+        private int resistanceAmount = 30;
         private string evolvesFrom;
         private int stage;
         private ObservableCollection<Attack> attacks = new ObservableCollection<Attack>();
@@ -95,6 +96,17 @@ namespace TCGCards
                 FirePropertyChanged();
             }
         }
+
+        public int ResistanceAmount
+        {
+            get { return resistanceAmount; }
+            set
+            {
+                resistanceAmount = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EvolvesFrom
         {

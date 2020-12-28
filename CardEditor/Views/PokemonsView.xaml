@@ -104,6 +104,10 @@
                 <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Card.Resistance}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
+                <Label Content="Amount" MinWidth="80"/>
+                <TextBox Text="{Binding Card.ResistanceAmount}"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
                 <Label Content="Weakness" MinWidth="80"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource energyTypes}}" SelectedItem="{Binding Card.Weakness}"/>
             </DockPanel>

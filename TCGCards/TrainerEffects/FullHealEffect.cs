@@ -8,6 +8,7 @@ namespace TCGCards.TrainerEffects
     public class FullHealEffect : DataModel, IEffect
     {
         private TargetingMode targetingMode;
+        private bool useLastTarget;
 
         [DynamicInput("Targeting type", InputControl.Dropdown, typeof(TargetingMode))]
         public TargetingMode TargetingMode
@@ -16,6 +17,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 targetingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Use last target", InputControl.Boolean)]
+        public bool UseLastTarget
+        {
+            get { return useLastTarget; }
+            set
+            {
+                useLastTarget = value;
                 FirePropertyChanged();
             }
         }
@@ -37,7 +49,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+            PokemonCard target = UseLastTarget ? game.LastTarget : Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
             
             if (target == null)
             {

@@ -9,6 +9,7 @@ namespace TCGCards.Core.Abilities
         private int amount;
         private bool worksOnSelf;
         private bool onlyForYou;
+        private string onlyWithLikeName;
 
         public RetreatCostModifierAbility() : this(null)
         {
@@ -53,8 +54,23 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        [DynamicInput("Only with name ")]
+        public string OnlyWithNameLike
+        {
+            get { return onlyWithLikeName; }
+            set
+            {
+                onlyWithLikeName = value;
+                FirePropertyChanged();
+            }
+        }
+
         public virtual bool IsActive(GameField game)
         {
+            if (!string.IsNullOrEmpty(OnlyWithNameLike) && !game.ActivePlayer.ActivePokemonCard.Name.ToLower().Contains(OnlyWithNameLike.ToLower()))
+            {
+                return false;
+            }
             if (onlyForYou && !game.ActivePlayer.Id.Equals(PokemonOwner.Owner.Id))
             {
                 return false;

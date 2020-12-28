@@ -8,6 +8,7 @@ namespace TCGCards.Core.Abilities
         private float modifer;
         private bool roundDown;
         private bool onlyIfAnyDamage;
+        private bool coinFlip;
 
         [DynamicInput("Only add damage if any damage", InputControl.Boolean)]
         public bool OnlyIfAnyDamage
@@ -43,6 +44,17 @@ namespace TCGCards.Core.Abilities
             }
         }
 
+        [DynamicInput("Coin Flip", InputControl.Boolean)]
+        public bool CoinFlip
+        {
+            get { return coinFlip; }
+            set
+            {
+                coinFlip = value;
+                FirePropertyChanged();
+            }
+        }
+
         public DealDamageModifier() : this(null)
         {
 
@@ -55,13 +67,23 @@ namespace TCGCards.Core.Abilities
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
-
+            foreach (var effect in Effects)
+            {
+                effect.Process(game, owner, opponent, PokemonOwner);
+            }
         }
 
         public int GetModifiedDamage(int damageDone, GameField game)
         {
+            if (CoinFlip && game.FlipCoins(1) == 0)
+            {
+                Activate(game.ActivePlayer, game.NonActivePlayer, damageDone, game);
+                return damageDone;
+            }
+
             if (damageDone == 0 && OnlyIfAnyDamage)
             {
+                Activate(game.ActivePlayer, game.NonActivePlayer, damageDone, game);
                 return damageDone;
             }
 
@@ -79,6 +101,7 @@ namespace TCGCards.Core.Abilities
                 }
             }
 
+            Activate(game.ActivePlayer, game.NonActivePlayer, damageDone, game);
             return (int)Math.Max(damageWithPrevention, 0);
         }
     }

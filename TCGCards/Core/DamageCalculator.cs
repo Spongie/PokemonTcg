@@ -1,10 +1,11 @@
 ﻿using System;
+using TCGCards.Core.Abilities;
 
 namespace TCGCards.Core
 {
     public static class DamageCalculator
     {
-        public static int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender, Attack attack)
+        public static int GetDamageAfterWeaknessAndResistance(int damage, PokemonCard attacker, PokemonCard defender, Attack attack, IResistanceModifier resistanceModifier)
         {
             var realDamage = damage;
 
@@ -15,7 +16,13 @@ namespace TCGCards.Core
 
             if (attack.ApplyResistance && defender.Resistance == attacker.Type)
             {
-                realDamage -= 30;
+                if (resistanceModifier != null)
+                {
+                    realDamage -= resistanceModifier.GetModifiedResistance(attacker, defender);
+                }
+                {
+                    realDamage -= defender.ResistanceAmount;
+                }
             }
             if (attack.ApplyWeakness &&  defender.Weakness == attacker.Type)
             {

@@ -17,6 +17,8 @@ namespace TCGCards.TrainerEffects
         private bool askYesNo;
         private EnergyTypes energyType;
         private int energyToDiscard;
+        private bool useLastCoin;
+        private bool checkTails;
 
         [DynamicInput("Ask Yes/No", InputControl.Boolean)]
         public bool MayAbility
@@ -95,6 +97,27 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Use last coin flip?", InputControl.Boolean)]
+        public bool UseLastCoin
+        {
+            get { return useLastCoin; }
+            set
+            {
+                useLastCoin = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Trigger on tails instead?", InputControl.Boolean)]
+        public bool CheckTails
+        {
+            get { return checkTails; }
+            set
+            {
+                checkTails = value;
+                FirePropertyChanged();
+            }
+        }
 
         public string EffectType
         {
@@ -141,7 +164,14 @@ namespace TCGCards.TrainerEffects
                 }
             }
 
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            var targetValue = CheckTails ? 0 : 1;
+            var lastValue = game != null && game.LastCoinFlipResult ? 1 : 0;
+
+            if (UseLastCoin && lastValue != targetValue)
+            {
+                return;
+            }
+            else if (CoinFlip && game.FlipCoins(1) != targetValue)
             {
                 return;
             }
@@ -157,7 +187,7 @@ namespace TCGCards.TrainerEffects
 
             if (ApplyWeaknessResistance)
             {
-                damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null);
+                damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null, game.FindResistanceModifier());
             }
             else
             {

@@ -1,55 +1,77 @@
-﻿using NetworkingCore;
+﻿using Entities;
+using NetworkingCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.Deckfilters;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects.Util
 {
     public static class Targeting
     {
-        public static List<PokemonCard> GetPossibleTargetsFromMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner)
+        public static List<PokemonCard> GetPossibleTargetsFromMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner, string nameFilter = "")
         {
+            var pokemons = new List<PokemonCard>();
             switch (targetingMode)
             {
                 case TargetingMode.YourActive:
-                    return new List<PokemonCard> { caster.ActivePokemonCard };
+                    pokemons.Add(caster.ActivePokemonCard);
+                    break;
                 case TargetingMode.YourBench:
-                    return caster.BenchedPokemon.ValidPokemonCards.ToList();
+                    pokemons = caster.BenchedPokemon.ValidPokemonCards.ToList();
+                    break;
                 case TargetingMode.YourPokemon:
-                    return caster.GetAllPokemonCards();
+                    pokemons = caster.GetAllPokemonCards();
+                    break;
                 case TargetingMode.OpponentActive:
                     {
                         if (game.CurrentDefender != null)
                         {
-                            return new List<PokemonCard> { game.CurrentDefender };
+                            pokemons.Add(game.CurrentDefender);
                         }
-
-                        return new List<PokemonCard> { opponent.ActivePokemonCard };
+                        else
+                        {
+                            pokemons.Add(opponent.ActivePokemonCard);
+                        }
+                        break;
                     }
                 case TargetingMode.OpponentBench:
-                    return opponent.BenchedPokemon.ValidPokemonCards.ToList();
+                    pokemons = opponent.BenchedPokemon.ValidPokemonCards.ToList();
+                    break;
                 case TargetingMode.OpponentPokemon:
-                    return opponent.GetAllPokemonCards();
+                    pokemons = opponent.GetAllPokemonCards();
+                    break;
                 case TargetingMode.AnyPokemon:
-                    var pokemons = caster.GetAllPokemonCards();
+                    pokemons = caster.GetAllPokemonCards();
                     pokemons.AddRange(opponent.GetAllPokemonCards());
-                    return pokemons;
+                    break;
                 case TargetingMode.AttachedTo:
-                    return new List<PokemonCard> { pokemonOwner };
+                    pokemons.Add(pokemonOwner);
+                    break;
                 case TargetingMode.Self:
-                    return new List<PokemonCard> { pokemonOwner };
+                    pokemons.Add(pokemonOwner);
+                    break;
                 default:
-                    return new List<PokemonCard> { pokemonOwner };
+                    pokemons.Add(pokemonOwner);
+                    break;
             }
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                return pokemons.Where(p => p.Name.ToLower().Contains(nameFilter.ToLower())).ToList();
+            }
+
+            return pokemons;
         }
 
-        public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner, string info = "")
+        public static PokemonCard AskForTargetFromTargetingMode(TargetingMode targetingMode, GameField game, Player caster, Player opponent, PokemonCard pokemonOwner, string info = "", string nameFilter = "")
         {
             PokemonCard target;
             NetworkMessage message;
             NetworkId selectedId;
+            IDeckFilter filter = !string.IsNullOrEmpty(nameFilter) ? new PokemonWithNameOrTypeFilter(nameFilter, EnergyTypes.All) : null;
 
             switch (targetingMode)
             {
@@ -68,12 +90,12 @@ namespace TCGCards.TrainerEffects.Util
                     {
                         return caster.BenchedPokemon.GetFirst();
                     }
-                    message = new SelectFromYourBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
+                    message = new SelectFromYourBenchMessage(1) { Info = info, Filter = filter }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.YourPokemon:
-                    message = new SelectFromYourPokemonMessage() { Info = info }.ToNetworkMessage(game.Id);
+                    message = new SelectFromYourPokemonMessage() { Info = info, Filter = filter }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.Cards[selectedId];
                     break;
@@ -90,20 +112,25 @@ namespace TCGCards.TrainerEffects.Util
                         return opponent.BenchedPokemon.GetFirst();
                     }
 
-                    message = new SelectFromOpponentBenchMessage(1) { Info = info }.ToNetworkMessage(game.Id);
+                    message = new SelectFromOpponentBenchMessage(1) { Info = info, Filter = filter }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.OpponentPokemon:
-                    message = new SelectOpponentPokemonMessage(1) { Info = info }.ToNetworkMessage(game.Id);
+                    message = new SelectOpponentPokemonMessage(1) { Info = info, Filter = filter }.ToNetworkMessage(game.Id);
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.Cards[selectedId];
                     break;
                 case TargetingMode.AnyPokemon:
-                    throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in CardUtil");
+                    throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in Targeting");
                 default:
                     target = caster.ActivePokemonCard;
                     break;
+            }
+
+            if (game != null)
+            {
+                game.LastTarget = target;
             }
 
             return target;
