@@ -1,10 +1,14 @@
-﻿using Entities.Models;
+﻿using CardEditor.Views;
+using Entities.Models;
 using TCGCards.Core;
 
 namespace TCGCards.TrainerEffects
 {
     public class RevealHandsEffect : DataModel, IEffect
     {
+        private bool youReveal = true;
+        private bool opponentReveal = true;
+
         public string EffectType
         {
             get
@@ -12,6 +16,29 @@ namespace TCGCards.TrainerEffects
                 return "Reveal hands";
             }
         }
+
+        [DynamicInput("You Reveals", InputControl.Boolean)]
+        public bool YouReveal
+        {
+            get { return youReveal; }
+            set
+            {
+                youReveal = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Opponent Reveals", InputControl.Boolean)]
+        public bool OpponentReveal
+        {
+            get { return opponentReveal; }
+            set
+            {
+                opponentReveal = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
@@ -25,8 +52,14 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            opponent.RevealCards(caster.Hand);
-            caster.RevealCards(opponent.Hand);
+            if (OpponentReveal)
+            {
+                caster.RevealCards(opponent.Hand);
+            }
+            if (YouReveal)
+            {
+                opponent.RevealCards(caster.Hand);
+            }
         }
     }
 }
