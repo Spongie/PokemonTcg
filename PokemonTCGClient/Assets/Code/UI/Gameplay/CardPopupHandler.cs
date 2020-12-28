@@ -26,7 +26,17 @@ namespace Assets.Code.UI.Gameplay
         {
             attackButtons = new List<GameObject>();
             this.card = card;
-            var player = GameController.Instance.Player ?? new Player() { ActivePokemonCard = (PokemonCard)card };
+            Player player;
+
+            if (card is PokemonCard)
+            {
+                player = GameController.Instance.Player ?? new Player() { ActivePokemonCard = (PokemonCard)card };
+            }
+            else
+            {
+                player = GameController.Instance.Player ?? new Player();
+            }
+
             AddToBenchButton.SetActive(card is PokemonCard && player.BenchedPokemon.Count < GameField.BenchMaxSize && player.Hand.Contains(card) && ((PokemonCard)card).Stage == 0);
 
             if (card is PokemonCard)
@@ -71,6 +81,23 @@ namespace Assets.Code.UI.Gameplay
                     ActivateAbilityButton.SetActive(false);
                 }
             }
+            else if (card is TrainerCard)
+            {
+                var trainerCard = (TrainerCard)card;
+
+                if (trainerCard.Ability == null || trainerCard.Ability.TriggerType != TriggerType.Activation)
+                {
+                    gameObject.SetActive(false);
+                    return;
+                }
+
+                ActivateAbilityButton.SetActive(true);
+                var abilityButton = ActivateAbilityButton.GetComponent<AbilityButton>();
+                abilityButton.gameObject.transform.SetAsFirstSibling();
+                abilityButton.Init(trainerCard.Ability);
+                EvolveButton.SetActive(false);
+                RetreatButton.SetActive(false);
+            }
             else
             {
                 ActivateAbilityButton.SetActive(false);
@@ -111,7 +138,18 @@ namespace Assets.Code.UI.Gameplay
 
         public void OnAbilityClick()
         {
-            NetworkManager.Instance.gameService.ActivateAbility(GameController.Instance.gameField.Id, ((PokemonCard)card).Ability.Id);
+            Ability ability;
+
+            if (card is PokemonCard)
+            {
+                ability = ((PokemonCard)card).Ability;
+            }
+            else
+            {
+                ability = ((TrainerCard)card).Ability;
+            }
+
+            NetworkManager.Instance.gameService.ActivateAbility(GameController.Instance.gameField.Id, ability.Id);
             gameObject.SetActive(false);
             ClearAttackButtons();
         }

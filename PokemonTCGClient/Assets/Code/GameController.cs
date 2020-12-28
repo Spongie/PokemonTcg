@@ -50,6 +50,7 @@ namespace Assets.Code
         public Text winnerText;
         public PilesInfoHandler playerInfoHandler;
         public PilesInfoHandler opponentInfoHandler;
+        public CardRenderer stadiumCard;
 
         internal void AddCard(CardRenderer card)
         {
@@ -364,7 +365,8 @@ namespace Assets.Code
         private void OnCardsRevealed(object message, NetworkId arg2)
         {
             var revealMessage = (RevealCardsMessage)message;
-
+            NetworkManager.Instance.RespondingTo = arg2;
+            SpecialState = SpecialGameState.LookingAtRevealedCards;
             selectFromListPanel.SetActive(true);
             selectFromListPanel.GetComponent<SelectFromListPanel>().InitView(revealMessage.Cards);
             infoText.text = "Look at the revealed cards!";
@@ -525,7 +527,7 @@ namespace Assets.Code
             }
             else if (minSelectedCardCount != maxSelectedCardCount)
             {
-                string cardsText = minSelectedCardCount > 1 ? "cards" : "card";
+                string cardsText = maxSelectedCardCount > 1 ? "cards" : "card";
                 infoText.text = $"Discard up to {maxSelectedCardCount} {cardsText} from your hand";
             }
             else
@@ -793,13 +795,25 @@ namespace Assets.Code
                 return;
             }
 
+            if (cardController.card == null)
+            {
+                return;
+            }
+
             if (cardController.card is EnergyCard)
             {
                 StartAttachingEnergy((EnergyCard)cardController.card);
             }
             else if (cardController.card is TrainerCard)
             {
-                NetworkManager.Instance.gameService.PlayCard(gameField.Id, cardController.card.Id);
+                if (Player.Hand.Contains(cardController.card))
+                {
+                    NetworkManager.Instance.gameService.PlayCard(gameField.Id, cardController.card.Id);
+                }
+                else
+                {
+                    cardController.DisplayPopup();
+                }
             }
             else
             {
@@ -911,6 +925,11 @@ namespace Assets.Code
                 SpecialState = SpecialGameState.None;
                 infoText.text = string.Empty;
             }
+            else if (SpecialState == SpecialGameState.LookingAtRevealedCards)
+            {
+                NetworkManager.Instance.RespondingTo = null;
+                return;
+            }
             else if (SpecialState == SpecialGameState.SelectingOpponentsPokemon || 
                 SpecialState == SpecialGameState.SelectPokemonMatchingFilter)
             {
@@ -993,6 +1012,8 @@ namespace Assets.Code
             SetBenchedPokemon(playerBench, me.BenchedPokemon);
             SetBenchedPokemon(opponentBench, opponent.BenchedPokemon);
 
+            stadiumCard.SetCard(gameField.StadiumCard, false, false);
+
             EnableButtons();
         }
 
@@ -1033,6 +1054,8 @@ namespace Assets.Code
             IsMyTurn = gameInfo.ActivePlayer.Equals(myId);
             CurrentGameState = gameInfo.CurrentState;
             gameField.GameState = CurrentGameState;
+            stadiumCard.SetCard(gameInfo.StadiumCard, false, false);
+            gameField.StadiumCard = gameInfo.StadiumCard;
 
             if (!string.IsNullOrWhiteSpace(textInfo))
             {

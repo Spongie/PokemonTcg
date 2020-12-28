@@ -59,6 +59,15 @@ namespace Server.Services
                     }
                     pokemonCard.ReInitLists();
                 }
+                if (card is TrainerCard)
+                {
+                    var trainerCard = (TrainerCard)card;
+
+                    if (trainerCard.Ability != null)
+                    {
+                        trainerCard.Ability.Id = NetworkId.Generate();
+                    }
+                }
 
                 player.Deck.Cards.Push(card);
             }
@@ -100,6 +109,15 @@ namespace Server.Services
                         attack.Id = NetworkId.Generate();
                     }
                     pokemonCard.ReInitLists();
+                }
+                if (card is TrainerCard)
+                {
+                    var trainerCard = (TrainerCard)card;
+
+                    if (trainerCard.Ability != null)
+                    {
+                        trainerCard.Ability.Id = NetworkId.Generate();
+                    }
                 }
 
                 player.Deck.Cards.Push(card);

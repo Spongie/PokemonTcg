@@ -10,5 +10,6 @@ namespace TCGCards.Core.GameEvents
         public List<Card> CardsInMyHand { get; set; }
         public NetworkId ActivePlayer { get; set; }
         public GameFieldState CurrentState { get; set; }
+        public TrainerCard StadiumCard { get; set; }
     }
 }

@@ -102,6 +102,11 @@ namespace TCGCards.TrainerEffects
                 return true;
             }
 
+            if (AllowDiscardLess)
+            {
+                return true;
+            }
+
             return availableChoices.Count >= amount;
         }
 

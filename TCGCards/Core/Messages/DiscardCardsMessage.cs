@@ -5,7 +5,7 @@ namespace TCGCards.Core.Messages
 {
     public class DiscardCardsMessage : AbstractNetworkMessage
     {
-        public DiscardCardsMessage()
+        public DiscardCardsMessage() :this(0)
         {
 
         }

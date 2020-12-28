@@ -1,6 +1,6 @@
 ﻿namespace TCGCards.Core
 {
-    public readonly struct DiscardCardSettings
+    public struct DiscardCardSettings
     {
         public DiscardCardSettings(int amount, IDeckFilter[] filters, bool shuffleIntoDeck) :this(amount, amount, filters, shuffleIntoDeck)
         {
@@ -15,9 +15,9 @@
             ShuffleIntoDeck = shuffleIntoDeck;
         }
 
-        public int MinAmount { get; }
-        public int MaxAmount { get; }
-        public IDeckFilter[] Filters { get; }
-        public bool ShuffleIntoDeck { get; }
+        public int MinAmount { get; set; }
+        public int MaxAmount { get; set; }
+        public IDeckFilter[] Filters { get; set; }
+        public bool ShuffleIntoDeck { get; set; }
     }
 }

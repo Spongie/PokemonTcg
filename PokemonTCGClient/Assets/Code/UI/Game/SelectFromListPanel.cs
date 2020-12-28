@@ -148,6 +148,10 @@ namespace Assets.Code.UI.Game
             {
                 selectedCards?.Clear();
                 gameObject.SetActive(false);
+                if (GameController.Instance.SpecialState == SpecialGameState.LookingAtRevealedCards)
+                {
+                    NetworkManager.Instance.RespondingTo = null;
+                }
                 GameController.Instance.SpecialState = SpecialGameState.None;
                 return;
             }

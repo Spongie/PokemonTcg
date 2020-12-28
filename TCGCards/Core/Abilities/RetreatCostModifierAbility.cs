@@ -76,7 +76,8 @@ namespace TCGCards.Core.Abilities
                 return false;
             }
 
-            return base.CanActivate(game, PokemonOwner.Owner, game.GetOpponentOf(PokemonOwner.Owner));
+            var owner = GetActivator(game.ActivePlayer);
+            return base.CanActivate(game, owner, game.GetOpponentOf(owner));
         }
 
         public virtual HashSet<NetworkId> GetUnAffectedCards()

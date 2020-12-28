@@ -89,14 +89,14 @@ namespace Assets.Code
 
                     if (responseMapper.ContainsKey(message.ResponseTo))
                     {
+                        RespondingTo = message.RequiresResponse ? message.MessageId : null;
                         responseMapper[message.ResponseTo].Invoke(message.Data);
                         responseMapper.Remove(message.ResponseTo);
-                        RespondingTo = message.RequiresResponse ? message.MessageId : null;
                     }
                     if (messageConsumers.ContainsKey(message.MessageType))
                     {
-                        messageConsumers[message.MessageType].Invoke(message.Data, message.MessageId);
                         RespondingTo = message.RequiresResponse ? message.MessageId : null;
+                        messageConsumers[message.MessageType].Invoke(message.Data, message.MessageId);
                     }
                 }
             }
@@ -114,16 +114,16 @@ namespace Assets.Code
 
                     if (responseMapper.ContainsKey(item.ResponseTo))
                     {
-                        responseMapper[item.ResponseTo].Invoke(item.Data);
-                        responseMapper.Remove(item.ResponseTo);
                         handledMessages.Add(item.ResponseTo);
                         RespondingTo = item.RequiresResponse ? item.MessageId : null;
+                        responseMapper[item.ResponseTo].Invoke(item.Data);
+                        responseMapper.Remove(item.ResponseTo);
                     }
                     if (messageConsumers.ContainsKey(item.MessageType))
                     {
-                        messageConsumers[item.MessageType].Invoke(item.Data, item.MessageId);
                         handledMessages.Add(item.ResponseTo);
                         RespondingTo = item.RequiresResponse ? item.MessageId : null;
+                        messageConsumers[item.MessageType].Invoke(item.Data, item.MessageId);
                     }
                 }
 

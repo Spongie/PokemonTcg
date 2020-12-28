@@ -483,7 +483,8 @@ namespace TCGCards.Core
 
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} activates ability {ability.Name}");
 
-            SendEventToPlayers(new AbilityActivatedEvent() { PokemonId = ability.PokemonOwner.Id });
+            var activatorId = ability.PokemonOwner != null ? ability.PokemonOwner.Id : StadiumCard.Id;
+            SendEventToPlayers(new AbilityActivatedEvent() { PokemonId = activatorId });
             
             ability.Trigger(ActivePlayer, NonActivePlayer, 0, this);
 
@@ -776,7 +777,8 @@ namespace TCGCards.Core
                     Opponent = nonActivePlayer,
                     CardsInMyHand = ActivePlayer.Hand,
                     CurrentState = GameState,
-                    ActivePlayer = ActivePlayer.Id
+                    ActivePlayer = ActivePlayer.Id,
+                    StadiumCard = StadiumCard
                 };
             }
             else
@@ -787,7 +789,8 @@ namespace TCGCards.Core
                     Opponent = activePlayer,
                     CardsInMyHand = NonActivePlayer.Hand,
                     CurrentState = GameState,
-                    ActivePlayer = ActivePlayer.Id
+                    ActivePlayer = ActivePlayer.Id,
+                    StadiumCard = StadiumCard
                 };
             }
         }
@@ -961,8 +964,8 @@ namespace TCGCards.Core
                     continue;
                 }
 
-                var other = Players.First(player => !player.Id.Equals(ability.PokemonOwner.Owner));
-                if (ability.TriggerType == triggerType && ability.CanActivate(this, ability.PokemonOwner.Owner, other))
+                var other = Players.First(player => !player.Id.Equals(ability.GetActivator(ActivePlayer)));
+                if (ability.TriggerType == triggerType && ability.CanActivate(this, ability.GetActivator(ActivePlayer), other))
                 {
                     GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers...");
                     SendEventToPlayers(new AbilityActivatedEvent
@@ -1103,7 +1106,7 @@ namespace TCGCards.Core
                 return passiveAbilities.Where(x => x.Id.Equals(idOfStopper) || x.IsBuff).ToList();
             }
             
-            return passiveAbilities.Where(a => a.CanActivate(this, a.PokemonOwner.Owner, GetOpponentOf(a.PokemonOwner.Owner))).ToList();
+            return passiveAbilities.Where(a => a.CanActivate(this, a.GetActivator(ActivePlayer), GetOpponentOf(a.GetActivator(ActivePlayer)))).ToList();
         }
 
         public void PushGameLogUpdatesToPlayers()

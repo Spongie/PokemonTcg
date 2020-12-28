@@ -98,13 +98,21 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
 
     public void SetCard(Card card, bool spawnAttachedEnergy, bool isPreview = false)
     {
+        this.card = card;
+
+        if (card == null)
+        {
+            art.color = new Color(art.color.r, art.color.g, art.color.b, 0);
+            return;
+        }
+
+        art.color = new Color(art.color.r, art.color.g, art.color.b, 1);
+
         if (card is PokemonCard)
         {
             pokemon = (PokemonCard)card;
         }
 
-        this.card = card;
-        
         if (!isPreview)
         {
             GameController.Instance.AddCard(this);
