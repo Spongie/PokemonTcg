@@ -9,7 +9,7 @@ namespace TCGCards.TrainerEffects.Util
 {
     public static class CardUtil
     {
-        public static List<Card> GetCardsOfType(List<Card> cards, CardType cardType)
+        public static List<Card> GetCardsOfType(List<Card> cards, CardType cardType, EnergyTypes energyType = EnergyTypes.All)
         {
             switch (cardType)
             {
@@ -22,7 +22,7 @@ namespace TCGCards.TrainerEffects.Util
                 case CardType.Energy:
                     return cards.OfType<EnergyCard>().OfType<Card>().ToList();
                 case CardType.BasicEnergy:
-                    return cards.OfType<EnergyCard>().Where(energy => energy.IsBasic).OfType<Card>().ToList();
+                    return cards.OfType<EnergyCard>().Where(e => energyType == EnergyTypes.All || e.EnergyType == energyType).Where(energy => energy.IsBasic).OfType<Card>().ToList();
                 case CardType.Any:
                 default:
                     return cards;

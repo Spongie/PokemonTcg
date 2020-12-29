@@ -1,4 +1,5 @@
 ﻿using CardEditor.Views;
+using Entities;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace TCGCards.TrainerEffects
         private CardType cardType;
         private int amount = 1;
         private bool shuffleIntoDeck;
+        private EnergyTypes energyType = EnergyTypes.All;
+        private int flipCoinsForAmount = -1;
 
         [DynamicInput("Cards to pick up")]
         public int Amount
@@ -23,6 +26,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 amount = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Flip coins for amount")]
+        public int FlipCoinsForAmount
+        {
+            get { return flipCoinsForAmount; }
+            set
+            {
+                flipCoinsForAmount = value;
                 FirePropertyChanged();
             }
         }
@@ -37,6 +51,18 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
+
+        [DynamicInput("Energy Type", InputControl.Dropdown, typeof(EnergyTypes))]
+        public EnergyTypes EnergyType
+        {
+            get { return energyType; }
+            set
+            {
+                energyType = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Shuffle into deck", InputControl.Boolean)]
         public bool ShuffleIntoDeck
@@ -70,9 +96,16 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            List<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
+            int amount = FlipCoinsForAmount != -1 ? game.FlipCoins(FlipCoinsForAmount) : Amount;
 
-            var message = new PickFromListMessage(choices, 0, Amount).ToNetworkMessage(game.Id);
+            if (amount == 0)
+            {
+                return;
+            }
+
+            List<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType, EnergyType);
+
+            var message = new PickFromListMessage(choices, 0, amount).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;
             var cards = new List<Card>();
 
