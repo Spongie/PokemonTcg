@@ -74,22 +74,8 @@ namespace CardEditor.ViewModels
 
             foreach (var trainer in Serializer.Deserialize<List<TrainerCard>>(json))
             {
-                EffectMigrator(trainer.Effects);
                 TrainerCards.Add(trainer);
             }
-        }
-
-        public static void EffectMigrator(ObservableCollection<IEffect> effects)
-        {
-            //foreach (var e in effects)
-            //{
-            //    var prop = e.GetType().GetProperties().FirstOrDefault(x => x.PropertyType.Name == "CoinFlipConditional");
-
-            //    if (prop != null)
-            //    {
-            //        prop.SetValue(e, CoinFlipConditional.CreateFromObject(e));
-            //    }
-            //}
         }
 
         private void AddTrainerCard(object obj)

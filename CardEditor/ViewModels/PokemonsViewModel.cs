@@ -179,11 +179,6 @@ namespace CardEditor.ViewModels
 
 			foreach (var pokemon in Serializer.Deserialize<List<PokemonCard>>(json))
 			{
-                foreach (var attack in pokemon.Attacks)
-                {
-					TrainerCardsViewModel.EffectMigrator(attack.Effects);
-				}
-
 				PokemonCards.Add(new PokemonViewModel(pokemon));
 			}
 		}

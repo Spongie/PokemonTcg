@@ -76,8 +76,6 @@ namespace CardEditor.ViewModels
 
             foreach (var energy in Serializer.Deserialize<List<EnergyCard>>(json))
             {
-                TrainerCardsViewModel.EffectMigrator(energy.Effects);
-
                 EnergyCards.Add(energy);
             }
         }
