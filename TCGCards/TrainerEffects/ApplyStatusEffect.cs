@@ -9,41 +9,17 @@ namespace TCGCards.TrainerEffects
     public class ApplyStatusEffect : DataModel, IEffect
     {
         private StatusEffect statusEffect;
-        private bool flipCoin;
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
         private StatusEffect secondaryEffect = StatusEffect.None;
-        private bool useLastCoin;
-        private bool checkTails;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
-        [DynamicInput("Use last coin flip?", InputControl.Boolean)]
-        public bool UseLastCoin
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return useLastCoin; }
+            get { return coinflipConditional; }
             set
             {
-                useLastCoin = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Trigger on tails instead?", InputControl.Boolean)]
-        public bool CheckTails
-        {
-            get { return checkTails; }
-            set
-            {
-                checkTails = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Flip Coin?", InputControl.Boolean)]
-        public bool FlipCoin
-        {
-            get { return flipCoin; }
-            set
-            {
-                flipCoin = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -112,14 +88,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            var targetValue = CheckTails ? 0 : 1;
-            var lastValue = game != null && game.LastCoinFlipResult ? 1 : 0;
-
-            if (UseLastCoin && lastValue != targetValue)
-            {
-                return;
-            }
-            else if (flipCoin && game.FlipCoins(1) != targetValue)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

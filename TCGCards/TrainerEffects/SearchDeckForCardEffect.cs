@@ -4,6 +4,7 @@ using Entities.Models;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.GameEvents;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
@@ -14,6 +15,8 @@ namespace TCGCards.TrainerEffects
         private EnergyTypes energyType = EnergyTypes.None;
         private bool revealCard;
         private bool useLastDiscardCount;
+        private SearchDeckResult result = SearchDeckResult.PutInHand; 
+        private TargetingMode targetingMode;
 
         [DynamicInput("Card type", InputControl.Dropdown, typeof(CardType))]
         public CardType CardType
@@ -59,6 +62,28 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Result", InputControl.Dropdown, typeof(SearchDeckResult))]
+        public SearchDeckResult ResultType
+        {
+            get { return result; }
+            set
+            {
+                result = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Target", InputControl.Dropdown, typeof(TargetingMode))]
+        public TargetingMode TargetingMode
+        {
+            get { return targetingMode; }
+            set
+            {
+                targetingMode = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EffectType
         {
@@ -70,12 +95,20 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
+            switch (result)
+            {
+                case SearchDeckResult.PutOnBench:
+                    return caster.BenchedPokemon.Count < GameField.BenchMaxSize;
+                default:
+                    break;
+            }
+
             return caster.Deck.Cards.Count > 0;
         }
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
@@ -90,7 +123,41 @@ namespace TCGCards.TrainerEffects
                     card.RevealToAll();
                 }
 
-                caster.DrawCardsFromDeck(new List<Card> { card });
+                switch (result)
+                {
+                    case SearchDeckResult.PutInHand:
+                        caster.DrawCardsFromDeck(new List<Card> { card });
+                        break;
+                    case SearchDeckResult.PutInDiscard:
+                        {
+                            caster.Deck.Cards.Except(new[] { card });
+                            caster.DiscardPile.Add(card);
+                            caster.TriggerDiscardEvent(new List<Card>() { card });
+                        }
+                        break;
+                    case SearchDeckResult.PutOnBench:
+                        {
+                            caster.Deck.Cards.Except(new[] { card });
+                            int benchIndex = caster.BenchedPokemon.GetNextFreeIndex();
+                            caster.BenchedPokemon.Add((PokemonCard)card);
+                            game.SendEventToPlayers(new PokemonAddedToBenchEvent()
+                            {
+                                Player = caster.Id,
+                                Pokemon = (PokemonCard)card,
+                                Index = benchIndex
+                            });
+                        }
+                        break;
+                    case SearchDeckResult.AttachToTarget:
+                        {
+                            caster.Deck.Cards.Except(new[] { card });
+                            var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, pokemonSource);
+                            target.AttachEnergy((EnergyCard)card, game);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
 
             caster.Deck.Shuffle();

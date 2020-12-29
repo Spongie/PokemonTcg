@@ -24,8 +24,6 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-
-
         [DynamicInput("Coins to flip")]
         public int CoinsToFlip
         {

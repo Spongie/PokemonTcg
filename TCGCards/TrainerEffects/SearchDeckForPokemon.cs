@@ -6,11 +6,20 @@ using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Deckfilters;
 using TCGCards.Core.GameEvents;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
     public class SearchDeckForPokemon : DataModel, IEffect
     {
+        private bool addToBench;
+        private EnergyTypes energyType = EnergyTypes.None;
+        private string names;
+        private int amount;
+        private bool revealCard;
+        private bool evolveSource;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+
         public string EffectType
         {
             get
@@ -19,13 +28,16 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        private bool addToBench;
-        private EnergyTypes energyType = EnergyTypes.None;
-        private string names;
-        private int amount;
-        private bool coinFlip;
-        private bool revealCard;
-        private bool evolveSource;
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
+        {
+            get { return coinflipConditional; }
+            set
+            {
+                coinflipConditional = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Evolve user", InputControl.Boolean)]
         public bool EvolveSource
@@ -34,18 +46,6 @@ namespace TCGCards.TrainerEffects
             set
             {
                 evolveSource = value;
-                FirePropertyChanged();
-            }
-        }
-
-
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
-        {
-            get { return coinFlip; }
-            set
-            {
-                coinFlip = value;
                 FirePropertyChanged();
             }
         }
@@ -124,7 +124,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

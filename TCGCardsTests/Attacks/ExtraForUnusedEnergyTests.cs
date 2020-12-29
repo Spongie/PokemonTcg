@@ -663,7 +663,7 @@ namespace TCGCards.Attacks.Tests
                 {
                     Attacks = new ObservableCollection<Attack>
                     {
-                        
+
                     }
                 }
             };
@@ -773,6 +773,58 @@ namespace TCGCards.Attacks.Tests
             }
 
             Assert.Equal(expected, attack.GetDamage(player, opponent, new GameField()).NormalDamage);
+        }
+
+        [Theory]
+        [InlineData(1, 20)]
+        [InlineData(2, 40)]
+        [InlineData(3, 60)]
+        [InlineData(4, 80)]
+        [InlineData(5, 100)]
+        [InlineData(6, 120)]
+        public void GetDamage_Discard_Extra(int attached, int expected)
+        {
+            var opponentPokemon = new PokemonCard()
+            {
+                
+            };
+            var opponent = new Player
+            {
+                ActivePokemonCard = opponentPokemon
+            };
+            var attack = new ExtraForUnusedEnergy()
+            {
+                Damage = 20,
+                MaxExtraDamage = 265750,
+                AmountPerEnergy = 20,
+                EnergyType = EnergyTypes.Fire,
+                DiscardUnusedEnergy = true,
+                Cost = new ObservableCollection<Energy>
+                {
+                    new Energy(EnergyTypes.Fire, 1)
+                }
+            };
+
+            var player = new Player()
+            {
+                ActivePokemonCard = new PokemonCard()
+                {
+                    Attacks = new ObservableCollection<Attack>
+                    {
+                        attack
+                    }
+                }
+            };
+
+            player.ActivePokemonCard.Owner = player;
+
+            for (int i = 0; i < attached; i++)
+            {
+                player.ActivePokemonCard.AttachedEnergy.Add(new EnergyCard() { Amount = 1, EnergyType = EnergyTypes.Fire });
+            }
+
+            Assert.Equal(expected, attack.GetDamage(player, opponent, new GameField()).NormalDamage);
+            Assert.Single(player.ActivePokemonCard.AttachedEnergy);
         }
     }
 }

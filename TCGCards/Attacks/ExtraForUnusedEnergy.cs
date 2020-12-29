@@ -11,6 +11,7 @@ namespace TCGCards.Attacks
         private EnergyTypes energyType;
         private int amountPerEnergy;
         private int maxExtraDamage;
+        private bool discardUnusedEnergy;
 
         [DynamicInput("Extra Damage per energy")]
         public int AmountPerEnergy
@@ -46,6 +47,18 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Discard unused energy", InputControl.Boolean)]
+        public bool DiscardUnusedEnergy
+        {
+            get { return discardUnusedEnergy; }
+            set
+            {
+                discardUnusedEnergy = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             int energyOfType = owner.ActivePokemonCard.AttachedEnergy.Where(e => e.EnergyType == EnergyType).Sum(e => e.Amount);
@@ -57,6 +70,18 @@ namespace TCGCards.Attacks
             if (colorless < 0)
             {
                 energyOfType -= -colorless;
+            }
+
+            if (DiscardUnusedEnergy)
+            {
+                int extraEnergy = energyOfType;
+
+                while (extraEnergy > 0)
+                {
+                    var energy = owner.ActivePokemonCard.AttachedEnergy.FirstOrDefault(x => x.EnergyType == EnergyType);
+                    owner.ActivePokemonCard.DiscardEnergyCard(energy, game);
+                    extraEnergy -= energy.Amount;
+                }
             }
 
             return Damage + Math.Max(Math.Min(MaxExtraDamage, energyOfType * AmountPerEnergy), 0);

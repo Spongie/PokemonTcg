@@ -12,7 +12,7 @@ namespace TCGCards.TrainerEffects
     public class DisableEnergyAttachment : DataModel, IEffect
     {
         private TargetingMode targetingMode;
-        private bool coinFlip;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
         public string EffectType
         {
@@ -32,14 +32,14 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
-
-        [DynamicInput("Coin flip", InputControl.Boolean)]
-        public bool CoinFlip
+        
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return coinFlip; }
+            get { return coinflipConditional; }
             set
             {
-                coinFlip = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -57,7 +57,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

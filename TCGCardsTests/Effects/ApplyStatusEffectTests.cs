@@ -3,6 +3,7 @@ using Xunit;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCardsTests.Effects
 {
@@ -14,7 +15,6 @@ namespace TCGCardsTests.Effects
             var pokemon = new PokemonCard();
             var effect = new ApplyStatusEffect
             {
-                FlipCoin = false,
                 StatusEffect = StatusEffect.Burn,
                 TargetingMode = TargetingMode.OpponentActive
             };
@@ -50,7 +50,10 @@ namespace TCGCardsTests.Effects
             var pokemon = new PokemonCard();
             var effect = new ApplyStatusEffect
             {
-                FlipCoin = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 StatusEffect = StatusEffect.Burn,
                 TargetingMode = TargetingMode.OpponentActive
             };
@@ -65,7 +68,10 @@ namespace TCGCardsTests.Effects
             var pokemon = new PokemonCard();
             var effect = new ApplyStatusEffect
             {
-                FlipCoin = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 StatusEffect = StatusEffect.Burn,
                 TargetingMode = TargetingMode.OpponentActive
             };
@@ -80,7 +86,6 @@ namespace TCGCardsTests.Effects
             var pokemon = new PokemonCard();
             var effect = new ApplyStatusEffect
             {
-                FlipCoin = false,
                 StatusEffect = StatusEffect.Burn,
                 TargetingMode = TargetingMode.AttachedTo
             };

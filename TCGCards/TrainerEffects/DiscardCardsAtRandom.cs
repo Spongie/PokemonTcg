@@ -4,11 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
     public class DiscardCardsAtRandom : DataModel, IEffect
     {
+        private bool targetsOpponent;
+        private int amount;
+        private bool shuffleIntoDeck;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+
         public string EffectType
         {
             get
@@ -17,18 +23,13 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        private bool targetsOpponent;
-        private bool coinFlip;
-        private int amount;
-        private bool shuffleIntoDeck;
-
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return coinFlip; }
+            get { return coinflipConditional; }
             set
             {
-                coinFlip = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -80,6 +81,11 @@ namespace TCGCards.TrainerEffects
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
             var target = targetsOpponent ? opponent : caster;
+
+            if (!CoinflipConditional.IsOk(game, caster))
+            {
+                return;
+            }
 
             List<Card> cardsToDiscard;
             if (Amount == -1 || target.Hand.Count <= Amount)

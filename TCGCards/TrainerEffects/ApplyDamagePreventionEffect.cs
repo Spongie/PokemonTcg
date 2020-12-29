@@ -3,16 +3,28 @@ using Entities.Models;
 using System;
 using TCGCards.Core;
 using TCGCards.Core.SpecialAbilities;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
     public class ApplyDamagePreventionEffect : DataModel, IEffect
     {
         private int amount;
-        private bool coinFlip;
         private int maxDamage;
         private bool onlyProtectSelf = true;
         private bool lastsUntilDamage;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
+        {
+            get { return coinflipConditional; }
+            set
+            {
+                coinflipConditional = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Only protect self", InputControl.Boolean)]
         public bool OnlyProtectSelf
@@ -32,17 +44,6 @@ namespace TCGCards.TrainerEffects
             set
             {
                 maxDamage = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Coin flipped", InputControl.Boolean)]
-        public bool CoinFlip
-        {
-            get { return coinFlip; }
-            set
-            {
-                coinFlip = value;
                 FirePropertyChanged();
             }
         }
@@ -69,7 +70,6 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-
         public string EffectType
         {
             get
@@ -87,7 +87,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

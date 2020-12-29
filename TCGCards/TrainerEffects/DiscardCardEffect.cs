@@ -10,11 +10,11 @@ namespace TCGCards.TrainerEffects
     public class DiscardCardEffect : DataModel, IEffect
     {
         private int amount;
-        private bool onlyOnCoinflip;
         private CardType cardType = CardType.Any;
         private bool shuffleIntoDeck;
         private bool allowDiscardLess;
         private bool targetsOpponent;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
         [DynamicInput("Target Opponent?", InputControl.Boolean)]
         public bool TargetsOpponent
@@ -27,14 +27,13 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-
-        [DynamicInput("Flip coin", InputControl.Boolean)]
-        public bool OnlyOnCoinFlip
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return onlyOnCoinflip; }
+            get { return coinflipConditional; }
             set
             {
-                onlyOnCoinflip = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -119,7 +118,7 @@ namespace TCGCards.TrainerEffects
         {
             var target = TargetsOpponent ? opponent : caster;
             
-            if (onlyOnCoinflip && game.FlipCoins(1) == 0)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

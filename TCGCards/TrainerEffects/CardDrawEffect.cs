@@ -8,11 +8,11 @@ namespace TCGCards.TrainerEffects
     public class CardDrawEffect : DataModel, IEffect
     {
         private int amount;
-        private bool onlyOnCoinflip;
         private bool opponents;
         private bool isMay;
         private bool useLastDiscard;
         private float modiferForLastCount = 1.0f;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
         [DynamicInput("Targets opponent?", InputControl.Boolean)]
         public bool Opponents
@@ -25,13 +25,13 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        [DynamicInput("Flip coin", InputControl.Boolean)]
-        public bool OnlyOnCoinFlip
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return onlyOnCoinflip; }
+            get { return coinflipConditional; }
             set
             {
-                onlyOnCoinflip = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -105,7 +105,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
             
-            if (onlyOnCoinflip && game.FlipCoins(1) == 0)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

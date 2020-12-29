@@ -6,6 +6,7 @@ using TCGCards;
 using TCGCards.Attacks;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace CardEditor.Util
 {
@@ -27,7 +28,10 @@ namespace CardEditor.Util
                 {
                     baseAttack.Effects.Add(new ApplyStatusEffect()
                     {
-                        FlipCoin = true,
+                        CoinflipConditional = new CoinFlipConditional
+                        {
+                            FlipCoin = true
+                        },
                         TargetingMode = TargetingMode.OpponentActive,
                         StatusEffect = effect.Value
                     });
@@ -45,12 +49,21 @@ namespace CardEditor.Util
                 {
                     baseAttack.Effects.Add(new ApplyStatusEffect()
                     {
-                        FlipCoin = false,
                         TargetingMode = TargetingMode.OpponentActive,
                         StatusEffect = effect.Value
                     });
                     return true;
                 }
+            }
+            else if (Regex.IsMatch(sdkAttack.Text, @".*does \d+ damage to itself[.]"))
+            {
+                int damage = int.Parse(Regex.Matches(sdkAttack.Text, @"\d+")[0].Value);
+                baseAttack.Effects.Add(new DamageEffect
+                {
+                    Amount = damage,
+                    TargetingMode = TargetingMode.YourActive
+                });
+                return true;
             }
             else if (sdkAttack.Text.Trim() == "Flip a coin. If tails, this attack does nothing.")
             {
@@ -119,7 +132,6 @@ namespace CardEditor.Util
             {
                 baseAttack.Effects.Add(new ApplyRetreatStopper()
                 {
-                    FlipCoin = false,
                     TargetingMode = TargetingMode.OpponentActive,
                     Turns = 2
                 });

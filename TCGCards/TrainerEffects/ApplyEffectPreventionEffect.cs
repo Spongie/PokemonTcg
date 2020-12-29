@@ -9,16 +9,27 @@ namespace TCGCards.TrainerEffects
     public class ApplyEffectPreventionEffect : DataModel, IEffect
     {
         private TargetingMode targetingMode;
-        private bool coinFlip;
         private bool isMay;
         private bool useLastYesNo;
         private int turnDuration = Ability.UNTIL_YOUR_NEXT_TURN;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
         public string EffectType
         {
             get
             {
                 return "Apply effect prevention";
+            }
+        }
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
+        {
+            get { return coinflipConditional; }
+            set
+            {
+                coinflipConditional = value;
+                FirePropertyChanged();
             }
         }
 
@@ -32,18 +43,7 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
-
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
-        {
-            get { return coinFlip; }
-            set
-            {
-                coinFlip = value;
-                FirePropertyChanged();
-            }
-        }
-
+        
         [DynamicInput("Ask Yes/No?", InputControl.Boolean)]
         public bool IsMay
         {
@@ -101,7 +101,7 @@ namespace TCGCards.TrainerEffects
                 }
             }
 
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

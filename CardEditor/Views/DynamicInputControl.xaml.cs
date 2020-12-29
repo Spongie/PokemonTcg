@@ -42,7 +42,7 @@ namespace CardEditor.Views
                     var panel = new DockPanel();
                     panel.LastChildFill = true;
                     //panel.MaxHeight = 30;
-                    if (dynamicInput.InputType != InputControl.Ability)
+                    if (dynamicInput.InputType != InputControl.Ability && dynamicInput.InputType != InputControl.Dynamic)
                     {
                         var label = new Label { Content = dynamicInput.DisplayName, MinWidth = 200 };
                         panel.Children.Add(label);
@@ -98,6 +98,17 @@ namespace CardEditor.Views
                             DockPanel.SetDock(abilityInput, Dock.Top);
                             input = abilityInput;
                             break;
+                        case InputControl.Dynamic:
+                            {
+                                var dynamicGroup = new GroupBox();
+                                
+                                var control = new DynamicInputControl();
+                                control.SetBinding(DynamicInputControl.DataContextProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                                dynamicGroup.Content = control;
+                                dynamicGroup.Header = dynamicInput.DisplayName;
+                                input = dynamicGroup;
+                                break;
+                            }
                         default:
                             throw new NotImplementedException();
                     }

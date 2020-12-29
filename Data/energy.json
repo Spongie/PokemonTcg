@@ -166,8 +166,14 @@
       {
         "$id": "23",
         "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
-        "CoinflipConditional": null,
-        "CoinFlip": false,
+        "CoinflipConditional": {
+          "$id": "24",
+          "UseLastCoin": false,
+          "CheckTails": false,
+          "FlipCoin": false,
+          "CoinsToFlip": 1,
+          "SuccessessForBonus": 1
+        },
         "Amount": 10,
         "TargetingMode": 0,
         "EffectType": "Heal"
@@ -177,11 +183,11 @@
     "EnergyType": 2,
     "IsBasic": false,
     "CardId": {
-      "$id": "24",
+      "$id": "25",
       "Value": "7e38af7a-be21-4b06-9a9a-00b6895f039f"
     },
     "Id": {
-      "$id": "25",
+      "$id": "26",
       "Value": "b4a4cde6-369b-4df5-adbf-e16ff9b03deb"
     },
     "SetCode": "base5",
@@ -194,10 +200,10 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "26",
+    "$id": "27",
     "Effects": [
       {
-        "$id": "27",
+        "$id": "28",
         "$type": "TCGCards.TrainerEffects.FullHealEffect, TCGCards",
         "TargetingMode": 0,
         "UseLastTarget": false,
@@ -208,11 +214,11 @@
     "EnergyType": 2,
     "IsBasic": false,
     "CardId": {
-      "$id": "28",
+      "$id": "29",
       "Value": "8998b708-d5cc-4f1f-a208-a673a444fb14"
     },
     "Id": {
-      "$id": "29",
+      "$id": "30",
       "Value": "6102b86a-9e43-4d54-84fa-221336396f29"
     },
     "SetCode": "base5",
@@ -225,21 +231,25 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "30",
+    "$id": "31",
     "Effects": [
       {
-        "$id": "31",
+        "$id": "32",
         "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+        "CoinflipConditional": {
+          "$id": "33",
+          "UseLastCoin": false,
+          "CheckTails": false,
+          "FlipCoin": false,
+          "CoinsToFlip": 1,
+          "SuccessessForBonus": 1
+        },
         "MayAbility": false,
         "EnergyToDiscard": 0,
         "EnergyType": 0,
         "Amount": 10,
         "TargetingMode": 3,
-        "CoinflipConditional": null,
-        "CoinFlip": false,
         "ApplyWeaknessResistance": false,
-        "UseLastCoin": false,
-        "CheckTails": false,
         "EffectType": "Damage"
       }
     ],
@@ -247,11 +257,11 @@
     "EnergyType": 1,
     "IsBasic": false,
     "CardId": {
-      "$id": "32",
+      "$id": "34",
       "Value": "7b4a66ae-15a5-451d-8e52-ff0f65415c0e"
     },
     "Id": {
-      "$id": "33",
+      "$id": "35",
       "Value": "c19d2e0c-b186-4f76-8d6d-c2e0f823ef79"
     },
     "SetCode": "base5",
@@ -264,17 +274,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "34",
+    "$id": "36",
     "Effects": [],
     "Amount": 1,
     "EnergyType": 8,
     "IsBasic": true,
     "CardId": {
-      "$id": "35",
+      "$id": "37",
       "Value": "5f865851-68cf-4c6b-bf4c-79fe4aaef9de"
     },
     "Id": {
-      "$id": "36",
+      "$id": "38",
       "Value": "e4aa4ac9-53e7-4c5a-853a-3a813ae3ceb3"
     },
     "SetCode": "gym1",
@@ -287,17 +297,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "37",
+    "$id": "39",
     "Effects": [],
     "Amount": 1,
     "EnergyType": 4,
     "IsBasic": true,
     "CardId": {
-      "$id": "38",
+      "$id": "40",
       "Value": "ac0a15bb-ac6a-4b08-85e0-9d7524f25e0c"
     },
     "Id": {
-      "$id": "39",
+      "$id": "41",
       "Value": "28e60a4f-01a3-4b91-8de9-c8b974fa8821"
     },
     "SetCode": "gym1",
@@ -310,17 +320,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "40",
+    "$id": "42",
     "Effects": [],
     "Amount": 1,
     "EnergyType": 5,
     "IsBasic": true,
     "CardId": {
-      "$id": "41",
+      "$id": "43",
       "Value": "f736e5ee-d8ed-4b0f-bbc3-20b360f55b22"
     },
     "Id": {
-      "$id": "42",
+      "$id": "44",
       "Value": "a0fc17d2-7abd-4379-bc67-760e11fa163d"
     },
     "SetCode": "gym1",
@@ -333,17 +343,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "43",
+    "$id": "45",
     "Effects": [],
     "Amount": 1,
     "EnergyType": 6,
     "IsBasic": true,
     "CardId": {
-      "$id": "44",
+      "$id": "46",
       "Value": "53e93c4a-d04f-4c6d-a3a4-28c88387a199"
     },
     "Id": {
-      "$id": "45",
+      "$id": "47",
       "Value": "46f0bb48-a72f-4b75-8429-db82b2eeff78"
     },
     "SetCode": "gym1",
@@ -356,17 +366,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "46",
+    "$id": "48",
     "Effects": [],
     "Amount": 1,
     "EnergyType": 3,
     "IsBasic": true,
     "CardId": {
-      "$id": "47",
+      "$id": "49",
       "Value": "eb0f6e1e-768a-43bc-9d37-8ad22706a66d"
     },
     "Id": {
-      "$id": "48",
+      "$id": "50",
       "Value": "7a01f1d5-af8d-47d2-bafd-4145df46da3a"
     },
     "SetCode": "gym1",
@@ -379,17 +389,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "49",
+    "$id": "51",
     "Effects": [],
     "Amount": 1,
     "EnergyType": 7,
     "IsBasic": true,
     "CardId": {
-      "$id": "50",
+      "$id": "52",
       "Value": "306e94ac-7ba5-4167-bc00-940963389541"
     },
     "Id": {
-      "$id": "51",
+      "$id": "53",
       "Value": "c2cf1133-3499-4926-92dd-4ac260623bdb"
     },
     "SetCode": "gym1",

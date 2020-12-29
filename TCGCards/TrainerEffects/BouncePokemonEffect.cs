@@ -16,44 +16,18 @@ namespace TCGCards.TrainerEffects
         private bool returnAttachedToHand;
         private bool onlyBasic;
         private bool isMay;
-        private bool coinFlip;
-        private int coins = 1;
-        private int headsForSuccess = 1;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return coinFlip; }
+            get { return coinflipConditional; }
             set
             {
-                coinFlip = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
-
-        [DynamicInput("Coins")]
-        public int Coins
-        {
-            get { return coins; }
-            set
-            {
-                coins = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Heads for success")]
-        public int HeadsForSuccess
-        {
-            get { return headsForSuccess; }
-            set
-            {
-                headsForSuccess = value;
-                FirePropertyChanged();
-            }
-        }
-
-
 
         [DynamicInput("Only return basic version", InputControl.Boolean)]
         public bool OnlyBasic
@@ -164,7 +138,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            if (CoinFlip && game.FlipCoins(Coins) < HeadsForSuccess)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

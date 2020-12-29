@@ -15,6 +15,13 @@
         Passive,
         Attacked,
         DamageTakenModifier,
-        DamageDealtModifier
+        DamageDealtModifier,
+        EnergyAttached,
+        FireAttached,
+        WaterAttached,
+        GrassAttached,
+        ElectricAttached,
+        PsychicAttached,
+        FightingAttached
     }
 }

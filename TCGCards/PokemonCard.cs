@@ -403,6 +403,42 @@ namespace TCGCards
             });
 
             energyCard.OnAttached(this, fromHand, game);
+
+            switch (energyCard.EnergyType)
+            {
+                case EnergyTypes.All:
+                case EnergyTypes.Colorless:
+                    game.TriggerAbilityOfType(TriggerType.EnergyAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Water:
+                    game.TriggerAbilityOfType(TriggerType.WaterAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Fire:
+                    game.TriggerAbilityOfType(TriggerType.FireAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Grass:
+                    game.TriggerAbilityOfType(TriggerType.GrassAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Electric:
+                    game.TriggerAbilityOfType(TriggerType.ElectricAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Psychic:
+                    game.TriggerAbilityOfType(TriggerType.PsychicAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Fighting:
+                    game.TriggerAbilityOfType(TriggerType.FightingAttached, this, 0, this);
+                    break;
+                case EnergyTypes.Darkness:
+                    break;
+                case EnergyTypes.Steel:
+                    break;
+                case EnergyTypes.Fairy:
+                    break;
+                case EnergyTypes.Dragon:
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override string GetName()
@@ -471,7 +507,11 @@ namespace TCGCards
                 abilities.Add(Ability);
             }
 
-            abilities.AddRange(game.TemporaryPassiveAbilities);
+            if (game != null)
+            {
+                abilities.AddRange(game.TemporaryPassiveAbilities);
+            }
+
             abilities.AddRange(TemporaryAbilities.Where(x => x.CanActivate(game, caster, opponent)).ToList());
 
             return abilities;

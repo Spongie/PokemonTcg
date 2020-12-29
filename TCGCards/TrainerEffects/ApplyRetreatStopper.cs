@@ -10,15 +10,15 @@ namespace TCGCards.TrainerEffects
     {
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
         private int turns = Ability.UNTIL_YOUR_NEXT_TURN;
-        private bool flipCoin;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
 
-        [DynamicInput("Flip Coin?", InputControl.Boolean)]
-        public bool FlipCoin
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return flipCoin; }
+            get { return coinflipConditional; }
             set
             {
-                flipCoin = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -65,7 +65,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (FlipCoin && game.FlipCoins(1) == 0)
+            if (CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

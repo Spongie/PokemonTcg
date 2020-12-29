@@ -10,15 +10,15 @@ namespace TCGCards.TrainerEffects
     {
         private TargetingMode targetingMode;
         private int amount;
-        private bool coinFlip;
-
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+        
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
         {
-            get { return coinFlip; }
+            get { return coinflipConditional; }
             set
             {
-                coinFlip = value;
+                coinflipConditional = value;
                 FirePropertyChanged();
             }
         }
@@ -57,7 +57,7 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            if (CoinFlip && CoinFlipper.FlipCoin())
+            if (!CoinflipConditional.IsOk(game, attachedTo.Owner))
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CoinFlip && game.FlipCoins(1) == 0)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

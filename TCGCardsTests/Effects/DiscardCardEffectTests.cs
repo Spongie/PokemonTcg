@@ -7,6 +7,7 @@ using TCGCards;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCardsTests.Effects
 {
@@ -18,7 +19,6 @@ namespace TCGCardsTests.Effects
             var effect = new DiscardCardEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = false,
                 CardType = CardType.Any
             };
 
@@ -43,7 +43,10 @@ namespace TCGCardsTests.Effects
             var effect = new DiscardCardEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 CardType = CardType.Any
             };
 
@@ -67,7 +70,10 @@ namespace TCGCardsTests.Effects
             var effect = new DiscardCardEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 CardType = CardType.Any
             };
 
@@ -91,7 +97,6 @@ namespace TCGCardsTests.Effects
             var effect = new DiscardCardEffect()
             {
                 Amount = -1,
-                OnlyOnCoinFlip = false,
                 CardType = CardType.Any
             };
 
@@ -112,7 +117,6 @@ namespace TCGCardsTests.Effects
             var effect = new DiscardCardEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = false,
                 CardType = CardType.Any
             };
 

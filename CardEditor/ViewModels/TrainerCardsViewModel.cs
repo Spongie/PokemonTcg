@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TCGCards;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace CardEditor.ViewModels
 {
@@ -73,12 +74,22 @@ namespace CardEditor.ViewModels
 
             foreach (var trainer in Serializer.Deserialize<List<TrainerCard>>(json))
             {
-                if (trainer.CardId == null)
-                {
-                    trainer.CardId = NetworkId.Generate();
-                }
+                EffectMigrator(trainer.Effects);
                 TrainerCards.Add(trainer);
             }
+        }
+
+        public static void EffectMigrator(ObservableCollection<IEffect> effects)
+        {
+            //foreach (var e in effects)
+            //{
+            //    var prop = e.GetType().GetProperties().FirstOrDefault(x => x.PropertyType.Name == "CoinFlipConditional");
+
+            //    if (prop != null)
+            //    {
+            //        prop.SetValue(e, CoinFlipConditional.CreateFromObject(e));
+            //    }
+            //}
         }
 
         private void AddTrainerCard(object obj)

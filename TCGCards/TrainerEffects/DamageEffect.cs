@@ -12,13 +12,22 @@ namespace TCGCards.TrainerEffects
     {
         private int amount;
         private TargetingMode targetingMode = TargetingMode.OpponentActive;
-        private bool coinFlip;
         private bool applyWeaknessResistance;
         private bool askYesNo;
         private EnergyTypes energyType;
         private int energyToDiscard;
-        private bool useLastCoin;
-        private bool checkTails;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinflipConditional
+        {
+            get { return coinflipConditional; }
+            set
+            {
+                coinflipConditional = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Ask Yes/No", InputControl.Boolean)]
         public bool MayAbility
@@ -75,17 +84,6 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
-        {
-            get { return coinFlip; }
-            set
-            {
-                coinFlip = value;
-                FirePropertyChanged();
-            }
-        }
-
         [DynamicInput("Apply weakness resistance", InputControl.Boolean)]
         public bool ApplyWeaknessResistance
         {
@@ -93,28 +91,6 @@ namespace TCGCards.TrainerEffects
             set
             {
                 applyWeaknessResistance = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Use last coin flip?", InputControl.Boolean)]
-        public bool UseLastCoin
-        {
-            get { return useLastCoin; }
-            set
-            {
-                useLastCoin = value;
-                FirePropertyChanged();
-            }
-        }
-
-        [DynamicInput("Trigger on tails instead?", InputControl.Boolean)]
-        public bool CheckTails
-        {
-            get { return checkTails; }
-            set
-            {
-                checkTails = value;
                 FirePropertyChanged();
             }
         }
@@ -164,14 +140,7 @@ namespace TCGCards.TrainerEffects
                 }
             }
 
-            var targetValue = CheckTails ? 0 : 1;
-            var lastValue = game != null && game.LastCoinFlipResult ? 1 : 0;
-
-            if (UseLastCoin && lastValue != targetValue)
-            {
-                return;
-            }
-            else if (CoinFlip && game.FlipCoins(1) != targetValue)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

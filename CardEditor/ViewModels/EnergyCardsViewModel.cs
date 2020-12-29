@@ -76,10 +76,7 @@ namespace CardEditor.ViewModels
 
             foreach (var energy in Serializer.Deserialize<List<EnergyCard>>(json))
             {
-                if (energy.CardId == null)
-                {
-                    energy.CardId = NetworkId.Generate();
-                }
+                TrainerCardsViewModel.EffectMigrator(energy.Effects);
 
                 EnergyCards.Add(energy);
             }

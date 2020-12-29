@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TCGCards;
@@ -99,6 +100,7 @@ namespace CardEditor.ViewModels
 				if (cardsFound > pageSize)
 				{
 					//TODO
+					MessageBox.Show("There are more cards!!!");
 				}
 				var pokemons = new List<PokemonViewModel>();
 				foreach (var card in JsonConvert.DeserializeObject<JsonPokemonList>(json).Cards)
@@ -177,10 +179,10 @@ namespace CardEditor.ViewModels
 
 			foreach (var pokemon in Serializer.Deserialize<List<PokemonCard>>(json))
 			{
-				if (pokemon.CardId == null)
+                foreach (var attack in pokemon.Attacks)
                 {
-					pokemon.CardId = NetworkId.Generate();
-                }
+					TrainerCardsViewModel.EffectMigrator(attack.Effects);
+				}
 
 				PokemonCards.Add(new PokemonViewModel(pokemon));
 			}

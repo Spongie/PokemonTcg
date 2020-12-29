@@ -14,6 +14,7 @@ namespace TCGCards.TrainerEffects
         private CardType cardType;
         private int amount = 1;
         private bool coinFlip;
+        private bool targetsOpponent;
 
         [DynamicInput("Flip a coin", InputControl.Boolean)]
         public bool CoinFlip
@@ -47,6 +48,18 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
+
+        [DynamicInput("Opponent", InputControl.Boolean)]
+        public bool TargetsOpponent
+        {
+            get { return targetsOpponent; }
+            set
+            {
+                targetsOpponent = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public string EffectType
         {
@@ -89,7 +102,9 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            List<Card> choices = CardUtil.GetCardsOfType(caster.DiscardPile, CardType);
+            var target = TargetsOpponent ? opponent : caster;
+
+            List<Card> choices = CardUtil.GetCardsOfType(target.DiscardPile, CardType);
 
             var message = new PickFromListMessage(choices, Amount).ToNetworkMessage(game.Id);
             var response = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards;
@@ -97,8 +112,8 @@ namespace TCGCards.TrainerEffects
             foreach (var id in response)
             {
                 var card = game.Cards[id];
-                caster.Deck.Cards.Push(card);
-                caster.DiscardPile.Remove(card);
+                target.Deck.Cards.Push(card);
+                target.DiscardPile.Remove(card);
             }
         }
     }

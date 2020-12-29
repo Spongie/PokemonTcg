@@ -6,7 +6,7 @@ namespace TCGCards.TrainerEffects
     {
         public override void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            if (CoinFlip && game.FlipCoins(Coins) < HeadsForSuccess)
+            if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }

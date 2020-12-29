@@ -3,6 +3,7 @@ using Xunit;
 using TCGCards;
 using TCGCards.Core;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCardsTests.Effects
 {
@@ -14,7 +15,6 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = false,
                 Opponents = false
             };
 
@@ -32,7 +32,10 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 Opponents = false
             };
 
@@ -49,7 +52,10 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 Opponents = false
             };
 
@@ -66,7 +72,6 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = false,
                 Opponents = true
             };
 
@@ -84,7 +89,10 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 Opponents = true
             };
 
@@ -101,7 +109,10 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = true,
+                CoinflipConditional = new CoinFlipConditional
+                {
+                    FlipCoin = true
+                },
                 Opponents = true
             };
 
@@ -118,7 +129,6 @@ namespace TCGCardsTests.Effects
             var effect = new CardDrawEffect()
             {
                 Amount = 1,
-                OnlyOnCoinFlip = false,
                 Opponents = false
             };
 
