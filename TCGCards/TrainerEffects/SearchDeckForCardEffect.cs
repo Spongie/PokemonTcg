@@ -17,6 +17,19 @@ namespace TCGCards.TrainerEffects
         private bool useLastDiscardCount;
         private SearchDeckResult result = SearchDeckResult.PutInHand; 
         private TargetingMode targetingMode;
+        private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinFlipConditional
+        {
+            get { return coinFlipConditional; }
+            set
+            {
+                coinFlipConditional = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Card type", InputControl.Dropdown, typeof(CardType))]
         public CardType CardType
@@ -113,6 +126,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (!CoinFlipConditional.IsOk(game, caster))
+            {
+                return;
+            }
+
             var filter = CardUtil.GetCardFilters(CardType, EnergyType).ToList();
             int amount = useLastDiscardCount ? game.LastDiscard : 1;
 

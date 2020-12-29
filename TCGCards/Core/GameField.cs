@@ -44,6 +44,18 @@ namespace TCGCards.Core
             return this;
         }
 
+        internal void DestroyStadium()
+        {
+            if (StadiumCard == null)
+            {
+                return;
+            }    
+
+            StadiumCard.Owner.DiscardPile.Add(StadiumCard);
+            StadiumCard = null;
+            SendEventToPlayers(new StadiumDestroyedEvent());
+        }
+
         public bool IsSuccessfulFlip(bool flipCoin, bool checkLastFlip, bool checkTails)
         {
             var targetValue = checkTails ? 0 : 1;

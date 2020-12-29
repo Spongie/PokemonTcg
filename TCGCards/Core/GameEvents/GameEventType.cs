@@ -20,6 +20,7 @@
         PokemonBounced = 15,
         PokemonHealed = 16,
         RemovedFromBench = 17,
-        StadiumCardPlayed = 18
+        StadiumCardPlayed = 18,
+        StadiumCardDestroyed = 19
     }
 }

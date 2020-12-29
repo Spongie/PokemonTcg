@@ -1,8 +1,4 @@
 ﻿using Xunit;
-using TCGCards.TrainerEffects.Util;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TCGCards.Core;
 using Entities;
 
@@ -10,6 +6,14 @@ namespace TCGCards.TrainerEffects.Util.Tests
 {
     public class CoinFlipConditionalTests
     {
+        [Fact]
+        public void IsOk_Empty()
+        {
+            var condition = new CoinFlipConditional();
+
+            Assert.True(condition.IsOk(new GameField(), new Player()));
+        }
+
         [Fact]
         public void IsOk_No_Flip()
         {
