@@ -3,6 +3,7 @@ using Entities.Models;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
@@ -10,6 +11,19 @@ namespace TCGCards.TrainerEffects
     {
         private int amountOfTargets;
         private int damage;
+        private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinFlipConditional
+        {
+            get { return coinflipConditional; }
+            set
+            {
+                coinflipConditional = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         [DynamicInput("Damage")]
         public int Damage
@@ -53,6 +67,11 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (!CoinFlipConditional.IsOk(game, caster))
+            {
+                return;
+            }
+
             if (opponent.BenchedPokemon.Count <= AmountOfTargets)
             {
                 foreach (var pokemon in opponent.BenchedPokemon.ValidPokemonCards)
