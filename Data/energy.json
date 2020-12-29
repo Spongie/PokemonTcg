@@ -166,6 +166,7 @@
       {
         "$id": "23",
         "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "Amount": 10,
         "TargetingMode": 0,
@@ -199,6 +200,7 @@
         "$id": "27",
         "$type": "TCGCards.TrainerEffects.FullHealEffect, TCGCards",
         "TargetingMode": 0,
+        "UseLastTarget": false,
         "EffectType": "Full Heal"
       }
     ],
@@ -233,8 +235,11 @@
         "EnergyType": 0,
         "Amount": 10,
         "TargetingMode": 3,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "ApplyWeaknessResistance": false,
+        "UseLastCoin": false,
+        "CheckTails": false,
         "EffectType": "Damage"
       }
     ],

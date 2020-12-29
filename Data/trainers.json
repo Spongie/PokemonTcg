@@ -4,6 +4,7 @@
     "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "2",
@@ -16,6 +17,7 @@
           "RoundDown": false,
           "Modifer": 20.0,
           "OnlyPreventFromBasic": false,
+          "AttackerName": null,
           "UsableImmediately": true,
           "TurnDuration": 2,
           "TriggerType": 12,
@@ -41,6 +43,7 @@
         }
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "5",
       "Value": "c509a9f9-da98-4ede-b616-536ca2549193"
@@ -63,11 +66,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "8",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 1,
         "AllowDiscardLess": false,
@@ -82,9 +87,12 @@
         "EnergyType": 0,
         "RevealCard": false,
         "UseLastDiscardCount": false,
+        "ResultType": 0,
+        "TargetingMode": 0,
         "EffectType": "Search your deck for a card"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "10",
       "Value": "4e6e276f-0e80-49f4-b7e7-a0daa3e23564"
@@ -107,11 +115,14 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "13",
         "$type": "TCGCards.TrainerEffects.RevealHandsEffect, TCGCards",
-        "EffectType": "Reveal hands"
+        "EffectType": "Reveal hands",
+        "YouReveal": true,
+        "OpponentReveal": true
       },
       {
         "$id": "14",
@@ -130,6 +141,7 @@
         "EffectType": "Shuffle hand into deck"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "16",
       "Value": "77499784-9104-44ab-a5c5-6be0940050b9"
@@ -152,11 +164,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "19",
         "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
         "CoinFlip": false,
+        "CoinflipConditional": null,
         "Coins": 1,
         "HeadsForSuccess": 1,
         "OnlyBasic": true,
@@ -167,6 +181,7 @@
         "EffectType": "Bounce pokemon"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "20",
       "Value": "f6a23b62-a663-4001-b615-a164236150ea"
@@ -189,6 +204,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "23",
@@ -203,6 +219,7 @@
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 7,
         "IsMay": false,
         "UseLastDiscardCount": false,
@@ -210,6 +227,7 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "25",
       "Value": "b879bd3c-d1c8-43c5-b3d0-48129965ad0b"
@@ -232,11 +250,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "28",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 1,
         "AllowDiscardLess": false,
@@ -253,6 +273,7 @@
         "EffectType": "Pick from discard"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "30",
       "Value": "8babc8ba-1f98-44ce-b4b9-6d5921b28221"
@@ -275,6 +296,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "33",
@@ -284,6 +306,7 @@
         "EffectType": "Put Pokemon From Discard On Bench"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "34",
       "Value": "e80bbef7-833c-4d94-92bf-c4a3205e321d"
@@ -306,14 +329,17 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "37",
         "$type": "TCGCards.TrainerEffects.FullHealEffect, TCGCards",
         "TargetingMode": 0,
+        "UseLastTarget": false,
         "EffectType": "Full Heal"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "38",
       "Value": "e3b89ccc-551e-4f50-9a81-69ad41a75c51"
@@ -336,6 +362,7 @@
     "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "41",
@@ -343,6 +370,7 @@
         "EffectType": "Create fossile Pokémon"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "42",
       "Value": "42a5d388-a7b5-447b-a284-a03a947689ed"
@@ -365,16 +393,19 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "45",
         "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "Amount": 20,
         "TargetingMode": 2,
         "EffectType": "Heal"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "46",
       "Value": "20207451-8b75-4a2f-806d-9284c2705ea9"
@@ -397,6 +428,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "49",
@@ -409,6 +441,7 @@
         "OnlyOnCoinFlip": false
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "50",
       "Value": "417e39e7-e818-4af2-892b-653164b3f15c"
@@ -431,11 +464,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "53",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 2,
         "AllowDiscardLess": false,
@@ -452,6 +487,7 @@
         "EffectType": "Pick from discard"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "55",
       "Value": "5a40d709-893a-4e47-87de-6762481e4f4a"
@@ -474,6 +510,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "58",
@@ -488,6 +525,7 @@
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 1,
         "IsMay": false,
         "UseLastDiscardCount": false,
@@ -495,6 +533,7 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "60",
       "Value": "b148f0e9-e7f8-4546-9ff3-efbb360d56ba"
@@ -517,12 +556,14 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "63",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 2,
         "IsMay": false,
         "UseLastDiscardCount": false,
@@ -530,6 +571,7 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "64",
       "Value": "724d7079-50f2-4d83-94bc-bf5a3108b831"
@@ -552,6 +594,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "67",
@@ -564,6 +607,7 @@
         "OnlyOnCoinFlip": false
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "68",
       "Value": "a121dd82-a7af-4463-9959-07c047e0869f"
@@ -586,6 +630,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "71",
@@ -595,6 +640,7 @@
         "EffectType": "ReArrange cards on the top of deck"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "72",
       "Value": "d8f9f268-f45a-4688-9f6a-c2ac9b82653f"
@@ -617,6 +663,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "75",
@@ -625,13 +672,16 @@
         "TargetingMode": 5,
         "Amount": 1,
         "EnergyType": 0,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "UseLastCoin": false,
         "CheckTails": false,
         "AllowUseWithoutTarget": false,
+        "OnlyWithNameLike": null,
         "EffectType": "Discard attached energy"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "76",
       "Value": "a3c3b3e5-b42b-4d59-9c33-2f26337ac9e0"
@@ -654,11 +704,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "79",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 2,
         "AllowDiscardLess": false,
@@ -673,9 +725,12 @@
         "EnergyType": 0,
         "RevealCard": false,
         "UseLastDiscardCount": false,
+        "ResultType": 0,
+        "TargetingMode": 0,
         "EffectType": "Search your deck for a card"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "81",
       "Value": "5bed935c-8086-408e-83fb-06eab740dc4c"
@@ -698,6 +753,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "84",
@@ -706,10 +762,12 @@
         "TargetingMode": 2,
         "Amount": 1,
         "EnergyType": 0,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "UseLastCoin": false,
         "CheckTails": false,
         "AllowUseWithoutTarget": false,
+        "OnlyWithNameLike": null,
         "EffectType": "Discard attached energy"
       },
       {
@@ -719,13 +777,16 @@
         "TargetingMode": 5,
         "Amount": 2,
         "EnergyType": 0,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "UseLastCoin": false,
         "CheckTails": false,
         "AllowUseWithoutTarget": false,
+        "OnlyWithNameLike": null,
         "EffectType": "Discard attached energy"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "86",
       "Value": "8608e8f2-8c53-495e-9683-642cee011348"
@@ -748,11 +809,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "89",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": -1,
         "AllowDiscardLess": false,
@@ -765,6 +828,7 @@
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 7,
         "IsMay": false,
         "UseLastDiscardCount": false,
@@ -772,6 +836,7 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "91",
       "Value": "62e41fa0-4923-4533-bbf3-7687971ab878"
@@ -794,7 +859,9 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
       "$id": "94",
       "Value": "e51266fc-a4a1-4ffa-a09c-2145ced358d0"
@@ -817,6 +884,7 @@
     "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "97",
@@ -829,6 +897,7 @@
           "OnlyIfAnyDamage": true,
           "RoundDown": false,
           "Modifer": 10.0,
+          "CoinFlip": false,
           "UsableImmediately": true,
           "TurnDuration": 1,
           "TriggerType": 13,
@@ -854,6 +923,7 @@
         }
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "100",
       "Value": "8eb7e901-fcba-4140-b3f4-a2076e5ebae9"
@@ -876,6 +946,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "103",
@@ -886,6 +957,7 @@
         "EffectType": "Discard attached energy and heal"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "104",
       "Value": "8bffc978-e29b-4c4c-8ebc-a477d42f2664"
@@ -908,6 +980,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "107",
@@ -915,6 +988,7 @@
         "EffectType": "Heal and Discard all attached energy"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "108",
       "Value": "33d0e4f6-42f7-4a07-8832-033a0a4ea1e1"
@@ -937,6 +1011,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "111",
@@ -946,6 +1021,7 @@
         "EffectType": "Put Pokemon From Discard On Bench"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "112",
       "Value": "ebc7402d-389d-41d8-a74a-d787b4ddaf2d"
@@ -968,6 +1044,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "115",
@@ -975,6 +1052,7 @@
         "EffectType": "Pokémon Breeder"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "116",
       "Value": "8f5f210f-9c68-4652-9dc6-cec313235527"
@@ -997,7 +1075,9 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
       "$id": "119",
       "Value": "c0807c37-bed3-4803-9b75-5546e1f4cd2a"
@@ -1020,11 +1100,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "122",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 1,
         "AllowDiscardLess": false,
@@ -1045,6 +1127,7 @@
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 4,
         "IsMay": false,
         "UseLastDiscardCount": false,
@@ -1052,6 +1135,7 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "125",
       "Value": "8af2df5c-069a-4c70-a998-c7e8fa55eb64"
@@ -1074,6 +1158,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "128",
@@ -1081,12 +1166,14 @@
         "UseLastCoin": false,
         "CheckTails": false,
         "FlipCoin": true,
+        "CoinflipConditional": null,
         "StatusEffect": 0,
         "SecondaryEffect": 5,
         "TargetingMode": 3,
         "EffectType": "Apply Status"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "129",
       "Value": "696726da-0872-4ada-9ddf-fb3137df229b"
@@ -1109,6 +1196,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "132",
@@ -1116,6 +1204,7 @@
         "EffectType": "Reveal prize cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "133",
       "Value": "f3996d29-ab4b-4f75-8d65-328310f6b9bd"
@@ -1138,6 +1227,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "136",
@@ -1148,6 +1238,7 @@
         "EffectType": "Pick from discard"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "137",
       "Value": "6d6da40d-2b8a-484c-b1df-01953d64eb67"
@@ -1170,6 +1261,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "140",
@@ -1177,6 +1269,7 @@
         "EffectType": "Reveal prize cards"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "141",
       "Value": "aec0e37f-561e-4cee-b126-28908f38f7bb"
@@ -1199,6 +1292,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "144",
@@ -1209,6 +1303,7 @@
         "ShuffleIntoDeck": true
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "145",
       "Value": "0dba5be9-092d-4be1-8644-a7dea6ec41f9"
@@ -1231,7 +1326,9 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
       "$id": "148",
       "Value": "94171457-01d1-4c1a-993a-bab8759142ce"
@@ -1254,6 +1351,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "151",
@@ -1261,6 +1359,7 @@
         "EffectType": "Stop abilities"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "152",
       "Value": "f06f8f0f-9f4a-4653-a55f-e903ad711349"
@@ -1283,6 +1382,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "155",
@@ -1293,6 +1393,7 @@
         "ShuffleIntoDeck": true
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "156",
       "Value": "2b16d607-2557-4418-b18d-89c6f34612aa"
@@ -1315,12 +1416,14 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "159",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "EvolveSource": false,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "Amount": 1,
         "Names": "Dark ",
@@ -1329,6 +1432,7 @@
         "AddToBench": false
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "160",
       "Value": "f12c8049-2cc8-4d4e-acbe-abb680466aa8"
@@ -1351,6 +1455,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "163",
@@ -1358,6 +1463,7 @@
         "EffectType": "Challenge"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "164",
       "Value": "d4b069e3-2d2a-4a76-afab-6381cc024417"
@@ -1380,12 +1486,14 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "167",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "EvolveSource": false,
+        "CoinflipConditional": null,
         "CoinFlip": true,
         "Amount": 1,
         "Names": null,
@@ -1394,6 +1502,7 @@
         "AddToBench": false
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "168",
       "Value": "90a98997-2f24-428a-b52d-62db3b29ddff"
@@ -1416,6 +1525,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "171",
@@ -1424,9 +1534,12 @@
         "EnergyType": 1,
         "RevealCard": false,
         "UseLastDiscardCount": false,
+        "ResultType": 0,
+        "TargetingMode": 0,
         "EffectType": "Search your deck for a card"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "172",
       "Value": "276bc34d-87eb-48f0-b896-9278fc7ea23a"
@@ -1449,11 +1562,13 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "175",
         "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
         "CoinFlip": false,
+        "CoinflipConditional": null,
         "Coins": 1,
         "HeadsForSuccess": 1,
         "OnlyBasic": false,
@@ -1464,6 +1579,7 @@
         "EffectType": "Bounce pokemon"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "176",
       "Value": "eb354064-fcb5-4597-adc5-c5d92879160d"
@@ -1486,6 +1602,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "179",
@@ -1493,9 +1610,11 @@
         "CoinFlip": true,
         "Amount": 1,
         "CardType": 0,
+        "TargetsOpponent": false,
         "EffectType": "Put card from discard onto deck"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "180",
       "Value": "3e857d2a-37fa-4700-b769-d425cbc94bd8"
@@ -1518,6 +1637,7 @@
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "183",
@@ -1535,6 +1655,7 @@
         "EffectType": "Draw cards depending on flip"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "185",
       "Value": "e59204e9-c2d7-47b4-b5cd-75fd6fabc689"
@@ -1557,6 +1678,7 @@
     "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
         "$id": "188",
@@ -1564,6 +1686,7 @@
         "EffectType": "Create fossile Pokémon"
       }
     ],
+    "Ability": null,
     "CardId": {
       "$id": "189",
       "Value": "52c0f6ba-7482-4858-92b3-f3b06e4f3805"
@@ -1583,38 +1706,74 @@
   },
   {
     "$id": "191",
-    "AddToDiscardWhenCasting": true,
+    "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
-    "CardId": {
+    "Ability": {
       "$id": "192",
+      "$type": "TCGCards.Core.Abilities.RetreatCostModifierAbility, TCGCards",
+      "WorksOnSelf": true,
+      "OnlyForYou": false,
+      "Amount": 1,
+      "OnlyWithNameLike": null,
+      "ModifierType": 0,
+      "LimitedByTime": false,
+      "TurnsLeft": 0,
+      "UsableImmediately": true,
+      "TurnDuration": 9999,
+      "TriggerType": 10,
+      "PokemonOwner": null,
+      "AbilityType": "RetreatCostModifierAbility",
+      "Name": "The Rocket's Training Gym",
+      "Description": null,
+      "Usages": 9999,
+      "Effects": [],
+      "SelectedAbilityEffect": null,
+      "UsableWhileConfused": false,
+      "UsableWhileAsleep": false,
+      "UsableWhileParalyzed": false,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
+      "Id": {
+        "$id": "193",
+        "Value": "7d030f43-bebc-46b3-8e65-5bf97c759e81"
+      },
+      "UsedTimes": 0,
+      "Source": null,
+      "IsBuff": false
+    },
+    "CardId": {
+      "$id": "194",
       "Value": "b716bf6b-2b51-44bf-aa50-deb48721cd51"
     },
     "Id": {
-      "$id": "193",
+      "$id": "195",
       "Value": "0b498af0-cff4-41a8-aca9-557cc303b174"
     },
     "SetCode": "gym1",
     "Name": "The Rocket's Training Gym",
     "ImageUrl": "https://images.pokemontcg.io/gym1/104_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "194",
+    "$id": "196",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 1,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "195",
+        "$id": "197",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 5,
         "IsMay": false,
         "UseLastDiscardCount": false,
@@ -1622,12 +1781,13 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "196",
+      "$id": "198",
       "Value": "71f97fcd-5600-4bbc-bbe5-0bb8deff9b29"
     },
     "Id": {
-      "$id": "197",
+      "$id": "199",
       "Value": "b6bd7eaf-7009-4956-b59f-8aa5b3584344"
     },
     "SetCode": "gym1",
@@ -1640,61 +1800,148 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "198",
-    "AddToDiscardWhenCasting": true,
+    "$id": "200",
+    "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": {
+      "$id": "201",
+      "UsableImmediately": true,
+      "TurnDuration": 9999,
+      "TriggerType": 0,
+      "PokemonOwner": null,
+      "AbilityType": "Ability",
+      "Name": "Celadon City Gym",
+      "Description": null,
+      "Usages": 1,
+      "Effects": [
+        {
+          "$id": "202",
+          "$type": "TCGCards.TrainerEffects.DiscardAttachedEnergy, TCGCards",
+          "MayAbility": false,
+          "TargetingMode": 2,
+          "Amount": 1,
+          "EnergyType": 0,
+          "CoinflipConditional": null,
+          "CoinFlip": false,
+          "UseLastCoin": false,
+          "CheckTails": false,
+          "AllowUseWithoutTarget": false,
+          "OnlyWithNameLike": "Erika",
+          "EffectType": "Discard attached energy"
+        },
+        {
+          "$id": "203",
+          "$type": "TCGCards.TrainerEffects.FullHealEffect, TCGCards",
+          "TargetingMode": 0,
+          "UseLastTarget": true,
+          "EffectType": "Full Heal"
+        }
+      ],
+      "SelectedAbilityEffect": {
+        "$ref": "203"
+      },
+      "UsableWhileConfused": false,
+      "UsableWhileAsleep": false,
+      "UsableWhileParalyzed": false,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
+      "Id": {
+        "$id": "204",
+        "Value": "0eabca0e-2514-404c-a2e5-eaf8b2fb7d9c"
+      },
+      "UsedTimes": 0,
+      "Source": null,
+      "IsBuff": false
+    },
     "CardId": {
-      "$id": "199",
+      "$id": "205",
       "Value": "5d8c5725-8c5a-4c7a-8ae0-0aa2b3aeb737"
     },
     "Id": {
-      "$id": "200",
+      "$id": "206",
       "Value": "8b1906b0-084c-4758-9748-2d34afc77dc0"
     },
     "SetCode": "gym1",
     "Name": "Celadon City Gym",
     "ImageUrl": "https://images.pokemontcg.io/gym1/107_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "201",
-    "AddToDiscardWhenCasting": true,
+    "$id": "207",
+    "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": {
+      "$id": "208",
+      "$type": "TCGCards.Core.Abilities.RetreatCostModifierAbility, TCGCards",
+      "WorksOnSelf": true,
+      "OnlyForYou": false,
+      "Amount": -1,
+      "OnlyWithNameLike": "Misty",
+      "ModifierType": 0,
+      "LimitedByTime": false,
+      "TurnsLeft": 0,
+      "UsableImmediately": true,
+      "TurnDuration": 9999,
+      "TriggerType": 10,
+      "PokemonOwner": null,
+      "AbilityType": "RetreatCostModifierAbility",
+      "Name": "Cerulean City Gym",
+      "Description": null,
+      "Usages": 9999,
+      "Effects": [],
+      "SelectedAbilityEffect": null,
+      "UsableWhileConfused": false,
+      "UsableWhileAsleep": false,
+      "UsableWhileParalyzed": false,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
+      "Id": {
+        "$id": "209",
+        "Value": "920c7fe8-0495-4358-8239-eddaab5e97f4"
+      },
+      "UsedTimes": 0,
+      "Source": null,
+      "IsBuff": false
+    },
     "CardId": {
-      "$id": "202",
+      "$id": "210",
       "Value": "121078dd-107c-4f2d-8ea0-5e6742d3e546"
     },
     "Id": {
-      "$id": "203",
+      "$id": "211",
       "Value": "a300b8b5-c355-4234-9fbe-b7a0014dd5a0"
     },
     "SetCode": "gym1",
     "Name": "Cerulean City Gym",
     "ImageUrl": "https://images.pokemontcg.io/gym1/108_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "204",
+    "$id": "212",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "205",
+        "$id": "213",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 2,
         "AllowDiscardLess": false,
@@ -1703,10 +1950,11 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "206",
+        "$id": "214",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "EvolveSource": false,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "Amount": 2,
         "Names": "Erika",
@@ -1715,12 +1963,13 @@
         "AddToBench": false
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "207",
+      "$id": "215",
       "Value": "5aa3b830-a10a-414b-a644-87be86b7580f"
     },
     "Id": {
-      "$id": "208",
+      "$id": "216",
       "Value": "912f43d6-3e1b-4eb1-a67f-2b47a0220ff6"
     },
     "SetCode": "gym1",
@@ -1733,24 +1982,26 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "209",
+    "$id": "217",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "210",
+        "$id": "218",
         "$type": "TCGCards.TrainerEffects.HealAllEffect, TCGCards",
         "EffectType": "Heal all your pokemon",
         "Amount": 10
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "211",
+      "$id": "219",
       "Value": "a5ddc928-eb59-401b-b6ca-a334698948ff"
     },
     "Id": {
-      "$id": "212",
+      "$id": "220",
       "Value": "c2e79acd-ee40-4159-807c-771c1621b79b"
     },
     "SetCode": "gym1",
@@ -1763,23 +2014,25 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "213",
+    "$id": "221",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "214",
+        "$id": "222",
         "$type": "TCGCards.TrainerEffects.SetBasicFromHandAsActive, TCGCards",
         "EffectType": "Set basic Pokémon from hand as active"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "215",
+      "$id": "223",
       "Value": "60ee0951-5a41-4782-a5c2-20967dba5f90"
     },
     "Id": {
-      "$id": "216",
+      "$id": "224",
       "Value": "9fe472a7-ef76-40ec-9cca-03e2b962bdcc"
     },
     "SetCode": "gym1",
@@ -1792,50 +2045,103 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "217",
+    "$id": "225",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
-    "Effects": [],
+    "MaxBasicInHand": 99,
+    "Effects": [
+      {
+        "$id": "226",
+        "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
+        "TargetsOpponent": false,
+        "CoinflipConditional": null,
+        "OnlyOnCoinFlip": false,
+        "Amount": 2,
+        "AllowDiscardLess": false,
+        "CardType": 0,
+        "ShuffleIntoDeck": false,
+        "EffectType": "Discard cards"
+      },
+      {
+        "$id": "227",
+        "$type": "TCGCards.TrainerEffects.CreateAbilityOnGameEffect, TCGCards",
+        "EffectType": "Create Game Ability",
+        "Ability": {
+          "$id": "228",
+          "$type": "TCGCards.Core.Abilities.DamageTakenModifier, TCGCards",
+          "RoundDown": false,
+          "Modifer": -20.0,
+          "OnlyPreventFromBasic": false,
+          "AttackerName": "Misty",
+          "UsableImmediately": true,
+          "TurnDuration": 1,
+          "TriggerType": 12,
+          "PokemonOwner": null,
+          "AbilityType": "DamageTakenModifier",
+          "Name": "Misty",
+          "Description": null,
+          "Usages": 9999,
+          "Effects": [],
+          "SelectedAbilityEffect": null,
+          "UsableWhileConfused": false,
+          "UsableWhileAsleep": false,
+          "UsableWhileParalyzed": false,
+          "UsableWhileActive": true,
+          "UsableWhileBenched": true,
+          "Id": {
+            "$id": "229",
+            "Value": "4aa7f0fd-ab9b-46ea-91a2-ef68e5c1f474"
+          },
+          "UsedTimes": 0,
+          "Source": null,
+          "IsBuff": false
+        }
+      }
+    ],
+    "Ability": null,
     "CardId": {
-      "$id": "218",
+      "$id": "230",
       "Value": "42ae46ec-4ebd-4fb6-a806-966bfd8ad3c4"
     },
     "Id": {
-      "$id": "219",
+      "$id": "231",
       "Value": "445bb995-eb6f-4b76-a15a-33217740ed96"
     },
     "SetCode": "gym1",
     "Name": "Misty",
     "ImageUrl": "https://images.pokemontcg.io/gym1/18_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "220",
+    "$id": "232",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "221",
+        "$id": "233",
         "$type": "TCGCards.TrainerEffects.DiscardCardsAtRandom, TCGCards",
         "EffectType": "Discard at random",
+        "CoinflipConditional": null,
         "CoinFlip": true,
         "TargetsOpponent": true,
         "ShuffleIntoDeck": true,
         "Amount": 3
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "222",
+      "$id": "234",
       "Value": "f00c205b-9f62-4b23-9bfd-e903cf7bf20d"
     },
     "Id": {
-      "$id": "223",
+      "$id": "235",
       "Value": "a8719f0f-0934-4383-89dc-d374f8bec860"
     },
     "SetCode": "gym1",
@@ -1848,17 +2154,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "224",
+    "$id": "236",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "225",
+      "$id": "237",
       "Value": "996547f7-8311-46e2-bd24-e80809543e5e"
     },
     "Id": {
-      "$id": "226",
+      "$id": "238",
       "Value": "ec627c63-f703-403c-ad09-c9886cff774a"
     },
     "SetCode": "gym1",
@@ -1871,24 +2179,26 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "227",
+    "$id": "239",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "228",
+        "$id": "240",
         "$type": "TCGCards.TrainerEffects.HealAllEffect, TCGCards",
         "EffectType": "Heal all your pokemon",
         "Amount": 10
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "229",
+      "$id": "241",
       "Value": "33ca11c4-41d2-4e15-acb1-f6c3df4c957f"
     },
     "Id": {
-      "$id": "230",
+      "$id": "242",
       "Value": "869194fd-8991-4f3e-98f5-2f4792087deb"
     },
     "SetCode": "gym1",
@@ -1901,16 +2211,18 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "231",
+    "$id": "243",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "232",
+        "$id": "244",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 3,
         "IsMay": true,
         "UseLastDiscardCount": false,
@@ -1918,10 +2230,11 @@
         "EffectType": "Draw cards"
       },
       {
-        "$id": "233",
+        "$id": "245",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 3,
         "IsMay": true,
         "UseLastDiscardCount": false,
@@ -1929,12 +2242,13 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "234",
+      "$id": "246",
       "Value": "ff082fc8-128a-4554-a06c-0821599f8517"
     },
     "Id": {
-      "$id": "235",
+      "$id": "247",
       "Value": "d3fc2fe7-dab1-4b64-8242-cda718c0bda6"
     },
     "SetCode": "gym1",
@@ -1947,17 +2261,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "236",
+    "$id": "248",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "237",
+      "$id": "249",
       "Value": "89587761-0a52-490b-abd3-acccfe8b3b06"
     },
     "Id": {
-      "$id": "238",
+      "$id": "250",
       "Value": "77e488d3-e0b5-4803-ac6c-98a10bc04011"
     },
     "SetCode": "gym1",
@@ -1970,15 +2286,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "239",
+    "$id": "251",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "240",
+        "$id": "252",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 99,
         "AllowDiscardLess": true,
@@ -1987,10 +2305,11 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "241",
+        "$id": "253",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": true,
+        "CoinflipConditional": null,
         "Amount": 0,
         "IsMay": false,
         "UseLastDiscardCount": true,
@@ -1998,12 +2317,13 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "242",
+      "$id": "254",
       "Value": "bd042495-9fd7-4ede-a4c6-20e8aafa0089"
     },
     "Id": {
-      "$id": "243",
+      "$id": "255",
       "Value": "e440a0fa-3bf6-468f-99b7-f13baaa04da7"
     },
     "SetCode": "gym1",
@@ -2016,20 +2336,22 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "244",
+    "$id": "256",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "245",
+        "$id": "257",
         "$type": "TCGCards.TrainerEffects.LookAtOpponentHand, TCGCards",
         "EffectType": "Look at opponents hand"
       },
       {
-        "$id": "246",
+        "$id": "258",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": 99,
         "AllowDiscardLess": true,
@@ -2038,10 +2360,11 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "247",
+        "$id": "259",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 0,
         "IsMay": false,
         "UseLastDiscardCount": true,
@@ -2049,12 +2372,13 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "248",
+      "$id": "260",
       "Value": "4a520f03-bd29-4459-a98f-4b2cb89dfbde"
     },
     "Id": {
-      "$id": "249",
+      "$id": "261",
       "Value": "2bd0b279-1c4e-4fdb-9346-42ec6a11229d"
     },
     "SetCode": "gym1",
@@ -2067,17 +2391,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "250",
+    "$id": "262",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "251",
+      "$id": "263",
       "Value": "dd0fe16a-4830-4220-8836-342bfd9707d4"
     },
     "Id": {
-      "$id": "252",
+      "$id": "264",
       "Value": "a131e2dd-f748-4fd8-88b3-a490af050d97"
     },
     "SetCode": "gym1",
@@ -2090,40 +2416,91 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "253",
-    "AddToDiscardWhenCasting": true,
+    "$id": "265",
+    "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": {
+      "$id": "266",
+      "$type": "TCGCards.Core.Abilities.DealDamageModifier, TCGCards",
+      "OnlyIfAnyDamage": false,
+      "RoundDown": false,
+      "Modifer": 10.0,
+      "CoinFlip": true,
+      "UsableImmediately": true,
+      "TurnDuration": 9999,
+      "TriggerType": 13,
+      "PokemonOwner": null,
+      "AbilityType": "DealDamageModifier",
+      "Name": "Vermilion City Gym",
+      "Description": null,
+      "Usages": 9999,
+      "Effects": [
+        {
+          "$id": "267",
+          "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
+          "MayAbility": false,
+          "EnergyToDiscard": 0,
+          "EnergyType": 0,
+          "Amount": 10,
+          "TargetingMode": 0,
+          "CoinflipConditional": null,
+          "CoinFlip": false,
+          "ApplyWeaknessResistance": false,
+          "UseLastCoin": true,
+          "CheckTails": true,
+          "EffectType": "Damage"
+        }
+      ],
+      "SelectedAbilityEffect": {
+        "$ref": "267"
+      },
+      "UsableWhileConfused": false,
+      "UsableWhileAsleep": false,
+      "UsableWhileParalyzed": false,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
+      "Id": {
+        "$id": "268",
+        "Value": "395d4d16-5445-4ef3-b382-ff42a8048aac"
+      },
+      "UsedTimes": 0,
+      "Source": null,
+      "IsBuff": false
+    },
     "CardId": {
-      "$id": "254",
+      "$id": "269",
       "Value": "dab0aff8-c45a-4ff9-99b5-09d508eecd4a"
     },
     "Id": {
-      "$id": "255",
+      "$id": "270",
       "Value": "c3353730-cd0c-472a-8107-72819fdea195"
     },
     "SetCode": "gym1",
     "Name": "Vermilion City Gym",
     "ImageUrl": "https://images.pokemontcg.io/gym1/120_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "256",
+    "$id": "271",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "257",
+      "$id": "272",
       "Value": "de781c97-4ca2-457d-b57f-9f70128831a0"
     },
     "Id": {
-      "$id": "258",
+      "$id": "273",
       "Value": "9edb57ab-a472-4ce5-8142-33570959f072"
     },
     "SetCode": "gym1",
@@ -2136,13 +2513,14 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "259",
+    "$id": "274",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "260",
+        "$id": "275",
         "$type": "TCGCards.TrainerEffects.PickCardFromTopOfDeck, TCGCards",
         "EffectType": "Pick cards from top of deck",
         "AmountToPick": 2,
@@ -2152,12 +2530,13 @@
         "RevealPickedCards": false
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "261",
+      "$id": "276",
       "Value": "c329757b-1625-445f-affc-94204623c743"
     },
     "Id": {
-      "$id": "262",
+      "$id": "277",
       "Value": "9777a315-de35-44d5-ae18-b64f744e52bc"
     },
     "SetCode": "gym1",
@@ -2170,17 +2549,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "263",
+    "$id": "278",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "264",
+      "$id": "279",
       "Value": "c7c1f12b-9525-4c9c-8e46-487f023ece5b"
     },
     "Id": {
-      "$id": "265",
+      "$id": "280",
       "Value": "3fd31dd4-7543-4efd-bc4d-a007a5db8a09"
     },
     "SetCode": "gym1",
@@ -2193,17 +2574,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "266",
+    "$id": "281",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "267",
+      "$id": "282",
       "Value": "b195ad84-5ef5-4ca2-8edd-6118905eea08"
     },
     "Id": {
-      "$id": "268",
+      "$id": "283",
       "Value": "ca90d2ed-95eb-4741-b532-5c1381534211"
     },
     "SetCode": "gym1",
@@ -2216,17 +2599,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "269",
+    "$id": "284",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "270",
+      "$id": "285",
       "Value": "52fc3238-1a5d-41ee-8dfa-c2761fa4a7eb"
     },
     "Id": {
-      "$id": "271",
+      "$id": "286",
       "Value": "f76cf6b9-232c-4152-833a-6e7b1dc989bb"
     },
     "SetCode": "gym1",
@@ -2239,17 +2624,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "272",
+    "$id": "287",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "273",
+      "$id": "288",
       "Value": "1ba3e045-5826-47b8-b00c-ad81a5e4dc05"
     },
     "Id": {
-      "$id": "274",
+      "$id": "289",
       "Value": "8dd70f3b-de56-4128-bfcb-090f90c7805b"
     },
     "SetCode": "gym1",
@@ -2262,16 +2649,18 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "275",
+    "$id": "290",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "276",
+        "$id": "291",
         "$type": "TCGCards.TrainerEffects.SearchDeckForPokemon, TCGCards",
         "EffectType": "Search your deck for Pokémon",
         "EvolveSource": false,
+        "CoinflipConditional": null,
         "CoinFlip": false,
         "Amount": 1,
         "Names": "Brock",
@@ -2280,12 +2669,13 @@
         "AddToBench": false
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "277",
+      "$id": "292",
       "Value": "273adcce-6f3f-456e-ac0c-f65bb14c4187"
     },
     "Id": {
-      "$id": "278",
+      "$id": "293",
       "Value": "e4f5abb2-82c5-4bd7-9826-265d419035ba"
     },
     "SetCode": "gym1",
@@ -2298,17 +2688,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "279",
+    "$id": "294",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "280",
+      "$id": "295",
       "Value": "a0c30b06-fce9-478b-b75b-f8f2aa909b15"
     },
     "Id": {
-      "$id": "281",
+      "$id": "296",
       "Value": "1172360c-df52-4d41-b3ba-9c324ea55a30"
     },
     "SetCode": "gym1",
@@ -2321,40 +2713,72 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "282",
-    "AddToDiscardWhenCasting": true,
+    "$id": "297",
+    "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": {
+      "$id": "298",
+      "$type": "TCGCards.Core.Abilities.ResistanceModifierAbility, TCGCards",
+      "Modifier": 0.0,
+      "AttackerName": "Brock",
+      "DefenderName": null,
+      "UsableImmediately": true,
+      "TurnDuration": 9999,
+      "TriggerType": 10,
+      "PokemonOwner": null,
+      "AbilityType": "ResistanceModifierAbility",
+      "Name": "Pewter City Gym",
+      "Description": null,
+      "Usages": 9999,
+      "Effects": [],
+      "SelectedAbilityEffect": null,
+      "UsableWhileConfused": false,
+      "UsableWhileAsleep": false,
+      "UsableWhileParalyzed": false,
+      "UsableWhileActive": true,
+      "UsableWhileBenched": true,
+      "Id": {
+        "$id": "299",
+        "Value": "2043e50e-c57f-4b06-bf8a-6f5e93129228"
+      },
+      "UsedTimes": 0,
+      "Source": null,
+      "IsBuff": false
+    },
     "CardId": {
-      "$id": "283",
+      "$id": "300",
       "Value": "2123b1dc-6743-4baa-b78d-23a39a5452ee"
     },
     "Id": {
-      "$id": "284",
+      "$id": "301",
       "Value": "bc15a2eb-c300-466b-a599-5f8553413e6e"
     },
     "SetCode": "gym1",
     "Name": "Pewter City Gym",
     "ImageUrl": "https://images.pokemontcg.io/gym1/115_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "285",
+    "$id": "302",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "286",
+      "$id": "303",
       "Value": "8b5eefb0-066e-4a25-a760-a2a0c05d9585"
     },
     "Id": {
-      "$id": "287",
+      "$id": "304",
       "Value": "0083a211-8aad-480c-90c0-795e83b93b4c"
     },
     "SetCode": "gym1",
@@ -2367,17 +2791,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "288",
+    "$id": "305",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "289",
+      "$id": "306",
       "Value": "f5a409fc-2997-4837-8cbf-7f810e0aab78"
     },
     "Id": {
-      "$id": "290",
+      "$id": "307",
       "Value": "5e4052b0-aa9f-4b3e-b407-1f22424578fb"
     },
     "SetCode": "gym1",
@@ -2390,16 +2816,18 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "291",
+    "$id": "308",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "292",
+        "$id": "309",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 3,
         "IsMay": true,
         "UseLastDiscardCount": false,
@@ -2407,10 +2835,11 @@
         "EffectType": "Draw cards"
       },
       {
-        "$id": "293",
+        "$id": "310",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 3,
         "IsMay": true,
         "UseLastDiscardCount": false,
@@ -2418,12 +2847,13 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "294",
+      "$id": "311",
       "Value": "2873696f-daf3-4e9a-aff1-fba3a48e8f23"
     },
     "Id": {
-      "$id": "295",
+      "$id": "312",
       "Value": "c44ae620-aedc-484b-bae6-b7b9f0db8e98"
     },
     "SetCode": "gym1",
@@ -2436,17 +2866,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "296",
+    "$id": "313",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "297",
+      "$id": "314",
       "Value": "6981ee1c-ca59-4f97-8ba6-b1a272d5896a"
     },
     "Id": {
-      "$id": "298",
+      "$id": "315",
       "Value": "233a2673-933c-4136-93ac-cfe726a8049e"
     },
     "SetCode": "gym1",
@@ -2459,17 +2891,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "299",
+    "$id": "316",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "300",
+      "$id": "317",
       "Value": "bd6a5784-e74d-4fed-9203-be8edbbcf3a2"
     },
     "Id": {
-      "$id": "301",
+      "$id": "318",
       "Value": "92458066-2918-44cf-af4b-135548413ee5"
     },
     "SetCode": "gym1",
@@ -2482,17 +2916,19 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "302",
+    "$id": "319",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "303",
+      "$id": "320",
       "Value": "adf21400-f799-4ba3-9ba2-7c2089e4afa1"
     },
     "Id": {
-      "$id": "304",
+      "$id": "321",
       "Value": "eeccca62-97d8-4cf4-9190-a172085c686a"
     },
     "SetCode": "gym1",
@@ -2505,40 +2941,63 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "305",
+    "$id": "322",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
-    "Effects": [],
+    "MaxBasicInHand": 0,
+    "Effects": [
+      {
+        "$id": "323",
+        "$type": "TCGCards.TrainerEffects.RevealHandsEffect, TCGCards",
+        "EffectType": "Reveal hands",
+        "YouReveal": true,
+        "OpponentReveal": false
+      },
+      {
+        "$id": "324",
+        "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
+        "CardType": 5,
+        "EnergyType": 0,
+        "RevealCard": true,
+        "UseLastDiscardCount": false,
+        "ResultType": 0,
+        "TargetingMode": 0,
+        "EffectType": "Search your deck for a card"
+      }
+    ],
+    "Ability": null,
     "CardId": {
-      "$id": "306",
+      "$id": "325",
       "Value": "c6e4efba-7b03-4752-8a32-7b06d03bdfa4"
     },
     "Id": {
-      "$id": "307",
+      "$id": "326",
       "Value": "56161f28-e68c-4d79-87f0-6814bedccfce"
     },
     "SetCode": "gym1",
     "Name": "Good Manners",
     "ImageUrl": "https://images.pokemontcg.io/gym1/111_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "308",
+    "$id": "327",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [],
+    "Ability": null,
     "CardId": {
-      "$id": "309",
+      "$id": "328",
       "Value": "ef3767bb-5acf-4c90-bb11-1551783e11f5"
     },
     "Id": {
-      "$id": "310",
+      "$id": "329",
       "Value": "0d3e7856-e98d-462b-a29b-ca327d36d456"
     },
     "SetCode": "gym1",
@@ -2551,15 +3010,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "311",
+    "$id": "330",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "312",
+        "$id": "331",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": -1,
         "AllowDiscardLess": false,
@@ -2568,10 +3029,11 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "313",
+        "$id": "332",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": false,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 0,
         "IsMay": false,
         "UseLastDiscardCount": true,
@@ -2579,9 +3041,10 @@
         "EffectType": "Draw cards"
       },
       {
-        "$id": "314",
+        "$id": "333",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": true,
+        "CoinflipConditional": null,
         "OnlyOnCoinFlip": false,
         "Amount": -1,
         "AllowDiscardLess": false,
@@ -2590,10 +3053,11 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "315",
+        "$id": "334",
         "$type": "TCGCards.TrainerEffects.CardDrawEffect, TCGCards",
         "Opponents": true,
         "OnlyOnCoinFlip": false,
+        "CoinflipConditional": null,
         "Amount": 0,
         "IsMay": false,
         "UseLastDiscardCount": true,
@@ -2601,12 +3065,13 @@
         "EffectType": "Draw cards"
       }
     ],
+    "Ability": null,
     "CardId": {
-      "$id": "316",
+      "$id": "335",
       "Value": "b6646413-2723-4817-85cd-e51980afd69b"
     },
     "Id": {
-      "$id": "317",
+      "$id": "336",
       "Value": "2bbcc0f8-59ad-4712-b398-aeb9680e8742"
     },
     "SetCode": "gym1",
