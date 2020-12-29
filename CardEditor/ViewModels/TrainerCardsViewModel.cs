@@ -72,7 +72,7 @@ namespace CardEditor.ViewModels
 
             TrainerCards.Clear();
 
-            foreach (var trainer in Serializer.Deserialize<List<TrainerCard>>(json))
+            foreach (var trainer in Serializer.Deserialize<List<TrainerCard>>(json).OrderBy(x => x.SetCode).ThenBy(x => x.Name))
             {
                 TrainerCards.Add(trainer);
             }

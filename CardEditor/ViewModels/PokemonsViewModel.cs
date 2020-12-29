@@ -177,7 +177,7 @@ namespace CardEditor.ViewModels
 
 			PokemonCards.Clear();
 
-			foreach (var pokemon in Serializer.Deserialize<List<PokemonCard>>(json))
+			foreach (var pokemon in Serializer.Deserialize<List<PokemonCard>>(json).OrderBy(x => x.SetCode).ThenBy(x => x.Name))
 			{
 				PokemonCards.Add(new PokemonViewModel(pokemon));
 			}
