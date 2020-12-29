@@ -196,6 +196,7 @@ namespace TCGCards
         public bool DoublePoison { get; set; }
         public bool EvolvedThisTurn { get; set; }
         public bool AbilityDisabled { get; set; }
+        public Attack LastAttackUsed { get; set; }
 
         public int GetEnergyOfType(EnergyTypes energyType) => AttachedEnergy.Count(e => e.EnergyType == energyType || e.EnergyType == EnergyTypes.All);
 

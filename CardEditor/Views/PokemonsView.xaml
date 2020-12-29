@@ -185,6 +185,10 @@
                                         <Label Content="Ignore Effects" MinWidth="80"/>
                                         <CheckBox IsChecked="{Binding SelectedAttack.IgnoreEffects}" VerticalAlignment="Center"/>
                                     </DockPanel>
+                                    <DockPanel DockPanel.Dock="Top">
+                                        <Label Content="Can't use after" MinWidth="80"/>
+                                        <TextBox Text="{Binding SelectedAttack.StoppedIfLastAttackName}"/>
+                                    </DockPanel>
                                     <local:DynamicInputControl DataContext="{Binding SelectedAttack}">
 
                                     </local:DynamicInputControl>

@@ -524,6 +524,7 @@ namespace TCGCards.Core
 
             SendEventToPlayers(new PokemonAttackedEvent() { Player = ActivePlayer.Id });
 
+            ActivePlayer.ActivePokemonCard.LastAttackUsed = attack;
             TriggerAbilityOfType(TriggerType.Attacks, ActivePlayer.ActivePokemonCard);
             TriggerAbilityOfType(TriggerType.Attacked, NonActivePlayer.ActivePokemonCard);
 

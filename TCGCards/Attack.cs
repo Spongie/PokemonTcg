@@ -26,6 +26,7 @@ namespace TCGCards
         private bool applyResistance = true;
         private DiscardCostMode extraCostMode = DiscardCostMode.Discard;
         private bool ignoreEffects;
+        private string stoppedIfLastAttackName;
 
         public Attack()
         {
@@ -104,6 +105,17 @@ namespace TCGCards
                 FirePropertyChanged();
             }
         }
+
+        public string StoppedIfLastAttackName
+        {
+            get { return stoppedIfLastAttackName; }
+            set
+            {
+                stoppedIfLastAttackName = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public int Damage
         {
@@ -230,6 +242,12 @@ namespace TCGCards
         public virtual bool CanBeUsed(GameField game, Player owner, Player opponent)
         {
             if (game.FirstTurn || foreverDisabled)
+            {
+                return false;
+            }
+
+            var lastAttack = owner.ActivePokemonCard.LastAttackUsed;
+            if (lastAttack != null && !string.IsNullOrEmpty(StoppedIfLastAttackName) && StoppedIfLastAttackName == lastAttack.Name)
             {
                 return false;
             }
