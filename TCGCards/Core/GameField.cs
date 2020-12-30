@@ -618,7 +618,7 @@ namespace TCGCards.Core
             {
                 GameLog.AddMessage(NonActivePlayer.ActivePokemonCard.Ability.Name + "triggered by dying");
                 NonActivePlayer.ActivePokemonCard.KnockedOutBy = ActivePlayer.ActivePokemonCard;
-                NonActivePlayer.ActivePokemonCard.Ability.Trigger(NonActivePlayer, ActivePlayer, 0, this);
+                TriggerAbilityOfType(TriggerType.KilledByAttack, NonActivePlayer.ActivePokemonCard, 0, NonActivePlayer.ActivePokemonCard);
             }
 
             DamageStoppers.ForEach(damageStopper => damageStopper.TurnsLeft--);
@@ -977,8 +977,10 @@ namespace TCGCards.Core
                     continue;
                 }
 
-                var other = Players.First(player => !player.Id.Equals(ability.GetActivator(ActivePlayer)));
-                if (ability.TriggerType == triggerType && ability.CanActivate(this, ability.GetActivator(ActivePlayer), other))
+                var activator = ability.GetActivator(ActivePlayer);
+                var other = GetOpponentOf(activator);
+
+                if (ability.TriggerType == triggerType && ability.CanActivate(this, activator, other))
                 {
                     GameLog.AddMessage($"Ability {ability.Name} from {ability.PokemonOwner.Name} triggers...");
                     SendEventToPlayers(new AbilityActivatedEvent
@@ -986,7 +988,7 @@ namespace TCGCards.Core
                         PokemonId = pokemon.Id
                     });
                     ability.SetTarget(target);
-                    ability.Trigger(pokemon.Owner, Players.First(x => !x.Id.Equals(pokemon.Owner.Id)), damage, this);
+                    ability.Trigger(pokemon.Owner, GetOpponentOf(pokemon.Owner), damage, this);
                     ability.SetTarget(null);
                 }
             }
