@@ -1,5 +1,6 @@
 ﻿using CardEditor.Views;
 using TCGCards.Core;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Attacks
 {
@@ -8,6 +9,18 @@ namespace TCGCards.Attacks
         private int selfDamage;
         private int teamBenchDamage;
         private int enemyBenchDamage;
+        private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinFlipConditional
+        {
+            get { return coinFlipConditional; }
+            set
+            {
+                coinFlipConditional = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Damage to your bench")]
         public int TeamBenchDamage
@@ -44,6 +57,11 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
+            if (!CoinFlipConditional.IsOk(game, owner))
+            {
+                return;
+            }
+
             var source = game?.ActivePlayer.ActivePokemonCard;
 
             owner.ActivePokemonCard.DealDamage(SelfDamage, game, source, false);
