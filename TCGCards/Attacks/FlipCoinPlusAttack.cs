@@ -10,6 +10,7 @@ namespace TCGCards.Attacks
         private int extraForTails;
         private int coinsToFlip = 1;
         private int headsForBonus = 1;
+        private bool bonusForAllHeads;
 
         public FlipCoinPlusAttack() : base()
         {
@@ -60,12 +61,27 @@ namespace TCGCards.Attacks
             }
         }
 
+        [DynamicInput("Bonus for all heads", InputControl.Boolean)]
+        public bool BonusForAllHeads
+        {
+            get { return bonusForAllHeads; }
+            set
+            {
+                bonusForAllHeads = value;
+                FirePropertyChanged();
+            }
+        }
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {
             int extraDamage;
+            var heads = game.FlipCoins(CoinsToFlip);
 
-            if (game.FlipCoins(CoinsToFlip) >= HeadsForBonus)
+            if (bonusForAllHeads)
+            {
+                extraDamage = ExtraforHeads * heads;
+            }
+            else if (heads >= HeadsForBonus)
             {
                 extraDamage = ExtraforHeads;
             }
