@@ -20,27 +20,27 @@ namespace TCGCardsTests.Effects
             };
 
 
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.True(pokemon.IsBurned);
 
             pokemon.IsBurned = false;
             effect.StatusEffect = StatusEffect.Confuse;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.True(pokemon.IsConfused);
 
             pokemon.IsConfused = false;
             effect.StatusEffect = StatusEffect.Paralyze;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.True(pokemon.IsParalyzed);
 
             pokemon.IsParalyzed = false;
             effect.StatusEffect = StatusEffect.Poison;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.True(pokemon.IsPoisoned);
 
             pokemon.IsPoisoned = false;
             effect.StatusEffect = StatusEffect.Sleep;
-            effect.Process(null, new Player(), new Player { ActivePokemonCard = pokemon }, null);
+            effect.Process(new GameField(), new Player(), new Player { ActivePokemonCard = pokemon }, null);
             Assert.True(pokemon.IsAsleep);
         }
 
