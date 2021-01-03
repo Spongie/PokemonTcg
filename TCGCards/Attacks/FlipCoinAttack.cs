@@ -1,6 +1,8 @@
-﻿using CardEditor.Views;
+﻿using System.Linq;
+using CardEditor.Views;
 using Entities;
 using TCGCards.Core;
+using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Attacks
@@ -12,6 +14,8 @@ namespace TCGCards.Attacks
         private StatusEffect statusEffect;
         private TargetingMode targetingMode;
         private bool useLastDiscardCount;
+        private bool discardEnergyForeachHeads;
+        private EnergyTypes typeToDiscard;
 
         public FlipCoinAttack() : base()
         {
@@ -72,7 +76,6 @@ namespace TCGCards.Attacks
                 FirePropertyChanged();
             }
         }
-
 
         public override Damage GetDamage(Player owner, Player opponent, GameField game)
         {

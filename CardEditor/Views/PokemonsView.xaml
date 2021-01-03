@@ -66,7 +66,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
-        <DockPanel Grid.Column="1" DataContext="{Binding SelectedCard}" Margin="0,0,5,0" LastChildFill="False">
+        <DockPanel Grid.Column="1" DataContext="{Binding SelectedCard}" Margin="0,0,5,0" LastChildFill="False" x:Name="cardGroup">
             <DockPanel DockPanel.Dock="Top">
                 <Label Content="Id" MinWidth="80"/>
                 <TextBlock VerticalAlignment="Center" Text="{Binding Card.CardId, UpdateSourceTrigger=PropertyChanged}"/>
@@ -186,7 +186,7 @@
                                         <CheckBox IsChecked="{Binding SelectedAttack.IgnoreEffects}" VerticalAlignment="Center"/>
                                     </DockPanel>
                                     <DockPanel DockPanel.Dock="Top">
-                                        <Label Content="Can't use after" MinWidth="80"/>
+                                        <Label Content="Only use after" MinWidth="80"/>
                                         <TextBox Text="{Binding SelectedAttack.StoppedIfLastAttackName}"/>
                                     </DockPanel>
                                     <local:DynamicInputControl DataContext="{Binding SelectedAttack}">

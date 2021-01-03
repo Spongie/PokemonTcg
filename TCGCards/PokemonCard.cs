@@ -7,6 +7,7 @@ using TCGCards.Core;
 using TCGCards.Core.Abilities;
 using TCGCards.Core.GameEvents;
 using TCGCards.Core.SpecialAbilities;
+using TCGCards.TrainerEffects;
 
 namespace TCGCards
 {
@@ -226,6 +227,11 @@ namespace TCGCards
                 {
                     attack.DamageModifier = null;
                 }
+
+                foreach (var effect in attack.Effects.OfType<DamageEffect>())
+                {
+                    effect.DamageModifier?.ReduceTurnCount();
+                }
             }
 
             PlayedThisTurn = false;
@@ -335,6 +341,20 @@ namespace TCGCards
                 foreach (var ability in GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageTakenModifier>())
                 {
                     totalDamage = ability.GetModifiedDamage(totalDamage, source, game);
+                }
+
+                if (game != null)
+                {
+                    foreach (var ability in game.GetGlobalDamageTakenModifiers())
+                    {
+                        if (Ability == ablity)
+                        {
+                            //Self ability will already be triggered
+                            continue;
+                        }
+
+                        totalDamage = ability.GetModifiedDamage(totalDamage, source, game);
+                    }
                 }
             }
 

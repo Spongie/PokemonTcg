@@ -3,6 +3,7 @@ using Entities.Models;
 using NetworkingCore;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using TCGCards.TrainerEffects;
 
 namespace TCGCards.Core

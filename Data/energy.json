@@ -176,6 +176,7 @@
         },
         "Amount": 10,
         "TargetingMode": 0,
+        "OpponentPicks": false,
         "EffectType": "Heal"
       }
     ],
@@ -250,6 +251,7 @@
         "Amount": 10,
         "TargetingMode": 3,
         "ApplyWeaknessResistance": false,
+        "DamageModifier": null,
         "EffectType": "Damage"
       }
     ],

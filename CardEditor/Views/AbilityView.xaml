@@ -60,7 +60,10 @@
                     <ListBox ItemsSource="{Binding Effects}" SelectedItem="{Binding SelectedAbilityEffect}" DockPanel.Dock="Top">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Label Content="{Binding EffectType}" />
+                                <DockPanel>
+                                    <Label DockPanel.Dock="Left" Content="{Binding EffectType}" />
+                                    <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Content="&#xf1f8;" FontSize="20" FontFamily="{StaticResource FontAwesome}" Click="Delete_Thing_Click" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

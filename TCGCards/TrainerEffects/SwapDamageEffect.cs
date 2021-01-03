@@ -13,12 +13,24 @@ namespace TCGCards.TrainerEffects
     {
         private TargetingMode firstTarget;
         private TargetingMode secondTarget;
-
+        private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
+        
         public string EffectType
         {
             get
             {
                 return "Swap damage";
+            }
+        }
+
+        [DynamicInput("Condition", InputControl.Dynamic)]
+        public CoinFlipConditional CoinFlipConditional
+        {
+            get { return coinFlipConditional; }
+            set
+            {
+                coinFlipConditional = value;
+                FirePropertyChanged();
             }
         }
 

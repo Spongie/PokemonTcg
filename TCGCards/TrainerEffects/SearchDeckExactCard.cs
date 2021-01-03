@@ -1,36 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using CardEditor.Views;
 using Entities.Models;
+using NetworkingCore;
 using TCGCards.Core;
+using TCGCards.Core.Deckfilters;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
 {
-    public class SetRemainingHp : DataModel, IEffect
+    public class SearchDeckExactCard : DataModel, IEffect
     {
-        private bool onlyIfDead;
-        private int remainingHp;
+        private string name;
         private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
-        private TargetingMode targeting = TargetingMode.Self;
+        private bool inverted;
 
         public string EffectType
         {
             get
             {
-                return "Set remaining HP";
-            }
-        }
-
-        [DynamicInput("Target", InputControl.Dropdown, typeof(TargetingMode))]
-        public TargetingMode TargetMode
-        {
-            get { return targeting; }
-            set
-            {
-                targeting = value;
-                FirePropertyChanged();
+                return "Search deck specific";
             }
         }
 
@@ -45,24 +33,24 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        [DynamicInput("Only if dead", InputControl.Boolean)]
-        public bool OnlyIfDead
+        [DynamicInput("Card name")]
+        public string CardName
         {
-            get { return onlyIfDead; }
+            get { return name; }
             set
             {
-                onlyIfDead = value;
+                name = value;
                 FirePropertyChanged();
             }
         }
-        
-        [DynamicInput("Remaining HP")]
-        public int RemainingHp
+
+        [DynamicInput("Inverted", InputControl.Boolean)]
+        public bool Inverted
         {
-            get { return remainingHp; }
+            get { return inverted; }
             set
             {
-                remainingHp = value;
+                inverted = value;
                 FirePropertyChanged();
             }
         }
@@ -80,14 +68,18 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            var target = Targeting.AskForTargetFromTargetingMode(TargetMode, game, caster, opponent, pokemonSource);
-
-            if (OnlyIfDead && !target.IsDead())
+            if (!CoinFlipConditional.IsOk(game, caster))
             {
                 return;
             }
 
-            target.DamageCounters = target.Hp - RemainingHp;
+            var filter = new ExactCardFilter() { Name = CardName, Invert = Inverted };
+
+            foreach (var card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { filter }, 1))
+            {
+                card.RevealToAll();
+                caster.DrawCardsFromDeck(new List<NetworkId> { card.Id });
+            }
         }
     }
 }

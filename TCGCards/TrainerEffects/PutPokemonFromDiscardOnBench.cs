@@ -23,8 +23,8 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-        [DynamicInput("Targets opponent", InputControl.Boolean)]
-        public bool TargetsOpponent
+        [DynamicInput("Allow target opponent?", InputControl.Boolean)]
+        public bool AskYesNoToTargetOpponent
         {
             get { return targetsOpponent; }
             set
@@ -59,7 +59,16 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            var target = TargetsOpponent ? opponent : caster;
+            Player target;
+
+            if (AskYesNoToTargetOpponent && game.AskYesNo(caster, "Put Pokémon from opponents discard onto their bench?"))
+            {
+                target = opponent;
+            }
+            else
+            {
+                target = caster;
+            }
 
             var pokemons = target.DiscardPile.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList();
 

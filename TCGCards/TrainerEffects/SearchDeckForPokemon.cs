@@ -19,6 +19,7 @@ namespace TCGCards.TrainerEffects
         private bool revealCard;
         private bool evolveSource;
         private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+        private bool invertNameSearch;
 
         public string EffectType
         {
@@ -68,6 +69,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 names = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Invert name search", InputControl.Boolean)]
+        public bool InvertNameSearch
+        {
+            get { return invertNameSearch; }
+            set
+            {
+                invertNameSearch = value;
                 FirePropertyChanged();
             }
         }
@@ -129,7 +141,7 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            foreach (PokemonCard card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) { OnlyBasic = addToBench } }, Amount))
+            foreach (PokemonCard card in DeckSearchUtil.SearchDeck(game, caster, new List<IDeckFilter> { new PokemonWithNameOrTypeFilter(Names, EnergyType) { OnlyBasic = addToBench, InvertName = InvertNameSearch } }, Amount))
             {
                 caster.Deck.Cards = new Stack<Card>(caster.Deck.Cards.Except(new[] { card }));
                 

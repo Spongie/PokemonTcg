@@ -28,6 +28,11 @@ namespace TCGCards.Attacks
 
         public override void ProcessEffects(GameField game, Player owner, Player opponent)
         {
+            if (chosenAttack == null)
+            {
+                return;
+            }
+
             chosenAttack.ProcessEffects(game, owner, opponent);
             chosenAttack = null;
 

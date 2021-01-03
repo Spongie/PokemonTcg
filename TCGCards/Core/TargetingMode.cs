@@ -10,6 +10,7 @@
         OpponentPokemon,
         AnyPokemon,
         AttachedTo,
-        Self
+        Self,
+        LastEffectTarget
     }
 }

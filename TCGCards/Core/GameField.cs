@@ -384,6 +384,22 @@ namespace TCGCards.Core
             CheckDeadPokemon();
         }
 
+        public List<IDamageTakenModifier> GetGlobalDamageTakenModifiers()
+        {
+            var modifiers = new List<IDamageTakenModifier>();
+
+            foreach (var pokemon in ActivePlayer.GetAllPokemonCards())
+            {
+                modifiers.AddRange(pokemon.GetAllActiveAbilities(this, ActivePlayer, NonActivePlayer).OfType<DamageTakenModifier>().Where(a => a.IsGlobal));
+            }
+            foreach (var pokemon in NonActivePlayer.GetAllPokemonCards())
+            {
+                modifiers.AddRange(pokemon.GetAllActiveAbilities(this, ActivePlayer, NonActivePlayer).OfType<DamageTakenModifier>().Where(a => a.IsGlobal));
+            }
+
+            return modifiers;
+        }
+
         public void AddPokemonToBench(Player owner, List<PokemonCard> selectedPokemons)
         {
             if (GameState != GameFieldState.BothSelectingBench)

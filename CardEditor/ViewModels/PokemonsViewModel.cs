@@ -17,6 +17,8 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TCGCards;
 using TCGCards.Core;
+using TCGCards.Core.Abilities;
+using TCGCards.TrainerEffects.Util;
 
 namespace CardEditor.ViewModels
 {

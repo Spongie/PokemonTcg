@@ -15,6 +15,7 @@ namespace TCGCards.TrainerEffects
         }
 
         private int amount;
+        private bool opponents;
 
         [DynamicInput("Amount")]
         public int Amount
@@ -27,6 +28,16 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Opponents", InputControl.Boolean)]
+        public bool Opponents
+        {
+            get { return opponents; }
+            set
+            {
+                opponents = value;
+                FirePropertyChanged();
+            }
+        }
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
@@ -40,7 +51,9 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
-            foreach (var pokemon in caster.GetAllPokemonCards())
+            var target = Opponents ? opponent : caster;
+
+            foreach (var pokemon in target.GetAllPokemonCards())
             {
                 pokemon.Heal(Amount, game);
             }

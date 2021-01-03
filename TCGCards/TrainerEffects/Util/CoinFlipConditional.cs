@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CardEditor.Views;
+﻿using CardEditor.Views;
 using Entities.Models;
 using TCGCards.Core;
 
 namespace TCGCards.TrainerEffects.Util
 {
-
     public class CoinFlipConditional : DataModel, IEffectCondition
     {
         private bool useLastCoin;
@@ -123,7 +119,6 @@ namespace TCGCards.TrainerEffects.Util
         {
             var targetValue = CheckTails ? 0 : 1;
             var lastValue = game != null && game.LastCoinFlipResult ? 1 : 0;
-
             if (UseLastCoin)
             {
                 return lastValue == targetValue;
@@ -132,19 +127,26 @@ namespace TCGCards.TrainerEffects.Util
             {
                 int heads = game.FlipCoins(CoinsToFlip);
 
+                bool result;
                 if (CheckTails)
                 {
                     var tails = coinsToFlip - heads;
-                    return tails >= SuccessessForBonus;
+                    result = tails >= SuccessessForBonus;
+                    game.LastCoinFlipResult = result;
+                    return result;
                 }
 
-                return heads >= SuccessessForBonus;
+                result = heads >= SuccessessForBonus;
+                game.LastCoinFlipResult = result;
+                return result;
             }
             else if (FlipCoin && game.FlipCoins(1) != targetValue)
             {
+                game.LastCoinFlipResult = false;
                 return false;
             }
 
+            game.LastCoinFlipResult = true;
             return true;
         }
     }

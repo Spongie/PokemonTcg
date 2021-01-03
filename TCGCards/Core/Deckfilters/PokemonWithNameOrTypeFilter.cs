@@ -25,6 +25,7 @@ namespace TCGCards.Core.Deckfilters
         public string Names { get; set; }
         public EnergyTypes Type { get; set; }
         public bool OnlyBasic { get; set; }
+        public bool InvertName { get; set; }
 
         public bool IsCardValid(Card card)
         {
@@ -43,7 +44,14 @@ namespace TCGCards.Core.Deckfilters
             
             if (valid && !string.IsNullOrEmpty(Names))
             {
-                valid = Names.Split(';').Contains(card.Name);
+                if (!InvertName)
+                {
+                    valid = Names.Split(';').Contains(card.Name);
+                }
+                else
+                {
+                    valid = !Names.Split(';').Contains(card.Name);
+                }
             }
 
             if (OnlyBasic && pokemon.Stage > 0)

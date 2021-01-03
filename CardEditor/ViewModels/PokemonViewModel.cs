@@ -15,7 +15,6 @@ namespace CardEditor.ViewModels
 		private PokemonCard card;
 		private Attack selectedAttack;
 		private IEffect selectedEffect;
-		private IEffect selectedAbilityEffect;
 
 		public PokemonViewModel() :this(new PokemonCard())
 		{
@@ -35,7 +34,16 @@ namespace CardEditor.ViewModels
 			MoveEffectDownCommand = new RelayCommand(CanMoveEffectDown, MoveEffectDown);
 			MoveAttackUpCommand = new RelayCommand(CanMoveAttackUp, MoveAttackUp);
 			MoveAttackDownCommand = new RelayCommand(CanMoveAttackDown, MoveAttackDown);
+			DeleteAbilitySelectedEffect = new RelayCommand(CanAddAttack, DeleteAbilityEffect);
 		}
+
+        private void DeleteAbilityEffect(object obj)
+        {
+            if (Card.Ability != null)
+            {
+				Card.Ability.Effects.Remove((IEffect)obj);
+            }
+        }
 
         private void MoveEffectUp(object obj)
         {
@@ -245,5 +253,6 @@ namespace CardEditor.ViewModels
         public ICommand MoveEffectDownCommand { get; set; }
 		public ICommand MoveAttackUpCommand { get; set; }
 		public ICommand MoveAttackDownCommand { get; set; }
-	}
+        public ICommand DeleteAbilitySelectedEffect { get; set; }
+    }
 }

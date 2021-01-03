@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using TCGCards.TrainerEffects.Util;
+using Xunit;
 using TCGCards.Core;
 using Entities;
 
@@ -162,6 +163,29 @@ namespace TCGCards.TrainerEffects.Util.Tests
             };
 
             Assert.True(condition.IsOk(new GameField() { LastCoinFlipResult = CoinFlipper.TAILS, LastCoinFlipHeadCount = 0 }, new Player()));
+        }
+
+        [Fact]
+        public void IsOk_Double_Tails_First_Second_Check_Last()
+        {
+            var game = new GameField().WithFlips(CoinFlipper.TAILS, CoinFlipper.TAILS);
+
+            var conditional = new CoinFlipConditional
+            {
+                FlipCoin = true,
+                CoinsToFlip = 2,
+                SuccessessForBonus = 2,
+                CheckTails = true
+            };
+
+            Assert.True(conditional.IsOk(game, null));
+
+            var secondCondition = new CoinFlipConditional
+            {
+                UseLastCoin = true
+            };
+
+            Assert.True(secondCondition.IsOk(game, null));
         }
     }
 }

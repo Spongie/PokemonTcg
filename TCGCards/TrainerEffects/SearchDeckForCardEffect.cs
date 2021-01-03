@@ -97,7 +97,6 @@ namespace TCGCards.TrainerEffects
             }
         }
 
-
         public string EffectType
         {
             get

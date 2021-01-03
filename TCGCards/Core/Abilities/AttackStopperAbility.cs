@@ -1,4 +1,5 @@
 ﻿using CardEditor.Views;
+using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Core.Abilities
 {
@@ -14,19 +15,18 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.Attacked;
         }
 
-        private bool coinFlip;
+        private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
 
-        [DynamicInput("Coin Flip", InputControl.Boolean)]
-        public bool CoinFlip
+        [DynamicInput("Coin Flip", InputControl.Dynamic)]
+        public CoinFlipConditional CoinFlipConditional
         {
-            get { return coinFlip; }
+            get { return coinFlipConditional; }
             set
             {
-                coinFlip = value;
+                coinFlipConditional = value;
                 FirePropertyChanged();
             }
         }
-
 
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
@@ -35,7 +35,7 @@ namespace TCGCards.Core.Abilities
 
         public bool IsStopped(GameField game, PokemonCard attacker, PokemonCard defender)
         {
-            return CoinFlip && game.FlipCoins(1) == 1;
+            return CoinFlipConditional.IsOk(game, PokemonOwner.Owner);
         }
     }
 }

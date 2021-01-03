@@ -30,5 +30,6 @@
         RevealCardsMessage,
         SelectStatus,
         StatusSelected,
+        AskForAmount,
     }
 }

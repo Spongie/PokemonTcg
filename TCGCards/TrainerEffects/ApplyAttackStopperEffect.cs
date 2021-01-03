@@ -12,12 +12,25 @@ namespace TCGCards.TrainerEffects
         private int duration;
         private bool onlyStopAttacksOnSelf;
         private string onlyThisAttack;
+        private int onlyIfLessThanThisHp = 9999;
+        private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
 
         public string EffectType
         {
             get
             {
                 return "Apply attack stopper";
+            }
+        }
+
+        [DynamicInput("Coin flip", InputControl.Dynamic)]
+        public CoinFlipConditional CoinFlipConditional
+        {
+            get { return coinFlipConditional; }
+            set
+            {
+                coinFlipConditional = value;
+                FirePropertyChanged();
             }
         }
 
@@ -65,6 +78,17 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Only if less than hp")]
+        public int OnlyIfLessThanHP
+        {
+            get { return onlyIfLessThanThisHp; }
+            set
+            {
+                onlyIfLessThanThisHp = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
@@ -78,7 +102,17 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            if (!CoinFlipConditional.IsOk(game, caster))
+            {
+                return;
+            }
+
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, pokemonSource);
+
+            if (target.Hp > onlyIfLessThanThisHp)
+            {
+                return;
+            }
 
             var ability = new AttackStoppingAbility()
             {

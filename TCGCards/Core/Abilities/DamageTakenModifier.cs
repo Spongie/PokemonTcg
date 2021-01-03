@@ -9,6 +9,18 @@ namespace TCGCards.Core.Abilities
         private bool roundDown;
         private bool onlyPreventBasic;
         private string attackerName;
+        private bool isGlobal;
+
+        [DynamicInput("Is Global?", InputControl.Boolean)]
+        public bool IsGlobal
+        {
+            get { return isGlobal; }
+            set
+            {
+                isGlobal = value;
+                FirePropertyChanged();
+            }
+        }
 
         [DynamicInput("Round down?", InputControl.Boolean)]
         public bool RoundDown

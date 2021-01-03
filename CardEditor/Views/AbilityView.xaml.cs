@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using TCGCards.Core;
+using TCGCards.TrainerEffects;
 
 namespace CardEditor.Views
 {
@@ -25,6 +26,12 @@ namespace CardEditor.Views
                 ability.Effects.Add(window.SelectedEffect);
                 ability.SelectedAbilityEffect = ability.Effects.Last();
             }
+        }
+
+        private void Delete_Thing_Click(object sender, RoutedEventArgs e)
+        {
+            var ability = (Ability)DataContext;
+            ability.Effects.Remove((IEffect)((Control)sender).DataContext);
         }
     }
 }

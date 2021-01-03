@@ -121,6 +121,9 @@ namespace TCGCards.TrainerEffects.Util
                     selectedId = caster.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message).Cards.First();
                     target = (PokemonCard)game.Cards[selectedId];
                     break;
+                case TargetingMode.LastEffectTarget:
+                    target = game.LastTarget;
+                    break;
                 case TargetingMode.AnyPokemon:
                     throw new NotImplementedException("TargetingMode.AnyPokemon not implemented in Targeting");
                 default:

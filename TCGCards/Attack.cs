@@ -247,7 +247,7 @@ namespace TCGCards
             }
 
             var lastAttack = owner.ActivePokemonCard.LastAttackUsed;
-            if (lastAttack != null && !string.IsNullOrEmpty(StoppedIfLastAttackName) && StoppedIfLastAttackName == lastAttack.Name)
+            if (lastAttack != null && !string.IsNullOrEmpty(StoppedIfLastAttackName) && StoppedIfLastAttackName != lastAttack.Name)
             {
                 return false;
             }

@@ -11,7 +11,8 @@ namespace TCGCards.TrainerEffects
         private TargetingMode targetingMode;
         private int amount;
         private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
-        
+        private bool opponentPicks;
+
         [DynamicInput("Condition", InputControl.Dynamic)]
         public CoinFlipConditional CoinflipConditional
         {
@@ -45,6 +46,18 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Opponent Picks", InputControl.Boolean)]
+        public bool OpponentPicks
+        {
+            get { return opponentPicks; }
+            set
+            {
+                opponentPicks = value;
+                FirePropertyChanged();
+            }
+        }
+
+
         public string EffectType
         {
             get
@@ -67,12 +80,15 @@ namespace TCGCards.TrainerEffects
 
         public void Process(GameField game, Player caster, Player opponent, PokemonCard pokemonSource)
         {
+            var selector = OpponentPicks ? opponent : caster;
+            var other = OpponentPicks ? caster : opponent;
+
             if (!CoinflipConditional.IsOk(game, caster))
             {
                 return;
             }
 
-            PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
+            PokemonCard target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, selector, other, selector.ActivePokemonCard);
 
             target?.Heal(Amount, game);
         }

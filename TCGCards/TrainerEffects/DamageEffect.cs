@@ -4,6 +4,7 @@ using Entities.Models;
 using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
+using TCGCards.Core.SpecialAbilities;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.TrainerEffects
@@ -95,6 +96,8 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        public DamageModifier DamageModifier { get; set; }
+
         public string EffectType
         {
             get
@@ -152,11 +155,20 @@ namespace TCGCards.TrainerEffects
                 return;
             }
 
-            int damage; 
+            int damage;
+
+            if (DamageModifier != null)
+            {
+                damage = DamageModifier.NewDamage;
+            }
+            else
+            {
+                damage = Amount;
+            }
 
             if (ApplyWeaknessResistance)
             {
-                damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(Amount, pokemonSource, target, null, game.FindResistanceModifier());
+                damage = DamageCalculator.GetDamageAfterWeaknessAndResistance(damage, pokemonSource, target, null, game.FindResistanceModifier());
             }
             else
             {

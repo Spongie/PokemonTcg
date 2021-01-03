@@ -19,6 +19,7 @@ namespace Assets.Code
         SelectingFromList,
         SelectingAttack,
         SelectingStatus,
-        LookingAtRevealedCards
+        LookingAtRevealedCards,
+        EnteringAmount
     }
 }

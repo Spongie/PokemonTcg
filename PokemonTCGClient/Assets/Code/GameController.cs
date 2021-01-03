@@ -46,6 +46,7 @@ namespace Assets.Code
         public GameObject NoButton;
         public GameObject EscapeMenu;
         public GameObject WinMenu;
+        public GameObject EnterAmountPanel;
         public SelectStatusPanel SelectStatusPanel;
         public Text winnerText;
         public PilesInfoHandler playerInfoHandler;
@@ -336,6 +337,7 @@ namespace Assets.Code
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectAttack, OnStartSelectAttack);
             NetworkManager.Instance.RegisterCallback(MessageTypes.DiscardCards, OnStartDiscardCards);
             NetworkManager.Instance.RegisterCallback(MessageTypes.SelectPrizeCards, OnStartPickPrize);
+            NetworkManager.Instance.RegisterCallback(MessageTypes.AskForAmount, OnStartEnterAmount);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogNewMessages, OnNewLogMessage);
             NetworkManager.Instance.RegisterCallback(MessageTypes.GameLogReload, OnGameLogReload);
             NetworkManager.Instance.RegisterCallback(MessageTypes.YesNoMessage, OnYesNoMessage);
@@ -677,11 +679,25 @@ namespace Assets.Code
                     doneButton.SetActive(false);
                     cancelButton.SetActive(false);
                     break;
+                case SpecialGameState.EnteringAmount:
+                    doneButton.SetActive(false);
+                    cancelButton.SetActive(false);
+                    endTurnButton.SetActive(false);
+                    break;
                 default:
                     doneButton.SetActive(false);
                     cancelButton.SetActive(false);
                     break;
             }
+        }
+
+        private void OnStartEnterAmount(object message, NetworkId messageId)
+        {
+            var amountMessage = (AskForAmountMessage)message;
+            infoText.text = amountMessage.Info;
+            SpecialState = SpecialGameState.EnteringAmount;
+            EnterAmountPanel.SetActive(true);
+            EnableButtons();
         }
 
         private void OnStartPickPrize(object message, NetworkId messageId)
@@ -695,9 +711,16 @@ namespace Assets.Code
 
         private void OnStartPickFromList(object message, NetworkId messageId)
         {
+            var pickFromListMessage = (PickFromListMessage)message;
             SpecialState = SpecialGameState.SelectingFromList;
             selectFromListPanel.SetActive(true);
-            selectFromListPanel.GetComponent<SelectFromListPanel>().Init((PickFromListMessage)message);
+            selectFromListPanel.GetComponent<SelectFromListPanel>().Init(pickFromListMessage);
+
+            if (!string.IsNullOrEmpty(pickFromListMessage.Info))
+            {
+                infoText.text = pickFromListMessage.Info;
+            }
+
             EnableButtons();
         }
 
