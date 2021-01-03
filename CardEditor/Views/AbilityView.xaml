@@ -26,23 +26,27 @@
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Label Content="Usable while active" MinWidth="80"/>
-                    <CheckBox IsChecked="{Binding UsableWhileActive}"/>
+                    <CheckBox IsChecked="{Binding UsableWhileActive}" VerticalAlignment="Center"/>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Label Content="Usable while benched" MinWidth="80"/>
-                    <CheckBox IsChecked="{Binding UsableWhileBenched}"/>
+                    <CheckBox IsChecked="{Binding UsableWhileBenched}" VerticalAlignment="Center"/>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Label Content="Usable while asleep" MinWidth="80"/>
-                    <CheckBox IsChecked="{Binding UsableWhileAsleep}"/>
+                    <CheckBox IsChecked="{Binding UsableWhileAsleep}" VerticalAlignment="Center"/>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <Label Content="Usable while paralyzed" MinWidth="80"/>
-                    <CheckBox IsChecked="{Binding UsableWhileParalyzed}"/>
+                    <CheckBox IsChecked="{Binding UsableWhileParalyzed}" VerticalAlignment="Center"/>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
-                    <Label Content="Usable while confused" MinWidth="80"/>
-                    <CheckBox IsChecked="{Binding UsableWhileConfused}"/>
+                    <Label Content="Usable while confused" MinWidth="80" VerticalAlignment="Center"/>
+                    <CheckBox IsChecked="{Binding UsableWhileConfused}" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Label Content="Removed When Benched" MinWidth="80"/>
+                    <CheckBox IsChecked="{Binding RemovedWhenBenched}" VerticalAlignment="Center"/>
                 </DockPanel>
                 <local:DynamicInputControl DataContext="{Binding }" VerticalAlignment="Stretch">
 

@@ -18,6 +18,7 @@ namespace TCGCards.TrainerEffects
         private SearchDeckResult result = SearchDeckResult.PutInHand; 
         private TargetingMode targetingMode;
         private CoinFlipConditional coinFlipConditional = new CoinFlipConditional();
+        private int amount;
 
         [DynamicInput("Condition", InputControl.Dynamic)]
         public CoinFlipConditional CoinFlipConditional
@@ -49,6 +50,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 energyType = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Cards to search")]
+        public int Amount
+        {
+            get { return amount; }
+            set
+            {
+                amount = value;
                 FirePropertyChanged();
             }
         }
@@ -131,7 +143,7 @@ namespace TCGCards.TrainerEffects
             }
 
             var filter = CardUtil.GetCardFilters(CardType, EnergyType).ToList();
-            int amount = useLastDiscardCount ? game.LastDiscard : 1;
+            int amount = useLastDiscardCount ? game.LastDiscard : Amount;
 
             foreach (var card in DeckSearchUtil.SearchDeck(game, caster, filter, amount))
             {

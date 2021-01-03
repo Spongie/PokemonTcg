@@ -26,6 +26,7 @@ namespace TCGCards.Core
         private bool usableWhileConfused = false;
         private int turnDuration = 9999;
         private bool usableImmediately = true;
+        private bool removedWhenBenched;
 
         public Ability():this(null)
         {
@@ -191,6 +192,17 @@ namespace TCGCards.Core
         public int UsedTimes { get; set; }
         public Card Source { get; set; }
         public bool IsBuff { get; set; }
+
+        public bool RemovedWhenBenched
+        {
+            get { return removedWhenBenched; }
+            set
+            {
+                removedWhenBenched = value;
+                FirePropertyChanged();
+            }
+        }
+
 
         public void Trigger(Player owner, Player opponent, int damageTaken, GameField game)
         {

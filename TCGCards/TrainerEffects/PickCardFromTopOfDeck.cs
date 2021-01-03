@@ -25,6 +25,7 @@ namespace TCGCards.TrainerEffects
         private CardType cardType;
         private EnergyTypes energyType;
         private bool revealPickedCards;
+        private bool shuffleBack;
 
         [DynamicInput("Cards to pick")]
         public int AmountToPick
@@ -81,6 +82,16 @@ namespace TCGCards.TrainerEffects
             }
         }
 
+        [DynamicInput("Shuffle rest into your deck", InputControl.Boolean)]
+        public bool ShuffleBack
+        {
+            get { return shuffleBack; }
+            set
+            {
+                shuffleBack = value;
+                FirePropertyChanged();
+            }
+        }
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
@@ -113,11 +124,20 @@ namespace TCGCards.TrainerEffects
                     }
                     cardsDrawn.Add(card);
                 }
+                else if (ShuffleBack)
+                {
+                    caster.Deck.Cards.Push(card);
+                }
                 else
                 {
                     card.RevealToAll();
                     discardedCards.Add(card);
                 }
+            }
+
+            if (shuffleBack)
+            {
+                caster.Deck.Shuffle();
             }
 
             caster.DrawCardsFromDeck(cardsDrawn);

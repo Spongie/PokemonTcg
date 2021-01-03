@@ -1,10 +1,12 @@
 ﻿using CardEditor.ViewModels;
+using Entities;
 using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using TCGCards.TrainerEffects;
+using TCGCards.TrainerEffects.Util;
 
 namespace CardEditor.Views
 {
@@ -30,6 +32,13 @@ namespace CardEditor.Views
                     return;
                 }
 
+                var valuesetter = e.NewValue.GetType().GetCustomAttribute<ValueSetterAttribute>();
+                if (valuesetter != null)
+                {
+                    CreateValueSetterInput(valuesetter, e.NewValue);
+                    return;
+                }
+
                 foreach (var property in e.NewValue.GetType().GetProperties())
                 {
                     var dynamicInput = property.GetCustomAttribute<DynamicInputAttribute>();
@@ -41,7 +50,7 @@ namespace CardEditor.Views
 
                     var panel = new DockPanel();
                     panel.LastChildFill = true;
-                    //panel.MaxHeight = 30;
+                    
                     if (dynamicInput.InputType != InputControl.Ability && dynamicInput.InputType != InputControl.Dynamic)
                     {
                         var label = new Label { Content = dynamicInput.DisplayName, MinWidth = 200 };
@@ -122,6 +131,43 @@ namespace CardEditor.Views
             {
                 MessageBox.Show("Some error generating inputs, re-select attack");
             }
+        }
+
+        private void CreateValueSetterInput(ValueSetterAttribute valuesetter, object target)
+        {
+            var panel = new DockPanel();
+            panel.LastChildFill = true;
+
+            var propertyCombobox = new ComboBox();
+            propertyCombobox.DisplayMemberPath = "PropertyName";
+            propertyCombobox.MinWidth = 150;
+
+            var x = target.GetType().GetProperty("SelectedProperty").GetValue(target);
+
+            foreach (var p in valuesetter.TargetType.GetProperties())
+            {
+                if (p.PropertyType.Namespace.StartsWith("System"))
+                {
+                    propertyCombobox.Items.Add(new PropertyInfoData(p));
+                }
+            }
+
+
+            propertyCombobox.SetBinding(ComboBox.SelectedItemProperty, new Binding("SelectedProperty") { Mode = BindingMode.TwoWay });
+            DockPanel.SetDock(propertyCombobox, Dock.Left);
+
+            var textInput = new TextBox();
+            textInput.SetBinding(TextBox.TextProperty, new Binding("ValueToSet") { Mode = BindingMode.TwoWay });
+            DockPanel.SetDock(textInput, Dock.Left);
+
+            var label = new Label { Content = "Property" };
+            DockPanel.SetDock(label, Dock.Left);
+
+            panel.Children.Add(label);
+            panel.Children.Add(propertyCombobox);
+            panel.Children.Add(textInput);
+
+            targetControl.Children.Add(panel);
         }
 
         private void AddAbility(object obj)

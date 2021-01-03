@@ -35,6 +35,7 @@ namespace CardEditor.Views
         Dropdown,
         Grid,
         Ability,
-        Dynamic
+        Dynamic,
+        List
     }
 }

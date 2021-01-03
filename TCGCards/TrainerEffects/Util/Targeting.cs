@@ -138,5 +138,10 @@ namespace TCGCards.TrainerEffects.Util
 
             return target;
         }
+
+        public static bool IsYours(TargetingMode mode)
+        {
+            return mode == TargetingMode.YourBench || mode == TargetingMode.YourPokemon;
+        }
     }
 }

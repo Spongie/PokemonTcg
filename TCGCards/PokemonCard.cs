@@ -183,6 +183,7 @@ namespace TCGCards
         public PokemonCard EvolvedFrom { get; set; }
         public List<EnergyCard> AttachedEnergy { get; set; } = new List<EnergyCard>();
         public List<TrainerCard> AttachedTools { get; set; } = new List<TrainerCard>();
+        public bool CanEvolveWithoutOtherChecks { get; set; }
         public bool PlayedThisTurn { get; set; }
         public bool ParalyzedThisTurn { get; set; }
         public bool IsParalyzed { get; set; }
@@ -538,11 +539,25 @@ namespace TCGCards
             return abilities;
         }
 
-        public bool IsDead() => DamageCounters >= Hp;
+        public bool IsDead()
+        {
+            return DamageCounters >= Hp;
+        }
 
-        public bool CanEvolve() => !PlayedThisTurn && !EvolvedThisTurn && Owner.TurnsTaken > 0;
+        public bool CanEvolve()
+        {
+            if (CanEvolveWithoutOtherChecks || (EvolvedFrom != null && EvolvedFrom.CanEvolveWithoutOtherChecks))
+            {
+                return true;
+            }
 
-        public bool CanAttack() => !IsParalyzed && !IsAsleep && !TemporaryAbilities.OfType<PassiveAbility>().Any(x => x.ModifierType == PassiveModifierType.StopAttack);
+            return !PlayedThisTurn && !EvolvedThisTurn && Owner.TurnsTaken > 0;
+        }
+
+        public bool CanAttack()
+        {
+            return !IsParalyzed && !IsAsleep && !TemporaryAbilities.OfType<PassiveAbility>().Any(x => x.ModifierType == PassiveModifierType.StopAttack);
+        }
 
         public void SetBase(PokemonCard target)
         {

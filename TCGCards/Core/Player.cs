@@ -122,11 +122,31 @@ namespace TCGCards.Core
             pokemon.RevealToAll();
         }
 
+        public void ClearAbilitiesWhenBenched(PokemonCard pokemon)
+        {
+            var toRemove = new List<Ability>();
+
+            foreach (var ability in pokemon.TemporaryAbilities)
+            {
+                if (ability.RemovedWhenBenched)
+                {
+                    toRemove.Add(ability);
+                    pokemon.AttachedTools.Remove((TrainerCard)ability.Source);
+                }
+            }
+
+            foreach (var ability in toRemove)
+            {
+                pokemon.TemporaryAbilities.Remove(ability);
+            }
+        }
+
         public void ForceRetreatActivePokemon(PokemonCard replacementPokemon, GameField game)
         {
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
             BenchedPokemon.ReplaceWith(replacementPokemon, oldActivePokemon);
+            ClearAbilitiesWhenBenched(oldActivePokemon);
             oldActivePokemon.ClearStatusEffects();
 
             game?.SendEventToPlayers(new PokemonBecameActiveEvent
@@ -152,6 +172,8 @@ namespace TCGCards.Core
 
             var oldActivePokemon = ActivePokemonCard;
             ActivePokemonCard = replacementPokemon;
+            
+            ClearAbilitiesWhenBenched(oldActivePokemon);
 
             ActivePokemonCard.DamageStoppers = ActivePokemonCard.DamageStoppers.Where(d => !d.LastsUntilDamageTaken).ToList();
             BenchedPokemon.ReplaceWith(replacementPokemon, oldActivePokemon);
