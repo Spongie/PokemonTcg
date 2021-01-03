@@ -29,6 +29,7 @@ namespace Assets.Code._2D
         internal void Init(AskForAmountMessage amountMessage)
         {
             Info.text = amountMessage.Info;
+            Input.text = "0";
         }
     }
 }

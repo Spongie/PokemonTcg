@@ -46,7 +46,7 @@ namespace Assets.Code
         public GameObject NoButton;
         public GameObject EscapeMenu;
         public GameObject WinMenu;
-        public GameObject EnterAmountPanel;
+        public EnterAmountPanel EnterAmountPanel;
         public SelectStatusPanel SelectStatusPanel;
         public Text winnerText;
         public PilesInfoHandler playerInfoHandler;
@@ -693,10 +693,9 @@ namespace Assets.Code
 
         private void OnStartEnterAmount(object message, NetworkId messageId)
         {
-            var amountMessage = (AskForAmountMessage)message;
-            infoText.text = amountMessage.Info;
             SpecialState = SpecialGameState.EnteringAmount;
-            EnterAmountPanel.SetActive(true);
+            EnterAmountPanel.gameObject.SetActive(true);
+            EnterAmountPanel.Init((AskForAmountMessage)message);
             EnableButtons();
         }
 
