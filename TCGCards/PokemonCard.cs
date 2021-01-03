@@ -331,7 +331,7 @@ namespace TCGCards
             
             if (source != null && preventable)
             {
-                foreach (var ability in source.GetAllActiveAbilities(game, Owner, game?.Players.First(x => !x.Id.Equals(Owner.Id))).OfType<IDamageDealtModifier>())
+                foreach (var ability in source.GetAllActiveAbilities(game, Owner, game.GetOpponentOf(Owner)).OfType<IDamageDealtModifier>())
                 {
                     totalDamage = ability.GetModifiedDamage(totalDamage, game);
                 }
