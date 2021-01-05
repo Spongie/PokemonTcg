@@ -187,7 +187,7 @@ namespace TCGCards
                         switch (ExtraCostMode)
                         {
                             case DiscardCostMode.Discard:
-                                owner.ActivePokemonCard.DiscardEnergyCard(card, game);
+                                owner.ActivePokemonCard.DiscardEnergyCard(card, game, true);
                                 break;
                             case DiscardCostMode.ToHand:
                                 owner.ActivePokemonCard.AttachedEnergy.Remove(card);

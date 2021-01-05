@@ -496,14 +496,17 @@ namespace TCGCards
             return !IsParalyzed && !IsAsleep && AttachedEnergy.Sum(x => x.Amount) >= (RetreatCost + game.GetRetreatCostModified());
         }
 
-        public void DiscardEnergyCard(EnergyCard energyCard, GameField game)
+        public void DiscardEnergyCard(EnergyCard energyCard, GameField game, bool isExtraCost = false)
         {
-            var preventer = TemporaryAbilities.OfType<EffectPreventer>().FirstOrDefault();
-
-            if (preventer != null)
+            if (!isExtraCost)
             {
-                game.GameLog.AddMessage($"Discard energy card prevented by {preventer.Name}");
-                return;
+                var preventer = TemporaryAbilities.OfType<EffectPreventer>().FirstOrDefault();
+
+                if (preventer != null)
+                {
+                    game.GameLog.AddMessage($"Discard energy card prevented by {preventer.Name}");
+                    return;
+                }
             }
 
             AttachedEnergy.Remove(energyCard);
