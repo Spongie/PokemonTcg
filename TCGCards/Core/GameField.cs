@@ -262,7 +262,7 @@ namespace TCGCards.Core
 
         public void PlayEnergyCard(EnergyCard energyCard, PokemonCard target)
         {
-            if (!EnergyRule.CanPlayEnergyCard(energyCard))
+            if (!EnergyRule.CanPlayEnergyCard(energyCard, target))
             {
                 GameLog.AddMessage("Energy-rule disallowed playing the energy");
                 return;
@@ -285,7 +285,7 @@ namespace TCGCards.Core
 
             GameLog.AddMessage($"Attaching {energyCard.GetName()} to {target.Name}");
 
-            EnergyRule.CardPlayed();
+            EnergyRule.CardPlayed(energyCard, target);
             energyCard.RevealToAll();
             target.AttachedEnergy.Add(energyCard);
 

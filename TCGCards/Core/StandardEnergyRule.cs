@@ -2,7 +2,7 @@
 {
     public struct StandardEnergyRule : IEnergyRule
     {
-        public bool CanPlayEnergyCard(EnergyCard card)
+        public bool CanPlayEnergyCard(EnergyCard card, PokemonCard target)
         {
             return CardsPlayedThisTurn == 0;
         }
@@ -12,7 +12,7 @@
             CardsPlayedThisTurn = 0;
         }
 
-        public void CardPlayed()
+        public void CardPlayed(EnergyCard card, PokemonCard target)
         {
             CardsPlayedThisTurn++;
         }
