@@ -17,7 +17,7 @@ namespace TCGCards.Core.Tests
 
             p.SetActivePokemon(card);
 
-            Assert.False(p.Hand.Contains(card));
+            Assert.DoesNotContain(card, p.Hand);
         }
 
         [Fact]
@@ -73,7 +73,12 @@ namespace TCGCards.Core.Tests
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
 
-            p.PlayEnergyCard(energyCard, p.ActivePokemonCard, null);
+            var game = new GameField()
+            {
+                ActivePlayer = p
+            };
+
+            game.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(), new GameField());
 
@@ -91,8 +96,13 @@ namespace TCGCards.Core.Tests
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
+            
+            var game = new GameField()
+            {
+                ActivePlayer = p
+            };
 
-            p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
+            game.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), new GameField());
 
@@ -115,8 +125,13 @@ namespace TCGCards.Core.Tests
 
             p.SetActivePokemon(card);
             p.SetBenchedPokemon(card2);
+            
+            var game = new GameField()
+            {
+                ActivePlayer = p
+            };
 
-            p.PlayEnergyCard(energyCard, p.ActivePokemonCard);
+            game.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), new GameField());
 

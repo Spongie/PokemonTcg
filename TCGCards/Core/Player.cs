@@ -201,7 +201,6 @@ namespace TCGCards.Core
             }
 
             endedTurn = true;
-            HasPlayedEnergy = false;
             ActivePokemonCard?.EndTurn(game);
 
             foreach(var pokemon in BenchedPokemon.ValidPokemonCards)
@@ -255,44 +254,6 @@ namespace TCGCards.Core
 
             ActivePokemonCard = pokemon;
             pokemon.RevealToAll();
-        }
-
-        public void PlayEnergyCard(EnergyCard energyCard, PokemonCard targetPokemonCard, GameField game = null)
-        {
-            if(HasPlayedEnergy || !Hand.Contains(energyCard) || Hand.Contains(targetPokemonCard))
-                return;
-
-            foreach (var ability in targetPokemonCard.TemporaryAbilities)
-            {
-                if (ability is DisableEnergyAttachmentAbility)
-                {
-                    game?.GameLog.AddMessage($"Ability {ability.Name} stops attaching energy to {targetPokemonCard.Name}");
-                    return;
-                }
-            }
-
-            game?.GameLog.AddMessage($"Attaching {energyCard.GetName()} to {targetPokemonCard.GetName()}");
-
-            HasPlayedEnergy = true;
-            energyCard.RevealToAll();
-            targetPokemonCard.AttachedEnergy.Add(energyCard);
-
-            bool fromHand = false;
-            if (Hand.Contains(energyCard)) 
-            {
-                fromHand = true;
-                Hand.Remove(energyCard);
-            }
-
-            game?.SendEventToPlayers(new EnergyCardsAttachedEvent()
-            {
-                AttachedTo = targetPokemonCard,
-                EnergyCard = energyCard
-            });
-
-            energyCard.OnAttached(targetPokemonCard, fromHand, game);
-            
-            game?.PushGameLogUpdatesToPlayers();
         }
 
         internal void ResetTurn()
@@ -375,7 +336,6 @@ namespace TCGCards.Core
         public List<Card> DiscardPile { get; set; }
         public Deck Deck { get; set; }
         public List<Card> Hand { get; set; }
-        public bool HasPlayedEnergy { get; protected set; }
         public NetworkId Id { get; set; }
         public bool IsDead { get; set; }
         public int TurnsTaken { get; set; }

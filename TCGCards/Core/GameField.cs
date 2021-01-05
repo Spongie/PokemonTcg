@@ -32,6 +32,7 @@ namespace TCGCards.Core
             GameState = GameFieldState.WaitingForConnection;
             GameLog = new GameLog();
             forcedFlips = new Queue<bool>();
+            EnergyRule = new StandardEnergyRule();
         }
 
         public GameField WithFlips(params bool[] flips)
@@ -255,6 +256,53 @@ namespace TCGCards.Core
             {
                 TriggerAbilityOfType(TriggerType.EnterPlay, evolution);
             }
+
+            PushGameLogUpdatesToPlayers();
+        }
+
+        public void PlayEnergyCard(EnergyCard energyCard, PokemonCard target)
+        {
+            if (!EnergyRule.CanPlayEnergyCard(energyCard))
+            {
+                GameLog.AddMessage("Energy-rule disallowed playing the energy");
+                return;
+            }
+
+            if (!ActivePlayer.Hand.Contains(energyCard) || ActivePlayer.Hand.Contains(target))
+            {
+                GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} tried something wierd");
+                return;
+            }
+
+            foreach (var ability in target.TemporaryAbilities)
+            {
+                if (ability is DisableEnergyAttachmentAbility)
+                {
+                    GameLog.AddMessage($"Ability {ability.Name} stops attaching energy to {target.Name}");
+                    return;
+                }
+            }
+
+            GameLog.AddMessage($"Attaching {energyCard.GetName()} to {target.Name}");
+
+            EnergyRule.CardPlayed();
+            energyCard.RevealToAll();
+            target.AttachedEnergy.Add(energyCard);
+
+            bool fromHand = false;
+            if (ActivePlayer.Hand.Contains(energyCard))
+            {
+                fromHand = true;
+                ActivePlayer.Hand.Remove(energyCard);
+            }
+
+            SendEventToPlayers(new EnergyCardsAttachedEvent()
+            {
+                AttachedTo = target,
+                EnergyCard = energyCard
+            });
+
+            energyCard.OnAttached(target, fromHand, this);
 
             PushGameLogUpdatesToPlayers();
         }
@@ -1049,6 +1097,7 @@ namespace TCGCards.Core
                 TemporaryPassiveAbilities.Remove(ability);
             }
 
+            EnergyRule.Reset();
             ActivePlayer.EndTurn(this);
             ActivePlayer.TurnsTaken++;
 
@@ -1181,6 +1230,7 @@ namespace TCGCards.Core
         public bool FirstTurn { get; set; } = true;
         public bool IgnorePostAttack { get; set; }
         public TrainerCard StadiumCard { get; set; }
+        public IEnergyRule EnergyRule { get; set; }
 
         [JsonIgnore]
         public TrainerCard CurrentTrainerCard { get; set; }

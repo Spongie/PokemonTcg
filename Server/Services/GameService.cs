@@ -218,7 +218,7 @@ namespace Server.Services
             var energyCard = (EnergyCard)game.Cards[energyCardId];
             var target = (PokemonCard)game.Cards[targetId];
             
-            game.ActivePlayer.PlayEnergyCard(energyCard, target, game);
+            game.PlayEnergyCard(energyCard, target);
 
             return game;
         }

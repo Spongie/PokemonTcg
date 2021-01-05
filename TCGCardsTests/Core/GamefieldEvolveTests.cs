@@ -28,7 +28,7 @@ namespace TCGCardsTests.Core
 
             Assert.Equal(evolution, player.ActivePokemonCard);
 
-            game.ActivePlayer.PlayEnergyCard(energyCard, evolution, game);
+            game.PlayEnergyCard(energyCard, evolution);
 
             Assert.Single(evolution.AttachedEnergy);
         }
