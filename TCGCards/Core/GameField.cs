@@ -712,9 +712,12 @@ namespace TCGCards.Core
             TriggerAbilityOfType(TriggerType.EnterPlay, pokemon);
         }
 
-        public void PlayTrainerCard(TrainerCard trainerCard)
+        public void PlayTrainerCard(TrainerCard trainerCard, Player asPlayer = null)
         {
-            if (!ActivePlayer.Hand.Contains(trainerCard))
+            var caster = asPlayer == null ? ActivePlayer : asPlayer;
+            var opponent = GetOpponentOf(caster);
+
+            if (asPlayer == null && !caster.Hand.Contains(trainerCard))
             {
                 GameLog.AddMessage($"{ActivePlayer?.NetworkPlayer?.Name} Tried to play a trainer ({trainerCard.Name}) card not in his hand");
                 return;
@@ -725,7 +728,7 @@ namespace TCGCards.Core
                 GameLog.AddMessage($"{trainerCard.Name} stopped by ability");
                 return;
             }
-            else if (!trainerCard.CanCast(this, ActivePlayer, NonActivePlayer))
+            else if (!trainerCard.CanCast(this, caster, opponent))
             {
                 GameLog.AddMessage($"{trainerCard.Name} could not be cast because something is missing");
                 return;
@@ -740,41 +743,60 @@ namespace TCGCards.Core
             trainerCard.RevealToAll();
             CurrentTrainerCard = trainerCard;
 
-            GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
+            TriggerAllAbilitiesOfType(TriggerType.TrainerCardPlayed);
+
+            GameLog.AddMessage(caster.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
             PushGameLogUpdatesToPlayers();
 
-            ActivePlayer.Hand.Remove(trainerCard);
+            caster.Hand.Remove(trainerCard);
 
             var trainerEvent = new TrainerCardPlayed()
             {
                 Card = trainerCard,
-                Player = ActivePlayer.Id
+                Player = caster.Id
             };
 
             SendEventToPlayers(trainerEvent);
 
-            trainerCard.Process(this, ActivePlayer, NonActivePlayer);
+            trainerCard.Process(this, caster, opponent);
             
             if (trainerCard.AddToDiscardWhenCasting)
             {
-                ActivePlayer.DiscardPile.Add(trainerCard);
+                trainerCard.Owner.DiscardPile.Add(trainerCard);
             }
 
             CurrentTrainerCard = null;
 
-            if (ActivePlayer.IsDead)
+            if (caster.IsDead)
             {
-                GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} loses because they drew to many cards");
-                EndGame(NonActivePlayer.Id);
+                GameLog.AddMessage($"{caster.NetworkPlayer?.Name} loses because they drew to many cards");
+                EndGame(opponent.Id);
             }
 
             SendEventToPlayers(new GameInfoEvent { });
+        }
+
+        private void TriggerAllAbilitiesOfType(TriggerType triggerType)
+        {
+            if (StadiumCard != null && StadiumCard.Ability.TriggerType == triggerType)
+            {
+                StadiumCard.Ability.Trigger(ActivePlayer, NonActivePlayer, 0, this);
+            }
+
+            foreach (var player in Players)
+            {
+                foreach (var pokemon in player.GetAllPokemonCards())
+                {
+                    TriggerAbilityOfType(triggerType, pokemon);
+                }
+            }
         }
 
         private void PlayStadiumCard(TrainerCard trainerCard)
         {
             trainerCard.RevealToAll();
             CurrentTrainerCard = trainerCard;
+            TriggerAllAbilitiesOfType(TriggerType.TrainerCardPlayed);
 
             GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " Plays " + trainerCard.GetName());
             PushGameLogUpdatesToPlayers();

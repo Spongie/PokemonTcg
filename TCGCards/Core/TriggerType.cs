@@ -22,6 +22,7 @@
         GrassAttached,
         ElectricAttached,
         PsychicAttached,
-        FightingAttached
+        FightingAttached,
+        TrainerCardPlayed
     }
 }
