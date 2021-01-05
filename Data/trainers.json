@@ -3360,27 +3360,35 @@
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "380",
+        "$type": "TCGCards.TrainerEffects.SetEnergyRuleEffect, TCGCards",
+        "EffectType": "Set Energy Rule",
+        "RuleType": "TCGCards.Core.EnergyRules.BlainesEnergyRule, TCGCards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "OnlyReplaceIfOldAllows": true
+      }
+    ],
     "Ability": null,
     "CardId": {
-      "$id": "380",
+      "$id": "381",
       "Value": "bb227bc0-9cbc-4d16-8ca9-6328a7106219"
     },
     "Id": {
-      "$id": "381",
+      "$id": "382",
       "Value": "b1bd0f9c-861b-4bde-af02-10e58d98860a"
     },
     "SetCode": "gym2",
     "Name": "Blaine",
     "ImageUrl": "https://images.pokemontcg.io/gym2/100_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
     "IgnoreInBuilder": false
   },
   {
-    "$id": "382",
+    "$id": "383",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3388,11 +3396,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "383",
+      "$id": "384",
       "Value": "43a4f0f3-e7b4-4444-907f-54e2a3ef1db6"
     },
     "Id": {
-      "$id": "384",
+      "$id": "385",
       "Value": "fc9b5a3c-52d0-446b-815e-bd46476206bb"
     },
     "SetCode": "gym2",
@@ -3405,7 +3413,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "385",
+    "$id": "386",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3413,11 +3421,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "386",
+      "$id": "387",
       "Value": "d0f942e5-6eb4-4f4c-914c-226c75ac919e"
     },
     "Id": {
-      "$id": "387",
+      "$id": "388",
       "Value": "97ccbc9a-a95e-4668-8c83-c8402728c3dd"
     },
     "SetCode": "gym2",
@@ -3430,7 +3438,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "388",
+    "$id": "389",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3438,11 +3446,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "389",
+      "$id": "390",
       "Value": "055f3b7d-11d6-4655-8da4-e44d1e4f4a22"
     },
     "Id": {
-      "$id": "390",
+      "$id": "391",
       "Value": "c8aea9f0-aafc-415e-a0b1-1bfe13026758"
     },
     "SetCode": "gym2",
@@ -3455,7 +3463,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "391",
+    "$id": "392",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3463,11 +3471,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "392",
+      "$id": "393",
       "Value": "7961c511-f762-46c3-b482-c7532cfab786"
     },
     "Id": {
-      "$id": "393",
+      "$id": "394",
       "Value": "1f11b922-818b-4d03-b166-7be5f3fe5acb"
     },
     "SetCode": "gym2",
@@ -3480,7 +3488,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "394",
+    "$id": "395",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3488,11 +3496,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "395",
+      "$id": "396",
       "Value": "8c17f95d-0dea-486d-a887-870502ca7cd5"
     },
     "Id": {
-      "$id": "396",
+      "$id": "397",
       "Value": "0639a684-eb85-4522-9cc5-dc85291472fe"
     },
     "SetCode": "gym2",
@@ -3505,7 +3513,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "397",
+    "$id": "398",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3513,11 +3521,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "398",
+      "$id": "399",
       "Value": "1dc28313-cd92-45bf-8f91-c5284d136f1d"
     },
     "Id": {
-      "$id": "399",
+      "$id": "400",
       "Value": "1a4c32e4-52f8-43e4-9eba-d0de162c2978"
     },
     "SetCode": "gym2",
@@ -3530,50 +3538,40 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "400",
+    "$id": "401",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
-    "Effects": [],
+    "Effects": [
+      {
+        "$id": "402",
+        "$type": "TCGCards.TrainerEffects.HealAllEffect, TCGCards",
+        "EffectType": "Heal all your pokemon",
+        "Amount": 20,
+        "Opponents": true
+      },
+      {
+        "$id": "403",
+        "$type": "TCGCards.TrainerEffects.HealAllEffect, TCGCards",
+        "EffectType": "Heal all your pokemon",
+        "Amount": 20,
+        "Opponents": false
+      }
+    ],
     "Ability": null,
     "CardId": {
-      "$id": "401",
+      "$id": "404",
       "Value": "1852432f-8f3b-454d-8339-fdbf04891aa6"
     },
     "Id": {
-      "$id": "402",
+      "$id": "405",
       "Value": "69299424-64e4-4aa8-9461-98f8f4570766"
     },
     "SetCode": "gym2",
     "Name": "Erika's Kindness",
     "ImageUrl": "https://images.pokemontcg.io/gym2/103_hires.png",
-    "Completed": false,
-    "Owner": null,
-    "RevealedTo": [],
-    "RevealedToAll": false,
-    "IgnoreInBuilder": false
-  },
-  {
-    "$id": "403",
-    "AddToDiscardWhenCasting": true,
-    "MaxCardsInHand": 99,
-    "MaxBenchedPokemon": 99,
-    "MaxBasicInHand": 99,
-    "Effects": [],
-    "Ability": null,
-    "CardId": {
-      "$id": "404",
-      "Value": "76a54b4b-ae47-4f91-80ae-ab23e94a8f45"
-    },
-    "Id": {
-      "$id": "405",
-      "Value": "4dc3dcd1-0870-45bd-9fa7-c994e0f25ad1"
-    },
-    "SetCode": "gym2",
-    "Name": "Fervor",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/124_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
@@ -3586,8 +3584,33 @@
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [],
-    "Ability": {
+    "Ability": null,
+    "CardId": {
       "$id": "407",
+      "Value": "76a54b4b-ae47-4f91-80ae-ab23e94a8f45"
+    },
+    "Id": {
+      "$id": "408",
+      "Value": "4dc3dcd1-0870-45bd-9fa7-c994e0f25ad1"
+    },
+    "SetCode": "gym2",
+    "Name": "Fervor",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/124_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "RevealedTo": [],
+    "RevealedToAll": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "409",
+    "AddToDiscardWhenCasting": true,
+    "MaxCardsInHand": 99,
+    "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
+    "Effects": [],
+    "Ability": {
+      "$id": "410",
       "UsableImmediately": true,
       "TurnDuration": 9999,
       "TriggerType": 0,
@@ -3598,10 +3621,10 @@
       "Usages": 1,
       "Effects": [
         {
-          "$id": "408",
+          "$id": "411",
           "$type": "TCGCards.TrainerEffects.BouncePokemonEffect, TCGCards",
           "CoinflipConditional": {
-            "$id": "409",
+            "$id": "412",
             "UseLastCoin": false,
             "CheckTails": false,
             "FlipCoin": true,
@@ -3617,7 +3640,7 @@
         }
       ],
       "SelectedAbilityEffect": {
-        "$ref": "408"
+        "$ref": "411"
       },
       "UsableWhileConfused": false,
       "UsableWhileAsleep": false,
@@ -3625,7 +3648,7 @@
       "UsableWhileActive": true,
       "UsableWhileBenched": true,
       "Id": {
-        "$id": "410",
+        "$id": "413",
         "Value": "7cf51b7d-a036-45bf-9e01-ef27ce8d407f"
       },
       "UsedTimes": 0,
@@ -3634,11 +3657,11 @@
       "RemovedWhenBenched": false
     },
     "CardId": {
-      "$id": "411",
+      "$id": "414",
       "Value": "5691a286-6de7-49be-b4a0-15c765c09dc5"
     },
     "Id": {
-      "$id": "412",
+      "$id": "415",
       "Value": "9baf724a-e0e8-4537-ba6c-6e228e55b923"
     },
     "SetCode": "gym2",
@@ -3651,25 +3674,25 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "413",
+    "$id": "416",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "414",
+        "$id": "417",
         "$type": "TCGCards.TrainerEffects.GetTargetEffect, TCGCards",
         "EffectType": "Get Target",
         "TargetingMode": 2,
         "Name": "Giovanni"
       },
       {
-        "$id": "415",
+        "$id": "418",
         "$type": "TCGCards.TrainerEffects.PokemonValueSetterEffect, TCGCards",
         "EffectType": "Set value on Pokémon",
         "SelectedProperty": {
-          "$id": "416",
+          "$id": "419",
           "TypeName": "TCGCards.PokemonCard, TCGCards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "PropertyName": "CanEvolveWithoutOtherChecks"
         },
@@ -3678,11 +3701,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "417",
+      "$id": "420",
       "Value": "98dfa39c-992f-4c48-948a-3e6ce4c79105"
     },
     "Id": {
-      "$id": "418",
+      "$id": "421",
       "Value": "822deedf-7f2f-47f9-84d9-963914a3aa03"
     },
     "SetCode": "gym2",
@@ -3695,7 +3718,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "419",
+    "$id": "422",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3703,11 +3726,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "420",
+      "$id": "423",
       "Value": "f0353b4e-4a6a-4dd3-b397-bea856cee662"
     },
     "Id": {
-      "$id": "421",
+      "$id": "424",
       "Value": "9b97a83e-6a03-4ea8-8826-835a429c8a37"
     },
     "SetCode": "gym2",
@@ -3720,24 +3743,24 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "422",
+    "$id": "425",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "423",
+        "$id": "426",
         "$type": "TCGCards.TrainerEffects.GetTargetEffect, TCGCards",
         "EffectType": "Get Target",
         "TargetingMode": 2,
         "Name": "Giovanni"
       },
       {
-        "$id": "424",
+        "$id": "427",
         "$type": "TCGCards.TrainerEffects.HealEffect, TCGCards",
         "CoinflipConditional": {
-          "$id": "425",
+          "$id": "428",
           "UseLastCoin": false,
           "CheckTails": false,
           "FlipCoin": false,
@@ -3750,11 +3773,11 @@
         "EffectType": "Heal"
       },
       {
-        "$id": "426",
+        "$id": "429",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
         "CoinflipConditional": {
-          "$id": "427",
+          "$id": "430",
           "UseLastCoin": false,
           "CheckTails": false,
           "FlipCoin": false,
@@ -3770,42 +3793,17 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "428",
+      "$id": "431",
       "Value": "8b61a5f4-afd8-462e-9a6e-720c55576470"
     },
     "Id": {
-      "$id": "429",
+      "$id": "432",
       "Value": "47dfcac2-7bba-4537-85c9-a68adb371ac5"
     },
     "SetCode": "gym2",
     "Name": "Giovanni's Last Resort",
     "ImageUrl": "https://images.pokemontcg.io/gym2/105_hires.png",
     "Completed": true,
-    "Owner": null,
-    "RevealedTo": [],
-    "RevealedToAll": false,
-    "IgnoreInBuilder": false
-  },
-  {
-    "$id": "430",
-    "AddToDiscardWhenCasting": true,
-    "MaxCardsInHand": 99,
-    "MaxBenchedPokemon": 99,
-    "MaxBasicInHand": 99,
-    "Effects": [],
-    "Ability": null,
-    "CardId": {
-      "$id": "431",
-      "Value": "d4b144dd-2dce-4f09-af0c-6b07f97d5e65"
-    },
-    "Id": {
-      "$id": "432",
-      "Value": "cfc9888c-be45-4f22-b687-888c90d42fde"
-    },
-    "SetCode": "gym2",
-    "Name": "Koga",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/19_hires.png",
-    "Completed": false,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
@@ -3821,10 +3819,35 @@
     "Ability": null,
     "CardId": {
       "$id": "434",
-      "Value": "e26515a7-44f1-4d40-ab79-92cc90879dd7"
+      "Value": "d4b144dd-2dce-4f09-af0c-6b07f97d5e65"
     },
     "Id": {
       "$id": "435",
+      "Value": "cfc9888c-be45-4f22-b687-888c90d42fde"
+    },
+    "SetCode": "gym2",
+    "Name": "Koga",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/19_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "RevealedTo": [],
+    "RevealedToAll": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "436",
+    "AddToDiscardWhenCasting": true,
+    "MaxCardsInHand": 99,
+    "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
+    "Effects": [],
+    "Ability": null,
+    "CardId": {
+      "$id": "437",
+      "Value": "e26515a7-44f1-4d40-ab79-92cc90879dd7"
+    },
+    "Id": {
+      "$id": "438",
       "Value": "45cf6608-b254-4be7-bdf4-8ee3d51df281"
     },
     "SetCode": "gym2",
@@ -3837,26 +3860,26 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "436",
+    "$id": "439",
     "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "437",
+        "$id": "440",
         "$type": "TCGCards.TrainerEffects.GetTargetEffect, TCGCards",
         "EffectType": "Get Target",
         "TargetingMode": 0,
         "Name": "Koga"
       },
       {
-        "$id": "438",
+        "$id": "441",
         "$type": "TCGCards.TrainerEffects.AttachmentEffect, TCGCards",
         "EffectType": "Create attachment",
         "TargetingMode": 9,
         "Ability": {
-          "$id": "439",
+          "$id": "442",
           "UsableImmediately": true,
           "TurnDuration": 9999,
           "TriggerType": 11,
@@ -3867,7 +3890,7 @@
           "Usages": 9999,
           "Effects": [
             {
-              "$id": "440",
+              "$id": "443",
               "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
               "EffectType": "Swap Active Pokemon",
               "RequireTargetUsabled": true,
@@ -3878,7 +3901,7 @@
             }
           ],
           "SelectedAbilityEffect": {
-            "$ref": "440"
+            "$ref": "443"
           },
           "UsableWhileConfused": true,
           "UsableWhileAsleep": true,
@@ -3886,7 +3909,7 @@
           "UsableWhileActive": true,
           "UsableWhileBenched": false,
           "Id": {
-            "$id": "441",
+            "$id": "444",
             "Value": "df711a75-b4dd-4979-b6aa-3667d89fc0ce"
           },
           "UsedTimes": 0,
@@ -3898,11 +3921,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "442",
+      "$id": "445",
       "Value": "c2c7381d-59e0-475c-bf20-2b8b21027ecc"
     },
     "Id": {
-      "$id": "443",
+      "$id": "446",
       "Value": "f661c7a6-531d-4a02-8edd-ab74cad765c8"
     },
     "SetCode": "gym2",
@@ -3915,7 +3938,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "444",
+    "$id": "447",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -3923,11 +3946,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "445",
+      "$id": "448",
       "Value": "9727d05e-4c0f-4eb4-bafa-9c125b111ceb"
     },
     "Id": {
-      "$id": "446",
+      "$id": "449",
       "Value": "1cd149ee-8933-40f7-9bf2-9e88746afa22"
     },
     "SetCode": "gym2",
@@ -3940,14 +3963,14 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "447",
+    "$id": "450",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "448",
+        "$id": "451",
         "$type": "TCGCards.TrainerEffects.PickCardFromTopOfDeck, TCGCards",
         "EffectType": "Pick cards from top of deck",
         "AmountToPick": 1,
@@ -3960,11 +3983,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "449",
+      "$id": "452",
       "Value": "2b949b11-f4c6-4fb8-b14c-e8bb18ca3ba4"
     },
     "Id": {
-      "$id": "450",
+      "$id": "453",
       "Value": "ce906aa9-0ca8-4403-837d-de8286f99f22"
     },
     "SetCode": "gym2",
@@ -3977,18 +4000,18 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "451",
+    "$id": "454",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "452",
+        "$id": "455",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
         "CoinflipConditional": {
-          "$id": "453",
+          "$id": "456",
           "UseLastCoin": false,
           "CheckTails": false,
           "FlipCoin": false,
@@ -4002,7 +4025,7 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "454",
+        "$id": "457",
         "$type": "TCGCards.TrainerEffects.PutPokemonFromDiscardOnBench, TCGCards",
         "WithRemainingHealth": 0.0,
         "AskYesNoToTargetOpponent": false,
@@ -4011,11 +4034,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "455",
+      "$id": "458",
       "Value": "0374d63d-b6b1-4515-89ef-5602d49d1fde"
     },
     "Id": {
-      "$id": "456",
+      "$id": "459",
       "Value": "7b462e59-7725-42ca-b16c-f11ffab65962"
     },
     "SetCode": "gym2",
@@ -4028,18 +4051,18 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "457",
+    "$id": "460",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "458",
+        "$id": "461",
         "$type": "TCGCards.TrainerEffects.DiscardCardEffect, TCGCards",
         "TargetsOpponent": false,
         "CoinflipConditional": {
-          "$id": "459",
+          "$id": "462",
           "UseLastCoin": false,
           "CheckTails": false,
           "FlipCoin": false,
@@ -4053,10 +4076,10 @@
         "EffectType": "Discard cards"
       },
       {
-        "$id": "460",
+        "$id": "463",
         "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
         "CoinFlipConditional": {
-          "$id": "461",
+          "$id": "464",
           "UseLastCoin": false,
           "CheckTails": false,
           "FlipCoin": false,
@@ -4075,11 +4098,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "462",
+      "$id": "465",
       "Value": "3e5e734d-3ceb-44ae-bd2c-75cb36a26c94"
     },
     "Id": {
-      "$id": "463",
+      "$id": "466",
       "Value": "f7ef856a-6744-4450-b953-66fdae5d13b9"
     },
     "SetCode": "gym2",
@@ -4092,7 +4115,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "464",
+    "$id": "467",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4100,11 +4123,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "465",
+      "$id": "468",
       "Value": "d80c7baa-b0b9-45ec-8326-3e7c49c85e85"
     },
     "Id": {
-      "$id": "466",
+      "$id": "469",
       "Value": "e661b578-e754-4766-ab0a-b1a2b580d1db"
     },
     "SetCode": "gym2",
@@ -4117,14 +4140,14 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "467",
+    "$id": "470",
     "AddToDiscardWhenCasting": false,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [],
     "Ability": {
-      "$id": "468",
+      "$id": "471",
       "$type": "TCGCards.Core.Abilities.ResistanceModifierAbility, TCGCards",
       "Modifier": 20.0,
       "AttackerName": null,
@@ -4145,7 +4168,7 @@
       "UsableWhileActive": true,
       "UsableWhileBenched": true,
       "Id": {
-        "$id": "469",
+        "$id": "472",
         "Value": "ef1b3dbc-cf1b-4c46-8e57-c42e917761d4"
       },
       "UsedTimes": 0,
@@ -4154,11 +4177,11 @@
       "RemovedWhenBenched": false
     },
     "CardId": {
-      "$id": "470",
+      "$id": "473",
       "Value": "4a7d5424-5d67-4387-80aa-7dc013f87289"
     },
     "Id": {
-      "$id": "471",
+      "$id": "474",
       "Value": "dc4e47ee-c3f8-4831-be39-ef6c465d5e61"
     },
     "SetCode": "gym2",
@@ -4171,7 +4194,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "472",
+    "$id": "475",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4179,11 +4202,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "473",
+      "$id": "476",
       "Value": "1ee2d2b7-c9f0-448b-a948-f42f9f397011"
     },
     "Id": {
-      "$id": "474",
+      "$id": "477",
       "Value": "4577d0b3-df69-469c-a358-d2e65dc7c38d"
     },
     "SetCode": "gym2",
@@ -4196,17 +4219,17 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "475",
+    "$id": "478",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "476",
+        "$id": "479",
         "$type": "TCGCards.TrainerEffects.SearchDeckForCardEffect, TCGCards",
         "CoinFlipConditional": {
-          "$id": "477",
+          "$id": "480",
           "UseLastCoin": false,
           "CheckTails": false,
           "FlipCoin": true,
@@ -4223,48 +4246,23 @@
         "EffectType": "Search your deck for a card"
       },
       {
-        "$id": "478",
+        "$id": "481",
         "$type": "TCGCards.TrainerEffects.ApplyStopTrainerCards, TCGCards",
         "EffectType": "Stop trainer casting"
       }
     ],
     "Ability": null,
     "CardId": {
-      "$id": "479",
+      "$id": "482",
       "Value": "77d3e0b5-ea16-41be-a819-fc66875df7f7"
     },
     "Id": {
-      "$id": "480",
+      "$id": "483",
       "Value": "3044896c-ec0b-4532-ac3b-a68a9fb20798"
     },
     "SetCode": "gym2",
     "Name": "Rocket's Secret Experiment",
     "ImageUrl": "https://images.pokemontcg.io/gym2/120_hires.png",
-    "Completed": false,
-    "Owner": null,
-    "RevealedTo": [],
-    "RevealedToAll": false,
-    "IgnoreInBuilder": false
-  },
-  {
-    "$id": "481",
-    "AddToDiscardWhenCasting": true,
-    "MaxCardsInHand": 99,
-    "MaxBenchedPokemon": 99,
-    "MaxBasicInHand": 99,
-    "Effects": [],
-    "Ability": null,
-    "CardId": {
-      "$id": "482",
-      "Value": "736b3b59-d2b5-487f-b524-73e70d19ac2b"
-    },
-    "Id": {
-      "$id": "483",
-      "Value": "58b12f2b-cab3-4eb9-8b9d-aae98190ca26"
-    },
-    "SetCode": "gym2",
-    "Name": "Sabrina",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/20_hires.png",
     "Completed": false,
     "Owner": null,
     "RevealedTo": [],
@@ -4281,15 +4279,15 @@
     "Ability": null,
     "CardId": {
       "$id": "485",
-      "Value": "fdaf81b7-6927-46ce-aaf9-99a5e46cebf8"
+      "Value": "736b3b59-d2b5-487f-b524-73e70d19ac2b"
     },
     "Id": {
       "$id": "486",
-      "Value": "891b6b7c-4458-474a-bf27-48257efc35f5"
+      "Value": "58b12f2b-cab3-4eb9-8b9d-aae98190ca26"
     },
     "SetCode": "gym2",
     "Name": "Sabrina",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/110_hires.png",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/20_hires.png",
     "Completed": false,
     "Owner": null,
     "RevealedTo": [],
@@ -4306,15 +4304,15 @@
     "Ability": null,
     "CardId": {
       "$id": "488",
-      "Value": "4f8db01e-73b3-45d1-8675-7e4e284c7d54"
+      "Value": "fdaf81b7-6927-46ce-aaf9-99a5e46cebf8"
     },
     "Id": {
       "$id": "489",
-      "Value": "ec9513c6-8b67-4252-a16e-9d16b0a90994"
+      "Value": "891b6b7c-4458-474a-bf27-48257efc35f5"
     },
     "SetCode": "gym2",
-    "Name": "Sabrina's Psychic Control",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/121_hires.png",
+    "Name": "Sabrina",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/110_hires.png",
     "Completed": false,
     "Owner": null,
     "RevealedTo": [],
@@ -4331,15 +4329,15 @@
     "Ability": null,
     "CardId": {
       "$id": "491",
-      "Value": "5af9e5c3-34ed-449b-b29b-6eb5aea2dff7"
+      "Value": "4f8db01e-73b3-45d1-8675-7e4e284c7d54"
     },
     "Id": {
       "$id": "492",
-      "Value": "7dae7d62-8627-4eca-9b9a-c5d113dcd52a"
+      "Value": "ec9513c6-8b67-4252-a16e-9d16b0a90994"
     },
     "SetCode": "gym2",
-    "Name": "Saffron City Gym",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/122_hires.png",
+    "Name": "Sabrina's Psychic Control",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/121_hires.png",
     "Completed": false,
     "Owner": null,
     "RevealedTo": [],
@@ -4356,15 +4354,15 @@
     "Ability": null,
     "CardId": {
       "$id": "494",
-      "Value": "ca5062d2-aae4-4d12-8c2f-c6f1e550fc4c"
+      "Value": "5af9e5c3-34ed-449b-b29b-6eb5aea2dff7"
     },
     "Id": {
       "$id": "495",
-      "Value": "f1e49436-c88f-44c1-982d-42f1332a3edc"
+      "Value": "7dae7d62-8627-4eca-9b9a-c5d113dcd52a"
     },
     "SetCode": "gym2",
-    "Name": "Transparent Walls",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/125_hires.png",
+    "Name": "Saffron City Gym",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/122_hires.png",
     "Completed": false,
     "Owner": null,
     "RevealedTo": [],
@@ -4381,15 +4379,15 @@
     "Ability": null,
     "CardId": {
       "$id": "497",
-      "Value": "b17006a5-f809-4b46-81f3-9540a9bd6e67"
+      "Value": "ca5062d2-aae4-4d12-8c2f-c6f1e550fc4c"
     },
     "Id": {
       "$id": "498",
-      "Value": "dafd2059-e76e-48a5-b6b1-c75ba0f0c28b"
+      "Value": "f1e49436-c88f-44c1-982d-42f1332a3edc"
     },
     "SetCode": "gym2",
-    "Name": "Viridian City Gym",
-    "ImageUrl": "https://images.pokemontcg.io/gym2/123_hires.png",
+    "Name": "Transparent Walls",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/125_hires.png",
     "Completed": false,
     "Owner": null,
     "RevealedTo": [],
@@ -4402,9 +4400,34 @@
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
+    "Effects": [],
+    "Ability": null,
+    "CardId": {
+      "$id": "500",
+      "Value": "b17006a5-f809-4b46-81f3-9540a9bd6e67"
+    },
+    "Id": {
+      "$id": "501",
+      "Value": "dafd2059-e76e-48a5-b6b1-c75ba0f0c28b"
+    },
+    "SetCode": "gym2",
+    "Name": "Viridian City Gym",
+    "ImageUrl": "https://images.pokemontcg.io/gym2/123_hires.png",
+    "Completed": false,
+    "Owner": null,
+    "RevealedTo": [],
+    "RevealedToAll": false,
+    "IgnoreInBuilder": false
+  },
+  {
+    "$id": "502",
+    "AddToDiscardWhenCasting": true,
+    "MaxCardsInHand": 99,
+    "MaxBenchedPokemon": 99,
+    "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "500",
+        "$id": "503",
         "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
         "EffectType": "Swap Active Pokemon",
         "RequireTargetUsabled": true,
@@ -4414,7 +4437,7 @@
         "OnlyOnCoinFlip": false
       },
       {
-        "$id": "501",
+        "$id": "504",
         "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
         "EffectType": "Swap Active Pokemon",
         "RequireTargetUsabled": true,
@@ -4426,11 +4449,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "502",
+      "$id": "505",
       "Value": "f2ee3381-7c3e-4f55-b04b-93e971d05e5e"
     },
     "Id": {
-      "$id": "503",
+      "$id": "506",
       "Value": "87b9e05e-d567-4507-829f-aec959f99091"
     },
     "SetCode": "gym2",

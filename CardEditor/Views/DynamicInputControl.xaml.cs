@@ -1,5 +1,6 @@
 ﻿using CardEditor.ViewModels;
 using Entities;
+using NetworkingCore;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -116,6 +117,19 @@ namespace CardEditor.Views
                                 dynamicGroup.Content = control;
                                 dynamicGroup.Header = dynamicInput.DisplayName;
                                 input = dynamicGroup;
+                                break;
+                            }
+                        case InputControl.Type:
+                            {
+                                var typeCombobox = new ComboBox() { MinWidth = 100 };
+                                foreach (var value in TypeLoader.GetLoadedTypesAssignableFrom(dynamicInput.EnumType))
+                                {
+                                    typeCombobox.Items.Add(value);
+                                }
+                                typeCombobox.DisplayMemberPath = "Name";
+                                typeCombobox.SetBinding(ComboBox.SelectedItemProperty, new Binding(property.Name) { Mode = BindingMode.TwoWay });
+                                input = typeCombobox;
+                                DockPanel.SetDock(input, Dock.Left);
                                 break;
                             }
                         default:

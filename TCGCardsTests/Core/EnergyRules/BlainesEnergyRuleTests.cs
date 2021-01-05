@@ -1,4 +1,5 @@
 ﻿using Entities;
+using NetworkingCore;
 using TCGCards;
 using TCGCards.Core.EnergyRules;
 using Xunit;

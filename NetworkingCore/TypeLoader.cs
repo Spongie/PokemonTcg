@@ -12,7 +12,19 @@ namespace NetworkingCore
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                types.AddRange(assembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract));
+                types.AddRange(assembly.GetTypes().Where(type => typeof(T).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract));
+            }
+
+            return types;
+        }
+
+        public static List<Type> GetLoadedTypesAssignableFrom(Type targetType)
+        {
+            var types = new List<Type>();
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                types.AddRange(assembly.GetTypes().Where(type => targetType.IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract));
             }
 
             return types;
