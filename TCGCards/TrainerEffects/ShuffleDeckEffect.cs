@@ -36,7 +36,7 @@ namespace TCGCards.TrainerEffects
 
         public void OnAttachedTo(PokemonCard attachedTo, bool fromHand, GameField game)
         {
-            var target = targetsOpponent ? game.Players.First(p => !p.Id.Equals(attachedTo.Owner.Id)) : attachedTo.Owner;
+            var target = targetsOpponent ? game.GetOpponentOf(attachedTo.Owner) : attachedTo.Owner;
             target.Deck.Shuffle();
         }
 
