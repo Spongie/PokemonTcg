@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using TCGCards.Core;
+using Xunit;
 using Entities;
 
 namespace TCGCards.Core.Tests
@@ -52,6 +53,33 @@ namespace TCGCards.Core.Tests
             game.WithFlips(CoinFlipper.HEADS);
             game.FlipCoins(1);
             Assert.False(game.IsSuccessfulFlip(false, true, true));
+        }
+
+        [Fact()]
+        public void SwapActivePlayerTest()
+        {
+            Player p1 = new Player();
+            Player p2 = new Player();
+            var game = new GameField();
+            game.AddPlayer(p1);
+            game.AddPlayer(p2);
+            game.ActivePlayerIndex = 0;
+
+            Assert.Equal(0, game.ActivePlayerIndex);
+            Assert.Equal(p1, game.ActivePlayer);
+            Assert.Equal(p2, game.NonActivePlayer);
+
+            game.SwapActivePlayer();
+
+            Assert.Equal(1, game.ActivePlayerIndex);
+            Assert.Equal(p1, game.NonActivePlayer);
+            Assert.Equal(p2, game.ActivePlayer);
+
+            game.SwapActivePlayer();
+
+            Assert.Equal(0, game.ActivePlayerIndex);
+            Assert.Equal(p1, game.ActivePlayer);
+            Assert.Equal(p2, game.NonActivePlayer);
         }
     }
 }

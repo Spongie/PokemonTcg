@@ -22,7 +22,7 @@ namespace Server.Services
             RemoveCompletedGames();
             var allGames = ActiveGames.Values;
 
-            return allGames.Where(game => game.Players.Count < 2).Select(game => new GameInfo
+            return allGames.Where(game => game.Players.Count(x => x != null) < 2).Select(game => new GameInfo
             {
                 HostingPlayer = game.Players.First().NetworkPlayer.Name,
                 FormatName = "Unlimited",
@@ -356,7 +356,7 @@ namespace Server.Services
             return game;
         }
 
-        private void SendUpdateToPlayers(List<Player> players, GameField game)
+        private void SendUpdateToPlayers(IEnumerable<Player> players, GameField game)
         {
             foreach (var player in players)
             {

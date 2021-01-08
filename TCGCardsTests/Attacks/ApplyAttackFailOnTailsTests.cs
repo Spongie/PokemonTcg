@@ -22,8 +22,9 @@ namespace TCGCards.Attacks.Tests
             };
 
             var game = new GameField();
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.AddPlayer(player);
+            game.AddPlayer(opponent);
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 

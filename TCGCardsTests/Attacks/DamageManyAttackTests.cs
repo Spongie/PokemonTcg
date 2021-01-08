@@ -34,8 +34,7 @@ namespace TCGCards.Attacks.Tests
             var game = new GameField();
             game.AddPlayer(player);
             game.AddPlayer(opponent);
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 

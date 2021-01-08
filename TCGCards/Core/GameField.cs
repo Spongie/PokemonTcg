@@ -21,11 +21,11 @@ namespace TCGCards.Core
         private readonly object lockObject = new object();
         private readonly HashSet<NetworkId> playersSetStartBench;
         private Queue<bool> forcedFlips;
+        private int connectedPlayers = 0;
         
         public GameField()
         {
             Id = NetworkId.Generate();
-            Players = new List<Player>();
             playersSetStartBench = new HashSet<NetworkId>();
             DamageStoppers = new List<DamageStopper>();
             TemporaryPassiveAbilities = new List<Ability>();
@@ -33,6 +33,7 @@ namespace TCGCards.Core
             GameLog = new GameLog();
             forcedFlips = new Queue<bool>();
             EnergyRule = new StandardEnergyRule();
+            Players = new Player[2];
         }
 
         public GameField WithFlips(params bool[] flips)
@@ -117,7 +118,9 @@ namespace TCGCards.Core
 
         public void AddPlayer(Player player)
         {
-            Players.Add(player);
+            Players[connectedPlayers] = player;
+            player.MyGameIndex = connectedPlayers;
+            connectedPlayers++;
 
             foreach (var card in player.Deck.Cards)
             {
@@ -191,9 +194,9 @@ namespace TCGCards.Core
             return heads;
         }
 
-        internal Player GetOpponentOf(Player player)
+        public Player GetOpponentOf(Player player)
         {
-            return Players.FirstOrDefault(p => !p.Id.Equals(player.Id));
+            return Players[(player.MyGameIndex - 1) * -1];
         }
 
         public void SendEventToPlayers(Event gameEvent)
@@ -309,10 +312,9 @@ namespace TCGCards.Core
 
         public void InitTest()
         {
-            Players.Add(new Player { Id = NetworkId.Generate() });
-            Players.Add(new Player { Id = NetworkId.Generate() });
-            ActivePlayer = Players[0];
-            NonActivePlayer = Players[1];
+            Players[0] = new Player { Id = NetworkId.Generate(), MyGameIndex = 0 };
+            Players[1] = new Player { Id = NetworkId.Generate(), MyGameIndex = 1 };
+            ActivePlayerIndex = 0;
 
             for (var i = 0; i < 20; i++)
             {
@@ -363,7 +365,10 @@ namespace TCGCards.Core
                     {
                         if (playersSetStartBench.Count == 2)
                         {
-                            Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
+                            foreach (var player in Players)
+                            {
+                                player.SetPrizeCards(PrizeCardCount);
+                            }
                             GameState = GameFieldState.InTurn;
                             SendEventToPlayers(new GameSyncEvent { Game = this });
                         }
@@ -482,13 +487,16 @@ namespace TCGCards.Core
                     playersSetStartBench.Add(owner.Id);
                     if (playersSetStartBench.Count == 2)
                     {
-                        Players.ForEach(x => x.SetPrizeCards(PrizeCardCount));
+                        foreach (var player in Players)
+                        {
+                            player.SetPrizeCards(PrizeCardCount);
+                        }
                         GameState = GameFieldState.InTurn;
                         SendEventToPlayers(new GameSyncEvent { Game = this });
                     }
                     else
                     {
-                        SendEventMessage(new GameSyncEvent { Game = this, Info = "Opponent is still selecting Pokémons" }, Players.First(x => x.Id.Equals(owner.Id)));
+                        SendEventMessage(new GameSyncEvent { Game = this, Info = "Opponent is still selecting Pokémons" }, owner);
                     }
                 }
             }
@@ -497,8 +505,7 @@ namespace TCGCards.Core
         public void StartGame()
         {
             GameLog.AddMessage("Game starting");
-            ActivePlayer = Players[new Random().Next(2)];
-            NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
+            ActivePlayerIndex = new Random().Next(2);
 
             GameLog.AddMessage($"{ActivePlayer.NetworkPlayer?.Name} goes first");
 
@@ -1169,8 +1176,7 @@ namespace TCGCards.Core
 
         public void SwapActivePlayer()
         {
-            ActivePlayer = Players.First(x => !x.Id.Equals(ActivePlayer.Id));
-            NonActivePlayer = Players.First(p => !p.Id.Equals(ActivePlayer.Id));
+            ActivePlayerIndex = (ActivePlayerIndex - 1) * -1;
         }
 
         public bool IsAbilitiesBlocked()
@@ -1242,9 +1248,23 @@ namespace TCGCards.Core
 
         public GameFieldState GameState { get; set; }
         public NetworkId Id { get; set; }
-        public List<Player> Players { get; set; } = new List<Player>();
-        public Player ActivePlayer { get; set; }
-        public Player NonActivePlayer { get; set; }
+        public Player[] Players { get; set; }
+        public Player ActivePlayer
+        {
+            get
+            {
+                return Players[ActivePlayerIndex];
+            }
+        }
+        
+        public Player NonActivePlayer 
+        {
+            get
+            {
+                return Players[(ActivePlayerIndex - 1) * -1];
+            }
+        }
+
         public GameLog GameLog { get; set; } = new GameLog();
         public List<DamageStopper> DamageStoppers { get; set; }
         public List<Ability> TemporaryPassiveAbilities { get; set; }
@@ -1253,7 +1273,7 @@ namespace TCGCards.Core
         public bool IgnorePostAttack { get; set; }
         public TrainerCard StadiumCard { get; set; }
         public IEnergyRule EnergyRule { get; set; }
-
+        public int ActivePlayerIndex { get; set; }
         [JsonIgnore]
         public TrainerCard CurrentTrainerCard { get; set; }
         public bool LastCoinFlipResult { get; set; }

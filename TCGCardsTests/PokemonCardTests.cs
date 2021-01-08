@@ -45,8 +45,7 @@ namespace TCGCards.Tests
                 Owner = opponent
             };
 
-            game.ActivePlayer = opponent;
-            game.NonActivePlayer = player;
+            game.ActivePlayerIndex = 0;
 
             var pokemon = new PokemonCard()
             {
@@ -111,9 +110,13 @@ namespace TCGCards.Tests
         public void DealDamage_Redirect_Less_Than_Taken()
         {
             var game = new GameField();
-            game.NonActivePlayer = new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100 }, Id = NetworkId.Generate() };
-            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
             var player = new Player() { Id = NetworkId.Generate() };
+
+            game.AddPlayer(player);
+            game.AddPlayer(new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100 }, Id = NetworkId.Generate() });
+            game.ActivePlayerIndex = 0;
+
+            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
 
             var active = new PokemonCard()
             {
@@ -136,11 +139,6 @@ namespace TCGCards.Tests
             };
             player.BenchedPokemon.Add(benched);
 
-            game.ActivePlayer = player;
-
-            game.AddPlayer(player);
-            game.AddPlayer(game.NonActivePlayer);
-
             game.ActivePlayer.ActivePokemonCard.DealDamage(50, game, game.NonActivePlayer.ActivePokemonCard, true);
 
             Assert.Equal(40, active.DamageCounters);
@@ -151,13 +149,16 @@ namespace TCGCards.Tests
         public void DealDamage_Redirect_Equal_Taken()
         {
             var game = new GameField();
-            game.NonActivePlayer = new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100, }, Id = NetworkId.Generate() };
-            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
 
             var player = new Player()
             {
                 Id = NetworkId.Generate()
             };
+
+            game.AddPlayer(player);
+            game.AddPlayer(new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100, }, Id = NetworkId.Generate() });
+            game.ActivePlayerIndex = 0;
+            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
 
             var active = new PokemonCard()
             {
@@ -179,11 +180,6 @@ namespace TCGCards.Tests
                 AmountToRedirect = 50
             };
             player.BenchedPokemon.Add(benched);
-
-            game.ActivePlayer = player;
-
-            game.AddPlayer(player);
-            game.AddPlayer(game.NonActivePlayer);
 
             game.ActivePlayer.ActivePokemonCard.DealDamage(50, game, game.NonActivePlayer.ActivePokemonCard, true);
 
@@ -195,8 +191,7 @@ namespace TCGCards.Tests
         public void DealDamage_Redirect_Higher_Than_Taken()
         {
             var game = new GameField();
-            game.NonActivePlayer = new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100 }, Id = NetworkId.Generate() };
-            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
+            
             var player = new Player() { Id = NetworkId.Generate() };
 
             var active = new PokemonCard()
@@ -204,6 +199,11 @@ namespace TCGCards.Tests
                 Hp = 100,
                 Owner = player
             };
+
+            game.AddPlayer(player);
+            game.AddPlayer(new Player() { ActivePokemonCard = new PokemonCard() { Hp = 100 }, Id = NetworkId.Generate() });
+            game.ActivePlayerIndex = 0;
+            game.NonActivePlayer.ActivePokemonCard.Owner = game.NonActivePlayer;
 
             player.ActivePokemonCard = active;
 
@@ -219,11 +219,6 @@ namespace TCGCards.Tests
                 AmountToRedirect = 50
             };
             player.BenchedPokemon.Add(benched);
-
-            game.ActivePlayer = player;
-
-            game.AddPlayer(player);
-            game.AddPlayer(game.NonActivePlayer);
 
             game.ActivePlayer.ActivePokemonCard.DealDamage(20, game, game.NonActivePlayer.ActivePokemonCard, true);
 

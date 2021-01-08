@@ -89,10 +89,10 @@ namespace TCGCards.TrainerEffects.Tests
             opponent.SetNetworkPlayer(sub);
 
             var game = new GameField();
-            game.Players.Add(new Player() { Id = NetworkId.Generate() });
-            game.Players.Add(opponent);
+            game.AddPlayer(new Player() { Id = NetworkId.Generate() });
+            game.AddPlayer(opponent);
             opponent.Id = NetworkId.Generate();
-            game.Cards.Add(other.Id, other);
+            
 
             effect.Process(game, game.Players[0], opponent, null);
 
@@ -132,10 +132,9 @@ namespace TCGCards.TrainerEffects.Tests
             opponent.SetNetworkPlayer(sub);
 
             var game = new GameField();
-            game.Players.Add(new Player() { Id = NetworkId.Generate() });
-            game.Players.Add(opponent);
+            game.AddPlayer(new Player() { Id = NetworkId.Generate() });
+            game.AddPlayer(opponent);
             opponent.Id = NetworkId.Generate();
-            game.Cards.Add(other.Id, other);
 
             effect.Process(game, game.Players[0], opponent, null);
 
@@ -171,10 +170,9 @@ namespace TCGCards.TrainerEffects.Tests
             opponent.SetNetworkPlayer(sub);
 
             var game = new GameField();
-            game.Players.Add(new Player() { Id = NetworkId.Generate() });
-            game.Players.Add(opponent);
+            game.AddPlayer(new Player() { Id = NetworkId.Generate() });
+            game.AddPlayer(opponent);
             opponent.Id = NetworkId.Generate();
-            game.Cards.Add(other.Id, other);
 
             effect.Process(game, game.Players[0], opponent, null);
 
@@ -210,10 +208,9 @@ namespace TCGCards.TrainerEffects.Tests
             opponent.SetNetworkPlayer(sub);
 
             var game = new GameField();
-            game.Players.Add(new Player() { Id = NetworkId.Generate() });
-            game.Players.Add(opponent);
+            game.AddPlayer(new Player() { Id = NetworkId.Generate() });
+            game.AddPlayer(opponent);
             opponent.Id = NetworkId.Generate();
-            game.Cards.Add(other.Id, other);
 
             effect.Process(game, game.Players[0], opponent, null);
 
@@ -252,11 +249,9 @@ namespace TCGCards.TrainerEffects.Tests
             player.ActivePokemonCard = activePokemon;
             player.BenchedPokemon.Add(targetPokemon);
 
-            
-            game.ActivePlayer = player;
-            game.NonActivePlayer = new Player();
-
             game.AddPlayer(player);
+            game.AddPlayer(new Player());
+            game.ActivePlayerIndex = 0;
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -297,10 +292,9 @@ namespace TCGCards.TrainerEffects.Tests
             player.BenchedPokemon.Add(targetPokemon);
 
             var game = new GameField();
-            game.ActivePlayer = player;
-            game.NonActivePlayer = new Player();
-
             game.AddPlayer(player);
+            game.AddPlayer(new Player());
+            game.ActivePlayerIndex = 0;
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -341,10 +335,9 @@ namespace TCGCards.TrainerEffects.Tests
             player.BenchedPokemon.Add(targetPokemon);
 
             var game = new GameField();
-            game.ActivePlayer = player;
-            game.NonActivePlayer = new Player();
-
             game.AddPlayer(player);
+            game.AddPlayer(new Player());
+            game.ActivePlayerIndex = 0;
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -382,10 +375,9 @@ namespace TCGCards.TrainerEffects.Tests
             player.BenchedPokemon.Add(targetPokemon);
 
             var game = new GameField();
-            game.ActivePlayer = player;
-            game.NonActivePlayer = new Player();
-
             game.AddPlayer(player);
+            game.AddPlayer(new Player());
+            game.ActivePlayerIndex = 0;
 
             effect.Process(game, player, game.NonActivePlayer, null);
 
@@ -424,10 +416,9 @@ namespace TCGCards.TrainerEffects.Tests
             player.BenchedPokemon.Add(targetPokemon);
 
             var game = new GameField();
-            game.ActivePlayer = player;
-            game.NonActivePlayer = new Player();
-
             game.AddPlayer(player);
+            game.AddPlayer(new Player());
+            game.ActivePlayerIndex = 0;
 
             effect.Process(game, player, game.NonActivePlayer, null);
 

@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardEditor", "CardEditor\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerController", "ServerController\ServerController.csproj", "{F01459EB-F947-47FE-B5AB-E293991639D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{4968BBF7-21DC-447E-8CF5-46083ECE594E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,14 @@ Global
 		{F01459EB-F947-47FE-B5AB-E293991639D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F01459EB-F947-47FE-B5AB-E293991639D0}.Release|x86.ActiveCfg = Release|Any CPU
 		{F01459EB-F947-47FE-B5AB-E293991639D0}.Release|x86.Build.0 = Release|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Debug|x86.Build.0 = Debug|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Release|x86.ActiveCfg = Release|Any CPU
+		{4968BBF7-21DC-447E-8CF5-46083ECE594E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

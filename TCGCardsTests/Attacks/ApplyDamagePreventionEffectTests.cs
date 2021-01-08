@@ -27,8 +27,9 @@ namespace TCGCards.Attacks.Tests
             };
 
             var game = new GameField().WithFlips(CoinFlipper.HEADS);
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.AddPlayer(player);
+            game.AddPlayer(opponent);
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 
@@ -55,8 +56,9 @@ namespace TCGCards.Attacks.Tests
             };
 
             var game = new GameField().WithFlips(CoinFlipper.TAILS);
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.AddPlayer(player);
+            game.AddPlayer(opponent);
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 
@@ -84,8 +86,9 @@ namespace TCGCards.Attacks.Tests
             };
 
             var game = new GameField().WithFlips(CoinFlipper.HEADS);
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.AddPlayer(player);
+            game.AddPlayer(opponent);
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 
@@ -115,8 +118,9 @@ namespace TCGCards.Attacks.Tests
             };
 
             var game = new GameField().WithFlips(CoinFlipper.HEADS);
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.AddPlayer(player);
+            game.AddPlayer(opponent);
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 
@@ -147,8 +151,9 @@ namespace TCGCards.Attacks.Tests
             };
 
             var game = new GameField().WithFlips(CoinFlipper.HEADS);
-            game.ActivePlayer = player;
-            game.NonActivePlayer = opponent;
+            game.AddPlayer(player);
+            game.AddPlayer(opponent);
+            game.ActivePlayerIndex = 0;
 
             attack.ProcessEffects(game, player, opponent);
 

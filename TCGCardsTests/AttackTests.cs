@@ -157,11 +157,10 @@ namespace TCGCards.Tests
         {
             var game = new GameField();
             game.FirstTurn = false;
-            game.Players.Add(new Player() { Id = NetworkId.Generate() });
-            game.Players.Add(new Player() { Id = NetworkId.Generate() });
 
-            game.ActivePlayer = game.Players.First();
-            game.NonActivePlayer = game.Players.Last();
+            game.AddPlayer(new Player() { Id = NetworkId.Generate() });
+            game.AddPlayer(new Player() { Id = NetworkId.Generate() });
+            game.ActivePlayerIndex = 0;
 
             game.ActivePlayer.ActivePokemonCard = new TestPokemon(game.ActivePlayer);
             game.NonActivePlayer.ActivePokemonCard = new TestPokemon(game.NonActivePlayer);

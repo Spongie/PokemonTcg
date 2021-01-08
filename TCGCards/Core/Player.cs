@@ -339,6 +339,7 @@ namespace TCGCards.Core
         public NetworkId Id { get; set; }
         public bool IsDead { get; set; }
         public int TurnsTaken { get; set; }
+        public int MyGameIndex { get; set; }
 
         [JsonIgnore]
         public INetworkPlayer NetworkPlayer { get; private set; }

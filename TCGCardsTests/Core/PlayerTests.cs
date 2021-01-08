@@ -75,8 +75,11 @@ namespace TCGCards.Core.Tests
 
             var game = new GameField()
             {
-                ActivePlayer = p
+                ActivePlayerIndex = 0
             };
+
+            game.AddPlayer(p);
+            game.AddPlayer(new Player());
 
             game.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
@@ -99,9 +102,10 @@ namespace TCGCards.Core.Tests
             
             var game = new GameField()
             {
-                ActivePlayer = p
+                ActivePlayerIndex = 0
             };
-
+            game.AddPlayer(p);
+            game.AddPlayer(new Player());
             game.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), new GameField());
@@ -128,9 +132,10 @@ namespace TCGCards.Core.Tests
             
             var game = new GameField()
             {
-                ActivePlayer = p
+                ActivePlayerIndex = 0
             };
-
+            game.AddPlayer(p);
+            game.AddPlayer(new Player());
             game.PlayEnergyCard(energyCard, p.ActivePokemonCard);
 
             p.RetreatActivePokemon(p.BenchedPokemon.ValidPokemonCards.First(), new List<EnergyCard>(p.ActivePokemonCard.AttachedEnergy), new GameField());
