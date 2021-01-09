@@ -1126,6 +1126,7 @@ namespace TCGCards.Core
                 TemporaryPassiveAbilities.Remove(ability);
             }
 
+            EnergyRule = new StandardEnergyRule();
             EnergyRule.Reset();
             ActivePlayer.EndTurn(this);
             ActivePlayer.TurnsTaken++;
@@ -1278,7 +1279,6 @@ namespace TCGCards.Core
         public TrainerCard CurrentTrainerCard { get; set; }
         public bool LastCoinFlipResult { get; set; }
         public int LastCoinFlipHeadCount { get; set; }
-        
         [JsonIgnore]
         public PokemonCard LastTarget { get; set; }
 
