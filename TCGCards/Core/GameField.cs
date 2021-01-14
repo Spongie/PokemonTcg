@@ -571,6 +571,8 @@ namespace TCGCards.Core
             
             ability.Trigger(ActivePlayer, NonActivePlayer, 0, this);
 
+            SendEventToPlayers(new GameInfoEvent { });
+
             CheckDeadPokemon();
 
             PushGameLogUpdatesToPlayers();
