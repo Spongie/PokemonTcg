@@ -1,23 +1,47 @@
 ﻿using Assets.Code._2D;
 using Entities;
+using System;
 using System.Collections.Generic;
-using TCGCards;
 using TCGCards.Core.Messages;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Code.UI.Game
 {
     public class SelectColorPanel : MonoBehaviour
     {
-        private EnergyResourceManager energyResources;
-        public GameObject buttonHolder;
-        private bool onlyColorsInGame;
+        public TextMeshProUGUI infoText;
 
-        public void Init(string message, bool onlyInGame)
+        public void Init(SelectColorMessage colorMessage)
         {
-            GetComponent<Text>().text = message;
-            onlyColorsInGame = onlyInGame;
+            if (!string.IsNullOrEmpty(colorMessage.Message))
+            {
+                infoText.text = colorMessage.Message;
+            }
+            else
+            {
+                infoText.text = "Select a Type";
+            }
+            HashSet<EnergyTypes> colors;
+
+            if (colorMessage.OnlyColorsInGame)
+            {
+                colors = GetEnergyTypesInGame();
+            }
+            else
+            {
+                colors = new HashSet<EnergyTypes>();
+
+                foreach (EnergyTypes value in Enum.GetValues(typeof(EnergyTypes)))
+                {
+                    colors.Add(value);
+                }
+            }
+
+            foreach (var symbol in GetComponentsInChildren<SelectEnergySymbolHandler>())
+            {
+                symbol.gameObject.SetActive(colors.Contains(symbol.EnergyType));
+            }
         }
 
         private HashSet<EnergyTypes> GetEnergyTypesInGame()
@@ -37,42 +61,6 @@ namespace Assets.Code.UI.Game
             }
 
             return set;
-        }
-
-        private void Start()
-        {
-            energyResources = GameObject.FindGameObjectWithTag("_global_").GetComponent<EnergyResourceManager>();
-            HashSet<EnergyTypes> typesInGame = GetEnergyTypesInGame();
-
-            foreach (var key in energyResources.Icons.Keys)
-            {
-                if (onlyColorsInGame && !typesInGame.Contains(key))
-                {
-                    continue;
-                }
-
-                var child = new GameObject();
-                child.transform.SetParent(buttonHolder.transform);
-                Button button = child.AddComponent<Button>();
-                button.onClick.AddListener(() =>
-                {
-                    onClick(key);
-                });
-                child.AddComponent<Image>().sprite = energyResources.Icons[key];
-                child.AddComponent<LayoutElement>();
-            }
-        }
-
-        private void onClick(EnergyTypes energyType)
-        {
-            var message = new SelectColorMessage(energyType).ToNetworkMessage(NetworkManager.Instance.Me.Id);
-            message.ResponseTo = NetworkManager.Instance.RespondingTo;
-
-            NetworkManager.Instance.Me.Send(message);
-
-            NetworkManager.Instance.RespondingTo = null;
-            GameController.Instance.OnCardPicked();
-            gameObject.SetActive(false);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Assets.Code
         public BenchController opponentBench;
         public GameObject playerActivePokemon;
         public GameObject opponentActivePokemon;
-        public GameObject selectColorPanel;
+        public SelectColorPanel selectColorPanel;
         public GameObject selectFromListPanel;
         public GameObject cardPrefab;
         public NetworkId myId;
@@ -725,7 +725,9 @@ namespace Assets.Code
 
         private void OnStartSelectColor(object message, NetworkId messageId)
         {
-            selectColorPanel.SetActive(true);
+            var colorMessage = (SelectColorMessage)message;
+            selectColorPanel.gameObject.SetActive(true);
+            selectColorPanel.Init(colorMessage);
             SpecialState = SpecialGameState.SelectingColor;
         }
 
@@ -1027,7 +1029,7 @@ namespace Assets.Code
 
             IsMyTurn = gameField.ActivePlayer.Id.Equals(myId);
             SpecialState = SpecialGameState.None;
-            selectColorPanel.SetActive(false);
+            selectColorPanel.gameObject.SetActive(false);
             selectedCards.Clear();
             selectFromListPanel.SetActive(false);
 
@@ -1183,8 +1185,10 @@ namespace Assets.Code
         {
             if (SpecialState == SpecialGameState.SelectingColor)
             {
+                SpecialState = SpecialGameState.None;
                 NetworkManager.Instance.SendToServer(new SelectColorMessage(energyType), true);
-                selectColorPanel.SetActive(false);
+                selectColorPanel.gameObject.SetActive(false);
+                EnableButtons();
             }
         }
 
@@ -1203,7 +1207,7 @@ namespace Assets.Code
         {
             get
             {
-                return gameField?.Players?.FirstOrDefault(player => player.Id.Equals(myId));
+                return gameField?.Players?.FirstOrDefault(player => player != null && player.Id.Equals(myId));
             }
         }
 
@@ -1211,7 +1215,7 @@ namespace Assets.Code
         {
             get
             {
-                return gameField?.Players?.FirstOrDefault(player => !player.Id.Equals(myId));
+                return gameField?.Players?.FirstOrDefault(player => player != null && !player.Id.Equals(myId));
             }
         }
     }

@@ -36,7 +36,7 @@ namespace TCGCards.Core.Abilities
             var availablePokemons = new List<PokemonCard>(caster.BenchedPokemon.ValidPokemonCards);
             availablePokemons.Add(caster.ActivePokemonCard);
 
-            if (availablePokemons.Where(x => x.DamageCounters > 0).Count() < 2)
+            if (availablePokemons.Where(x => x.DamageCounters > 0).Count() < 1)
             {
                 return false;
             }

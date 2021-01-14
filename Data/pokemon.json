@@ -26950,7 +26950,7 @@
     "Weakness": 4,
     "Resistance": 0,
     "ResistanceAmount": 30,
-    "EvolvesFrom": "Gloom",
+    "EvolvesFrom": "Dark Gloom",
     "Stage": 2,
     "Attacks": [
       {
@@ -35222,7 +35222,7 @@
           "RequireTargetUsabled": true,
           "IsChoice": false,
           "OpponentChooses": false,
-          "Opponents": false,
+          "Opponents": true,
           "OnlyOnCoinFlip": true
         }
       ],
@@ -38505,7 +38505,7 @@
               "$id": "3248",
               "UseLastCoin": true,
               "CheckTails": false,
-              "FlipCoin": true,
+              "FlipCoin": false,
               "CoinsToFlip": 1,
               "SuccessessForBonus": 1
             },

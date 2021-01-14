@@ -5,20 +5,26 @@ namespace TCGCards.Core.Messages
 {
     public class SelectColorMessage : AbstractNetworkMessage
     {
-        public SelectColorMessage()
+        public SelectColorMessage() :this(EnergyTypes.All, string.Empty)
         {
-
+            
         }
 
-        public SelectColorMessage(string message)
+        public SelectColorMessage(string message) : this(EnergyTypes.All, message)
         {
-            Message = message;
-            MessageType = MessageTypes.SelectColor;
+            
         }
 
-        public SelectColorMessage(EnergyTypes color)
+        public SelectColorMessage(EnergyTypes color) :this(color, string.Empty)
+        {
+            
+        }
+
+        public SelectColorMessage(EnergyTypes color, string info) 
         {
             Color = color;
+            Message = info;
+            MessageType = MessageTypes.SelectColor;
         }
 
         public string Message { get; set; }
