@@ -150,7 +150,7 @@ namespace TCGCards.TrainerEffects
         {
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            if (target == null)
+            if (target == null || target.IsDead())
             {
                 return;
             }
