@@ -3,6 +3,7 @@ using Entities.Models;
 using System;
 using System.Linq;
 using TCGCards.Core;
+using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 
 namespace TCGCards.TrainerEffects
@@ -84,6 +85,7 @@ namespace TCGCards.TrainerEffects
 
             var pokemonCard = (PokemonCard)card;
 
+            int index = target.BenchedPokemon.GetNextFreeIndex();
             target.BenchedPokemon.Add(pokemonCard);
             target.DiscardPile.Remove(card);
 
@@ -106,6 +108,8 @@ namespace TCGCards.TrainerEffects
             {
                 pokemonCard.DamageCounters = 0;
             }
+
+            game.SendEventToPlayers(new PokemonAddedToBenchEvent() { Pokemon = pokemonCard, Player = target.Id, Index = index });
         }
     }
 }
