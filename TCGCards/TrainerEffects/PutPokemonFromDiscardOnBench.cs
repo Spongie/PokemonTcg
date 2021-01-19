@@ -11,6 +11,7 @@ namespace TCGCards.TrainerEffects
     public class PutPokemonFromDiscardOnBench : DataModel, IEffect
     {
         private bool targetsOpponent;
+        private bool canTargetOpponent;
         private float withRemainingHealth;
 
         [DynamicInput("Health to come back to (0 = full, 0.X for X%)")]
@@ -27,6 +28,17 @@ namespace TCGCards.TrainerEffects
         [DynamicInput("Allow target opponent?", InputControl.Boolean)]
         public bool AskYesNoToTargetOpponent
         {
+            get { return canTargetOpponent; }
+            set
+            {
+                canTargetOpponent = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Target opponent?", InputControl.Boolean)]
+        public bool TargetsOpponent
+        {
             get { return targetsOpponent; }
             set
             {
@@ -34,6 +46,7 @@ namespace TCGCards.TrainerEffects
                 FirePropertyChanged();
             }
         }
+
 
         public string EffectType
         {
@@ -45,7 +58,7 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            if (targetsOpponent)
+            if (TargetsOpponent)
             {
                 return opponent.DiscardPile.OfType<PokemonCard>().Any() && GameField.BenchMaxSize - opponent.BenchedPokemon.Count > 0;
             }
@@ -71,9 +84,14 @@ namespace TCGCards.TrainerEffects
                 target = caster;
             }
 
+            if (TargetsOpponent)
+            {
+                target = opponent;
+            }
+
             var pokemons = target.DiscardPile.OfType<PokemonCard>().Where(pokemon => pokemon.Stage == 0).OfType<Card>().ToList();
 
-            if (pokemons.Count == 0)
+            if (pokemons.Count == 0 || target.BenchedPokemon.Count == GameField.BenchMaxSize)
             {
                 return;
             }

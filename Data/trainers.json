@@ -772,6 +772,7 @@
         "$type": "TCGCards.TrainerEffects.PutPokemonFromDiscardOnBench, TCGCards",
         "WithRemainingHealth": 0.0,
         "AskYesNoToTargetOpponent": false,
+        "TargetsOpponent": true,
         "EffectType": "Put Pokemon From Discard On Bench"
       }
     ],
@@ -973,6 +974,7 @@
         "$type": "TCGCards.TrainerEffects.PutPokemonFromDiscardOnBench, TCGCards",
         "WithRemainingHealth": 0.5,
         "AskYesNoToTargetOpponent": false,
+        "TargetsOpponent": false,
         "EffectType": "Put Pokemon From Discard On Bench"
       }
     ],
@@ -2142,7 +2144,7 @@
         }
       ],
       "SelectedAbilityEffect": {
-        "$ref": "246"
+        "$ref": "244"
       },
       "UsableWhileConfused": false,
       "UsableWhileAsleep": false,
@@ -2169,7 +2171,7 @@
     "SetCode": "gym1",
     "Name": "Celadon City Gym",
     "ImageUrl": "https://images.pokemontcg.io/gym1/107_hires.png",
-    "Completed": false,
+    "Completed": true,
     "Owner": null,
     "RevealedTo": [],
     "RevealedToAll": false,
@@ -3320,8 +3322,8 @@
           "$type": "TCGCards.TrainerEffects.DamageEffect, TCGCards",
           "CoinflipConditional": {
             "$id": "377",
-            "UseLastCoin": false,
-            "CheckTails": false,
+            "UseLastCoin": true,
+            "CheckTails": true,
             "FlipCoin": false,
             "CoinsToFlip": 1,
             "SuccessessForBonus": 1
@@ -4143,6 +4145,7 @@
         "$type": "TCGCards.TrainerEffects.PutPokemonFromDiscardOnBench, TCGCards",
         "WithRemainingHealth": 0.0,
         "AskYesNoToTargetOpponent": false,
+        "TargetsOpponent": false,
         "EffectType": "Put Pokemon From Discard On Bench"
       }
     ],
