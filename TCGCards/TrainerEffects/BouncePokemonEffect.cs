@@ -17,6 +17,7 @@ namespace TCGCards.TrainerEffects
         private bool onlyBasic;
         private bool isMay;
         private CoinFlipConditional coinflipConditional = new CoinFlipConditional();
+        private bool allowBounceDead;
 
         [DynamicInput("Condition", InputControl.Dynamic)]
         public CoinFlipConditional CoinflipConditional
@@ -80,6 +81,17 @@ namespace TCGCards.TrainerEffects
             set
             {
                 isMay = value;
+                FirePropertyChanged();
+            }
+        }
+
+        [DynamicInput("Works on dead Pokémon?", InputControl.Boolean)]
+        public bool AllowBounceDead
+        {
+            get { return allowBounceDead; }
+            set
+            {
+                allowBounceDead = value;
                 FirePropertyChanged();
             }
         }
@@ -150,7 +162,12 @@ namespace TCGCards.TrainerEffects
         {
             var target = Targeting.AskForTargetFromTargetingMode(TargetingMode, game, caster, opponent, caster.ActivePokemonCard);
 
-            if (target == null || target.IsDead())
+            if (target == null)
+            {
+                return;
+            }
+
+            if (target.IsDead() && !AllowBounceDead)
             {
                 return;
             }
