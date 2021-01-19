@@ -160,7 +160,7 @@ namespace TCGCards.TrainerEffects
 
                 if (target.AttachedEnergy.Count <= Amount)
                 {
-                    for (int i = 0; i < target.AttachedEnergy.Count; i++)
+                    while (target.AttachedEnergy.Count > 0)
                     {
                         target.DiscardEnergyCard(target.AttachedEnergy[0], game);
                         cardsDiscarded++;
