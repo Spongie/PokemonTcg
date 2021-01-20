@@ -1,5 +1,4 @@
-﻿using TCGCards.Core;
-using Xunit;
+﻿using Xunit;
 using Entities;
 
 namespace TCGCards.Core.Tests

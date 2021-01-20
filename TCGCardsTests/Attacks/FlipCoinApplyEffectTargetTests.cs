@@ -1,7 +1,6 @@
 ﻿using Xunit;
 using Entities;
 using TCGCards.Core;
-using System;
 
 namespace TCGCards.Attacks.Tests
 {

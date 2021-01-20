@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TCGCards.Core.Abilities;
 using TCGCards.Core.GameEvents;
 using TCGCards.Core.Messages;
 using TCGCards.Core.SpecialAbilities;

@@ -1,5 +1,4 @@
-﻿using TCGCards.TrainerEffects.Util;
-using Xunit;
+﻿using Xunit;
 using TCGCards.Core;
 using Entities;
 

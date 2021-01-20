@@ -1,8 +1,6 @@
-﻿using NetworkingCore.Messages;
-using System;
+﻿using System;
 using System.Linq;
 using TCGCards.Core.Messages;
-using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Core.Abilities
 {

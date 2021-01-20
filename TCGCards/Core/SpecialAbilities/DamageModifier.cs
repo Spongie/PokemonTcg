@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TCGCards.Core.SpecialAbilities
+﻿namespace TCGCards.Core.SpecialAbilities
 {
     public class DamageModifier
     {

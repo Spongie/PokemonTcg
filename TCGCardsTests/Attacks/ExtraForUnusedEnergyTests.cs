@@ -1,8 +1,4 @@
 ﻿using Xunit;
-using TCGCards.Attacks;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Entities;
 using System.Collections.ObjectModel;
 using TCGCards.Core;

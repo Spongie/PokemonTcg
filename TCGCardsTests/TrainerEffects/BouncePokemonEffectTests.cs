@@ -4,7 +4,6 @@ using TCGCards.Core;
 using NSubstitute;
 using NetworkingCore;
 using TCGCards.Core.Messages;
-using System.Linq;
 
 namespace TCGCards.TrainerEffects.Tests
 {

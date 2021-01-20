@@ -1,5 +1,4 @@
 ﻿using Entities.Models;
-using System.Linq;
 using TCGCards.Core;
 using TCGCards.Core.GameEvents;
 

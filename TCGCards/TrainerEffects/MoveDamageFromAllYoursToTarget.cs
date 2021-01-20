@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CardEditor.Views;
 using Entities.Models;
 using TCGCards.Core;

@@ -1,5 +1,4 @@
-﻿using TCGCards.Core;
-using Xunit;
+﻿using Xunit;
 using System.Collections.Generic;
 using System.Linq;
 using Entities;

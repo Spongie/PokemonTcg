@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Entities;
+﻿using Entities;
 using Entities.Models;
 using TCGCards.Core;
 using TCGCards.TrainerEffects.Util;

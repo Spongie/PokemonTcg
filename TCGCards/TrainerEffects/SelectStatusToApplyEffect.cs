@@ -1,7 +1,5 @@
 ﻿using CardEditor.Views;
-using Entities;
 using Entities.Models;
-using System;
 using TCGCards.Core;
 using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects.Util;

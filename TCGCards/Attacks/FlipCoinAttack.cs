@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using CardEditor.Views;
+﻿using CardEditor.Views;
 using Entities;
 using TCGCards.Core;
-using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects.Util;
 
 namespace TCGCards.Attacks

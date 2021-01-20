@@ -1,12 +1,7 @@
 ﻿using Xunit;
-using TCGCards;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TCGCards.TrainerEffects;
 using TCGCards.Core.Abilities;
 using TCGCards.Core;
-using System.Collections.ObjectModel;
 using NetworkingCore;
 using Entities;
 
