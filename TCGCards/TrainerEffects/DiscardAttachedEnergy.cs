@@ -106,7 +106,7 @@ namespace TCGCards.TrainerEffects
 
         public bool CanCast(GameField game, Player caster, Player opponent)
         {
-            if (AllowUseWithoutTarget)
+            if (AllowUseWithoutTarget || Amount == -1)
             {
                 return true;
             }
@@ -156,7 +156,7 @@ namespace TCGCards.TrainerEffects
                     continue;
                 }
 
-                if (target.AttachedEnergy.Count <= Amount)
+                if (Amount == -1 || target.AttachedEnergy.Count <= Amount)
                 {
                     while (target.AttachedEnergy.Count > 0)
                     {
