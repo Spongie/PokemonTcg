@@ -27,7 +27,7 @@ namespace TCGCards.TrainerEffects.Util
                     break;
                 case TargetingMode.OpponentActive:
                     {
-                        if (game.CurrentDefender != null)
+                        if (game.CurrentDefender != null && game.CurrentDefender.Owner.Id.Equals(opponent.Id))
                         {
                             pokemons.Add(game.CurrentDefender);
                         }
