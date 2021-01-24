@@ -226,6 +226,7 @@ namespace TCGCards.Core
             {
                 if (!UsableImmediately && PokemonOwner.PlayedThisTurn)
                 {
+                    game.GameLog.AddMessage($"{Name} cannot be used the same turn {PokemonOwner.Name} is played");
                     return false;
                 }
                 if (IsBuff)
@@ -234,32 +235,52 @@ namespace TCGCards.Core
                 }
                 if (!usableWhileActive && caster.ActivePokemonCard == PokemonOwner)
                 {
+                    game.GameLog.AddMessage($"{Name} cannot be used while {PokemonOwner.Name} is Active");
                     return false;
                 }
                 else if (!usableWhileBenched && caster.BenchedPokemon.Contains(PokemonOwner))
                 {
+                    game.GameLog.AddMessage($"{Name} cannot be used while {PokemonOwner.Name} is Benched");
                     return false;
                 }
                 else if (!UsableWhileAsleep && PokemonOwner.IsAsleep)
                 {
+                    game.GameLog.AddMessage($"{Name} cannot be used while {PokemonOwner.Name} is Asleep");
                     return false;
                 }
                 else if (!UsableWhileConfused && PokemonOwner.IsConfused)
                 {
+                    game.GameLog.AddMessage($"{Name} cannot be used while {PokemonOwner.Name} is Confused");
                     return false;
                 }
                 else if (!UsableWhileParalyzed && PokemonOwner.IsParalyzed)
                 {
+                    game.GameLog.AddMessage($"{Name} cannot be used while {PokemonOwner.Name} is Paralyzed");
                     return false;
                 }
                 else if (PokemonOwner.AbilityDisabled)
                 {
+                    game.GameLog.AddMessage($"{Name} is disabled by something");
                     return false;
                 }
             }
 
-            return UsedTimes < Usages 
-                && Effects.All(effect => effect.CanCast(game, caster, opponent));
+            if (UsedTimes >= Usages)
+            {
+                game.GameLog.AddMessage($"{Name} has been used {UsedTimes} and has a limit of {Usages}");
+                return false;
+            }
+
+            foreach (var effect in Effects)
+            {
+                if (!effect.CanCast(game, caster, opponent))
+                {
+                    game.GameLog.AddMessage($"{effect.EffectType} cannot be used");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public Player GetActivator(Player activePlayer)

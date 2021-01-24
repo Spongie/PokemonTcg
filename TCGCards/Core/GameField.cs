@@ -1086,6 +1086,8 @@ namespace TCGCards.Core
                     ability.Trigger(pokemon.Owner, GetOpponentOf(pokemon.Owner), damage, this);
                     ability.SetTarget(null);
                 }
+
+                PushGameLogUpdatesToPlayers();
             }
         }
 
