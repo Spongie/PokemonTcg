@@ -1,4 +1,5 @@
 ﻿using Entities;
+using NetworkingCore;
 using TCGCards.Core;
 
 namespace TCGCards.EnergyCards
@@ -6,16 +7,19 @@ namespace TCGCards.EnergyCards
     public class BuzzardEnergy : EnergyCard
     {
         private readonly PokemonCard createdBy;
-        private readonly EnergyTypes energyType;
 
-        public BuzzardEnergy(PokemonCard pokemonOwner, EnergyTypes energyType)
+        public BuzzardEnergy() :base()
         {
-            createdBy = pokemonOwner;
-            this.energyType = energyType;
-            IgnoreInBuilder = true;
+
         }
 
-        public override Energy GetEnergry() => new Energy(energyType, 2);
+        public BuzzardEnergy(PokemonCard pokemonOwner, EnergyTypes energyType) :base()
+        {
+            createdBy = pokemonOwner;
+            EnergyType = energyType;
+            IgnoreInBuilder = true;
+            Amount = 2;
+        }
 
         public override string GetName() => PokemonNames.Electrode;
 

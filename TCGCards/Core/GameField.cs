@@ -575,6 +575,25 @@ namespace TCGCards.Core
 
             CheckDeadPokemon();
 
+            if (GameState == GameFieldState.GameOver)
+            {
+                if (IsDraw())
+                {
+                    GameLog.AddMessage("It's a draw!");
+                    EndGame(Id);
+                }
+                if (ActivePlayer.PrizeCards.Count == 0)
+                {
+                    GameLog.AddMessage(ActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(ActivePlayer.Id);
+                }
+                else if (NonActivePlayer.PrizeCards.Count == 0)
+                {
+                    GameLog.AddMessage(NonActivePlayer.NetworkPlayer?.Name + " wins the game");
+                    EndGame(NonActivePlayer.Id);
+                }
+            }
+
             PushGameLogUpdatesToPlayers();
         }
 
@@ -1234,7 +1253,7 @@ namespace TCGCards.Core
             GameLog.CommitMessages();
         }
 
-        private void PushInfoToPlayer(string info, Player player)
+        public void PushInfoToPlayer(string info, Player player)
         {
             var message = new InfoMessage(info);
             player.NetworkPlayer.Send(message.ToNetworkMessage(Id));

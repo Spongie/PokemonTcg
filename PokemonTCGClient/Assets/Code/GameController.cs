@@ -595,6 +595,11 @@ namespace Assets.Code
                         endTurnButton.SetActive(false);
                         doneButton.SetActive(true);
                         return;
+                    case GameFieldState.AbilitySpecial:
+                        cancelButton.SetActive(false);
+                        endTurnButton.SetActive(false);
+                        doneButton.SetActive(false);
+                        return;
                     default:
                         break;
                 }
@@ -630,6 +635,7 @@ namespace Assets.Code
                 case SpecialGameState.SelectingColor:
                     doneButton.SetActive(false);
                     cancelButton.SetActive(false);
+                    endTurnButton.SetActive(false);
                     break;
                 case SpecialGameState.AttachingEnergyToBenchedPokemon:
                     doneButton.SetActive(true);

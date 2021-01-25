@@ -10,6 +10,7 @@
         GameOver,
         Attacking,
         TurnEnding,
-        PostAttack
+        PostAttack,
+        AbilitySpecial
     }
 }
