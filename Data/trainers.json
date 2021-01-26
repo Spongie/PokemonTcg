@@ -4009,8 +4009,8 @@
               "$id": "453",
               "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
               "EffectType": "Swap Active Pokemon",
-              "RequireTargetUsabled": true,
-              "IsChoice": false,
+              "RequireTargetUsabled": false,
+              "IsChoice": true,
               "OpponentChooses": false,
               "Opponents": false,
               "OnlyOnCoinFlip": false
