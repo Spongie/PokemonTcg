@@ -24040,7 +24040,7 @@
     "Hp": 50,
     "Type": 5,
     "RetreatCost": 2,
-    "Weakness": 8,
+    "Weakness": 4,
     "Resistance": 0,
     "ResistanceAmount": 30,
     "EvolvesFrom": "Oddish",
@@ -47470,7 +47470,7 @@
           "$id": "4030",
           "UseLastCoin": false,
           "CheckTails": false,
-          "FlipCoin": false,
+          "FlipCoin": true,
           "CoinsToFlip": 1,
           "SuccessessForBonus": 1
         },
@@ -47489,7 +47489,7 @@
         "StoppedIfLastAttackName": null,
         "Damage": 0,
         "Description": "The Defending Pokémon is now Poisoned. It now takes 20 Poison damage instead of 10 after each player's turn (even if it was already Poisoned).",
-        "Name": "Toxic",
+        "Name": "Toxic Scretion",
         "ExtraCostMode": 0,
         "AttackType": "ApplyDoublePoisonEffect",
         "Id": {
@@ -47509,7 +47509,7 @@
       "TriggerType": 0,
       "PokemonOwner": null,
       "AbilityType": "Ability",
-      "Name": "Emertge",
+      "Name": "Emerge",
       "Description": null,
       "Usages": 1,
       "Effects": [
