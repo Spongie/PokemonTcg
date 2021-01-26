@@ -46,11 +46,11 @@ namespace TCGCards.Core.Deckfilters
             {
                 if (!InvertName)
                 {
-                    valid = Names.Split(';').Contains(card.Name);
+                    valid = Names.Split(';').Any(x => card.Name.Contains(x));
                 }
                 else
                 {
-                    valid = !Names.Split(';').Contains(card.Name);
+                    valid = !Names.Split(';').Any(x => card.Name.Contains(x));
                 }
             }
 
