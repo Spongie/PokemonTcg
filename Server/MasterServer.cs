@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Server
 {
@@ -72,7 +73,7 @@ namespace Server
 
                 player.Id = NetworkId.Generate();
 
-                Logger.Instance.Log("Player connected with id: " + player.Id);
+                Logger.Instance.Info("Player connected with id: " + player.Id);
 
                 player.Send(new NetworkMessage(MessageTypes.Connected, player.Id, Id, NetworkId.Generate()));
                 player.DataReceived += Player_DataReceived;
@@ -88,7 +89,7 @@ namespace Server
                 Clients.TryRemove(playerId, out player);
                 player.OnDisconnected -= Player_OnDisconnected;
                 player.DataReceived -= Player_DataReceived;
-                Logger.Instance.Log($"Player with id {playerId} disconnected");
+                Logger.Instance.Info($"Player with id {playerId} disconnected");
             }
         }
 
@@ -124,14 +125,25 @@ namespace Server
                     }
                     catch (Exception e)
                     {
-                        Logger.Instance.Log(e.Message);
+                        var message = new StringBuilder();
+                        message.Append(e.Message);
 
                         if (e.InnerException != null)
                         {
-                            Logger.Instance.Log(e.InnerException.Message);
+                            message.Append(Environment.NewLine);
+                            message.Append(e.InnerException.Message);
                         }
 
-                        Logger.Instance.Log(e.StackTrace);
+                        message.Append(Environment.NewLine);
+                        message.Append(e.StackTrace);
+
+                        if (e.InnerException != null)
+                        {
+                            message.Append(e.InnerException.StackTrace);
+                        }
+
+                        message.Append(Environment.NewLine);
+                        Logger.Instance.Error(message.ToString());
 
                         if (Clients.TryGetValue(messageReceivedEvent.Message.SenderId, out NetworkPlayer errorPlayer))
                         {

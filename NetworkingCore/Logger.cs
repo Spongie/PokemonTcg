@@ -23,7 +23,7 @@ namespace NetworkingCore
             }
         }
 
-        public void Log(string info)
+        public void Info(string info)
         {
             Console.WriteLine(info);
 

@@ -41,14 +41,14 @@ namespace NetworkingCore
             }
             catch (Exception e)
             {
-                Logger.Instance.Log(e.Message);
+                Logger.Instance.Info(e.Message);
 
                 if (e.InnerException != null)
                 {
-                    Logger.Instance.Log(e.InnerException.Message);
+                    Logger.Instance.Info(e.InnerException.Message);
                 }
 
-                Logger.Instance.Log(e.StackTrace);
+                Logger.Instance.Info(e.StackTrace);
 
                 Disconnect(false);
                 return;
@@ -93,14 +93,14 @@ namespace NetworkingCore
                     }
                     catch (Exception e)
                     {
-                        Logger.Instance.Log(e.Message);
+                        Logger.Instance.Info(e.Message);
 
                         if (e.InnerException != null)
                         {
-                            Logger.Instance.Log(e.InnerException.Message);
+                            Logger.Instance.Info(e.InnerException.Message);
                         }
 
-                        Logger.Instance.Log(e.StackTrace);
+                        Logger.Instance.Info(e.StackTrace);
 
                         Disconnect(false);
                         return;
@@ -134,14 +134,14 @@ namespace NetworkingCore
                         }
                         catch (Exception e)
                         {
-                            Logger.Instance.Log(e.Message);
+                            Logger.Instance.Info(e.Message);
 
                             if (e.InnerException != null)
                             {
-                                Logger.Instance.Log(e.InnerException.Message);
+                                Logger.Instance.Info(e.InnerException.Message);
                             }
 
-                            Logger.Instance.Log(e.StackTrace);
+                            Logger.Instance.Info(e.StackTrace);
 
                             Disconnect(false);
                             return;

@@ -15,12 +15,12 @@ namespace Server.Services
 
         public void InitTypes()
         {
-            Logger.Instance.Log("Loading sets cache");
+            Logger.Instance.Info("Loading sets cache");
 
             sets = Serializer.Deserialize<List<Set>>(File.ReadAllText("sets.json"));
 
-            Logger.Instance.Log($"Loaded {sets.Count} sets to cache");
-            Logger.Instance.Log("Loading cards cache");
+            Logger.Instance.Info($"Loaded {sets.Count} sets to cache");
+            Logger.Instance.Info("Loading cards cache");
 
             string json = File.ReadAllText("pokemon.json");
 
@@ -33,7 +33,7 @@ namespace Server.Services
 
             cards = cardList.ToDictionary(card => card.CardId);
 
-            Logger.Instance.Log($"Loaded {cards.Count} cards to cache");
+            Logger.Instance.Info($"Loaded {cards.Count} cards to cache");
         }
 
         public List<Card> GetAllCards() => cards.Values.ToList();
@@ -41,7 +41,7 @@ namespace Server.Services
 
         public bool UpdateCards(string pokemonCards, string energyCards, string tainerCards, string sets, string formats)
         {
-            Logger.Instance.Log("Received card updates, updating cards...");
+            Logger.Instance.Info("Received card updates, updating cards...");
 
             File.WriteAllText("pokemon.json", pokemonCards);
             File.WriteAllText("energy.json", energyCards);
@@ -49,14 +49,14 @@ namespace Server.Services
             File.WriteAllText("sets.json", sets);
             File.WriteAllText("formats.json", formats);
 
-            Logger.Instance.Log("reloading caches...");
+            Logger.Instance.Info("reloading caches...");
             InitTypes();
 
             var version = new VersionNumber(File.ReadAllText("cards.version"));
             version.Build++;
             File.WriteAllText("cards.version", version.ToString());
 
-            Logger.Instance.Log("Update complete");
+            Logger.Instance.Info("Update complete");
 
             return true;
         }
@@ -65,7 +65,7 @@ namespace Server.Services
         {
             if (!cards.ContainsKey(id))
             {
-                Logger.Instance.Log($"Card with id {id} not found");
+                Logger.Instance.Info($"Card with id {id} not found");
                 return null;
             }
 
