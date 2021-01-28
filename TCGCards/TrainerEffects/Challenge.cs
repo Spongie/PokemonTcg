@@ -44,9 +44,15 @@ namespace TCGCards.TrainerEffects
             var casterResponse = DeckSearchUtil.SearchDeck(game, caster, CardUtil.GetCardFilters(CardType.BasicPokemon), GameField.BenchMaxSize - caster.BenchedPokemon.Count);
             var opponentResponse = DeckSearchUtil.SearchDeck(game, opponent, CardUtil.GetCardFilters(CardType.BasicPokemon), GameField.BenchMaxSize - opponent.BenchedPokemon.Count);
 
+            foreach (var pokemon in casterResponse.OfType<PokemonCard>())
+            {
+                caster.BenchedPokemon.Add(pokemon);
+            }
 
-            game.AddPokemonToBench(caster, casterResponse.OfType<PokemonCard>().ToList());
-            game.AddPokemonToBench(opponent, opponentResponse.OfType<PokemonCard>().ToList());
+            foreach (var pokemon in opponentResponse.OfType<PokemonCard>())
+            {
+                opponent.BenchedPokemon.Add(pokemon);
+            }
 
             caster.Deck.Shuffle();
             opponent.Deck.Shuffle();

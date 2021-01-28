@@ -26,8 +26,11 @@ namespace NetworkingCore
         public void Info(string info)
         {
             Console.WriteLine(info);
+        }
 
-            File.AppendAllText("error.log", info + Environment.NewLine + Environment.NewLine);
+        public void Error(string info)
+        {
+            File.AppendAllText("error.log", DateTime.Now + "  -  " + info + Environment.NewLine + Environment.NewLine);
         }
     }
 }
