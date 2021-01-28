@@ -1138,7 +1138,7 @@ namespace TCGCards.Core
             {
                 ability.TurnsLeft--;
 
-                if (ability.TurnsLeft <= 0 && !ability.LimitedByTime)
+                if (ability.TurnsLeft <= 0 && ability.LimitedByTime)
                 {
                     abilitiesToRemove.Add(ability);
                 }

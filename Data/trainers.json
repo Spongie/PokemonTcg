@@ -4365,16 +4365,24 @@
       {
         "$id": "491",
         "$type": "TCGCards.TrainerEffects.ApplyStopTrainerCards, TCGCards",
+        "CoinFlipConditional": {
+          "$id": "492",
+          "UseLastCoin": false,
+          "CheckTails": false,
+          "FlipCoin": false,
+          "CoinsToFlip": 1,
+          "SuccessessForBonus": 1
+        },
         "EffectType": "Stop trainer casting"
       }
     ],
     "Ability": null,
     "CardId": {
-      "$id": "492",
+      "$id": "493",
       "Value": "77d3e0b5-ea16-41be-a819-fc66875df7f7"
     },
     "Id": {
-      "$id": "493",
+      "$id": "494",
       "Value": "3044896c-ec0b-4532-ac3b-a68a9fb20798"
     },
     "SetCode": "gym2",
@@ -4387,7 +4395,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "494",
+    "$id": "495",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4395,11 +4403,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "495",
+      "$id": "496",
       "Value": "736b3b59-d2b5-487f-b524-73e70d19ac2b"
     },
     "Id": {
-      "$id": "496",
+      "$id": "497",
       "Value": "58b12f2b-cab3-4eb9-8b9d-aae98190ca26"
     },
     "SetCode": "gym2",
@@ -4412,7 +4420,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "497",
+    "$id": "498",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4420,11 +4428,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "498",
+      "$id": "499",
       "Value": "fdaf81b7-6927-46ce-aaf9-99a5e46cebf8"
     },
     "Id": {
-      "$id": "499",
+      "$id": "500",
       "Value": "891b6b7c-4458-474a-bf27-48257efc35f5"
     },
     "SetCode": "gym2",
@@ -4437,7 +4445,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "500",
+    "$id": "501",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4445,11 +4453,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "501",
+      "$id": "502",
       "Value": "4f8db01e-73b3-45d1-8675-7e4e284c7d54"
     },
     "Id": {
-      "$id": "502",
+      "$id": "503",
       "Value": "ec9513c6-8b67-4252-a16e-9d16b0a90994"
     },
     "SetCode": "gym2",
@@ -4462,7 +4470,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "503",
+    "$id": "504",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4470,11 +4478,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "504",
+      "$id": "505",
       "Value": "5af9e5c3-34ed-449b-b29b-6eb5aea2dff7"
     },
     "Id": {
-      "$id": "505",
+      "$id": "506",
       "Value": "7dae7d62-8627-4eca-9b9a-c5d113dcd52a"
     },
     "SetCode": "gym2",
@@ -4487,7 +4495,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "506",
+    "$id": "507",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4495,11 +4503,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "507",
+      "$id": "508",
       "Value": "ca5062d2-aae4-4d12-8c2f-c6f1e550fc4c"
     },
     "Id": {
-      "$id": "508",
+      "$id": "509",
       "Value": "f1e49436-c88f-44c1-982d-42f1332a3edc"
     },
     "SetCode": "gym2",
@@ -4512,7 +4520,7 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "509",
+    "$id": "510",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
@@ -4520,11 +4528,11 @@
     "Effects": [],
     "Ability": null,
     "CardId": {
-      "$id": "510",
+      "$id": "511",
       "Value": "b17006a5-f809-4b46-81f3-9540a9bd6e67"
     },
     "Id": {
-      "$id": "511",
+      "$id": "512",
       "Value": "dafd2059-e76e-48a5-b6b1-c75ba0f0c28b"
     },
     "SetCode": "gym2",
@@ -4537,14 +4545,14 @@
     "IgnoreInBuilder": false
   },
   {
-    "$id": "512",
+    "$id": "513",
     "AddToDiscardWhenCasting": true,
     "MaxCardsInHand": 99,
     "MaxBenchedPokemon": 99,
     "MaxBasicInHand": 99,
     "Effects": [
       {
-        "$id": "513",
+        "$id": "514",
         "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
         "EffectType": "Swap Active Pokemon",
         "RequireTargetUsabled": true,
@@ -4554,7 +4562,7 @@
         "OnlyOnCoinFlip": false
       },
       {
-        "$id": "514",
+        "$id": "515",
         "$type": "TCGCards.TrainerEffects.SwapActivePokemonEffect, TCGCards",
         "EffectType": "Swap Active Pokemon",
         "RequireTargetUsabled": true,
@@ -4566,11 +4574,11 @@
     ],
     "Ability": null,
     "CardId": {
-      "$id": "515",
+      "$id": "516",
       "Value": "f2ee3381-7c3e-4f55-b04b-93e971d05e5e"
     },
     "Id": {
-      "$id": "516",
+      "$id": "517",
       "Value": "87b9e05e-d567-4507-829f-aec959f99091"
     },
     "SetCode": "gym2",
