@@ -72,5 +72,21 @@ namespace TCGCardsTests.Core.EnergyRules
 
             Assert.True(rule.CanPlayEnergyCard(card, pokemon));
         }
+
+        [Fact]
+        public void CanOnlyAttachToSameBlainePokemon()
+        {
+            var card = new EnergyCard { EnergyType = EnergyTypes.Fire };
+            var pokemon = new PokemonCard { Name = "Blaine's Pickachu" };
+            var pokemon2 = new PokemonCard { Name = "Blaine's Raichi" };
+
+            var rule = new BlainesEnergyRule();
+
+            Assert.True(rule.CanPlayEnergyCard(card, pokemon));
+
+            rule.CardPlayed(card, pokemon);
+
+            Assert.False(rule.CanPlayEnergyCard(card, pokemon2));
+        }
     }
 }

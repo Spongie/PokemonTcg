@@ -14,6 +14,11 @@ namespace TCGCards.Core.EnergyRules
 
             if (target.Name.Contains("Blaine") && card.EnergyType == EnergyTypes.Fire)
             {
+                if (TargetId != null)
+                {
+                    return target.Id.Equals(TargetId);
+                }
+
                 return CardsAttachedThisTurn < 2;
             }
 
