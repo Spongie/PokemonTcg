@@ -90,7 +90,7 @@ namespace TCGCards.TrainerEffects
             List<Card> cardsToDiscard;
             if (Amount == -1 || target.Hand.Count <= Amount)
             {
-                cardsToDiscard = new List<Card>(caster.Hand);
+                cardsToDiscard = new List<Card>(target.Hand);
             }
             else
             {
@@ -100,13 +100,18 @@ namespace TCGCards.TrainerEffects
 
             if (ShuffleIntoDeck)
             {
-                caster.Deck.ShuffleInCards(new List<Card>(caster.Hand));
-                caster.Hand.Clear();
-                caster.TriggerDiscardEvent(cardsToDiscard);
+                target.Deck.ShuffleInCards(cardsToDiscard);
+                
+                foreach (var card in cardsToDiscard)
+                {
+                    target.Hand.Remove(card);
+                }
+
+                target.TriggerDiscardEvent(cardsToDiscard);
             }
             else
             {
-                caster.DiscardCards(cardsToDiscard);
+                target.DiscardCards(cardsToDiscard);
             }
         }
     }
