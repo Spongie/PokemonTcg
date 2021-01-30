@@ -10,6 +10,7 @@ using TCGCards.Core.Messages;
 using TCGCards.TrainerEffects;
 using TCGCards.Core.SpecialAbilities;
 using TCGCards.Core.GameEvents;
+using System;
 
 namespace TCGCards
 {
@@ -302,6 +303,11 @@ namespace TCGCards
                 if (energyCosts.ContainsKey(actualType) && energyCosts[actualType] > 0)
                 {
                     energyCosts[actualType] -= energy.Amount;
+
+                    if (energyCosts[actualType] < 0)
+                    {
+                        energyCosts[EnergyTypes.Colorless] -= Math.Abs(energyCosts[actualType]);
+                    }
                 }
                 else if (energyCosts.ContainsKey(EnergyTypes.Colorless))
                 {

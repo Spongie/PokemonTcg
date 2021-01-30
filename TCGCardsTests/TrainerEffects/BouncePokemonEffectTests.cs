@@ -362,6 +362,7 @@ namespace TCGCards.TrainerEffects.Tests
             var targetPokemon = new PokemonCard()
             {
                 Stage = 1,
+                Hp = 200,
                 AttachedEnergy = new List<EnergyCard> { new EnergyCard(), new EnergyCard() },
                 Owner = player,
                 EvolvedFrom = basicPokemon
