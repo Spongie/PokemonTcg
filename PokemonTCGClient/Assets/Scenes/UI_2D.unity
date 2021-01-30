@@ -844,6 +844,7 @@ MonoBehaviour:
   icon_atlas: {fileID: 2800000, guid: ae3480f97632f6d46acad02756105041, type: 3}
   DoubleColorless: {fileID: 21300000, guid: 29402c9872a825042aaa2f869b735462, type: 3}
   Special: {fileID: 21300000, guid: 00b44250d3219f0408d1035d88841b3d, type: 3}
+  BuzzapIcon: {fileID: 21300000, guid: d367aba6fb518de4cb30cd812a78a2cd, type: 3}
 --- !u!114 &159126277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,6 +888,7 @@ MonoBehaviour:
   IsMyTurn: 0
   infoText: {fileID: 1606039663}
   gameLog: []
+  dummy: {fileID: 0}
 --- !u!114 &159126278
 MonoBehaviour:
   m_ObjectHideFlags: 0

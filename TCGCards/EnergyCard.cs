@@ -10,6 +10,8 @@ public class EnergyCard : Card
     private EnergyTypes energyType;
     private int amount;
     private ObservableCollection<IEffect> effects = new ObservableCollection<IEffect>();
+    private bool attachedIconOverridden;
+    private EnergyOverriders energyOverrideType;
 
     public EnergyCard() : base(null)
     {
@@ -68,4 +70,25 @@ public class EnergyCard : Card
             FirePropertyChanged();
         }
     }
+
+    public EnergyOverriders EnergyOverrideType
+    {
+        get { return energyOverrideType; }
+        set
+        {
+            energyOverrideType = value;
+            FirePropertyChanged();
+        }
+    }
+
+    public bool AttachedIconOverridden
+    {
+        get { return attachedIconOverridden; }
+        set
+        {
+            attachedIconOverridden = value;
+            FirePropertyChanged();
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using TCGCards;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Assets.Code._2D
         public Texture2D icon_atlas;
         public Sprite DoubleColorless;
         public Sprite Special;
+        public Sprite BuzzapIcon;
 
         private void Awake()
         {
@@ -27,6 +29,15 @@ namespace Assets.Code._2D
 
         public Sprite GetSpriteForEnergyCard(EnergyCard energyCard)
         {
+            if (energyCard.AttachedIconOverridden)
+            {
+                switch (energyCard.EnergyOverrideType)
+                {
+                    case EnergyOverriders.Buzzap:
+                        return BuzzapIcon;
+                }
+            }
+
             if (energyCard.Amount == 2 && energyCard.EnergyType == EnergyTypes.Colorless)
             {
                 return DoubleColorless;

@@ -16,4 +16,9 @@
         Fairy,
         Dragon
     }
+
+    public enum EnergyOverriders
+    {
+        Buzzap
+    }
 }

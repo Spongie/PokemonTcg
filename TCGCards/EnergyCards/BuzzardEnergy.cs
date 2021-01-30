@@ -10,15 +10,16 @@ namespace TCGCards.EnergyCards
 
         public BuzzardEnergy() :base()
         {
-
+            IgnoreInBuilder = true;
+            Amount = 2;
+            AttachedIconOverridden = true;
+            EnergyOverrideType = EnergyOverriders.Buzzap;
         }
 
-        public BuzzardEnergy(PokemonCard pokemonOwner, EnergyTypes energyType) :base()
+        public BuzzardEnergy(PokemonCard pokemonOwner, EnergyTypes energyType) :this()
         {
             createdBy = pokemonOwner;
             EnergyType = energyType;
-            IgnoreInBuilder = true;
-            Amount = 2;
         }
 
         public override string GetName() => PokemonNames.Electrode;

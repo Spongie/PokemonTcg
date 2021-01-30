@@ -73,27 +73,6 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
     void Awake()
     {
         zoomer = GetComponent<Zoomer>();
-        //SetCard(new PokemonCard()
-        //{
-        //    SetCode = "base1",
-        //    IsRevealed = true,
-        //    ImageUrl = "https://images.pokemontcg.io/base1/33_hires.png",
-        //    Attacks = new ObservableCollection<Attack>
-        //    {
-        //        new Attack() { Name = "Mega punch", Cost = new ObservableCollection<Energy> { new Energy(EnergyTypes.Grass, 2) } },
-        //        new Attack() { Name = "Power Slut", Cost = new ObservableCollection<Energy> { new Energy(EnergyTypes.Grass, 2), new Energy(EnergyTypes.Colorless, 1) } }
-        //    },
-        //    AttachedEnergy = new List<EnergyCard>
-        //    {
-        //        new EnergyCard() { SetCode = "base1", ImageUrl = "", EnergyType = EnergyTypes.Grass }
-        //    },
-        //    AttachedTools = new List<TrainerCard>
-        //    {
-        //        new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/80_hires.png", SetCode = "base1" },
-        //        new TrainerCard {IsRevealed =true, ImageUrl = "https://images.pokemontcg.io/base1/84_hires.png", SetCode = "base1" },
-        //    }
-        //}, true);
-        //GameController.Instance.AddCard(this);
     }
 
     public void SetCard(Card card, bool spawnAttachedEnergy, bool isPreview = false)
@@ -282,39 +261,6 @@ public class CardRenderer : MonoBehaviour, IPointerClickHandler
         }
 
         actualDamageText.text = (currentDamage + damage).ToString();
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    Instantiate(HealEffect, EffectParent);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    Instantiate(WaterEffect, EffectParent);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    Instantiate(DeathEffect, EffectParent);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //{
-        //    Instantiate(RockEffect, EffectParent);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    Instantiate(GrassEffect, EffectParent);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha6))
-        //{
-        //    Instantiate(PsychicEffect, EffectParent);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    var numbers = new[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-        //    StartOnDamageTaken(numbers[UnityEngine.Random.Range(0, numbers.Length)]);
-        //}
     }
 
     internal void FadeOut()
