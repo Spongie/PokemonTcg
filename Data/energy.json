@@ -5,6 +5,8 @@
     "Amount": 1,
     "EnergyType": 3,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "2",
       "Value": "0ca4e5e2-dcac-428b-982d-634befff08e1"
@@ -28,6 +30,8 @@
     "Amount": 2,
     "EnergyType": 2,
     "IsBasic": false,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "5",
       "Value": "3f95fe31-48b5-43f7-abf9-81e35b34a776"
@@ -51,6 +55,8 @@
     "Amount": 1,
     "EnergyType": 4,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "8",
       "Value": "c0f3f3f6-f3e6-4a3f-9fda-7d9033acc976"
@@ -74,6 +80,8 @@
     "Amount": 1,
     "EnergyType": 5,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "11",
       "Value": "8023f056-1975-404d-ae67-bedf0c8f43fb"
@@ -97,6 +105,8 @@
     "Amount": 1,
     "EnergyType": 6,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "14",
       "Value": "95a34672-5e8c-4989-8c98-444fa8623bae"
@@ -120,6 +130,8 @@
     "Amount": 1,
     "EnergyType": 8,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "17",
       "Value": "e18ebed5-6f2f-4c39-b43b-519e6c554434"
@@ -143,6 +155,8 @@
     "Amount": 1,
     "EnergyType": 7,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "20",
       "Value": "9f2b11a6-268b-46b5-bad3-81c9081a5cf1"
@@ -183,6 +197,8 @@
     "Amount": 1,
     "EnergyType": 2,
     "IsBasic": false,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "25",
       "Value": "7e38af7a-be21-4b06-9a9a-00b6895f039f"
@@ -214,6 +230,8 @@
     "Amount": 1,
     "EnergyType": 2,
     "IsBasic": false,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "29",
       "Value": "8998b708-d5cc-4f1f-a208-a673a444fb14"
@@ -258,6 +276,8 @@
     "Amount": 1,
     "EnergyType": 1,
     "IsBasic": false,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "34",
       "Value": "7b4a66ae-15a5-451d-8e52-ff0f65415c0e"
@@ -281,6 +301,8 @@
     "Amount": 1,
     "EnergyType": 8,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "37",
       "Value": "5f865851-68cf-4c6b-bf4c-79fe4aaef9de"
@@ -304,6 +326,8 @@
     "Amount": 1,
     "EnergyType": 4,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "40",
       "Value": "ac0a15bb-ac6a-4b08-85e0-9d7524f25e0c"
@@ -327,6 +351,8 @@
     "Amount": 1,
     "EnergyType": 5,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "43",
       "Value": "f736e5ee-d8ed-4b0f-bbc3-20b360f55b22"
@@ -350,6 +376,8 @@
     "Amount": 1,
     "EnergyType": 6,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "46",
       "Value": "53e93c4a-d04f-4c6d-a3a4-28c88387a199"
@@ -373,6 +401,8 @@
     "Amount": 1,
     "EnergyType": 3,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "49",
       "Value": "eb0f6e1e-768a-43bc-9d37-8ad22706a66d"
@@ -396,6 +426,8 @@
     "Amount": 1,
     "EnergyType": 7,
     "IsBasic": true,
+    "EnergyOverrideType": 0,
+    "AttachedIconOverridden": false,
     "CardId": {
       "$id": "52",
       "Value": "306e94ac-7ba5-4167-bc00-940963389541"

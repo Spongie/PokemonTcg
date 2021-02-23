@@ -391,6 +391,11 @@ namespace TCGCards.Core
 
         public void KillActivePokemon()
         {
+            if (ActivePokemonCard == null)
+            {
+                return;
+            }
+
             KillPokemon(ActivePokemonCard);
             ActivePokemonCard = null;
         }
