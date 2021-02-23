@@ -20,6 +20,7 @@ namespace TCGCards.Core
                 {
                     realDamage -= resistanceModifier.GetModifiedResistance(attacker, defender);
                 }
+                else
                 {
                     realDamage -= defender.ResistanceAmount;
                 }
