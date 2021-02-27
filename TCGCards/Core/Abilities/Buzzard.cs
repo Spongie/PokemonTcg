@@ -21,6 +21,11 @@ namespace TCGCards.Core.Abilities
             TriggerType = TriggerType.Activation;
         }
 
+        public override bool CanActivate(GameField game, Player caster, Player opponent)
+        {
+            return caster.BenchedPokemon.Count > 0 && base.CanActivate(game, caster, opponent);
+        }
+
         protected override void Activate(Player owner, Player opponent, int damageTaken, GameField game)
         {
             NetworkId selectedId = null;
