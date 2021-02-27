@@ -51,14 +51,14 @@ namespace TCGCards.Attacks
         {
             var heads = game.FlipCoins(owner.ActivePokemonCard.AttachedEnergy.Count(e => OnlyThisType == EnergyTypes.All || e.EnergyType == OnlyThisType));
 
-            if (heads > 0)
+            if (DiscardForeachHead && heads > 0)
             {
                 var message = new PickFromListMessage(owner.ActivePokemonCard.AttachedEnergy.OfType<Card>().ToList(), heads).ToNetworkMessage(owner.Id);
                 var response = owner.NetworkPlayer.SendAndWaitForResponse<CardListMessage>(message);
                 opponent.ActivePokemonCard.DiscardEnergyCard((EnergyCard)game.Cards[response.Cards.First()], game);
             }
 
-            return ExtraBaseDamage + (heads * Damage);
+            return Damage + (heads * ExtraBaseDamage);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace TCGCards.TrainerEffects
         {
             get
             {
-                return "Damage multiple";
+                return "Damage multiple not of type";
             }
         }
 
