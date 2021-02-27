@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isZooming: 0
   isHovered: 0
+  skipWorldConversion: 0
   zoomedScale: {x: 3.5, y: 3.5, z: 1}
 --- !u!114 &8069761017221620793
 MonoBehaviour:
@@ -142,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6755ce3830a4394981319f2c880bffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 2599579965392925209}

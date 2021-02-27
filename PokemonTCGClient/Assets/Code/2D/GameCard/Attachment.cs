@@ -7,13 +7,8 @@ namespace Assets.Code._2D.GameCard
     [RequireComponent(typeof(Image))]
     public class Attachment : MonoBehaviour
     {
-        private Image image;
+        public Image image;
         public TrainerCard card;
-
-        private void Start()
-        {
-            image = GetComponent<Image>();
-        }
 
         internal void SetCard(TrainerCard trainerCard)
         {
