@@ -215,7 +215,11 @@ namespace Assets.Code
         {
             if (currentDeckFilters == null || currentDeckFilters.All(f => f.IsCardValid(clickedCard.card)))
             {
-                if (minSelectedCardCount == 1 && maxSelectedCardCount == 1)
+                if (Player.Hand.Contains(clickedCard.card))
+                {
+                    return;
+                }
+                else if (minSelectedCardCount == 1 && maxSelectedCardCount == 1)
                 {
                     var message = new CardListMessage(new[] { clickedCard.card.Id }.ToList());
                     NetworkManager.Instance.SendToServer(message, true);
