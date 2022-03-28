@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Configurations>Debug;Release</Configurations>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Configurations>Debug;Release</Configurations>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Entities\Entities.csproj" />
-    <ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
-    <ProjectReference Include="..\TCGCards\TCGCards.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Entities\Entities.csproj" />
+		<ProjectReference Include="..\NetworkingCore\NetworkingCore.csproj" />
+		<ProjectReference Include="..\ProxyGenerator\ProxyGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\TCGCards\TCGCards.csproj" />
+	</ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)\..\PokemonTCGClient\Assets\Dependencies\&quot;" />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy /y /d &quot;$(TargetDir)*.dll&quot; &quot;$(ProjectDir)\..\PokemonTCGClient\Assets\Dependencies\&quot;" />
+	</Target>
 
 </Project>
